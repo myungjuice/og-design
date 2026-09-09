@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 유저앱 리뉴얼 일정</title>
+  <link rel="stylesheet" href="../../design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    :root {
+      --color-page: oklch(98% 0.006 265);
+      --color-surface: oklch(100% 0.004 265);
+      --color-header: oklch(25% 0.025 265);
+      --color-header-ink: oklch(98% 0.006 265);
+      --color-ink: oklch(25% 0.018 265);
+      --color-muted: oklch(44% 0.015 265);
+      --color-rule: oklch(86% 0.012 265);
+      --color-design: oklch(94% 0.035 255);
+      --color-development: oklch(94% 0.035 285);
+      --font-body: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --radius: 0.75rem;
+      --rule: 1px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    body {
+      margin: 0;
+      padding: clamp(var(--space-md), 4vw, var(--space-xl));
+      background: var(--color-page);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+    }
+    table {
+      width: min(100%, 90rem);
+      margin-inline: auto;
+      overflow: clip;
+      border: var(--rule) solid var(--color-rule);
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      table-layout: fixed;
+    }
+    col:nth-child(1) { width: 12%; }
+    col:nth-child(2) { width: 18%; }
+    col:nth-child(3) { width: 70%; }
+    th, td {
+      padding: clamp(var(--space-sm), 1.8vw, var(--space-lg));
+      border-inline-end: var(--rule) solid var(--color-rule);
+      border-block-end: var(--rule) solid var(--color-rule);
+      font-size: clamp(0.75rem, 1.35vw, 1.25rem);
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+    th:last-child, td:last-child { border-inline-end: 0; }
+    tbody tr:last-child td { border-block-end: 0; }
+    thead th {
+      background: var(--color-header);
+      color: var(--color-header-ink);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    tbody td { vertical-align: middle; }
+    .category {
+      color: var(--color-ink);
+      font-weight: 800;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .category-design { background: var(--color-design); }
+    .category-development { background: var(--color-development); }
+    .period { color: var(--color-muted); font-weight: 700; white-space: nowrap; }
+    .schedule-main { padding-top: var(--space-lg); }
+
+    @media (max-width: 32rem) {
+      col:nth-child(1) { width: 16%; }
+      col:nth-child(2) { width: 23%; }
+      col:nth-child(3) { width: 61%; }
+      th, td { padding: var(--space-xs); }
+      .category, .period, thead th { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+  <main class="schedule-main">
+    <h1 class="sr-only">오지고랜드 유저앱 리뉴얼 통합 일정</h1>
+    <table aria-label="오지고랜드 유저앱 리뉴얼 통합 일정">
+    <colgroup><col><col><col></colgroup>
+    <thead>
+      <tr><th scope="col">구분</th><th scope="col">기간</th><th scope="col">주요 업무</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="category category-design" rowspan="4">디자인</td><td class="period">9월 2주차</td><td>디자인 방향·컬러 시스템 후보 및 대표 화면 컨셉 시안 제작</td></tr>
+      <tr><td class="period">9월 3주차</td><td>디자인 시스템·공통 컴포넌트 및 주요 화면 디자인</td></tr>
+      <tr><td class="period">9월 4주차</td><td>전체 화면 디자인 마무리 및 일관성 점검</td></tr>
+      <tr><td class="period">9월 5주차</td><td>디자인 시안 공유 및 최종 컨펌</td></tr>
+      <tr><td class="category category-development" rowspan="3">개발</td><td class="period">10월</td><td>공통 UI, 홈, 바코드, 내 정보, 설정·메뉴, 마이랜드 비게임 기능 개발 및 테스트</td></tr>
+      <tr><td class="period">11월</td><td>오지파크, 이벤트, 공모전, 커뮤니티 개발, 게임 제외 전체 통합 테스트 및 오류 수정</td></tr>
+      <tr><td class="period">12월</td><td>룰렛·퍼즐 개발, 게임별 티켓 차감, 보상 지급, 참여 제한 적용, 게임 테스트 및 오류 수정</td></tr>
+    </tbody>
+    </table>
+  </main>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+:root {
+  --font-display: "Bricolage Grotesque", "Pretendard", sans-serif;
+  --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-icon: "Material Icons";
+
+  --neutral-0: oklch(100% 0 0);
+  --neutral-50: oklch(98% 0.006 275);
+  --neutral-100: oklch(95.5% 0.01 275);
+  --neutral-200: oklch(92% 0.014 275);
+  --neutral-300: oklch(84% 0.012 275);
+  --neutral-400: oklch(68% 0.014 275);
+  --neutral-500: oklch(48% 0.014 275);
+  --neutral-600: oklch(39% 0.017 275);
+  --neutral-700: oklch(31% 0.018 275);
+  --neutral-800: oklch(24% 0.018 275);
+  --neutral-900: oklch(18% 0.018 275);
+
+  --blue-50: oklch(97% 0.018 258);
+  --blue-100: oklch(93% 0.042 258);
+  --blue-200: oklch(86% 0.082 258);
+  --blue-300: oklch(76% 0.135 258);
+  --blue-400: oklch(65% 0.18 258);
+  --blue-500: oklch(57% 0.205 258);
+  --blue-600: oklch(53% 0.205 258);
+  --blue-700: oklch(46% 0.188 258);
+  --blue-800: oklch(39% 0.155 258);
+  --blue-900: oklch(32% 0.115 258);
+
+  --indigo-50: oklch(97% 0.018 277);
+  --indigo-100: oklch(93% 0.042 277);
+  --indigo-200: oklch(86% 0.082 277);
+  --indigo-300: oklch(76% 0.13 277);
+  --indigo-400: oklch(64% 0.18 277);
+  --indigo-500: oklch(58% 0.205 277);
+  --indigo-600: oklch(52% 0.205 277);
+  --indigo-700: oklch(45% 0.185 277);
+  --indigo-800: oklch(38% 0.15 277);
+  --indigo-900: oklch(31% 0.11 277);
+
+  --violet-50: oklch(97% 0.018 297);
+  --violet-100: oklch(93% 0.042 297);
+  --violet-200: oklch(86% 0.082 297);
+  --violet-300: oklch(76% 0.13 297);
+  --violet-400: oklch(64% 0.18 297);
+  --violet-500: oklch(58% 0.205 297);
+  --violet-600: oklch(52% 0.205 297);
+  --violet-700: oklch(45% 0.185 297);
+  --violet-800: oklch(38% 0.15 297);
+  --violet-900: oklch(31% 0.11 297);
+
+  --color-primary-50: var(--indigo-50);
+  --color-primary-100: var(--indigo-100);
+  --color-primary-200: var(--indigo-200);
+  --color-primary-300: var(--indigo-300);
+  --color-primary-400: var(--indigo-400);
+  --color-primary-500: var(--indigo-500);
+  --color-primary-600: var(--indigo-600);
+  --color-primary-700: var(--indigo-700);
+  --color-primary-800: var(--indigo-800);
+  --color-primary-900: var(--indigo-900);
+  --color-primary: var(--indigo-600);
+
+  --color-paper: var(--neutral-50);
+  --color-paper-2: var(--neutral-100);
+  --color-paper-3: var(--neutral-200);
+  --color-surface: var(--neutral-0);
+  --color-ink: var(--neutral-900);
+  --color-ink-2: var(--neutral-700);
+  --color-neutral: var(--neutral-500);
+  --color-muted: var(--neutral-500);
+  --color-rule: var(--neutral-300);
+  --color-rule-2: var(--neutral-200);
+
+  --color-candidate-blue: var(--blue-600);
+  --color-candidate-indigo: var(--indigo-600);
+  --color-candidate-violet: var(--violet-600);
+  --color-accent: var(--color-primary);
+  --color-accent-soft: var(--color-primary-100);
+  --color-accent-softer: var(--color-primary-50);
+  --color-accent-deep: var(--color-primary-700);
+  --color-accent-ink: var(--neutral-0);
+  --color-focus: var(--color-primary-400);
+
+  --color-success: oklch(55% 0.15 148);
+  --color-success-soft: oklch(95% 0.035 148);
+  --color-warning: oklch(72% 0.14 78);
+  --color-warning-soft: oklch(96% 0.04 78);
+  --color-danger: oklch(57% 0.19 25);
+  --color-danger-soft: oklch(95% 0.035 25);
+  --color-info: oklch(59% 0.16 245);
+  --color-info-soft: oklch(95% 0.035 245);
+
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5625rem;
+  --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+  --text-display: clamp(2.15rem, 4vw + 0.5rem, 4.25rem);
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-round: 999rem;
+  --rule-thin: 1px;
+
+  --shadow-card: 0 0.5rem 1.75rem oklch(20% 0.018 275 / 0.08);
+  --shadow-float: 0 0.75rem 2.5rem oklch(20% 0.018 275 / 0.12);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+}
+
+:root[data-palette="blue"] {
+  --color-primary-50: var(--blue-50);
+  --color-primary-100: var(--blue-100);
+  --color-primary-200: var(--blue-200);
+  --color-primary-300: var(--blue-300);
+  --color-primary-400: var(--blue-400);
+  --color-primary-500: var(--blue-500);
+  --color-primary-600: var(--blue-600);
+  --color-primary-700: var(--blue-700);
+  --color-primary-800: var(--blue-800);
+  --color-primary-900: var(--blue-900);
+  --color-primary: var(--blue-600);
+}
+
+:root[data-palette="violet"] {
+  --color-primary-50: var(--violet-50);
+  --color-primary-100: var(--violet-100);
+  --color-primary-200: var(--violet-200);
+  --color-primary-300: var(--violet-300);
+  --color-primary-400: var(--violet-400);
+  --color-primary-500: var(--violet-500);
+  --color-primary-600: var(--violet-600);
+  --color-primary-700: var(--violet-700);
+  --color-primary-800: var(--violet-800);
+  --color-primary-900: var(--violet-900);
+  --color-primary: var(--violet-600);
+}
+
+html,
+body {
+  overflow-x: clip;
+}

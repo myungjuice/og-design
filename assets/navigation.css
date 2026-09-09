@@ -1,0 +1,61 @@
+.artifact-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-lg);
+  width: min(100%, 88rem);
+  min-height: 4.5rem;
+  margin-inline: auto;
+  border-bottom: var(--rule-thin) solid var(--color-rule-2);
+}
+
+.artifact-brand,
+.artifact-back {
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.artifact-brand {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-overflow: ellipsis;
+}
+
+.artifact-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: var(--space-sm);
+  border: var(--rule-thin) solid var(--color-rule);
+  border-radius: var(--radius-round);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  transition: transform var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), background var(--dur-micro) var(--ease-out);
+}
+
+.artifact-brand:hover { color: var(--color-accent-deep); }
+.artifact-back:hover,
+.artifact-back[data-state="loading"] { border-color: var(--color-primary-300); background: var(--color-primary-50); }
+.artifact-back:active,
+.artifact-back[data-state="active"] { transform: translateY(1px); }
+.artifact-brand:focus-visible,
+.artifact-back:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.artifact-back[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+.artifact-back[data-state="error"] { border-color: var(--color-danger); background: var(--color-danger-soft); }
+.artifact-back[data-state="success"] { border-color: var(--color-success); background: var(--color-success-soft); }
+
+@media (max-width: 26rem) {
+  .artifact-nav { min-height: 4rem; gap: var(--space-sm); }
+  .artifact-brand { font-size: var(--text-base); }
+  .artifact-back { min-height: 2.25rem; padding-inline: var(--space-xs); font-size: var(--text-xs); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artifact-back { transition-duration: 0.01ms; }
+}

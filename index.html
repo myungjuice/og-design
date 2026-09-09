@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 디자인 시안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="assets/navigation.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .index-head { padding-block: clamp(var(--space-2xl), 8vw, var(--space-3xl)) var(--space-xl); }
+    .index-head p { margin: 0 0 var(--space-xs); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    .index-head h1 {
+      max-width: 12ch;
+      min-width: 0;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      overflow-wrap: anywhere;
+    }
+    .link-list { padding-block: var(--space-lg) var(--space-3xl); border-top: var(--rule-thin) solid var(--color-rule); }
+    .artifact-link {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-md);
+      min-height: 6rem;
+      padding-block: var(--space-lg);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+      color: var(--color-ink);
+      text-decoration: none;
+      transition: color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .artifact-link:hover { color: var(--color-accent-deep); transform: translateX(var(--space-2xs)); }
+    .artifact-link:active { transform: translateX(0); }
+    .artifact-link:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 4px; }
+    .artifact-link[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+    .artifact-link[data-state="loading"] { color: var(--color-neutral); }
+    .artifact-link[data-state="error"] { color: var(--color-danger); }
+    .artifact-link[data-state="success"] { color: var(--color-success); }
+    .link-copy strong { display: block; font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -0.025em; }
+    .link-copy span { display: block; margin-top: var(--space-2xs); color: var(--color-muted); font-size: var(--text-sm); }
+    .link-arrow { font-size: var(--text-md); font-weight: 800; }
+    @media (max-width: 26rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .artifact-link { min-height: 5rem; }
+      .link-copy strong { font-size: var(--text-md); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .artifact-link { transition-duration: 0.01ms; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="index.html">오지고랜드 디자인 시안</a>
+  </header>
+  <main class="shell">
+    <section class="index-head">
+      <p>Design Index</p>
+      <h1>작업 목록</h1>
+    </section>
+    <nav class="link-list" aria-label="디자인 시안 목록">
+      <a class="artifact-link" href="design-system/foundations/colors.html"><span class="link-copy"><strong>컬러 디자인 시스템</strong><span>Primary 후보와 공통 상태 색상</span></span><span class="link-arrow" aria-hidden="true">→</span></a>
+      <a class="artifact-link" href="concepts/my-info/index.html"><span class="link-copy"><strong>내 정보 컨셉</strong><span>대표 화면 디자인 방향 5종</span></span><span class="link-arrow" aria-hidden="true">→</span></a>
+      <a class="artifact-link" href="reports/renewal-schedule/index.html"><span class="link-copy"><strong>리뉴얼 일정표</strong><span>9월 디자인과 10~12월 개발 일정</span></span><span class="link-arrow" aria-hidden="true">→</span></a>
+      <a class="artifact-link" href="docs/planning/OGGO_유저앱_UI개편_화면시안_260904.pptx"><span class="link-copy"><strong>리뉴얼 기획서</strong><span>PPTX 원본 문서</span></span><span class="link-arrow" aria-hidden="true">↓</span></a>
+    </nav>
+  </main>
+</body>
+</html>
