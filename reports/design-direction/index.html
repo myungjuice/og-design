@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 앱 리뉴얼 디자인 방향 제안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    /* Hallmark · genre: modern-minimal · macrostructure: Long Document · theme: OG Indigo · enrichment: none · nav: N1 · footer: Ft2 · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.68;
+      word-break: keep-all;
+    }
+    h1, h2, h3 { font-family: var(--font-display); font-style: normal; }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .brief { width: min(100%, 67rem); margin-inline: auto; padding-block: clamp(var(--space-16), 9vw, var(--space-3xl)); }
+    .eyebrow { margin: 0 0 var(--space-3); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 {
+      max-width: 17ch;
+      min-width: 0;
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4.75rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      overflow-wrap: anywhere;
+    }
+    .lede { max-width: 58ch; margin: var(--space-8) 0 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .summary-line { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: var(--space-12); border-block: var(--rule-thin) solid var(--color-rule); }
+    .summary-item { padding-block: var(--space-5); }
+    .summary-item + .summary-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .summary-item span { display: block; color: var(--color-muted); font-size: var(--text-xs); }
+    .summary-item strong { display: block; margin-top: var(--space-1); font-size: var(--app-body-1-size); }
+    .chapter { padding-top: clamp(var(--space-16), 8vw, var(--space-3xl)); }
+    .chapter-head { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; margin-bottom: var(--space-8); }
+    .chapter-index { color: var(--color-accent-deep); font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; }
+    .chapter h2 { margin: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.1; letter-spacing: -0.04em; }
+    .chapter-copy { max-width: 64ch; margin: 0 0 var(--space-8) 5rem; color: var(--color-neutral); }
+    .palette-list { border-top: var(--rule-thin) solid var(--color-rule); }
+    .palette-row { display: grid; grid-template-columns: 3rem minmax(9rem, 0.55fr) minmax(0, 1.45fr); gap: var(--space-5); align-items: center; padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .swatch { width: 2rem; height: 2rem; border: var(--rule-thin) solid oklch(20% 0 0 / 0.08); border-radius: var(--radius-round); }
+    .swatch[data-color="blue"] { background: var(--blue-600); }
+    .swatch[data-color="indigo"] { background: var(--indigo-600); }
+    .swatch[data-color="violet"] { background: var(--violet-600); }
+    .palette-row strong { font-size: var(--app-body-1-size); }
+    .palette-row p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .label { display: inline-flex; align-items: center; min-height: 1.75rem; margin-inline-start: var(--space-2); padding-inline: var(--space-3); border: var(--rule-thin) solid var(--color-primary-300); border-radius: var(--radius-round); color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; vertical-align: middle; }
+    .inline-link { color: var(--color-accent-deep); font-weight: 800; text-decoration-thickness: var(--rule-thin); text-underline-offset: 0.25em; }
+    .inline-link:hover { color: var(--color-primary-800); }
+    .inline-link:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .concept-list { border-top: 0.25rem solid var(--color-ink); }
+    .concept-row { display: grid; grid-template-columns: 3.5rem minmax(9rem, 0.55fr) minmax(0, 1.45fr); gap: var(--space-5); padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .concept-row > span { color: var(--color-accent-deep); font-family: var(--font-display); font-weight: 800; }
+    .concept-row h3 { margin: 0; font-size: var(--text-md); letter-spacing: -0.025em; }
+    .concept-row p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .detail-link { margin: var(--space-6) 0 0 5rem; }
+    .foundation-lines { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-block: var(--rule-thin) solid var(--color-rule); }
+    .foundation-line { min-height: 10rem; padding: var(--space-6) var(--space-6) var(--space-6) 0; }
+    .foundation-line:nth-child(even) { padding-inline: var(--space-6) 0; border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .foundation-line:nth-child(n+3) { border-top: var(--rule-thin) solid var(--color-rule); }
+    .foundation-line span { color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .foundation-line h3 { margin: var(--space-2) 0; font-size: var(--text-md); }
+    .foundation-line p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .flutter-note { padding: var(--space-8); border-inline-start: 0.25rem solid var(--color-primary); background: var(--color-primary-50); }
+    .flutter-note strong { display: block; font-family: var(--font-display); font-size: var(--text-md); }
+    .flutter-note p { margin: var(--space-3) 0 0; color: var(--color-ink-2); }
+    .flutter-points { display: grid; margin-top: var(--space-6); border-top: var(--rule-thin) solid var(--color-rule); }
+    .flutter-point { display: grid; grid-template-columns: minmax(10rem, 0.55fr) minmax(0, 1.45fr); gap: var(--space-5); padding-block: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .flutter-point strong { font-size: var(--app-body-2-size); }
+    .flutter-point p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .decision-box { padding: clamp(var(--space-8), 6vw, var(--space-12)); background: var(--color-ink); color: var(--neutral-0); }
+    .decision-box .chapter-index { color: var(--color-primary-300); }
+    .decision-box h2 { max-width: 18ch; font-size: clamp(var(--text-xl), 5vw, var(--text-2xl)); }
+    .decision-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--space-10); border-top: var(--rule-thin) solid oklch(100% 0 0 / 0.3); }
+    .decision-item { padding: var(--space-6) var(--space-6) var(--space-2) 0; }
+    .decision-item + .decision-item { padding-inline: var(--space-6) 0; border-inline-start: var(--rule-thin) solid oklch(100% 0 0 / 0.3); }
+    .decision-item span { color: var(--color-primary-300); font-size: var(--text-xs); font-weight: 800; }
+    .decision-item h3 { margin: var(--space-2) 0; font-size: var(--text-md); }
+    .decision-item p { margin: 0; color: var(--neutral-300); font-size: var(--app-body-2-size); }
+    .next-line { margin: var(--space-8) 0 0; color: var(--neutral-200); }
+    .footer { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-8); border-top: var(--rule-thin) solid var(--color-rule); color: var(--color-muted); font-size: var(--text-xs); }
+    @media (max-width: 48rem) {
+      .summary-line { grid-template-columns: minmax(0, 1fr); }
+      .summary-item + .summary-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .chapter-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
+      .chapter-copy, .detail-link { margin-inline-start: 0; }
+      .palette-row, .concept-row { grid-template-columns: 3rem minmax(0, 1fr); }
+      .palette-row p, .concept-row p { grid-column: 2; }
+      .foundation-lines, .decision-items { grid-template-columns: minmax(0, 1fr); }
+      .foundation-line, .foundation-line:nth-child(even) { min-height: 0; padding-inline: 0; border-inline-start: 0; }
+      .foundation-line + .foundation-line { border-top: var(--rule-thin) solid var(--color-rule); }
+      .decision-item, .decision-item + .decision-item { padding-inline: 0; }
+      .decision-item + .decision-item { border-inline-start: 0; border-top: var(--rule-thin) solid oklch(100% 0 0 / 0.3); }
+    }
+    @media (max-width: 40rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .brief { padding-block-start: var(--space-12); }
+      .flutter-note, .decision-box { padding: var(--space-6); }
+      .flutter-point { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
+      .footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main class="shell">
+    <article class="brief">
+      <header>
+        <p class="eyebrow">Design Direction Brief</p>
+        <h1>오지고랜드 앱 리뉴얼 디자인 방향 제안</h1>
+        <p class="lede">9월 디자인 작업의 첫 단계로 유저앱과 점주앱이 함께 사용할 컬러 기준을 제안하고, 리뉴얼 대표 화면인 내 정보를 다섯 가지 방향으로 비교했습니다.</p>
+        <div class="summary-line" role="group" aria-label="제안 요약">
+          <div class="summary-item"><span>Primary Candidates</span><strong>Blue · Indigo · Violet</strong></div>
+          <div class="summary-item"><span>Screen Concepts</span><strong>내 정보 5종</strong></div>
+          <div class="summary-item"><span>Current Working Color</span><strong>OG Indigo</strong></div>
+        </div>
+      </header>
+
+      <section class="chapter" aria-labelledby="color-title">
+        <div class="chapter-head"><span class="chapter-index">01 / COLOR</span><h2 id="color-title">Primary 컬러 후보</h2></div>
+        <p class="chapter-copy">로고의 Blue–Violet 계열을 기준으로 세 후보를 구성했습니다. 최종 선택 전 작업에는 브랜드와 기능의 균형이 좋은 OG Indigo를 임시 기준으로 사용합니다.</p>
+        <div class="palette-list">
+          <div class="palette-row"><span class="swatch" data-color="blue" aria-hidden="true"></span><strong>OG Blue</strong><p>명확하고 기능적인 인상이 강한 방향입니다.</p></div>
+          <div class="palette-row"><span class="swatch" data-color="indigo" aria-hidden="true"></span><strong>OG Indigo <span class="label">현재 적용</span></strong><p>브랜드 인지도와 서비스 기능의 균형을 맞춘 방향입니다.</p></div>
+          <div class="palette-row"><span class="swatch" data-color="violet" aria-hidden="true"></span><strong>OG Violet</strong><p>친근하고 콘텐츠 중심의 인상을 강화한 방향입니다.</p></div>
+        </div>
+        <p class="detail-link"><a class="inline-link" href="../../design-system/foundations/colors.html">컬러 시스템 상세 보기 →</a></p>
+      </section>
+
+      <section class="chapter" aria-labelledby="concept-title">
+        <div class="chapter-head"><span class="chapter-index">02 / CONCEPT</span><h2 id="concept-title">내 정보 대표 화면 5종</h2></div>
+        <p class="chapter-copy">리뉴얼 기획서의 정보 구조를 기준으로 시각적 위계와 화면 성격을 다르게 구성했습니다. 기능 범위는 같고 표현 방식만 비교할 수 있도록 맞췄습니다.</p>
+        <div class="concept-list">
+          <div class="concept-row"><span>01</span><h3>기본형</h3><p>현재 카드 구조를 정돈하고 3분할 마일리지와 2×3 메뉴를 적용한 방향입니다.</p></div>
+          <div class="concept-row"><span>02</span><h3>브랜드형</h3><p>짙은 헤더와 Primary 표식으로 OG의 존재감을 높인 방향입니다.</p></div>
+          <div class="concept-row"><span>03</span><h3>캐릭터형</h3><p>신규 마스코트 선택을 내 정보의 중심 경험으로 배치한 방향입니다.</p></div>
+          <div class="concept-row"><span>04</span><h3>활동형</h3><p>최근 방문과 마일리지 변동을 강조해 다음 행동으로 연결하는 방향입니다.</p></div>
+          <div class="concept-row"><span>05</span><h3>미니멀형</h3><p>카드를 최소화하고 선과 여백으로 정보를 구분한 방향입니다.</p></div>
+        </div>
+        <p class="detail-link"><a class="inline-link" href="../../concepts/my-info/index.html">내 정보 5종 비교 보기 →</a></p>
+      </section>
+
+      <section class="chapter" aria-labelledby="foundation-title">
+        <div class="chapter-head"><span class="chapter-index">03 / SYSTEM</span><h2 id="foundation-title">두 앱에 공통 적용할 디자인 기준</h2></div>
+        <p class="chapter-copy">유저앱만 먼저 리뉴얼하더라도 컬러·폰트·간격·아이콘의 기본 언어는 점주앱과 동일하게 유지합니다.</p>
+        <div class="foundation-lines">
+          <div class="foundation-line"><span>TYPOGRAPHY</span><h3>Pretendard</h3><p>제목·본문·레이블·설명 역할별 크기와 행간을 고정합니다.</p></div>
+          <div class="foundation-line"><span>SPACING</span><h3>4px 기본 단위</h3><p>화면 안쪽 여백과 요소 사이 간격을 일정한 단계로 사용합니다.</p></div>
+          <div class="foundation-line"><span>SHAPE</span><h3>6 · 10 · 16 · 24px</h3><p>컨트롤과 카드, 바텀시트의 크기에 따라 모서리 단계를 구분합니다.</p></div>
+          <div class="foundation-line"><span>ICON</span><h3>기존 Material Icons 유지</h3><p>아이콘 체계가 결정되기 전에는 현재 아이콘을 유지하고 크기와 색상만 통일합니다.</p></div>
+        </div>
+        <p class="detail-link"><a class="inline-link" href="../../design-system/foundations/index.html">기본 디자인 시스템 보기 →</a></p>
+      </section>
+
+      <section class="chapter" aria-labelledby="flutter-title">
+        <div class="chapter-head"><span class="chapter-index">04 / FLUTTER</span><h2 id="flutter-title">현재 앱 구조에 적용 가능한 기준</h2></div>
+        <div class="flutter-note"><strong>기존 기능을 유지하며 디자인을 단계적으로 적용할 수 있습니다.</strong><p>두 앱 모두 Material 3와 Pretendard를 사용하고 있어 ColorScheme·TextTheme·컴포넌트 Theme를 확장하는 방식으로 적용할 수 있습니다.</p></div>
+        <div class="flutter-points">
+          <div class="flutter-point"><strong>공통 적용</strong><p>컬러·타입·간격·모서리·버튼·입력·선택 상태와 오버레이의 시각 규칙</p></div>
+          <div class="flutter-point"><strong>유저앱 전용</strong><p>하단 5탭·중앙 바코드·Q오더·퀵적립·마일리지·커뮤니티 화면 구조</p></div>
+          <div class="flutter-point"><strong>점주앱 전용</strong><p>매장 운영·예약·웨이팅·Q오더 상태 카드와 점주용 내비게이션</p></div>
+          <div class="flutter-point"><strong>적용 원칙</strong><p>기능 로직과 API 호출은 유지하고 전역 Theme와 화면 스타일을 순차적으로 교체</p></div>
+        </div>
+        <p class="detail-link"><a class="inline-link" href="../../research/flutter-design-mapping/index.html">Flutter 적용 매핑 보기 →</a></p>
+      </section>
+
+      <section class="chapter decision-box" aria-labelledby="decision-title">
+        <div class="chapter-head"><span class="chapter-index">05 / DECISION</span><h2 id="decision-title">이번 단계에서 결정이 필요한 항목</h2></div>
+        <div class="decision-items">
+          <div class="decision-item"><span>DECISION 01</span><h3>Primary 컬러</h3><p>OG Blue·OG Indigo·OG Violet 중 향후 두 앱에 공통으로 적용할 기준 컬러를 선택합니다.</p></div>
+          <div class="decision-item"><span>DECISION 02</span><h3>화면 컨셉</h3><p>기본형·브랜드형·캐릭터형·활동형·미니멀형 중 전체 리뉴얼에 확장할 방향을 선택합니다.</p></div>
+        </div>
+        <p class="next-line">컬러와 컨셉 확정 후 버튼·인풋 등 세부 컴포넌트와 전체 앱 화면 디자인을 해당 기준으로 진행합니다.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer shell"><span>오지고랜드 앱 리뉴얼</span><span>디자인 방향 제안</span></footer>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

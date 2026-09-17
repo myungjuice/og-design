@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>오지고랜드 내 정보 디자인 컨셉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&amp;family=Material+Icons&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { background: var(--color-paper); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+    .material-icons {
+      font-family: var(--font-icon);
+      font-size: 1.25rem;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-shell {
+      width: min(100%, 92rem);
+      margin-inline: auto;
+      padding-inline: clamp(var(--space-md), 4vw, var(--space-2xl));
+    }
+    .nav-edge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 4.5rem;
+      border-bottom: var(--rule-thin) solid var(--color-rule-2);
+    }
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .document-meta {
+      color: var(--color-muted);
+      font-size: var(--text-sm);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .intro {
+      display: grid;
+      gap: var(--space-lg);
+      padding-block: var(--space-2xl) var(--space-xl);
+    }
+    .intro h1 {
+      max-width: 13ch;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+    .intro-copy {
+      max-width: 42rem;
+      margin: 0;
+      color: var(--color-ink-2);
+      font-size: var(--text-md);
+    }
+    .scope-note {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      max-width: 50rem;
+      padding-block: var(--space-sm);
+      border-block: var(--rule-thin) solid var(--color-rule-2);
+      color: var(--color-neutral);
+      font-size: var(--text-sm);
+    }
+    .scope-note .material-icons { color: var(--color-accent); }
+    .palette-workbench {
+      padding-block: var(--space-xl) var(--space-2xl);
+    }
+    .section-heading {
+      display: grid;
+      gap: var(--space-xs);
+      margin-block-end: var(--space-lg);
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+    .section-heading p {
+      max-width: 44rem;
+      margin: 0;
+      color: var(--color-neutral);
+    }
+    .palette-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-sm);
+    }
+    .palette-button {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 4.5rem;
+      padding: var(--space-sm) var(--space-md);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-ink);
+      text-align: start;
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out);
+    }
+    .palette-button[data-palette="blue"] { --swatch: var(--color-candidate-blue); }
+    .palette-button[data-palette="indigo"] { --swatch: var(--color-candidate-indigo); }
+    .palette-button[data-palette="violet"] { --swatch: var(--color-candidate-violet); }
+    .palette-button[aria-pressed="true"] {
+      border-color: var(--color-accent);
+      background: var(--color-accent-softer);
+    }
+    .palette-button[disabled], .palette-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+    .palette-button[data-state="loading"] { opacity: 0.7; cursor: progress; }
+    .palette-button[data-state="error"] { border-color: var(--color-danger); background: var(--color-danger-soft); }
+    .palette-button[data-state="success"] { border-color: var(--color-success); }
+    .swatch {
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--radius-round);
+      background: var(--swatch);
+      box-shadow: 0 0 0 var(--rule-thin) var(--color-rule);
+    }
+    .palette-name { display: block; font-weight: 700; }
+    .selected-icon { color: var(--color-accent); opacity: 0; }
+    .palette-button[aria-pressed="true"] .selected-icon { opacity: 1; }
+    .concepts {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2xl) var(--space-xl);
+      padding-block-end: var(--space-3xl);
+    }
+    .concept {
+      display: grid;
+      min-width: 0;
+      gap: var(--space-md);
+      align-content: start;
+    }
+    .preview-stage {
+      display: grid;
+      place-items: start center;
+      min-width: 0;
+      padding: clamp(var(--space-sm), 3vw, var(--space-xl));
+      border-top: var(--rule-thin) solid var(--color-rule);
+      background: var(--color-paper-2);
+    }
+    .app-screen {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: min(100%, 24.375rem);
+      min-height: 45rem;
+      overflow: clip;
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      box-shadow: var(--shadow-card);
+    }
+    .app-header {
+      display: grid;
+      grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+      align-items: center;
+      min-height: 4.25rem;
+      padding-inline: var(--space-md);
+    }
+    .app-header h3 {
+      margin: 0;
+      text-align: center;
+      font-size: var(--text-md);
+      line-height: 1.2;
+    }
+    .header-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-xs);
+    }
+    .icon-surface {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      color: var(--color-ink-2);
+    }
+    .app-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md) 5.25rem;
+    }
+    .profile-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-sm);
+      min-width: 0;
+    }
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: var(--radius-round);
+      background: var(--color-accent-soft);
+      color: var(--color-accent-deep);
+      box-shadow: 0 0 0 var(--space-3xs) var(--color-accent);
+    }
+    .avatar .material-icons { font-size: var(--text-xl); }
+    .profile-name { margin: 0; font-size: var(--text-md); font-weight: 800; line-height: 1.2; }
+    .profile-link { margin: var(--space-2xs) 0 0; color: var(--color-neutral); font-size: var(--text-sm); }
+    .card {
+      padding: var(--space-md);
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-block-end: var(--space-sm);
+    }
+    .section-title-row h4 { margin: 0; font-size: var(--text-base); }
+    .text-action { color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 700; white-space: nowrap; }
+    .balance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-xs);
+    }
+    .balance-cell { min-width: 0; padding-inline-end: var(--space-xs); border-inline-end: var(--rule-thin) solid var(--color-rule-2); }
+    .balance-cell:last-child { border-inline-end: 0; padding-inline-end: 0; }
+    .balance-label { display: block; color: var(--color-muted); font-size: var(--text-xs); }
+    .balance-value { display: block; margin-block-start: var(--space-2xs); font-size: var(--text-base); font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .progress-track { height: var(--space-2xs); margin-block-start: var(--space-sm); overflow: clip; border-radius: var(--radius-round); background: var(--color-paper-3); }
+    .progress-value { width: 20%; height: 100%; border-radius: inherit; background: var(--color-accent); }
+    .visit-placeholder {
+      display: grid;
+      grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 4.5rem;
+    }
+    .store-image {
+      display: grid;
+      place-items: center;
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-paper-2);
+      color: var(--color-muted);
+    }
+    .store-copy strong { display: block; font-size: var(--text-sm); }
+    .store-copy span { display: block; color: var(--color-muted); font-size: var(--text-xs); }
+    .review-cta { color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 700; white-space: nowrap; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-xs);
+    }
+    .menu-tile {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: var(--space-xs);
+      min-width: 0;
+      min-height: 5.5rem;
+      padding: var(--space-sm);
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-sm);
+      background: var(--color-paper);
+      text-align: center;
+    }
+    .menu-tile .material-icons { color: var(--color-neutral); }
+    .menu-tile span:last-child { font-size: var(--text-xs); font-weight: 700; white-space: nowrap; }
+    .bottom-nav {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: var(--z-raised);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      min-height: 4.75rem;
+      padding: var(--space-xs) var(--space-xs) max(var(--space-xs), env(safe-area-inset-bottom));
+      border-top: var(--rule-thin) solid var(--color-rule-2);
+      background: var(--color-surface);
+    }
+    .nav-item {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: var(--space-2xs);
+      min-width: 0;
+      color: var(--color-muted);
+      font-size: var(--text-xs);
+    }
+    .nav-item span:last-child { white-space: nowrap; }
+    .nav-item.is-active { color: var(--color-accent-deep); font-weight: 800; }
+    .nav-item.is-main .material-icons {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: var(--radius-round);
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+    }
+    .concept-caption {
+      display: grid;
+      gap: var(--space-xs);
+      padding-inline: var(--space-xs);
+    }
+    .caption-head { display: flex; align-items: baseline; gap: var(--space-sm); }
+    .caption-head h2 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.2; letter-spacing: -0.03em; }
+    .concept-caption p { margin: 0; color: var(--color-ink-2); }
+
+    /* B · 브랜드형 */
+    .screen-brand .app-header { background: var(--color-ink); color: var(--color-paper); }
+    .screen-brand .app-header .icon-surface { color: var(--color-paper); }
+    .screen-brand .profile-panel {
+      margin-inline: calc(var(--space-md) * -1);
+      margin-block-start: calc(var(--space-sm) * -1);
+      padding: var(--space-lg) var(--space-md) var(--space-xl);
+      background: var(--color-ink);
+      color: var(--color-paper);
+    }
+    .screen-brand .profile-panel .profile-link { color: var(--color-rule); }
+    .screen-brand .profile-panel .material-icons { color: var(--color-paper); }
+    .screen-brand .profile-panel .avatar .material-icons { color: var(--color-accent-deep); }
+    .screen-brand .balance-card { margin-block-start: calc(var(--space-lg) * -1); box-shadow: var(--shadow-float); }
+    .brand-marker { width: 2.5rem; height: var(--space-2xs); margin-block-end: var(--space-sm); border-radius: var(--radius-round); background: var(--color-accent); }
+
+    /* C · 캐릭터형 */
+    .screen-character .app-body { background: var(--color-paper-2); }
+    .character-hero { display: grid; justify-items: center; gap: var(--space-sm); padding: var(--space-md) var(--space-sm) var(--space-lg); text-align: center; }
+    .character-hero .avatar { width: 6.5rem; height: 6.5rem; box-shadow: none; }
+    .character-hero .avatar .material-icons { font-size: var(--text-2xl); }
+    .character-hero .profile-link { color: var(--color-accent-deep); font-weight: 700; }
+    .character-hero .helper { max-width: 17rem; margin: 0; color: var(--color-neutral); font-size: var(--text-xs); }
+    .screen-character .card { background: var(--color-surface); }
+    .screen-character .menu-tile { border: 0; background: var(--color-surface); box-shadow: 0 0 0 var(--rule-thin) var(--color-rule-2); }
+
+    /* D · 활동형 */
+    .screen-activity .compact-profile { padding-block: var(--space-xs) var(--space-md); border-bottom: var(--rule-thin) solid var(--color-rule-2); }
+    .screen-activity .avatar { width: 3rem; height: 3rem; box-shadow: none; }
+    .activity-list { display: grid; gap: 0; }
+    .activity-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-sm); align-items: center; padding-block: var(--space-sm); border-bottom: var(--rule-thin) solid var(--color-rule-2); }
+    .activity-item:last-child { border-bottom: 0; }
+    .activity-icon { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: var(--radius-round); background: var(--color-paper-2); color: var(--color-accent-deep); }
+    .activity-copy strong, .activity-copy span { display: block; }
+    .activity-copy strong { font-size: var(--text-sm); }
+    .activity-copy span { color: var(--color-muted); font-size: var(--text-xs); }
+    .activity-value { font-size: var(--text-sm); font-weight: 800; white-space: nowrap; }
+    .quick-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xs); }
+
+    /* E · 미니멀형 */
+    .screen-minimal .app-body { gap: var(--space-lg); padding-inline: var(--space-lg); }
+    .screen-minimal .avatar { width: 3.5rem; height: 3.5rem; background: var(--color-accent-soft); box-shadow: none; color: var(--color-accent-deep); }
+    .minimal-balance { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); padding-block: var(--space-md); border-block: var(--rule-thin) solid var(--color-rule); }
+    .minimal-list { display: grid; }
+    .minimal-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); min-height: 3.75rem; border-bottom: var(--rule-thin) solid var(--color-rule-2); }
+    .minimal-row span:first-child { font-weight: 700; }
+    .minimal-row .material-icons { color: var(--color-muted); }
+    .screen-minimal .bottom-nav { background: var(--color-paper); }
+
+    .foot-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-block: var(--space-lg) var(--space-xl);
+      border-top: var(--rule-thin) solid var(--color-rule);
+      color: var(--color-muted);
+      font-size: var(--text-sm);
+    }
+    .foot-line p { margin: 0; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .palette-button:hover { transform: translateY(-1px); }
+      .palette-button:active { transform: translateY(0); }
+    }
+    @media (min-width: 40rem) {
+      .intro { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: end; }
+      .scope-note { grid-column: 1 / -1; }
+      .palette-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .concepts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .concept:last-child { grid-column: 1 / -1; width: min(100%, 44rem); justify-self: center; }
+    }
+    @media (min-width: 60rem) {
+      .intro { padding-block: var(--space-3xl) var(--space-2xl); }
+      .concepts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-block: var(--space-3xl); }
+      .preview-stage { min-height: 51rem; align-items: center; }
+    }
+    @media (min-width: 90rem) {
+      .concepts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .concept:last-child { grid-column: auto; width: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 150ms !important; animation-iteration-count: 1 !important; transition-duration: 150ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Icon family: Material Icons, matching the current Flutter app family until the renewal icon set is chosen. -->
+  <header class="artifact-nav page-shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro page-shell">
+      <h1>내 정보,<br>다섯 가지 방향</h1>
+      <p class="intro-copy">현재 앱의 실제 정보와 리뉴얼 기획안의 1.5화면 구조를 같은 조건으로 놓고 비교합니다. 색상과 화면 구성을 따로 판단할 수 있도록 Primary 후보를 즉시 바꿀 수 있습니다.</p>
+      <div class="scope-note">
+        <span class="material-icons" aria-hidden="true">info</span>
+        <span>이번 초안은 방향 선택용입니다. 캐릭터 원화와 신규 아이콘은 확정 전이므로 기존 Material 아이콘과 중립 프로필 자리표시자를 사용했습니다.</span>
+      </div>
+    </section>
+
+    <section class="palette-workbench page-shell" aria-labelledby="palette-title">
+      <div class="section-heading">
+        <h2 id="palette-title">Primary 후보</h2>
+      </div>
+      <div class="palette-row" role="group" aria-label="Primary 컬러 선택">
+        <button class="palette-button" type="button" data-palette="blue" aria-pressed="false">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="palette-name">OG Blue</span>
+          <span class="material-icons selected-icon" aria-hidden="true">check_circle</span>
+        </button>
+        <button class="palette-button" type="button" data-palette="indigo" aria-pressed="true" data-state="default">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="palette-name">OG Indigo</span>
+          <span class="material-icons selected-icon" aria-hidden="true">check_circle</span>
+        </button>
+        <button class="palette-button" type="button" data-palette="violet" aria-pressed="false">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="palette-name">OG Violet</span>
+          <span class="material-icons selected-icon" aria-hidden="true">check_circle</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="concepts page-shell" aria-label="내 정보 디자인 컨셉 5개">
+      <article class="concept">
+        <div class="preview-stage">
+          <div class="app-screen screen-standard" role="group" aria-label="기본형 내 정보 화면 시안">
+            <div class="app-header"><span></span><h3>내 정보</h3><div class="header-actions"><span class="icon-surface"><span class="material-icons">notifications_none</span></span></div></div>
+            <div class="app-body">
+              <div class="profile-row card"><div class="avatar"><span class="material-icons">face</span></div><div><p class="profile-name">맑은 땅콩 님</p><p class="profile-link">프로필 캐릭터 선택</p></div><span class="material-icons">chevron_right</span></div>
+              <section class="card"><div class="section-title-row"><h4>마일리지</h4><span class="text-action">내역 보기</span></div><div class="balance-grid"><div class="balance-cell"><span class="balance-label">사용 가능</span><strong class="balance-value">0 M</strong></div><div class="balance-cell"><span class="balance-label">보유</span><strong class="balance-value">1,000 M</strong></div><div class="balance-cell"><span class="balance-label">소멸 예정</span><strong class="balance-value">—</strong></div></div><div class="progress-track"><div class="progress-value"></div></div></section>
+              <section class="card"><div class="section-title-row"><h4>최근 방문</h4><span class="text-action">전체 보기</span></div><div class="visit-placeholder"><div class="store-image"><span class="material-icons">storefront</span></div><div class="store-copy"><strong>회원점명</strong><span>최근 방문 매장 예시</span></div><span class="review-cta">후기 작성</span></div></section>
+              <div class="menu-grid"><div class="menu-tile"><span class="material-icons">receipt_long</span><span>이용 내역</span></div><div class="menu-tile"><span class="material-icons">campaign</span><span>공지·알림</span></div><div class="menu-tile"><span class="material-icons">qr_code_2</span><span>멤버십</span></div><div class="menu-tile"><span class="material-icons">support_agent</span><span>문의하기</span></div><div class="menu-tile"><span class="material-icons">settings</span><span>설정</span></div><div class="menu-tile"><span class="material-icons">manage_accounts</span><span>내 정보</span></div></div>
+            </div>
+            <div class="bottom-nav"><div class="nav-item"><span class="material-icons">home</span><span>홈</span></div><div class="nav-item"><span class="material-icons">local_activity</span><span>마이랜드</span></div><div class="nav-item is-main"><span class="material-icons">qr_code_scanner</span><span>바코드</span></div><div class="nav-item"><span class="material-icons">park</span><span>오지파크</span></div><div class="nav-item is-active"><span class="material-icons">person</span><span>내 정보</span></div></div>
+          </div>
+        </div>
+        <div class="concept-caption"><div class="caption-head"><h2>기본형</h2></div><p>현재 앱의 카드 구조를 다듬고 리뉴얼 기획의 3분할 마일리지와 2×3 메뉴를 곧바로 적용한 안입니다.</p></div>
+      </article>
+
+      <article class="concept">
+        <div class="preview-stage">
+          <div class="app-screen screen-brand" role="group" aria-label="브랜드형 내 정보 화면 시안">
+            <div class="app-header"><span></span><h3>내 정보</h3><div class="header-actions"><span class="icon-surface"><span class="material-icons">notifications_none</span></span></div></div>
+            <div class="app-body">
+              <div class="profile-panel"><div class="brand-marker"></div><div class="profile-row"><div class="avatar"><span class="material-icons">face</span></div><div><p class="profile-name">맑은 땅콩 님</p><p class="profile-link">프로필 캐릭터 선택</p></div><span class="material-icons">arrow_forward</span></div></div>
+              <section class="card balance-card"><div class="section-title-row"><h4>마일리지</h4><span class="text-action">내역 보기</span></div><div class="balance-grid"><div class="balance-cell"><span class="balance-label">사용 가능</span><strong class="balance-value">0 M</strong></div><div class="balance-cell"><span class="balance-label">보유</span><strong class="balance-value">1,000 M</strong></div><div class="balance-cell"><span class="balance-label">소멸 예정</span><strong class="balance-value">—</strong></div></div><div class="progress-track"><div class="progress-value"></div></div></section>
+              <section class="card"><div class="section-title-row"><h4>최근 방문</h4><span class="text-action">전체 보기</span></div><div class="visit-placeholder"><div class="store-image"><span class="material-icons">storefront</span></div><div class="store-copy"><strong>회원점명</strong><span>최근 방문 매장 예시</span></div><span class="review-cta">후기 작성</span></div></section>
+              <div class="menu-grid"><div class="menu-tile"><span class="material-icons">receipt_long</span><span>이용 내역</span></div><div class="menu-tile"><span class="material-icons">campaign</span><span>공지·알림</span></div><div class="menu-tile"><span class="material-icons">qr_code_2</span><span>멤버십</span></div><div class="menu-tile"><span class="material-icons">support_agent</span><span>문의하기</span></div><div class="menu-tile"><span class="material-icons">settings</span><span>설정</span></div><div class="menu-tile"><span class="material-icons">manage_accounts</span><span>내 정보</span></div></div>
+            </div>
+            <div class="bottom-nav"><div class="nav-item"><span class="material-icons">home</span><span>홈</span></div><div class="nav-item"><span class="material-icons">local_activity</span><span>마이랜드</span></div><div class="nav-item is-main"><span class="material-icons">qr_code_scanner</span><span>바코드</span></div><div class="nav-item"><span class="material-icons">park</span><span>오지파크</span></div><div class="nav-item is-active"><span class="material-icons">person</span><span>내 정보</span></div></div>
+          </div>
+        </div>
+        <div class="concept-caption"><div class="caption-head"><h2>브랜드형</h2></div><p>짙은 브랜드 헤더와 작은 Primary 표식을 사용해 OG의 존재감을 높인 안입니다. 그라데이션 없이 색의 대비로 브랜드를 표현합니다.</p></div>
+      </article>
+
+      <article class="concept">
+        <div class="preview-stage">
+          <div class="app-screen screen-character" role="group" aria-label="캐릭터형 내 정보 화면 시안">
+            <div class="app-header"><span></span><h3>내 정보</h3><div class="header-actions"><span class="icon-surface"><span class="material-icons">notifications_none</span></span></div></div>
+            <div class="app-body">
+              <div class="character-hero"><div class="avatar"><span class="material-icons">face</span></div><div><p class="profile-name">맑은 땅콩 님</p><p class="profile-link">내 캐릭터 고르기</p></div><p class="helper">곰·펭귄·너구리 에셋 확정 전에는 중립 자리표시자를 사용합니다.</p></div>
+              <section class="card"><div class="section-title-row"><h4>나의 마일리지</h4><span class="text-action">내역 보기</span></div><div class="balance-grid"><div class="balance-cell"><span class="balance-label">사용 가능</span><strong class="balance-value">0 M</strong></div><div class="balance-cell"><span class="balance-label">보유</span><strong class="balance-value">1,000 M</strong></div><div class="balance-cell"><span class="balance-label">소멸 예정</span><strong class="balance-value">—</strong></div></div></section>
+              <div class="menu-grid"><div class="menu-tile"><span class="material-icons">receipt_long</span><span>이용 내역</span></div><div class="menu-tile"><span class="material-icons">campaign</span><span>공지·알림</span></div><div class="menu-tile"><span class="material-icons">qr_code_2</span><span>멤버십</span></div><div class="menu-tile"><span class="material-icons">support_agent</span><span>문의하기</span></div><div class="menu-tile"><span class="material-icons">settings</span><span>설정</span></div><div class="menu-tile"><span class="material-icons">manage_accounts</span><span>내 정보</span></div></div>
+              <section class="card"><div class="section-title-row"><h4>최근 방문</h4><span class="text-action">전체 보기</span></div><div class="visit-placeholder"><div class="store-image"><span class="material-icons">storefront</span></div><div class="store-copy"><strong>회원점명</strong><span>최근 방문 매장 예시</span></div><span class="review-cta">후기 작성</span></div></section>
+            </div>
+            <div class="bottom-nav"><div class="nav-item"><span class="material-icons">home</span><span>홈</span></div><div class="nav-item"><span class="material-icons">local_activity</span><span>마이랜드</span></div><div class="nav-item is-main"><span class="material-icons">qr_code_scanner</span><span>바코드</span></div><div class="nav-item"><span class="material-icons">park</span><span>오지파크</span></div><div class="nav-item is-active"><span class="material-icons">person</span><span>내 정보</span></div></div>
+          </div>
+        </div>
+        <div class="concept-caption"><div class="caption-head"><h2>캐릭터형</h2></div><p>신규 마스코트 선택을 내 정보의 중심 경험으로 다루는 안입니다. 프로필을 먼저 보여주고 서비스 메뉴를 그다음에 배치합니다.</p></div>
+      </article>
+
+      <article class="concept">
+        <div class="preview-stage">
+          <div class="app-screen screen-activity" role="group" aria-label="활동형 내 정보 화면 시안">
+            <div class="app-header"><span></span><h3>내 정보</h3><div class="header-actions"><span class="icon-surface"><span class="material-icons">settings</span></span></div></div>
+            <div class="app-body">
+              <div class="profile-row compact-profile"><div class="avatar"><span class="material-icons">face</span></div><div><p class="profile-name">맑은 땅콩 님</p><p class="profile-link">프로필 관리</p></div><span class="material-icons">chevron_right</span></div>
+              <section><div class="section-title-row"><h4>최근 활동</h4><span class="text-action">전체 보기</span></div><div class="activity-list"><div class="activity-item"><div class="activity-icon"><span class="material-icons">storefront</span></div><div class="activity-copy"><strong>회원점명</strong><span>최근 방문 매장 예시</span></div><span class="review-cta">후기 작성</span></div><div class="activity-item"><div class="activity-icon"><span class="material-icons">paid</span></div><div class="activity-copy"><strong>가입 이벤트</strong><span>2026.08.28</span></div><span class="activity-value">+1,000 M</span></div></div></section>
+              <section class="card"><div class="section-title-row"><h4>마일리지</h4><span class="text-action">내역 보기</span></div><div class="balance-grid"><div class="balance-cell"><span class="balance-label">사용 가능</span><strong class="balance-value">0 M</strong></div><div class="balance-cell"><span class="balance-label">보유</span><strong class="balance-value">1,000 M</strong></div><div class="balance-cell"><span class="balance-label">소멸 예정</span><strong class="balance-value">—</strong></div></div></section>
+              <div class="quick-list"><div class="menu-tile"><span class="material-icons">receipt_long</span><span>이용 내역</span></div><div class="menu-tile"><span class="material-icons">campaign</span><span>공지·알림</span></div><div class="menu-tile"><span class="material-icons">qr_code_2</span><span>멤버십</span></div><div class="menu-tile"><span class="material-icons">support_agent</span><span>문의하기</span></div><div class="menu-tile"><span class="material-icons">settings</span><span>설정</span></div><div class="menu-tile"><span class="material-icons">manage_accounts</span><span>내 정보</span></div></div>
+            </div>
+            <div class="bottom-nav"><div class="nav-item"><span class="material-icons">home</span><span>홈</span></div><div class="nav-item"><span class="material-icons">local_activity</span><span>마이랜드</span></div><div class="nav-item is-main"><span class="material-icons">qr_code_scanner</span><span>바코드</span></div><div class="nav-item"><span class="material-icons">park</span><span>오지파크</span></div><div class="nav-item is-active"><span class="material-icons">person</span><span>내 정보</span></div></div>
+          </div>
+        </div>
+        <div class="concept-caption"><div class="caption-head"><h2>활동형</h2></div><p>최근 방문과 마일리지 변동을 위로 올려 사용자의 다음 행동을 빠르게 만드는 안입니다. 내 정보가 개인 활동 허브 역할을 합니다.</p></div>
+      </article>
+
+      <article class="concept">
+        <div class="preview-stage">
+          <div class="app-screen screen-minimal" role="group" aria-label="미니멀형 내 정보 화면 시안">
+            <div class="app-header"><span></span><h3>내 정보</h3><div class="header-actions"><span class="icon-surface"><span class="material-icons">notifications_none</span></span></div></div>
+            <div class="app-body">
+              <div class="profile-row"><div class="avatar"><span class="material-icons">face</span></div><div><p class="profile-name">맑은 땅콩 님</p><p class="profile-link">프로필 캐릭터 선택</p></div><span class="material-icons">chevron_right</span></div>
+              <div class="minimal-balance"><div><span class="balance-label">사용 가능</span><strong class="balance-value">0 M</strong></div><div><span class="balance-label">보유</span><strong class="balance-value">1,000 M</strong></div><div><span class="balance-label">소멸 예정</span><strong class="balance-value">—</strong></div></div>
+              <section><div class="section-title-row"><h4>최근 방문</h4><span class="text-action">전체 보기</span></div><div class="visit-placeholder"><div class="store-image"><span class="material-icons">storefront</span></div><div class="store-copy"><strong>회원점명</strong><span>최근 방문 매장 예시</span></div><span class="review-cta">후기 작성</span></div></section>
+              <div class="minimal-list"><div class="minimal-row"><span>이용 내역</span><span class="material-icons">chevron_right</span></div><div class="minimal-row"><span>공지·알림</span><span class="material-icons">chevron_right</span></div><div class="minimal-row"><span>멤버십</span><span class="material-icons">chevron_right</span></div><div class="minimal-row"><span>문의하기</span><span class="material-icons">chevron_right</span></div><div class="minimal-row"><span>설정</span><span class="material-icons">chevron_right</span></div><div class="minimal-row"><span>내 정보</span><span class="material-icons">chevron_right</span></div></div>
+            </div>
+            <div class="bottom-nav"><div class="nav-item"><span class="material-icons">home</span><span>홈</span></div><div class="nav-item"><span class="material-icons">local_activity</span><span>마이랜드</span></div><div class="nav-item is-main"><span class="material-icons">qr_code_scanner</span><span>바코드</span></div><div class="nav-item"><span class="material-icons">park</span><span>오지파크</span></div><div class="nav-item is-active"><span class="material-icons">person</span><span>내 정보</span></div></div>
+          </div>
+        </div>
+        <div class="concept-caption"><div class="caption-head"><h2>미니멀형</h2></div><p>카드 사용을 최소화하고 정보와 메뉴를 선과 여백으로 구분한 안입니다. 가장 조용하고 관리하기 쉬운 디자인 언어를 지향합니다.</p></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="foot-line page-shell"><p>오지고랜드 유저앱 리뉴얼 · 방향 선택용 초안</p><p>아이콘과 캐릭터는 미확정</p></footer>
+
+  <script>
+    const paletteButtons = document.querySelectorAll(".palette-button");
+
+    paletteButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const palette = button.dataset.palette;
+        document.documentElement.dataset.palette = palette;
+        paletteButtons.forEach((item) => {
+          const selected = item === button;
+          item.setAttribute("aria-pressed", String(selected));
+          item.dataset.state = "default";
+        });
+      });
+    });
+  </script>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

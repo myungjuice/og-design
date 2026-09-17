@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 리뉴얼 화면 인벤토리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    /* Hallmark pre-emit critique · P4 H4 E4 S5 R4 V4 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    h1, h2, h3 { font-family: var(--font-display); font-style: normal; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 {
+      max-width: 13ch;
+      min-width: 0;
+      margin: 0;
+      font-size: var(--text-display);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      overflow-wrap: anywhere;
+    }
+    .intro-copy { max-width: 58ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .boundary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .boundary-item { padding: var(--space-6) var(--space-5) var(--space-6) 0; }
+    .boundary-item + .boundary-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .boundary-item span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .boundary-item strong { display: block; font-size: var(--app-body-1-size); }
+    .section { padding-block: clamp(var(--space-12), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(20rem, 1.25fr);
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .section-head h2 { min-width: 0; margin: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+    .section-head p { max-width: 68ch; margin: 0; color: var(--color-neutral); }
+    .tab-label { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+    .tab-number { color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .tab-label h3 { margin: 0; font-size: var(--text-lg); letter-spacing: -0.025em; }
+    .inventory { width: 100%; border-collapse: collapse; text-align: left; }
+    .inventory th, .inventory td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .inventory th { color: var(--color-muted); font-size: var(--text-xs); }
+    .inventory td { font-size: var(--app-body-2-size); }
+    .inventory td:first-child { width: 24%; font-weight: 800; }
+    .inventory td:nth-child(2) { width: 15%; }
+    .inventory td:nth-child(3) { width: 24%; color: var(--color-neutral); }
+    .inventory td:nth-child(4) { width: 14%; }
+    .status, .month {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.75rem;
+      padding-inline: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-round);
+      background: var(--color-surface);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .status[data-kind="keep"] { border-color: var(--color-success); color: var(--color-success); }
+    .status[data-kind="renew"] { border-color: var(--color-info); color: var(--color-primary-800); }
+    .status[data-kind="screen"] { border-color: var(--color-primary); color: var(--color-accent-deep); }
+    .status[data-kind="feature"] { border-color: var(--color-warning); color: var(--color-ink-2); }
+    .status[data-kind="keep"]::before { content: "B · "; }
+    .status[data-kind="renew"]::before,
+    .status[data-kind="screen"]::before,
+    .status[data-kind="feature"]::before { content: "A · "; }
+    .status[data-kind="review"] { border-color: var(--color-warning); color: var(--color-ink-2); }
+    .status[data-kind="exclude"] { border-color: var(--color-rule-strong); color: var(--color-muted); }
+    .month { border-color: var(--color-primary-300); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .tab-block + .tab-block { margin-top: var(--space-12); }
+    .scope-legend {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: var(--space-10);
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .scope-item { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .scope-item + .scope-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .scope-item strong { display: block; margin-bottom: var(--space-1); font-size: var(--app-body-1-size); }
+    .scope-item p { margin: 0; color: var(--color-neutral); font-size: var(--text-sm); }
+    .notes { display: grid; border-top: var(--rule-thin) solid var(--color-rule); }
+    .note { display: grid; grid-template-columns: minmax(9rem, 0.45fr) minmax(0, 1.55fr); gap: var(--space-6); padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .note strong { font-size: var(--app-body-1-size); }
+    .note p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 64rem) {
+      .boundary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .boundary-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .boundary-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+      .scope-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .scope-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .scope-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+    }
+    @media (max-width: 48rem) {
+      .intro, .section-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .inventory, .inventory tbody, .inventory tr, .inventory td { display: block; width: 100%; }
+      .inventory thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .inventory tr { padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .inventory td, .inventory td:first-child, .inventory td:nth-child(2), .inventory td:nth-child(3), .inventory td:nth-child(4) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .inventory td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .note { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .boundary { grid-template-columns: minmax(0, 1fr); }
+      .boundary-item + .boundary-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .boundary-item { padding-inline-end: 0; }
+      .scope-legend { grid-template-columns: minmax(0, 1fr); }
+      .scope-item + .scope-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .scope-item { padding-inline-end: 0; }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Renewal Screen Inventory</p><h1>화면과 개발 범위</h1></div>
+      <p class="intro-copy">리뉴얼 기획서와 현재 Flutter 유저앱 코드를 함께 대조해 화면, 모달, 스캔·적립 흐름과 공통 상태까지 분류했습니다.</p>
+    </section>
+
+    <section class="section shell" aria-labelledby="scope-title">
+      <div class="section-head"><h2 id="scope-title">디자인 적용 범위</h2><p>기획서에 직접 포함된 화면과 기존 앱에만 존재하는 화면을 구분합니다. 화면 수가 늘어나도 같은 기준으로 범위를 판단합니다.</p></div>
+      <div class="scope-legend" role="list" aria-label="화면 범위 분류">
+        <div class="scope-item" role="listitem"><strong>A · 전면 개편</strong><p>리뉴얼 기획서에서 구조나 기능 변경이 명시된 화면입니다.</p></div>
+        <div class="scope-item" role="listitem"><strong>B · 시스템 적용</strong><p>기존 동작은 유지하고 컬러·타입·간격·컴포넌트를 맞출 화면입니다.</p></div>
+        <div class="scope-item" role="listitem"><strong>C · 확인 필요</strong><p>현재 운영 여부나 신규 기능과의 관계를 확인한 뒤 범위를 정할 화면입니다.</p></div>
+        <div class="scope-item" role="listitem"><strong>제외 · 대체 예정</strong><p>새 화면으로 대체되거나 운영 종료가 확정된 기존 화면입니다.</p></div>
+      </div>
+      <div class="notes">
+        <div class="note"><strong>코드 조사 기준</strong><p><code>0_pages</code> 아래 Dart 파일 102개를 기준으로 확인했습니다. 이 중 <code>Scaffold</code>를 포함한 파일은 62개이며, 다이얼로그·시트가 포함된 파일은 16개입니다. 파일 수는 화면 수와 같지 않으며 상태 화면과 분기까지 포함하면 실제 디자인 대상은 더 많습니다.</p></div>
+        <div class="note"><strong>공통 상태</strong><p>로딩, 데이터 없음, 오류, 성공, 권한 요청, 확인 다이얼로그와 스낵바는 개별 화면이 아니라 재사용 상태 패턴으로 관리합니다.</p></div>
+      </div>
+    </section>
+
+    <section class="boundary shell" aria-label="적용 기준">
+      <div class="boundary-item"><span>Primary</span><strong>OG Indigo 임시 적용</strong></div>
+      <div class="boundary-item"><span>Icon</span><strong>결정 전까지 기존 아이콘 유지</strong></div>
+      <div class="boundary-item"><span>First Release</span><strong>11월 말 · 게임 제외</strong></div>
+      <div class="boundary-item"><span>Game</span><strong>게임은 12월 개발</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="common-title">
+      <div class="section-head"><h2 id="common-title">공통 영역</h2><p>모든 탭에 반복되는 화면 틀과 피드백 요소입니다. 개별 기능보다 먼저 같은 디자인 규칙을 적용합니다.</p></div>
+      <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+        <tr><td data-label="화면·영역">앱 공통 화면 틀</td><td data-label="현행 구분"><span class="status" data-kind="keep">기존 유지</span></td><td data-label="주요 컴포넌트">ThemeData · Scaffold · Safe Area</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">Pretendard와 기존 화면 전환은 유지하고 컬러·타이포그래피·간격 토큰을 연결합니다.</td></tr>
+        <tr><td data-label="화면·영역">상단 앱바</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">AppBar · Back · Action</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">타이틀·뒤로가기·우측 액션의 크기와 여백을 통일합니다.</td></tr>
+        <tr><td data-label="화면·영역">하단 5탭</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Navigation · Badge</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">홈·마이랜드·바코드·오지파크·내 정보로 구성합니다.</td></tr>
+        <tr><td data-label="화면·영역">공통 상태 피드백</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Loading · Dialog · Snackbar · Empty State</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">로딩·오류·성공·데이터 없음 상태의 구조와 표현을 맞춥니다.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="section shell" aria-labelledby="tabs-title">
+      <div class="section-head"><h2 id="tabs-title">하단 탭별 화면</h2><p>기획서에서 확인되는 화면과 화면 안의 주요 기능 영역을 함께 기록했습니다.</p></div>
+
+      <div class="tab-block" data-tab="홈">
+        <div class="tab-label"><span class="tab-number">01</span><h3>홈</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">지도 홈</td><td data-label="현행 구분"><span class="status" data-kind="keep">기존 유지</span></td><td data-label="주요 컴포넌트">Search Bar · Category Chip · Location FAB</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">검색·카테고리·현 위치·지도 탐색 동작을 유지합니다.</td></tr>
+          <tr><td data-label="화면·영역">신규 회원점 표시</td><td data-label="현행 구분"><span class="status" data-kind="feature">신규 기능</span></td><td data-label="주요 컴포넌트">Map Marker · NEW Badge</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">등록 30일 이내 회원점 핀에 NEW 표시를 추가합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block" data-tab="마이랜드">
+        <div class="tab-label"><span class="tab-number">02</span><h3>마이랜드</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">마이랜드 메인</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Summary Card · Section Header · Status Badge</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">기존 마일리지 탭을 출석·티켓·미션 중심의 메인 화면으로 개편합니다.</td></tr>
+          <tr><td data-label="화면·영역">마일리지·티켓·공유 요약</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Summary Card · Progress · Link</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">잔액을 3분할하고 마일리지 내역 진입 동선을 제공합니다.</td></tr>
+          <tr><td data-label="화면·영역">출석 캘린더·완료</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Calendar · Milestone · Reward Sheet</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">일일 출석과 7·14·21·30일 마일스톤 상태를 표시합니다.</td></tr>
+          <tr><td data-label="화면·영역">일일·주간 미션</td><td data-label="현행 구분"><span class="status" data-kind="feature">신규 기능</span></td><td data-label="주요 컴포넌트">Mission Card · Progress · Status Badge</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">미션별 진행도와 완료 상태를 마이랜드에서 확인합니다.</td></tr>
+          <tr><td data-label="화면·영역">룰렛 진입·진행·결과</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Ticket Badge · Game Canvas · Result Sheet</td><td data-label="개발"><span class="month">12월</span></td><td data-label="적용 내용">티켓 차감, 룰렛 진행, 결과 확인을 분리해 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">룰렛 확률 안내</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Info Sheet · Data Table</td><td data-label="개발"><span class="month">12월</span></td><td data-label="적용 내용">보상 구간과 확률표를 상시 확인할 수 있게 합니다.</td></tr>
+          <tr><td data-label="화면·영역">퍼즐 진입·플레이·결과</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Timer · Score · Game Board · Result Sheet</td><td data-label="개발"><span class="month">12월</span></td><td data-label="적용 내용">60초 매치3 플레이와 점수별 결과 화면을 구성합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block" data-tab="바코드">
+        <div class="tab-label"><span class="tab-number">03</span><h3>바코드</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">결제 바코드</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Barcode · Balance · Progress</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">PAY 표현을 마일리지로 바꾸고 잔액과 5,000원 단위 진행도를 강조합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block" data-tab="오지파크">
+        <div class="tab-label"><span class="tab-number">04</span><h3>오지파크</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">오지파크 메인</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Section Header · Content Card · Tabs</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">기존 핫플을 대체하고 이벤트·공모전·커뮤니티 진입 구역을 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">이벤트 목록</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Event Card · Filter · Status Badge</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">본사 주최 이벤트를 기간과 진행 상태에 따라 노출합니다.</td></tr>
+          <tr><td data-label="화면·영역">이벤트 상세·참여</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Hero Image · Store Card · CTA · Notice</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">응모형·결제형·방문형의 참여 상태와 안내를 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">공모전 목록</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Contest Card · Format Badge · Segmented Tabs</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">진행 중·심사 중·종료 상태와 출품 형식을 구분합니다.</td></tr>
+          <tr><td data-label="화면·영역">공모전 상세·출품</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Detail · Upload · Form · CTA</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">사진·영상·그림 공모전 안내와 출품 접수를 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">심사 중·결과 발표</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Submission Card · Result List · Status Badge</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">내 출품작 확인과 수상 결과를 진행 상태에 맞춰 표시합니다.</td></tr>
+          <tr><td data-label="화면·영역">관심 업종 선택</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Search · Choice Chip · Selection Counter</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">24개 업종 중 최대 3개를 선택하며 검색과 건너뛰기를 제공합니다.</td></tr>
+          <tr><td data-label="화면·영역">커뮤니티 게시글 목록</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Tabs · Sort · Post Card · Store Badge</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">선택 업종과 5km 지역 기준으로 최신순·인기순 게시글을 노출합니다.</td></tr>
+          <tr><td data-label="화면·영역">게시글 상세</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Profile · Store Tag · Media · Action</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">회원점·일반 매장 구분과 게시글 콘텐츠를 표시합니다.</td></tr>
+          <tr><td data-label="화면·영역">게시글 작성</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Input · Media Upload · Store Search · CTA</td><td data-label="개발"><span class="month">11월</span></td><td data-label="적용 내용">미등록 매장을 포함한 매장 선택과 콘텐츠 등록을 지원합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block" data-tab="내 정보">
+        <div class="tab-label"><span class="tab-number">05</span><h3>내 정보</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">현행 구분</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">내 정보 메인</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Profile · Summary Card · Recent Store · Menu Grid</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">프로필을 축소하고 잔액·최근 방문·6개 메뉴를 1.5개 화면 안에 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">프로필 캐릭터 선택</td><td data-label="현행 구분"><span class="status" data-kind="screen">신규 화면</span></td><td data-label="주요 컴포넌트">Character Card · Selection · CTA</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">곰·펭귄·너구리 중 하나를 선택해 프로필과 멤버십에 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">마일리지 내역</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Summary Card · Period Tabs · History List</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">3분할 잔액 카드에서 진입하며 기간별 적립·사용 내역을 표시합니다.</td></tr>
+          <tr><td data-label="화면·영역">내정보</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Input · Selection Control · CTA</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">가입 정보와 공유 정보를 확인·수정하는 구성을 시트에 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">이용내역</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Tabs · History Card</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">예약·웨이팅·Q오더·리뷰를 4개 탭으로 묶습니다.</td></tr>
+          <tr><td data-label="화면·영역">서비스</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Service Menu</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">기존 서비스 진입 기능을 시트형 메뉴로 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">공지사항·내 알림</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Tabs · Notice List · Notification List</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">공지와 알림을 탭으로 구분하고 각각의 상세 진입을 유지합니다.</td></tr>
+          <tr><td data-label="화면·영역">멤버십</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Membership Card · QR · Share</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">공유코드와 QR을 한 화면에 배치하고 캐릭터를 함께 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">문의하기</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Menu Grid · FAQ List</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">FAQ·문의·고객센터 관련 메뉴를 6개 그리드로 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">설정</td><td data-label="현행 구분"><span class="status" data-kind="renew">기존 개편</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Switch · Menu Row</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">알림 설정과 야간 알림 동의, 보안·회원 메뉴를 그룹으로 나눕니다.</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="existing-title">
+      <div class="section-head"><h2 id="existing-title">기획서 밖의 기존 화면</h2><p>기획서에 직접 언급되지는 않았지만 현재 앱에서 실제 사용되는 화면입니다. 기존 동작을 유지하면서 선택된 디자인 시스템을 적용하는 범위로 분류했습니다.</p></div>
+
+      <div class="tab-block">
+        <div class="tab-label"><span class="tab-number">A</span><h3>시작·로그인·공통 안내</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">범위·현행</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">스플래시·초기 진입</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Logo · Loading · Version Check</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">초기화와 버전 확인 동작은 유지하고 브랜드 컬러와 로딩 표현을 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">휴대전화·카카오·제휴 인증</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Input · Verification · Social Login · CTA</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">인증 절차는 유지하고 입력, 버튼, 오류와 대기 상태를 공통 기준에 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">아이디 로그인·PIN·생체 인증</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Input · Keypad · Biometric · Error</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">로그인과 간편 인증의 상태별 표현을 통일합니다.</td></tr>
+          <tr><td data-label="화면·영역">접근 권한·이벤트 동의</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Permission List · Agreement · CTA</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">권한 목적, 필수·선택 구분과 동의 상태를 명확하게 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">이벤트 팝업·웹뷰·일반 알림</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Modal · WebView · Alert · Phone Action</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">운영 콘텐츠는 유지하고 닫기, 확인, 외부 이동 규칙을 공통화합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block">
+        <div class="tab-label"><span class="tab-number">B</span><h3>홈·지도·매장 상세</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">범위·현행</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">검색 결과·결과 없음</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Search · Store List · Empty State</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">지도 홈과 이어지는 검색 결과 및 빈 상태에 같은 검색·카드 규칙을 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">카테고리 선택</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Category Grid · Selection · Apply</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">선택 상태와 적용 버튼을 공통 컴포넌트 기준으로 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">주변 매장·마일리지·바코드 시트</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 시트</span></td><td data-label="주요 컴포넌트">Bottom Sheet · Store Card · Balance · Barcode</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">열리는 방식은 유지하고 시트, 카드, 간격과 상태 표현을 개편합니다.</td></tr>
+          <tr><td data-label="화면·영역">매장 상세 홈·메뉴·리뷰</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Store Header · Tabs · Menu Card · Review Card</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">정보 구조와 기능은 유지하고 탭, 카드, 사진, 리스트 표현을 통일합니다.</td></tr>
+          <tr><td data-label="화면·영역">매장 상세정보·위치찾기</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Info List · Map · Route Action</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">영업 정보와 지도 이동 기능을 유지하면서 정보 위계를 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">메뉴 상세·리뷰 작성·사진 보기</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Detail · Form · Rating · Image Viewer</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">상세와 작성 흐름에 입력, 버튼, 피드백 상태를 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">매장 예약·웨이팅 진입</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 기능</span></td><td data-label="주요 컴포넌트">Reservation · Waiting · Status Action</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">매장 상세에서 이어지는 예약·웨이팅 동선의 시각 기준을 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">매장 소식·매장 이벤트</td><td data-label="범위·현행"><span class="status" data-kind="review">C · 확인 필요</span></td><td data-label="주요 컴포넌트">News List · Event Detail</td><td data-label="개발"><span class="month">확인 후</span></td><td data-label="적용 내용">오지파크의 본사 이벤트와 별도 기능인지, 통합할지 확인합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block">
+        <div class="tab-label"><span class="tab-number">C</span><h3>적립·스캔·주문</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">범위·현행</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">영수증 이미지 선택·카메라·미리보기</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 흐름</span></td><td data-label="주요 컴포넌트">Source Sheet · Camera · Preview · CTA</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">촬영과 사진 선택 동작은 유지하고 안내, 버튼, 권한 상태를 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">영수증 처리 중·재시도·승인번호</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 상태</span></td><td data-label="주요 컴포넌트">Scan Loading · Retry · Verification Input</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">인식 진행, 실패 재시도와 추가 인증 상태를 하나의 흐름으로 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">영수증 적립 성공·실패</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 상태</span></td><td data-label="주요 컴포넌트">Result · Reason · Primary Action</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">결과, 실패 사유와 다음 행동을 공통 피드백 규칙에 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">마일리지 사용 QR 스캔·금액 입력</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 흐름</span></td><td data-label="주요 컴포넌트">QR Scanner · Amount · Confirm · Result</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">스캔, 사용 금액, 확인, 결과 단계에 동일한 거래 화면 규칙을 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">Q오더 NFC·QR 진입·스캐너</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 흐름</span></td><td data-label="주요 컴포넌트">NFC · QR Scanner · Permission · Error</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">주문 진입 방식과 예외 처리는 유지하고 스캔 안내를 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">Q오더 메뉴·장바구니·주문 확인</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 흐름</span></td><td data-label="주요 컴포넌트">Menu List · Option · Cart · Order Summary</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">주문 정보 구조를 유지하면서 상품 카드, 옵션, 합계와 CTA를 통일합니다.</td></tr>
+          <tr><td data-label="화면·영역">Q오더 처리 중·성공·실패</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 상태</span></td><td data-label="주요 컴포넌트">Loading · Success · Failure · Retry</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">주문 상태와 후속 행동을 공통 피드백 패턴으로 구성합니다.</td></tr>
+          <tr><td data-label="화면·영역">Q오더·퀵적립 플로팅 버튼</td><td data-label="범위·현행"><span class="status" data-kind="renew">기존+추가</span></td><td data-label="주요 컴포넌트">Dual FAB · Camera Entry · Order Entry</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">주요 화면에서 Q오더와 퀵적립 버튼을 함께 노출하는 전제로 배치 기준을 정합니다.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-block">
+        <div class="tab-label"><span class="tab-number">D</span><h3>예약·웨이팅·내 정보 상세</h3></div>
+        <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">범위·현행</th><th scope="col">주요 컴포넌트</th><th scope="col">개발</th><th scope="col">적용 내용</th></tr></thead><tbody>
+          <tr><td data-label="화면·영역">예약·웨이팅 내역·상세·변경</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">History · Detail · Status · Form</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">상태 배지, 일정 정보, 변경·취소 동작을 공통 기준에 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">웨이팅 실시간 상태</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Queue Status · Realtime Action · Alert</td><td data-label="개발"><span class="month">10~11월</span></td><td data-label="적용 내용">현재 순번과 호출 상태를 읽기 쉽게 정리합니다.</td></tr>
+          <tr><td data-label="화면·영역">가입 정보·친구 공유 상세</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Info List · Share Code · Input · CTA</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">내 정보 메인에서 연결되는 기존 상세 기능을 새 구성에 맞춥니다.</td></tr>
+          <tr><td data-label="화면·영역">공지 상세·알림 목록·삭제</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Notice Detail · Notification List · Delete</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">목록뿐 아니라 상세, 읽음, 삭제 상태까지 동일한 규칙을 적용합니다.</td></tr>
+          <tr><td data-label="화면·영역">FAQ·1:1 문의·의견 보내기</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Accordion · Form · Attachment · Result</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">문의하기 메뉴의 하위 목록, 작성, 제출 결과를 포함합니다.</td></tr>
+          <tr><td data-label="화면·영역">고객센터·약관·정책 상세</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Contact · Policy List · WebView</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">고객 지원과 정책 문서의 리스트·상세 진입 화면을 포함합니다.</td></tr>
+          <tr><td data-label="화면·영역">설정 하위 화면</td><td data-label="범위·현행"><span class="status" data-kind="keep">기존 화면</span></td><td data-label="주요 컴포넌트">Switch · Menu Row · Security · Account</td><td data-label="개발"><span class="month">10월</span></td><td data-label="적용 내용">알림, 보안, 로그아웃과 회원 정보의 하위 흐름까지 디자인 시스템을 적용합니다.</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="review-title">
+      <div class="section-head"><h2 id="review-title">운영 확인 후 정리할 화면</h2><p>코드에는 남아 있으나 현재 사용 여부가 불명확하거나 리뉴얼 방향과 충돌하는 화면입니다. 디자인 착수 전 운영 여부를 확인합니다.</p></div>
+      <table class="inventory"><thead><tr><th scope="col">화면·영역</th><th scope="col">범위·현행</th><th scope="col">확인 내용</th><th scope="col">개발</th><th scope="col">판단 기준</th></tr></thead><tbody>
+        <tr><td data-label="화면·영역">OG PAY 선물·교환·사용 내역</td><td data-label="범위·현행"><span class="status" data-kind="review">C · 확인 필요</span></td><td data-label="확인 내용">PAY 표현 제거 후에도 기능을 유지하는지 확인</td><td data-label="개발"><span class="month">확인 후</span></td><td data-label="판단 기준">마일리지 기능으로 이름만 전환하면 B, 기능 종료 시 제외합니다.</td></tr>
+        <tr><td data-label="화면·영역">OG BOX·배송 관련 화면</td><td data-label="범위·현행"><span class="status" data-kind="review">C · 확인 필요</span></td><td data-label="확인 내용">현재 서비스 운영 및 접근 경로 확인</td><td data-label="개발"><span class="month">확인 후</span></td><td data-label="판단 기준">운영 중이면 B, 메뉴와 기능이 종료되었으면 제외합니다.</td></tr>
+        <tr><td data-label="화면·영역">친구 추가 단독 화면</td><td data-label="범위·현행"><span class="status" data-kind="review">C · 확인 필요</span></td><td data-label="확인 내용">새 멤버십·공유 화면과 중복 여부 확인</td><td data-label="개발"><span class="month">확인 후</span></td><td data-label="판단 기준">공유 화면으로 통합하면 제외하고 별도 기능이면 B로 유지합니다.</td></tr>
+        <tr><td data-label="화면·영역">기존 바코드 사용 안내</td><td data-label="범위·현행"><span class="status" data-kind="review">C · 확인 필요</span></td><td data-label="확인 내용">현재 화면 접근 경로와 운영 필요성 확인</td><td data-label="개발"><span class="month">확인 후</span></td><td data-label="판단 기준">새 바코드 화면 안에 안내를 통합할지 결정합니다.</td></tr>
+        <tr><td data-label="화면·영역">Multiavatar·사진 아바타 설정</td><td data-label="범위·현행"><span class="status" data-kind="exclude">제외 · 대체</span></td><td data-label="확인 내용">신규 3종 캐릭터 선택으로 대체 확정</td><td data-label="개발"><span class="month">10월</span></td><td data-label="판단 기준">기존 생성·사진 선택 UI는 새 캐릭터 선택 화면에 포함하지 않습니다.</td></tr>
+        <tr><td data-label="화면·영역">기존 핫플 화면</td><td data-label="범위·현행"><span class="status" data-kind="exclude">제외 · 대체</span></td><td data-label="확인 내용">오지파크로 대체</td><td data-label="개발"><span class="month">11월</span></td><td data-label="판단 기준">기존 핫플 UI를 재디자인하지 않고 필요한 데이터·동선만 이관합니다.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="section shell" aria-labelledby="notes-title">
+      <div class="section-head"><h2 id="notes-title">확정 기준과 확인 사항</h2><p>현재까지 정해진 적용 원칙과 실제 화면 디자인 전에 확인할 항목입니다.</p></div>
+      <div class="notes">
+        <div class="note"><strong>내 정보 바텀시트</strong><p>기획서는 바텀시트 8종을 제시하면서 마일리지 내역을 별도로 설명합니다. 마일리지 내역을 8종에 포함할지 별도 시트로 둘지 최종 확인이 필요합니다.</p></div>
+        <div class="note"><strong>홈 하단 리스트 카드</strong><p>오픈일과 리뷰 키워드가 있는 하단 리스트 카드는 권장안으로 표현되어 있어 현재 확정 화면 목록에서는 제외했습니다.</p></div>
+        <div class="note"><strong>프로필 캐릭터</strong><p>3종 캐릭터 선택은 1차 범위에 포함하고, 의상·얼굴·액세서리 등 파츠 꾸미기는 후속 범위로 분리합니다.</p></div>
+        <div class="note"><strong>지도 하단 시트</strong><p>주변 매장, 마일리지, 바코드 시트의 열림 방식은 유지하고 디자인 시스템만 적용합니다.</p></div>
+        <div class="note"><strong>플로팅 버튼</strong><p>Q오더와 퀵적립 버튼은 주요 화면에 함께 노출하는 전제로 배치와 겹침 방지 규칙을 설계합니다.</p></div>
+        <div class="note"><strong>누락 화면</strong><p>기획서에 없는 기존 운영 화면도 최소한 컬러, 타이포그래피, 간격과 공통 상태 기준을 적용합니다.</p></div>
+        <div class="note"><strong>아이콘</strong><p>새 아이콘 세트를 확정하기 전까지 기존 아이콘 유지 기준으로 화면 시안을 진행합니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 리뉴얼 화면 인벤토리</span><span>기획서·Flutter 코드 대조</span></footer>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

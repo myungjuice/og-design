@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 Flutter 적용 매핑</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    /* Hallmark · genre: modern-minimal · macrostructure: Narrative Workflow · theme: OG Indigo · enrichment: none · nav: N3 · footer: Ft4 · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--color-paper); }
+    html, body { overflow-x: clip; }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-style: normal; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 {
+      max-width: 12ch;
+      min-width: 0;
+      font-size: var(--text-display);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      overflow-wrap: anywhere;
+    }
+    .intro-copy { max-width: 58ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .fact-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .fact { padding-block: var(--space-6); }
+    .fact + .fact { padding-inline-start: var(--space-6); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .fact span { display: block; color: var(--color-muted); font-size: var(--text-xs); }
+    .fact strong { display: block; margin-top: var(--space-1); font-size: var(--text-md); }
+    .workflow {
+      display: grid;
+      grid-template-columns: minmax(11rem, 0.24fr) minmax(0, 1fr);
+      gap: clamp(var(--space-8), 6vw, var(--space-16));
+      padding-block: var(--space-12) var(--space-3xl);
+    }
+    .rail { position: sticky; top: var(--space-6); align-self: start; }
+    .rail p { margin: 0 0 var(--space-4); color: var(--color-muted); font-size: var(--text-xs); font-weight: 800; letter-spacing: 0.05em; }
+    .rail ol { margin: 0; padding: 0; border-top: var(--rule-thin) solid var(--color-rule); list-style: none; }
+    .rail a {
+      display: grid;
+      grid-template-columns: 2.75rem minmax(0, 1fr);
+      gap: var(--space-2);
+      padding-block: var(--space-3);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+      color: var(--color-ink-2);
+      font-size: var(--text-sm);
+      text-decoration: none;
+      transition: color var(--dur-micro) var(--ease-out), padding-inline-start var(--dur-micro) var(--ease-out);
+    }
+    .rail a:hover { padding-inline-start: var(--space-1); color: var(--color-accent-deep); }
+    .rail a:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .rail-index { color: var(--color-accent-deep); font-weight: 800; }
+    .stages { min-width: 0; }
+    .stage { padding-block: var(--space-10) var(--space-16); border-top: 0.25rem solid var(--color-ink); }
+    .stage:first-child { padding-top: 0; border-top: 0; }
+    .stage-heading { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--space-6); align-items: start; margin-bottom: var(--space-8); }
+    .stage-number { color: var(--color-accent-deep); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; line-height: 1; }
+    .stage-title h2 { font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; }
+    .stage-title p { max-width: 65ch; margin: var(--space-3) 0 0; color: var(--color-neutral); }
+    .mapping-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .mapping-table th, .mapping-table td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .mapping-table th { color: var(--color-muted); font-size: var(--text-xs); }
+    .mapping-table td { font-size: var(--app-body-2-size); }
+    .mapping-table td:first-child { width: 25%; color: var(--color-ink); font-weight: 800; }
+    .mapping-table td:nth-child(2) { width: 30%; }
+    .mapping-table code { color: var(--color-accent-deep); }
+    .callout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: var(--space-6);
+      padding: var(--space-6);
+      border-inline-start: 0.25rem solid var(--color-primary);
+      background: var(--color-primary-50);
+    }
+    .callout h3 { font-size: var(--text-md); letter-spacing: -0.025em; }
+    .callout p { margin: 0; color: var(--color-ink-2); font-size: var(--app-body-2-size); }
+    .component-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+    .component-group { padding: var(--space-6); border: var(--rule-thin) solid var(--color-rule-2); background: var(--color-surface); }
+    .component-group span { display: block; color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .component-group h3 { margin-top: var(--space-2); font-size: var(--text-md); letter-spacing: -0.025em; }
+    .component-group ul { margin: var(--space-4) 0 0; padding-inline-start: 1.1rem; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .component-group li + li { margin-top: var(--space-2); }
+    .decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: var(--rule-thin) solid var(--color-rule); }
+    .decision { padding: var(--space-6) var(--space-5) var(--space-6) 0; }
+    .decision + .decision { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .decision span { color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .decision h3 { margin-top: var(--space-2); font-size: var(--text-md); }
+    .decision p { margin: var(--space-3) 0 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .sequence { display: grid; border-top: var(--rule-thin) solid var(--color-rule); }
+    .sequence-row { display: grid; grid-template-columns: 4rem minmax(12rem, 0.65fr) minmax(0, 1.35fr); gap: var(--space-5); padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .sequence-row > span { color: var(--color-accent-deep); font-weight: 800; }
+    .sequence-row strong { font-size: var(--app-body-1-size); }
+    .sequence-row p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .verification { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: var(--space-8); align-items: start; }
+    .verification h3 { font-size: var(--text-md); }
+    .check-list { margin: 0; padding: 0; border-top: var(--rule-thin) solid var(--color-rule); list-style: none; }
+    .check-list li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); color: var(--color-ink-2); font-size: var(--app-body-2-size); }
+    .check-list li::before { color: var(--color-accent-deep); font-weight: 800; content: "✓"; }
+    .colophon { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); padding-block: var(--space-8); border-top: var(--rule-thin) solid var(--color-rule); color: var(--color-muted); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: var(--text-xs); }
+    @media (max-width: 60rem) {
+      .workflow { grid-template-columns: minmax(0, 1fr); }
+      .rail { position: static; }
+      .rail ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .rail a { grid-template-columns: minmax(0, 1fr); min-height: 5.5rem; padding-inline: var(--space-3); border-inline-end: var(--rule-thin) solid var(--color-rule); }
+      .rail li:last-child a { border-inline-end: 0; }
+      .component-groups { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 48rem) {
+      .intro, .callout, .verification { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .stage-heading { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+      .mapping-table, .mapping-table tbody, .mapping-table tr, .mapping-table td { display: block; width: 100%; }
+      .mapping-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .mapping-table tr { padding-block: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .mapping-table td, .mapping-table td:first-child, .mapping-table td:nth-child(2) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .mapping-table td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .decision-grid { grid-template-columns: minmax(0, 1fr); }
+      .decision + .decision { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .sequence-row { grid-template-columns: 2.5rem minmax(0, 1fr); }
+      .sequence-row p { grid-column: 2; }
+    }
+    @media (max-width: 40rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .fact-strip { grid-template-columns: minmax(0, 1fr); }
+      .fact + .fact { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .rail ol { grid-template-columns: minmax(0, 1fr); }
+      .rail a { grid-template-columns: 2.5rem minmax(0, 1fr); min-height: 3rem; padding-inline: 0; border-inline-end: 0; }
+      .component-group, .callout { padding: var(--space-5); }
+      .colophon { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Flutter Design Mapping</p><h1>디자인 기준을 앱 코드로 옮기는 순서</h1></div>
+      <p class="intro-copy">HTML 시안은 시각 기준이며 Flutter 구현은 별도입니다. 유저앱과 점주앱이 같은 디자인 언어를 유지하도록 토큰·테마·공통 컴포넌트·화면 적용 단계를 연결합니다.</p>
+    </section>
+
+    <section class="fact-strip shell" aria-label="현재 구현 요약">
+      <div class="fact"><span>Flutter Projects</span><strong>유저앱 · 점주앱 2개</strong></div>
+      <div class="fact"><span>Current Foundation</span><strong>Material 3 · Pretendard</strong></div>
+      <div class="fact"><span>Recommended Start</span><strong>ThemeData 확장</strong></div>
+    </section>
+
+    <div class="workflow shell">
+      <nav class="rail" aria-label="Flutter 적용 단계">
+        <p>IMPLEMENTATION FLOW</p>
+        <ol>
+          <li><a href="#stage-1"><span class="rail-index">1.0</span><span>토큰 변환</span></a></li>
+          <li><a href="#stage-2"><span class="rail-index">2.0</span><span>테마 연결</span></a></li>
+          <li><a href="#stage-3"><span class="rail-index">3.0</span><span>공통화 경계</span></a></li>
+          <li><a href="#stage-4"><span class="rail-index">4.0</span><span>화면 적용</span></a></li>
+          <li><a href="#stage-5"><span class="rail-index">5.0</span><span>검증</span></a></li>
+        </ol>
+      </nav>
+
+      <div class="stages">
+        <section class="stage" id="stage-1" aria-labelledby="stage-1-title">
+          <div class="stage-heading">
+            <span class="stage-number">1.0</span>
+            <div class="stage-title"><h2 id="stage-1-title">HTML 토큰을 Flutter 타입으로 변환</h2><p>색상값을 화면마다 복사하지 않고 의미 기반 토큰으로 옮깁니다. Primary 후보가 바뀌어도 Theme 한 곳을 수정하면 두 앱의 공통 스타일에 반영되는 구조입니다.</p></div>
+          </div>
+          <table class="mapping-table">
+            <thead><tr><th scope="col">HTML 기준</th><th scope="col">Flutter 대상</th><th scope="col">적용 내용</th></tr></thead>
+            <tbody>
+              <tr><td data-label="HTML 기준"><code>--color-primary-*</code></td><td data-label="Flutter 대상"><code>ColorScheme</code></td><td data-label="적용 내용">Primary·Container·OnPrimary 계열을 연결하고 Blue·Indigo·Violet 후보 교체 지점을 한 곳으로 제한합니다.</td></tr>
+              <tr><td data-label="HTML 기준">Surface · Ink · Rule</td><td data-label="Flutter 대상"><code>ColorScheme</code></td><td data-label="적용 내용">surface·onSurface·outline·outlineVariant로 매핑해 카드, 구분선, 배경 대비를 통일합니다.</td></tr>
+              <tr><td data-label="HTML 기준">Success · Warning · Info</td><td data-label="Flutter 대상"><code>ThemeExtension</code></td><td data-label="적용 내용">기본 ColorScheme에 없는 상태색은 <code>OgSemanticColors</code>로 분리합니다.</td></tr>
+              <tr><td data-label="HTML 기준">App Typography</td><td data-label="Flutter 대상"><code>TextTheme</code></td><td data-label="적용 내용">Display·Title·Headline·Body·Label·Caption을 Pretendard 크기와 행간 기준으로 연결합니다.</td></tr>
+              <tr><td data-label="HTML 기준">Space · Radius · Size</td><td data-label="Flutter 대상"><code>ThemeExtension</code></td><td data-label="적용 내용"><code>OgSpacing</code>·<code>OgRadii</code>·<code>OgSizes</code>로 여백, 모서리, 터치 영역을 관리합니다.</td></tr>
+              <tr><td data-label="HTML 기준">Shadow · Motion</td><td data-label="Flutter 대상">공통 상수</td><td data-label="적용 내용">Elevation과 Duration·Curve를 단계별 상수로 두고 화면별 임의값을 줄입니다.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="stage" id="stage-2" aria-labelledby="stage-2-title">
+          <div class="stage-heading">
+            <span class="stage-number">2.0</span>
+            <div class="stage-title"><h2 id="stage-2-title">ThemeData에서 기본 형태와 상태를 연결</h2><p>현재 두 앱의 ThemeData에는 ColorScheme·AppBar·폰트만 정의되어 있습니다. Flutter 기본 위젯을 활용할 수 있는 요소는 별도 위젯을 만들기 전에 컴포넌트 테마로 흡수합니다.</p></div>
+          </div>
+          <div class="component-groups">
+            <article class="component-group"><span>BUTTONS &amp; INPUTS</span><h3>기본 위젯 테마</h3><ul><li><code>FilledButtonThemeData</code> · <code>OutlinedButtonThemeData</code> · <code>TextButtonThemeData</code></li><li><code>InputDecorationTheme</code>으로 레이블·도움말·오류 상태 통일</li><li>비활성·포커스·선택 상태는 <code>WidgetStateProperty</code>로 연결</li></ul></article>
+            <article class="component-group"><span>SELECTION</span><h3>선택 컨트롤 테마</h3><ul><li><code>CheckboxThemeData</code> · <code>RadioThemeData</code> · <code>SwitchThemeData</code></li><li><code>TabBarThemeData</code> · <code>ChipThemeData</code></li><li>색상뿐 아니라 테두리와 표시 형태를 함께 사용해 상태 구분</li></ul></article>
+            <article class="component-group"><span>SURFACES</span><h3>기본 표면 테마</h3><ul><li><code>AppBarTheme</code>의 기존 동작을 유지하며 타이틀과 아이콘 규격 보강</li><li><code>CardThemeData</code> · <code>DividerThemeData</code></li><li>화면 배경과 카드 표면의 단계가 일관되게 보이도록 구성</li></ul></article>
+            <article class="component-group"><span>OVERLAYS</span><h3>기본 오버레이 테마</h3><ul><li><code>BottomSheetThemeData</code> · <code>DialogThemeData</code></li><li><code>SnackBarThemeData</code> · <code>ProgressIndicatorThemeData</code></li><li>동작은 유지하고 반경·여백·색상·텍스트 기준을 공통 적용</li></ul></article>
+          </div>
+        </section>
+
+        <section class="stage" id="stage-3" aria-labelledby="stage-3-title">
+          <div class="stage-heading">
+            <span class="stage-number">3.0</span>
+            <div class="stage-title"><h2 id="stage-3-title">공통 규격과 앱별 기능을 분리</h2><p>유저앱과 점주앱은 독립된 Flutter 프로젝트입니다. 디자인 기준은 공유하되 기능과 화면 구조까지 억지로 하나의 위젯으로 묶지 않습니다.</p></div>
+          </div>
+          <div class="decision-grid">
+            <article class="decision"><span>SHARED</span><h3>두 앱 공통</h3><p>컬러·타입·간격·모서리·아이콘 의미, 버튼·입력·선택 상태, 앱바·다이얼로그·바텀시트·스낵바의 시각 규칙을 공유합니다.</p></article>
+            <article class="decision"><span>USER APP</span><h3>유저앱 전용</h3><p>중앙 바코드를 포함한 하단 5탭, Q오더·퀵적립 전역 액션, 마일리지·매장·이벤트·커뮤니티 카드 구조를 별도로 둡니다.</p></article>
+            <article class="decision"><span>STORE APP</span><h3>점주앱 전용</h3><p>매장 운영 흐름, 예약·웨이팅·Q오더 상태 카드와 점주용 내비게이션은 공통 토큰을 사용하되 독립 컴포넌트로 유지합니다.</p></article>
+          </div>
+          <div class="callout">
+            <h3>초기에는 앱별 어댑터가 안전합니다</h3>
+            <p>두 앱에 같은 Theme·토큰 규격을 각각 적용해 리뉴얼 위험을 낮춥니다. 양쪽에서 실제로 안정된 기본 요소가 확인된 뒤에만 별도 로컬 패키지로 추출하는 방식을 검토합니다.</p>
+          </div>
+        </section>
+
+        <section class="stage" id="stage-4" aria-labelledby="stage-4-title">
+          <div class="stage-heading">
+            <span class="stage-number">4.0</span>
+            <div class="stage-title"><h2 id="stage-4-title">전역에서 화면 순서로 점진 적용</h2><p>한 번에 전체 화면을 교체하지 않고 영향 범위가 넓고 재사용성이 높은 순서로 적용합니다. 기능 로직과 API 호출은 유지합니다.</p></div>
+          </div>
+          <div class="sequence">
+            <div class="sequence-row"><span>01</span><strong>Foundation</strong><p>ColorScheme·TextTheme·ThemeExtension을 유저앱과 점주앱에 동일 규격으로 정의합니다.</p></div>
+            <div class="sequence-row"><span>02</span><strong>Primitive</strong><p>버튼·입력·선택 컨트롤·앱바처럼 Flutter Theme로 처리 가능한 기본 요소를 연결합니다.</p></div>
+            <div class="sequence-row"><span>03</span><strong>Pattern</strong><p>다이얼로그·바텀시트·피드백·카드·목록 등 구조가 필요한 공통 패턴을 앱별 래퍼로 적용합니다.</p></div>
+            <div class="sequence-row"><span>04</span><strong>User Screens</strong><p>10~11월 리뉴얼 순서에 맞춰 유저앱 화면을 전환하고 기존 기능 회귀 테스트를 병행합니다.</p></div>
+            <div class="sequence-row"><span>05</span><strong>Store Alignment</strong><p>점주앱은 공통 토큰과 기본 컴포넌트를 우선 반영하고 업무 화면은 별도 일정으로 순차 전환합니다.</p></div>
+          </div>
+        </section>
+
+        <section class="stage" id="stage-5" aria-labelledby="stage-5-title">
+          <div class="stage-heading">
+            <span class="stage-number">5.0</span>
+            <div class="stage-title"><h2 id="stage-5-title">디자인 일관성과 기존 동작을 함께 검증</h2><p>HTML과 픽셀을 그대로 복제하는 것보다 같은 토큰·상태·정보 위계를 유지하는지가 중요합니다.</p></div>
+          </div>
+          <div class="verification">
+            <h3>적용 완료 기준</h3>
+            <ul class="check-list">
+              <li>Primary 변경이 개별 화면 수정 없이 공통 Theme를 통해 반영됩니다.</li>
+              <li>텍스트 스타일과 간격에 화면별 임의값을 추가하지 않습니다.</li>
+              <li>버튼·입력·선택 요소의 기본·포커스·비활성·오류 상태가 동일합니다.</li>
+              <li>유저앱과 점주앱의 공통 요소는 같은 의미와 시각 규칙을 사용합니다.</li>
+              <li>기존 로그인·적립·바코드·주문·예약 흐름의 동작이 유지됩니다.</li>
+              <li>접근성 글자 크기, 터치 영역, 대비와 iOS·Android 표시를 확인합니다.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="colophon shell"><span>오지고랜드 Flutter 적용 매핑</span><span>공통 디자인 기준 · 앱별 점진 적용</span></footer>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

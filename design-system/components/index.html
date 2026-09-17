@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 컴포넌트 구조 및 상태 기준</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=Material+Icons&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button, input, select { font: inherit; }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .material-icons {
+      font-family: var(--font-icon);
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .intro-label { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    .intro h1 {
+      max-width: 12ch;
+      min-width: 0;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      overflow-wrap: anywhere;
+    }
+    .intro-copy { max-width: 58ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .principle { padding: var(--space-6) 0; }
+    .principle + .principle { padding-inline-start: var(--space-6); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .principle span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .principle strong { font-size: var(--text-md); }
+    .section { padding-block: clamp(var(--space-16), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); margin-bottom: var(--space-10); }
+    .section-head h2 { margin: 0; font-family: var(--font-display); font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; }
+    .section-head p { max-width: 65ch; margin: 0; color: var(--color-neutral); }
+    .subhead { margin: 0 0 var(--space-4); font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -0.025em; }
+    .anatomy {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: var(--space-10);
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .anatomy-item { padding: var(--space-4) 0; }
+    .anatomy-item + .anatomy-item { padding-inline-start: var(--space-4); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .anatomy-item span { display: block; color: var(--color-muted); font-size: var(--text-xs); }
+    .anatomy-item strong { display: block; margin-top: var(--space-1); font-size: var(--text-sm); }
+    .button-sizes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-10); }
+    .ui-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-width: 7.5rem;
+      min-height: var(--control-height-md);
+      padding-inline: var(--space-4);
+      border: var(--rule-thin) solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      background: var(--color-primary);
+      color: var(--color-accent-ink);
+      font-size: var(--app-body-2-size);
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out), background var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .ui-button.size-sm { min-height: var(--control-height-sm); }
+    .ui-button.size-lg { min-height: var(--control-height-lg); padding-inline: var(--space-6); }
+    .ui-button.secondary { background: var(--color-surface); color: var(--color-accent-deep); }
+    .ui-button.tertiary { border-color: transparent; background: transparent; color: var(--color-accent-deep); }
+    .ui-button:hover, .ui-button[data-state="hover"] { border-color: var(--color-primary-700); background: var(--color-primary-700); }
+    .ui-button.secondary:hover, .ui-button.secondary[data-state="hover"] { background: var(--color-primary-50); }
+    .ui-button:focus-visible, .ui-button[data-state="focus"] { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .ui-button:active, .ui-button[data-state="active"] { transform: translateY(1px); background: var(--color-primary-800); }
+    .ui-button:disabled, .ui-button[data-state="disabled"] { border-color: var(--color-rule); background: var(--color-paper-3); color: var(--color-muted); opacity: 0.55; cursor: not-allowed; }
+    .ui-button[data-state="loading"] { border-color: var(--color-primary-700); background: var(--color-primary-700); cursor: progress; }
+    .ui-button[data-state="error"] { border-color: var(--color-danger); background: var(--color-danger); }
+    .ui-button[data-state="success"] { border-color: var(--color-success); background: var(--color-success); }
+    .state-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-3); }
+    .state-cell {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: var(--space-3);
+      min-height: 8rem;
+      padding: var(--space-4);
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+    .state-label { color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; text-transform: capitalize; }
+    .spinner { width: var(--icon-sm); height: var(--icon-sm); border: 2px solid var(--color-primary-200); border-top-color: var(--color-accent-ink); border-radius: var(--radius-round); }
+    .field-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+    .field-demo { padding: var(--space-4); border: var(--rule-thin) solid var(--color-rule-2); border-radius: var(--radius-md); background: var(--color-surface); }
+    .field-label { display: block; margin-bottom: var(--space-2); font-size: var(--app-label-size); font-weight: 700; }
+    .field-wrap { display: flex; align-items: center; min-height: var(--control-height-md); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-surface); }
+    .field-wrap input { min-width: 0; flex: 1; padding-inline: var(--space-3); border: 0; outline: 0; background: transparent; color: var(--color-ink); font-size: var(--app-body-2-size); }
+    .field-wrap input::placeholder { color: var(--color-muted); }
+    .field-wrap select { min-width: 0; min-height: calc(var(--control-height-md) - var(--space-3xs)); flex: 1; padding-inline: var(--space-3); border: 0; outline: 0; background: transparent; color: var(--color-ink); font-size: var(--app-body-2-size); }
+    .field-wrap .material-icons { padding-inline-end: var(--space-3); color: var(--color-muted); font-size: var(--icon-md); }
+    .field-helper { min-height: var(--field-helper-min); margin: var(--space-1) 0 0; color: var(--color-muted); font-size: var(--app-caption-size); }
+    .field-demo[data-state="focus"] .field-wrap { border-color: var(--color-primary); outline: 3px solid var(--color-primary-100); outline-offset: 1px; }
+    .field-demo[data-state="disabled"] .field-wrap { background: var(--color-paper-2); opacity: 0.7; cursor: not-allowed; }
+    .field-demo[data-state="disabled"] input { color: var(--color-ink-2); cursor: not-allowed; }
+    .field-demo[data-state="error"] .field-wrap { border-color: var(--color-danger); }
+    .field-demo[data-state="error"] .field-helper { color: var(--color-danger); }
+    .field-demo[data-state="success"] .field-wrap { border-color: var(--color-success); }
+    .field-demo[data-state="success"] .field-helper { color: var(--color-success); }
+    .control-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
+    .control-group { padding: var(--space-6); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); }
+    .control-list { display: grid; gap: var(--space-3); }
+    .control-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--tap-target-min); }
+    .control-row label { font-size: var(--app-body-2-size); }
+    .native-control { width: var(--icon-lg); height: var(--icon-lg); accent-color: var(--color-primary); }
+    .switch { position: relative; display: inline-flex; width: 3rem; height: 1.75rem; flex: 0 0 auto; }
+    .switch input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .switch-track { width: 100%; height: 100%; border-radius: var(--radius-round); background: var(--color-paper-3); transition: background var(--dur-micro) var(--ease-out); }
+    .switch-track::after { display: block; width: 1.25rem; height: 1.25rem; margin: var(--space-1); border-radius: var(--radius-round); background: var(--color-surface); box-shadow: var(--shadow-low); content: ""; transition: transform var(--dur-micro) var(--ease-out); }
+    .switch input:checked + .switch-track { background: var(--color-primary); }
+    .switch input:checked + .switch-track::after { transform: translateX(1.25rem); }
+    .switch input:focus-visible + .switch-track { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .switch input:disabled + .switch-track { opacity: 0.45; cursor: not-allowed; }
+    .tabs { display: flex; align-items: center; gap: var(--space-1); min-height: var(--control-height-md); padding: var(--space-1); border-radius: var(--radius-sm); background: var(--color-paper-2); }
+    .tab {
+      min-height: var(--control-height-sm);
+      flex: 1;
+      padding-inline: var(--space-3);
+      border: 0;
+      border-radius: var(--radius-xs);
+      background: transparent;
+      color: var(--color-muted);
+      font-size: var(--app-label-size);
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .tab:hover { color: var(--color-ink); }
+    .tab:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 1px; }
+    .tab:active { transform: translateY(1px); }
+    .tab[aria-selected="true"] { background: var(--color-surface); color: var(--color-accent-deep); box-shadow: var(--shadow-low); }
+    .tab:disabled { opacity: 0.45; cursor: not-allowed; }
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
+    .chip {
+      min-height: var(--control-height-sm);
+      padding-inline: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-round);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      font-size: var(--app-label-size);
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--color-primary-300); background: var(--color-primary-50); }
+    .chip:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .chip:active { transform: translateY(1px); }
+    .chip[aria-pressed="true"] { border-color: var(--color-primary); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .chip:disabled { opacity: 0.45; cursor: not-allowed; }
+    .mapping { width: 100%; border-collapse: collapse; text-align: left; }
+    .mapping th, .mapping td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .mapping th { color: var(--color-muted); font-size: var(--text-xs); }
+    .mapping td { font-size: var(--app-body-2-size); }
+    .mapping code { color: var(--color-accent-deep); font-family: var(--font-body); font-weight: 700; }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 58rem) {
+      .intro { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .state-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .field-grid { grid-template-columns: minmax(0, 1fr); }
+      .control-layout { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .principles { grid-template-columns: minmax(0, 1fr); }
+      .principle + .principle { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .anatomy { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .anatomy-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .anatomy-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+      .state-grid { grid-template-columns: minmax(0, 1fr); }
+      .mapping { display: block; overflow-x: auto; }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="intro-label">Component Standards</p><h1>구조와 상태 기준</h1></div>
+      <p class="intro-copy">화면 컨셉이 달라져도 유지되는 컴포넌트의 구조, 크기와 상태를 정의합니다. 색상과 모서리 같은 시각 속성은 공통 토큰으로 연결해 컨셉 확정 후 조정합니다.</p>
+    </section>
+
+    <section class="principles shell" aria-label="컴포넌트 공통 기준">
+      <div class="principle"><span>Touch Target</span><strong>최소 48 × 48 dp</strong></div>
+      <div class="principle"><span>Temporary Primary</span><strong>OG Indigo</strong></div>
+      <div class="principle"><span>Visual Direction</span><strong>컨셉 확정 후 적용</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="button-title">
+      <div class="section-head"><h2 id="button-title">Button</h2><p>레이블은 한 줄을 유지하고, 주요 동작은 화면당 하나를 기본으로 합니다. 크기는 사용 위치에 따라 구분하되 터치 영역은 48dp 이상을 확보합니다.</p></div>
+      <h3 class="subhead">Anatomy</h3>
+      <div class="anatomy"><div class="anatomy-item"><span>01</span><strong>Container</strong></div><div class="anatomy-item"><span>02</span><strong>Leading Icon</strong></div><div class="anatomy-item"><span>03</span><strong>Label</strong></div><div class="anatomy-item"><span>04</span><strong>Progress / Result</strong></div></div>
+      <h3 class="subhead">Size &amp; Hierarchy</h3>
+      <div class="button-sizes"><button class="ui-button size-sm" type="button">Small · 40</button><button class="ui-button" type="button">Medium · 48</button><button class="ui-button size-lg" type="button">Large · 56</button><button class="ui-button secondary" type="button">Secondary</button><button class="ui-button tertiary" type="button">Text Button</button></div>
+      <h3 class="subhead">States</h3>
+      <div class="state-grid">
+        <div class="state-cell"><span class="state-label">default</span><button class="ui-button" type="button" data-state="default">저장하기</button></div>
+        <div class="state-cell"><span class="state-label">hover</span><button class="ui-button" type="button" data-state="hover">저장하기</button></div>
+        <div class="state-cell"><span class="state-label">focus</span><button class="ui-button" type="button" data-state="focus">저장하기</button></div>
+        <div class="state-cell"><span class="state-label">active</span><button class="ui-button" type="button" data-state="active">저장하기</button></div>
+        <div class="state-cell"><span class="state-label">disabled</span><button class="ui-button" type="button" data-state="disabled" disabled>저장하기</button></div>
+        <div class="state-cell"><span class="state-label">loading</span><button class="ui-button" type="button" data-state="loading" aria-busy="true"><span class="spinner" aria-hidden="true"></span>처리 중</button></div>
+        <div class="state-cell"><span class="state-label">error</span><button class="ui-button" type="button" data-state="error">다시 시도</button></div>
+        <div class="state-cell"><span class="state-label">success</span><button class="ui-button" type="button" data-state="success">저장 완료</button></div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="input-title">
+      <div class="section-head"><h2 id="input-title">Input</h2><p>레이블은 입력 전후에 항상 유지합니다. 도움말과 오류 메시지는 같은 자리를 사용해 상태 변경 시 화면이 움직이지 않도록 합니다.</p></div>
+      <div class="field-grid">
+        <div class="field-demo" data-state="default"><label class="field-label" for="field-default">닉네임</label><div class="field-wrap"><input id="field-default" placeholder="닉네임 입력"></div><p class="field-helper">한글·영문 2~12자</p></div>
+        <div class="field-demo" data-state="focus"><label class="field-label" for="field-focus">닉네임</label><div class="field-wrap"><input id="field-focus" value="맑은 땅콩"></div><p class="field-helper">입력 중</p></div>
+        <div class="field-demo" data-state="disabled"><label class="field-label" for="field-disabled">전화번호</label><div class="field-wrap"><input id="field-disabled" value="010-****-7913" disabled></div><p class="field-helper">변경할 수 없는 정보</p></div>
+        <div class="field-demo" data-state="error"><label class="field-label" for="field-error">닉네임</label><div class="field-wrap"><input id="field-error" value="땅"><span class="material-icons" aria-hidden="true">error_outline</span></div><p class="field-helper">2자 이상 입력해 주세요</p></div>
+        <div class="field-demo" data-state="success"><label class="field-label" for="field-success">닉네임</label><div class="field-wrap"><input id="field-success" value="맑은 땅콩"><span class="material-icons" aria-hidden="true">check_circle_outline</span></div><p class="field-helper">사용할 수 있는 닉네임입니다</p></div>
+        <div class="field-demo"><label class="field-label" for="field-select">관심 업종</label><div class="field-wrap"><select id="field-select"><option>음식점</option><option>카페</option><option>생활 서비스</option></select></div><p class="field-helper">최대 3개까지 선택</p></div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="selection-title">
+      <div class="section-head"><h2 id="selection-title">Selection Controls</h2><p>체크박스는 복수 선택, 라디오는 단일 선택, 스위치는 즉시 적용되는 설정에 사용합니다.</p></div>
+      <div class="control-layout">
+        <div class="control-group"><h3 class="subhead">Checkbox &amp; Radio</h3><div class="control-list">
+          <div class="control-row"><label for="check-1">이벤트 알림</label><input class="native-control" id="check-1" type="checkbox" checked></div>
+          <div class="control-row"><label for="check-2">야간 알림</label><input class="native-control" id="check-2" type="checkbox"></div>
+          <div class="control-row"><label for="radio-1">양력</label><input class="native-control" id="radio-1" name="calendar" type="radio" checked></div>
+          <div class="control-row"><label for="radio-2">음력</label><input class="native-control" id="radio-2" name="calendar" type="radio"></div>
+        </div></div>
+        <div class="control-group"><h3 class="subhead">Switch</h3><div class="control-list">
+          <div class="control-row"><label for="switch-1">적립·사용 내역 알림</label><span class="switch"><input id="switch-1" type="checkbox" checked><span class="switch-track"></span></span></div>
+          <div class="control-row"><label for="switch-2">이벤트·홍보 알림</label><span class="switch"><input id="switch-2" type="checkbox"><span class="switch-track"></span></span></div>
+          <div class="control-row"><label for="switch-3">변경할 수 없는 설정</label><span class="switch"><input id="switch-3" type="checkbox" disabled><span class="switch-track"></span></span></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="navigation-title">
+      <div class="section-head"><h2 id="navigation-title">Tabs &amp; Chips</h2><p>탭은 같은 화면 안의 콘텐츠 전환에, 칩은 필터나 짧은 선택값에 사용합니다. 선택 상태는 색상만이 아니라 면과 테두리로 함께 구분합니다.</p></div>
+      <div class="tabs" role="tablist" aria-label="마일리지 기간"><button class="tab" type="button" role="tab" aria-selected="true">1개월</button><button class="tab" type="button" role="tab" aria-selected="false">3개월</button><button class="tab" type="button" role="tab" aria-selected="false">6개월</button><button class="tab" type="button" role="tab" aria-selected="false" disabled>직접 선택</button></div>
+      <div class="chips" role="group" aria-label="관심 업종"><button class="chip" type="button" aria-pressed="true">음식점</button><button class="chip" type="button" aria-pressed="false">카페</button><button class="chip" type="button" aria-pressed="false">뷰티</button><button class="chip" type="button" aria-pressed="false">생활 서비스</button><button class="chip" type="button" disabled>선택 불가</button></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="flutter-title">
+      <div class="section-head"><h2 id="flutter-title">Flutter Mapping</h2><p>HTML 시안의 구조와 상태 기준은 아래 Flutter 위젯과 테마 속성으로 옮깁니다.</p></div>
+      <table class="mapping"><thead><tr><th scope="col">기준</th><th scope="col">Flutter 위젯</th><th scope="col">주요 적용 항목</th></tr></thead><tbody>
+        <tr><td>Primary Button</td><td><code>ElevatedButton</code></td><td>ButtonStyle, WidgetStateProperty</td></tr>
+        <tr><td>Input</td><td><code>TextFormField</code></td><td>InputDecorationTheme, validator</td></tr>
+        <tr><td>Switch</td><td><code>Switch</code></td><td>SwitchThemeData, WidgetStateProperty</td></tr>
+        <tr><td>Chip</td><td><code>ChoiceChip</code></td><td>ChipThemeData, selected 상태</td></tr>
+        <tr><td>Tab</td><td><code>TabBar</code></td><td>TabBarThemeData, indicator</td></tr>
+      </tbody></table>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 컴포넌트 기준</span><span>컨셉 확정 전 구조·상태 정의</span></footer>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

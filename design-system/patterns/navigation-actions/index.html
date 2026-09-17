@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 내비게이션과 전역 액션 기준</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=Material+Icons&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../foundations/tokens.css">
+  <link rel="stylesheet" href="../../../assets/navigation.css">
+  <style>
+    /* Hallmark · macrostructure: Component Playground · theme: OG Indigo · pre-emit critique: P4 H5 E5 S5 R5 V4 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button { font: inherit; }
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-style: normal; }
+    .material-icons {
+      font-family: var(--font-icon);
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 1fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 { max-width: 13ch; min-width: 0; font-size: var(--text-display); line-height: 1.04; letter-spacing: -0.05em; overflow-wrap: anywhere; }
+    .intro-copy { max-width: 60ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .baseline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .baseline-item { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .baseline-item + .baseline-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .baseline-item span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .baseline-item strong { display: block; font-size: var(--app-body-1-size); }
+    .section { padding-block: clamp(var(--space-12), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 1.28fr);
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .section-head h2 { min-width: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+    .section-head p { max-width: 68ch; margin: 0; color: var(--color-neutral); }
+    .specimen {
+      display: grid;
+      grid-template-columns: minmax(19rem, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(var(--space-6), 5vw, var(--space-12));
+      align-items: center;
+    }
+    .stage {
+      min-width: 0;
+      padding: clamp(var(--space-4), 4vw, var(--space-8));
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-low);
+    }
+    .stage-label { margin: 0 0 var(--space-4); color: var(--color-muted); font-size: var(--text-xs); font-weight: 800; }
+    .appbar-demo { display: grid; gap: var(--space-4); }
+    .appbar {
+      display: grid;
+      grid-template-columns: var(--tap-target-min) minmax(0, 1fr) var(--tap-target-min);
+      align-items: center;
+      min-height: 3.5rem;
+      border-bottom: var(--rule-thin) solid var(--color-rule-2);
+    }
+    .appbar-title { min-width: 0; overflow: hidden; font-size: var(--app-headline-size); font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+    .icon-button {
+      display: inline-grid;
+      width: var(--tap-target-min);
+      height: var(--tap-target-min);
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-round);
+      background: transparent;
+      color: var(--color-ink-2);
+      cursor: pointer;
+    }
+    .icon-button:hover { background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .icon-button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .icon-button:active { transform: scale(0.96); background: var(--color-primary-100); }
+    .icon-button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .icon-button .material-icons { font-size: var(--icon-lg); }
+    .annotation { display: grid; border-top: var(--rule-thin) solid var(--color-rule); }
+    .annotation-row { display: grid; grid-template-columns: minmax(7rem, 0.38fr) minmax(0, 1.62fr); gap: var(--space-4); padding-block: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .annotation-row strong { font-size: var(--app-body-2-size); }
+    .annotation-row p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .navigation-stage { position: relative; min-height: 22rem; overflow: hidden; padding: var(--space-6) var(--space-4) 0; }
+    .content-lines { display: grid; gap: var(--space-3); }
+    .content-line { height: var(--space-4); border-radius: var(--radius-round); background: var(--color-paper-2); }
+    .content-line:nth-child(2) { width: 72%; }
+    .content-line:nth-child(3) { width: 46%; }
+    .global-action {
+      position: absolute;
+      bottom: 5.75rem;
+      display: grid;
+      width: 3.625rem;
+      height: 3.625rem;
+      place-items: center;
+      border: var(--rule-thin) solid var(--color-primary-200);
+      border-radius: var(--radius-md);
+      background: var(--color-primary-50);
+      color: var(--color-accent-deep);
+      box-shadow: var(--shadow-float);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .global-action.left { left: var(--space-4); }
+    .global-action.right { right: var(--space-4); }
+    .global-action:hover { border-color: var(--color-primary); background: var(--color-primary-100); }
+    .global-action:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .global-action:active { transform: translateY(1px); }
+    .global-action:disabled { border-color: var(--color-rule); background: var(--color-paper-2); color: var(--color-muted); box-shadow: var(--shadow-none); cursor: not-allowed; }
+    .bottom-nav {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      min-height: 5.25rem;
+      padding: var(--space-2) var(--space-2) var(--space-1);
+      border-top: var(--rule-thin) solid var(--color-rule);
+      background: var(--color-surface);
+    }
+    .nav-item {
+      display: grid;
+      min-width: 0;
+      min-height: var(--tap-target-min);
+      place-items: center;
+      align-content: center;
+      gap: var(--space-1);
+      padding: var(--space-1);
+      border: 0;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--color-muted);
+      cursor: pointer;
+    }
+    .nav-item .material-icons { font-size: var(--icon-md); }
+    .nav-item span:last-child { max-width: 100%; overflow: hidden; font-size: var(--app-caption-size); font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .nav-item:hover { background: var(--color-primary-50); color: var(--color-ink-2); }
+    .nav-item:focus-visible { outline: 3px solid var(--color-focus); outline-offset: -2px; }
+    .nav-item:active { transform: translateY(1px); }
+    .nav-item[aria-current="page"] { color: var(--color-accent-deep); }
+    .nav-item.center { position: relative; transform: translateY(calc(var(--space-4) * -1)); }
+    .nav-item.center:active { transform: translateY(calc((var(--space-4) * -1) + 1px)); }
+    .nav-item.center .material-icons {
+      display: grid;
+      width: 3.875rem;
+      height: 3.875rem;
+      place-items: center;
+      border: var(--space-1) solid var(--color-surface);
+      border-radius: var(--radius-round);
+      background: var(--color-primary);
+      color: var(--color-accent-ink);
+      box-shadow: var(--shadow-medium);
+      font-size: var(--icon-lg);
+    }
+    .nav-item.center span:last-child { color: var(--color-ink); font-weight: 800; }
+    .spec-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .spec-table th, .spec-table td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .spec-table th { color: var(--color-muted); font-size: var(--text-xs); }
+    .spec-table td { font-size: var(--app-body-2-size); }
+    .spec-table td:first-child { width: 24%; font-weight: 800; }
+    .spec-table td:nth-child(2) { width: 22%; color: var(--color-ink-2); }
+    .scope {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.75rem;
+      padding-inline: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-round);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .scope[data-tone="show"] { border-color: var(--color-success); color: var(--color-success); }
+    .scope[data-tone="hide"] { border-color: var(--color-danger); color: var(--color-danger); }
+    .scope[data-tone="check"] { border-color: var(--color-warning); }
+    .rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--rule-thin) solid var(--color-rule); }
+    .rule { padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .rule:nth-child(even) { padding-inline: var(--space-5) 0; border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .rule strong { display: block; margin-bottom: var(--space-1); }
+    .rule p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 64rem) {
+      .baseline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .baseline-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .baseline-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+      .specimen { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 48rem) {
+      .intro, .section-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .spec-table, .spec-table tbody, .spec-table tr, .spec-table td { display: block; width: 100%; }
+      .spec-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .spec-table tr { padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .spec-table td, .spec-table td:first-child, .spec-table td:nth-child(2) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .spec-table td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .rules { grid-template-columns: minmax(0, 1fr); }
+      .rule:nth-child(even) { padding-inline: 0; border-inline-start: 0; }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .baseline { grid-template-columns: minmax(0, 1fr); }
+      .baseline-item + .baseline-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .annotation-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+      .stage { padding-inline: var(--space-3); }
+      .navigation-stage { min-height: 24rem; }
+      .global-action { width: 3.5rem; height: 3.5rem; }
+      .bottom-nav { padding-inline: 0; }
+      .nav-item span:last-child { font-size: var(--text-xs); }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../../index.html" data-back-link data-fallback="../../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Navigation &amp; Global Actions</p><h1>내비게이션과 전역 액션</h1></div>
+      <p class="intro-copy">화면 컨셉과 무관하게 먼저 적용할 수 있는 앱바, 하단 5탭, Q오더·퀵적립 버튼의 구조와 노출 기준을 정리했습니다.</p>
+    </section>
+
+    <section class="baseline shell" aria-label="현재 코드 기준">
+      <div class="baseline-item"><span>Bottom Bar</span><strong>83dp + Safe Area</strong></div>
+      <div class="baseline-item"><span>Center Barcode</span><strong>62dp</strong></div>
+      <div class="baseline-item"><span>Global Action</span><strong>58dp · 좌우 16dp</strong></div>
+      <div class="baseline-item"><span>App Bar Title</span><strong>18sp · 700 · 중앙</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="appbar-title">
+      <div class="section-head"><h2 id="appbar-title">앱바</h2><p>메인 화면과 하위 화면 모두 같은 높이와 정렬 규칙을 사용합니다. 뒤로가기나 우측 액션이 없어도 제목의 중앙 위치는 유지합니다.</p></div>
+      <div class="specimen">
+        <div class="stage">
+          <p class="stage-label">기본 조합</p>
+          <div class="appbar-demo">
+            <div class="appbar"><span aria-hidden="true"></span><div class="appbar-title">내 정보</div><button class="icon-button" type="button" aria-label="설정"><span class="material-icons" aria-hidden="true">settings</span></button></div>
+            <div class="appbar"><button class="icon-button" type="button" aria-label="뒤로가기"><span class="material-icons" aria-hidden="true">arrow_back_ios_new</span></button><div class="appbar-title">마일리지 내역</div><span aria-hidden="true"></span></div>
+            <div class="appbar"><button class="icon-button" type="button" aria-label="뒤로가기"><span class="material-icons" aria-hidden="true">arrow_back_ios_new</span></button><div class="appbar-title">공지사항</div><button class="icon-button" type="button" aria-label="더보기"><span class="material-icons" aria-hidden="true">more_horiz</span></button></div>
+          </div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-row"><strong>높이</strong><p>상태 표시줄을 제외한 툴바 영역은 56dp를 기본값으로 사용합니다.</p></div>
+          <div class="annotation-row"><strong>좌우 액션</strong><p>아이콘 크기와 관계없이 누를 수 있는 영역은 최소 48×48dp를 확보합니다.</p></div>
+          <div class="annotation-row"><strong>제목</strong><p>18sp·700 중앙 정렬을 유지하며 한 줄을 넘으면 말줄임 처리합니다.</p></div>
+          <div class="annotation-row"><strong>아이콘</strong><p>새 아이콘 체계가 결정되기 전까지 현재 Material 아이콘을 사용합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="bottom-title">
+      <div class="section-head"><h2 id="bottom-title">하단 5탭과 전역 버튼</h2><p>중앙 바코드는 현재처럼 강조하고, Q오더는 왼쪽, 퀵적립은 오른쪽에 같은 크기로 배치합니다. 실제 자산은 유지하되 배치 규칙을 먼저 통일합니다.</p></div>
+      <div class="specimen">
+        <div class="stage navigation-stage">
+          <p class="stage-label">메인 화면 배치</p>
+          <div class="content-lines" aria-hidden="true"><div class="content-line"></div><div class="content-line"></div><div class="content-line"></div></div>
+          <button class="global-action left" type="button">Q오더</button>
+          <button class="global-action right" type="button">퀵적립</button>
+          <nav class="bottom-nav" aria-label="하단 탭 예시">
+            <button class="nav-item" type="button" aria-current="page"><span class="material-icons" aria-hidden="true">home</span><span>홈</span></button>
+            <button class="nav-item" type="button"><span class="material-icons" aria-hidden="true">confirmation_number</span><span>마이랜드</span></button>
+            <button class="nav-item center" type="button"><span class="material-icons" aria-hidden="true">qr_code_scanner</span><span>바코드</span></button>
+            <button class="nav-item" type="button"><span class="material-icons" aria-hidden="true">park</span><span>오지파크</span></button>
+            <button class="nav-item" type="button"><span class="material-icons" aria-hidden="true">person</span><span>내 정보</span></button>
+          </nav>
+        </div>
+        <div class="annotation">
+          <div class="annotation-row"><strong>하단 바</strong><p>현행 83dp와 Safe Area 대응을 유지하고 5개 탭을 같은 폭으로 배치합니다.</p></div>
+          <div class="annotation-row"><strong>중앙 바코드</strong><p>62dp 강조 영역을 유지하며 선택 상태와 관계없이 주요 액션으로 인지되게 합니다.</p></div>
+          <div class="annotation-row"><strong>Q오더·퀵적립</strong><p>현행 기준 58dp, 화면 좌우 16dp, 하단 바 위 동일한 높이로 정렬합니다.</p></div>
+          <div class="annotation-row"><strong>Safe Area</strong><p>기기 하단 영역만큼 하단 바와 플로팅 버튼을 함께 위로 이동합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="exposure-title">
+      <div class="section-head"><h2 id="exposure-title">노출 기준</h2><p>전역 버튼이 주요 화면에서는 항상 보이되, 촬영·스캔·인증·거래처럼 집중이 필요한 흐름을 가리지 않도록 구분합니다.</p></div>
+      <table class="spec-table">
+        <thead><tr><th scope="col">화면 유형</th><th scope="col">하단 탭</th><th scope="col">Q오더·퀵적립</th><th scope="col">적용 기준</th></tr></thead>
+        <tbody>
+          <tr><td data-label="화면 유형">5개 메인 탭</td><td data-label="하단 탭"><span class="scope" data-tone="show">노출</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="show">둘 다 노출</span></td><td data-label="적용 기준">홈·마이랜드·바코드·오지파크·내 정보의 기본 상태입니다.</td></tr>
+          <tr><td data-label="화면 유형">지도 하단 시트</td><td data-label="하단 탭"><span class="scope" data-tone="show">노출</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="check">겹침 확인</span></td><td data-label="적용 기준">시트 높이에 따라 버튼이 콘텐츠나 드래그 핸들을 가리지 않게 이동합니다.</td></tr>
+          <tr><td data-label="화면 유형">매장 상세 패널</td><td data-label="하단 탭"><span class="scope" data-tone="show">노출</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="show">둘 다 노출</span></td><td data-label="적용 기준">현재 홈 위에 표시되는 구조를 유지하는 전제입니다.</td></tr>
+          <tr><td data-label="화면 유형">일반 하위 화면</td><td data-label="하단 탭"><span class="scope" data-tone="hide">숨김</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="hide">숨김</span></td><td data-label="적용 기준">앱바와 뒤로가기를 사용하는 목록·상세·입력 화면입니다.</td></tr>
+          <tr><td data-label="화면 유형">카메라·QR 스캔</td><td data-label="하단 탭"><span class="scope" data-tone="hide">숨김</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="hide">숨김</span></td><td data-label="적용 기준">촬영 영역과 스캔 가이드를 가리지 않도록 모든 전역 요소를 숨깁니다.</td></tr>
+          <tr><td data-label="화면 유형">로그인·회원가입·권한</td><td data-label="하단 탭"><span class="scope" data-tone="hide">숨김</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="hide">숨김</span></td><td data-label="적용 기준">앱 진입 전 흐름에는 서비스 전역 액션을 표시하지 않습니다.</td></tr>
+          <tr><td data-label="화면 유형">거래 확인·처리·결과</td><td data-label="하단 탭"><span class="scope" data-tone="hide">숨김</span></td><td data-label="Q오더·퀵적립"><span class="scope" data-tone="hide">숨김</span></td><td data-label="적용 기준">마일리지 사용과 Q오더 처리 도중 중복 진입을 막습니다.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section shell" aria-labelledby="rule-title">
+      <div class="section-head"><h2 id="rule-title">배치·동작 규칙</h2><p>시각 컨셉 확정 후 모서리와 색상은 바뀔 수 있지만 아래 구조는 유지합니다.</p></div>
+      <div class="rules">
+        <div class="rule"><strong>좌우 대칭</strong><p>Q오더와 퀵적립은 동일 크기와 동일한 하단 기준선을 사용합니다.</p></div>
+        <div class="rule"><strong>콘텐츠 보호</strong><p>스크롤 콘텐츠의 마지막 항목에는 하단 바와 전역 버튼 높이만큼 여백을 확보합니다.</p></div>
+        <div class="rule"><strong>시트 충돌</strong><p>지도 시트가 확장되면 버튼을 시트 위로 이동하거나 시트가 버튼 아래에서 멈추게 합니다.</p></div>
+        <div class="rule"><strong>연속 실행 방지</strong><p>액션을 누른 직후에는 중복 탭을 막고 다음 화면이 열리면 버튼을 숨깁니다.</p></div>
+        <div class="rule"><strong>상태 복귀</strong><p>하위 흐름을 종료하면 이전 메인 화면의 탭 선택과 스크롤 상태를 유지합니다.</p></div>
+        <div class="rule"><strong>접근성</strong><p>표시 자산의 크기와 별개로 모든 아이콘과 플로팅 버튼에 최소 48×48dp 터치 영역을 제공합니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 내비게이션과 전역 액션 기준</span><span>Flutter 현행 코드 대조</span></footer>
+  <script src="../../../assets/navigation.js"></script>
+</body>
+</html>

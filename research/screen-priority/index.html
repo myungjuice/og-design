@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 공통 구조와 화면 제작 순서</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../design-system/foundations/tokens.css">
+  <link rel="stylesheet" href="../../assets/navigation.css">
+  <style>
+    /* Hallmark · macrostructure: Map / Diagram · theme: OG Indigo · pre-emit critique: P4 H5 E4 S5 R5 V4 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-style: normal; }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1.1fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 { min-width: 0; font-size: var(--text-display); line-height: 1.04; letter-spacing: -0.05em; overflow-wrap: anywhere; }
+    .intro p:last-child { max-width: 62ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .summary-item { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .summary-item + .summary-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .summary-item span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .summary-item strong { font-size: var(--app-body-1-size); }
+    .section { padding-block: clamp(var(--space-12), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 1.28fr);
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .section-head h2 { min-width: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+    .section-head p { max-width: 66ch; margin: 0; color: var(--color-neutral); }
+    .system-map { display: grid; gap: var(--space-4); }
+    .map-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(8rem, 0.22fr) minmax(0, 1.78fr);
+      border-top: var(--rule-thin) solid var(--color-rule);
+    }
+    .map-label { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .map-label span { display: block; color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .map-label strong { display: block; margin-top: var(--space-1); font-size: var(--app-body-1-size); }
+    .map-content {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-2);
+      padding: var(--space-4) 0 var(--space-4) var(--space-5);
+      border-inline-start: var(--rule-thin) solid var(--color-rule);
+    }
+    .map-node {
+      display: flex;
+      min-width: 0;
+      min-height: 4.5rem;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      font-size: var(--text-sm);
+      font-weight: 750;
+      text-align: center;
+    }
+    .map-node[data-tone="primary"] { border-color: var(--color-primary-300); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .map-node[data-tone="muted"] { background: var(--color-paper-2); color: var(--color-neutral); }
+    .map-node[data-span="all"] { grid-column: 1 / -1; min-height: 3.5rem; }
+    .map-node[data-span="two"] { grid-column: span 2; }
+    .map-node[data-span="three"] { grid-column: span 3; }
+    .map-caption { margin: var(--space-4) 0 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .matrix { width: 100%; border-collapse: collapse; text-align: left; }
+    .matrix th, .matrix td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .matrix th { color: var(--color-muted); font-size: var(--text-xs); }
+    .matrix td { font-size: var(--app-body-2-size); }
+    .matrix td:first-child { width: 25%; font-weight: 800; }
+    .matrix td:nth-child(2) { width: 29%; color: var(--color-ink-2); }
+    .matrix td:nth-child(3) { width: 27%; color: var(--color-neutral); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.75rem;
+      padding-inline: var(--space-3);
+      border: var(--rule-thin) solid var(--color-primary-300);
+      border-radius: var(--radius-round);
+      background: var(--color-primary-50);
+      color: var(--color-accent-deep);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .priority-list { display: grid; border-top: var(--rule-thin) solid var(--color-rule); }
+    .priority {
+      display: grid;
+      grid-template-columns: minmax(8rem, 0.32fr) minmax(0, 1.68fr);
+      gap: var(--space-8);
+      padding-block: var(--space-6);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+    }
+    .priority-mark span { display: block; color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; }
+    .priority-mark strong { display: block; margin-top: var(--space-1); font-size: var(--app-title-2-size); }
+    .priority-body h3 { margin-bottom: var(--space-2); font-size: var(--app-headline-size); }
+    .priority-body p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .priority-body ul { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-4) 0 0; padding: 0; list-style: none; }
+    .priority-body li { padding: var(--space-2) var(--space-3); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-round); background: var(--color-surface); font-size: var(--text-sm); }
+    .rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--rule-thin) solid var(--color-rule); }
+    .rule { padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .rule:nth-child(even) { padding-inline: var(--space-5) 0; border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .rule strong { display: block; margin-bottom: var(--space-1); }
+    .rule p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 64rem) {
+      .map-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .map-node[data-span="all"] { grid-column: 1 / -1; }
+      .map-node[data-span="three"] { grid-column: span 3; }
+    }
+    @media (max-width: 48rem) {
+      .intro, .section-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .summary { grid-template-columns: minmax(0, 1fr); }
+      .summary-item + .summary-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .map-row, .priority { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .map-label { padding-bottom: var(--space-2); }
+      .map-content { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline-start: 0; border-inline-start: 0; }
+      .map-node[data-span="three"] { grid-column: 1 / -1; }
+      .matrix, .matrix tbody, .matrix tr, .matrix td { display: block; width: 100%; }
+      .matrix thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .matrix tr { padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .matrix td, .matrix td:first-child, .matrix td:nth-child(2), .matrix td:nth-child(3) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .matrix td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .priority-mark { margin-bottom: var(--space-4); }
+      .rules { grid-template-columns: minmax(0, 1fr); }
+      .rule:nth-child(even) { padding-inline: 0; border-inline-start: 0; }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .map-content { grid-template-columns: minmax(0, 1fr); }
+      .map-node[data-span="two"], .map-node[data-span="three"] { grid-column: auto; }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../index.html" data-back-link data-fallback="../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Screen Structure &amp; Priority</p><h1>공통 구조와 제작 순서</h1></div>
+      <p>화면 컨셉이 결정되기 전에 확정할 수 있는 공통 화면 틀을 정리하고, 리뉴얼 기준을 먼저 검증할 화면부터 순서대로 배치했습니다.</p>
+    </section>
+
+    <section class="summary shell" aria-label="기준 요약">
+      <div class="summary-item"><span>화면 구조</span><strong>5개 하단 탭 기준</strong></div>
+      <div class="summary-item"><span>공통 액션</span><strong>Q오더·퀵적립 유지</strong></div>
+      <div class="summary-item"><span>디자인 기준</span><strong>OG Indigo 임시 적용</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="map-title">
+      <div class="section-head"><h2 id="map-title">공통 화면 구조</h2><p>메인 화면, 하위 화면과 공통 상태를 하나의 계층으로 연결합니다. 기능별 화면을 만들 때 이 구조에서 필요한 층만 조합합니다.</p></div>
+      <div class="system-map" role="img" aria-label="앱바, 메인 탭, 전역 액션, 하위 화면, 공통 상태로 이어지는 오지고랜드 화면 구조">
+        <div class="map-row">
+          <div class="map-label"><span>Layer 01</span><strong>상단 구조</strong></div>
+          <div class="map-content"><div class="map-node" data-tone="primary" data-span="all">앱바 · 뒤로가기 · 화면 제목 · 우측 액션</div></div>
+        </div>
+        <div class="map-row">
+          <div class="map-label"><span>Layer 02</span><strong>메인 탭</strong></div>
+          <div class="map-content">
+            <div class="map-node">홈</div><div class="map-node">마이랜드</div><div class="map-node">바코드</div><div class="map-node">오지파크</div><div class="map-node">내 정보</div>
+          </div>
+        </div>
+        <div class="map-row">
+          <div class="map-label"><span>Layer 03</span><strong>전역 액션</strong></div>
+          <div class="map-content">
+            <div class="map-node" data-tone="primary" data-span="two">Q오더</div>
+            <div class="map-node" data-tone="primary" data-span="three">퀵적립</div>
+          </div>
+        </div>
+        <div class="map-row">
+          <div class="map-label"><span>Layer 04</span><strong>하위 화면</strong></div>
+          <div class="map-content">
+            <div class="map-node">전체 화면</div><div class="map-node">바텀시트</div><div class="map-node">상세·목록</div><div class="map-node">입력·선택</div><div class="map-node">스캔·거래</div>
+          </div>
+        </div>
+        <div class="map-row">
+          <div class="map-label"><span>Layer 05</span><strong>공통 상태</strong></div>
+          <div class="map-content">
+            <div class="map-node" data-tone="muted">로딩</div><div class="map-node" data-tone="muted">빈 상태</div><div class="map-node" data-tone="muted">오류</div><div class="map-node" data-tone="muted">성공</div><div class="map-node" data-tone="muted">권한·확인</div>
+          </div>
+        </div>
+      </div>
+      <p class="map-caption">카메라·QR 스캐너·인증·거래 확인처럼 집중이 필요한 전체 화면에서는 전역 플로팅 버튼을 숨기는 방향으로 검토합니다.</p>
+    </section>
+
+    <section class="section shell" aria-labelledby="mapping-title">
+      <div class="section-head"><h2 id="mapping-title">화면별 공통 구조 적용</h2><p>기획서의 주요 화면과 기존 운영 화면에 어떤 공통 구조가 필요한지 연결했습니다.</p></div>
+      <table class="matrix">
+        <thead><tr><th scope="col">화면 그룹</th><th scope="col">기본 구조</th><th scope="col">필수 상태</th><th scope="col">범위</th></tr></thead>
+        <tbody>
+          <tr><td data-label="화면 그룹">홈·지도</td><td data-label="기본 구조">하단 탭 · 검색 · 지도 시트 · 전역 액션</td><td data-label="필수 상태">위치 권한 · 검색 결과 없음 · 지도 로딩</td><td data-label="범위"><span class="tag">A 전면 개편</span></td></tr>
+          <tr><td data-label="화면 그룹">마이랜드</td><td data-label="기본 구조">하단 탭 · 요약 · 캘린더 · 미션 · 게임 진입</td><td data-label="필수 상태">출석 완료 · 보상 · 티켓 없음 · 준비 중</td><td data-label="범위"><span class="tag">A 전면 개편</span></td></tr>
+          <tr><td data-label="화면 그룹">바코드·마일리지 사용</td><td data-label="기본 구조">하단 탭 · 잔액 · 바코드 · 스캔·거래 화면</td><td data-label="필수 상태">금액 부족 · 확인 · 처리 중 · 성공·실패</td><td data-label="범위"><span class="tag">A+B</span></td></tr>
+          <tr><td data-label="화면 그룹">오지파크</td><td data-label="기본 구조">하단 탭 · 콘텐츠 목록 · 상세 · 작성</td><td data-label="필수 상태">콘텐츠 없음 · 심사 중 · 종료 · 신고</td><td data-label="범위"><span class="tag">A 전면 개편</span></td></tr>
+          <tr><td data-label="화면 그룹">내 정보</td><td data-label="기본 구조">하단 탭 · 프로필 · 요약 · 바텀시트 · 상세</td><td data-label="필수 상태">최근 방문 없음 · 알림 없음 · 저장 완료</td><td data-label="범위"><span class="tag">A 전면 개편</span></td></tr>
+          <tr><td data-label="화면 그룹">매장 상세</td><td data-label="기본 구조">앱바 · 매장 헤더 · 탭 · 목록·상세 · 전역 액션</td><td data-label="필수 상태">메뉴·리뷰 없음 · 이미지 로딩 · 영업 상태</td><td data-label="범위"><span class="tag">B 시스템 적용</span></td></tr>
+          <tr><td data-label="화면 그룹">로그인·회원가입</td><td data-label="기본 구조">앱바 · 입력 · 약관 · 인증 · CTA</td><td data-label="필수 상태">유효성 오류 · 인증 대기 · 실패 · 완료</td><td data-label="범위"><span class="tag">B 시스템 적용</span></td></tr>
+          <tr><td data-label="화면 그룹">영수증 적립·Q오더</td><td data-label="기본 구조">카메라·스캔 · 입력 · 확인 · 결과</td><td data-label="필수 상태">권한 · 처리 중 · 재시도 · 성공·실패</td><td data-label="범위"><span class="tag">B 시스템 적용</span></td></tr>
+          <tr><td data-label="화면 그룹">예약·웨이팅·문의</td><td data-label="기본 구조">앱바 · 목록 · 상세 · 입력 · 상태 배지</td><td data-label="필수 상태">내역 없음 · 변경·취소 · 제출 완료</td><td data-label="범위"><span class="tag">B 시스템 적용</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section shell" aria-labelledby="priority-title">
+      <div class="section-head"><h2 id="priority-title">화면 제작 우선순위</h2><p>먼저 만든 화면의 규칙을 다음 화면에서 재사용할 수 있도록 순서를 정했습니다. 월별 개발 일정이 아니라 디자인 제작 순서입니다.</p></div>
+      <div class="priority-list">
+        <article class="priority">
+          <div class="priority-mark"><span>Priority 01</span><strong>기준 확정</strong></div>
+          <div class="priority-body"><h3>공통 구조와 대표 화면</h3><p>앱 전체에 반복될 기본 규칙과 메인 탭의 밀도·정보 위계를 먼저 결정합니다.</p><ul><li>앱바</li><li>하단 탭</li><li>Q오더·퀵적립</li><li>홈</li><li>내 정보</li></ul></div>
+        </article>
+        <article class="priority">
+          <div class="priority-mark"><span>Priority 02</span><strong>리뉴얼 핵심</strong></div>
+          <div class="priority-body"><h3>11월 신규·전면 개편 화면</h3><p>리뉴얼의 변화가 가장 크게 드러나는 메인 화면과 신규 콘텐츠 구조를 제작합니다.</p><ul><li>마이랜드</li><li>바코드</li><li>오지파크</li><li>이벤트</li><li>공모전</li><li>커뮤니티</li></ul></div>
+        </article>
+        <article class="priority">
+          <div class="priority-mark"><span>Priority 03</span><strong>핵심 흐름</strong></div>
+          <div class="priority-body"><h3>사용·적립·주문과 주요 상세</h3><p>거래와 적립처럼 오류·로딩·결과 상태가 많은 흐름에 확정된 컴포넌트를 적용합니다.</p><ul><li>마일리지 사용</li><li>영수증 적립</li><li>Q오더</li><li>매장 상세</li><li>로그인·가입</li></ul></div>
+        </article>
+        <article class="priority">
+          <div class="priority-mark"><span>Priority 04</span><strong>전체 확장</strong></div>
+          <div class="priority-body"><h3>운영 화면과 예외 상태</h3><p>기획서 밖의 기존 화면과 하위 상세까지 디자인 시스템 적용을 마무리합니다.</p><ul><li>예약·웨이팅</li><li>공지·알림</li><li>문의·정책</li><li>권한 화면</li><li>빈 상태·오류</li></ul></div>
+        </article>
+        <article class="priority">
+          <div class="priority-mark"><span>Priority 05</span><strong>후속 제작</strong></div>
+          <div class="priority-body"><h3>12월 게임 화면</h3><p>티켓과 보상 정책을 반영해 게임 전용 화면과 결과 상태를 제작합니다.</p><ul><li>룰렛</li><li>퍼즐</li><li>티켓 차감</li><li>보상 결과</li><li>참여 제한</li></ul></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="rule-title">
+      <div class="section-head"><h2 id="rule-title">현재 적용 원칙</h2><p>컨셉 결정 전에도 바뀌지 않는 기준입니다.</p></div>
+      <div class="rules">
+        <div class="rule"><strong>컬러 토큰</strong><p>OG Indigo를 임시 기준으로 사용하며 Primary 값이 변경되면 전체 시안에 함께 반영합니다.</p></div>
+        <div class="rule"><strong>아이콘</strong><p>아이콘 체계가 결정되기 전까지 기존 Material 아이콘과 현재 자산을 유지합니다.</p></div>
+        <div class="rule"><strong>지도 하단 시트</strong><p>열리는 방식은 유지하고 컬러, 타이포그래피, 카드와 간격을 개편합니다.</p></div>
+        <div class="rule"><strong>프로필</strong><p>기존 Multiavatar·사진 설정은 신규 캐릭터 3종 선택 화면으로 대체합니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 공통 구조와 화면 제작 순서</span><span>화면 인벤토리 기준</span></footer>
+  <script src="../../assets/navigation.js"></script>
+</body>
+</html>

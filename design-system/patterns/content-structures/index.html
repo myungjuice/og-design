@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 콘텐츠 구조 기준</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=Material+Icons&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../foundations/tokens.css">
+  <link rel="stylesheet" href="../../../assets/navigation.css">
+  <style>
+    /* Hallmark · macrostructure: Split Studio · theme: OG Indigo · pre-emit critique: P4 H5 E5 S5 R5 V5 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button { font: inherit; }
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-style: normal; }
+    .material-icons {
+      font-family: var(--font-icon);
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 1fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 { max-width: 12ch; min-width: 0; font-size: var(--text-display); line-height: 1.04; letter-spacing: -0.05em; overflow-wrap: anywhere; }
+    .intro-copy { max-width: 60ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .baseline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .baseline-item { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .baseline-item + .baseline-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .baseline-item span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .baseline-item strong { display: block; font-size: var(--app-body-1-size); }
+    .section { padding-block: clamp(var(--space-12), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 1.28fr);
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .section-head h2 { min-width: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+    .section-head p { max-width: 68ch; margin: 0; color: var(--color-neutral); }
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(var(--space-8), 6vw, var(--space-16));
+      align-items: start;
+    }
+    .split.reverse .preview { order: 2; }
+    .preview {
+      min-width: 0;
+      padding: clamp(var(--space-5), 4vw, var(--space-8));
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-low);
+    }
+    .preview-label { margin: 0 0 var(--space-5); color: var(--color-muted); font-size: var(--text-xs); font-weight: 800; }
+    .rules { display: grid; border-top: var(--rule-thin) solid var(--color-rule); }
+    .rule { display: grid; grid-template-columns: minmax(7rem, 0.4fr) minmax(0, 1.6fr); gap: var(--space-4); padding-block: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .rule strong, .rule p { font-size: var(--app-body-2-size); }
+    .rule p { margin: 0; color: var(--color-neutral); }
+    .section-bar { display: flex; min-height: var(--tap-target-min); align-items: center; justify-content: space-between; gap: var(--space-4); }
+    .section-bar h3 { font-size: var(--app-headline-size); }
+    .text-action {
+      min-height: var(--control-height-sm);
+      padding-inline: var(--space-2);
+      border: 0;
+      border-radius: var(--radius-xs);
+      background: transparent;
+      color: var(--color-accent-deep);
+      font-size: var(--app-label-size);
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .text-action:hover { background: var(--color-primary-50); }
+    .text-action:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .text-action:active { transform: translateY(1px); }
+    .section-support { margin: 0 0 var(--space-4); color: var(--color-muted); font-size: var(--app-caption-size); }
+    .surface {
+      overflow: hidden;
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-low);
+    }
+    .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .summary-cell { min-width: 0; padding: var(--space-4); }
+    .summary-cell + .summary-cell { border-inline-start: var(--rule-thin) solid var(--color-rule-2); }
+    .summary-cell span { display: block; color: var(--color-muted); font-size: var(--app-caption-size); }
+    .summary-cell strong { display: block; margin-top: var(--space-1); overflow: hidden; font-size: var(--app-headline-size); text-overflow: ellipsis; white-space: nowrap; }
+    .progress { height: var(--space-1); margin: var(--space-4); overflow: hidden; border-radius: var(--radius-round); background: var(--color-paper-3); }
+    .progress span { display: block; width: 38%; height: 100%; border-radius: inherit; background: var(--color-primary); }
+    .menu-list { display: grid; }
+    .menu-row {
+      display: grid;
+      grid-template-columns: var(--icon-lg) minmax(0, 1fr) var(--icon-lg);
+      gap: var(--space-3);
+      align-items: center;
+      min-height: 3.75rem;
+      padding-inline: var(--space-4);
+      border: 0;
+      border-bottom: var(--rule-thin) solid var(--color-rule-2);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      text-align: left;
+      cursor: pointer;
+    }
+    .menu-row:last-child { border-bottom: 0; }
+    .menu-row:hover { background: var(--color-primary-50); }
+    .menu-row:focus-visible { position: relative; outline: 3px solid var(--color-focus); outline-offset: -3px; }
+    .menu-row:active { background: var(--color-primary-100); }
+    .menu-row .material-icons { color: var(--color-muted); font-size: var(--icon-md); }
+    .menu-row strong { min-width: 0; overflow: hidden; font-size: var(--app-body-2-size); text-overflow: ellipsis; white-space: nowrap; }
+    .action-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+    .with-top-gap { margin-top: var(--space-4); }
+    .rules.with-section-gap { margin-top: var(--space-8); }
+    .action-tile {
+      display: grid;
+      min-width: 0;
+      min-height: 7rem;
+      place-items: center;
+      align-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      cursor: pointer;
+    }
+    .action-tile:hover { border-color: var(--color-primary-300); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .action-tile:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .action-tile:active { transform: translateY(1px); }
+    .action-tile .material-icons { font-size: var(--icon-lg); }
+    .action-tile span:last-child { max-width: 100%; overflow: hidden; font-size: var(--app-caption-size); font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+    .media-list { display: grid; gap: var(--space-3); }
+    .media-card {
+      display: grid;
+      grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+      min-width: 0;
+      padding: var(--space-3);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .media-card:hover { border-color: var(--color-primary-300); box-shadow: var(--shadow-low); }
+    .media-card:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .media-card:active { transform: translateY(1px); }
+    .media-placeholder { aspect-ratio: 1; border-radius: var(--radius-sm); background: var(--color-paper-2); }
+    .media-copy { min-width: 0; }
+    .media-copy strong, .media-copy span { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .media-copy strong { font-size: var(--app-body-1-size); }
+    .media-copy span { margin-top: var(--space-1); color: var(--color-muted); font-size: var(--app-caption-size); }
+    .badge { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--space-3); border: var(--rule-thin) solid var(--color-primary-300); border-radius: var(--radius-round); background: var(--color-primary-50); color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; white-space: nowrap; }
+    .feed-card { overflow: hidden; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); }
+    .feed-media { aspect-ratio: 16 / 7; background: var(--color-paper-2); }
+    .feed-body { padding: var(--space-4); }
+    .feed-meta { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; color: var(--color-muted); font-size: var(--app-caption-size); }
+    .feed-body h3 { margin-top: var(--space-3); font-size: var(--app-headline-size); }
+    .feed-body p { display: -webkit-box; margin: var(--space-2) 0 0; overflow: hidden; color: var(--color-neutral); font-size: var(--app-body-2-size); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .skeleton { overflow: hidden; position: relative; background: var(--color-paper-2); }
+    .skeleton::after { position: absolute; inset: 0; background: linear-gradient(90deg, var(--color-paper-2), var(--color-surface), var(--color-paper-2)); content: ""; transform: translateX(-100%); animation: shimmer 1.4s infinite; }
+    @keyframes shimmer { to { transform: translateX(100%); } }
+    .type-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .type-table th, .type-table td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .type-table th { color: var(--color-muted); font-size: var(--text-xs); }
+    .type-table td { font-size: var(--app-body-2-size); }
+    .type-table td:first-child { width: 22%; font-weight: 800; }
+    .type-table td:nth-child(2) { width: 25%; }
+    .type-table td:nth-child(3) { width: 28%; color: var(--color-ink-2); }
+    .decision { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--space-3); border: var(--rule-thin) solid var(--color-primary-300); border-radius: var(--radius-round); background: var(--color-primary-50); color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; white-space: nowrap; }
+    .principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--rule-thin) solid var(--color-rule); }
+    .principle { padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .principle:nth-child(even) { padding-inline: var(--space-5) 0; border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .principle strong { display: block; margin-bottom: var(--space-1); }
+    .principle p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 64rem) {
+      .baseline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .baseline-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .baseline-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+    }
+    @media (max-width: 48rem) {
+      .intro, .section-head, .split { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .split.reverse .preview { order: initial; }
+      .type-table, .type-table tbody, .type-table tr, .type-table td { display: block; width: 100%; }
+      .type-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .type-table tr { padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .type-table td, .type-table td:first-child, .type-table td:nth-child(2), .type-table td:nth-child(3) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .type-table td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .principles { grid-template-columns: minmax(0, 1fr); }
+      .principle:nth-child(even) { padding-inline: 0; border-inline-start: 0; }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .baseline { grid-template-columns: minmax(0, 1fr); }
+      .baseline-item + .baseline-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .rule { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+      .summary-grid { grid-template-columns: minmax(0, 1fr); }
+      .summary-cell + .summary-cell { border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule-2); }
+      .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .media-card { grid-template-columns: 4.5rem minmax(0, 1fr); }
+      .media-card .badge { grid-column: 2; justify-self: start; }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../../index.html" data-back-link data-fallback="../../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Content Structures</p><h1>카드·리스트·섹션</h1></div>
+      <p class="intro-copy">마일리지, 최근 방문, 매장, 이벤트와 커뮤니티 화면에서 반복되는 정보 구조를 같은 규칙으로 설계하기 위한 기준입니다.</p>
+    </section>
+
+    <section class="baseline shell" aria-label="현재 코드 조사">
+      <div class="baseline-item"><span>Material Card</span><strong>사용 파일 2개</strong></div>
+      <div class="baseline-item"><span>Material ListTile</span><strong>사용 파일 2개</strong></div>
+      <div class="baseline-item"><span>직접 BoxDecoration</span><strong>화면 파일 52개</strong></div>
+      <div class="baseline-item"><span>JbContainer</span><strong>16dp · 반경 12dp</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="section-title">
+      <div class="section-head"><h2 id="section-title">섹션 헤더와 요약</h2><p>섹션 제목은 콘텐츠 그룹을 설명하고, 요약 카드는 서로 비교해야 하는 핵심 값만 담습니다.</p></div>
+      <div class="split">
+        <div class="preview">
+          <p class="preview-label">마일리지 요약</p>
+          <div class="section-bar"><h3>마일리지</h3><button class="text-action" type="button">내역 보기</button></div>
+          <p class="section-support">사용·보유·소멸 예정 금액</p>
+          <div class="surface">
+            <div class="summary-grid">
+              <div class="summary-cell"><span>사용 가능</span><strong>0 M</strong></div>
+              <div class="summary-cell"><span>보유</span><strong>1,000 M</strong></div>
+              <div class="summary-cell"><span>소멸 예정</span><strong>—</strong></div>
+            </div>
+            <div class="progress" role="progressbar" aria-label="마일리지 진행도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38"><span></span></div>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule"><strong>제목</strong><p>18sp·700을 기본으로 사용하고 화면 제목보다 한 단계 낮게 구성합니다.</p></div>
+          <div class="rule"><strong>우측 액션</strong><p>‘전체 보기’, ‘내역 보기’처럼 목적지가 명확한 동사형 문구를 사용합니다.</p></div>
+          <div class="rule"><strong>보조 설명</strong><p>필요한 경우에만 제목 아래 한 줄로 표시하며 반복 설명은 생략합니다.</p></div>
+          <div class="rule"><strong>값 비교</strong><p>비교 대상은 같은 행과 같은 타이포 위계로 배치합니다.</p></div>
+          <div class="rule"><strong>빈 값</strong><p>확인할 값이 없으면 0과 —를 의미에 맞게 구분합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="menu-title">
+      <div class="section-head"><h2 id="menu-title">메뉴 리스트와 바로가기</h2><p>텍스트 중심 메뉴는 하나의 리스트로 묶고, 자주 쓰는 기능을 빠르게 구분해야 할 때만 아이콘 그리드를 사용합니다.</p></div>
+      <div class="split reverse">
+        <div class="preview">
+          <p class="preview-label">목록형·그리드형</p>
+          <div class="surface menu-list">
+            <button class="menu-row" type="button"><span class="material-icons" aria-hidden="true">receipt_long</span><strong>이용 내역</strong><span class="material-icons" aria-hidden="true">chevron_right</span></button>
+            <button class="menu-row" type="button"><span class="material-icons" aria-hidden="true">notifications</span><strong>공지·알림</strong><span class="material-icons" aria-hidden="true">chevron_right</span></button>
+            <button class="menu-row" type="button"><span class="material-icons" aria-hidden="true">settings</span><strong>설정</strong><span class="material-icons" aria-hidden="true">chevron_right</span></button>
+          </div>
+          <div class="action-grid with-top-gap">
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">receipt_long</span><span>이용 내역</span></button>
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">card_membership</span><span>멤버십</span></button>
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">notifications</span><span>공지·알림</span></button>
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">support_agent</span><span>문의하기</span></button>
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">settings</span><span>설정</span></button>
+            <button class="action-tile" type="button"><span class="material-icons" aria-hidden="true">person</span><span>내 정보</span></button>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule"><strong>목록형</strong><p>메뉴 수가 많거나 문구가 긴 경우 한 행씩 배치하고 구분선으로 묶습니다.</p></div>
+          <div class="rule"><strong>그리드형</strong><p>동일한 중요도의 대표 메뉴 4~6개에 사용하며 2×3 또는 3×2로 구성합니다.</p></div>
+          <div class="rule"><strong>정렬</strong><p>그리드형은 아이콘과 텍스트를 수평·수직 중앙에 배치합니다.</p></div>
+          <div class="rule"><strong>행 높이</strong><p>목록 행은 최소 60dp, 전체 터치 영역은 최소 48dp를 확보합니다.</p></div>
+          <div class="rule"><strong>중첩 금지</strong><p>하나의 카드 안에서 목록형과 그리드형을 동시에 사용하지 않습니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="content-title">
+      <div class="section-head"><h2 id="content-title">매장·이벤트·게시글</h2><p>콘텐츠 성격에 따라 목록 카드와 피드 카드를 구분합니다. 모든 정보를 하나의 카드 형태로 강제하지 않습니다.</p></div>
+      <div class="split">
+        <div class="preview">
+          <p class="preview-label">매장 목록</p>
+          <div class="section-bar"><h3>최근 방문</h3><button class="text-action" type="button">전체 보기</button></div>
+          <div class="media-list">
+            <button class="media-card" type="button"><span class="media-placeholder" aria-hidden="true"></span><span class="media-copy"><strong>회원점명</strong><span>최근 방문 매장 · 후기 작성 가능</span></span><span class="badge">후기 작성</span></button>
+            <button class="media-card" type="button"><span class="media-placeholder skeleton" aria-hidden="true"></span><span class="media-copy"><strong>신규 회원점</strong><span>영업 중 · 1.2km</span></span><span class="badge">NEW</span></button>
+          </div>
+        </div>
+        <div class="preview">
+          <p class="preview-label">이벤트·커뮤니티 피드</p>
+          <article class="feed-card">
+            <div class="feed-media" aria-hidden="true"></div>
+            <div class="feed-body"><div class="feed-meta"><span class="badge">진행 중</span><span>오지파크</span><span>9월 30일까지</span></div><h3>이벤트 또는 게시글 제목</h3><p>목록에서 판단에 필요한 내용만 두 줄까지 보여주고 상세 정보는 다음 화면에서 제공합니다.</p></div>
+          </article>
+        </div>
+      </div>
+      <div class="rules with-section-gap">
+        <div class="rule"><strong>매장 카드</strong><p>썸네일·매장명·거리 또는 방문 정보·현재 가능한 행동을 우선합니다.</p></div>
+        <div class="rule"><strong>피드 카드</strong><p>이미지·상태·출처·제목·요약 순서로 구성하고 상세 데이터는 목록에서 줄입니다.</p></div>
+        <div class="rule"><strong>상태 배지</strong><p>NEW, 진행 중, 심사 중처럼 빠르게 판단해야 하는 상태에만 사용합니다.</p></div>
+        <div class="rule"><strong>전체 카드 탭</strong><p>카드 전체가 하나의 상세 화면으로 이동할 때만 전체 영역을 탭 대상으로 사용합니다.</p></div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="choice-title">
+      <div class="section-head"><h2 id="choice-title">구조 선택 기준</h2><p>콘텐츠를 카드로 감쌀지, 목록으로 이어갈지 판단하는 기준입니다.</p></div>
+      <table class="type-table">
+        <thead><tr><th scope="col">콘텐츠</th><th scope="col">권장 구조</th><th scope="col">판단 기준</th><th scope="col">적용 화면</th></tr></thead>
+        <tbody>
+          <tr><td data-label="콘텐츠">핵심 수치 비교</td><td data-label="권장 구조"><span class="decision">요약 카드</span></td><td data-label="판단 기준">2~3개의 값을 같은 위계로 비교할 때 사용합니다.</td><td data-label="적용 화면">마일리지·티켓·공유</td></tr>
+          <tr><td data-label="콘텐츠">설정·상세 메뉴</td><td data-label="권장 구조"><span class="decision">구분선 리스트</span></td><td data-label="판단 기준">텍스트가 중심이고 목적지가 여러 개인 경우 사용합니다.</td><td data-label="적용 화면">설정·문의·이용 내역</td></tr>
+          <tr><td data-label="콘텐츠">대표 바로가기</td><td data-label="권장 구조"><span class="decision">아이콘 그리드</span></td><td data-label="판단 기준">중요도가 비슷한 4~6개 기능을 빠르게 구분할 때 사용합니다.</td><td data-label="적용 화면">내 정보 메인</td></tr>
+          <tr><td data-label="콘텐츠">매장 목록</td><td data-label="권장 구조"><span class="decision">미디어 리스트</span></td><td data-label="판단 기준">이미지와 이름, 거리·방문 정보, 행동을 함께 보여줍니다.</td><td data-label="적용 화면">홈·최근 방문·이벤트 참여점</td></tr>
+          <tr><td data-label="콘텐츠">이벤트·공모전</td><td data-label="권장 구조"><span class="decision">피드 카드</span></td><td data-label="판단 기준">대표 이미지와 진행 상태가 선택에 중요한 경우 사용합니다.</td><td data-label="적용 화면">오지파크</td></tr>
+          <tr><td data-label="콘텐츠">커뮤니티 글</td><td data-label="권장 구조"><span class="decision">텍스트·미디어 피드</span></td><td data-label="판단 기준">작성자·매장·본문·이미지의 읽기 순서를 우선합니다.</td><td data-label="적용 화면">업종별 커뮤니티</td></tr>
+          <tr><td data-label="콘텐츠">연속 정보</td><td data-label="권장 구조"><span class="decision">카드 없이 목록</span></td><td data-label="판단 기준">항목이 같은 맥락에서 연속되고 개별 강조가 필요하지 않은 경우입니다.</td><td data-label="적용 화면">알림·공지·마일리지 내역</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section shell" aria-labelledby="principle-title">
+      <div class="section-head"><h2 id="principle-title">공통 적용 원칙</h2><p>컨셉 확정 후 색상과 모서리는 조정할 수 있지만 콘텐츠 위계는 유지합니다.</p></div>
+      <div class="principles">
+        <div class="principle"><strong>카드 남용 방지</strong><p>모든 항목에 개별 배경과 그림자를 주지 않고 같은 맥락의 항목은 하나의 표면 안에 묶습니다.</p></div>
+        <div class="principle"><strong>한 카드·한 목적</strong><p>카드 내부에 서로 다른 주요 이동 버튼을 여러 개 배치하지 않습니다.</p></div>
+        <div class="principle"><strong>고정 간격</strong><p>화면 좌우 16dp, 카드 내부 16dp를 기본으로 하고 정보량에 따라 20·24dp 단계를 사용합니다.</p></div>
+        <div class="principle"><strong>상태 공간 유지</strong><p>로딩·빈 상태·오류로 바뀌어도 섹션 제목과 화면 골격이 크게 움직이지 않게 합니다.</p></div>
+        <div class="principle"><strong>텍스트 제한</strong><p>목록 제목은 한 줄, 설명은 최대 두 줄을 기본으로 하며 전체 내용은 상세 화면에서 제공합니다.</p></div>
+        <div class="principle"><strong>접근성</strong><p>카드 전체가 눌리는 경우 의미 있는 접근성 라벨을 제공하고 내부 장식 아이콘은 읽기에서 제외합니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 카드·리스트·섹션 기준</span><span>Flutter 현행 코드 대조</span></footer>
+  <script src="../../../assets/navigation.js"></script>
+</body>
+</html>

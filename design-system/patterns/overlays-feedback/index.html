@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ko" data-palette="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오지고랜드 오버레이와 피드백 기준</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=Material+Icons&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../foundations/tokens.css">
+  <link rel="stylesheet" href="../../../assets/navigation.css">
+  <style>
+    /* Hallmark · macrostructure: Catalogue · theme: OG Indigo · pre-emit critique: P4 H5 E5 S5 R5 V4 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button { font: inherit; }
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-style: normal; }
+    .material-icons {
+      font-family: var(--font-icon);
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
+    .shell { width: min(100% - 2rem, 88rem); margin-inline: auto; }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 1fr);
+      gap: clamp(var(--space-8), 7vw, var(--space-16));
+      align-items: end;
+      padding-block: clamp(var(--space-16), 8vw, var(--space-3xl)) var(--space-12);
+    }
+    .eyebrow { margin: 0 0 var(--space-2); color: var(--color-accent-deep); font-size: var(--text-sm); font-weight: 800; }
+    h1 { max-width: 12ch; min-width: 0; font-size: var(--text-display); line-height: 1.04; letter-spacing: -0.05em; overflow-wrap: anywhere; }
+    .intro-copy { max-width: 60ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-md); }
+    .baseline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+    .baseline-item { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+    .baseline-item + .baseline-item { padding-inline-start: var(--space-5); border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .baseline-item span { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); }
+    .baseline-item strong { display: block; font-size: var(--app-body-1-size); }
+    .section { padding-block: clamp(var(--space-12), 7vw, var(--space-3xl)); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 1.28fr);
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .section-head h2 { min-width: 0; font-size: clamp(var(--text-xl), 4vw, var(--text-2xl)); line-height: 1.08; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+    .section-head p { max-width: 68ch; margin: 0; color: var(--color-neutral); }
+    .catalogue { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+    .entry { min-width: 0; }
+    .entry-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-3); }
+    .entry-head h3 { font-size: var(--text-lg); letter-spacing: -0.025em; }
+    .entry-head span { color: var(--color-muted); font-size: var(--text-xs); font-weight: 800; white-space: nowrap; }
+    .stage {
+      position: relative;
+      min-height: 28rem;
+      overflow: hidden;
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      background: var(--color-paper-2);
+    }
+    .stage-lines { display: grid; gap: var(--space-3); padding: var(--space-6); }
+    .stage-line { height: var(--space-4); border-radius: var(--radius-round); background: var(--color-surface); }
+    .stage-line:nth-child(2) { width: 72%; }
+    .stage-line:nth-child(3) { width: 46%; }
+    .scrim { position: absolute; inset: 0; background: color-mix(in oklch, var(--color-ink) 30%, transparent); }
+    .sheet {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      min-height: 18rem;
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      background: var(--color-surface);
+      box-shadow: var(--shadow-high);
+    }
+    .sheet-handle { width: 2rem; height: var(--space-1); margin: 0 auto var(--space-5); border-radius: var(--radius-round); background: var(--color-rule); }
+    .sheet-head { display: grid; grid-template-columns: minmax(0, 1fr) var(--tap-target-min); align-items: center; margin-bottom: var(--space-5); }
+    .sheet-head h3 { min-width: 0; font-size: var(--app-title-2-size); overflow-wrap: anywhere; }
+    .icon-button {
+      display: inline-grid;
+      width: var(--tap-target-min);
+      height: var(--tap-target-min);
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-round);
+      background: transparent;
+      color: var(--color-ink-2);
+      cursor: pointer;
+    }
+    .icon-button:hover { background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .icon-button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .icon-button:active { transform: scale(0.96); }
+    .sheet-row { display: flex; min-height: var(--tap-target-min); align-items: center; justify-content: space-between; gap: var(--space-4); border-top: var(--rule-thin) solid var(--color-rule-2); color: var(--color-ink-2); font-size: var(--app-body-2-size); }
+    .dialog {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(calc(100% - var(--space-8)), 22rem);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-high);
+      transform: translate(-50%, -50%);
+    }
+    .dialog-symbol { display: grid; width: 2.5rem; height: 2.5rem; margin-bottom: var(--space-4); place-items: center; border-radius: var(--radius-round); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .dialog h3 { font-size: var(--app-title-2-size); }
+    .dialog p { margin: var(--space-2) 0 var(--space-6); color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); }
+    .ui-button {
+      min-height: var(--control-height-md);
+      padding-inline: var(--space-4);
+      border: var(--rule-thin) solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      background: var(--color-primary);
+      color: var(--color-accent-ink);
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .ui-button.secondary { border-color: var(--color-rule); background: var(--color-surface); color: var(--color-ink-2); }
+    .ui-button:hover { border-color: var(--color-primary-700); background: var(--color-primary-700); }
+    .ui-button.secondary:hover { border-color: var(--color-primary-300); background: var(--color-primary-50); }
+    .ui-button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .ui-button:active { transform: translateY(1px); }
+    .ui-button:disabled { border-color: var(--color-rule); background: var(--color-paper-3); color: var(--color-muted); cursor: not-allowed; }
+    .entry-notes { display: grid; margin-top: var(--space-3); border-top: var(--rule-thin) solid var(--color-rule); }
+    .entry-note { display: grid; grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1.65fr); gap: var(--space-4); padding-block: var(--space-3); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .entry-note strong, .entry-note p { font-size: var(--app-body-2-size); }
+    .entry-note p { margin: 0; color: var(--color-neutral); }
+    .feedback-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+    .feedback {
+      display: flex;
+      min-width: 0;
+      min-height: 18rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-6);
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      text-align: center;
+    }
+    .feedback-icon { display: grid; width: 3rem; height: 3rem; margin-bottom: var(--space-4); place-items: center; border-radius: var(--radius-round); background: var(--color-primary-50); color: var(--color-accent-deep); }
+    .feedback[data-tone="success"] .feedback-icon { background: var(--color-success-soft); color: var(--color-success); }
+    .feedback[data-tone="error"] .feedback-icon { background: var(--color-danger-soft); color: var(--color-danger); }
+    .feedback[data-tone="warning"] .feedback-icon { background: var(--color-warning-soft); color: var(--color-ink-2); }
+    .feedback h3 { font-size: var(--app-headline-size); }
+    .feedback p { max-width: 25ch; margin: var(--space-2) 0 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .feedback .ui-button { margin-top: var(--space-5); }
+    .spinner { width: 2rem; height: 2rem; margin-bottom: var(--space-5); border: var(--space-1) solid var(--color-primary-100); border-top-color: var(--color-primary); border-radius: var(--radius-round); animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .snackbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      width: 100%;
+      gap: var(--space-3);
+      align-items: center;
+      margin-top: var(--space-5);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-sm);
+      background: var(--color-ink-2);
+      color: var(--color-surface);
+      text-align: left;
+    }
+    .snackbar span { min-width: 0; font-size: var(--app-caption-size); }
+    .snackbar button { min-height: var(--control-height-sm); padding-inline: var(--space-2); border: 0; background: transparent; color: var(--color-surface); font-weight: 800; cursor: pointer; }
+    .snackbar button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .matrix { width: 100%; border-collapse: collapse; text-align: left; }
+    .matrix th, .matrix td { padding: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule); vertical-align: top; }
+    .matrix th { color: var(--color-muted); font-size: var(--text-xs); }
+    .matrix td { font-size: var(--app-body-2-size); }
+    .matrix td:first-child { width: 21%; font-weight: 800; }
+    .matrix td:nth-child(2) { width: 20%; }
+    .matrix td:nth-child(3) { width: 28%; color: var(--color-ink-2); }
+    .tag { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--space-3); border: var(--rule-thin) solid var(--color-primary-300); border-radius: var(--radius-round); background: var(--color-primary-50); color: var(--color-accent-deep); font-size: var(--text-xs); font-weight: 800; white-space: nowrap; }
+    .rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--rule-thin) solid var(--color-rule); }
+    .rule { padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .rule:nth-child(even) { padding-inline: var(--space-5) 0; border-inline-start: var(--rule-thin) solid var(--color-rule); }
+    .rule strong { display: block; margin-bottom: var(--space-1); }
+    .rule p { margin: 0; color: var(--color-neutral); font-size: var(--app-body-2-size); }
+    .foot { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-10); color: var(--color-muted); font-size: var(--text-sm); }
+    @media (max-width: 64rem) {
+      .baseline, .feedback-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .baseline-item:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .baseline-item:nth-child(4) { border-top: var(--rule-thin) solid var(--color-rule); }
+    }
+    @media (max-width: 48rem) {
+      .intro, .section-head, .catalogue { grid-template-columns: minmax(0, 1fr); align-items: start; }
+      .catalogue { gap: var(--space-12); }
+      .matrix, .matrix tbody, .matrix tr, .matrix td { display: block; width: 100%; }
+      .matrix thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .matrix tr { padding-block: var(--space-5); border-bottom: var(--rule-thin) solid var(--color-rule); }
+      .matrix td, .matrix td:first-child, .matrix td:nth-child(2), .matrix td:nth-child(3) { width: 100%; padding: var(--space-1) 0; border: 0; }
+      .matrix td::before { display: block; margin-bottom: var(--space-1); color: var(--color-muted); font-size: var(--text-xs); font-weight: 700; content: attr(data-label); }
+      .rules { grid-template-columns: minmax(0, 1fr); }
+      .rule:nth-child(even) { padding-inline: 0; border-inline-start: 0; }
+    }
+    @media (max-width: 34rem) {
+      .shell { width: min(100% - 1.25rem, 88rem); }
+      .baseline, .feedback-grid { grid-template-columns: minmax(0, 1fr); }
+      .baseline-item + .baseline-item { padding-inline-start: 0; border-inline-start: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+      .stage { min-height: 26rem; }
+      .sheet { padding-inline: var(--space-4); }
+      .entry-note { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+      .feedback { min-height: 15rem; }
+      .foot { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="artifact-nav shell">
+    <a class="artifact-brand" href="../../../index.html">오지고랜드 디자인 시안</a>
+    <a class="artifact-back" href="../../../index.html" data-back-link data-fallback="../../../index.html">← 뒤로가기</a>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">Overlays &amp; Feedback</p><h1>오버레이와 피드백</h1></div>
+      <p class="intro-copy">바텀시트·다이얼로그와 로딩·빈 상태·오류·성공·권한 요청을 앱 전체에서 같은 방식으로 사용하기 위한 구조 기준입니다.</p>
+    </section>
+
+    <section class="baseline shell" aria-label="현재 코드 기준">
+      <div class="baseline-item"><span>Loading Logo</span><strong>기본 30dp · 1초 회전</strong></div>
+      <div class="baseline-item"><span>Alert Dialog</span><strong>반경 24dp · 제목 18sp</strong></div>
+      <div class="baseline-item"><span>Bottom Sheet</span><strong>상단 반경 24dp · 여백 24dp</strong></div>
+      <div class="baseline-item"><span>Snackbar</span><strong>좌우 20dp · 반경 12dp</strong></div>
+    </section>
+
+    <section class="section shell" aria-labelledby="overlay-title">
+      <div class="section-head"><h2 id="overlay-title">오버레이 유형</h2><p>사용자가 맥락을 유지한 채 선택하는 경우에는 바텀시트, 즉시 판단이 필요한 경우에는 다이얼로그를 사용합니다.</p></div>
+      <div class="catalogue">
+        <article class="entry">
+          <div class="entry-head"><h3>바텀시트</h3><span>선택·메뉴·간단한 입력</span></div>
+          <div class="stage">
+            <div class="stage-lines" aria-hidden="true"><div class="stage-line"></div><div class="stage-line"></div><div class="stage-line"></div></div>
+            <div class="scrim" aria-hidden="true"></div>
+            <section class="sheet" aria-label="바텀시트 예시">
+              <div class="sheet-handle" aria-hidden="true"></div>
+              <div class="sheet-head"><h3>이용 내역</h3><button class="icon-button" type="button" aria-label="닫기"><span class="material-icons" aria-hidden="true">close</span></button></div>
+              <div class="sheet-row"><span>예약 내역</span><span class="material-icons" aria-hidden="true">chevron_right</span></div>
+              <div class="sheet-row"><span>웨이팅 내역</span><span class="material-icons" aria-hidden="true">chevron_right</span></div>
+              <div class="sheet-row"><span>Q오더 내역</span><span class="material-icons" aria-hidden="true">chevron_right</span></div>
+            </section>
+          </div>
+          <div class="entry-notes">
+            <div class="entry-note"><strong>기본 구조</strong><p>핸들·제목·닫기·콘텐츠·하단 액션 순서를 유지합니다.</p></div>
+            <div class="entry-note"><strong>높이</strong><p>내용 높이에 맞추되 긴 목록은 화면 안에서 스크롤합니다.</p></div>
+            <div class="entry-note"><strong>키보드</strong><p>입력 시 <code>viewInsets</code>를 반영해 CTA가 가려지지 않게 합니다.</p></div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head"><h3>다이얼로그</h3><span>확인·경고·실패</span></div>
+          <div class="stage">
+            <div class="stage-lines" aria-hidden="true"><div class="stage-line"></div><div class="stage-line"></div><div class="stage-line"></div></div>
+            <div class="scrim" aria-hidden="true"></div>
+            <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-demo-title">
+              <div class="dialog-symbol"><span class="material-icons" aria-hidden="true">notifications</span></div>
+              <h3 id="dialog-demo-title">알림을 삭제하시겠습니까?</h3>
+              <p>삭제한 알림은 다시 확인할 수 없습니다.</p>
+              <div class="dialog-actions"><button class="ui-button secondary" type="button">취소</button><button class="ui-button" type="button">삭제</button></div>
+            </section>
+          </div>
+          <div class="entry-notes">
+            <div class="entry-note"><strong>버튼 수</strong><p>안내는 1개, 확인이 필요한 작업은 취소·실행 2개를 사용합니다.</p></div>
+            <div class="entry-note"><strong>닫힘 조건</strong><p>삭제·거래처럼 결과가 남는 작업은 바깥 영역 탭으로 닫히지 않게 합니다.</p></div>
+            <div class="entry-note"><strong>문구</strong><p>제목은 질문이나 결과, 본문은 영향과 다음 행동을 설명합니다.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="feedback-title">
+      <div class="section-head"><h2 id="feedback-title">공통 피드백 상태</h2><p>화면마다 다른 이미지와 문구를 새로 만들지 않고 같은 구조에 상황별 콘텐츠를 적용합니다.</p></div>
+      <div class="feedback-grid">
+        <article class="feedback"><div class="spinner" aria-hidden="true"></div><h3>불러오는 중</h3><p>화면을 유지하고 콘텐츠 영역 안에서 진행 상태를 표시합니다.</p></article>
+        <article class="feedback"><div class="feedback-icon"><span class="material-icons" aria-hidden="true">inbox</span></div><h3>아직 내역이 없습니다</h3><p>비어 있는 이유와 사용자가 시작할 수 있는 행동을 안내합니다.</p><button class="ui-button secondary" type="button">주변 매장 보기</button></article>
+        <article class="feedback" data-tone="error"><div class="feedback-icon"><span class="material-icons" aria-hidden="true">error_outline</span></div><h3>불러오지 못했습니다</h3><p>원인을 길게 노출하지 않고 다시 시도할 방법을 제공합니다.</p><button class="ui-button secondary" type="button">다시 시도</button></article>
+        <article class="feedback" data-tone="success"><div class="feedback-icon"><span class="material-icons" aria-hidden="true">check</span></div><h3>적립이 완료되었습니다</h3><p>마일리지 변화와 다음 이동을 결과 화면에서 확인합니다.</p><button class="ui-button" type="button">확인</button></article>
+        <article class="feedback" data-tone="warning"><div class="feedback-icon"><span class="material-icons" aria-hidden="true">location_on</span></div><h3>위치 권한이 필요합니다</h3><p>권한이 필요한 이유를 먼저 설명한 뒤 시스템 설정으로 연결합니다.</p><button class="ui-button secondary" type="button">설정으로 이동</button></article>
+        <article class="feedback"><div class="feedback-icon"><span class="material-icons" aria-hidden="true">info</span></div><h3>간단한 안내</h3><p>화면 전환을 막을 필요가 없는 정보는 스낵바로 전달합니다.</p><div class="snackbar"><span>클립보드에 복사했습니다.</span><button type="button">닫기</button></div></article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="selection-title">
+      <div class="section-head"><h2 id="selection-title">상황별 선택 기준</h2><p>같은 오류라도 사용자의 작업을 막는 정도와 후속 행동에 따라 표현을 구분합니다.</p></div>
+      <table class="matrix">
+        <thead><tr><th scope="col">상황</th><th scope="col">사용 패턴</th><th scope="col">기준</th><th scope="col">대표 적용</th></tr></thead>
+        <tbody>
+          <tr><td data-label="상황">짧은 처리</td><td data-label="사용 패턴"><span class="tag">영역 로딩</span></td><td data-label="기준">기존 콘텐츠 구조를 유지하며 해당 영역만 비활성화합니다.</td><td data-label="대표 적용">목록 갱신·버튼 처리</td></tr>
+          <tr><td data-label="상황">화면 전체 초기 로딩</td><td data-label="사용 패턴"><span class="tag">페이지 로딩</span></td><td data-label="기준">30dp 전후의 공통 로더와 짧은 상태 문구를 사용합니다.</td><td data-label="대표 적용">앱 진입·상세 조회</td></tr>
+          <tr><td data-label="상황">데이터 없음</td><td data-label="사용 패턴"><span class="tag">빈 상태</span></td><td data-label="기준">무엇이 없는지와 시작 행동을 함께 제공합니다.</td><td data-label="대표 적용">최근 방문·알림·이용 내역</td></tr>
+          <tr><td data-label="상황">복구 가능한 오류</td><td data-label="사용 패턴"><span class="tag">인라인 오류</span></td><td data-label="기준">현재 화면 안에서 원인 요약과 다시 시도를 제공합니다.</td><td data-label="대표 적용">목록·이미지·네트워크</td></tr>
+          <tr><td data-label="상황">결정이 필요한 경고</td><td data-label="사용 패턴"><span class="tag">다이얼로그</span></td><td data-label="기준">작업의 영향과 취소·실행을 명확하게 구분합니다.</td><td data-label="대표 적용">삭제·로그아웃·예약 취소</td></tr>
+          <tr><td data-label="상황">거래 결과</td><td data-label="사용 패턴"><span class="tag">결과 화면</span></td><td data-label="기준">금액·마일리지·주문 상태와 다음 행동을 화면에 남깁니다.</td><td data-label="대표 적용">적립·사용·Q오더</td></tr>
+          <tr><td data-label="상황">가벼운 완료 안내</td><td data-label="사용 패턴"><span class="tag">스낵바</span></td><td data-label="기준">현재 흐름을 멈추지 않고 짧게 노출합니다.</td><td data-label="대표 적용">복사·저장·설정 변경</td></tr>
+          <tr><td data-label="상황">권한 거부</td><td data-label="사용 패턴"><span class="tag">권한 안내</span></td><td data-label="기준">권한 목적과 제한되는 기능을 설명하고 설정 이동을 제공합니다.</td><td data-label="대표 적용">위치·카메라·알림</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section shell" aria-labelledby="rule-title">
+      <div class="section-head"><h2 id="rule-title">문구·동작 원칙</h2><p>화면 컨셉과 관계없이 유지할 공통 기준입니다.</p></div>
+      <div class="rules">
+        <div class="rule"><strong>오류 원문 제한</strong><p>서버 응답이나 예외 전문을 그대로 보여주지 않고 사용자가 이해할 수 있는 원인과 행동으로 바꿉니다.</p></div>
+        <div class="rule"><strong>한국어 액션 통일</strong><p>현재 일부 오류 스낵바의 `Close`를 `닫기`로 통일합니다.</p></div>
+        <div class="rule"><strong>중복 피드백 금지</strong><p>같은 결과에 다이얼로그와 스낵바를 동시에 표시하지 않습니다.</p></div>
+        <div class="rule"><strong>거래 결과 유지</strong><p>적립·사용·주문 결과는 자동으로 사라지는 스낵바만 사용하지 않습니다.</p></div>
+        <div class="rule"><strong>빈 상태 자산</strong><p>네트워크 이미지에만 의존하지 않고 앱에 포함된 아이콘·일러스트 또는 텍스트 구조를 사용합니다.</p></div>
+        <div class="rule"><strong>접근성</strong><p>모달이 열리면 포커스를 내부에 유지하고 닫힌 뒤 실행한 요소로 돌려보냅니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot shell"><span>오지고랜드 오버레이와 피드백 기준</span><span>Flutter 현행 코드 대조</span></footer>
+  <script src="../../../assets/navigation.js"></script>
+</body>
+</html>
