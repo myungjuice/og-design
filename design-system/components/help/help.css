@@ -1,0 +1,7 @@
+@import url("../shared.css");
+.og-tooltip,.og-popover{position:fixed;inset:auto;margin:0;box-sizing:border-box;border:var(--app-border-width) solid var(--app-edge);background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font);box-shadow:var(--app-shadow-sheet);overflow:auto;word-break:keep-all;overflow-wrap:anywhere}
+.og-tooltip{width:max-content;max-width:min(28ch,calc(100vw - 24px));padding:var(--app-space-2) var(--app-space-3);border-radius:var(--app-radius-sm);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-popover{width:320px;max-width:calc(100vw - 24px);padding:var(--app-space-4);border-radius:var(--app-radius-lg);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-popover-header{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2)}
+.og-popover h3{margin:0;min-width:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
+.og-popover p{margin:var(--app-space-2) 0 0;font-size:inherit;line-height:inherit;color:var(--app-text-secondary)}

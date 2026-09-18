@@ -1,0 +1,25 @@
+@import url("../shared.css");
+/* Hallmark · component: input · existing OG · P4 H4 E4 S5 R5 V4
+ * states: default · hover · focus/typing · disabled · loading · error · success · filled · readonly */
+.og-field {font-family:var(--app-font);color:var(--app-text-primary);min-width:0}
+.og-field label {display:block;margin-bottom:var(--app-label-gap);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium)}
+.og-field label small {font:inherit;color:var(--app-text-secondary)}
+.og-field-control {position:relative;display:flex;align-items:stretch}
+.og-field input,.og-field textarea {box-sizing:border-box;width:100%;min-width:0;min-height:var(--app-control-height);border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-md);background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);padding:calc((var(--app-control-height) - var(--app-body-1-line)) / 2 - var(--app-border-width)) var(--app-space-4);padding-right:calc(var(--app-touch-min) + var(--app-space-2));box-shadow:none}
+.og-field input::placeholder,.og-field textarea::placeholder {color:var(--app-text-secondary);opacity:1}
+.og-field input:focus-visible,.og-field textarea:focus-visible,.og-field.is-focus input {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-field.is-hover input {background:var(--app-state-hover)}
+@media(hover:hover){.og-field input:not(:disabled):not([readonly]):hover,.og-field textarea:not(:disabled):hover {background:var(--app-state-hover)}}
+.og-field input:disabled {background:var(--app-disabled-surface);color:var(--app-disabled-text);cursor:not-allowed}
+.og-field input[readonly] {background:var(--app-background);color:var(--app-text-primary)}
+.og-field [aria-invalid="true"] {border-color:var(--app-error)}
+.og-field[data-state="success"] input {border-color:var(--app-success)}
+.og-field-help {min-height:var(--app-label-line);margin:var(--app-helper-gap) 0 0;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-field:has([aria-invalid="true"]) .og-field-help {color:var(--app-error)}
+.og-field[data-state="success"] .og-field-help {color:var(--app-success)}
+.og-field-slot {position:absolute;right:var(--app-space-1);top:0;min-width:var(--app-touch-min);min-height:var(--app-touch-min);display:grid;place-items:center;font-size:var(--app-body-1-size);color:var(--app-text-secondary);pointer-events:none}
+.og-field button.og-field-clear {position:absolute;right:var(--app-space-1);top:0;width:var(--app-touch-min);height:var(--app-touch-min);padding:0;border:0;border-radius:var(--app-radius-sm);background:none;color:var(--app-text-secondary);font-size:var(--app-title-2-size)}
+.og-field button.og-field-clear[hidden] {display:none}
+.og-field textarea {min-height:calc(var(--app-space-16) * 2);padding:var(--app-space-3) var(--app-space-4);resize:vertical}
+.og-field-footer {display:flex;align-items:baseline;justify-content:space-between;gap:var(--app-inline-gap)}
+.og-field-count {flex-shrink:0;font-size:var(--app-caption-size);color:var(--app-text-secondary);font-variant-numeric:tabular-nums}

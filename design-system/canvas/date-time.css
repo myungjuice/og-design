@@ -1,0 +1,8 @@
+.picker-section{margin-top:var(--app-space-8)}
+.picker-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);margin-bottom:var(--app-space-4)}
+.picker-heading h2{margin:0}
+.picker-heading>button{font-size:var(--app-caption-size);color:var(--app-action)}
+.picker-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4)}
+.picker-example{margin:0;min-width:0}
+.picker-example>figcaption{margin-bottom:var(--app-space-3);font-size:var(--app-label-size);font-weight:var(--app-weight-bold);color:var(--app-text-secondary)}
+.picker-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}

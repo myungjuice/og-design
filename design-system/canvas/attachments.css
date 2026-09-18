@@ -1,0 +1,8 @@
+.attachment-section{margin-top:var(--app-space-8)}
+.attachment-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);margin-bottom:var(--app-space-4)}
+.attachment-heading h2{margin:0}
+.attachment-heading>button{font-size:var(--app-caption-size);color:var(--app-action)}
+.attachment-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4) var(--app-space-4)}
+.attachment-example{margin:0;min-width:0}
+.attachment-example figcaption{font-size:var(--app-label-size);color:var(--app-text-secondary);font-weight:var(--app-weight-bold);margin-bottom:var(--app-space-3)}
+.attachment-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}

@@ -1,0 +1,20 @@
+@import url("../shared.css");
+/* Hallmark · component: avatar / thumbnail · existing OG tokens
+ * pre-emit critique: P4 H4 E4 S4 R5 V4
+ * Media states: ready, loading, empty, error. Images are not buttons.
+ */
+.og-avatar{--avatar-size:var(--app-space-12);display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--avatar-size);height:var(--avatar-size);border-radius:var(--app-radius-pill);background:var(--app-gradient-header);color:var(--primary08);border:var(--app-border-width) solid var(--app-surface);box-shadow:var(--app-shadow-card);overflow:hidden;box-sizing:border-box}
+.og-avatar[data-size="small"]{--avatar-size:var(--app-space-8)}
+.og-avatar[data-size="large"]{--avatar-size:var(--app-space-16)}
+.og-avatar .material-icons{font-size:calc(var(--avatar-size)*.6);line-height:1}
+.og-avatar img{width:100%;height:100%;object-fit:cover;object-position:center}
+.og-thumbnail{position:relative;display:flex;align-items:center;justify-content:center;flex:none;width:var(--app-space-16);aspect-ratio:1;border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-md);overflow:hidden;background:var(--app-background);color:var(--app-text-secondary);box-sizing:border-box}
+.og-thumbnail[data-ratio="wide"]{width:100%;aspect-ratio:16/9}
+.og-thumbnail img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.og-thumbnail[data-fit="contain"] img{object-fit:contain}
+.og-media-fallback{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--app-space-2);font-size:var(--app-caption-size);line-height:var(--app-caption-line)}
+.og-media-fallback svg{width:var(--app-icon-lg);height:var(--app-icon-lg)}
+.og-thumbnail[data-state="loading"]{background:var(--gray02)}
+.og-thumbnail[data-state="loading"] .og-media-fallback{visibility:hidden}
+.og-thumbnail[data-state="ready"] .og-media-fallback{display:none}
+.og-thumbnail:not([data-state="ready"]) img{display:none}

@@ -1,0 +1,14 @@
+@import url("../shared.css");
+@import url("../button/button.css");
+@import url("../input/input.css");
+/* Hallmark · component: search · existing OG · P4 H4 E4 S5 R5 V4
+ * Requires input/input.css. Result states remain outside the input. */
+.og-search {container-type:inline-size}
+.og-search-row {display:flex;align-items:flex-start;gap:var(--app-inline-gap)}
+.og-search-row .og-field-control {flex:1;min-width:0}
+.og-search input[type="search"]::-webkit-search-cancel-button {appearance:none}
+.og-search input {padding-left:calc(var(--app-icon-sm) + var(--app-space-4) + var(--app-inline-gap))}
+.og-search-icon {position:absolute;left:var(--app-space-4);top:calc((var(--app-control-height) - var(--app-icon-sm)) / 2);width:var(--app-icon-sm);height:var(--app-icon-sm);pointer-events:none;color:var(--app-text-secondary)}
+@container(max-width:300px){.og-search-row {flex-wrap:wrap}.og-search-row .og-field-control {flex-basis:100%}.og-search-submit {width:100%}}
+
+.og-search .og-search-submit{padding-inline:var(--app-space-4)}

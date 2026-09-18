@@ -1,0 +1,34 @@
+@import url("../shared.css");
+/* Hallmark · component: tabs/segment/chips · existing OG · P4 H4 E4 S5 R5 V4
+ * Selection stays separate from loading/error/success of the resulting content. */
+.og-tabs {display:flex;border-bottom:var(--app-border-width) solid var(--app-edge);gap:var(--app-space-2);overflow-x:auto}
+.og-tabs [role="tab"] {position:relative;flex:1 0 auto;min-height:var(--app-touch-min);padding:var(--app-space-3) var(--app-space-4);border:0;border-radius:0;background:var(--app-surface);color:var(--app-text-secondary);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium);white-space:nowrap;transform:none}
+.og-tabs [role="tab"]::after {content:"";position:absolute;bottom:0;left:var(--app-space-4);right:var(--app-space-4);height:var(--app-focus-width);background:none}
+.og-tabs [aria-selected="true"] {color:var(--app-action);font-weight:var(--app-weight-bold)}
+.og-tabs [aria-selected="true"]::after {background:var(--app-action)}
+.og-tabs [role="tab"]:focus-visible,.og-tabs .is-focus {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:calc(-1 * var(--app-focus-width))}
+.og-tabs [role="tab"]:disabled {opacity:1;color:var(--app-disabled-text);background:var(--app-disabled-surface);cursor:not-allowed}
+.og-tab-panel {padding:var(--app-space-4);min-height:calc(var(--app-space-16) * 2);color:var(--app-text-primary);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-tab-panel[hidden] {display:none}
+.og-segment {display:flex;gap:var(--app-space-1);padding:var(--app-space-1);border:0;border-radius:var(--app-radius-md);background:var(--app-background);min-width:0;margin:0}
+.og-segment legend {float:left;width:100%;padding:0;margin-bottom:var(--app-label-gap)}
+.og-segment label {position:relative;flex:1;min-width:0;cursor:pointer}
+.og-segment input,.og-chip-radio input {position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:inherit}
+.og-segment span {display:flex;align-items:center;justify-content:center;min-height:var(--app-touch-min);padding:var(--app-space-2) var(--app-space-3);border-radius:var(--app-radius-sm);font:var(--app-weight-medium) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);color:var(--app-text-secondary);white-space:nowrap}
+.og-segment input:checked+span {background:var(--app-surface);box-shadow:var(--app-shadow-menu);color:var(--app-action);font-weight:var(--app-weight-bold)}
+.og-segment input:focus-visible+span,.og-chip-radio input:focus-visible+span {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-segment input:disabled+span {color:var(--app-disabled-text);box-shadow:none;cursor:not-allowed}
+.og-chip-group {display:flex;flex-wrap:wrap;gap:var(--app-space-2)}
+button.og-chip,.og-chip-radio span {display:inline-flex;align-items:center;justify-content:center;gap:var(--app-inline-gap);min-height:var(--app-touch-min);padding:var(--app-space-2) var(--app-space-4);border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-pill);background:var(--app-surface);color:var(--app-text-primary);font:var(--app-weight-medium) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);white-space:nowrap;transform:none}
+.og-chip-radio {position:relative;display:inline-flex;cursor:pointer}
+.og-chip-radio input:checked+span,button.og-chip[aria-pressed="true"] {background:var(--app-selected);border-color:var(--app-action);color:var(--app-action)}
+button.og-chip[data-filter]::before {content:"+";width:var(--app-icon-xs);text-align:center}
+button.og-chip[data-filter][aria-pressed="true"]::before {content:"✓"}
+.og-chip-radio input:checked+span::before {content:"✓"}
+button.og-chip:focus-visible,button.og-chip.is-focus {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+button.og-chip:disabled {opacity:1;cursor:not-allowed;background:var(--app-disabled-surface);color:var(--app-disabled-text);border-color:var(--app-edge)}
+.og-chip-radio input:disabled+span {background:var(--app-disabled-surface);color:var(--app-disabled-text);cursor:not-allowed}
+@media(hover:hover){.og-tabs [role="tab"]:not(:disabled):hover,button.og-chip:not(:disabled):hover,.og-chip-radio:has(input:not(:disabled)):hover span,.og-segment:has(input:not(:disabled)) label:hover span {background:var(--app-state-hover)}}
+.og-tabs [role="tab"]:not(:disabled):active,button.og-chip:not(:disabled):active,.og-chip-radio input:not(:disabled):active+span,.og-segment input:not(:disabled):active+span {background:var(--app-selected)}
+.og-filter-token {display:inline-flex;align-items:center;gap:0;border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-pill);background:var(--app-selected);color:var(--app-action);padding-left:var(--app-space-4);font-size:var(--app-body-2-size)}
+.og-filter-token button {min-width:var(--app-touch-min);min-height:var(--app-touch-min);padding:0;border:0;border-radius:var(--app-radius-pill);background:none;color:var(--app-action);font-size:var(--app-title-2-size)}

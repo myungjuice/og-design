@@ -1,0 +1,15 @@
+/* Hallmark · existing canvas specimen layout */
+.avatar-section{margin-top:var(--app-space-8)}
+.avatar-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.avatar-heading h2{margin:0}
+.avatar-heading button{color:var(--app-action);font-size:var(--app-caption-size)}
+.avatar-sizes{display:flex;align-items:end;gap:var(--app-space-8);padding:var(--app-space-6) 0}
+.avatar-sizes figure{margin:0;text-align:center}
+.avatar-sizes figcaption{margin-top:var(--app-space-3);font-size:var(--app-label-size);color:var(--app-text-secondary)}
+.avatar-context{display:flex;align-items:center;gap:var(--app-space-4);padding:var(--app-space-5);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-xl);margin:var(--app-space-4) 0}
+.avatar-context p{margin:var(--app-space-1) 0 0;color:var(--app-text-secondary);font-size:var(--app-label-size)}
+.media-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4)}
+.media-pair figure{margin:0}
+.media-pair figcaption,.avatar-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);margin-top:var(--app-space-3)}
+.media-controls{display:flex;align-items:center;gap:var(--app-space-3);margin:var(--app-space-5) 0;font-size:var(--app-body-2-size)}
+.media-controls select{min-height:var(--app-touch-min);border:1px solid var(--app-control-border);border-radius:var(--app-radius-sm);background:var(--app-surface);color:var(--app-text-primary);font:inherit;padding:var(--app-space-2)}

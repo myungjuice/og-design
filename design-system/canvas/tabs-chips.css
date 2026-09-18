@@ -1,0 +1,13 @@
+/* Hallmark · tabs and chips specimens · existing OG */
+.tc-section {margin-top:var(--app-space-8)}
+.tc-heading {display:flex;justify-content:space-between;align-items:center;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.tc-heading h2 {margin:0}
+.tc-heading button {font-size:var(--app-caption-size);color:var(--app-action)}
+.tc-demo {padding:var(--app-space-4);border:1px solid var(--app-edge);border-radius:var(--app-radius-md);margin-bottom:var(--app-space-4)}
+.tc-demo h3 {margin-bottom:var(--app-space-3)}
+.tc-note {font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}
+.tc-status {min-height:var(--app-body-2-line);font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin:var(--app-space-3) 0 0}
+.tc-status[data-error="true"] {color:var(--app-error)}
+.tc-state-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4)}
+.tc-state-grid>div {background:var(--app-background);padding:var(--app-space-3);border-radius:var(--app-radius-sm)}
+.tc-state-grid p {font-size:var(--app-caption-size);margin:0 0 var(--app-space-2);color:var(--app-text-secondary)}

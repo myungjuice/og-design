@@ -1,0 +1,7 @@
+/* Static result messages, with no timer or application action. */
+.snackbar-section{margin-top:var(--app-space-8)}
+.snackbar-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.snackbar-heading h2{margin:0}
+.snackbar-heading>button{font-size:var(--app-caption-size);color:var(--app-action)}
+.snackbar-stage{display:flex;align-items:flex-end;justify-content:center;min-height:160px;box-sizing:border-box;padding:var(--app-space-6) var(--app-space-4);background:var(--app-background);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-lg)}
+.snackbar-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}

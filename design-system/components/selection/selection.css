@@ -1,0 +1,28 @@
+@import url("../shared.css");
+/* Hallmark · component: selection · existing OG · P4 H4 E4 S5 R5 V4
+ * Native input semantics; loading/error/success belong to the enclosing operation. */
+:root {--choice-size:var(--app-icon-sm);--switch-width:44px;--switch-height:28px;--switch-thumb:20px;--switch-inset:3px;--switch-travel:16px}
+.og-choice {display:flex;align-items:center;gap:var(--app-inline-gap);min-height:var(--app-touch-min);min-width:0;padding:var(--app-space-2);border-radius:var(--app-radius-sm);font-family:var(--app-font);color:var(--app-text-primary);cursor:pointer}
+.og-choice input {width:var(--choice-size);height:var(--choice-size);flex-shrink:0;margin:0;accent-color:var(--app-action);cursor:inherit}
+.og-choice-copy {min-width:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);overflow-wrap:anywhere}
+.og-choice-copy small {display:block;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin-top:var(--app-helper-gap)}
+.og-choice:has(input:focus-visible),.og-choice.is-focus {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-choice input:focus-visible {outline:none}
+@media(hover:hover){.og-choice:not(:has(input:disabled)):hover {background:var(--app-state-hover)}}
+.og-choice.is-hover {background:var(--app-state-hover)}
+.og-choice:not(:has(input:disabled)):active {background:var(--app-selected)}
+.og-choice:has(input:disabled) {color:var(--app-disabled-text);background:var(--app-disabled-surface);cursor:not-allowed}
+.og-choice-group {border:0;min-width:0;margin:0;padding:0}
+.og-choice-group legend {font-size:var(--app-body-2-size);font-weight:var(--app-weight-bold);margin-bottom:var(--app-space-2);padding:0}
+.og-choice-help {font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin:var(--app-helper-gap) var(--app-space-2) 0;min-height:var(--app-label-line)}
+.og-choice-help[data-state="error"] {color:var(--app-error)}
+.og-choice-help[data-state="success"] {color:var(--app-success)}
+.og-choice.og-switch {justify-content:space-between;gap:var(--app-space-4)}
+.og-switch input {appearance:none;width:var(--switch-width);height:var(--switch-height);position:relative;border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-pill);background:var(--app-control-border);color:var(--app-on-action)}
+.og-switch input::before {content:"";position:absolute;top:var(--switch-inset);left:var(--switch-inset);width:var(--switch-thumb);height:var(--switch-thumb);background:var(--app-white);border-radius:var(--app-radius-pill);transition:transform var(--app-motion-feedback) var(--app-ease-out)}
+.og-switch input:checked {background:var(--app-action);border-color:var(--app-action)}
+.og-switch input:checked::before {transform:translateX(var(--switch-travel))}
+.og-switch input:disabled {background:var(--app-disabled-text);border-color:var(--app-disabled-text)}
+.og-switch input:checked:disabled {background:var(--app-muted);border-color:var(--app-muted)}
+@media(prefers-reduced-motion:reduce){.og-switch input::before {transition:none}}
+@media(forced-colors:active){.og-switch input {appearance:auto;width:var(--choice-size);height:var(--choice-size)}.og-switch input::before {display:none}}

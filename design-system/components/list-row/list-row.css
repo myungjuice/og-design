@@ -1,0 +1,19 @@
+@import url("../shared.css");
+/* Hallmark · component: list row · existing OG · P4 H4 E4 S5 R5 V4 */
+.og-list-row{display:flex;align-items:center;flex-wrap:wrap;gap:var(--app-space-3);width:100%;min-width:0;min-height:var(--app-control-lg);padding:var(--app-space-4);border:0;border-radius:var(--app-radius-sm);background:var(--app-surface);color:var(--app-text-primary);font:var(--app-weight-regular) var(--app-body-1-size)/var(--app-body-1-line) var(--app-font);text-align:left;white-space:normal;box-shadow:none;box-sizing:border-box;transform:none}
+.og-row-copy{flex:1 1 120px;min-width:0;overflow-wrap:anywhere}
+.og-row-title{display:block;font-weight:var(--app-weight-medium)}
+.og-row-description{display:block;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin-top:var(--app-space-1)}
+.og-row-value{margin-left:auto;max-width:100%;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.og-row-chevron{flex:none;width:var(--app-icon-sm);height:var(--app-icon-sm);color:var(--app-text-secondary)}
+.og-row-icon{display:flex;align-items:center;justify-content:center;flex:none;width:var(--app-space-12);height:var(--app-space-8);color:var(--app-action)}
+.og-row-icon svg{width:var(--app-icon-size);height:var(--app-icon-size)}
+.og-row-thumbnail{display:flex;align-items:center;justify-content:center;flex:none;width:var(--app-space-12);height:var(--app-space-12);border-radius:var(--app-radius-md);background:var(--app-selected);color:var(--app-action)}
+.og-row-thumbnail svg{width:var(--app-icon-size);height:var(--app-icon-size)}
+button.og-list-row{cursor:pointer}
+@media(hover:hover){button.og-list-row:hover:not(:disabled){background:var(--app-state-hover)}}
+button.og-list-row.is-hover{background:var(--app-state-hover)}
+button.og-list-row:focus-visible,button.og-list-row.is-focus{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:calc(-1 * var(--app-focus-width))}
+button.og-list-row:active:not(:disabled),button.og-list-row.is-pressed{background:var(--app-selected);transform:none}
+button.og-list-row:disabled{opacity:1;background:var(--app-disabled-surface);color:var(--app-disabled-text);cursor:not-allowed;transform:none}
+button.og-list-row:disabled .og-row-icon,button.og-list-row:disabled .og-row-chevron{color:var(--app-disabled-text)}

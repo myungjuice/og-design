@@ -1,0 +1,12 @@
+/* Hallmark · selection previews · existing OG */
+.selection-section {margin-top:var(--app-space-8)}
+.selection-heading {display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.selection-heading h2 {margin:0}
+.selection-heading button {color:var(--app-action);font-size:var(--app-caption-size)}
+.selection-demo {padding:var(--app-space-4);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-md)}
+.selection-demo hr {border:0;border-top:var(--app-border-width) solid var(--app-edge);margin:var(--app-space-2) 0}
+.selection-state-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);margin:var(--app-space-4) 0}
+.selection-state-grid>div {padding:var(--app-space-2);background:var(--app-background);border-radius:var(--app-radius-sm)}
+.selection-state-grid h3 {font-size:var(--app-caption-size);margin:var(--app-space-2);color:var(--app-text-secondary)}
+.selection-note {font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);margin:var(--app-space-3) 0}
+.selection-simulation {margin-top:var(--app-space-4);padding-top:var(--app-space-3);border-top:1px dashed var(--app-edge)}

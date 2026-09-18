@@ -1,0 +1,22 @@
+@import url("../shared.css");
+/* Hallmark · component: progress · existing OG · P4 H4 E4 S5 R5 V4 */
+.og-progress-track{display:flex;width:100%;height:var(--app-space-2);overflow:hidden;border-radius:var(--app-radius-pill);background:var(--app-track)}
+.og-progress-fill{height:100%;width:var(--progress-value,0%);background:var(--app-action);flex:none}
+.og-progress-fill[data-tone="brand"]{background:var(--app-gradient-brand)}
+.og-progress-held{height:100%;width:var(--progress-held,0%);background:var(--app-held);flex:none}
+.og-progress-track[aria-busy="true"]{background:var(--gray02)}
+.og-progress-track[aria-busy="true"] :is(.og-progress-fill,.og-progress-held){display:none}
+.og-progress-caption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--app-space-2);margin-block:var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);font-variant-numeric:tabular-nums}
+.og-progress-caption strong{color:var(--app-text-primary)}
+.og-mileage-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--app-space-3);margin:0 0 var(--app-space-5)}
+.og-mileage-summary>div{display:block;flex:1 1 120px;min-width:0;padding:0}
+.og-mileage-summary dt{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin-bottom:var(--app-space-2)}
+.og-mileage-summary dd{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.og-mileage-summary .og-mileage-available{background:var(--app-gradient-number);background-clip:text;-webkit-background-clip:text;color:transparent}
+.og-progress-legend{display:flex;flex-wrap:wrap;gap:var(--app-space-3);font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary);margin-top:var(--app-space-4)}
+.og-progress-legend>span{display:inline-flex;align-items:center;gap:var(--app-space-2)}
+.og-progress-dot{width:var(--app-space-2);height:var(--app-space-2);border-radius:var(--app-radius-pill);background:var(--app-track);flex:none}
+.og-progress-dot[data-tone="brand"]{background:var(--app-gradient-brand)}
+.og-progress-dot[data-tone="held"]{background:var(--app-held)}
+
+.og-mileage-summary>div+div{border-left:var(--app-border-width) solid var(--app-edge);padding-left:var(--app-space-3)}

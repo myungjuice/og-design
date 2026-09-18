@@ -1,0 +1,10 @@
+/* Hallmark · canvas grouping · existing OG · P4 H4 E4 S5 R5 V4 */
+:root { --system-area-background:var(--primary02); --system-area-border:var(--primary03); --component-area-background:var(--system-area-background); --component-area-border:var(--system-area-border); }
+#world {display:block;width:7480px;background:none;border:0}
+.system-region {position:absolute;top:0;border:1px solid var(--system-area-border);border-radius:var(--app-radius-2xl);background:var(--system-area-background)}
+#foundation-region {left:0;width:3288px}
+#component-region {left:3384px;width:4096px;background:var(--component-area-background);border-color:var(--component-area-border)}
+#world>.board {position:absolute;width:768px;margin:0;border-radius:var(--app-radius-sm)}
+.system-area-heading {position:absolute;left:48px;top:36px;right:48px;display:flex;align-items:baseline;gap:24px;color:var(--app-ink)}
+.system-area-heading h2 {font-size:40px;margin:0;letter-spacing:-.02em}
+.system-area-heading p {font-size:18px;margin:0;color:var(--app-text-secondary)}

@@ -1,0 +1,5 @@
+import {escapeHTML as e,attributes as attrs,uid,icon} from '../core.mjs';
+export function quantity({id=uid('quantity'),value=1,min=1,max=5,locked=false,state='',descriptionId='',label='주문 수량'}={}) {
+ if(![value,min,max].every(Number.isInteger)||min>max||value<min||value>max)throw new RangeError('Invalid quantity range');
+ return '<div id="'+e(id)+'" class="og-quantity" role="group" aria-label="'+e(label)+'" data-min="'+min+'" data-max="'+max+'" data-value="'+value+'"'+attrs({'aria-disabled':locked?'true':undefined,'aria-describedby':descriptionId||undefined})+'><button type="button" data-quantity-minus aria-label="수량 1개 줄이기"'+attrs({disabled:locked||value===min})+'>'+icon('remove')+'</button><output aria-live="polite" aria-atomic="true"><span class="og-quantity-unit">수량 </span><span data-quantity-value>'+value+'</span><span class="og-quantity-unit">개</span></output><button type="button" class="'+e(state)+'" data-quantity-plus aria-label="수량 1개 늘리기"'+attrs({disabled:locked||value===max})+'>'+icon('add')+'</button></div>';
+}

@@ -1,0 +1,9 @@
+/* Hallmark · search board · existing OG */
+.search-demo {padding:var(--app-space-4);border:1px solid var(--app-edge);border-radius:var(--app-radius-md)}
+.search-preview-results {margin-top:var(--app-space-4);padding:var(--app-space-4);background:var(--app-background);border-radius:var(--app-radius-sm);min-height:calc(var(--app-space-16) * 2);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.search-preview-results p {margin:0 0 var(--app-space-2)}
+.search-preview-results ul {margin:0;padding-left:var(--app-space-5)}
+.search-demo-controls {display:flex;align-items:center;min-height:var(--app-touch-min);gap:var(--app-inline-gap);font-size:var(--app-label-size);color:var(--app-text-secondary);cursor:pointer}
+.search-demo-controls input {accent-color:var(--app-action);width:var(--app-icon-sm);height:var(--app-icon-sm)}
+.search-state-list {display:grid;gap:var(--app-space-4);margin-top:var(--app-space-4)}
+.search-state-list h3 {margin-bottom:var(--app-space-3)}

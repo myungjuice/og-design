@@ -1,0 +1,18 @@
+/* Hallmark · badge specimens · existing OG */
+.badge-section {margin-top:var(--app-space-8)}
+.badge-section-heading {display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.badge-section-heading h2 {margin:0}
+.badge-section-heading button {color:var(--app-action);font-size:var(--app-caption-size)}
+.badge-role-row {display:grid;grid-template-columns:128px minmax(0,1fr);gap:var(--app-space-4);padding:var(--app-space-4) 0;border-bottom:1px solid var(--app-edge);align-items:start}
+.badge-role-row .og-badge {justify-self:start}
+.badge-role-row h3 {margin:0 0 var(--app-space-1)}
+.badge-role-row p {margin:0;color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-body-2-line)}
+.badge-role-row code {font-size:var(--app-caption-size);color:var(--app-text-secondary)}
+.badge-example-box {padding:var(--app-space-5);border:1px solid var(--app-edge);border-radius:var(--app-radius-md);margin:var(--app-space-4) 0}
+.badge-context-row {display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);padding:var(--app-space-4) 0;border-bottom:1px solid var(--app-edge);font-size:var(--app-body-2-size)}
+.badge-context-row:last-child {border-bottom:0}
+.badge-context-row>span:first-child {min-width:0}
+.badge-count-controls {display:flex;align-items:center;gap:var(--app-space-3);margin-bottom:var(--app-space-4);font-size:var(--app-body-2-size)}
+.badge-count-controls select {min-height:var(--app-touch-min);font:inherit;color:var(--app-text-primary);background:var(--app-surface);border:1px solid var(--app-control-border);border-radius:var(--app-radius-sm);padding:var(--app-space-2) var(--app-space-3)}
+.badge-note {color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-body-2-line)}
+.badge-size-example {display:flex;flex-wrap:wrap;align-items:center;gap:var(--app-space-4);padding:var(--app-space-4) 0}

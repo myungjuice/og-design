@@ -1,0 +1,16 @@
+@import url("../shared.css");
+/* Hallmark · component: badge/status · existing OG · P4 H4 E4 S5 R5 V4
+ * Informational, not interactive. No hover/focus/pressed/loading decoration. */
+:root {--badge-height-sm:24px;--badge-height-md:28px;--badge-dot-size:8px}
+.og-badge {display:inline-flex;align-items:center;justify-content:center;gap:var(--app-space-1);min-height:var(--badge-height-sm);padding:calc(var(--app-space-1) / 2) var(--app-space-2);border-radius:var(--app-radius-xs);font-family:var(--app-font);font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-weight:var(--app-weight-medium);white-space:nowrap;vertical-align:middle;color:var(--app-text-secondary);background:var(--app-disabled-surface)}
+.og-badge[data-tone="brand"] {color:var(--app-action);background:var(--app-selected)}
+.og-badge[data-tone="info"] {color:var(--app-info);background:var(--app-info-surface)}
+.og-badge[data-tone="success"] {color:var(--app-success);background:var(--app-success-surface)}
+.og-badge[data-tone="warning"] {color:var(--app-warning);background:var(--app-warning-surface)}
+.og-badge[data-tone="error"] {color:var(--app-error);background:var(--app-error-surface)}
+.og-badge[data-size="medium"] {min-height:var(--badge-height-md);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-count-badge {display:inline-flex;align-items:center;justify-content:center;min-width:var(--badge-height-sm);min-height:var(--badge-height-sm);padding:calc(var(--app-space-1) / 2) var(--app-space-2);border-radius:var(--app-radius-pill);background:var(--app-action);color:var(--app-on-action);font-family:var(--app-font);font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.og-unread-dot {display:inline-block;width:var(--badge-dot-size);height:var(--badge-dot-size);border-radius:var(--app-radius-pill);background:var(--app-action);flex-shrink:0}
+.og-count-badge[hidden],.og-unread-dot[hidden] {display:none}
+.og-badge-group {display:flex;flex-wrap:wrap;align-items:center;gap:var(--app-inline-gap)}
+@media(forced-colors:active){.og-badge,.og-count-badge {border:1px solid currentColor}.og-unread-dot {background:CanvasText}}

@@ -1,0 +1,17 @@
+@import url("../shared.css");
+/* Hallmark · component: surfaces · existing OG
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 */
+.og-surface{padding:var(--app-card-inset);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-card);background:var(--app-surface);color:var(--app-text-primary);box-shadow:var(--app-shadow-card);min-width:0}
+.og-surface[data-depth="flat"]{box-shadow:var(--app-shadow-none)}
+.og-menu-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--app-space-2);min-height:var(--app-touch-min);padding:var(--app-space-5) var(--app-space-4);border:var(--app-border-width) solid var(--app-edge);border-bottom:var(--app-menu-edge-width) solid var(--app-menu-floor);border-radius:var(--app-radius-menu);background:var(--app-gradient-menu);color:var(--app-text-primary);box-shadow:var(--app-shadow-menu);font:var(--app-weight-bold) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);cursor:pointer;white-space:normal;overflow-wrap:anywhere;transition:transform var(--app-motion-feedback) var(--app-ease-out)}
+.og-menu-tile svg{width:var(--app-icon-size);height:var(--app-icon-size);color:var(--app-action);flex:none}
+@media(hover:hover){.og-menu-tile:hover:not(:disabled){background:var(--app-state-hover)}}
+.og-menu-tile.is-hover{background:var(--app-state-hover)}
+.og-menu-tile:focus-visible,.og-menu-tile.is-focus{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-menu-tile:active:not(:disabled),.og-menu-tile.is-pressed{transform:translateY(1px);box-shadow:var(--app-shadow-pressed)}
+.og-menu-tile:disabled{opacity:1;background:var(--app-disabled-surface);color:var(--app-disabled-text);border-color:var(--app-edge);box-shadow:var(--app-shadow-none);cursor:not-allowed;transform:none}
+.og-menu-tile:disabled svg{color:var(--app-disabled-text)}
+.og-divider{display:block;border:0;margin:0;height:var(--app-border-width);background:var(--app-edge);flex-shrink:0}
+.og-divider[data-inset="true"]{margin-inline:var(--app-card-inset)}
+.og-divider[aria-orientation="vertical"]{width:var(--app-border-width);height:auto;align-self:stretch}
+@media(prefers-reduced-motion:reduce){.og-menu-tile{transition:none}.og-menu-tile:active:not(:disabled),.og-menu-tile.is-pressed{transform:none}}

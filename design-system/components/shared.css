@@ -1,0 +1,18 @@
+/* Hallmark · shared controls · existing OG · P4 H4 E4 S5 R5 V4 */
+:where([class^="og-"],[class*=" og-"]),:where([class^="og-"],[class*=" og-"]) *{box-sizing:border-box}
+:where([class^="og-"],[class*=" og-"]){font-family:var(--app-font)}
+:where([class^="og-"],[class*=" og-"]) :is(button,input,textarea,select){font:inherit}
+:where([class^="og-"],[class*=" og-"]) button:disabled{opacity:1}
+.og-icon-button{display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--app-touch-min);height:var(--app-touch-min);min-height:var(--app-touch-min);padding:0;border:0;border-radius:var(--app-radius-sm);background:transparent;color:var(--app-text-secondary);font-family:var(--app-font);line-height:1;box-shadow:none}
+.og-icon-button .material-icons,.og-icon-button svg{width:var(--app-icon-sm);height:var(--app-icon-sm);font-size:var(--app-icon-sm)}
+.og-info-button{justify-content:flex-start;padding-left:var(--app-space-1)}
+.og-info-button .material-icons,.og-info-button svg{width:var(--app-icon-xs);height:var(--app-icon-xs);font-size:var(--app-icon-xs)}
+.og-info-button[aria-expanded="true"]{color:var(--app-action)}
+.og-icon-button:hover,.og-icon-button:active{background:transparent;color:var(--app-action);box-shadow:none;transform:none}
+.og-icon-button:focus-visible{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-icon-button:disabled{opacity:1;background:transparent;color:var(--app-disabled-text)}
+.og-text-button{display:inline-flex;align-items:center;justify-content:center;min-height:var(--app-touch-min);padding:var(--app-space-2);border:0;border-radius:var(--app-radius-sm);background:transparent;color:var(--app-action);font:var(--app-weight-bold) var(--app-label-size)/var(--app-label-line) var(--app-font);white-space:nowrap;box-shadow:none}
+.og-text-button:hover,.og-text-button.is-hover{background:var(--app-state-hover)}
+.og-text-button:active,.og-text-button.is-pressed{background:var(--app-selected);transform:none}
+.og-text-button:focus-visible,.og-text-button.is-focus{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-text-button:disabled{opacity:1;background:var(--app-disabled-surface);color:var(--app-disabled-text)}

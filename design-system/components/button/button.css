@@ -1,0 +1,48 @@
+@import url("../shared.css");
+/* Hallmark · component: button · theme: existing OG · P4 H4 E4 S5 R5 V4
+ * states: default · hover · focus · active · disabled · loading · error · success */
+.og-button {
+ --button-bg:var(--app-action); --button-fg:var(--app-on-action); --button-border:var(--app-action);
+ position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--app-inline-gap);
+ min-height:var(--app-control-md);min-width:var(--app-touch-min);padding:var(--app-space-3) var(--app-space-5);
+ border:var(--app-border-width) solid var(--button-border);border-radius:var(--app-radius-md);
+ background:var(--button-bg);color:var(--button-fg);font-family:var(--app-font);
+ font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);
+ white-space:nowrap;cursor:pointer;box-shadow:var(--app-shadow-none);
+ transition:transform var(--app-motion-feedback) var(--app-ease-out);
+}
+.og-button[data-variant="secondary"] {--button-bg:var(--app-surface);--button-fg:var(--app-action);--button-border:var(--app-control-border)}
+.og-button[data-variant="text"],.og-button[data-variant="icon"] {--button-bg:var(--app-surface);--button-fg:var(--app-action);--button-border:var(--app-surface)}
+.og-button[data-variant="danger"] {--button-bg:var(--app-error);--button-border:var(--app-error)}
+.og-button[data-variant="icon"] {padding:var(--app-space-3);width:var(--app-touch-min)}
+.og-button svg {width:var(--app-icon-sm);height:var(--app-icon-sm);flex-shrink:0}
+.og-button:is(:hover,.is-hover) {background:var(--app-action-pressed);border-color:var(--app-action-pressed)}
+.og-button:is([data-variant="secondary"],[data-variant="text"],[data-variant="icon"]):is(:hover,.is-hover) {background:var(--app-state-hover);border-color:var(--button-border)}
+.og-button[data-variant="danger"]:is(:hover,.is-hover) {background:var(--app-error);box-shadow:var(--app-shadow-pressed);border-color:var(--app-error)}
+.og-button:focus-visible,.og-button.is-focus {outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-button:active,.og-button.is-active {transform:translateY(1px);box-shadow:var(--app-shadow-pressed)}
+.og-button:disabled {opacity:1;background:var(--app-disabled-surface);color:var(--app-disabled-text);border-color:var(--app-disabled-surface);cursor:not-allowed;transform:none;box-shadow:none}
+.og-button[aria-busy="true"] {background:var(--app-action);color:var(--app-on-action);border-color:var(--app-action);cursor:wait}
+.og-button[data-state="error"] {--button-bg:var(--app-error-surface);--button-fg:var(--app-error);--button-border:var(--app-error)}
+.og-button[data-state="success"] {--button-bg:var(--app-success-surface);--button-fg:var(--app-success);--button-border:var(--app-success)}
+.og-button[data-state="error"]:is(:hover,.is-hover) {background:var(--app-error-surface);border-color:var(--app-error)}
+.og-button[data-state="success"]:is(:hover,.is-hover) {background:var(--app-success-surface);border-color:var(--app-success)}
+.og-button[data-size="large"] {min-height:var(--app-control-lg);font-size:var(--app-body-1-size)}
+.og-button[data-size="small"] {min-height:var(--app-touch-min);padding:var(--app-space-2) var(--app-space-4);border:0;background:none}
+.og-button[data-size="small"]::before {content:"";position:absolute;inset:var(--app-space-1) 0;z-index:-1;border-radius:inherit;background:var(--button-bg)}
+.og-button[data-size="small"] {isolation:isolate}
+.og-button[data-size="small"]:is(:hover,.is-hover) {background:none}
+.og-button[data-size="small"]:is(:hover,.is-hover)::before {background:var(--app-action-pressed)}
+.og-button[data-size="small"]:is([data-variant="secondary"],[data-variant="text"],[data-variant="icon"]):is(:hover,.is-hover)::before {background:var(--app-state-hover)}
+.og-button[data-size="small"][data-variant="danger"]:is(:hover,.is-hover)::before {background:var(--app-error)}
+.og-button[data-size="small"]:is([data-state="error"],[data-state="success"]):is(:hover,.is-hover)::before {background:var(--button-bg)}
+.og-button[data-size="small"]:disabled::before {background:var(--app-disabled-surface)}
+.og-button.is-full {width:100%}
+@media(prefers-reduced-motion:reduce){.og-button{transition:none}.og-button:active{transform:none}}
+
+/* Favorite: restrained icon emphasis on a transparent surface. */
+.og-button.og-favorite{background:transparent;border-color:transparent;color:var(--app-text-secondary);box-shadow:none}
+.og-favorite svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linejoin:round}
+.og-favorite[aria-pressed="true"]{color:var(--app-action)}
+.og-favorite[aria-pressed="true"] svg{fill:currentColor}
+.og-button.og-favorite:hover,.og-button.og-favorite:active{background:transparent;border-color:transparent;color:var(--app-action);box-shadow:none;transform:none}

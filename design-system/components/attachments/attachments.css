@@ -1,0 +1,25 @@
+@import url("../shared.css");
+@import url("../button/button.css");
+/* Hallmark · component: attachments/viewer · existing OG · P4 H4 E4 S5 R5 V4 */
+.og-attachment-box{display:flex;flex-wrap:wrap;gap:var(--app-space-3);padding:var(--app-space-4);min-height:128px;box-sizing:border-box;background:var(--app-surface);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-lg);box-shadow:var(--app-shadow-card)}
+.og-attachment-add,.og-attachment-item{position:relative;width:96px;height:96px;box-sizing:border-box;border-radius:var(--app-radius-md)}
+.og-attachment-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--app-space-2);padding:var(--app-space-2);border:var(--app-border-width) dashed var(--app-control-border);background:var(--app-background);color:var(--app-action);font-size:var(--app-caption-size)}
+.og-attachment-item{border:var(--app-border-width) solid var(--app-edge);background:var(--app-background)}
+.og-attachment-item img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.og-attachment-remove{position:absolute;top:0;right:0;width:var(--app-touch-min);height:var(--app-touch-min);min-height:0;padding:0;border:0;background:transparent;display:grid;place-items:center;color:var(--app-white)}
+.og-attachment-remove span{display:grid;place-items:center;width:var(--app-space-6);height:var(--app-space-6);border-radius:var(--app-radius-pill);background:var(--app-ink);font-size:var(--app-icon-xs)}
+.og-attachment-status{display:flex;flex-direction:column;justify-content:center;gap:var(--app-space-2);flex:1;min-width:120px;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-attachment-status p{margin:0}
+.og-attachment-status[data-state="error"]{color:var(--app-error)}
+.og-attachment-track{height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--app-disabled-surface);overflow:hidden}
+.og-attachment-track span{display:block;width:40%;height:100%;background:var(--app-action)}
+.og-attachment-actions{display:flex;flex-wrap:wrap;gap:var(--app-space-2)}
+.og-image-viewer{background:var(--app-ink);color:var(--app-white);border-radius:var(--app-radius-lg);overflow:hidden}
+.og-viewer-header{display:flex;align-items:center;justify-content:space-between;padding:var(--app-space-2) var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-viewer-header button{border:0;background:transparent;color:var(--app-white);width:var(--app-touch-min);min-height:var(--app-touch-min)}
+.og-viewer-image{display:flex;align-items:center;justify-content:center;height:240px;overflow:hidden}
+.og-viewer-image img{width:100%;height:100%;object-fit:contain}
+.og-image-viewer[data-view="zoom"] img{transform:scale(1.8)}
+.og-viewer-error{padding:var(--app-space-4);text-align:center;font-size:var(--app-body-2-size)}
+.og-button.og-viewer-retry{--button-bg:transparent;--button-fg:var(--app-white);--button-border:var(--app-white)}
+.og-button.og-viewer-retry:is(:hover,.is-hover){background:var(--app-text-secondary)}

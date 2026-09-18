@@ -1,0 +1,14 @@
+@import url("../shared.css");
+/* Hallmark · component: quantity · existing OG soft blue · P4 H4 E4 S5 R5 V4 */
+.og-quantity{display:inline-flex;align-items:center;width:max-content;max-width:100%;border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-md);background:var(--app-gradient-menu);box-shadow:var(--app-shadow-card);color:var(--app-text-primary);font-family:var(--app-font);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);vertical-align:middle}
+.og-quantity button{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:var(--app-touch-min);min-height:var(--app-touch-min);padding:var(--app-space-3);border:0;border-radius:var(--app-radius-md);background:none;color:var(--app-action);font-family:var(--app-font);font-size:inherit;line-height:inherit;cursor:pointer;transition:transform var(--app-motion-feedback) var(--app-ease-out)}
+.og-quantity button .material-icons{font-size:var(--app-icon-sm);line-height:1}
+.og-quantity output{display:block;min-width:3ch;padding-inline:var(--app-space-2);text-align:center;font-size:inherit;line-height:inherit;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.og-quantity-unit{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(hover:hover){.og-quantity button:hover:not(:disabled){background:var(--app-state-hover)}}
+.og-quantity button.is-hover{background:var(--app-state-hover)}
+.og-quantity button:focus-visible,.og-quantity button.is-focus{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+.og-quantity button:active:not(:disabled),.og-quantity button.is-pressed{background:var(--app-selected);box-shadow:var(--app-shadow-pressed);transform:translateY(1px)}
+.og-quantity button:disabled{opacity:1;color:var(--app-disabled-text);cursor:not-allowed;background:none;box-shadow:none;transform:none}
+.og-quantity[aria-disabled="true"]{background:var(--app-disabled-surface);box-shadow:none;color:var(--app-disabled-text)}
+@media(prefers-reduced-motion:reduce){.og-quantity button{transition:none}.og-quantity button:active:not(:disabled),.og-quantity button.is-pressed{transform:none}}

@@ -1,0 +1,7 @@
+/* Static dialog specimens, not a live modal layer. */
+.dialog-section{margin-top:var(--app-space-8)}
+.dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);margin-bottom:var(--app-space-4)}
+.dialog-heading h2{margin:0}
+.dialog-heading>button{font-size:var(--app-caption-size);color:var(--app-action)}
+.dialog-stage{display:flex;justify-content:center;align-items:center;padding:var(--app-space-8) var(--app-space-4);background:var(--app-scrim);border-radius:var(--app-radius-lg)}
+.dialog-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}

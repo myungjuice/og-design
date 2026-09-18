@@ -1,0 +1,17 @@
+/* Hallmark · card/divider board · existing OG */
+.surface-section{margin-top:var(--app-space-8)}
+.surface-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--app-space-4);margin-bottom:var(--app-space-4)}
+.surface-heading h2{margin:0}
+.surface-heading button{font-size:var(--app-caption-size);color:var(--app-action)}
+.surface-stage{background:var(--app-background);padding:var(--app-space-6);border-radius:var(--app-radius-lg);display:grid;gap:var(--app-space-4)}
+.surface-stage h3{font-size:var(--app-body-1-size);margin:0 0 var(--app-space-2)}
+.surface-stage p,.surface-note{font-size:var(--app-label-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);margin:var(--app-space-2) 0 0}
+.surface-tile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--app-space-4)}
+.surface-tile-grid>div{min-width:0}
+.surface-tile-grid .og-menu-tile{width:100%}
+.surface-tile-grid small{display:block;margin:var(--app-space-2) 0 var(--app-space-4);font-size:var(--app-caption-size);color:var(--app-text-secondary)}
+.surface-divider-demo{border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-md);margin-block:var(--app-space-4);overflow:hidden}
+.surface-divider-demo p{padding:var(--app-space-4);margin:0;font-size:var(--app-body-2-size)}
+.surface-columns{display:flex;align-items:stretch;gap:var(--app-space-4);padding:var(--app-space-4)}
+.surface-columns>div{flex:1;min-width:0}
+.surface-columns small{display:block;color:var(--app-text-secondary);margin-bottom:var(--app-space-2)}

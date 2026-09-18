@@ -1,0 +1,18 @@
+@import url("../shared.css");
+@import url("../button/button.css");
+/* Hallmark · component: feedback · existing OG soft blue · P4 H4 E4 S5 R5 V4 */
+.og-feedback{display:flex;flex-direction:column;align-items:center;gap:var(--app-space-3);padding:var(--app-space-8) var(--app-space-4);text-align:center;min-width:0;color:var(--app-text-primary)}
+.og-feedback-icon{display:grid;place-items:center;width:var(--app-space-12);height:var(--app-space-12);border-radius:var(--app-radius-pill);background:var(--app-background);color:var(--app-text-secondary);flex:none}
+.og-feedback-icon .material-icons{font-size:var(--app-icon-md)}
+.og-feedback h3{font-size:var(--app-headline-size);line-height:var(--app-headline-line);font-weight:var(--app-weight-bold);margin:0;overflow-wrap:anywhere;max-width:100%}
+.og-feedback p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);margin:0;max-width:32ch;overflow-wrap:anywhere}
+.og-feedback .og-button{margin-top:var(--app-space-1)}
+.og-feedback [hidden]{display:none}
+.og-notice{--notice-ink:var(--app-info);--notice-surface:var(--app-info-surface);display:flex;align-items:flex-start;gap:var(--app-space-3);padding:var(--app-space-4);border-radius:var(--app-radius-md);background:var(--notice-surface);color:var(--app-text-primary);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);min-width:0}
+.og-notice[data-tone="warning"]{--notice-ink:var(--app-warning);--notice-surface:var(--app-warning-surface)}
+.og-notice[data-tone="error"]{--notice-ink:var(--app-error);--notice-surface:var(--app-error-surface)}
+.og-notice[data-tone="success"]{--notice-ink:var(--app-success);--notice-surface:var(--app-success-surface)}
+.og-notice>.material-icons{color:var(--notice-ink);font-size:var(--app-icon-sm);line-height:var(--app-body-2-line);flex:none}
+.og-notice>div{min-width:0;flex:1}
+.og-notice strong{display:block;font-size:inherit;line-height:inherit;font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-notice p{margin:var(--app-space-1) 0 0;font-size:inherit;line-height:inherit;overflow-wrap:anywhere}

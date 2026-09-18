@@ -1,0 +1,10 @@
+@import url("../shared.css");
+/* Hallmark · component: section heading · existing OG · P4 H4 E4 S5 R5 V4 */
+.og-section-heading{display:flex;align-items:center;flex-wrap:wrap;gap:var(--app-space-2) var(--app-space-4);min-width:0;color:var(--app-text-primary)}
+.og-heading-copy{flex:1 1 min-content;min-width:0}
+.og-heading-title-line{display:flex;align-items:center;gap:var(--app-space-1);min-width:0}
+.og-section-heading h3{font:var(--app-weight-bold) var(--app-title-2-size)/var(--app-title-2-line) var(--app-font);letter-spacing:var(--app-tracking-heading);margin:0;min-width:0;overflow-wrap:anywhere}
+.og-heading-description{margin:var(--app-space-2) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);overflow-wrap:anywhere}
+.og-heading-help{padding:var(--app-space-3) var(--app-space-4);border-radius:var(--app-radius-sm);background:var(--app-background);color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-label-line);margin:var(--app-space-2) 0 0}
+
+.og-heading-action{margin-left:auto;flex:none}

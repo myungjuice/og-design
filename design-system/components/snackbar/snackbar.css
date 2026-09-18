@@ -1,0 +1,6 @@
+@import url("../shared.css");
+/* Hallmark · component: snackbar · existing OG · P4 H4 E4 S5 R5 V4 */
+.og-snackbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--app-space-2) var(--app-space-4);box-sizing:border-box;width:100%;max-width:360px;min-height:var(--app-touch-min);padding:var(--app-space-3) var(--app-space-4);border-radius:var(--app-radius-md);background:var(--app-ink);color:var(--app-white);box-shadow:var(--app-shadow-card);font-family:var(--app-font)}
+.og-snackbar-message{flex:1 1 160px;margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all;overflow-wrap:anywhere}
+.og-snackbar-action{flex:0 0 auto;margin-left:auto;min-height:var(--app-touch-min);padding:var(--app-space-2);border:0;border-radius:var(--app-radius-sm);background:transparent;color:var(--app-white);font:inherit;font-size:var(--app-body-2-size);font-weight:var(--app-weight-bold);text-decoration:underline;text-underline-offset:var(--app-space-1);white-space:nowrap}
+.og-snackbar-action:focus-visible{outline:var(--app-focus-width) solid var(--app-white);outline-offset:var(--app-focus-gap)}

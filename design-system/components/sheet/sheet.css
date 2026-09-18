@@ -1,0 +1,32 @@
+@import url("../shared.css");
+@import url("../button/button.css");
+@import url("../selection/selection.css");
+@import url("../tabs-chips/tabs-chips.css");
+/* Hallmark · component: sheet · existing OG soft blue · P4 H4 E4 S5 R5 V4 */
+.og-sheet-panel{display:flex;flex-direction:column;min-height:0;background:var(--app-surface);color:var(--app-text-primary);border-radius:var(--app-radius-sheet) var(--app-radius-sheet) 0 0;border:var(--app-border-width) solid var(--app-edge);box-shadow:var(--app-shadow-sheet);font-family:var(--app-font);overflow:hidden}
+.og-sheet-dialog{position:fixed;inset:auto 0 var(--og-sheet-bottom,0px);margin:0 auto;padding:0;width:min(var(--app-content-max),100%);max-width:100%;max-height:calc(var(--og-sheet-viewport-height,100dvh) * .85);box-sizing:border-box;}
+.og-sheet-dialog:not([open]){display:none}
+.og-sheet-dialog[open]{animation:og-sheet-enter var(--app-motion-overlay) var(--app-ease-out)}
+.og-sheet-dialog[data-size="long"]{height:720px}
+.og-sheet-dialog::backdrop{background:var(--app-scrim)}
+.og-sheet-header{display:flex;flex:none;align-items:center;justify-content:space-between;gap:var(--app-space-3);padding:var(--app-space-4) var(--app-space-4) var(--app-space-2)}
+.og-sheet-header :is(h2,h3){font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);margin:0;min-width:0;overflow-wrap:anywhere}
+.og-sheet-body{padding:var(--app-space-2) var(--app-space-4) var(--app-space-4);min-height:0;overflow-y:auto;overscroll-behavior:contain;flex:1 1 auto;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all;overflow-wrap:anywhere}
+.og-sheet-body h3{font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);margin:0 0 var(--app-space-2)}
+.og-sheet-body p{margin:0;color:var(--app-text-secondary);font-size:inherit;line-height:inherit}
+.og-sheet-body section+section{margin-top:var(--app-space-6)}
+.og-sheet-footer{flex:none;display:flex;gap:var(--app-space-3);padding:var(--app-space-4);padding-bottom:calc(var(--app-space-4) + var(--app-safe-bottom));border-top:var(--app-border-width) solid var(--app-edge);background:var(--app-surface)}
+.og-sheet-footer .og-button{width:100%}
+.og-sheet-memo{display:grid;gap:var(--app-space-2);margin-top:var(--app-space-6)}
+.og-sheet-memo label{font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-sheet-memo textarea{box-sizing:border-box;width:100%;min-height:96px;resize:vertical;padding:var(--app-space-3);border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-md);color:var(--app-text-primary);background:var(--app-surface);font:inherit}
+.og-sheet-memo textarea:focus-visible{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}
+@keyframes og-sheet-enter{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.og-sheet-dialog[open]{animation:none}}
+
+/* History composition shares the base tabs, with compact spacing for four labels. */
+.og-sheet-tabs{flex:none;margin-inline:var(--app-space-4);gap:0;overflow:visible}
+.og-sheet-tabs [role="tab"]{flex:1 1 0;min-width:0;padding-inline:var(--app-space-1);font-size:var(--app-label-size)}
+.og-sheet-history{padding:var(--app-space-6) var(--app-space-2);text-align:center}
+.og-sheet-history>.material-icons{font-size:var(--app-space-8);color:var(--app-text-secondary);margin-bottom:var(--app-space-4)}
+.og-sheet-history h3{font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}

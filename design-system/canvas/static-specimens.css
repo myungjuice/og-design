@@ -1,0 +1,18 @@
+/* Hallmark · component state sheets · existing OG soft blue · P4 H4 E4 S5 R5 V4 */
+.specimen-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4);margin-block:var(--app-space-4)}
+.specimen-state{margin:0;min-width:0}
+.specimen-state>figcaption{font-size:var(--app-label-size);line-height:var(--app-label-line);font-weight:var(--app-weight-bold);color:var(--app-text-secondary);margin-bottom:var(--app-space-3)}
+.specimen-state :is(.progress-stage,.feedback-stage,.search-demo){padding:var(--app-space-4)}
+.specimen-state .og-surface{min-width:0}
+#help .specimen-grid,#progress .specimen-grid{grid-template-columns:minmax(0,1fr)}
+.specimen-overlay.og-tooltip,.specimen-overlay.og-popover{position:static;display:block;inset:auto;max-width:100%;margin-top:var(--app-space-2);margin-left:var(--app-space-8)}
+.specimen-overlay.og-tooltip{grid-column:2;width:max-content;max-width:100%;margin-left:var(--app-space-1);margin-top:calc(var(--app-space-1) / 2)}
+#help-tooltip-specimen .og-help-trigger{align-self:center;height:var(--app-space-6);min-height:var(--app-space-6)}
+.specimen-overlay.og-popover{max-width:calc(100% - var(--app-space-8))}
+.specimen-state .sheet-stage{padding:var(--app-space-3) var(--app-space-3) 0}
+.specimen-state .og-sheet-panel[data-size="long"]{height:420px}
+.specimen-state .og-sheet-body{overflow:visible}
+.specimen-state .og-thumbnail[data-ratio="wide"]{width:100%}
+.specimen-state .loading-stage{display:block}
+.board [inert]{cursor:default}
+.board *,.board *::before,.board *::after{animation:none!important;transition:none!important}
