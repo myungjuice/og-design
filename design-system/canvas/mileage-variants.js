@@ -1,6 +1,6 @@
 import {myInfo} from '../pages/my-info/render.mjs';
 import {mileage,sectionHeading} from '../components/index.mjs';
-import {focusBoard} from './canvas.js?v=20260919-partitions';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
 const summary=mileage({available:15000,total:16000,max:20000,density:'compact'}).split('<div class="og-progress-track"')[0];
 const note='<p class="mileage-variant-note"><strong>4,000M</strong> 더 적립하면<br>5,000M를 추가로 사용할 수 있어요.</p>';
 const track='<div class="og-progress-track" role="img" aria-label="다음 5,000M 중 1,000M 적립, 20%"><span class="og-progress-fill" data-tone="brand" style="--progress-value:20%"></span></div>';

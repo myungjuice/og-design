@@ -1,6 +1,6 @@
 import {boards,canvases,canvasFor} from './catalog.mjs';
 import {activeCanvas,navigateCanvas} from './session.mjs';
-import {focusReview} from './canvas.js?v=20260919-partitions';
+import {focusReview} from './canvas.js?v=20260922-touch2';
 import {reviewNotes} from './review-notes.mjs?v=20260920-art-options';
 import {reviewState} from './review-policy.mjs';
 import {escapeHTML as e} from '../components/core.mjs';

@@ -5,7 +5,7 @@ const world = document.querySelector('#world');
 const output = document.querySelector('#zoom-value');
 // A sibling hit surface avoids inherited cursor/user-select changes across every board.
 const dragLayer=document.createElement('div');dragLayer.id='canvas-drag-layer';dragLayer.hidden=true;dragLayer.setAttribute('aria-hidden','true');viewport.append(dragLayer);
-let x = 32, y = 32, scale = 1, drag = null;
+let x = 32, y = 32, scale = 1, gesture = null;
 const viewStorageKey=storageKeyForCanvas(activeCanvas);
 let persistenceReady=false,saveTimer=0;
 function saveView(){
@@ -99,20 +99,49 @@ export function focusReview(id){
 }
 document.querySelector('aside').addEventListener('click',event=>{const button=event.target.closest('[data-board]');if(button)focusBoard(button.dataset.board);});
 document.querySelector('#board-picker').onchange=e=>focusBoard(e.target.value);
+const pointers=new Map();
+function measureGesture(){
+ const points=[...pointers.values()].slice(0,2);
+ if(!points.length)return null;
+ if(points.length===1)return {...points[0],distance:0};
+ const [a,b]=points;
+ return {x:(a.x+b.x)/2,y:(a.y+b.y)/2,distance:Math.hypot(b.x-a.x,b.y-a.y)};
+}
 viewport.addEventListener('pointerdown', e=>{
  if(e.button!==0 || viewport.getAttribute('aria-busy')==='true') return;
  const control=e.target.closest('button,input,textarea,select,a,summary,[contenteditable="true"]');
  if(control&&!control.closest('[inert]'))return;
+ if(pointers.size&&[...pointers.values()][0].type!==e.pointerType)return;
  e.preventDefault();
  // Promote only while dragging: pan can reuse rasterized pages without a permanent giant layer.
  world.style.willChange='transform';
- drag={id:e.pointerId,x:e.clientX,y:e.clientY};dragLayer.hidden=false;dragLayer.setPointerCapture(e.pointerId);
+ pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,type:e.pointerType});gesture=measureGesture();
+ dragLayer.hidden=false;dragLayer.setPointerCapture(e.pointerId);
 });
 viewport.addEventListener('pointermove',e=>{
- if(!drag || drag.id!==e.pointerId)return;
- x+=e.clientX-drag.x;y+=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;scheduleRender();
+ if(!pointers.has(e.pointerId))return;
+ e.preventDefault();
+ pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,type:e.pointerType});
+ const next=measureGesture();
+ if(gesture.distance>0&&next.distance>0){
+  const rect=viewport.getBoundingClientRect();
+  zoom(scale*next.distance/gesture.distance,gesture.x-rect.left,gesture.y-rect.top,true);
+ }
+ x+=next.x-gesture.x;y+=next.y-gesture.y;gesture=next;scheduleRender();
 });
-function end(){if(!drag)return;const id=drag.id;drag=null;world.style.removeProperty('will-change');if(dragLayer.hasPointerCapture(id))dragLayer.releasePointerCapture(id);dragLayer.hidden=true;}
+function end(e){
+ if(!pointers.delete(e.pointerId))return;
+ // Rebase to the remaining finger before releasing capture; no jump after a pinch.
+ gesture=measureGesture();
+ if(dragLayer.hasPointerCapture(e.pointerId))dragLayer.releasePointerCapture(e.pointerId);
+ if(!pointers.size){world.style.removeProperty('will-change');dragLayer.hidden=true;render();saveView();}
+}
+function cancelGesture(){
+ const ids=[...pointers.keys()];pointers.clear();gesture=null;
+ for(const id of ids)if(dragLayer.hasPointerCapture(id))dragLayer.releasePointerCapture(id);
+ dragLayer.hidden=true;world.style.removeProperty('will-change');render();saveView();
+}
+window.addEventListener('blur',cancelGesture);
 viewport.addEventListener('pointerup',end);viewport.addEventListener('pointercancel',end);viewport.addEventListener('lostpointercapture',end);
 viewport.addEventListener('wheel',e=>{
  e.preventDefault();

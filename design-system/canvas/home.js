@@ -20,7 +20,7 @@ import {storeImage} from './specimen-media.mjs';
 import {categoryBoard,categoryPrompt} from '../pages/home/category.mjs?v=20260920-detail-polish';
 import {searchBoard,searchPrompt} from '../pages/home/search.mjs?v=20260920-detail-polish';
 import {homeBoard} from '../pages/home/render.mjs?v=20260920-detail-polish';
-import {focusBoard} from './canvas.js?v=20260919-partitions';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
 const world=document.querySelector('#world');
 const title=canvases.find(c=>c.id===activeCanvas).title;
 export const homeRegion=document.createElement('section');

@@ -26,7 +26,7 @@ import {mileageHistoryBoard} from '../pages/my-info/mileage-history.mjs';
 import {myInfo,recentVisitExamples} from '../pages/my-info/render.mjs?v=20260918-recent';
 import {myInfoPages} from '../pages/my-info/manifest.mjs';
 import {escapeHTML as e} from '../components/core.mjs';
-import {focusBoard} from './canvas.js?v=20260919-partitions';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
 function mileageHelpExample(){
  return '<section class="screen-mileage-help" inert aria-label="마일리지 안내가 열린 상태"><h3>마일리지 안내 · 열린 상태</h3><div class="screen-mileage-help-card">'+surface({contentHTML:sectionHeading({title:'마일리지',infoButton:true,expanded:true,helpId:'my-info-mileage-help',action:'내역 보기'})+mileage({available:15000,total:16000,max:20000,density:'compact'})+popover({id:'my-info-mileage-help',title:'마일리지 안내',body:'마일리지는 5,000M 단위로 사용할 수 있어요. 사용 가능 마일리지는 총 보유에 포함돼요. 게이지의 회색 구간은 총 보유에서 사용 가능 금액을 뺀 나머지예요.'})})+'</div></section>';
 }

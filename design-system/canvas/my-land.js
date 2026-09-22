@@ -1,5 +1,5 @@
 import {myLandScreen,myLandVariant} from '../pages/my-land/render.mjs?v=20260920-art-options';
-import {focusBoard} from './canvas.js?v=20260919-partitions';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
 const world=document.querySelector('#world');
 export const myLandRegion=document.createElement('section');
 myLandRegion.className='system-region';myLandRegion.id='my-land-region';

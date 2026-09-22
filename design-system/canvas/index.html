@@ -54,7 +54,7 @@
 <link rel="stylesheet" href="board-prompts.css?v=20260918-reuse">
 <link rel="stylesheet" href="screens.css?v=20260920-art-options">
 <link rel="stylesheet" href="review.css?v=20260919-services">
-<script type="module" src="boot.js?v=20260920-art-options"></script>
+<script type="module" src="boot.js?v=20260922-touch2"></script>
 </head>
 <body>
 <header class="toolbar">
@@ -64,7 +64,7 @@
 <label class="mobile-picker">보드 이동 <select id="board-picker"><option value="color">컬러</option><option value="type">타이포그래피</option><option value="space">간격과 크기</option><option value="depth">표면과 입체감</option></select></label>
 <div class="workspace">
 <aside><p class="aside-label">디자인시스템</p><nav aria-label="기본 스타일"><button data-board="color">컬러</button><button data-board="type">타이포그래피</button><button data-board="space">간격과 크기</button><button data-board="depth">표면과 입체감</button></nav><div class="aside-note"><p>밝은 블루와 화이트를 기본으로 사용합니다.<br>중요한 정보에는 브랜드 그라데이션으로 포인트를 줍니다.</p></div><a class="source" href="../foundations/app-tokens.css?v=20260918-reuse">토큰 CSS 보기 ↗</a></aside>
-<main id="viewport" aria-busy="true" tabindex="0" aria-label="오지플랫폼 디자인 시안 캔버스. 드래그 또는 방향키로 이동, 더하기 빼기로 확대 축소">
+<main id="viewport" aria-busy="true" tabindex="0" aria-label="오지플랫폼 디자인 시안 캔버스. 한 손가락 드래그 또는 방향키로 이동, 두 손가락 또는 더하기 빼기로 확대 축소">
 <div id="canvas-loading" role="status"><span class="og-spinner" aria-hidden="true"></span><span>캔버스를 불러오는 중입니다.</span></div>
 <div id="world">
 <section class="board" id="color">
@@ -126,5 +126,5 @@
 </div>
 </main>
 </div>
-<footer>빈 곳 드래그 · 휠 이동 · Ctrl/⌘ + 휠 확대/축소 · 방향키 이동<span>열람 전용 · 기본 스타일</span></footer>
+<footer>한 손가락 이동 · 두 손가락 확대/축소 · 마우스 드래그 · Ctrl/⌘ + 휠 확대/축소<span>열람 전용 · 기본 스타일</span></footer>
 </body></html>

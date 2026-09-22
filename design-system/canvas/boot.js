@@ -20,5 +20,5 @@ try{
  document.querySelector('#motion-toggle')?.remove();const motion=document.querySelector('#motion-sample');motion?.classList.add('is-open');motion?.setAttribute('aria-hidden','false');
 }
  if(files.length)await import('./board-prompts.js?v=20260918-reuse');
- await import('./area-layout.js?v=20260920-art-options');
+ await import('./area-layout.js?v=20260922-touch2');
 }catch(error){console.error(error);const loading=document.querySelector('#canvas-loading');loading.textContent='캔버스를 불러오지 못했습니다. 새로고침해 주세요.';loading.setAttribute('role','alert');}

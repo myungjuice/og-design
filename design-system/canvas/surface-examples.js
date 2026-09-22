@@ -2,7 +2,7 @@ import {myInfo} from '../pages/my-info/render.mjs';
 import {homeScreen} from '../pages/home/render.mjs';
 import {storeScreen} from '../pages/home/store.mjs';
 import {storeImage} from './specimen-media.mjs';
-import {focusBoard} from './canvas.js?v=20260919-partitions';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
 
 // Reuse the screen renderers; only the preview's surface treatment differs.
 export function createSurfaceExample(canvas){

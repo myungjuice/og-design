@@ -1,17 +1,17 @@
 import {activeCanvas} from './session.mjs';
 import {canvases} from './catalog.mjs';
-import {initializeReview} from './review.js?v=20260920-art-options';
-import {fit,focusBoard,focusReview,refreshBoardBounds,restoreView} from './canvas.js?v=20260919-partitions';
+import {initializeReview} from './review.js?v=20260922-touch2';
+import {fit,focusBoard,focusReview,refreshBoardBounds,restoreView} from './canvas.js?v=20260922-touch2';
 const area=document.querySelector('#world');
 const pageGrid=['explore','store','my-info','my-land'].includes(activeCanvas);
 let pages=[],region,comparisons=[],comparisonRegion;
 if(activeCanvas==='my-info'){
- const screens=await import('./screens.js?v=20260919-partitions');pages=screens.screenPages;region=screens.screenRegion;
- const variants=await import('./mileage-variants.js?v=20260919-partitions');comparisons=variants.comparisonPages;comparisonRegion=variants.comparisonRegion;
+ const screens=await import('./screens.js?v=20260922-touch2');pages=screens.screenPages;region=screens.screenRegion;
+ const variants=await import('./mileage-variants.js?v=20260922-touch2');comparisons=variants.comparisonPages;comparisonRegion=variants.comparisonRegion;
 }else if(activeCanvas==='my-land'){
- const land=await import('./my-land.js?v=20260920-art-options');pages=land.myLandPages;region=land.myLandRegion;
+ const land=await import('./my-land.js?v=20260922-touch2');pages=land.myLandPages;region=land.myLandRegion;
 }else if(['explore','store'].includes(activeCanvas)){
- const home=await import('./home.js?v=20260920-art-options');pages=home.homePages;region=home.homeRegion;
+ const home=await import('./home.js?v=20260922-touch2');pages=home.homePages;region=home.homeRegion;
 }else{
  pages=[...area.querySelectorAll('.board')];
  region=document.createElement('section');region.id=activeCanvas==='foundations'?'foundation-region':'component-region';region.className='system-region';
