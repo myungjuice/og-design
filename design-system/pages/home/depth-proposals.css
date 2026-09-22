@@ -1,0 +1,22 @@
+/* Hallmark · OG soft dimensional comparison · P4 H4 E4 S5 R5 V4
+ * Scoped proposals only. Original page renderers, copy and tokens stay unchanged. */
+.depth-proposal-section{margin-bottom:var(--app-space-10);padding-bottom:var(--app-space-8);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.depth-proposal-section>h3,.depth-original-label{font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);margin:0 0 var(--app-space-4)}
+.og-depth-proposal .og-home-top{inset:var(--app-space-4) var(--app-space-4) auto;padding:var(--app-space-3);border:var(--app-border-width) solid var(--app-white);border-radius:var(--app-radius-xl);background:var(--app-gradient-header);box-shadow:var(--app-shadow-card)}
+.og-depth-proposal .og-home-top .og-field-control{box-shadow:var(--app-shadow-menu)}
+.og-depth-proposal .og-home-filters .og-chip,
+.og-depth-proposal .og-home-filters .og-icon-button,
+.og-depth-proposal .og-home-locate .og-icon-button,
+.og-depth-proposal .og-home-explore .og-button{background:var(--app-gradient-menu);border:var(--app-border-width) solid var(--app-white);border-bottom:var(--app-menu-edge-width) solid var(--app-menu-floor);box-shadow:var(--app-shadow-menu)}
+.og-depth-proposal .og-home-filters .og-chip[aria-pressed="true"]{background:var(--app-action);border-color:var(--app-action);color:var(--app-on-action)}
+.og-depth-proposal .og-app-bottom-nav{background:var(--app-gradient-menu)}
+.og-depth-proposal .og-store{background:var(--app-gradient-header)}
+.og-depth-proposal .og-store-toolbar .og-icon-button{border-radius:var(--app-radius-pill);background:var(--app-gradient-menu);border:var(--app-border-width) solid var(--app-white);box-shadow:var(--app-shadow-menu)}
+.og-depth-proposal .og-store-toolbar>div{gap:var(--app-space-2)}
+.og-depth-proposal .og-store-identity{margin:var(--app-space-2) var(--app-space-4) var(--app-space-3);padding:var(--app-space-5) var(--app-space-4);background:var(--app-surface);border:var(--app-border-width) solid var(--app-white);border-radius:var(--app-radius-card);box-shadow:var(--app-shadow-card)}
+.og-depth-proposal .og-store .og-store-tabs{margin-inline:var(--app-space-4);padding-inline:0;border-bottom:0}
+.og-depth-proposal .og-store-body{margin:var(--app-space-2) var(--app-space-4) var(--app-space-4);padding-top:var(--app-space-4);background:var(--app-surface);border:var(--app-border-width) solid var(--app-white);border-radius:var(--app-radius-card);box-shadow:var(--app-shadow-card)}
+.og-depth-proposal .og-store-promotion{padding:var(--app-space-5) var(--app-space-4)}
+
+
+.og-depth-proposal .og-store-tabs [role="tab"]{background:transparent}

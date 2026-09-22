@@ -21,3 +21,12 @@
 .og-time-column strong{font-size:var(--app-caption-size);color:var(--app-text-secondary)}
 .og-time-value{display:flex;align-items:center;justify-content:center;min-height:var(--app-touch-min);padding:var(--app-space-2);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-sm);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);color:var(--app-text-secondary);background:var(--app-surface)}
 .og-time-value[data-selected="true"]{border-color:var(--app-action);background:var(--app-selected);color:var(--app-action);font-weight:var(--app-weight-bold)}
+
+/* Period endpoints retain the single-date circle; intermediate dates share one band. */
+.og-range-calendar .og-calendar-day span{position:relative}
+
+.og-range-calendar .og-calendar-day[data-range-day]{position:relative;border-radius:0;background:transparent}
+.og-range-calendar .og-calendar-day[data-in-range]::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--app-space-8);transform:translateY(-50%);background:var(--app-selected)}
+.og-range-calendar .og-calendar-day[data-range-start]::before{left:50%}
+.og-range-calendar .og-calendar-day[data-range-end]::before{right:50%}
+.og-range-calendar .og-calendar-day[data-range-start][data-range-end]::before{display:none}

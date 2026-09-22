@@ -1,0 +1,10 @@
+/* Hallmark · existing OG soft dimensional blue · four history shortcuts
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · shared sheet and menu tiles */
+@import url("./mileage-history.css");
+@import url("../../components/sheet/sheet.css");
+.og-services>.og-sheet-panel{inset:auto 0 0}
+.og-services>.og-sheet-panel>.og-sheet-body{background:var(--app-background)}
+.og-services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);padding:var(--app-space-4) 0}
+.og-services-grid .og-menu-tile{width:100%;min-width:0;min-height:calc(var(--app-space-12)*2);padding:var(--app-space-4) var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-services-grid .og-menu-tile>span:last-child{white-space:nowrap}
+.og-services-grid .og-menu-tile>.material-icons{font-size:var(--app-icon-size);color:var(--app-action)}

@@ -1,0 +1,36 @@
+/* Hallmark · OG mileage sheet · P4 H4 E4 S5 R5 V4 */
+@import url("./my-info.css");
+.og-history-screen{position:relative;width:100%;height:800px;overflow:hidden;background:var(--app-background);font-family:var(--app-font);color:var(--app-text-primary)}
+.og-history-backdrop{position:absolute;inset:0;pointer-events:none}
+.og-history-scrim{position:absolute;inset:0;background:var(--app-scrim)}
+.og-history-screen>.og-sheet-panel{position:absolute;inset:var(--app-space-16) 0 0}
+.og-history-balance{display:grid;gap:var(--app-space-1);padding:var(--app-space-5) 0 var(--app-space-6)}
+.og-history-balance span{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-history-balance strong{font-size:var(--app-title-1-size);line-height:var(--app-title-1-line);font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;background:var(--app-gradient-number);background-clip:text;-webkit-background-clip:text;color:transparent}
+.og-history-balance span:last-child{margin-top:var(--app-space-2)}
+.og-mileage-periods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--app-space-1)}
+.og-mileage-periods .og-chip{min-width:0;padding-inline:var(--app-space-1);font-size:var(--app-label-size);white-space:nowrap}
+.og-history-screen .og-history-range{margin:var(--app-space-3) 0 var(--app-space-6);font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-variant-numeric:tabular-nums}
+.og-mileage-entry{padding-block:var(--app-space-4);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-history-screen .og-mileage-entry+section{margin-top:0}
+.og-history-screen .og-mileage-entry h3{font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-weight:var(--app-weight-regular);color:var(--app-text-secondary);margin:0 0 var(--app-space-2)}
+.og-mileage-entry .og-list-row{padding:0;border-radius:0;flex-wrap:nowrap}
+.og-mileage-entry .og-row-copy{flex:1;min-width:0}
+.og-mileage-entry .og-row-value{flex:none;white-space:nowrap}
+.og-mileage-earned .og-row-value{color:var(--app-action)}
+.og-history-screen .og-feedback{padding-block:var(--app-space-12)}
+.history-state-label{margin:0 0 var(--app-space-4);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.history-empty-example{margin-top:var(--app-space-10);padding-top:var(--app-space-8);border-top:var(--app-border-width) solid var(--app-edge)}
+
+.og-period-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--app-space-4);background:var(--app-scrim)}
+.og-period-dialog{width:100%;min-width:0;background:var(--app-surface);border-radius:var(--app-radius-lg);box-shadow:var(--app-shadow-sheet)}
+.og-period-dialog>h3{margin:0;padding:var(--app-space-4) var(--app-space-4) 0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}
+.og-period-dialog .og-calendar{border:0;box-shadow:none}
+
+.og-mileage-cancel-examples{padding:var(--app-space-4);background:var(--app-surface);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-lg)}
+.og-mileage-cancel-examples .og-mileage-entry h3{font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-weight:var(--app-weight-regular);color:var(--app-text-secondary);margin:0 0 var(--app-space-2)}
+
+/* Approved empty-list guidance, centered in the remaining list area. */
+.og-history-screen .og-sheet-body:has(.og-mileage-empty){display:flex;flex-direction:column}
+.og-mileage-empty{display:flex;flex:1;align-items:center;justify-content:center;min-height:var(--app-space-16);padding:var(--app-space-4);text-align:center}
+.og-history-screen .og-mileage-empty p{margin:0;color:var(--app-text-secondary);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all}

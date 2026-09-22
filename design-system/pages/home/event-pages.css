@@ -1,0 +1,8 @@
+/* Hallmark · existing OG event reading pages · P4 H4 E4 S5 R5 V4 */
+@import url('./news-pages.css');
+.og-event-brand{display:flex;align-items:center;gap:var(--app-space-2);padding:var(--app-space-4) var(--app-space-6) 0;flex:none}
+.og-event-brand img{flex:none;object-fit:contain;border-radius:var(--app-radius-sm)}
+.og-event-brand strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
+.og-news-article.has-period>h3{border:0;padding-bottom:0}
+.og-reading-period{text-align:center;margin:var(--app-space-2) 0 0;padding-bottom:var(--app-space-6);border-bottom:var(--app-border-width) solid var(--app-edge);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium);overflow-wrap:anywhere}
+.og-event-page .og-news-empty{min-height:440px}

@@ -1,0 +1,35 @@
+/* Hallmark · existing OG my-info composition · tone: soft dimensional blue
+ * Audience: OG members · purpose: balance and account navigation
+ * Preserves approved v2 structure, shared tokens and primitives · P4 H4 E4 S5 R5 V4 */
+@import url("../../components/index.css");
+@import url("../../components/app-shell/app-shell.css");
+.og-my-info{container-type:inline-size;width:100%;max-width:var(--app-content-max);background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font);border:var(--app-border-width) solid var(--app-edge);overflow:clip}
+.og-my-info .material-icons{flex:none}
+.og-my-header{background:var(--app-gradient-header);padding-top:var(--app-space-3);padding-bottom:var(--app-space-8);border-bottom:var(--app-border-width) solid var(--app-track)}
+.og-my-profile-wrap{padding:var(--app-space-6) var(--app-page-inset) 0}
+.og-my-profile{display:flex;align-items:center;gap:var(--app-space-3);background:var(--app-gradient-header);border-color:var(--app-white)}
+.og-my-profile-copy{flex:1;min-width:0}
+.og-my-profile-copy strong{display:block;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-my-profile-copy span{display:block;margin-top:var(--app-space-1);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}
+.og-my-profile>.material-icons{color:var(--app-action);font-size:var(--app-icon-size)}
+.og-my-body{display:grid;gap:var(--app-stack-gap);padding:0 var(--app-page-inset) var(--app-space-8);margin-top:calc(-1 * var(--app-space-4));position:relative}
+.og-my-balance .og-section-heading{margin-bottom:var(--app-space-3)}
+.og-my-visits{display:flex;gap:var(--app-space-3);overflow:clip;margin-top:var(--app-space-3)}
+.og-my-visit{display:flex;align-items:center;gap:var(--app-space-3);flex:0 0 100%;min-width:0}
+.og-my-store-link{display:flex;align-items:center;gap:var(--app-space-3);flex:1;min-width:0}
+.og-my-store-link .og-thumbnail{width:var(--app-control-md);border-radius:var(--app-radius-md)}
+.og-my-store-link .og-media-fallback span{display:none}
+.og-my-visit-copy{flex:1;min-width:0}
+.og-my-visit strong{display:block;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.og-my-visit-copy>span{display:block;margin-top:var(--app-space-1);font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary);font-variant-numeric:tabular-nums}
+.og-my-visit .og-text-button{flex:none;padding-inline:0;white-space:nowrap}
+.og-my-visit-empty{display:flex;align-items:center;justify-content:center;gap:var(--app-space-2);min-height:calc(var(--app-space-10)*2);color:var(--app-text-secondary)}
+.og-my-visit-empty .material-icons{font-size:var(--app-icon-lg)}
+.og-my-visit-empty p{margin:0;font-size:var(--app-label-size);line-height:var(--app-label-line);word-break:keep-all}
+.og-my-recent-example+.og-my-recent-example{margin-top:var(--app-space-6)}
+.og-my-recent-example:last-child .og-my-visits{flex-direction:column;overflow:visible}
+.og-my-recent-example:last-child .og-my-visit{flex-basis:auto}
+.og-my-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--app-space-2)}
+.og-my-menu .og-menu-tile{min-height:calc(var(--app-control-md) * 2);padding-inline:var(--app-space-2)}
+.og-my-menu .material-icons{font-size:var(--app-icon-size);line-height:1;color:var(--app-action)}
+@container (max-width:350px){.og-my-info .og-mileage-summary dd{font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}.og-my-info .og-mileage-summary{gap:var(--app-space-1)}.og-my-info .og-mileage-summary>div+div{padding-left:var(--app-space-1)}}

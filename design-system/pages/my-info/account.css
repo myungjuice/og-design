@@ -1,0 +1,30 @@
+/* Hallmark · existing OG system · membership information sheet
+ * shared surfaces and controls · static legacy states */
+@import url("./mileage-history.css");
+@import url("../../components/sheet/sheet.css");
+@import url("../../components/input/input.css");
+@import url("../../components/list-row/list-row.css");
+@import url("../../components/dialog/dialog.css");
+.og-account>.og-sheet-panel>.og-sheet-body{background:var(--app-background)}
+.og-account-groups{display:flex;flex-direction:column;gap:var(--app-space-4);padding:var(--app-space-4) 0}
+.og-account-info,.og-account-withdrawal{padding:var(--app-space-4)}
+.og-account-heading,.og-account-auth{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2)}
+.og-account-heading{margin-bottom:var(--app-space-2)}
+.og-account-heading .og-section-heading{margin:0}
+.og-account .og-section-heading h3{margin:0}
+.og-account-info .og-list-row{min-height:var(--app-touch-min);padding:var(--app-space-2) 0;border-radius:0;flex-wrap:nowrap;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-account-info .og-list-row+.og-list-row{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-account-info .og-row-title{color:var(--app-text-secondary);font-weight:var(--app-weight-regular)}
+.og-account-info .og-row-value{min-width:0;overflow-wrap:anywhere;text-align:right}
+.og-account-withdrawal>.og-section-heading{margin-bottom:var(--app-space-4)}
+.og-account-auth{margin-bottom:var(--app-space-4)}
+.og-account-status{display:inline-flex;align-items:center;gap:var(--app-space-2);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-account-status>.material-icons{color:var(--app-text-secondary);font-size:var(--app-icon-size)}
+.og-account-status.is-checked>.material-icons{color:var(--app-action)}
+.og-account-withdrawal input{text-align:right}
+.og-account-withdrawal .og-field-help{word-break:keep-all}
+.og-account-withdraw{width:100%;margin-top:var(--app-space-4);color:var(--app-text-secondary);white-space:nowrap}
+.og-account-withdraw.is-confirmed{color:var(--app-text-primary)}
+.og-account-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--app-scrim);padding:var(--app-space-4)}
+.og-account-overlay>.og-dialog-panel{width:100%;min-width:0}
+.og-account-overlay .og-dialog-body{white-space:pre-line;word-break:keep-all}

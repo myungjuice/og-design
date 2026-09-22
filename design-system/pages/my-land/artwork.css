@@ -1,0 +1,46 @@
+/* Hallmark · component: static OG artwork · existing tokens, no animation.
+ * Pre-emit critique: P4 H4 E4 S4 R4 V4. Candidate-only selectors. */
+.og-myland-art-candidate .og-myland-blue-header{background:var(--app-gradient-header)}
+.og-myland-art-candidate .og-myland-blue-header>.og-app-bar,
+.og-myland-art-candidate .og-myland-hero{background:transparent}
+.og-land-illustration{display:block;overflow:visible;fill:none;stroke-linejoin:round;stroke-linecap:round;font-family:var(--app-font)}
+.og-land-illustration.is-hero{width:100%;height:100%}
+.og-myland-game>.og-land-illustration{position:absolute;width:82px;height:82px;right:6px;bottom:4px}
+.og-land-illustration .art-white{fill:var(--app-white)}
+.og-land-illustration .art-blue{fill:var(--app-action)}
+.og-land-illustration .art-pale{fill:var(--primary02)}
+.og-land-illustration .art-edge{fill:var(--primary03)}
+.og-land-illustration .art-violet-edge{fill:var(--secondary04)}
+.og-land-illustration .art-violet{fill:var(--secondary06)}
+.og-land-illustration .art-ticket{fill:var(--secondary01)}
+.og-land-illustration .art-outline{stroke:var(--app-edge);stroke-width:1}
+.og-land-illustration .art-ring{stroke:var(--gray04);stroke-width:5}
+.og-land-illustration .art-seven{stroke:var(--app-action);stroke-width:8;stroke-linejoin:miter;stroke-linecap:butt}
+.og-land-illustration .art-month{fill:var(--app-white);font-size:12px;font-weight:var(--app-weight-bold);text-anchor:middle}
+.og-land-illustration .art-ticket-type{fill:var(--secondary08);font-size:18px;font-weight:var(--app-weight-bold);text-anchor:middle}
+.og-land-illustration .art-perforation{stroke:var(--secondary04);stroke-width:1;stroke-dasharray:2 3}
+.og-land-illustration .art-hairline{stroke:var(--app-edge);stroke-width:1}
+.og-land-illustration .art-check{stroke:var(--secondary08);stroke-width:2.5}
+.og-land-illustration .art-pointer{fill:var(--secondary08);stroke:var(--app-white);stroke-width:1.5}
+.og-land-illustration .art-fold{fill:var(--primary03)}
+/* 6: consistent shallow sidewalls and a single light source. */
+[data-art-style="miniature"] .og-land-illustration{filter:drop-shadow(0 4px 3px var(--app-shadow-color))}
+[data-art-style="miniature"] .art-outline{stroke:var(--app-white);stroke-width:1.2}
+/* 7: near-front-on enamel relief, restrained monochromatic material. */
+[data-art-style="relief"] .art-violet{fill:var(--primary04)}
+[data-art-style="relief"] .art-violet-edge{fill:var(--primary03)}
+[data-art-style="relief"] .art-ticket{fill:var(--app-white)}
+[data-art-style="relief"] .art-ticket-type{fill:var(--app-action)}
+[data-art-style="relief"] .art-edge{fill:var(--app-edge)}
+[data-art-style="relief"] .art-ring{stroke:var(--primary04)}
+[data-art-style="relief"] .art-outline{stroke:var(--primary03);stroke-width:1.5}
+[data-art-style="relief"] .art-seven{stroke-width:6}
+[data-art-style="relief"] .art-pointer{fill:var(--app-action)}
+/* 8: folded stock, offset cut layers, visibly assembled paper shapes. */
+[data-art-style="paper"] .art-edge{fill:var(--primary03)}
+[data-art-style="paper"] .art-outline{stroke:var(--primary03);stroke-width:1}
+[data-art-style="paper"] .art-ring{stroke:var(--app-action);stroke-width:2.5}
+[data-art-style="paper"] .art-violet{fill:var(--secondary04)}
+[data-art-style="paper"] .art-seven{stroke-width:5}
+@media(max-width:375px){.og-myland-art-candidate .og-myland-art{width:174px;right:0}.og-myland-game>.og-land-illustration{width:76px;height:76px}}
+

@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {storeBoard} from './store.mjs';
+import {mainMenuBoard} from './main-menu.mjs';
+import {fullMenuBoard} from './full-menu.mjs';
+import {menuDetailBoard} from './menu-detail.mjs';
+import {storeInfoBoard} from './store-info.mjs';
+const store={name:'검증 매장',category:'일식',address:'검증로 17',images:['https://example.com/store.jpg'],logo:'',promotion:'소개 제목',description:'등록한 소개'};
+const items=[{name:'등록 메뉴',description:'등록 설명',price:17000,image:'https://example.com/menu.jpg',category:'등록 카테고리',featured:true,options:[]}];
+test('store board uses supplied identity and photos without removing its no-photo state',()=>{const html=storeBoard({store});assert.match(html,/검증 매장/);assert.match(html,/https:\/\/example.com\/store.jpg/);assert.match(html,/no_image.png/);});
+test('main menu receives registered items and store identity',()=>{const html=mainMenuBoard({store,items});assert.match(html,/검증 매장/);assert.match(html,/등록 메뉴/);assert.match(html,/17,000/);assert.doesNotMatch(html,/메뉴명/);});
+test('full menu preserves registered category, name and price across its states',()=>{const html=fullMenuBoard({store,items,imageSrc:store.images[0]});assert.match(html,/검증 매장/);assert.match(html,/등록 카테고리/);assert.match(html,/등록 메뉴/);assert.doesNotMatch(html,/회원점명/);});
+test('menu detail renders real item separately from illustrative option states',()=>{const html=menuDetailBoard({item:items[0]});assert.match(html,/등록 메뉴/);assert.match(html,/등록 설명/);assert.match(html,/17,000 원/);assert.match(html,/추가 옵션명/);});
+test('information and directions share supplied real address without fallback contacts',()=>{const info={streetAddress:'검증로 17',detailAddress:'1층',hours:['매일 12:00 ~ 22:30']};for(const kind of ['info','location']){const html=storeInfoBoard(kind,{store,info,location:{name:'검증 매장',localAddress:'검증동 17',detailAddress:'1층'}});assert.match(html,/검증 매장/);assert.match(html,/검증로 17/);assert.doesNotMatch(html,/example.com|02-000-0000/);if(kind==='location')assert.match(html,/검증동 17/);}});

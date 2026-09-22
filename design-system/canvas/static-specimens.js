@@ -80,7 +80,7 @@
  document.querySelectorAll('#quantity .og-quantity').forEach(e=>{const n=Number(e.dataset.value);e.querySelector('[data-quantity-minus]').disabled=n===Number(e.dataset.min)||e.getAttribute('aria-disabled')==='true';e.querySelector('[data-quantity-plus]').disabled=n===Number(e.dataset.max)||e.getAttribute('aria-disabled')==='true';});
  $('#quantity-basic-specimen .quantity-stage .quantity-note').textContent='최소 수량 · 줄이기 버튼 비활성';
  const heading=$('#heading-with-action').closest('.heading-stage');replaceStates(heading,[false,true].map(open=>{const e=copy(heading);e.querySelector('.og-heading-help').hidden=!open;e.querySelector('.og-heading-info').setAttribute('aria-expanded',String(open));e.querySelector('.heading-content-sample').remove();return [open?'설명 표시':'기본',e];}));remove('#heading-status,#row-status,#tile-status');
- remove('#motion-toggle');const motion=$('#motion-sample');motion.classList.add('is-open');motion.setAttribute('aria-hidden','false');
+ remove('#motion-toggle');const motion=$('#motion-sample');motion?.classList.add('is-open');motion?.setAttribute('aria-hidden','false');
 
  // Only canvas tools and handoff controls are actionable. Keep native styling intact.
  document.querySelectorAll('.board button,.board input,.board textarea,.board select,.board a,.board summary,.board [tabindex]').forEach(e=>{

@@ -1,0 +1,95 @@
+@import url('../pages/my-land/artwork.css?v=20260920-art-options');
+@import url('../pages/my-land/variants.css?v=20260920-art-options');
+@import url('../pages/my-land/my-land.css?v=20260920-myland');
+@import url('../pages/home/depth-subtle.css');
+@import url('../pages/home/store-info.css');
+@import url('../pages/home/review-pages.css?v=20260920-detail-polish');
+@import url('../pages/home/store-reviews.css');
+@import url('../pages/home/event-pages.css');
+@import url('../pages/home/news-pages.css');
+@import url('../pages/home/store-updates.css');
+@import url('../pages/home/store-services.css');
+@import url('../pages/home/menu-detail.css');
+@import url('../pages/home/full-menu.css');
+@import url("../pages/home/main-menu.css");
+@import url("../pages/home/store.css?v=20260920-detail-polish");
+@import url("../pages/home/nearby.css");
+@import url("../pages/home/category.css");
+@import url("../pages/home/search.css");
+@import url("../pages/home/home.css");
+@import url("../pages/my-info/services.css");
+@import url("../pages/my-info/review-write.css");
+@import url("../pages/my-info/photo-review.css");
+@import url("../pages/my-info/account.css");
+/* Hallmark · existing canvas extension · same-family vertical sequence · P4 H4 E4 S5 R5 V4 */
+@import url("../pages/my-info/my-info.css");
+@import url("../pages/my-info/mileage-history.css");
+@import url("../pages/my-info/use-history.css");
+@import url("../pages/my-info/reservation-detail.css");
+@import url("../pages/my-info/reservation-change.css");
+@import url("../pages/my-info/reservation-pickers.css");
+@import url("../pages/my-info/waiting-detail.css");
+@import url("../pages/my-info/order-detail.css");
+@import url("../pages/my-info/review-history.css");
+@import url("../pages/my-info/notices.css");
+@import url("../pages/my-info/notice-detail.css");
+@import url("../pages/my-info/membership.css");
+@import url("../pages/my-info/support.css");
+@import url("../pages/my-info/faq.css");
+@import url("../pages/my-info/opinion.css");
+@import url("../pages/my-info/customer-center.css");
+@import url("../pages/my-info/policies.css");
+@import url("../pages/my-info/policy-detail.css");
+@import url("../pages/my-info/settings.css");
+@import url("../pages/my-info/password.css");
+.screen-page{position:absolute;width:768px;background:var(--app-surface);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-sm);padding:var(--app-space-8);cursor:grab}
+.screen-page-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--app-space-4);padding-bottom:var(--app-space-6);margin-bottom:var(--app-space-6);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.screen-page-heading h2{margin:var(--app-space-2) 0 0;font-size:var(--app-title-1-size);line-height:var(--app-title-1-line)}
+.screen-page-heading span{font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary)}
+.screen-page-heading button{font-size:var(--app-label-size);color:var(--app-action);min-height:var(--app-touch-min)}
+.screen-page-content{display:grid;grid-template-columns:var(--app-layout-reference) minmax(0,1fr);align-items:start;gap:var(--app-space-8)}
+.screen-artboard{width:var(--app-layout-reference)}
+.screen-design-notes{padding-top:var(--app-space-4)}
+.screen-design-notes h3{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);margin:0 0 var(--app-space-2)}
+.screen-design-notes p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);margin:0 0 var(--app-space-8);word-break:keep-all}
+.screen-route{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin:0 0 var(--app-space-4)}
+.screen-placeholder{width:var(--app-layout-reference);height:480px;border:var(--app-border-width) dashed var(--app-control-border);background:var(--app-background)}
+aside{overflow-y:auto}
+.screen-nav{margin-bottom:var(--app-space-8)}
+.screen-nav button{font-size:var(--app-label-size)}
+#screen-prompt-dialog{width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:var(--app-space-6);border:var(--app-border-width) solid var(--app-edge);border-radius:var(--app-radius-xl);background:var(--app-surface);color:var(--app-ink);box-shadow:var(--app-shadow-sheet)}
+#screen-prompt-dialog::backdrop{background:var(--app-scrim)}
+#screen-prompt-dialog h2{margin:0;font-size:var(--app-title-2-size)}
+#screen-prompt-dialog p,#screen-prompt-dialog label{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+#screen-prompt-text{display:block;width:100%;height:45dvh;resize:vertical;padding:var(--app-space-3);font:var(--app-weight-regular) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);color:var(--app-ink);background:var(--app-background);border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-sm)}
+
+.screen-mileage-help{margin-top:var(--app-space-10);padding-top:var(--app-space-8);border-top:var(--app-border-width) solid var(--app-edge)}
+.screen-mileage-help>h3{margin:0 0 var(--app-space-4);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.screen-mileage-help-card{width:var(--app-layout-reference)}
+.screen-mileage-help-card>.og-surface{position:relative;min-height:280px}
+.screen-mileage-help .og-section-heading{margin-bottom:var(--app-space-3)}
+.screen-mileage-help .og-popover{position:absolute;top:var(--app-control-lg);left:var(--app-space-4);right:var(--app-space-4);width:auto;max-width:none}
+
+/* Hallmark · comparison only · P4 H4 E4 S5 R5 V4 */
+.mileage-variant-page{width:440px;padding:var(--app-space-8)}
+.mileage-variant-page .screen-page-heading h2{font-size:var(--app-title-2-size)}
+.mileage-variant-description{min-height:var(--app-space-16);margin:0 0 var(--app-space-6);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);word-break:keep-all}
+.mileage-variant-note{margin:var(--app-space-3) 0 0;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);word-break:keep-all}
+.mileage-variant-note strong{color:var(--app-action);font-weight:var(--app-weight-bold)}
+.mileage-next-title{margin:0 0 var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line);font-weight:var(--app-weight-medium)}
+.mileage-total,.mileage-shared{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2);margin:0;font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.mileage-total strong{font-size:var(--app-headline-size);line-height:var(--app-headline-line)}
+.mileage-breakdown dl{display:grid;gap:var(--app-space-3);border-top:var(--app-border-width) solid var(--app-edge);margin:var(--app-space-3) 0 0;padding-top:var(--app-space-3)}
+.mileage-breakdown dl>div{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2)}
+.mileage-breakdown dt{display:flex;align-items:center;gap:var(--app-space-1);font-size:var(--app-label-size);color:var(--app-text-secondary)}
+.mileage-breakdown dd{margin:0;font-size:var(--app-headline-size);line-height:var(--app-headline-line);font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
+.mileage-value-brand{background:var(--app-gradient-number);background-clip:text;-webkit-background-clip:text;color:transparent}
+.mileage-shared{border-top:var(--app-border-width) solid var(--app-edge);margin-top:var(--app-space-4);padding-top:var(--app-space-3);color:var(--app-text-secondary)}
+
+/* Hallmark · existing OG specimen boundary · P4 H4 E4 S5 R5 V4
+ * Presentation-only frame: includes the full screen and bottom navigation.
+ * Inset outline preserves the 375px content width and does not clip the barcode. */
+.screen-page[data-family="home"] .screen-artboard{
+ outline:var(--app-border-width) solid var(--app-edge);
+ outline-offset:calc(-1 * var(--app-border-width));
+}

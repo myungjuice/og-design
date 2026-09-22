@@ -1,0 +1,43 @@
+/* Hallmark · existing OG blue/white system · form and response list
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · restrained depth, legacy copy */
+@import url("./my-info.css");
+@import url("../../components/input/input.css");
+@import url("../../components/tabs-chips/tabs-chips.css");
+@import url("../../components/attachments/attachments.css");
+@import url("../../components/badges/badges.css");
+@import url("../../components/feedback/feedback.css");
+.og-opinion{display:flex;flex-direction:column;width:100%;height:800px;overflow:clip;border:var(--app-border-width) solid var(--app-edge);background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-opinion>.og-app-bar{flex:none;border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-opinion-tabs{padding:var(--app-space-4);flex:none}
+.og-opinion-tabs .og-segment{width:100%}
+.og-opinion-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 var(--app-space-4) var(--app-space-4)}
+.og-opinion-form{display:flex;flex-direction:column;gap:var(--app-space-4)}
+.og-opinion-required{margin-left:var(--app-space-1);color:var(--app-error);font-size:var(--app-space-2);vertical-align:middle}
+.og-opinion select{width:100%;min-width:0;min-height:var(--app-control-height);border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-md);background:var(--app-surface);color:var(--app-text-primary);padding:var(--app-space-3);font:var(--app-body-1-size)/var(--app-body-1-line) var(--app-font)}
+.og-opinion .og-field-help:empty{display:none}
+.og-opinion textarea{min-height:160px;resize:none;padding-right:calc(var(--app-touch-min) + var(--app-space-2))}
+.og-opinion-attach>.og-button{width:100%;justify-content:flex-start;white-space:nowrap}
+.og-opinion-attach p{margin:var(--app-space-2) 0 0;color:var(--app-text-secondary);font-size:var(--app-caption-size);line-height:var(--app-caption-line);word-break:keep-all}
+.og-opinion-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3)}
+.og-opinion-photos .og-attachment-item{width:100%;height:128px}
+.og-opinion-terms{padding:var(--app-space-4);border-radius:var(--app-radius-md);background:var(--app-background);font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary);word-break:keep-all;overflow-wrap:anywhere}
+.og-opinion-terms p{margin:0}
+.og-opinion-terms p+p{margin-top:var(--app-space-4)}
+.og-opinion-submit{flex:none;padding:var(--app-space-4);border-top:var(--app-border-width) solid var(--app-edge);background:var(--app-surface);box-shadow:var(--app-shadow-card)}
+.og-opinion-submit .og-button{width:100%;white-space:nowrap}
+.og-opinion-record+.og-opinion-record{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-opinion-record-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:var(--app-space-2);width:100%;border:0;background:var(--app-surface);padding:var(--app-space-4) 0;color:var(--app-text-primary);font:var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);text-align:left}
+.og-opinion-record-title{display:flex;gap:var(--app-space-2);min-width:0;overflow-wrap:anywhere;word-break:keep-all}
+.og-opinion-record-title>strong{color:var(--app-action);flex:none}
+.og-opinion-record-heading[aria-expanded="true"] .og-opinion-record-title{font-weight:var(--app-weight-bold)}
+.og-opinion time{grid-column:1/-1;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary)}
+.og-opinion-request-body,.og-opinion-answer{padding:var(--app-space-4);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all;overflow-wrap:anywhere}
+.og-opinion-request-body{padding-top:0}
+.og-opinion-request-body p{margin:0 0 var(--app-space-3);white-space:pre-line}
+.og-opinion-answer{background:var(--app-background);border-radius:var(--app-radius-md);margin-bottom:var(--app-space-4)}
+.og-opinion-answer h3{margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-opinion-answer h3>span{color:var(--app-brand-violet)}
+.og-opinion-answer p{margin:var(--app-space-3) 0 0;white-space:pre-line}
+.og-opinion-processing{text-align:center;padding:var(--app-space-4) 0;color:var(--app-action)}
+.og-opinion-processing p{margin-top:var(--app-space-1)}
+.og-opinion .og-feedback{padding-top:var(--app-space-16)}

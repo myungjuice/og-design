@@ -1,0 +1,15 @@
+/* Hallmark · existing OG category sheet · P4 H4 E4 S5 R5 V4 */
+@import url('./home.css');
+@import url('../../components/sheet/sheet.css');
+.og-category-stage{position:relative;height:800px;width:100%;overflow:clip}
+.og-category-overlay{position:absolute;inset:0;display:flex;align-items:flex-end}
+.og-category-scrim{position:absolute;inset:0;background:var(--app-scrim)}
+.og-category-overlay>.og-sheet-panel{position:relative;width:100%;height:40%;padding-top:var(--app-space-2)}
+.og-category-overlay>.og-sheet-panel::before{content:'';display:block;flex:none;align-self:center;width:var(--app-space-8);height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--app-control-border)}
+.og-category-overlay .og-sheet-footer{display:none}
+.og-category-overlay .og-category-options{display:flex;flex-wrap:wrap;align-content:flex-start;gap:var(--app-space-2);padding-bottom:var(--app-space-2)}
+.og-category-options .og-category-chip{min-height:var(--app-space-8);height:var(--app-space-8);font-size:var(--app-label-size);display:inline-flex;align-items:center;gap:var(--app-space-2);white-space:nowrap;min-width:0;padding-inline:var(--app-space-3);border-radius:var(--app-radius-md)}
+.og-category-chip img{flex:none;object-fit:contain}
+.og-home-filters{overflow-x:auto;scrollbar-width:none;padding-bottom:var(--app-space-1)}
+.og-home-filters .og-chip{flex:none}
+.og-home-filters>.og-icon-button{margin-left:0}

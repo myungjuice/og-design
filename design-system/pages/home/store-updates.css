@@ -1,0 +1,18 @@
+/* Hallmark · existing OG updates list · P4 H4 E4 S5 R5 V4 */
+@import url('./store.css');
+@import url('../../components/section-heading/section-heading.css');
+.og-store-updates{padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-update-row{display:flex;align-items:flex-start;gap:var(--app-space-3);padding-block:var(--app-space-4);min-height:112px}
+.og-update-row+.og-update-row{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-update-copy{min-width:0;flex:1}
+.og-update-copy h4{margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-update-date{margin:0;color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-label-line);overflow-wrap:anywhere}
+.og-update-date+h4{margin-top:var(--app-space-1)}
+.og-update-row>.og-thumbnail{width:80px;height:80px;flex:none;border-radius:var(--app-radius-md);box-shadow:var(--app-shadow-card)}
+.og-update-title{display:flex;align-items:flex-start;gap:var(--app-space-1)}
+.og-update-title>.material-icons{flex:none;color:var(--app-text-primary)}
+.og-update-row[data-status="active"] .og-update-title>.material-icons{color:var(--app-warning)}
+.og-update-event-copy{padding-left:calc(var(--app-icon-size) + var(--app-space-1))}
+.og-update-status{margin:var(--app-space-1) 0;font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-update-status strong{color:var(--app-brand-violet);font-weight:var(--app-weight-medium)}
+.og-update-row[data-status="ended"] .og-update-title,.og-update-row[data-status="ended"] .og-update-title>.material-icons,.og-update-row[data-status="ended"] .og-update-status{color:var(--app-text-secondary)}

@@ -1,0 +1,30 @@
+/* Hallmark · existing OG photo-led nearby panel · P4 H4 E4 S5 R5 V4 */
+@import url('./home.css');
+@import url('../../components/sheet/sheet.css');
+@import url('../../components/avatar/avatar.css');
+.og-nearby-stage{position:relative;width:100%;height:800px;overflow:clip}
+.og-nearby-stage>.og-home>.og-app-bottom-nav{visibility:hidden}
+.og-nearby-overlay{position:absolute;inset:20% 0 0;display:flex}
+.og-nearby-overlay>.og-sheet-panel{width:100%;padding-top:var(--app-space-2)}
+.og-nearby-overlay>.og-sheet-panel::before{content:'';display:block;flex:none;align-self:center;width:var(--app-space-8);height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--app-control-border)}
+.og-nearby-overlay .og-sheet-close,.og-nearby-overlay .og-sheet-footer{display:none}
+.og-nearby-overlay .og-sheet-header{padding-block:var(--app-space-5);padding-inline:var(--app-space-6)}
+.og-nearby-overlay .og-sheet-body{padding:0 var(--app-space-6) var(--app-space-6)}
+.og-nearby-card+.og-nearby-card{border-top:var(--app-border-width) solid var(--app-edge);padding-top:var(--app-space-6);margin-top:var(--app-space-6)}
+.og-nearby-photo{position:relative;height:350px}
+.og-nearby-photo .og-thumbnail{width:100%;height:100%;border-radius:var(--app-radius-xl)}
+.og-nearby-photo .og-thumbnail img{width:100%;height:100%;object-fit:cover}
+.og-nearby-count{position:absolute;right:var(--app-space-4);bottom:var(--app-space-4);border-radius:var(--app-radius-pill);padding:var(--app-space-1) var(--app-space-2);background:var(--app-scrim);color:var(--app-white);font:var(--app-weight-bold) var(--app-caption-size)/var(--app-caption-line) var(--app-font)}
+.og-nearby-card-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);padding-top:var(--app-space-2)}
+.og-nearby-overlay .og-nearby-card-heading h3{margin:0;min-width:0;overflow-wrap:anywhere;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line)}
+.og-nearby-card-heading .og-button{flex:none;padding-inline:0}
+.og-nearby-overlay .og-nearby-promotion{color:var(--app-text-primary)}
+.og-nearby-empty{height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--app-space-3);text-align:center}
+.og-nearby-empty>.material-icons{font-size:var(--app-space-8);color:var(--app-text-secondary)}
+
+.og-nearby-overlay .og-sheet-header h2{display:flex;align-items:center;gap:var(--app-space-3)}
+.og-nearby-overlay .og-sheet-header h2 .material-icons{font-size:var(--app-icon-size)}
+
+.og-nearby-overlay .og-sheet-header h2{width:100%;justify-content:flex-start;flex-wrap:nowrap;white-space:nowrap}
+.og-nearby-overlay .og-sheet-header h2 .material-icons{width:var(--app-icon-size);flex:0 0 var(--app-icon-size)}
+.og-nearby-overlay .og-sheet-header h2>span:last-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:left}

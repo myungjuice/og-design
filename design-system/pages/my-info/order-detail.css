@@ -1,0 +1,30 @@
+/* Hallmark · existing OG soft dimensional blue · order summary / menu list
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · static legacy states */
+@import url("./my-info.css");
+@import url("../../components/badges/badges.css");
+.og-order-detail{width:100%;min-height:800px;display:flex;flex-direction:column;background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font);border:var(--app-border-width) solid var(--app-edge);font-variant-numeric:tabular-nums}
+.og-order-detail .og-app-bar{background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-order-body{display:grid;gap:var(--app-space-3);padding:var(--app-space-4);align-content:start;flex:1}
+.og-order-store-image .og-thumbnail{height:150px;aspect-ratio:auto;border-radius:var(--app-radius-md)}
+.og-order-detail h3{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-order-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--app-space-2)}
+.og-order-heading h3{min-width:0}
+.og-order-heading .og-badge{flex:none}
+.og-order-summary dl{display:grid;gap:var(--app-space-3);margin:var(--app-space-4) 0 0}
+.og-order-summary dl>div{display:flex;justify-content:space-between;align-items:baseline;gap:var(--app-space-2);padding:0;border:0}
+.og-order-summary dt,.og-order-summary dd{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}
+.og-order-summary dt{flex:none}
+.og-order-summary dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.og-order-summary dd strong{color:var(--app-text-primary);font-size:var(--app-body-1-size);font-weight:var(--app-weight-bold)}
+.og-order-menus ul{list-style:none;padding:0;margin:var(--app-space-4) 0 0}
+.og-order-menu{display:flex;gap:var(--app-space-3);align-items:stretch;padding:var(--app-space-4) 0}
+.og-order-menu:first-child{padding-top:0}
+.og-order-menu:last-child{padding-bottom:0}
+.og-order-menu+.og-order-menu{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-order-menu-image .og-thumbnail{width:var(--app-space-16);border-radius:var(--app-radius-md)}
+.og-order-menu-copy{flex:1;min-width:0;overflow-wrap:anywhere}
+.og-order-menu h4{margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold)}
+.og-order-menu p{margin:var(--app-space-1) 0 0;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-order-menu-total{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line);white-space:nowrap}
+.og-order-actions{padding:var(--app-space-4);background:var(--app-surface);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-order-actions .og-button{width:100%;white-space:nowrap}

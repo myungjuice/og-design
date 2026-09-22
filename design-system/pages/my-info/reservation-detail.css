@@ -1,0 +1,42 @@
+/* Hallmark · existing OG soft dimensional blue · P4 H4 E4 S5 R5 V4
+ * Legacy reservation detail structure and exact guidance; no app interactions. */
+@import url("./my-info.css");
+.og-reservation-detail{width:100%;background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font);border:var(--app-border-width) solid var(--app-edge)}
+.og-reservation-detail .og-app-bar{background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-reservation-body{display:grid;gap:var(--app-space-4);padding:var(--app-space-4)}
+.og-reservation-store{display:flex;align-items:center;gap:var(--app-space-3)}
+.og-reservation-store>div{flex:1;min-width:0}
+.og-reservation-store-title{display:flex;align-items:center;gap:var(--app-space-2);justify-content:space-between;flex-wrap:wrap}
+.og-reservation-detail h3{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-reservation-store-icon{display:grid;place-items:center;flex:none;width:var(--app-space-12);height:var(--app-space-12);border-radius:var(--app-radius-pill);background:var(--app-info-surface);color:var(--app-action)}
+.og-reservation-phone{display:flex;align-items:center;gap:var(--app-space-1);min-height:var(--app-touch-min);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-reservation-phone .material-icons{font-size:var(--app-icon-sm)}
+.og-reservation-steps{display:flex;list-style:none;margin:0;padding:var(--app-space-3) 0}
+.og-reservation-steps li{position:relative;display:flex;flex:1;flex-direction:column;align-items:center;gap:var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-reservation-steps li+li::before{content:"";position:absolute;height:var(--app-space-1);top:var(--app-space-3);width:calc(100% - var(--app-space-8));right:calc(50% + var(--app-space-4));background:var(--app-control-border)}
+.og-reservation-steps li[data-complete="true"]{color:var(--app-action)}
+.og-reservation-steps li[data-complete="true"]::before{background:var(--app-action)}
+.og-reservation-step-dot{display:grid;place-items:center;width:calc(var(--app-space-6) + var(--app-space-1));height:calc(var(--app-space-6) + var(--app-space-1));border:var(--app-border-width) solid var(--app-control-border);border-radius:var(--app-radius-pill);background:var(--app-surface)}
+.og-reservation-steps [data-complete="true"] .og-reservation-step-dot{border-color:var(--app-action)}
+.og-reservation-steps [aria-current="step"] .og-reservation-step-dot{background:var(--app-action);color:var(--app-on-action)}
+.og-reservation-step-dot .material-icons{font-size:var(--app-icon-sm)}
+.og-reservation-info dl{display:grid;gap:var(--app-space-4);padding:0;margin:var(--app-space-4) 0 0}
+.og-reservation-info dl>div{display:flex;align-items:center;gap:var(--app-space-3)}
+.og-reservation-info dl>div>div{min-width:0}
+.og-reservation-info .material-icons{font-size:var(--app-icon-sm);color:var(--app-text-secondary)}
+.og-reservation-info dt{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-reservation-info dd{color:var(--app-text-primary);margin:var(--app-space-1) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium);overflow-wrap:anywhere}
+.og-reservation-notice{background:var(--app-info-surface);box-shadow:var(--app-shadow-none)}
+.og-reservation-notice h3{display:flex;align-items:center;gap:var(--app-space-2);font-size:var(--app-body-2-size)}
+.og-reservation-notice h3 .material-icons{font-size:var(--app-icon-sm)}
+.og-reservation-notice ul{padding-left:var(--app-space-4);margin:var(--app-space-2) 0 0;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);word-break:keep-all}
+.og-reservation-notice li+li{margin-top:var(--app-space-1)}
+.og-reservation-actions{display:flex;align-items:center;gap:var(--app-space-3);padding:var(--app-space-4);background:var(--app-surface);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-reservation-actions .og-button{flex:1;min-width:0;white-space:nowrap}
+
+.og-reservation-info dl>div{padding:0;border:0;justify-content:flex-start}
+.og-reservation-info dl>div>div{display:block;padding:0;border:0;text-align:left}
+.og-reservation-info dt,.og-reservation-info dd{text-align:left}
+.og-reservation-notice h3{justify-content:flex-start}
+
+.og-reservation-notice h3 .material-icons{width:var(--app-icon-sm);height:var(--app-icon-sm);flex:none}

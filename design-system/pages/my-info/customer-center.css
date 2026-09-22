@@ -1,0 +1,20 @@
+/* Hallmark · existing OG system · contact and location layout
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · restrained shared card depth */
+@import url("./my-info.css");
+.og-customer-center{display:flex;flex-direction:column;width:100%;height:800px;overflow:clip;border:var(--app-border-width) solid var(--app-edge);background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-customer-center>.og-app-bar{flex:none;background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-customer-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--app-space-4)}
+.og-customer-card{padding:var(--app-space-4)}
+.og-customer-card+.og-customer-card{margin-top:var(--app-space-4)}
+.og-customer-card .og-section-heading{margin-bottom:var(--app-space-3)}
+.og-customer-contact{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2);min-width:0}
+.og-customer-contact+.og-customer-contact{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-customer-contact p{flex:1;min-width:0;margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);overflow-wrap:anywhere}
+.og-customer-contact .og-text-button{flex:none;white-space:nowrap}
+.og-customer-map{height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--app-space-2);border-radius:var(--app-radius-md);overflow:clip;background:var(--app-selected);color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-customer-map .material-icons{font-size:var(--app-icon-lg);color:var(--app-action)}
+.og-customer-map img{width:100%;height:100%;object-fit:cover}
+.og-customer-company{padding:var(--app-space-6) 0 var(--app-space-2);font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary);word-break:keep-all;overflow-wrap:anywhere}
+.og-customer-company strong{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);color:var(--app-text-primary)}
+.og-customer-company p{margin:var(--app-space-1) 0 0}
+.og-customer-company strong+p{margin-top:var(--app-space-2)}

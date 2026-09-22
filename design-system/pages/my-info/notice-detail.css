@@ -1,0 +1,22 @@
+/* Hallmark · existing OG system · document layout with quiet header depth
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · no invented app actions */
+@import url("./my-info.css");
+.og-notice-detail{display:flex;flex-direction:column;width:100%;height:800px;overflow:clip;background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font);border:var(--app-border-width) solid var(--app-edge)}
+.og-notice-detail-header{flex:none;background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge);box-shadow:var(--app-shadow-card)}
+.og-notice-detail .og-app-bar{grid-template-columns:var(--app-touch-min) minmax(0,1fr);align-items:start;padding-block:var(--app-space-2);gap:var(--app-space-2)}
+.og-notice-detail .og-app-bar h2{text-align:left;min-width:0;word-break:keep-all;overflow-wrap:anywhere;padding-block:var(--app-space-2);padding-right:var(--app-space-2)}
+.og-notice-detail .og-app-bar-spacer{display:none}
+.og-notice-dates{padding:0 var(--app-space-4) var(--app-space-4);text-align:right;font-variant-numeric:tabular-nums}
+.og-notice-dates p{margin:0;color:var(--app-text-secondary);font-size:var(--app-caption-size);line-height:var(--app-caption-line);overflow-wrap:anywhere}
+.og-notice-dates p+p{margin-top:var(--app-space-1)}
+.og-notice-article{flex:1;min-height:0;padding:var(--app-space-5) var(--app-space-4);overflow:auto;overscroll-behavior:contain;word-break:keep-all;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);overflow-wrap:anywhere}
+.og-notice-article p{margin:0 0 var(--app-space-4)}
+.og-notice-article :is(h1,h2,h3,h4){margin:var(--app-space-6) 0 var(--app-space-3);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold);font-style:normal}
+.og-notice-article>:first-child{margin-top:0}
+.og-notice-article :is(ul,ol){padding-left:var(--app-space-5);margin:var(--app-space-4) 0}
+.og-notice-article li+li{margin-top:var(--app-space-2)}
+.og-notice-article strong{font-weight:var(--app-weight-bold)}
+.og-notice-article a{color:var(--app-action);text-decoration:underline;text-underline-offset:var(--app-space-1)}
+.og-notice-article img{display:block;max-width:100%;height:auto}
+.og-notice-article table{max-width:100%;border-collapse:collapse}
+.og-notice-article :is(th,td){padding:var(--app-space-2);border:var(--app-border-width) solid var(--app-edge)}

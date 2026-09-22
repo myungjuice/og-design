@@ -1,0 +1,24 @@
+/* Hallmark · existing OG review section · soft 3D · P4 H4 E4 S5 R5 V4 */
+@import url('./store.css');
+@import url('../../components/surfaces/surfaces.css');
+@import url('../../components/section-heading/section-heading.css');
+.og-store-reviews{padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-praise-row{position:relative;display:flex;align-items:center;gap:var(--app-space-3);height:32px;margin-top:var(--app-space-2);padding-left:var(--app-space-3);background:var(--app-background);border-radius:var(--app-radius-sm);overflow:clip;font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-praise-fill{position:absolute;inset:0 auto 0 0;width:calc(15px + var(--praise-ratio) * (100% - 55px));opacity:var(--praise-opacity);background:var(--app-action);border-radius:var(--app-radius-sm) var(--app-radius-pill) var(--app-radius-pill) var(--app-radius-sm)}
+.og-praise-row>.material-icons{position:relative;font-size:18px;color:var(--app-action)}
+.og-praise-name{position:relative;flex:1;min-width:0;font-weight:var(--app-weight-bold);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.og-praise-row>strong{position:relative;width:40px;flex:none;text-align:center;color:var(--app-action)}
+.og-store-review-more{display:flex;align-items:center;justify-content:center;color:var(--app-action);margin-block:var(--app-space-2)}
+.og-store-review-more>.material-icons{font-size:var(--app-icon-sm)}
+.og-store-review-section{margin-top:var(--app-space-5);padding-top:var(--app-space-5);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-store-review-card+.og-store-review-card{margin-top:var(--app-space-3)}
+.og-store-review-author{display:flex;align-items:center;gap:var(--app-space-2)}
+.og-store-review-author>.og-avatar,.og-store-review-author>img{width:25px;height:25px;flex:none;border-radius:var(--app-radius-pill);object-fit:cover}
+.og-store-review-author>strong{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-store-review-author>time{flex:none;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--app-text-secondary)}
+.og-store-review-images{display:flex;gap:var(--app-space-2);overflow:auto;scrollbar-width:none;margin-top:var(--app-space-3)}
+.og-store-review-images>.og-thumbnail{width:120px;height:120px;flex:none;border-radius:var(--app-radius-sm)}
+.og-store-review-text{margin:var(--app-space-3) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);white-space:pre-line;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.og-store-review-empty{padding-block:var(--app-space-6);text-align:center;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary)}
+.og-store-review-empty p{margin:0 0 var(--app-space-5)}
+.og-store-review-empty p:first-child{display:flex;align-items:center;justify-content:center;gap:var(--app-space-3)}

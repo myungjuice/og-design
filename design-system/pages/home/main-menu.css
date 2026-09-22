@@ -1,0 +1,11 @@
+/* Hallmark · existing OG menu rows · P4 H4 E4 S5 R5 V4 */
+@import url('./store.css');
+@import url('../../components/section-heading/section-heading.css');
+.og-main-menu{padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-main-menu-row{display:flex;align-items:center;gap:var(--app-space-4);padding-block:var(--app-space-3);min-height:104px}
+.og-main-menu-row+.og-main-menu-row{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-main-menu-copy{flex:1;min-width:0}
+.og-main-menu-copy h4{margin:0;font:var(--app-weight-bold) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);overflow-wrap:anywhere}
+.og-main-menu-description{margin:var(--app-space-1) 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-main-menu-price{margin:var(--app-space-2) 0 0;font:var(--app-weight-bold) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font)}
+.og-main-menu-row>.og-thumbnail{flex:none;width:93px;height:93px;border-radius:var(--app-radius-sm)}

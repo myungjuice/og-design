@@ -1,0 +1,39 @@
+/* Hallmark · existing OG system · FAQ cards and question list
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · static states, no new app actions */
+@import url("./my-info.css");
+@import url("../../components/list-row/list-row.css");
+.og-faq{display:flex;flex-direction:column;width:100%;height:800px;overflow:clip;background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font);border:var(--app-border-width) solid var(--app-edge)}
+.og-faq>.og-app-bar{flex:none;background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-faq-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.og-faq-best{padding:var(--app-space-5) var(--app-space-4);background:var(--app-gradient-header)}
+.og-faq-best>h3{margin:0 0 var(--app-space-3);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
+.og-faq-carousel{display:flex;gap:var(--app-space-3);overflow:auto;padding-bottom:var(--app-space-2);scrollbar-width:none}
+.og-faq-best-card{flex:0 0 calc((100% - var(--app-space-3))/2);min-width:0;padding:0;overflow:clip}
+.og-faq-best-card button{display:flex;flex-direction:column;gap:var(--app-space-2);width:100%;min-height:156px;padding:var(--app-space-4) var(--app-space-3);border:0;background:transparent;text-align:left;color:inherit;font-family:inherit;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all;overflow-wrap:anywhere}
+.og-faq-best-card strong,.og-faq-best-answer>strong{color:var(--app-action);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}
+.og-faq-best-card.is-selected{background:var(--app-action);color:var(--app-on-action)}
+.og-faq-best-card.is-selected strong{color:inherit}
+.og-faq-dots{display:flex;justify-content:center;gap:var(--app-space-2);padding-top:var(--app-space-3)}
+.og-faq-dots span{width:var(--app-space-2);height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--app-edge)}
+.og-faq-dots .is-current{background:var(--app-action)}
+.og-faq-best-answer{margin-top:var(--app-space-4);padding:var(--app-space-4)}
+.og-faq-tag{margin:var(--app-space-2) 0;color:var(--app-text-secondary);font-size:var(--app-caption-size);line-height:var(--app-caption-line)}
+.og-faq-best-answer h3{margin:0 0 var(--app-space-3);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-action)}
+.og-faq-copy{border-top:var(--app-border-width) solid var(--app-edge);padding-top:var(--app-space-3)}
+.og-faq-copy,.og-faq-answer{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);word-break:keep-all;overflow-wrap:anywhere}
+.og-faq :is(.og-faq-copy,.og-faq-answer) p{margin:0}
+.og-faq :is(.og-faq-copy,.og-faq-answer) p+p{margin-top:var(--app-space-3)}
+.og-faq-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-border-width);padding:var(--app-border-width);background:var(--app-edge)}
+.og-faq-categories>*{min-width:0;min-height:var(--app-touch-min);padding:var(--app-space-3) var(--app-space-2);border:0;background:var(--app-surface);font-family:inherit;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium);color:var(--app-text-primary);overflow-wrap:anywhere}
+.og-faq-categories>[aria-pressed="true"]{background:var(--app-action);color:var(--app-on-action)}
+.og-faq-questions{background:var(--app-surface)}
+.og-faq-item+.og-faq-item{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-faq-question{width:100%;align-items:start;padding:var(--app-space-4);gap:var(--app-space-2)}
+.og-faq-question .og-row-icon{width:auto;height:auto;background:none;color:var(--app-action);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold)}
+.og-faq-question .og-row-title{font-weight:var(--app-weight-regular)}
+.og-faq-question[aria-expanded="true"] .og-row-title{font-weight:var(--app-weight-bold)}
+.og-faq-question .og-row-chevron{transform:rotate(90deg)}
+.og-faq-question[aria-expanded="true"] .og-row-chevron{transform:rotate(-90deg)}
+.og-faq-answer{display:flex;align-items:start;gap:var(--app-space-2);padding:var(--app-space-4);background:var(--app-background)}
+.og-faq-answer>strong{color:var(--app-brand-violet);flex:none}
+.og-faq-answer>div{min-width:0}

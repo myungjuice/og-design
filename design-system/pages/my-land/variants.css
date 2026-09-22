@@ -1,0 +1,77 @@
+/* Hallmark · OG comparison layouts: small plaza / attendance desk / game lounge
+ * Existing OG tokens; same content and static controls. P4 H4 E4 S4 R4 V5. */
+.og-myland-variant[data-variant="plaza"]{background:var(--app-header-start)}
+.og-myland-variant[data-variant="plaza"]>.og-app-bar{background:var(--app-header-start)}
+.og-myland-plaza-stage{position:relative;isolation:isolate;background:var(--app-header-start);overflow:clip}
+.og-myland-plaza-stage .og-myland-hero{min-height:292px;align-items:flex-start;background:transparent;padding-top:var(--app-space-2)}
+.og-myland-plaza-stage .og-myland-hero-copy{max-width:none}
+.og-myland-plaza-stage .og-myland-hero h3{font-size:var(--app-title-1-size);margin-block:var(--app-space-1)}
+.og-myland-plaza-stage .og-myland-hero p{position:absolute;left:0;top:78px;white-space:nowrap;background:var(--app-white);box-shadow:var(--app-shadow-menu)}
+.og-myland-plaza-stage .og-myland-art{bottom:28px;right:var(--app-space-5)}
+.og-myland-plaza-stage .og-myland-plinth{width:198px;height:52px;left:-8px;background:var(--app-white)}
+.og-myland-plaza-stage .og-myland-calendar-object{transform:rotate(-6deg) skewY(3deg)}
+.og-myland-scenery{position:absolute;inset:0;z-index:var(--app-z-content);pointer-events:none}
+.og-myland-arch{position:absolute;left:32px;bottom:58px;width:68px;height:106px;border:14px solid var(--app-white);border-bottom:0;border-radius:44px 44px 0 0;transform:skewY(-6deg);box-shadow:6px 4px 0 var(--primary03),12px 9px 14px var(--app-shadow-color)}
+.og-myland-arch>span{position:absolute;left:0;right:0;top:4px;text-align:center;color:var(--app-action);font-size:var(--app-label-size);font-weight:var(--app-weight-bold)}
+.og-myland-tree{position:absolute;width:24px;height:44px;bottom:44px;left:10px;background:var(--primary03);border-radius:50% 50% 40% 40%;box-shadow:inset -5px -3px 0 var(--primary04),5px 7px 10px var(--app-shadow-color)}
+.og-myland-tree:after{content:"";position:absolute;left:11px;bottom:-11px;height:18px;width:4px;background:var(--primary05);border-radius:2px}
+.og-myland-tree.is-right{left:auto;right:18px;bottom:65px;transform:scale(.8)}
+.og-myland-path{position:absolute;left:46px;bottom:14px;width:76px;height:24px;border-radius:50%;background:var(--app-white);transform:rotate(-16deg);box-shadow:2px 4px 0 var(--primary02)}
+.og-myland-variant[data-variant="plaza"] .og-myland-summary{border-radius:var(--app-radius-card);box-shadow:var(--app-shadow-card)}
+.og-myland-variant[data-variant="plaza"] .og-myland-attendance{margin-top:var(--app-space-5)}
+.og-myland-variant[data-variant="plaza"] .og-myland-game{background:var(--app-white)}
+.og-myland-variant[data-variant="plaza"] .og-myland-game.is-puzzle{background:var(--secondary01)}
+
+/* Calendar-first: the CTA is above the dates; game entries become short rows. */
+.og-myland-variant[data-variant="attendance"]{background:var(--app-surface)}
+.og-myland-variant[data-variant="attendance"] .og-myland-hero{min-height:104px;padding-block:var(--app-space-3)}
+.og-myland-variant[data-variant="attendance"] .og-myland-hero-copy{max-width:65%}
+.og-myland-variant[data-variant="attendance"] .og-myland-hero h3{font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);margin-block:var(--app-space-1)}
+.og-myland-variant[data-variant="attendance"] .og-myland-art{transform:scale(.5);transform-origin:right bottom;right:var(--app-space-5);bottom:var(--app-space-3)}
+.og-myland-variant[data-variant="attendance"] .og-myland-attendance{display:flex;flex-direction:column;position:relative;margin-top:var(--app-space-2);padding-top:var(--app-space-6);background:var(--app-background);box-shadow:0 4px 0 var(--app-edge);border:var(--app-border-width) solid var(--app-edge)}
+.og-myland-variant[data-variant="attendance"] .og-myland-attendance:before,.og-myland-variant[data-variant="attendance"] .og-myland-attendance:after{content:"";position:absolute;top:-9px;left:24px;width:8px;height:17px;border:2px solid var(--app-white);background:var(--gray04);border-radius:var(--app-radius-pill)}
+.og-myland-variant[data-variant="attendance"] .og-myland-attendance:after{left:auto;right:24px}
+.og-myland-variant[data-variant="attendance"] .og-myland-attendance .og-section-heading{order:0}
+.og-myland-variant[data-variant="attendance"] .og-myland-checkin{order:1;margin-bottom:var(--app-space-3)}
+.og-myland-variant[data-variant="attendance"] .og-myland-weekdays{order:2}
+.og-myland-variant[data-variant="attendance"] .og-myland-calendar{order:3}
+.og-myland-variant[data-variant="attendance"] .og-myland-day{height:46px}
+.og-myland-variant[data-variant="attendance"] .og-myland-day.is-attended{background:var(--app-surface)}
+.og-myland-variant[data-variant="attendance"] .og-myland-summary{margin-top:var(--app-space-6);padding-block:var(--app-space-5);border-block:var(--app-border-width) solid var(--app-edge);border-radius:0;box-shadow:none}
+.og-myland-variant[data-variant="attendance"] .og-myland-games{grid-template-columns:minmax(0,1fr);margin-top:var(--app-space-6);gap:var(--app-space-2)}
+.og-myland-variant[data-variant="attendance"] .og-myland-game{min-height:92px;box-shadow:none;background:var(--primary01);padding-left:var(--app-space-5)}
+.og-myland-variant[data-variant="attendance"] .og-myland-game.is-puzzle{background:var(--secondary01)}
+.og-myland-variant[data-variant="attendance"] .og-myland-game>.material-icons{left:auto;right:var(--app-space-4);bottom:36px}
+.og-myland-variant[data-variant="attendance"] .og-myland-wheel{right:56px;bottom:16px;width:56px;height:56px}
+.og-myland-variant[data-variant="attendance"] .og-myland-puzzle{right:56px;bottom:14px}
+.og-myland-variant[data-variant="attendance"] .og-myland-puzzle>.material-icons{font-size:60px}
+
+/* Game lounge: game entry precedes the balance strip and compact calendar. */
+.og-myland-variant[data-variant="lounge"]{background:var(--app-surface)}
+.og-myland-variant[data-variant="lounge"] .og-myland-hero{min-height:156px;padding-top:var(--app-space-4)}
+.og-myland-variant[data-variant="lounge"] .og-myland-hero-copy{max-width:50%}
+.og-myland-variant[data-variant="lounge"] .og-myland-calendar-object,.og-myland-variant[data-variant="lounge"] .og-myland-plinth{display:none}
+.og-myland-variant[data-variant="lounge"] .og-myland-art{right:var(--app-space-6);bottom:var(--app-space-3);width:150px;height:120px}
+.og-myland-variant[data-variant="lounge"] .og-myland-ticket-object{width:124px;min-height:80px;right:8px;bottom:18px;transform:rotate(-12deg);padding:var(--app-space-4);gap:var(--app-space-2);background:var(--app-gradient-menu);color:var(--app-action);box-shadow:5px 6px 0 var(--primary03),10px 15px 16px var(--app-shadow-color)}
+.og-myland-variant[data-variant="lounge"] .og-myland-ticket-object>strong{font-size:var(--app-title-1-size)}
+.og-myland-variant[data-variant="lounge"] .og-myland-ticket-object>span:last-child{color:var(--app-text-secondary);border-color:var(--app-edge)}
+.og-myland-variant[data-variant="lounge"] .og-myland-games{margin-top:0;gap:var(--app-space-3)}
+.og-myland-variant[data-variant="lounge"] .og-myland-game{min-height:202px;padding:var(--app-space-5);background:var(--primary08);color:var(--app-white);box-shadow:none}
+.og-myland-variant[data-variant="lounge"] .og-myland-game h3{font-size:var(--app-title-1-size);line-height:var(--app-title-1-line)}
+.og-myland-variant[data-variant="lounge"] .og-myland-game p{color:var(--primary02)}
+.og-myland-variant[data-variant="lounge"] .og-myland-game.is-puzzle{background:var(--secondary02);color:var(--app-text-primary)}
+.og-myland-variant[data-variant="lounge"] .og-myland-game.is-puzzle p{color:var(--secondary08)}
+.og-myland-variant[data-variant="lounge"] .og-myland-wheel{width:88px;height:88px;bottom:22px;right:16px;border-width:7px;box-shadow:3px 5px 0 var(--primary05)}
+.og-myland-variant[data-variant="lounge"] .og-myland-puzzle{right:var(--app-space-4);bottom:var(--app-space-5)}
+.og-myland-variant[data-variant="lounge"] .og-myland-puzzle>.material-icons{font-size:94px}
+.og-myland-variant[data-variant="lounge"] .og-myland-game>.material-icons{left:auto;right:var(--app-space-4);top:var(--app-space-5);bottom:auto}
+.og-myland-variant[data-variant="lounge"] .og-myland-summary{background:var(--app-background);box-shadow:none;padding-block:var(--app-space-4)}
+.og-myland-variant[data-variant="lounge"] .og-myland-attendance{margin-top:var(--app-space-6);padding:var(--app-space-2) var(--app-space-2) var(--app-space-5);border-bottom:var(--app-border-width) solid var(--app-edge);border-radius:0;box-shadow:none}
+.og-myland-variant[data-variant="lounge"] .og-myland-day{height:36px}
+.og-myland-variant[data-variant="lounge"] .og-myland-checkin{background:var(--app-selected);color:var(--app-action);border-color:var(--primary03)}
+.og-myland-variant[data-variant="lounge"] .og-myland-missions{margin-top:var(--app-space-5)}
+
+/* Fifth option: original composition, same header/background tokens as My Info. */
+.og-myland-variant[data-variant="blue-header"] .og-myland-blue-header{background:var(--app-gradient-header)}
+.og-myland-variant[data-variant="blue-header"] .og-myland-blue-header>.og-app-bar,
+.og-myland-variant[data-variant="blue-header"] .og-myland-hero{background:transparent}

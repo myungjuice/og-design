@@ -1,0 +1,36 @@
+/* Hallmark · OG soft blue · review composition form
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · static states, legacy labels */
+@import url("./my-info.css");
+@import url("../../components/input/input.css");
+@import url("../../components/dialog/dialog.css");
+.og-review-write{position:relative;width:100%;height:800px;display:flex;flex-direction:column;overflow:clip;background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-review-write>.og-app-bar{flex:none;background:var(--app-surface);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-write-body{flex:1;min-height:0;overflow:auto;padding:var(--app-space-3)}
+.og-write-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2);margin-bottom:var(--app-space-2)}
+.og-write-heading h3{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}
+.og-write-inline{gap:var(--app-space-1);padding-inline:var(--app-space-2);background:transparent;border-color:transparent;white-space:nowrap}
+.og-write-inline>.material-icons{font-size:var(--app-icon-sm)}
+.og-write-body>.og-field{margin-bottom:var(--app-space-4)}
+.og-write-body>.og-field>label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.og-write-body .og-field-footer{display:none}
+.og-write-body textarea{resize:none;min-height:0;height:auto;padding:var(--app-space-3);font-size:var(--app-body-1-size);line-height:var(--app-body-1-line)}
+.og-write-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:var(--app-space-6) var(--app-space-3);padding:var(--app-space-3);min-height:calc(var(--app-space-16)*3)}
+.og-write-photo{position:relative;min-width:0;aspect-ratio:1}
+.og-write-photo>.og-thumbnail{width:100%;height:100%;border-radius:var(--app-radius-md)}
+.og-write-photo.is-selected{border-radius:var(--app-radius-md);box-shadow:var(--app-shadow-card)}
+.og-write-delete{position:absolute;top:0;right:0;color:var(--app-on-action)}
+.og-write-delete>.material-icons{display:grid;place-items:center;width:var(--app-space-8);height:var(--app-space-8);background:var(--app-error);border-radius:var(--app-radius-pill);font-size:var(--app-icon-sm)}
+.og-write-footer{flex:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--app-space-3);padding:var(--app-space-3);background:var(--app-surface);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-write-footer>.og-button{min-width:0;padding-inline:var(--app-space-2);white-space:nowrap}
+.og-write-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--app-space-4);background:var(--app-scrim)}
+.og-write-overlay>.og-dialog-panel{position:relative;width:100%;min-width:0}
+.og-write-overlay .og-dialog-title{padding-right:var(--app-space-8)}
+.og-write-help-close{position:absolute;top:var(--app-space-3);right:var(--app-space-3)}
+.og-write-help h4{display:flex;align-items:center;gap:var(--app-space-2);margin:var(--app-space-5) 0 var(--app-space-2);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-write-help h4>.material-icons{font-size:var(--app-icon-sm);color:var(--app-text-secondary)}
+.og-write-help p{margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--app-text-secondary);word-break:keep-all}
+.og-write-overlay .og-dialog-actions:empty{display:none}
+.og-write-overlay.is-source{align-items:flex-end}
+.og-write-source{width:100%;padding:var(--app-space-2)}
+.og-write-source>.og-text-button{display:flex;width:100%;min-height:var(--app-control-lg)}
+.og-write-source>.og-text-button+.og-text-button{border-top:var(--app-border-width) solid var(--app-edge);border-radius:0}

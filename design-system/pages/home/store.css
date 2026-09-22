@@ -1,0 +1,27 @@
+/* Hallmark · existing OG store overview · P4 H4 E4 S5 R5 V4 */
+@import url('./home.css');
+@import url('../../components/avatar/avatar.css');
+.og-store{width:100%;height:800px;display:flex;flex-direction:column;overflow:clip;background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-store-toolbar{display:flex;align-items:center;justify-content:space-between;flex:none;padding:var(--app-space-2)}
+.og-store-toolbar>div{display:flex;align-items:center;gap:var(--app-space-1)}
+.og-store-toolbar .og-store-bookmarked{color:var(--app-error)}
+.og-store-identity{display:flex;align-items:flex-start;gap:var(--app-space-3);padding:var(--app-space-3) var(--app-space-4) var(--app-space-5)}
+.og-store-logo{flex:none;object-fit:contain;margin-top:var(--app-space-1);border-radius:var(--app-radius-sm)}
+.og-store-identity-copy{flex:1;min-width:0}
+.og-store-name{display:flex;align-items:baseline;gap:var(--app-space-2);flex-wrap:wrap}
+.og-store-name h2{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-store-name>span,.og-store-identity p{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-store-identity p{margin:var(--app-space-1) 0 0;overflow-wrap:anywhere}
+.og-store-status{display:flex;gap:var(--app-space-2);align-items:center;flex-wrap:wrap}
+.og-store-status strong{color:var(--app-text-primary)}
+.og-store-event{display:flex;flex-direction:column;align-items:center;flex:none;font-size:var(--app-caption-size);color:var(--app-warning)}
+.og-store .og-store-tabs{flex:none;gap:var(--app-space-5);overflow-x:auto;scrollbar-width:none;padding-inline:var(--app-space-4);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-store-tabs [role="tab"]{flex:none;white-space:nowrap}
+.og-store-body{overflow:auto;min-height:0;padding-top:var(--app-space-4)}
+.og-store-photo{position:relative;margin-inline:var(--app-space-4);aspect-ratio:1}
+.og-store-photo .og-thumbnail{height:100%;width:100%;border-radius:var(--app-radius-xl)}
+.og-store-photo .og-thumbnail img{height:100%;width:100%;object-fit:cover}
+.og-store-count{position:absolute;right:var(--app-space-4);bottom:var(--app-space-4);background:var(--app-scrim);color:var(--app-white);padding:var(--app-space-1) var(--app-space-2);border-radius:var(--app-radius-pill);font-size:var(--app-caption-size)}
+.og-store-promotion{padding:var(--app-space-8) var(--app-space-4)}
+.og-store-promotion h3{margin:0 0 var(--app-space-3);font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);overflow-wrap:anywhere}
+.og-store-promotion p{margin:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}

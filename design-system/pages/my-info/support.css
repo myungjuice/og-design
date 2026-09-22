@@ -1,0 +1,13 @@
+/* Hallmark · existing OG soft 3D · common menu tiles in two columns
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · legacy labels and visibility */
+@import url("./mileage-history.css");
+@import url("../../components/sheet/sheet.css");
+@import url("../../components/dialog/dialog.css");
+.og-support>.og-sheet-panel>.og-sheet-body{background:var(--app-background)}
+.og-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);padding:var(--app-space-4) 0}
+.og-support-grid .og-menu-tile{width:100%;min-width:0;min-height:calc(var(--app-space-10)*3);padding:var(--app-space-4) var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-support-grid .og-menu-tile>span:last-child{white-space:nowrap}
+.og-support-grid .og-menu-tile>.material-icons{font-size:var(--app-icon-size)}
+.og-support-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--app-scrim);padding:var(--app-space-4)}
+.og-support-overlay>.og-dialog-panel{width:100%;min-width:0}
+.og-support-overlay .og-dialog-body{white-space:pre-line;word-break:keep-all}

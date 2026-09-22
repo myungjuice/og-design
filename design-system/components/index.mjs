@@ -18,3 +18,7 @@ export * from './help/render.mjs';
 export * from './sheet/render.mjs';
 export * from './date-time/render.mjs';
 export * from './attachments/render.mjs';
+
+export {appBar,bottomNavigation} from './app-shell/render.mjs';
+
+export * from './pin-pad/render.mjs';

@@ -1,0 +1,22 @@
+/* Hallmark · existing OG menu detail · soft 3D · P4 H4 E4 S5 R5 V4 */
+@import url('./store.css');
+@import url('../../components/selection/selection.css');
+@import url('../../components/badges/badges.css');
+.og-menu-detail{display:flex;flex-direction:column;width:100%;height:800px;overflow:clip;background:var(--app-surface);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-menu-detail-photo{height:264px;flex:none;position:relative}
+.og-menu-detail-photo>.og-thumbnail{width:100%;height:100%;border-radius:0}
+.og-menu-detail-photo>.og-icon-button{position:absolute;left:var(--app-space-2);top:var(--app-space-2);background:var(--app-surface);border-radius:var(--app-radius-pill);box-shadow:var(--app-shadow-card)}
+.og-menu-detail-no-photo{height:100px;flex:none;padding:var(--app-space-2)}
+.og-menu-detail-heading{display:flex;align-items:flex-start;gap:var(--app-space-2);padding:var(--app-space-5) var(--app-space-4);border-bottom:var(--app-space-2) solid var(--app-background);flex:none}
+.og-menu-detail-heading>div{min-width:0;flex:1}
+.og-menu-detail-heading h2{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-menu-detail-heading p{margin:var(--app-space-2) 0 0;font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);overflow-wrap:anywhere}
+.og-menu-detail[data-scrolled="true"] .og-menu-detail-heading{align-items:center;padding-left:var(--app-space-2)}
+.og-menu-detail-body{padding:var(--app-space-5) var(--app-space-4);overflow:auto;min-height:0}
+.og-menu-detail-section-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);margin-bottom:var(--app-space-2)}
+.og-menu-detail-section-heading h3{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold)}
+.og-menu-detail-row{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-3);min-height:var(--app-touch-min);padding-block:var(--app-space-1)}
+.og-menu-detail-row>.og-choice{flex:1;padding-left:0}
+.og-menu-detail-row>strong{flex:none;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);white-space:nowrap}
+.og-menu-detail-price,.og-menu-detail-options{border-bottom:var(--app-border-width) solid var(--app-edge);padding-bottom:var(--app-space-3)}
+.og-menu-detail-options{padding-top:var(--app-space-6)}

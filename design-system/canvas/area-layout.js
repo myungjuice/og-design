@@ -1,45 +1,68 @@
-import {fit} from './canvas.js?v=20260918-reuse';
-/* Independent foundation and component boundaries; board offsets remain canvas-relative. */
-{
- const area=document.querySelector('#world');
- const makeRegion=(id,title,copy)=>{
-  const region=document.createElement('section');region.id=id;region.className='system-region';
-  region.setAttribute('aria-label',title);
-  region.innerHTML='<header class="system-area-heading"><h2>'+title+'</h2><p>'+copy+'</p></header>';
-  area.prepend(region);return region;
- };
- const foundations=makeRegion('foundation-region','기본 스타일','오지고랜드 디자인시스템');
- const components=makeRegion('component-region','컴포넌트','공통 UI · 상태별 예시');
- const boards=[...area.querySelectorAll('.board')];
- function arrange(){
-  const foundationBoards=boards.filter(b=>!['buttons','inputs','selection','tabs-chips','search','badges','avatar','surfaces','list-row','section-heading','progress','loading','feedback','help','quantity','sheet','dialogs','snackbar','date-time','attachments'].includes(b.id));
-  const componentBoards=boards.filter(b=>['buttons','inputs','selection','tabs-chips','search','badges','avatar','surfaces','list-row','section-heading','progress','loading','feedback','help','quantity','sheet','dialogs','snackbar','date-time','attachments'].includes(b.id));
-  const bottoms=[136,136,136,136];
-  for(const board of [...foundationBoards].sort((a,b)=>b.offsetHeight-a.offsetHeight)){
-   const column=bottoms.indexOf(Math.min(...bottoms));
-   board.style.left=(48+column*808)+'px';board.style.top=bottoms[column]+'px';
-   bottoms[column]+=board.offsetHeight+40;
-  }
-  const foundationHeight=Math.max(...bottoms)+8;
-  const componentBottoms=[136,136,136,136,136,136,136];
-  for(const board of [...componentBoards].sort((a,b)=>b.offsetHeight-a.offsetHeight)){
-   const column=componentBottoms.indexOf(Math.min(...componentBottoms));
-   board.style.left=(3432+column*808)+'px';board.style.top=componentBottoms[column]+'px';
-   componentBottoms[column]+=board.offsetHeight+40;
-  }
-  const componentBottom=Math.max(...componentBottoms);
-  // Derive region bounds from the same positioned boards; CSS cannot lag behind column changes.
-  const right=items=>Math.max(...items.map(b=>b.offsetLeft+b.offsetWidth))+48;
-  foundations.style.width=(right(foundationBoards)-foundations.offsetLeft)+'px';
-  components.style.width=(right(componentBoards)-components.offsetLeft)+'px';
-  area.style.width=Math.max(right(foundationBoards),right(componentBoards))+'px';
-  foundations.style.height=foundationHeight+'px';
-  components.style.height=(componentBottom+8)+'px';
-  area.style.height=Math.max(foundationHeight,componentBottom+8)+'px';
- }
- let pending=0;
- const observer=new ResizeObserver(()=>{cancelAnimationFrame(pending);pending=requestAnimationFrame(arrange);});
- boards.forEach(board=>observer.observe(board));
- arrange();
- window.addEventListener('load',async()=>{await document.fonts.ready;arrange();fit();},{once:true});
+import {activeCanvas} from './session.mjs';
+import {canvases} from './catalog.mjs';
+import {initializeReview} from './review.js?v=20260920-art-options';
+import {fit,focusBoard,focusReview,refreshBoardBounds,restoreView} from './canvas.js?v=20260919-partitions';
+const area=document.querySelector('#world');
+const pageGrid=['explore','store','my-info','my-land'].includes(activeCanvas);
+let pages=[],region,comparisons=[],comparisonRegion;
+if(activeCanvas==='my-info'){
+ const screens=await import('./screens.js?v=20260919-partitions');pages=screens.screenPages;region=screens.screenRegion;
+ const variants=await import('./mileage-variants.js?v=20260919-partitions');comparisons=variants.comparisonPages;comparisonRegion=variants.comparisonRegion;
+}else if(activeCanvas==='my-land'){
+ const land=await import('./my-land.js?v=20260920-art-options');pages=land.myLandPages;region=land.myLandRegion;
+}else if(['explore','store'].includes(activeCanvas)){
+ const home=await import('./home.js?v=20260920-art-options');pages=home.homePages;region=home.homeRegion;
+}else{
+ pages=[...area.querySelectorAll('.board')];
+ region=document.createElement('section');region.id=activeCanvas==='foundations'?'foundation-region':'component-region';region.className='system-region';
+ region.innerHTML='<header class="system-area-heading"><h2>'+canvases.find(c=>c.id===activeCanvas).title+'</h2></header>';area.prepend(region);
 }
+function arrange(){
+ const columns=activeCanvas==='components'?7:activeCanvas==='my-land'?8:4;
+ const bottoms=Array(columns).fill(136);
+ region.style.left='0px';region.style.top='0px';
+ // Hallmark: preserve page contents and reading order; align the tops of each row.
+ if(pageGrid){
+  let top=136;
+  for(let i=0;i<pages.length;i+=columns){
+   const row=pages.slice(i,i+columns);
+   row.forEach((page,col)=>{page.style.left=(48+col*808)+'px';page.style.top=top+'px';});
+   top+=Math.max(...row.map(page=>page.offsetHeight))+40;
+  }
+  bottoms.fill(top);
+ }else{
+  const ordered=[...pages].sort((a,b)=>b.offsetHeight-a.offsetHeight);
+  for(const page of ordered){const col=bottoms.indexOf(Math.min(...bottoms));page.style.left=(48+col*808)+'px';page.style.top=bottoms[col]+'px';bottoms[col]+=page.offsetHeight+40;}
+ }
+ const right=Math.max(...pages.map(p=>p.offsetLeft+p.offsetWidth))+48;
+ const bottom=Math.max(...bottoms)+8;
+ region.style.width=right+'px';region.style.height=bottom+'px';
+ let comparisonBottom=0;
+ if(comparisonRegion){
+  comparisonRegion.style.left='-1536px';comparisonRegion.style.top='0px';comparisonRegion.style.width='1488px';
+  comparisons.forEach((p,i)=>{p.style.left=(-1488+i*464)+'px';p.style.top='136px';});
+  comparisonBottom=184+Math.max(...comparisons.map(p=>p.offsetHeight));comparisonRegion.style.height=comparisonBottom+'px';
+ }
+ area.dataset.minX=comparisonRegion?'-1536':'0';area.style.width=right+'px';area.style.height=Math.max(bottom,comparisonBottom)+'px';
+ refreshBoardBounds();
+}
+let pending=0;
+const observer=new ResizeObserver(()=>{cancelAnimationFrame(pending);pending=requestAnimationFrame(arrange);});
+[...pages,...comparisons].forEach(p=>observer.observe(p));
+const initialize=async()=>{
+ await document.fonts.ready;initializeReview();
+ await new Promise(requestAnimationFrame);arrange();
+ let sameLayout=!pageGrid;
+ const layoutKey='og-design:canvas-layout:'+activeCanvas;
+ try{if(pageGrid)sameLayout=localStorage.getItem(layoutKey)==='main-pages-v2';}catch{}
+ const restored=restoreView();
+ if(!restored||!sameLayout){
+  const id=location.hash.slice(1),target=document.getElementById(id);
+  if(target?.matches('.screen-page,.board,.mileage-variant-page'))focusBoard(id);
+  else if(target)focusReview(id);else fit();
+ }
+ try{if(pageGrid)localStorage.setItem(layoutKey,'main-pages-v2');}catch{}
+ await new Promise(requestAnimationFrame);
+ document.querySelector('#viewport').setAttribute('aria-busy','false');document.querySelector('#canvas-loading').hidden=true;
+};
+await initialize();

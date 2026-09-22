@@ -1,0 +1,11 @@
+/* Hallmark · component: app shell · existing OG · P4 H4 E4 S5 R5 V4 */
+@import url("../shared.css");
+.og-app-bar{display:grid;grid-template-columns:var(--app-touch-min) minmax(0,1fr) var(--app-touch-min);align-items:center;min-height:var(--app-header-height);padding-inline:var(--app-space-2)}
+.og-app-bar h2{margin:0;text-align:center;font:var(--app-weight-bold) var(--app-title-2-size)/var(--app-title-2-line) var(--app-font);letter-spacing:var(--app-tracking-heading)}
+.og-app-notification{color:var(--app-action)}
+.og-app-bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:var(--app-space-1);padding:var(--app-space-2) var(--app-space-2) calc(var(--app-space-2) + var(--app-safe-bottom));border-top:var(--app-border-width) solid var(--app-edge);background:var(--app-surface)}
+.og-app-bottom-nav button{position:relative;height:var(--app-control-lg);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:var(--app-space-1);min-height:var(--app-touch-min);min-width:0;padding:var(--app-space-1) 0;border:0;border-radius:0;background:transparent;color:var(--app-text-secondary);font:var(--app-weight-regular) var(--app-caption-size)/var(--app-caption-line) var(--app-font);white-space:nowrap}
+.og-app-bottom-nav .material-icons{font-size:var(--app-icon-size);line-height:1}
+.og-app-bottom-nav button[aria-current="page"]{color:var(--app-action);font-weight:var(--app-weight-bold)}
+.og-app-bottom-nav .og-app-barcode>.material-icons{position:absolute;bottom:calc(var(--app-caption-line) + var(--app-space-2));display:grid;place-items:center;width:var(--app-control-lg);height:var(--app-control-lg);border-radius:var(--app-radius-pill);background:var(--app-gradient-brand);color:var(--app-on-action);box-shadow:var(--app-shadow-card)}
+.og-app-bottom-nav button:focus-visible{outline:var(--app-focus-width) solid var(--app-focus-ring);outline-offset:var(--app-focus-gap)}

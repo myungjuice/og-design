@@ -1,0 +1,22 @@
+/* Hallmark · existing OG system · grouped settings sheet
+ * pre-emit critique: P4 H4 E4 S5 R5 V4 · shared controls, legacy conditions */
+@import url("./mileage-history.css");
+@import url("../../components/sheet/sheet.css");
+@import url("../../components/selection/selection.css");
+@import url("../../components/list-row/list-row.css");
+@import url("../../components/dialog/dialog.css");
+.og-settings>.og-sheet-panel>.og-sheet-body{background:var(--app-background)}
+.og-settings-groups{display:flex;flex-direction:column;gap:var(--app-space-4);padding:var(--app-space-4) 0}
+.og-settings-group{padding:var(--app-space-4)}
+.og-settings-group .og-section-heading{margin-bottom:var(--app-space-2)}
+.og-settings-group .og-section-heading h3{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary)}
+.og-settings-group .og-choice,.og-settings-group .og-list-row{padding:var(--app-space-3) 0;min-height:var(--app-control-height);border-radius:0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-settings-group .og-choice-copy{min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+.og-settings-group .og-switch input{flex:none}
+.og-settings-group .og-list-row{flex-wrap:nowrap}
+.og-settings-group .og-list-row+.og-list-row,.og-settings-group .og-choice+.og-list-row,.og-settings-group .og-choice+.og-choice,.og-settings-group .og-list-row+.og-choice,.og-settings-location{border-top:var(--app-border-width) solid var(--app-edge)}
+.og-settings-location>.og-text-button{display:block;margin-top:calc(-1 * var(--app-space-2));white-space:nowrap}
+.og-settings-login .og-row-title{color:var(--app-action)}
+.og-settings-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--app-scrim);padding:var(--app-space-4)}
+.og-settings-overlay>.og-dialog-panel{width:100%;min-width:0}
+.og-settings-overlay .og-dialog-body{word-break:keep-all}

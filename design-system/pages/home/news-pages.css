@@ -1,0 +1,21 @@
+/* Hallmark · existing OG news reading pages · P4 H4 E4 S5 R5 V4 */
+@import url('./store-updates.css');
+@import url('../../components/surfaces/surfaces.css');
+.og-news-page{width:100%;height:800px;display:flex;flex-direction:column;overflow:clip;background:var(--app-background);font-family:var(--app-font);color:var(--app-text-primary)}
+.og-news-page>.og-app-bar{flex:none;background:var(--app-surface)}
+.og-news-page-body{min-height:0;flex:1;overflow:auto;padding:var(--app-space-4)}
+.og-news-list{min-height:100%;display:flex;flex-direction:column}
+.og-news-list>.og-update-row{flex:none}
+.og-news-empty{flex:1;min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--app-space-2)}
+.og-news-empty img{width:150px;height:150px;object-fit:contain}
+.og-news-empty p{margin:0;text-align:center;color:var(--app-text-secondary);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-news-registered{margin:0;text-align:right;color:var(--app-text-secondary);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-news-article>h3{margin:var(--app-space-6) 0 0;padding-bottom:var(--app-space-6);border-bottom:var(--app-border-width) solid var(--app-edge);text-align:center;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
+.og-news-contents{padding-top:var(--app-space-6);white-space:pre-wrap;overflow-wrap:anywhere;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.og-news-article>.og-thumbnail{margin-top:var(--app-space-6);width:100%;height:auto;border-radius:var(--app-radius-md)}
+.og-news-article>.og-thumbnail img{display:block;width:100%;height:auto;object-fit:contain}
+
+/* Reading pages keep one continuous surface; list cards remain unchanged. */
+.og-reading-page{background:var(--app-surface)}
+.og-reading-page>.og-app-bar{border-bottom:var(--app-border-width) solid var(--app-edge);box-shadow:var(--app-shadow-menu);position:relative;z-index:var(--app-z-sticky)}
+.og-reading-page .og-news-article{border:0;border-radius:0;box-shadow:none;background:transparent}

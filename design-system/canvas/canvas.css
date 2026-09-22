@@ -26,7 +26,8 @@ aside button:hover { color:var(--app-brand); }
 .aside-note strong { color:var(--app-ink); }
 .source { margin:12px;color:var(--app-brand);font-size:12px; }
 #viewport { flex:1;min-width:0;overflow:clip;position:relative;cursor:grab;touch-action:none;background-image:radial-gradient(var(--canvas-dot) 1px,transparent 1px);background-size:20px 20px; }
-#viewport.dragging,#viewport.dragging * { cursor:grabbing!important;user-select:none!important; }
+#canvas-drag-layer{position:absolute;inset:0;z-index:1000;cursor:grabbing;user-select:none;touch-action:none}
+#canvas-drag-layer[hidden]{display:none}
 #world { width:2144px;display:grid;grid-template-columns:repeat(4,500px);gap:48px;transform-origin:0 0;position:absolute; }
 .board { background:var(--app-white);padding:36px;min-height:850px;border:1px solid var(--app-edge);cursor:grab; }
 .board-heading { border-bottom:1px solid var(--app-edge);padding-bottom:24px;margin-bottom:28px; }
@@ -162,3 +163,20 @@ button { min-height:44px; }
 .gradient-stops i { display:block;width:20px;height:20px;border-radius:50%;border:1px solid var(--app-edge); }
 .gradient-stops span { color:var(--app-muted); }
 .gradient-spec pre { margin:16px 0 0;padding:16px;background:var(--app-background);white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:var(--app-body-2-line);user-select:text; }
+
+/* Hidden boards retain dimensions for stable layout and navigation. */
+#world>.canvas-offscreen{visibility:hidden;pointer-events:none;content-visibility:hidden;contain-intrinsic-block-size:var(--canvas-content-height)}
+
+#viewport[aria-busy="true"] #world{opacity:0;pointer-events:none}
+#canvas-loading{position:absolute;inset:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:var(--app-space-3);background:var(--canvas-paper);color:var(--app-text-secondary);font-size:var(--app-body-2-size)}
+#canvas-loading[hidden]{display:none}
+
+/* Canvas navigation is outside the transformed design surface. */
+.canvas-switcher{display:grid;gap:4px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--app-edge)}
+.canvas-switcher a{padding:10px 12px;border-radius:8px;color:var(--app-muted);text-decoration:none;font-size:13px;font-weight:600}
+.canvas-switcher a:hover{background:var(--primary01)}
+.canvas-switcher a:focus-visible{outline:2px solid var(--app-brand);outline-offset:2px}
+.canvas-switcher a[aria-current="page"]{background:var(--primary01);color:var(--app-brand)}
+.canvas-switcher .aside-label{margin-bottom:8px}
+.canvas-select{display:none}
+@media(max-width:768px){.canvas-select{display:block;max-width:150px}}

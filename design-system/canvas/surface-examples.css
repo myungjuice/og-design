@@ -1,0 +1,8 @@
+/* Hallmark · OG role-based surfaces · pre-emit critique: P4 H4 E4 S5 R5 V4 */
+.og-surface-example .og-home-top .og-field-control,
+.og-surface-example .og-home-filters .og-chip:not([aria-pressed="true"]),
+.og-surface-example .og-home-filters .og-icon-button,
+.og-surface-example .og-home-locate .og-icon-button,
+.og-surface-example .og-home-explore .og-button{background:var(--app-gradient-menu);border-bottom-color:var(--app-control-border);box-shadow:var(--app-shadow-card)}
+.og-surface-example .og-store-tabs{box-shadow:var(--app-shadow-menu)}
+.og-surface-example .og-store-photo{box-shadow:var(--app-shadow-card)}

@@ -24,3 +24,6 @@
 @import url("./date-time/date-time.css");
 @import url("./attachments/attachments.css");
 @import url("./input/variants.css");
+@import url("./app-shell/app-shell.css");
+
+@import url("./pin-pad/pin-pad.css");
