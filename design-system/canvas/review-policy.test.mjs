@@ -16,3 +16,19 @@ test('new boards and filled placeholders auto-enroll while earlier work stays un
  assert.equal(reviewState({id:'color',ready:true,saved:'pending'}),'pending');
  assert.equal(reviewState({id:'review-waiting-people',ready:true,initial:true}),'pending');
 });
+
+test('audited early screens have review provenance and enroll without resetting completion',async()=>{
+ const {reviewState}=await import('./review-policy.mjs');
+ const {reviewNotes}=await import('./review-notes.mjs');
+ for(const id of ['main','mileage','history','reservation-detail','reservation-change','waiting-detail']){
+  const key='my-info-'+id,initial=Boolean(reviewNotes['board-'+key]?.length);
+  assert.equal(reviewState({id:key,initial}),'pending',key);
+  assert.equal(reviewState({id:key,initial,saved:'done'}),'done',key);
+ }
+});
+test('compact mileage presents the unified balance label',async()=>{
+ const {mileage}=await import('../components/progress/render.mjs');
+ const html=mileage({total:16000,available:15000,max:20000,density:'compact'});
+ assert.ok(html.includes('<dt>보유 마일리지</dt>'));
+ assert.ok(!html.includes('총 보유'));
+});

@@ -1,9 +1,9 @@
 const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');const assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});try{
  const p=await b.newPage({viewport:{width:1440,height:1000}});
- await p.goto('http://127.0.0.1:4173/design-system/canvas/');await p.waitForFunction(()=>document.querySelector('#viewport')?.getAttribute('aria-busy')==='false');
+ await p.goto(''+(process.env.PREVIEW_URL||'http://127.0.0.1:4173')+'/design-system/canvas/');await p.waitForFunction(()=>document.querySelector('#viewport')?.getAttribute('aria-busy')==='false');
  await p.locator('#review-toggle').click();
- for(const key of ['settings','password','account','photo-review','review-write','services','character']){
+ for(const key of ['settings','password','account','photo-review','review-write','services','character','main','mileage','history','reservation-detail','reservation-change','waiting-detail','order-detail','review-history','notice-detail','faq','customer-center','policies','policy-detail']){
   const entry=p.locator('[data-review-row]').filter({has:p.locator('[data-review-go="board-my-info-'+key+'"]')});
   assert.equal(await entry.count(),1);assert.match(await entry.innerText(),/기획/);assert.match(await entry.innerText(),/기존 페이지/);assert.match(await entry.innerText(),/lib\//);
  }
