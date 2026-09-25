@@ -1,7 +1,7 @@
 import {boards,canvases,canvasFor} from './catalog.mjs';
 import {activeCanvas,navigateCanvas} from './session.mjs';
 import {focusReview} from './canvas.js?v=20260922-touch2';
-import {reviewNotes} from './review-notes.mjs?v=20260920-art-options';
+import {reviewNotes} from './review-notes.mjs?v=20260925-barcode';
 import {reviewState} from './review-policy.mjs';
 import {escapeHTML as e} from '../components/core.mjs';
 import {enrollSurfaceRollout,surfaceRolloutKey} from './surface-rollout.mjs';

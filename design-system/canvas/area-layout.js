@@ -3,11 +3,13 @@ import {canvases} from './catalog.mjs';
 import {initializeReview} from './review.js?v=20260922-touch2';
 import {fit,focusBoard,focusReview,refreshBoardBounds,restoreView} from './canvas.js?v=20260922-touch2';
 const area=document.querySelector('#world');
-const pageGrid=['explore','store','my-info','my-land'].includes(activeCanvas);
+const pageGrid=['explore','store','my-info','my-land','barcode'].includes(activeCanvas);
 let pages=[],region,comparisons=[],comparisonRegion;
 if(activeCanvas==='my-info'){
  const screens=await import('./screens.js?v=20260922-touch2');pages=screens.screenPages;region=screens.screenRegion;
  const variants=await import('./mileage-variants.js?v=20260922-touch2');comparisons=variants.comparisonPages;comparisonRegion=variants.comparisonRegion;
+}else if(activeCanvas==='barcode'){
+ const barcode=await import('./barcode.js?v=20260925-barcode');pages=barcode.barcodePages;region=barcode.barcodeRegion;
 }else if(activeCanvas==='my-land'){
  const land=await import('./my-land.js?v=20260922-touch2');pages=land.myLandPages;region=land.myLandRegion;
 }else if(['explore','store'].includes(activeCanvas)){

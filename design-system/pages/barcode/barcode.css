@@ -1,0 +1,23 @@
+/* Hallmark · existing OG soft blue · payment sheet · P4 H5 E4 S5 R5 V4 */
+.og-barcode-screen{position:relative;width:100%;height:800px;overflow:hidden;border:var(--app-border-width) solid var(--app-edge);background:var(--app-background);color:var(--app-text-primary);font-family:var(--app-font)}
+.og-barcode-backdrop{position:absolute;inset:0;pointer-events:none}
+.og-barcode-scrim{position:absolute;inset:0;background:var(--app-scrim)}
+.og-barcode-screen>.og-sheet-panel{position:absolute;bottom:0;left:0;right:0;max-height:90%;background:var(--app-background)}
+.og-barcode-screen .og-sheet-header{position:relative;padding-block:var(--app-space-2)}
+.og-barcode-screen .og-sheet-header:before{content:"";position:absolute;left:50%;top:var(--app-space-3);transform:translateX(-50%);width:var(--app-space-8);height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--app-edge)}
+.og-barcode-screen .og-sheet-header h2{flex:1}
+.og-barcode-screen .og-sheet-footer{display:none}
+.og-barcode-content{display:grid;gap:var(--app-space-4)}
+.og-barcode-balance,.og-barcode-card{padding:var(--app-space-4)}
+.og-barcode-bars{height:90px;width:100%;margin:var(--app-space-5) 0 var(--app-space-4);background:repeating-linear-gradient(90deg,var(--app-text-primary) 0 2px,transparent 2px 4px,var(--app-text-primary) 4px 5px,transparent 5px 9px,var(--app-text-primary) 9px 13px,transparent 13px 16px);border-inline:var(--app-space-3) solid var(--app-surface)}
+.og-barcode-number{display:grid;gap:var(--app-space-1);font-variant-numeric:tabular-nums}
+.og-barcode-number span{font-size:var(--app-label-size);color:var(--app-text-secondary)}
+.og-barcode-number strong{font-size:var(--app-body-2-size);font-weight:var(--app-weight-medium);letter-spacing:.04em}
+.og-barcode-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-2);margin-top:var(--app-space-6)}
+.og-barcode-actions>.og-button{min-width:0;padding-inline:var(--app-space-2);white-space:nowrap}
+.og-barcode-guide{justify-self:center;font-size:var(--app-label-size)}
+.og-barcode-guest{text-align:center}
+.og-barcode-guest p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);margin:var(--app-space-4) 0}
+.og-barcode-obscured{height:var(--app-space-16);overflow:hidden;opacity:.15;filter:blur(6px)}
+.og-barcode-guest>.og-button{width:100%}
+.og-barcode-example+.og-barcode-example{margin-top:var(--app-space-8);padding-top:var(--app-space-8);border-top:var(--app-border-width) solid var(--app-edge)}

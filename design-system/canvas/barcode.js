@@ -1,0 +1,12 @@
+import {barcodeBoard} from '../pages/barcode/render.mjs?v=20260925-barcode';
+import {focusBoard} from './canvas.js?v=20260922-touch2';
+export const barcodeRegion=document.createElement('section');
+barcodeRegion.id='barcode-region';barcodeRegion.className='system-region';
+barcodeRegion.innerHTML='<header class="system-area-heading"><h2>바코드</h2></header>';
+const page=document.createElement('section');page.id='barcode-main';page.className='screen-page';
+page.innerHTML='<header class="screen-page-heading"><div><span>BAR-01 · 바텀시트</span><h2>바코드 · 마일리지 사용</h2></div></header>'+barcodeBoard();
+document.querySelector('#world').append(barcodeRegion,page);
+export const barcodePages=[page];
+const nav=document.createElement('nav');nav.className='screen-nav';
+nav.innerHTML='<button type="button">바코드 · 마일리지 사용</button>';nav.querySelector('button').onclick=()=>focusBoard('barcode-main');document.querySelector('aside').append(nav);
+document.querySelector('#board-picker').innerHTML='<option value="barcode-main">바코드 · 마일리지 사용</option>';
