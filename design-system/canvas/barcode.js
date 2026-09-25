@@ -1,3 +1,4 @@
+import {barcodeV2Board} from '../pages/barcode/v2.mjs';
 import {barcodeBoard} from '../pages/barcode/render.mjs?v=20260925-barcode';
 import {focusBoard} from './canvas.js?v=20260922-touch2';
 export const barcodeRegion=document.createElement('section');
@@ -6,7 +7,11 @@ barcodeRegion.innerHTML='<header class="system-area-heading"><h2>바코드</h2><
 const page=document.createElement('section');page.id='barcode-main';page.className='screen-page';
 page.innerHTML='<header class="screen-page-heading"><div><span>BAR-01 · 바텀시트</span><h2>바코드 · 마일리지 사용</h2></div></header>'+barcodeBoard();
 document.querySelector('#world').append(barcodeRegion,page);
-export const barcodePages=[page];
+const v2=document.createElement('section');v2.id='barcode-v2';v2.className='screen-page';
+v2.innerHTML='<header class="screen-page-heading"><div><span>BAR-02 · 비교 시안</span><h2>바코드 V2 · 기본 상태</h2></div></header>'+barcodeV2Board();
+document.querySelector('#world').append(v2);
+export const barcodePages=[page,v2];
 const nav=document.createElement('nav');nav.className='screen-nav';
 nav.innerHTML='<button type="button">바코드 · 마일리지 사용</button>';nav.querySelector('button').onclick=()=>focusBoard('barcode-main');document.querySelector('aside').append(nav);
-document.querySelector('#board-picker').innerHTML='<option value="barcode-main">바코드 · 마일리지 사용</option>';
+const v2Nav=document.createElement('button');v2Nav.type='button';v2Nav.textContent='바코드 V2 · 기본 상태';v2Nav.onclick=()=>focusBoard('barcode-v2');nav.append(v2Nav);
+document.querySelector('#board-picker').innerHTML='<option value="barcode-main">바코드 · 마일리지 사용</option><option value="barcode-v2">바코드 V2 · 기본 상태</option>';

@@ -1,0 +1,17 @@
+/* Hallmark · OG soft dimensional blue · additive barcode comparison
+ * Existing tokens, mileage and sheet primitives; original screen unchanged. */
+.og-barcode-v2>.og-sheet-panel{max-height:94%}
+.og-barcode-v2 .og-sheet-header{background:var(--app-header-start)}
+.og-barcode-v2 .og-sheet-body{background:linear-gradient(to bottom,var(--app-header-start),var(--app-header-end) 224px,var(--app-background) 224px);padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-barcode-v2 .og-barcode-content{gap:var(--app-space-5)}
+.og-barcode-v2 .og-barcode-balance{background:transparent;border:0;box-shadow:none;padding:var(--app-space-3) var(--app-space-2) var(--app-space-5)}
+.og-barcode-v2 .og-mileage-payment>div+div{border:0;margin-top:var(--app-space-3);padding-top:var(--app-space-1)}
+.og-barcode-v2 .og-mileage-payment>div:first-child dd{font-size:var(--app-headline-size);line-height:var(--app-headline-line)}
+.og-barcode-v2 .og-mileage-payment .og-mileage-available{font-size:var(--app-display-size);line-height:var(--app-display-line)}
+.og-barcode-v2 .og-mileage-milestone{margin-top:var(--app-space-5)}
+.og-barcode-v2 .og-mileage-milestone p{margin-top:var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-barcode-v2 .og-barcode-card{padding:var(--app-space-6) var(--app-space-5);border-color:var(--app-white);box-shadow:var(--app-shadow-card)}
+.og-barcode-v2 .og-barcode-bars{height:112px;margin:var(--app-space-6) 0 var(--app-space-3)}
+.og-barcode-v2 .og-barcode-number strong{font-size:var(--app-label-size);letter-spacing:.08em;color:var(--app-text-secondary)}
+.og-barcode-v2 .og-barcode-actions{margin-top:var(--app-space-6)}
+.og-barcode-v2 .og-barcode-guide{margin-block:var(--app-space-1)}
