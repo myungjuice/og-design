@@ -27,3 +27,17 @@
 .og-membership-overlay .og-sheet-footer{display:none}
 .og-membership-channels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);padding:var(--app-space-4) 0}
 .og-membership-channels .og-text-button{white-space:nowrap}
+
+/* Hallmark · existing OG dimensional certificate · P4 H4 E4 S5 R5 V4 */
+.og-membership-identity{display:flex;align-items:center;gap:var(--app-space-3);padding-bottom:var(--app-space-4);border-bottom:var(--app-border-width) solid var(--app-edge)}
+.og-membership-identity>div{min-width:0}
+.og-membership-identity span:not(.material-icons){font-size:var(--app-label-size);color:var(--app-text-secondary)}
+.og-membership-identity h3{margin:var(--app-space-1) 0 0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);overflow-wrap:anywhere}
+.og-membership-details{display:grid;gap:var(--app-space-2);margin:var(--app-space-4) 0}
+.og-membership-details>div{display:flex;justify-content:space-between;gap:var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-membership-details dt{color:var(--app-text-secondary)}
+.og-membership-details dd{margin:0;font-weight:var(--app-weight-bold);text-align:right;overflow-wrap:anywhere;min-width:0}
+.og-membership-qr{width:calc(var(--app-space-10)*3);height:calc(var(--app-space-10)*3);margin-block:var(--app-space-2)}
+.og-membership-qr>.material-icons{font-size:calc(var(--app-space-10)*3)}
+.og-membership-export{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3)}
+.og-membership-export>.og-button{min-width:0;white-space:nowrap}
