@@ -28,3 +28,16 @@
 .og-account-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--app-scrim);padding:var(--app-space-4)}
 .og-account-overlay>.og-dialog-panel{width:100%;min-width:0}
 .og-account-overlay .og-dialog-body{white-space:pre-line;word-break:keep-all}
+
+/* Hallmark · existing OG system · pre-emit critique: P4 H4 E4 S5 R5 V4 */
+.og-account-profile,.og-account-referral{padding:var(--app-space-4)}
+.og-account-profile>.og-section-heading,.og-account-referral>.og-section-heading{margin-bottom:var(--app-space-4)}
+.og-account-profile .og-field+.og-field{margin-top:var(--app-space-4)}
+.og-account-profile .og-field-help:empty{display:none}
+.og-account-profile .og-field-control>.og-icon-button{flex:none}
+.og-account-profile .og-list-row{padding:var(--app-space-3) 0;margin-top:var(--app-space-3);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-account-inviter{display:flex;align-items:center;gap:var(--app-space-3);padding:var(--app-space-3);background:var(--app-selected);border-radius:var(--app-radius-md)}
+.og-account-inviter>div{min-width:0;overflow-wrap:anywhere}
+.og-account-inviter strong{font-size:var(--app-body-2-size)}
+.og-account-inviter p,.og-account-no-inviter{font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);margin:var(--app-space-1) 0 0}
+.og-account-withdraw-link{color:var(--app-text-secondary)}
