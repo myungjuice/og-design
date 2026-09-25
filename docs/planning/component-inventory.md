@@ -28,7 +28,7 @@
 
 ## 근거 자료
 
-- [UI 개편 화면시안](./OGGO_유저앱_UI개편_화면시안_260904.pptx): 19슬라이드. 아래 페이지 번호는 표지 포함 슬라이드 순서입니다.
+- [UI 개편 화면시안](https://docs.google.com/presentation/d/1nyXwHG533BPOnDzfNqvnqlscMzOz5iw3/edit): 19슬라이드. 아래 페이지 번호는 표지 포함 슬라이드 순서입니다.
 - [현재 캔버스](../../design-system/canvas/index.html)
 - [공통 토큰](../../design-system/foundations/app-tokens.css)
 - [내 정보 시안](../../concepts/my-info/index.html)

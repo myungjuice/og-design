@@ -11,3 +11,5 @@ dist/
 !docs/
 !docs/planning/
 !docs/planning/*.pptx
+.vercel
+.env*

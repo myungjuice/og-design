@@ -5,7 +5,7 @@
 
 ## 근거
 
-- 기획: `docs/planning/OGGO_유저앱_UI개편_화면시안_260904.pptx`, 표기03페이지 / 슬라이드4.
+- 기획: [UI 개편 화면시안](https://docs.google.com/presentation/d/1nyXwHG533BPOnDzfNqvnqlscMzOz5iw3/edit), 표기03페이지 / 슬라이드4.
 - 기존: `og-platform-legacy-app/SOURCE/jbmembersapp/lib/0_pages/01_home/home.dart`, `my_navermap.dart`, `ted_cluster/ted_render/ted_renderer.dart`.
 - 카테고리: `lib/7_constants/store_category.dart`의 첫4개와 더보기.
 - 지도 핀: 원본 `assets/markers/MCI1000.png`, `MCI1001.png`, `MCI1002.png`를 변경 없이 `legacy-markers.mjs`에 포함.
