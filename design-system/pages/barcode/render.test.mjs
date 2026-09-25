@@ -19,3 +19,15 @@ test('barcode retains legacy actions even below use threshold',async()=>{
  for(const label of ['영수증 적립','마일리지 사용','마일리지 적립/사용 안내','보유 마일리지','내 바코드'])assert.ok(h.includes(label));
  assert.ok(!h.includes('OG PAY'));assert.ok(h.includes('inert'));
 });
+
+test('payment and compact use the same amount styling and brand progress',()=>{
+ for(const density of ['payment','compact']){
+  const html=mileage({total:12400,available:10000,max:15000,density});
+  assert.ok(html.includes('og-mileage-values'));
+  assert.ok(html.includes('data-tone="brand"'));
+ }
+});
+test('barcode does not introduce a member-number label',async()=>{
+ const {barcodeScreen}=await import('./render.mjs');
+ assert.ok(!barcodeScreen().includes('오지고랜드 회원 번호'));
+});

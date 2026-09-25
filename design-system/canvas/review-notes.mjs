@@ -236,6 +236,7 @@ for(const [variant,note] of [
 ];
 
 reviewNotes['board-barcode-main']=[
+ '스타일 재검토: 기획 10페이지의 보유/사용 가능 2행 구성을 유지하면서 내 정보와 금액·브랜드 진행바 스타일을 공통화했습니다. 과도한 세로 간격과 임의 회원번호 설명을 제거했습니다. 바코드는 실제 회원 정보가 아닌 Code128 샘플입니다.',
  '기획: 있음 — PPT 10번째(하단 표기09), 바코드 — 잔액 노출 강화. 제목·닉네임 삭제, 보유/사용 가능 M 강조, 5,000 단위 진행바, 광고 금지.',
  '기존 페이지: 있음. 하단 바코드 → BarcodePage 바텀시트. lib/0_pages/03_members/barcode_page.dart. 영수증 적립 → ReceiptOcrUploadPage, 마일리지 사용 → QR 스캔 → MileageQrUsePage, 안내 → OGMileageNotice. 신규 기능 페이지가 아닌 기존 화면의 개편 시안.',
  '2026-09-25 신규 시안: 내 정보와 동일한 공통 mileage에 payment 표시를 추가하고 surface·progress·bottomSheet·button을 재사용. 기본·5,000 M 미만·0 M·비로그인 4상태. 모든 금액과 회원번호는 디자인 예시이며 실제 거래용 바코드가 아닙니다.',
