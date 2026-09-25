@@ -1,0 +1,15 @@
+/* Hallmark · existing OG system · restrained two-card payment sheet
+ * My Info surface tokens unchanged; single additive comparison. */
+.og-barcode-v3>.og-sheet-panel{max-height:94%}
+.og-barcode-v3 .og-sheet-body{padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-barcode-v3 .og-barcode-content{gap:var(--app-space-4)}
+.og-barcode-v3 .og-barcode-balance{padding:var(--app-space-5) var(--app-card-inset)}
+.og-barcode-v3 .og-mileage-payment>div:first-child dd{font-size:var(--app-headline-size);line-height:var(--app-headline-line)}
+.og-barcode-v3 .og-mileage-payment>div+div{margin-top:var(--app-space-3);padding-top:var(--app-space-3)}
+.og-barcode-v3 .og-mileage-payment .og-mileage-available{font-size:var(--app-title-1-size);line-height:var(--app-title-1-line)}
+.og-barcode-v3 .og-mileage-milestone p{margin-top:var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-barcode-v3 .og-barcode-card{padding:var(--app-space-5) var(--app-card-inset)}
+.og-barcode-v3 .og-barcode-bars{height:112px;margin:var(--app-space-5) 0 var(--app-space-3)}
+.og-barcode-v3 .og-barcode-number strong{font-size:var(--app-label-size);letter-spacing:.08em;color:var(--app-text-secondary)}
+.og-barcode-v3 .og-barcode-actions{margin-top:var(--app-space-6)}
+.og-barcode-v3 .og-barcode-guide{margin-block:var(--app-space-1)}
