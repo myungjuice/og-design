@@ -14,5 +14,5 @@ test('withdrawal statuses derive separately from authentication and exact confir
 test('account escapes user content and renders four static examples including assets warning',()=>{
  assert.doesNotMatch(account({name:'<img src=x>',visible:true}),/<img src=x>/);
  const board=accountBoard();assert.equal((board.match(/class="og-history-screen og-account"/g)||[]).length,4);
- assert.match(board,/자산 소멸 확인/);assert.match(board,/마일리지, 포인트, 페이, 박스/);
+ assert.match(board,/자산 소멸 확인/);assert.match(board,/마일리지 등 남은 자산/);
 });

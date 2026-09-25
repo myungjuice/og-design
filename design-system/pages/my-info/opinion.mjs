@@ -6,7 +6,7 @@ import {attachmentItem} from '../../components/attachments/render.mjs';
 import {badge} from '../../components/badges/render.mjs';
 import {feedback} from '../../components/feedback/render.mjs';
 import {escapeHTML as e,uid} from '../../components/core.mjs';
-const types=['회원점 정보','앱 사용','마일리지/포인트','OG 페이','OG 박스','기타'];
+const types=['회원점 정보','앱 사용','마일리지','OG 박스','기타'];
 const terms=[
  '・고객의 소리 민원 처리를 위해 고객님의 연락처로 고객센터(또는 매장)에서 연락드릴 수 있습니다.',
  '・관계 법령에 저촉되거나 사회통념 등에 어긋나는 내용(예: 개인정보 보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방, 의도적인 업무방해 등) 또는 광고성 게시물은 별도의 사전 통보 없이 답변이 되지 않을 수 있으며, 등록된 의견은 처리가 시작되면 수정이 불가하오니 이 점 양지하여 주시기 바랍니다.',
