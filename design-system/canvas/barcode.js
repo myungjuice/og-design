@@ -12,11 +12,11 @@ const v2=document.createElement('section');v2.id='barcode-v2';v2.className='scre
 v2.innerHTML='<header class="screen-page-heading"><div><span>BAR-02 · 비교 시안</span><h2>바코드 V2 · 기본 상태</h2></div></header>'+barcodeV2Board();
 document.querySelector('#world').append(v2);
 const v3=document.createElement('section');v3.id='barcode-v3';v3.className='screen-page';
-v3.innerHTML='<header class="screen-page-heading"><div><span>BAR-03 · 비교 시안</span><h2>바코드 V3 · 기본 상태</h2></div></header>'+barcodeV3Board();
+v3.innerHTML='<header class="screen-page-heading"><div><span>BAR-03 · 비교 시안</span><h2>바코드 V3 · 상태별 시안</h2></div></header>'+barcodeV3Board();
 document.querySelector('#world').append(v3);
 export const barcodePages=[page,v2,v3];
 const nav=document.createElement('nav');nav.className='screen-nav';
 nav.innerHTML='<button type="button">바코드 · 마일리지 사용</button>';nav.querySelector('button').onclick=()=>focusBoard('barcode-main');document.querySelector('aside').append(nav);
 const v2Nav=document.createElement('button');v2Nav.type='button';v2Nav.textContent='바코드 V2 · 기본 상태';v2Nav.onclick=()=>focusBoard('barcode-v2');nav.append(v2Nav);
-const v3Nav=document.createElement('button');v3Nav.type='button';v3Nav.textContent='바코드 V3 · 기본 상태';v3Nav.onclick=()=>focusBoard('barcode-v3');nav.append(v3Nav);
-document.querySelector('#board-picker').innerHTML='<option value="barcode-main">바코드 · 마일리지 사용</option><option value="barcode-v2">바코드 V2 · 기본 상태</option><option value="barcode-v3">바코드 V3 · 기본 상태</option>';
+const v3Nav=document.createElement('button');v3Nav.type='button';v3Nav.textContent='바코드 V3 · 상태별 시안';v3Nav.onclick=()=>focusBoard('barcode-v3');nav.append(v3Nav);
+document.querySelector('#board-picker').innerHTML='<option value="barcode-main">바코드 · 마일리지 사용</option><option value="barcode-v2">바코드 V2 · 기본 상태</option><option value="barcode-v3">바코드 V3 · 상태별 시안</option>';
