@@ -17,3 +17,17 @@ test('delete previews retain distinct all-selected-single copy',async()=>{
  assert.ok(notices({selected:1,overlay:'selected'}).includes('선택한 알림 내역을 삭제할까요?'));
  assert.ok(notices({selected:1,overlay:'item'}).includes('이 알림 삭제'));
 });
+
+test('planning unread controls reflect records and disappear after all-read',async()=>{
+ const {notices}=await import('./notices.mjs');
+ assert.ok(notices().includes('모두 읽음'));assert.ok(notices().includes('data-unread="true"'));
+ const read=notices({selected:1,allRead:true});assert.ok(!read.includes('data-read="false"'));assert.ok(!read.includes('data-unread="true"'));assert.ok(!read.includes('모두 읽음'));
+ assert.ok(!notices({empty:true}).includes('모두 읽음'));
+});
+test('planning important and category badges use explicit data rather than inferring from title',async()=>{
+ const {notices}=await import('./notices.mjs');
+ assert.ok(notices({announcements:[{type:'공지',title:'제목',date:'',important:true}]}).includes('필독'));
+ assert.ok(!notices({announcements:[{type:'공지',title:'필독처럼 보이는 제목',date:''}]}).includes('data-important="true"'));
+ const html=notices({selected:1,notifications:[{type:'적립',title:'예시',body:'내용',date:'',read:false}]});
+ assert.ok(html.includes('og-notification-type'));assert.ok(html.includes('storefront'));
+});

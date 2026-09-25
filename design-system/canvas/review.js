@@ -1,7 +1,7 @@
 import {boards,canvases,canvasFor} from './catalog.mjs';
 import {activeCanvas,navigateCanvas} from './session.mjs';
 import {focusReview} from './canvas.js?v=20260922-touch2';
-import {reviewNotes} from './review-notes.mjs?v=20260925-support';
+import {reviewNotes} from './review-notes.mjs?v=20260925-notices';
 import {reviewState} from './review-policy.mjs';
 import {escapeHTML as e} from '../components/core.mjs';
 import {enrollSurfaceRollout,surfaceRolloutKey} from './surface-rollout.mjs';
@@ -34,6 +34,8 @@ export function initializeReview(){
  if(!postsEnrolled)for(const id of ['home-store-news','home-store-event','home-news-list','home-news-detail','home-event-list','home-event-detail'])states['board-'+id]='pending';
  let mapEnrolled=false;try{mapEnrolled=localStorage.getItem('og-design:naver-map:v1')==='done';}catch{}
  if(!mapEnrolled)for(const id of ['home-main','home-search','home-category','home-nearby'])states['board-'+id]='pending';
+ let noticesEnrolled=false;try{noticesEnrolled=localStorage.getItem('og-design:notices-planning:v1')==='done';}catch{}
+ if(!noticesEnrolled)states['board-my-info-notices']='pending';
  let supportEnrolled=false;try{supportEnrolled=localStorage.getItem('og-design:support-planning:v1')==='done';}catch{}
  if(!supportEnrolled)states['board-my-info-support']='pending';
  let membershipEnrolled=false;try{membershipEnrolled=localStorage.getItem('og-design:membership-certificate:v1')==='done';}catch{}
@@ -58,7 +60,7 @@ export function initializeReview(){
   item.node.prepend(controls);item.controls=controls;
   if(reviewNotes[item.key]?.length)controls.insertAdjacentHTML('afterend',noteHTML(item.key));
  }
- function save(){try{localStorage.setItem('og-design:support-planning:v1','done');localStorage.setItem('og-design:membership-certificate:v1','done');localStorage.setItem('og-design:account-profile:v1','done');localStorage.setItem('og-design:planning-settings:v1','done');localStorage.setItem('og-design:detail-polish:v1','done');localStorage.setItem(storageKey,JSON.stringify(states));localStorage.setItem(surfaceRolloutKey,'done');localStorage.setItem('og-design:all-state-data:v1','done');localStorage.setItem('og-design:public-services:v1','done');localStorage.setItem('og-design:public-reviews:v1','done');localStorage.setItem('og-design:public-posts:v1','done');localStorage.setItem('og-design:naver-map:v1','done');localStorage.setItem('og-design:public-content:v1','done');panel.querySelector('#review-status').textContent='';}catch{panel.querySelector('#review-status').textContent='이 브라우저에서는 검토 상태를 저장할 수 없습니다.'}}
+ function save(){try{localStorage.setItem('og-design:notices-planning:v1','done');localStorage.setItem('og-design:support-planning:v1','done');localStorage.setItem('og-design:membership-certificate:v1','done');localStorage.setItem('og-design:account-profile:v1','done');localStorage.setItem('og-design:planning-settings:v1','done');localStorage.setItem('og-design:detail-polish:v1','done');localStorage.setItem(storageKey,JSON.stringify(states));localStorage.setItem(surfaceRolloutKey,'done');localStorage.setItem('og-design:all-state-data:v1','done');localStorage.setItem('og-design:public-services:v1','done');localStorage.setItem('og-design:public-reviews:v1','done');localStorage.setItem('og-design:public-posts:v1','done');localStorage.setItem('og-design:naver-map:v1','done');localStorage.setItem('og-design:public-content:v1','done');panel.querySelector('#review-status').textContent='';}catch{panel.querySelector('#review-status').textContent='이 브라우저에서는 검토 상태를 저장할 수 없습니다.'}}
  function setState(key,value){states[key]=value;save();render()}
  function render(){
   const pending=items.filter(i=>states[i.key]==='pending'),done=items.filter(i=>states[i.key]==='done');
