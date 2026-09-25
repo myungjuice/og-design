@@ -7,7 +7,16 @@
 .og-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);padding:var(--app-space-4) 0}
 .og-support-grid .og-menu-tile{width:100%;min-width:0;min-height:calc(var(--app-space-10)*3);padding:var(--app-space-4) var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line)}
 .og-support-grid .og-menu-tile>span:last-child{white-space:nowrap}
-.og-support-grid .og-menu-tile>.material-icons{font-size:var(--app-icon-size)}
+.og-support-grid .og-menu-tile>.material-icons{font-size:var(--app-icon-size);color:var(--app-action)}
 .og-support-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--app-scrim);padding:var(--app-space-4)}
 .og-support-overlay>.og-dialog-panel{width:100%;min-width:0}
 .og-support-overlay .og-dialog-body{white-space:pre-line;word-break:keep-all}
+
+.og-support-grid .og-menu-tile{position:relative}
+.og-support-notification{position:absolute;top:var(--app-space-2);right:var(--app-space-2)}
+.og-support-contact{display:flex;align-items:center;justify-content:space-between;gap:var(--app-space-2);margin-bottom:var(--app-space-4)}
+.og-support-contact>div{display:flex;align-items:center;gap:var(--app-space-2);min-width:0}
+.og-support-contact>div>div{min-width:0}
+.og-support-contact strong{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);overflow-wrap:anywhere}
+.og-support-contact p{margin:var(--app-space-1) 0 0;font-size:var(--app-label-size);color:var(--app-text-secondary)}
+.og-support-contact>.og-text-button{flex:none;white-space:nowrap}
