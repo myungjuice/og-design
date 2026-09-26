@@ -21,3 +21,18 @@
 .og-barcode-obscured{height:var(--app-space-16);overflow:hidden;opacity:.15;filter:blur(6px)}
 .og-barcode-guest>.og-button{width:100%}
 .og-barcode-example+.og-barcode-example{margin-top:var(--app-space-8);padding-top:var(--app-space-8);border-top:var(--app-border-width) solid var(--app-edge)}
+
+/* Adopted payment sheet · shared My Info surface tokens. */
+.og-barcode-screen>.og-sheet-panel{max-height:94%}
+.og-barcode-screen .og-sheet-body{padding:var(--app-space-2) var(--app-space-4) var(--app-space-6)}
+.og-barcode-screen .og-barcode-content{gap:var(--app-space-4)}
+.og-barcode-screen .og-barcode-balance{padding:var(--app-space-5) var(--app-card-inset)}
+.og-barcode-screen .og-mileage-payment>div:first-child dd{font-size:var(--app-headline-size);line-height:var(--app-headline-line)}
+.og-barcode-screen .og-mileage-payment>div+div{margin-top:var(--app-space-3);padding-top:var(--app-space-3)}
+.og-barcode-screen .og-mileage-payment .og-mileage-available{font-size:var(--app-title-1-size);line-height:var(--app-title-1-line)}
+.og-barcode-screen .og-mileage-milestone p{margin-top:var(--app-space-3);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-barcode-screen .og-barcode-card{padding:var(--app-space-5) var(--app-card-inset)}
+.og-barcode-screen .og-barcode-bars{height:112px;margin:var(--app-space-5) 0 var(--app-space-3)}
+.og-barcode-screen .og-barcode-number strong{font-size:var(--app-label-size);letter-spacing:.08em;color:var(--app-text-secondary)}
+.og-barcode-screen .og-barcode-actions{margin-top:var(--app-space-6)}
+.og-barcode-screen .og-barcode-guide{margin-block:var(--app-space-1)}
