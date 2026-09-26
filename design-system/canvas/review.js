@@ -19,6 +19,9 @@ export function initializeReview(){
  for(const board of boards)entries.push({...board,key:'board-'+board.id,group:canvases.find(c=>c.id===board.canvas).title,node:document.getElementById(board.id)});
  const items=entries;let states={};
  try{const stored=JSON.parse(localStorage.getItem(storageKey));if(stored&&typeof stored==='object'&&!Array.isArray(stored))states=stored;}catch{}
+ let newBadgeAdopted=false;try{newBadgeAdopted=localStorage.getItem('og-design:new-badge-c:v1')==='done';}catch{}
+ if(!newBadgeAdopted)states['board-home-main']='pending';
+ for(const id of ['gradient','tab','sticker','placement'])delete states['board-home-new-'+id];
  for(const key of ['surface-my-info','surface-explore','surface-store','home-depth-subtle','store-depth-subtle','home-depth-proposal','store-depth-proposal'])delete states[key];
  let rolloutEnrolled=false;try{rolloutEnrolled=localStorage.getItem(surfaceRolloutKey)==='done';}catch{}
  states=enrollSurfaceRollout(states,rolloutEnrolled);
@@ -64,7 +67,7 @@ export function initializeReview(){
   item.node.prepend(controls);item.controls=controls;
   if(reviewNotes[item.key]?.length)controls.insertAdjacentHTML('afterend',noteHTML(item.key));
  }
- function save(){try{localStorage.setItem('og-design:barcode-v3-cases:v1','done');localStorage.setItem('og-design:barcode-style:v1','done');localStorage.setItem('og-design:notices-planning:v1','done');localStorage.setItem('og-design:support-planning:v1','done');localStorage.setItem('og-design:membership-certificate:v1','done');localStorage.setItem('og-design:account-profile:v1','done');localStorage.setItem('og-design:planning-settings:v1','done');localStorage.setItem('og-design:detail-polish:v1','done');localStorage.setItem(storageKey,JSON.stringify(states));localStorage.setItem(surfaceRolloutKey,'done');localStorage.setItem('og-design:all-state-data:v1','done');localStorage.setItem('og-design:public-services:v1','done');localStorage.setItem('og-design:public-reviews:v1','done');localStorage.setItem('og-design:public-posts:v1','done');localStorage.setItem('og-design:naver-map:v1','done');localStorage.setItem('og-design:public-content:v1','done');panel.querySelector('#review-status').textContent='';}catch{panel.querySelector('#review-status').textContent='이 브라우저에서는 검토 상태를 저장할 수 없습니다.'}}
+ function save(){try{localStorage.setItem('og-design:new-badge-c:v1','done');localStorage.setItem('og-design:barcode-v3-cases:v1','done');localStorage.setItem('og-design:barcode-style:v1','done');localStorage.setItem('og-design:notices-planning:v1','done');localStorage.setItem('og-design:support-planning:v1','done');localStorage.setItem('og-design:membership-certificate:v1','done');localStorage.setItem('og-design:account-profile:v1','done');localStorage.setItem('og-design:planning-settings:v1','done');localStorage.setItem('og-design:detail-polish:v1','done');localStorage.setItem(storageKey,JSON.stringify(states));localStorage.setItem(surfaceRolloutKey,'done');localStorage.setItem('og-design:all-state-data:v1','done');localStorage.setItem('og-design:public-services:v1','done');localStorage.setItem('og-design:public-reviews:v1','done');localStorage.setItem('og-design:public-posts:v1','done');localStorage.setItem('og-design:naver-map:v1','done');localStorage.setItem('og-design:public-content:v1','done');panel.querySelector('#review-status').textContent='';}catch{panel.querySelector('#review-status').textContent='이 브라우저에서는 검토 상태를 저장할 수 없습니다.'}}
  function setState(key,value){states[key]=value;save();render()}
  function render(){
   const pending=items.filter(i=>states[i.key]==='pending'),done=items.filter(i=>states[i.key]==='done');
