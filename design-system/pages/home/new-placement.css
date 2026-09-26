@@ -7,4 +7,4 @@
 .og-new-placement-name .og-map-name>.og-map-new{position:static;transform:none;flex:none}
 
 :is(.og-new-placement-name,.og-new-placement-pin){--new-placement-label-size:10px;--new-placement-label-line:14px}
-:is(.og-new-placement-name,.og-new-placement-pin) .og-map-new{font-size:var(--new-placement-label-size);line-height:var(--new-placement-label-line);padding-inline:var(--app-space-1);border-width:var(--app-border-width)}
+:is(.og-new-placement-name,.og-new-placement-pin) .og-map-new{font-size:var(--new-placement-label-size);font-weight:var(--app-weight-regular);line-height:var(--new-placement-label-line);padding-inline:var(--app-space-1);border-width:var(--app-border-width)}
