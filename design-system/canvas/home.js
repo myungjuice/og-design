@@ -1,3 +1,4 @@
+import {newPlacementBoard} from '../pages/home/new-placement.mjs';
 import {newShapeBoard} from '../pages/home/new-shapes.mjs';
 import {newGradientBoard} from '../pages/home/new-gradient.mjs';
 import {publicServicesData} from '../pages/home/public-services-data.mjs?v=20260920-detail-polish';
@@ -44,6 +45,10 @@ if(activeCanvas==='explore'){
   world.append(extra);homePages.push(extra);
  }
 }
+if(activeCanvas==='explore'){
+ const p=document.createElement('section');p.id='home-new-placement';p.className='screen-page';
+ p.innerHTML='<header class="screen-page-heading"><div><span>홈 · 위치 비교</span><h2>NEW · 핀 위 / 매장명 옆</h2></div></header>'+newPlacementBoard();world.append(p);homePages.push(p);
+}
 const sourceId=activeCanvas==='explore'?'home-main':'home-store';
 const source=document.getElementById(sourceId);
 // Adopt the chosen treatment through the same scoped CSS used by comparison B.
@@ -53,7 +58,7 @@ adoptedPrompt.dataset.depthPrompt=activeCanvas==='explore'?'home':'store';
 adoptedPrompt.dataset.depthSubtle='';adoptedPrompt.dataset.adoptedDepth='';
 source.querySelector(':scope > .screen-page-heading span').textContent+=' · B안 적용';
 const selected=homeBoards.filter(b=>b.canvas===activeCanvas);
-if(activeCanvas==='explore')selected.push({id:'home-new-gradient',title:'NEW · 브랜드 그라디언트'},{id:'home-new-tab',title:'NEW · 작은 탭형'},{id:'home-new-sticker',title:'NEW · 입체 스티커형'});
+if(activeCanvas==='explore')selected.push({id:'home-new-gradient',title:'NEW · 브랜드 그라디언트'},{id:'home-new-tab',title:'NEW · 작은 탭형'},{id:'home-new-sticker',title:'NEW · 입체 스티커형'},{id:'home-new-placement',title:'NEW · 핀 위 / 매장명 옆'});
 const nav=document.createElement('nav');nav.className='screen-nav';nav.setAttribute('aria-label',title+' 페이지 이동');
 nav.innerHTML=selected.map(b=>'<button type="button" data-screen-link="'+b.id+'">'+b.title+'</button>').join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>focusBoard(b.dataset.screenLink));document.querySelector('aside').append(nav);

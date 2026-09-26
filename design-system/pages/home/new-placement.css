@@ -1,0 +1,7 @@
+/* Hallmark · restrained OG label placement comparison · common palette preserved */
+.new-placement-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-4)}
+.new-placement-pair>section{min-width:0}
+.new-placement-pair h3{font:var(--app-weight-bold) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);margin:0 0 var(--app-space-3)}
+.new-placement-intro{font:var(--app-weight-regular) var(--app-body-2-size)/var(--app-body-2-line) var(--app-font);color:var(--app-text-secondary);margin:var(--app-space-4) 0}
+.og-new-placement-name .og-map-name:has(.og-map-new){display:inline-flex;align-items:center;gap:var(--app-space-1);white-space:nowrap;padding-block:var(--app-space-1)}
+.og-new-placement-name .og-map-name>.og-map-new{position:static;transform:none;flex:none}
