@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as proposal from './new-placement.mjs';
+test('C preserves B markup and changes only the badge text to Korean',()=>{
+ const normalize=html=>html.replace(/search-\d+/g,'search-id');
+ const b=normalize(proposal.newPlacementScreen('name'));
+ assert.equal(normalize(proposal.newPlacementScreen('name-ko')),b.replace('>NEW</span>','>신규</span>'));
+ const board=proposal.newPlacementBoard();
+ assert.equal((board.match(/<section>/g)||[]).length,3);
+ assert.ok(board.includes('C · 매장명 옆 · 신규'));
+});
 test('placement comparison relocates NEW into the name while preserving pins',()=>{
  assert.equal(typeof proposal.newPlacementScreen,'function');
  const html=proposal.newPlacementScreen('name');
