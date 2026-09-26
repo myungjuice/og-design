@@ -13,7 +13,7 @@ if(activeCanvas==='my-info'){
 }else if(activeCanvas==='my-land'){
  const land=await import('./my-land.js?v=20260922-touch2');pages=land.myLandPages;region=land.myLandRegion;
 }else if(['explore','store'].includes(activeCanvas)){
- const home=await import('./home.js?v=20260922-touch2');pages=home.homePages;region=home.homeRegion;
+ const home=await import('./home.js?v=20260926-new-shapes');pages=home.homePages;region=home.homeRegion;
 }else{
  pages=[...area.querySelectorAll('.board')];
  region=document.createElement('section');region.id=activeCanvas==='foundations'?'foundation-region':'component-region';region.className='system-region';
