@@ -1,0 +1,4 @@
+/* Hallmark · OG scoped badge comparisons · existing tokens and legacy pins preserved */
+.og-new-tab .og-map-new{background:var(--app-gradient-number);border-radius:var(--app-space-1);top:calc(-1 * var(--app-space-4));padding:0 var(--app-space-2)}
+.og-new-tab .og-map-new::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);width:var(--app-space-2);height:var(--app-space-1);background:var(--app-number-mid);border-bottom-left-radius:var(--app-space-1);border-bottom-right-radius:var(--app-space-1)}
+.og-new-sticker .og-map-new{background:var(--app-gradient-number);top:calc(-1 * var(--app-space-4));padding:0 var(--app-space-2);transform:translateX(-50%) rotate(-7deg);box-shadow:0 2px 0 var(--app-number-mid),0 4px 6px var(--app-shadow-color)}

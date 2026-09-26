@@ -1,3 +1,4 @@
+import {newShapeBoard} from '../pages/home/new-shapes.mjs';
 import {newGradientBoard} from '../pages/home/new-gradient.mjs';
 import {publicServicesData} from '../pages/home/public-services-data.mjs?v=20260920-detail-polish';
 import {publicReviewsData} from '../pages/home/public-reviews-data.mjs?v=20260920-detail-polish';
@@ -37,6 +38,11 @@ if(activeCanvas==='explore'){
  const comparison=document.createElement('section');comparison.id='home-new-gradient';comparison.className='screen-page';
  comparison.innerHTML='<header class="screen-page-heading"><div><span>홈 · 비교 시안</span><h2>NEW · 브랜드 그라디언트</h2></div></header>'+newGradientBoard();
  world.append(comparison);homePages.push(comparison);
+ for(const [kind,name] of [['tab','작은 탭형'],['sticker','입체 스티커형']]){
+  const extra=document.createElement('section');extra.id='home-new-'+kind;extra.className='screen-page';
+  extra.innerHTML='<header class="screen-page-heading"><div><span>홈 · 비교 시안</span><h2>NEW · '+name+'</h2></div></header>'+newShapeBoard(kind);
+  world.append(extra);homePages.push(extra);
+ }
 }
 const sourceId=activeCanvas==='explore'?'home-main':'home-store';
 const source=document.getElementById(sourceId);
@@ -47,7 +53,7 @@ adoptedPrompt.dataset.depthPrompt=activeCanvas==='explore'?'home':'store';
 adoptedPrompt.dataset.depthSubtle='';adoptedPrompt.dataset.adoptedDepth='';
 source.querySelector(':scope > .screen-page-heading span').textContent+=' · B안 적용';
 const selected=homeBoards.filter(b=>b.canvas===activeCanvas);
-if(activeCanvas==='explore')selected.push({id:'home-new-gradient',title:'NEW · 브랜드 그라디언트'});
+if(activeCanvas==='explore')selected.push({id:'home-new-gradient',title:'NEW · 브랜드 그라디언트'},{id:'home-new-tab',title:'NEW · 작은 탭형'},{id:'home-new-sticker',title:'NEW · 입체 스티커형'});
 const nav=document.createElement('nav');nav.className='screen-nav';nav.setAttribute('aria-label',title+' 페이지 이동');
 nav.innerHTML=selected.map(b=>'<button type="button" data-screen-link="'+b.id+'">'+b.title+'</button>').join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>focusBoard(b.dataset.screenLink));document.querySelector('aside').append(nav);

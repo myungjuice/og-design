@@ -4,7 +4,7 @@ test('catalog partitions every board once and maps nested review targets',async(
  const {canvases,boards,canvasFor}=await import('./catalog.mjs');
  assert.deepEqual(canvases.map(c=>c.id),['foundations','components','explore','store','my-info','barcode','my-land']);
  assert.equal(new Set(boards.map(b=>b.id)).size,boards.length);
- assert.equal(boards.length,89);
+ assert.equal(boards.length,91);
  assert.equal(canvasFor('barcode-main'),'barcode');
  assert.equal(canvasFor('barcode-v2'),'barcode');
  assert.equal(canvasFor('barcode-v3'),'barcode');
