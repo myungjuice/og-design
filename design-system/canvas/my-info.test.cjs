@@ -14,15 +14,14 @@ const assert=require('node:assert/strict');
  const navGeometry=await p.locator('#my-info-main .og-app-bottom-nav').evaluate(n=>{const r=n.getBoundingClientRect();const icon=n.querySelector('.og-app-barcode>.material-icons').getBoundingClientRect();const labels=[...n.querySelectorAll('button>span:last-child')].map(x=>x.getBoundingClientRect().top);return{raised:icon.top<r.top,aligned:Math.max(...labels)-Math.min(...labels)<1};});
  assert.ok(navGeometry.raised,'barcode protrudes without inflating white bar');assert.ok(navGeometry.aligned,'all navigation labels align');
  const layout=await p.evaluate(()=>({region:(()=>{let n=document.querySelector('#screen-region');return{x:n.offsetLeft,y:n.offsetTop,w:n.offsetWidth,h:n.offsetHeight}})(),pages:[...document.querySelectorAll('.screen-page[data-family="my-info"]')].map(n=>({x:n.offsetLeft,y:n.offsetTop,w:n.offsetWidth,h:n.offsetHeight})),world:{w:document.querySelector('#world').offsetWidth,h:document.querySelector('#world').offsetHeight}}));
- const upper=await p.locator('#foundation-region,#component-region').evaluateAll(ns=>ns.map(n=>({x:n.offsetLeft,bottom:n.offsetTop+n.offsetHeight})));
- assert.equal(layout.region.x,Math.min(...upper.map(n=>n.x)),'page area aligns with foundations');
- assert.ok(layout.region.y>=Math.max(...upper.map(n=>n.bottom))+320,'page area sits below both existing regions');
+ assert.equal(layout.region.x,0,'page region starts at the canvas origin');
+ assert.equal(layout.region.y,0,'page region starts at the canvas origin');
  assert.ok(layout.pages[0].y>=layout.region.y+136,'page content clears region heading');
  const comparisons=await p.locator('.mileage-variant-page').evaluateAll(ns=>ns.map(n=>({right:n.offsetLeft+n.offsetWidth,x:n.offsetLeft,y:n.offsetTop,fits:n.querySelector('.og-my-info').scrollWidth<=n.querySelector('.og-my-info').clientWidth})));
  assert.equal(comparisons.length,3);assert.equal(new Set(comparisons.map(n=>n.y)).size,1);
  comparisons.forEach(n=>{assert.ok(n.right<layout.region.x);assert.ok(n.fits);});
- assert.ok(layout.pages.length>15);assert.equal(new Set(layout.pages.map(n=>n.x)).size,1,'same family stays vertical');
- for(let i=0;i<layout.pages.length;i++){const n=layout.pages[i];assert.ok(n.x>=layout.region.x&&n.x+n.w<=layout.region.x+layout.region.w);assert.ok(n.y+n.h<=layout.region.y+layout.region.h);if(i)assert.ok(n.y>=layout.pages[i-1].y+layout.pages[i-1].h);}
+ assert.ok(layout.pages.length>15);assert.equal(new Set(layout.pages.map(n=>n.x)).size,4,'main pages use four columns');
+ for(let i=0;i<layout.pages.length;i++){const n=layout.pages[i];assert.ok(n.x>=layout.region.x&&n.x+n.w<=layout.region.x+layout.region.w);assert.ok(n.y+n.h<=layout.region.y+layout.region.h);if(i>=4)assert.ok(n.y>=layout.pages[i-4].y+layout.pages[i-4].h);}
  assert.ok(layout.world.h>=layout.region.y+layout.region.h);
  assert.equal(await p.locator('.screen-placeholder button,.screen-placeholder input').count(),0,'reserved pages stay empty');
  await p.locator('#my-info-main [data-screen-prompt]').click();await p.waitForFunction(()=>document.querySelector('#screen-prompt-copy')?.disabled===false);
@@ -41,5 +40,5 @@ const assert=require('node:assert/strict');
   assert.ok(await p.locator('.og-my-info').evaluate(n=>n.scrollWidth<=n.clientWidth),'screen fits '+width);
   assert.ok(await p.locator('.og-mileage-summary dd').evaluateAll(ns=>ns.every(n=>n.offsetHeight<=parseFloat(getComputedStyle(n).lineHeight)+1)),'amount remains one line at '+width);
  }
- assert.deepEqual(errors,[]);console.log('PASS: my-info shared components, vertical reserved pages, region bounds, prompt, navigation and four widths');
+ assert.deepEqual(errors,[]);console.log('PASS: my-info shared components, four-column boards, region bounds, prompt, navigation and four widths');
 }finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

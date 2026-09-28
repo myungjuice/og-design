@@ -7,6 +7,7 @@ const pageGrid=['explore','store','my-info','my-land','barcode'].includes(active
 let pages=[],region,comparisons=[],comparisonRegion;
 if(activeCanvas==='my-info'){
  const screens=await import('./screens.js?v=20260922-touch2');pages=screens.screenPages;region=screens.screenRegion;
+ const feedback=await import('./my-info-feedback.js?v=20260928');pages.splice(1,0,...feedback.createMyInfoFeedbackPages());
  const variants=await import('./mileage-variants.js?v=20260922-touch2');comparisons=variants.comparisonPages;comparisonRegion=variants.comparisonRegion;
 }else if(activeCanvas==='barcode'){
  const barcode=await import('./barcode.js?v=20260925-barcode');pages=barcode.barcodePages;region=barcode.barcodeRegion;

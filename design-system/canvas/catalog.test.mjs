@@ -4,7 +4,7 @@ test('catalog partitions every board once and maps nested review targets',async(
  const {canvases,boards,canvasFor}=await import('./catalog.mjs');
  assert.deepEqual(canvases.map(c=>c.id),['foundations','components','explore','store','my-info','barcode','my-land']);
  assert.equal(new Set(boards.map(b=>b.id)).size,boards.length);
- assert.equal(boards.length,86);
+ assert.equal(boards.length,88);
  assert.equal(canvasFor('barcode-main'),'barcode');
  assert.equal(canvasFor('my-land-main'),'my-land');
  for(const id of ['my-land-plaza','my-land-attendance','my-land-lounge','my-land-blue-header','my-land-miniature','my-land-relief','my-land-paper'])assert.equal(canvasFor(id),'my-land');
@@ -12,6 +12,8 @@ test('catalog partitions every board once and maps nested review targets',async(
  assert.equal(canvasFor('home-store-info'),'store');
  assert.equal(canvasFor('review-reservation-date'),'my-info');
  assert.equal(canvasFor('mileage-option-a'),'my-info');
+ assert.equal(canvasFor('my-info-mileage-feedback'),'my-info');
+ assert.equal(canvasFor('my-info-review-feedback'),'my-info');
 });
 test('deep links win, valid selection persists, unknown inputs fall back safely',async()=>{
  const {resolveCanvas,canvasHref,viewStorageKey}=await import('./catalog.mjs');

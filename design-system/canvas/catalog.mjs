@@ -8,7 +8,7 @@ export const boards=[
  ...rows('components',[['buttons','버튼'],['inputs','입력'],['selection','선택 요소'],['tabs-chips','탭·칩'],['search','검색창'],['badges','배지·상태'],['avatar','프로필·썸네일'],['surfaces','카드·구분선'],['list-row','목록'],['section-heading','섹션 제목'],['progress','진행 표시'],['loading','로딩'],['feedback','피드백'],['help','툴팁·팝오버'],['quantity','수량 선택'],['sheet','바텀시트'],['dialogs','다이얼로그'],['snackbar','스낵바'],['date-time','날짜·시간 선택'],['attachments','이미지 보기·첨부']]),
  ...rows('my-land',[['my-land-main','마이랜드 메인'],['my-land-plaza','B · 작은 광장형'],['my-land-attendance','C · 출석 집중형'],['my-land-lounge','D · 게임 라운지형'],['my-land-blue-header','5번 · 상단 블루형'],['my-land-miniature','6번 · 정교한 미니어처'],['my-land-relief','7번 · 낮은 양각형'],['my-land-paper','8번 · 종이 조형형']]),
  ...homeBoards,...myInfoPages.map(b=>({...b,canvas:'my-info'})),
- ...rows('my-info',[['mileage-option-a','마일리지 비교안 A'],['mileage-option-b','마일리지 비교안 B'],['mileage-option-c','마일리지 비교안 C']])
+ ...rows('my-info',[['mileage-option-a','마일리지 비교안 A'],['mileage-option-b','마일리지 비교안 B'],['mileage-option-c','마일리지 비교안 C'],['my-info-mileage-feedback','마일리지 · 디자이너 피드백안'],['my-info-review-feedback','최근 방문 · 후기 버튼 수정안']])
 ];
 export function canvasFor(id){if(id==='review-surface-explore')return 'explore';if(id==='review-surface-store')return 'store';if(id==='review-home-depth-subtle')return 'explore';if(id==='review-store-depth-subtle')return 'store';if(id==='review-home-depth-proposal')return 'explore';if(id==='review-store-depth-proposal')return 'store';if(id?.startsWith('review-'))return 'my-info';return boards.find(b=>b.id===id)?.canvas;}
 export function resolveCanvas({search='',hash='',last}={}){

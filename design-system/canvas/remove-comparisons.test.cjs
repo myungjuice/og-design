@@ -2,7 +2,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
 const assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});try{
 const p=await b.newPage({viewport:{width:1400,height:1100}});
-for(const [canvas,first,count] of [['explore','home-main',4],['store','home-store',17],['my-info','my-info-main',27]]){
+for(const [canvas,first,count] of [['explore','home-main',4],['store','home-store',17],['my-info','my-info-main',29]]){
  await p.goto('http://127.0.0.1:4173/design-system/canvas/?canvas='+canvas);await p.waitForFunction(()=>document.querySelector('#viewport')?.getAttribute('aria-busy')==='false');
  assert.equal(await p.locator('.proposal-page,.surface-example,.depth-proposal-section').count(),0,'top comparisons removed');
  assert.equal(await p.locator('#world>.screen-page').count(),count,'all real pages remain');

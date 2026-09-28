@@ -1,0 +1,20 @@
+/* Hallmark · comparison-only my-info cards · tone: soft dimensional blue
+ * Original screen and shared app components are unchanged · P4 H4 E4 S5 R5 V4 */
+.my-info-feedback-page{width:768px}
+.my-info-feedback-note{min-height:var(--app-space-12);margin:0 0 var(--app-space-4);font-size:var(--app-label-size);line-height:var(--app-label-line);color:var(--app-text-secondary);word-break:keep-all}
+.my-info-feedback-page .screen-artboard{width:var(--app-layout-reference)}
+.og-feedback-balance-top{display:flex;align-items:center;gap:var(--app-space-3);min-width:0}
+.og-feedback-coin{display:grid;place-items:center;flex:none;width:var(--app-control-md);height:var(--app-control-md);border:var(--app-border-width) solid var(--app-white);border-radius:var(--app-radius-pill);background:var(--app-gradient-brand);color:var(--app-white);font-size:var(--app-title-2-size);line-height:1;font-weight:var(--app-weight-bold);box-shadow:var(--app-shadow-card)}
+.og-feedback-balance-main{flex:1;min-width:0}
+.og-feedback-balance-main .og-section-heading{gap:var(--app-space-1);margin-bottom:var(--app-space-1)}
+.og-feedback-balance-main .og-heading-title-line{gap:var(--app-space-1)}
+.og-feedback-balance-main .og-heading-title-line h3{font-size:var(--app-caption-size);line-height:var(--app-caption-line);white-space:nowrap}
+.og-feedback-balance-main .og-heading-action{font-size:var(--app-caption-size);padding-inline:0}
+.og-feedback-available{display:block;width:max-content;max-width:100%;background:var(--app-gradient-number);background-clip:text;-webkit-background-clip:text;color:transparent;font-size:var(--app-title-1-size);line-height:var(--app-title-1-line);font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.og-feedback-balance-progress{margin-top:var(--app-space-5)}
+.og-feedback-balance-progress .og-progress-caption{margin-bottom:0}
+.og-feedback-balance-details{display:grid;gap:var(--app-space-2);margin:var(--app-space-4) 0 0;padding-top:var(--app-space-4);border-top:var(--app-border-width) solid var(--app-edge)}
+.og-feedback-balance-details>div{display:flex;justify-content:space-between;gap:var(--app-space-2);font-size:var(--app-label-size);line-height:var(--app-label-line)}
+.og-feedback-balance-details dt{color:var(--app-text-secondary)}
+.og-feedback-balance-details dd{margin:0;font-weight:var(--app-weight-medium);font-variant-numeric:tabular-nums;white-space:nowrap}
+.og-my-visit .og-feedback-review-button{flex:none;min-height:var(--app-control-sm);min-width:var(--app-touch-min);padding:var(--app-space-2) var(--app-space-3);font-size:var(--app-caption-size);line-height:var(--app-caption-line);font-weight:var(--app-weight-medium);box-shadow:var(--app-shadow-card)}
