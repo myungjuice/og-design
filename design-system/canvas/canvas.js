@@ -26,31 +26,53 @@ window.addEventListener('pagehide',saveView);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveView();});
 const minus=document.querySelector('#minus'),plus=document.querySelector('#plus');
 let pendingFrame=0,renderedScale=null,boardBounds=[],viewWidth=viewport.clientWidth,viewHeight=viewport.clientHeight;
-// Keep layout dimensions intact: only skip painting boards outside the viewport.
-function updateVisibility(){
+// Cache natural geometry. Pan/zoom only checks numbers, never reads layout.
+const measuredBoards=new Map();
+const outside=(left,top,width,height)=>{
  const margin=320;
+ return x+(left+width)*scale < -margin || x+left*scale > viewWidth+margin ||
+  y+(top+height)*scale < -margin || y+top*scale > viewHeight+margin;
+};
+function updateVisibility(){
  for(const b of boardBounds){
-  const hidden=x+(b.left+b.width)*scale < -margin || x+b.left*scale > viewWidth+margin ||
-   y+(b.top+b.height)*scale < -margin || y+b.top*scale > viewHeight+margin;
+  const hidden=outside(b.left,b.top,b.width,b.height);
   if(hidden!==b.hidden){b.node.classList.toggle('canvas-offscreen',hidden);b.hidden=hidden;}
+  for(const part of b.parts){
+   const skipped=hidden||outside(b.left+part.left,b.top+part.top,part.width,part.height);
+   if(skipped!==part.hidden){part.node.classList.toggle('canvas-chunk-offscreen',skipped);part.hidden=skipped;}
+  }
  }
 }
-export function refreshBoardBounds(){
- viewWidth=viewport.clientWidth;viewHeight=viewport.clientHeight;
- const nodes=[...world.querySelectorAll('.board,.screen-page,.mileage-variant-page')];
- // Reveal only for this synchronous measurement pass, before the browser paints.
- // This lets late fonts/images and review controls update the natural board height.
- nodes.forEach(node=>node.classList.remove('canvas-offscreen'));
- boardBounds=nodes.map(node=>{
-  const css=getComputedStyle(node);
-  const padding=parseFloat(css.paddingTop)+parseFloat(css.paddingBottom);
-  const border=parseFloat(css.borderTopWidth)+parseFloat(css.borderBottomWidth);
-  const height=parseFloat(css.height);
-  return {node,left:node.offsetLeft,top:node.offsetTop,width:node.offsetWidth,height:node.offsetHeight,
-   contentHeight:Math.max(0,height-(css.boxSizing==='border-box'?padding+border:0)),hidden:false};
+export function revealBoardForMeasurement(node){
+ node.classList.remove('canvas-offscreen');
+ const previous=measuredBoards.get(node);
+ if(previous){previous.hidden=false;for(const part of previous.parts){part.node.classList.remove('canvas-chunk-offscreen');part.hidden=false;}}
+}
+function intrinsicHeight(node){
+ const css=getComputedStyle(node);
+ const inset=parseFloat(css.paddingTop)+parseFloat(css.paddingBottom)+parseFloat(css.borderTopWidth)+parseFloat(css.borderBottomWidth);
+ return Math.max(0,parseFloat(css.height)-(css.boxSizing==='border-box'?inset:0));
+}
+export function refreshBoardBounds(layout,dirty){
+ const measured=[];
+ boardBounds=layout.map(bounds=>{
+  let board=measuredBoards.get(bounds.node);
+  if(!board||dirty.has(bounds.node)){
+   const rect=bounds.node.getBoundingClientRect(),ratio=rect.width/bounds.width||1;
+   const parts=[...bounds.node.querySelectorAll('.screen-artboard,.screen-design-notes')]
+    .filter(node=>!node.parentElement.closest('.screen-artboard,.screen-design-notes'))
+    .map(node=>{const r=node.getBoundingClientRect();return{node,left:(r.left-rect.left)/ratio,top:(r.top-rect.top)/ratio,width:r.width/ratio,height:r.height/ratio,contentHeight:intrinsicHeight(node),hidden:false};});
+   board={...bounds,parts,contentHeight:intrinsicHeight(bounds.node),hidden:false};
+   measuredBoards.set(bounds.node,board);
+   measured.push(board);
+  }else Object.assign(board,bounds);
+  return board;
  });
- // Freeze only the skipped content's intrinsic height, never the actual page height.
- for(const b of boardBounds)b.node.style.setProperty('--canvas-content-height',b.contentHeight+'px');
+ // All reads precede these writes; intrinsic sizes preserve positions while skipped.
+ for(const board of measured){
+  board.node.style.setProperty('--canvas-content-height',board.contentHeight+'px');
+  for(const part of board.parts)part.node.style.setProperty('--canvas-chunk-height',part.contentHeight+'px');
+ }
  updateVisibility();
 }
 new ResizeObserver(()=>{viewWidth=viewport.clientWidth;viewHeight=viewport.clientHeight;scheduleRender();}).observe(viewport);

@@ -166,6 +166,7 @@ button { min-height:44px; }
 
 /* Hidden boards retain dimensions for stable layout and navigation. */
 #world>.canvas-offscreen{visibility:hidden;pointer-events:none;content-visibility:hidden;contain-intrinsic-block-size:var(--canvas-content-height)}
+.canvas-chunk-offscreen{visibility:hidden;pointer-events:none;content-visibility:hidden;contain-intrinsic-block-size:var(--canvas-chunk-height)}
 
 #viewport[aria-busy="true"] #world{opacity:0;pointer-events:none}
 #canvas-loading{position:absolute;inset:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:var(--app-space-3);background:var(--canvas-paper);color:var(--app-text-secondary);font-size:var(--app-body-2-size)}
