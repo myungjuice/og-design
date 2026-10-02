@@ -1,12 +1,17 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 
-test('standalone screen renders six distinct menu assets and does not use a profile character',async()=>{
+test('standalone screen uses original Figma assets with six distinct sprite regions',async()=>{
  const {renderMyInfoTest}=await import('./render.mjs');
  const html=renderMyInfoTest();
  const images=[...html.matchAll(/<img\b[^>]*src="([^"]+)"/g)].map(m=>m[1]);
- assert.equal(images.length,6);
- assert.equal(new Set(images).size,6);
+ assert.equal(images.filter(src=>src==='./media/figma/menu-icons.png').length,6);
+ assert.equal(images.filter(src=>src==='./media/figma/mileage-m.png').length,1);
+ assert.equal(images.filter(src=>src==='./media/figma/recent-utensils.svg').length,3);
+ assert.equal(images.filter(src=>src==='./media/figma/review-pencil.svg').length,1);
+ const regions=[...html.matchAll(/data-art="([^"]+)" style="--art-left:([^;]+);--art-top:([^"]+)"/g)].map(m=>m.slice(1));
+ assert.deepEqual(regions,[['receipt','-2.16%','-7.31%'],['bell','-93.39%','-7.31%'],['membership','-196.02%','-8.56%'],['support','-3.71%','-96.78%'],['settings','-100.34%','-96.47%'],['account','-196.54%','-96.99%']]);
+ assert.ok(images.every(src=>src.startsWith('./media/figma/')));
  assert.equal(images.some(src=>/character|avatar/i.test(src)),false);
  assert.match(html,/aria-label="프로필 캐릭터 미적용"/);
 });

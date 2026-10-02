@@ -11,12 +11,25 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    await page.setViewportSize({width,height:1024});
    await page.goto('http://127.0.0.1:4173/screens/my-info-3d-test/');
    await page.evaluate(()=>document.fonts.ready);
-   await page.locator('.service-face img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
+   await page.locator('.my-info-test img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
    // Capture after decoded images have reached a painted frame, not just the decoder.
    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow at '+width);
    assert.equal(await page.locator('.service-face img').count(),6);
    assert.ok(await page.locator('.service-face img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)));
+   assert.deepEqual(await page.locator('.m-coin').evaluate(image=>[image.naturalWidth,image.naturalHeight]),[48,48]);
+   assert.equal(await page.locator('.m-coin').evaluate(image=>getComputedStyle(image).borderRadius),'50%','mask the exported background outside the circular M coin');
+   assert.ok(await page.locator('.visit-symbol img').evaluateAll(images=>images.every(image=>image.getBoundingClientRect().width===32&&image.getBoundingClientRect().height===32)));
+   assert.equal(await page.locator('.review-write img').evaluate(image=>image.getBoundingClientRect().width),16);
+   const regions=await page.locator('.service-art').evaluateAll(nodes=>nodes.map(node=>{
+    const image=node.querySelector('img'),box=node.getBoundingClientRect(),style=getComputedStyle(node);
+    return {name:node.dataset.art,width:box.width,height:box.height,natural:[image.naturalWidth,image.naturalHeight],crop:[style.getPropertyValue('--art-left'),style.getPropertyValue('--art-top')],clip:style.overflow};
+   }));
+   const slotSize=width<=352?72:80;
+   assert.ok(regions.every(region=>region.width===slotSize&&region.height===slotSize&&region.clip==='clip'),'square clipping region at '+width);
+   assert.ok(regions.every(region=>region.natural.join(',')==='384,256'));
+   assert.equal(new Set(regions.map(region=>region.crop.join(','))).size,6);
+   assert.deepEqual(regions.map(region=>region.name),['receipt','bell','membership','support','settings','account']);
    assert.ok(await page.evaluate(()=>{
     const title=document.querySelector('.mileage-title>div').getBoundingClientRect();
     const history=document.querySelector('.mileage-history').getBoundingClientRect();
@@ -56,6 +69,6 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
   await page.locator('.preview-close').click();
   assert.equal(await page.locator('#preview-dialog').evaluate(node=>node.open),false);
   assert.deepEqual(errors,[]);
-  console.log('PASS: four responsive widths, six loaded assets, balance layout, navigation, preview dialog and focus restoration');
+  console.log('PASS: four responsive widths, original Figma assets, six square sprite crops, balance layout, navigation, preview dialog and focus restoration');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
