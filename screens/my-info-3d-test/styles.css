@@ -1,9 +1,9 @@
 /* Hallmark · macrostructure: member dashboard · studied-DNA (user screenshot)
- * P4 H5 E4 S5 R4 V4 · font/spacing: OG shared system · imagery: Figma original assets
- * Deliberate reference choices: dimensional shadows, violet balance card, 3-column menu.
- * Isolated route; no existing canvas, component or token file is changed.
+ * P4 H5 E5 S5 R4 V4 · font/spacing: OG shared system · imagery: Figma original assets
+ * Deliberate reference choices: directional material depth, violet balance card, 3-column menu.
+ * Isolated route; no shared canvas, component or global token file is changed.
  * Contrast: pass for card/body/muted text; mobile: 320/375/414/768.
- * Reference overrides: accent-card footprint and 3-column icon menu retained by request. */
+ * Reference overrides: accent-card footprint, 3-column menu, and layered 3D material shadows retained by request. */
 @import url('./tokens.css');
 @import url('../../design-system/components/shared.css');
 @import url('../../design-system/components/surfaces/surfaces.css');
@@ -27,7 +27,7 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .profile-row h1{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);letter-spacing:var(--app-tracking-heading);color:var(--test-accent);overflow-wrap:anywhere}
 .profile-edit{display:flex;align-items:center;gap:var(--app-space-1);border:0;background:none;padding:var(--app-space-1) 0;color:var(--test-muted);font-size:var(--app-caption-size);line-height:var(--app-caption-line);min-height:32px;white-space:nowrap}
 .page-content{padding-inline:var(--app-space-5);display:grid;gap:var(--app-space-4)}
-.mileage-card.og-surface{padding:var(--app-space-5);border:1px solid var(--test-card-light);border-bottom:3px solid var(--test-card-edge);border-radius:var(--app-radius-xl);background:linear-gradient(160deg,var(--test-card-top),var(--test-card-bottom));color:var(--test-on-card);box-shadow:inset 0 2px 5px var(--test-card-light),0 7px 12px -5px var(--test-shadow)}
+.mileage-card.og-surface{padding:var(--app-space-5);border:1px solid var(--test-card-rim);border-radius:var(--app-radius-xl);background:linear-gradient(160deg,var(--test-card-top),var(--test-card-bottom));color:var(--test-on-card);box-shadow:var(--test-shadow-card)}
 .mileage-card button:focus-visible{outline-color:var(--test-on-card)}
 .mileage-top{display:flex;gap:var(--app-space-2);align-items:center;position:relative;padding-top:var(--app-space-1)}
 .m-coin{width:48px;height:48px;flex:none;border-radius:50%;font-family:var(--app-font)}
@@ -42,28 +42,32 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .graph-available{width:var(--progress);background:linear-gradient(180deg,var(--test-progress-lit),var(--test-progress-bottom));box-shadow:inset 0 1px 2px var(--test-on-card)}
 .mileage-graph>.graph-marker{width:20px;left:clamp(10px,var(--progress),calc(100% - 10px));transform:translateX(-50%);background:var(--test-on-card)}
 .graph-labels{display:flex;justify-content:space-between;gap:var(--app-space-1);font-size:var(--app-caption-size);line-height:var(--app-caption-line);margin-top:var(--app-space-1);font-variant-numeric:tabular-nums;color:var(--test-on-card-muted)}
-.mileage-breakdown{display:grid;gap:var(--app-space-2);border-top:1px solid var(--test-card-light);padding-top:var(--app-space-3);margin:var(--app-space-4) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.mileage-breakdown{display:grid;gap:var(--app-space-2);border-top:1px solid var(--test-card-rule);padding-top:var(--app-space-3);margin:var(--app-space-4) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
 .mileage-breakdown>div{display:flex;justify-content:space-between;gap:var(--app-space-2);align-items:center}
 .mileage-breakdown dt{color:var(--test-on-card-muted)}
 .mileage-breakdown dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
 .mileage-breakdown dd>span{padding-right:var(--app-space-1)}
-.recent-card.og-surface{padding:var(--app-space-4) var(--app-space-5) var(--app-space-5);border:1px solid var(--test-surface);border-bottom:3px solid var(--test-rule);border-radius:var(--app-radius-xl);background:var(--test-surface);box-shadow:0 7px 12px -5px var(--test-shadow)}
+.recent-card.og-surface{padding:var(--app-space-4) var(--app-space-5) var(--app-space-5);border:1px solid var(--test-surface);border-radius:var(--app-radius-xl);background:var(--test-surface);box-shadow:var(--test-shadow-panel)}
 .recent-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--app-space-2)}
 .recent-heading h2{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
 .recent-heading .icon-button{width:32px;height:32px;color:var(--test-muted)}
-.visit-list{display:grid;gap:var(--app-space-3);list-style:none;margin:0;padding:0}
+.visit-list{display:grid;gap:var(--app-space-2);list-style:none;margin:0;padding:0}
 .visit-list li{display:flex;align-items:center;gap:var(--app-space-2);min-height:var(--app-touch-min)}
 .visit-symbol{width:32px;height:32px;display:grid;place-items:center;flex:none;background:var(--test-tint);color:var(--test-violet);border-radius:var(--app-radius-sm)}
 .visit-copy{flex:1;min-width:0}
 .visit-copy strong{display:block;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .visit-copy>span{display:block;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--test-muted)}
 .review-button{flex:none;display:grid;place-items:center;white-space:nowrap;min-width:56px;height:32px;padding:0 var(--app-space-2);background:var(--test-surface);border:1px solid var(--app-control-border);border-radius:var(--app-radius-pill);font-size:var(--app-caption-size);color:var(--test-muted)}
+/* Invisible hit area stays inside the 44px visit row; visible pills remain 32px high. */
+.review-button,.recent-heading .icon-button{position:relative}
+.review-button::before,.recent-heading .icon-button::before{content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;min-width:var(--app-touch-min);min-height:var(--app-touch-min);transform:translate(-50%,-50%)}
 .review-write{min-width:36px;color:var(--test-on-card);background:var(--test-violet);border-color:var(--test-violet)}
 .service-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--app-space-4);row-gap:var(--app-space-5);padding:var(--app-space-4) var(--app-space-2) var(--app-space-8)}
 .service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:var(--app-space-2);padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--test-ink);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium)}
-.service-face{display:grid;place-items:center;position:relative;width:80px;height:80px;border:1px solid var(--test-surface);border-bottom:3px solid var(--test-rule);border-radius:var(--app-radius-lg);background:var(--test-surface);box-shadow:0 7px 10px -5px var(--test-shadow)}
-/* Undo the plate border inset so the exported crop uses a square 80px (mobile 72px) viewport. */
-.service-art{position:absolute;inset:-1px -1px -3px;border-radius:inherit;overflow:clip;pointer-events:none}
+.service-face{display:grid;place-items:center;position:relative;width:80px;height:80px;border:0;border-radius:var(--app-radius-lg);background:var(--test-surface);box-shadow:var(--test-shadow-tile)}
+/* Preserve the Figma crop viewport; an overlay adds the plate lip without resizing the art. */
+.service-face::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--test-inset-tile);pointer-events:none}
+.service-art{position:absolute;inset:0;border-radius:inherit;overflow:clip;pointer-events:none}
 .service-art img{display:block;position:absolute;max-width:none;width:300.68%;height:200.45%;left:var(--art-left);top:var(--art-top)}
 .visit-symbol img,.review-write img{display:block}
 .service-tile>span:last-child{white-space:nowrap}

@@ -30,6 +30,10 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    assert.ok(regions.every(region=>region.natural.join(',')==='384,256'));
    assert.equal(new Set(regions.map(region=>region.crop.join(','))).size,6);
    assert.deepEqual(regions.map(region=>region.name),['receipt','bell','membership','support','settings','account']);
+   assert.ok(await page.locator('.review-button,.recent-heading .icon-button').evaluateAll(buttons=>buttons.every(button=>{
+    const box=button.getBoundingClientRect(),x=box.x+box.width/2;
+    return [box.top-4,box.bottom+4].every(y=>document.elementFromPoint(x,y)?.closest('button')===button);
+   })),'small recent-visit buttons retain independent expanded hit areas at '+width);
    assert.ok(await page.evaluate(()=>{
     const title=document.querySelector('.mileage-title>div').getBoundingClientRect();
     const history=document.querySelector('.mileage-history').getBoundingClientRect();
@@ -58,7 +62,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
   });
   assert.ok(contrast.every(pair=>pair.ratio>=4.5),JSON.stringify(contrast));
   const review=page.locator('.review-write');
-  await review.click();
+  // The small pencil pill retains its appearance but has a 44px touch target.
+  const reviewHit=await review.evaluate(node=>{
+   const box=node.getBoundingClientRect();return {x:box.x+box.width/2,y:box.top-4};
+  });
+  await page.mouse.click(reviewHit.x,reviewHit.y);
   assert.equal(await page.locator('#preview-dialog').evaluate(node=>node.open),true);
   assert.equal(await page.locator('#preview-title').textContent(),'후기 작성');
   await page.keyboard.press('Escape');

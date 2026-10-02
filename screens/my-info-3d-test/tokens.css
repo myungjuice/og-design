@@ -12,6 +12,14 @@
  --test-track:oklch(34% .105 281);--test-held:oklch(43% .16 280);
  --test-progress-lit:oklch(96% .025 228);--test-progress-bottom:oklch(77% .086 241);
  --test-shadow:oklch(34% .035 266 / .16);--test-shadow-soft:oklch(44% .035 266 / .1);
+ /* Test-only material roles. Top-left light, soft lower contact; no ambient glow. */
+ --test-card-rim:oklch(70% .135 282);--test-card-rule:oklch(65% .13 282);
+ --test-card-highlight:oklch(96% .018 278 / .45);
+ --test-surface-edge:oklch(84% .018 268 / .48);
+ --test-shadow-card:inset 1px 1px 2px var(--test-card-highlight),inset -1px -3px 5px var(--test-card-edge),0 8px 16px -7px var(--test-shadow);
+ --test-shadow-panel:inset 1px 1px 1px var(--test-surface),inset 0 -2px 3px var(--test-surface-edge),0 7px 12px -6px var(--test-shadow);
+ --test-shadow-tile:0 5px 10px -4px var(--test-shadow);
+ --test-inset-tile:inset 1px 1px 2px var(--test-surface),inset -1px -4px 6px var(--test-surface-edge);
  --coin-rim-light:oklch(87% .06 285);--coin-rim-dark:oklch(56% .19 281);
  --coin-face-light:oklch(94% .032 278);--coin-face-dark:oklch(80% .085 280);--coin-letter:oklch(57% .23 282);
  --icon-lit:oklch(83% .07 267);--icon-shade:oklch(64% .085 265);--icon-stroke:oklch(82% .03 264);
