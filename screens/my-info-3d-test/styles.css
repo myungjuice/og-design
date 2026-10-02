@@ -1,0 +1,81 @@
+/* Hallmark · macrostructure: member dashboard · studied-DNA (user screenshot)
+ * P4 H5 E4 S5 R4 V4 · font/spacing: OG shared system · imagery: built-in imagegen
+ * Deliberate reference choices: dimensional shadows, violet balance card, 3-column menu.
+ * Isolated route; no existing canvas, component or token file is changed.
+ * Contrast: pass for card/body/muted text; mobile: 320/375/414/768.
+ * Reference overrides: accent-card footprint and 3-column icon menu retained by request. */
+@import url('./tokens.css');
+@import url('../../design-system/components/shared.css');
+@import url('../../design-system/components/surfaces/surfaces.css');
+@font-face{font-family:Pretendard;src:url('./media/Pretendard-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Pretendard;src:url('./media/Pretendard-Bold.woff2') format('woff2');font-weight:600 900;font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;background:var(--test-desktop)}
+body{font-family:var(--app-font);color:var(--test-ink);font-size:var(--app-body-2-size)}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:var(--app-focus-width) solid var(--test-focus);outline-offset:var(--app-focus-gap)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:active:not(:disabled){transform:translateY(1px)}
+button{transition:transform var(--test-press-duration) var(--test-ease-out)}
+.ui-icon{display:block;flex:none}
+.my-info-test{position:relative;max-width:414px;min-height:100dvh;margin-inline:auto;background:linear-gradient(180deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
+.profile-header{padding:var(--app-space-6) var(--app-space-5) var(--app-space-8)}
+.header-actions{display:flex;justify-content:flex-end;gap:var(--app-space-2);height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
+.icon-button{display:grid;place-items:center;width:var(--app-touch-min);height:var(--app-touch-min);border:0;padding:0;background:none;border-radius:var(--app-radius-md)}
+.profile-row{display:flex;align-items:center;gap:var(--app-space-3);padding-top:var(--app-space-3)}
+.profile-placeholder{display:grid;place-items:center;width:var(--app-space-16);height:var(--app-space-16);flex:none;border:2px solid var(--test-card-light);border-radius:var(--app-radius-pill);color:var(--test-muted);background:var(--test-surface)}
+.profile-row h1{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);letter-spacing:var(--app-tracking-heading);color:var(--test-accent);overflow-wrap:anywhere}
+.profile-edit{display:flex;align-items:center;gap:var(--app-space-1);border:0;background:none;padding:var(--app-space-1) 0;color:var(--test-muted);font-size:var(--app-caption-size);line-height:var(--app-caption-line);min-height:32px;white-space:nowrap}
+.page-content{padding-inline:var(--app-space-5);display:grid;gap:var(--app-space-4)}
+.mileage-card.og-surface{padding:var(--app-space-5);border:1px solid var(--test-card-light);border-bottom:3px solid var(--test-card-edge);border-radius:var(--app-radius-xl);background:linear-gradient(160deg,var(--test-card-top),var(--test-card-bottom));color:var(--test-on-card);box-shadow:inset 0 2px 5px var(--test-card-light),0 7px 12px -5px var(--test-shadow)}
+.mileage-card button:focus-visible{outline-color:var(--test-on-card)}
+.mileage-top{display:flex;gap:var(--app-space-2);align-items:center;position:relative;padding-top:var(--app-space-1)}
+.m-coin{width:48px;height:48px;flex:none;font-family:var(--app-font)}
+.mileage-title{min-width:0;flex:1}
+.mileage-title>div{display:flex;align-items:center;gap:2px;font-size:var(--app-caption-size);line-height:var(--app-caption-line);white-space:nowrap}
+.mileage-title strong{display:block;font-size:28px;line-height:32px;margin-top:2px;letter-spacing:-.02em;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
+.mileage-info{display:grid;place-items:center;background:none;border:0;color:inherit;padding:0;width:24px;height:24px;flex:none}
+.mileage-history{display:flex;align-items:center;gap:0;align-self:flex-start;background:none;color:var(--test-on-card-muted);border:0;padding:0;min-height:24px;white-space:nowrap;font-size:10px;line-height:16px;margin-left:var(--app-space-1)}
+.mileage-graph{position:relative;isolation:isolate;height:20px;border-radius:var(--app-radius-pill);margin-top:var(--app-space-5);background:var(--test-track);overflow:clip}
+.mileage-graph>span{position:absolute;inset:0 auto 0 0;border-radius:inherit}
+.graph-held{width:var(--progress);background:var(--test-held)}
+.graph-available{width:var(--progress);background:linear-gradient(180deg,var(--test-progress-lit),var(--test-progress-bottom));box-shadow:inset 0 1px 2px var(--test-on-card)}
+.mileage-graph>.graph-marker{width:20px;left:clamp(10px,var(--progress),calc(100% - 10px));transform:translateX(-50%);background:var(--test-on-card)}
+.graph-labels{display:flex;justify-content:space-between;gap:var(--app-space-1);font-size:var(--app-caption-size);line-height:var(--app-caption-line);margin-top:var(--app-space-1);font-variant-numeric:tabular-nums;color:var(--test-on-card-muted)}
+.mileage-breakdown{display:grid;gap:var(--app-space-2);border-top:1px solid var(--test-card-light);padding-top:var(--app-space-3);margin:var(--app-space-4) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
+.mileage-breakdown>div{display:flex;justify-content:space-between;gap:var(--app-space-2);align-items:center}
+.mileage-breakdown dt{color:var(--test-on-card-muted)}
+.mileage-breakdown dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mileage-breakdown dd>span{padding-right:var(--app-space-1)}
+.recent-card.og-surface{padding:var(--app-space-4) var(--app-space-5) var(--app-space-5);border:1px solid var(--test-surface);border-bottom:3px solid var(--test-rule);border-radius:var(--app-radius-xl);background:var(--test-surface);box-shadow:0 7px 12px -5px var(--test-shadow)}
+.recent-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--app-space-2)}
+.recent-heading h2{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
+.recent-heading .icon-button{width:32px;height:32px;color:var(--test-muted)}
+.visit-list{display:grid;gap:var(--app-space-3);list-style:none;margin:0;padding:0}
+.visit-list li{display:flex;align-items:center;gap:var(--app-space-2);min-height:var(--app-touch-min)}
+.visit-symbol{width:32px;height:32px;display:grid;place-items:center;flex:none;background:var(--test-tint);color:var(--test-violet);border-radius:var(--app-radius-sm)}
+.visit-copy{flex:1;min-width:0}
+.visit-copy strong{display:block;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visit-copy>span{display:block;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--test-muted)}
+.review-button{flex:none;display:grid;place-items:center;white-space:nowrap;min-width:56px;height:32px;padding:0 var(--app-space-2);background:var(--test-surface);border:1px solid var(--app-control-border);border-radius:var(--app-radius-pill);font-size:var(--app-caption-size);color:var(--test-muted)}
+.review-write{min-width:36px;color:var(--test-on-card);background:var(--test-violet);border-color:var(--test-violet)}
+.service-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--app-space-4);row-gap:var(--app-space-5);padding:var(--app-space-4) var(--app-space-2) var(--app-space-8)}
+.service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:var(--app-space-2);padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--test-ink);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium)}
+.service-face{display:grid;place-items:center;position:relative;width:80px;height:80px;border:1px solid var(--test-surface);border-bottom:3px solid var(--test-rule);border-radius:var(--app-radius-lg);background:var(--test-surface);box-shadow:0 7px 10px -5px var(--test-shadow)}
+.service-face img{display:block;width:72px;height:72px;object-fit:contain}
+.service-tile>span:last-child{white-space:nowrap}
+.bottom-navigation{position:relative;z-index:var(--test-nav-z);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;padding:var(--app-space-2) var(--app-space-2) calc(var(--app-space-3) + env(safe-area-inset-bottom,0px));border-top:1px solid var(--test-surface);border-radius:32px;background:linear-gradient(180deg,var(--test-surface),var(--test-page-top));box-shadow:0 7px 12px -7px var(--test-shadow)}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:var(--app-space-1);border:0;background:none;padding:0;min-width:0;color:var(--test-muted);font-size:10px;line-height:16px;white-space:nowrap}
+.nav-face{height:32px;display:grid;place-items:center}
+.nav-icon{filter:drop-shadow(0 2px 1px var(--test-shadow-soft))}
+.is-selected{color:var(--test-accent);font-weight:var(--app-weight-bold);--icon-lit:var(--test-nav-active-lit);--icon-shade:var(--test-nav-active-shade);--icon-stroke:var(--test-nav-active-lit)}
+.nav-barcode .nav-face{width:64px;height:64px;margin-top:-28px;border-radius:var(--app-radius-pill);border:3px solid var(--coin-rim-light);background:linear-gradient(155deg,var(--test-violet),var(--test-accent));box-shadow:inset 0 2px 4px var(--test-card-light),0 4px 8px -2px var(--test-shadow);color:var(--test-on-card)}
+.nav-barcode>span:last-child{color:var(--test-accent)}
+#preview-dialog{width:calc(100% - 40px);max-width:360px;border:1px solid var(--test-rule);border-radius:var(--app-radius-xl);padding:var(--app-space-6);background:var(--test-surface);color:var(--test-ink);box-shadow:0 12px 32px -8px var(--test-shadow)}
+#preview-dialog::backdrop{background:var(--test-overlay)}
+#preview-dialog h2{font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);margin:0 0 var(--app-space-3)}
+#preview-dialog p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--test-muted);word-break:keep-all}
+.preview-close{min-height:var(--app-touch-min);width:100%;border:0;border-radius:var(--app-radius-md);margin-top:var(--app-space-4);background:var(--test-accent);color:var(--test-on-card);font-weight:var(--app-weight-bold)}
+@media(min-width:25rem){.service-menu{column-gap:var(--app-space-6)}.mileage-title>div{font-size:13px}.mileage-history{font-size:11px}}
+@media(max-width:22rem){.page-content{padding-inline:var(--app-space-4)}.mileage-card.og-surface{padding:var(--app-space-4)}.m-coin{width:40px;height:40px}.mileage-title>div{font-size:10px}.mileage-title strong{font-size:26px}.mileage-history{font-size:9px}.service-menu{column-gap:var(--app-space-2)}.service-face{width:72px;height:72px}.service-face img{width:64px;height:64px}.recent-card.og-surface{padding-inline:var(--app-space-4)}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
