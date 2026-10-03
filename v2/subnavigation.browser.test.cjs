@@ -33,7 +33,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   assert.equal(new URL(page.url()).hash,'#secondary');
   assert.ok(await page.locator('#secondary').evaluate(n=>{const r=n.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight&&(scrollY>0||document.documentElement.scrollHeight<=innerHeight);}),'child jump reveals its section within the available document scroll');
   await aux.locator('[data-group-link="cards-information"]').click();
-  assert.deepEqual(await visible(),['cards','mileage']);
+  assert.deepEqual(await visible(),['cards','mileage','section-heading']);
   await page.goBack();await page.locator('#secondary').waitFor();assert.deepEqual(await visible(),['primary','secondary','review']);
   await page.reload();await page.locator('#secondary').waitFor();assert.deepEqual(await visible(),['primary','secondary','review']);
   await page.locator('.v2-skip').focus();await page.keyboard.press('Enter');

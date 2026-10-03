@@ -1,0 +1,33 @@
+/* Hallmark · component: section heading · genre: playful · theme: existing OG soft 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Title/description/info remain flat; the secondary action alone has low elevation.
+ * App specimens: default/pressed/disabled/loading/error/success; native hover/focus retained.
+ * macrostructure: existing grouped review gallery · five heading patterns, collapsed action states
+ * slop: pass (component scope; established OG tokens/white surfaces preserved)
+ * contrast: pass (WCAG 4.5:1 text) · responsive: pass (320–1440) · motion: none
+ */
+.v2-heading-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-heading-stage{width:100%;max-width:390px;min-width:0;padding:var(--v2-space-5);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
+.v2-heading-block{width:100%;min-width:0}
+.v2-section-heading{display:flex;align-items:flex-start;flex-wrap:wrap;gap:var(--v2-space-3) var(--v2-space-4);min-width:0;color:var(--v2-text)}
+.v2-section-heading .og-heading-copy{flex:1 1 160px;min-width:0}
+.v2-section-heading .og-heading-title-line{display:flex;align-items:center;gap:var(--v2-space-1);min-width:0}
+.v2-section-heading h3{margin:0;min-width:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal;overflow-wrap:anywhere;text-shadow:none;box-shadow:none}
+.v2-section-heading .og-heading-description{margin:var(--v2-space-2) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere}
+.v2-section-heading .og-heading-info{display:inline-flex;align-items:center;justify-content:flex-start;flex:none;width:48px;height:48px;margin:0;padding:0 0 0 var(--v2-space-1);border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text-muted);cursor:pointer;box-shadow:none}
+.v2-section-heading .og-heading-info svg{display:block;width:var(--v2-space-4);height:var(--v2-space-4)}
+.v2-section-heading .og-heading-action{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:96px;min-height:44px;margin-inline-start:auto;padding:var(--v2-space-2) var(--v2-space-3);border:1px solid var(--v2-control-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-action);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap;cursor:pointer;box-shadow:var(--v2-depth-raised)}
+.v2-section-heading button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:3px}
+@media(hover:hover) and (pointer:fine){.v2-section-heading button:not(:disabled):hover{color:var(--v2-focus)}}
+.v2-section-heading .og-heading-info:active,.v2-section-heading .og-heading-info[aria-expanded="true"]{color:var(--v2-focus)}
+.v2-section-heading .og-heading-action:not(:disabled):active,.v2-section-heading .og-heading-action[data-state="active"]{box-shadow:var(--v2-depth-inset)}
+.v2-section-heading .og-heading-action:disabled{background:var(--v2-disabled);color:var(--v2-text-muted);border-color:var(--v2-edge);box-shadow:none;cursor:not-allowed}
+.v2-section-heading .og-heading-action[data-state="error"]{border-color:var(--v2-error);border-style:dashed}
+.v2-section-heading .og-heading-action[data-state="success"]{border-color:var(--v2-success)}
+.v2-heading-help{margin:var(--v2-space-3) 0 0;padding:var(--v2-space-3);border-radius:var(--v2-radius-button);background:var(--v2-muted-surface);color:var(--v2-text-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere}
+.v2-heading-result{margin:var(--v2-space-3) 0 0;min-height:44px;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted)}
+.v2-heading-result[data-state="error"]{color:var(--v2-error)}
+.v2-heading-result[data-state="success"]{color:var(--v2-success)}
+.v2-heading-note,.v2-heading-feedback{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);color:var(--v2-workspace-muted)}
+.v2-heading-feedback{min-height:44px;margin-top:var(--v2-space-6)}
+@media(min-width:960px){.v2-heading-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

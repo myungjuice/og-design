@@ -4,8 +4,10 @@ import {escapeHTML as e} from '../../design-system/components/core.mjs';
 import {renderMileageSamples} from './mileage.mjs';
 import {renderHomeControlSamples} from './home-controls.mjs';
 import {renderListRowSamples} from './list-row.mjs';
+import {renderSectionHeadingSamples} from './section-heading.mjs';
 import {stateComparison} from './catalog.mjs';
 export {renderListRow} from './list-row.mjs';
+export {renderSectionHeading} from './section-heading.mjs';
 export const componentStates=[
  ['default','기본','동작하기 전'],['active','누르는 중','손가락으로 누르는 동안 얕게 눌림'],
  ['disabled','비활성','사용 가능한 마일리지가 없을 때'],['loading','처리 중','중복 실행을 막는 상태'],
@@ -39,6 +41,7 @@ export function renderComponents(){
  ${stateComparison(`<div class="v2-component-grid">${componentStates.slice(1).map(([state,name,desc])=>figure(name,state==='disabled'?'이용내역을 열 수 없는 상태':desc,renderMenuTile({state,attributes:{'aria-label':`${stateLabel('이용내역',state)} · 메뉴 타일 · ${name}`}}))).join('')}${figure('선택됨','선택 여부는 눌림 상태와 구분',renderMenuTile({selected:true,attributes:{'aria-label':'이용내역 · 메뉴 타일 · 선택됨'}}))}</div>`)}</section>
  ${renderMileageSamples()}
  ${renderListRowSamples()}
+ ${renderSectionHeadingSamples()}
  ${renderHomeControlSamples()}
  <section class="v2-component-section" id="try" aria-labelledby="try-title" hidden><h2 id="try-title">직접 눌러보기</h2><p>터치해서 눌림과 선택 상태를 확인합니다. 실제 마일리지를 사용하지 않습니다.</p><div class="v2-try-row">${renderButton({attributes:{'data-preview-action':'button'}})}${renderMenuTile({attributes:{'data-preview-action':'tile'}})}</div><p class="v2-preview-status" role="status" aria-live="polite">메뉴 타일을 누르면 선택 여부가 바뀝니다.</p>
  <details class="v2-accessibility-check"><summary>접근성 점검</summary><p>웹 검토 페이지에서는 Tab으로 버튼에 이동하고 Enter·Space로 누를 수 있습니다. 실제 포커스 표시와 키보드 조작은 유지하며, 앱 기본 시안의 상태 비교에서는 제외했습니다.</p></details></section>`;

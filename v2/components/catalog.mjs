@@ -4,6 +4,7 @@ export const componentItems=[
  {id:'review',label:'후기 버튼',group:'버튼'},
  {id:'cards',label:'카드·메뉴 타일',group:'카드·정보'},
  {id:'mileage',label:'마일리지 카드·진행바',group:'카드·정보'},
+ {id:'section-heading',label:'섹션 제목·우측 액션',group:'카드·정보'},
  {id:'list-row',label:'목록 행',group:'목록'},
  {id:'search',label:'매장 검색바',group:'지도 탐색'},
  {id:'categories',label:'업종 카테고리',group:'지도 탐색'},

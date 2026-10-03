@@ -4,8 +4,8 @@ const heart = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.
 export function button({label='',type='button',variant='primary',size,state,className='',disabled=false,busy=false,iconHTML='',attributes={}}={}) {
  return '<button type="'+e(type)+'" class="og-button'+(className?' '+e(className):'')+'" data-variant="'+e(variant)+'"'+attrs({'data-size':size,'data-state':state,disabled,'aria-busy':busy?'true':undefined,...attributes})+'>'+ (iconHTML || (variant==='icon'?close:e(label)))+'</button>';
 }
-export function iconButton({label, name='info_outline',info=false,expanded,className='',attributes={}}={}) {
- return '<button type="button" class="og-icon-button'+(info?' og-info-button':'')+(className?' '+e(className):'')+'"'+attrs({'aria-label':label,'aria-expanded':expanded===undefined?undefined:String(expanded),...attributes})+'>'+icon(name)+'</button>';
+export function iconButton({label, name='info_outline',info=false,expanded,className='',iconHTML='',attributes={}}={}) {
+ return '<button type="button" class="og-icon-button'+(info?' og-info-button':'')+(className?' '+e(className):'')+'"'+attrs({'aria-label':label,'aria-expanded':expanded===undefined?undefined:String(expanded),...attributes})+'>'+(iconHTML||icon(name))+'</button>';
 }
 export function textButton({label='',className='',disabled=false,attributes={}}={}) {
  return '<button type="button" class="og-text-button'+(className?' '+e(className):'')+'"'+attrs({disabled,...attributes})+'>'+e(label)+'</button>';

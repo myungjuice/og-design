@@ -36,8 +36,8 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
      assert.equal(new Set(heights).size,1,'state changes do not shift height '+id);
     }
    }
-   assert.ok(await page.locator('[data-state="loading"]').evaluateAll(nodes=>nodes.every(n=>n.disabled&&n.getAttribute('aria-busy')==='true')));
-   assert.ok(await page.locator('[data-state="disabled"]').evaluateAll(nodes=>nodes.every(n=>n.disabled)));
+   assert.ok(await page.locator('button[data-state="loading"]').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>n.disabled&&n.getAttribute('aria-busy')==='true')));
+   assert.ok(await page.locator('button[data-state="disabled"]').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>n.disabled)));
    assert.ok(await page.locator('.v2-button,.v2-menu-tile,.v2-mileage button').evaluateAll(nodes=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
     const luminance=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((sum,c,i)=>sum+c*[.2126,.7152,.0722][i],0);};
