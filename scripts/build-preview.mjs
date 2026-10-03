@@ -18,6 +18,6 @@ function copy(relative){
   mkdirSync(join(output,relative),{recursive:true});copyFileSync(join(root,path),join(output,path));count++;
  }
 }
-for(const dir of ['design-system','assets','docs','research','reports','concepts','screens'])copy(dir);
+for(const dir of ['design-system','assets','docs','research','reports','concepts','screens','v2'])copy(dir);
 copyFileSync(join(root,'index.html'),join(output,'index.html'));
 console.log(`Prepared ${count+1} static files; credentials and development files excluded.`);
