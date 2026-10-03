@@ -10,6 +10,9 @@
  --v2-workspace-accent:oklch(82% .09 277);--v2-workspace-focus:oklch(86% .05 277);
  --v2-workspace-selected:oklch(38% .04 277);
  --v2-page:oklch(96% 0 0);--v2-surface:oklch(100% 0 0);
+ /* App screen background matches Figma 35:76; review chrome stays dark grey. */
+ --v2-screen-top:var(--v2-surface);--v2-screen-bottom:oklch(93.052482% .02473482 257.646471);
+ --v2-nav-selected-surface:oklch(92% .032 278);
  --v2-control-edge:oklch(61% 0 0);
  --v2-muted-surface:oklch(97% 0 0);--v2-text:oklch(23% .012 270);
  --v2-text-muted:oklch(46% .025 267);--v2-edge:oklch(89% 0 0);

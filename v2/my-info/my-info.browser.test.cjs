@@ -16,6 +16,22 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.locator('.service-tile').count(),6);
    assert.equal(await page.locator('.mileage-card.v2-mileage').count(),1);
    assert.equal(await page.locator('.v2-menu nav [aria-current]').textContent(),'내정보');
+   const appearance=await page.locator('.my-info-test').evaluate(screen=>{
+    const rgba=value=>{const c=document.createElement('canvas');c.width=c.height=1;const ctx=c.getContext('2d');ctx.fillStyle=value;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data];};
+    const current=screen.querySelector('.bottom-navigation [aria-current="page"]'),face=current.querySelector('.nav-face'),cs=getComputedStyle(current),ss=getComputedStyle(screen),f=face.getBoundingClientRect();
+    return {gradient:ss.backgroundImage,bottom:rgba(ss.getPropertyValue('--test-page-bottom').trim()),label:current.textContent.trim(),weight:cs.fontWeight,text:rgba(cs.color),face:rgba(getComputedStyle(face).backgroundColor),faceSize:[f.width,f.height],iconSize:[face.querySelector('svg').width.baseVal.value,face.querySelector('svg').height.baseVal.value],currentCount:screen.querySelectorAll('.bottom-navigation [aria-current]').length,
+     otherFaces:[...screen.querySelectorAll('.bottom-navigation .nav-item:not([aria-current]):not(.nav-barcode) .nav-face')].map(n=>rgba(getComputedStyle(n).backgroundColor)[3])};
+   });
+   assert.deepEqual([
+    ...(!appearance.gradient.startsWith('linear-gradient(155.768')?['reference gradient missing']:[]),
+    ...(appearance.face[3]===0?['current navigation has no shape cue']:[])
+   ],[],'reference background and selected navigation are visible '+width);
+   assert.ok(appearance.bottom.slice(0,3).every((v,i)=>Math.abs(v-[222,233,249][i])<=1),'approved pale-blue endpoint '+width);
+   assert.equal(appearance.label,'내 정보');assert.equal(appearance.currentCount,1);assert.equal(appearance.weight,'700');
+   assert.deepEqual(appearance.faceSize,[40,32]);assert.deepEqual(appearance.iconSize,[26,26]);
+   assert.ok(appearance.otherFaces.every(alpha=>alpha===0),'unselected icons do not gain selected backgrounds');
+   const luminance=rgb=>rgb.slice(0,3).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+   assert.ok((1.05)/(luminance(appearance.text)+.05)>=4.5,'selected caption contrast on the white navigation '+width);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no document overflow '+width);
    const geometry=await page.locator('.my-info-test').evaluate(screen=>{
     const s=screen.getBoundingClientRect();
