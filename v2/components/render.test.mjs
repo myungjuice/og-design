@@ -24,7 +24,10 @@ test('tiles expose selection and block loading/disabled interaction',()=>{
 test('gallery covers three button roles, two card roles and readable state explanations',()=>{
  const html=renderComponents();
  for(const id of ['primary','secondary','review','cards'])assert.match(html,new RegExp(`id="${id}"`));
- assert.equal((html.match(/data-component="button"/g)||[]).length,24);
+ assert.equal((html.match(/data-component="button"/g)||[]).length,18);
+ assert.doesNotMatch(html,/data-state="(?:hover|focus)"/);
+ for(const state of ['default','active','disabled','loading','error','success'])assert.match(html,new RegExp(`data-state="${state}"`));
+ assert.match(html,/<details class="v2-accessibility-check"><summary>접근성 점검<\/summary>/);
  assert.match(html,/실제 마일리지를 사용하지 않습니다/);
  assert.match(html,/사용 가능한 마일리지가 없을 때/);
  assert.match(html,/다시 시도/);assert.match(html,/완료/);

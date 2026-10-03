@@ -46,5 +46,6 @@ test('components have their own route and use the actual shared renderers',()=>{
  assert.match(html,/class="og-button v2-button/);
  assert.match(html,/class="og-surface v2-card/);
  assert.match(html,/class="og-menu-tile v2-menu-tile/);
- for(const state of ['default','hover','focus','active','disabled','loading','error','success'])assert.match(html,new RegExp(`data-state="${state}"`));
+ for(const state of ['default','active','disabled','loading','error','success'])assert.match(html,new RegExp(`data-state="${state}"`));
+ assert.doesNotMatch(html,/data-state="(?:hover|focus)"/);
 });

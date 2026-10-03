@@ -10,7 +10,13 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   for(const width of [320,375,390,414,768,1440]){
    await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/`);
    await page.locator('#try').waitFor();await page.evaluate(()=>document.fonts.ready);
-   assert.equal(await page.locator('[data-component="button"]').count(),24);
+   assert.equal(await page.locator('[data-component="button"]').count(),18);
+   assert.equal(await page.locator('main [data-state="hover"],main [data-state="focus"]').count(),0);
+   const accessibility=page.locator('.v2-accessibility-check');
+   assert.equal(await accessibility.evaluate(n=>n.open),false);
+   await accessibility.locator('summary').focus();await page.keyboard.press('Enter');
+   assert.equal(await accessibility.evaluate(n=>n.open),true);
+   await page.keyboard.press('Enter');assert.equal(await accessibility.evaluate(n=>n.open),false);
    assert.equal(await page.locator('[data-foundation]').count(),0);
    assert.equal(await page.locator('link[href$="foundations.css"]').count(),0);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow '+width);
@@ -52,6 +58,6 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   await touchPage.locator('[data-preview-action="tile"]').tap();
   assert.equal(await touchPage.locator('[data-preview-action="tile"]').getAttribute('aria-pressed'),'true');
   assert.deepEqual(errors,[]);
-  console.log('v2 components: 8 states, 3 button roles, card/tile, 6 widths, keyboard/touch, no layout shift passed');
+  console.log('v2 components: 6 app states, separate accessibility checklist, 3 button roles, card/tile, 6 widths, keyboard/touch passed');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
