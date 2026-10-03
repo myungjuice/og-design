@@ -14,6 +14,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
      screen:relative(screen,screen),nav:relative(screen.querySelector('.bottom-navigation'),screen),
      status:screen.querySelector('.mobile-status-bar')?relative(screen.querySelector('.mobile-status-bar'),screen):null,
      indicator:screen.querySelector('.mobile-home-indicator')?relative(screen.querySelector('.mobile-home-indicator'),screen):null,
+     footer:screen.querySelector('.home-map')?(()=>{const style=getComputedStyle(screen.querySelector('.home-map'),'::before');return {content:style.content,height:style.height,bottom:style.bottom,pointerEvents:style.pointerEvents,background:style.backgroundImage};})():null,
      card:screen.querySelector('.mileage-card')?relative(screen.querySelector('.mileage-card'),screen):null,
      recent:screen.querySelector('.recent-card')?relative(screen.querySelector('.recent-card'),screen):null,
      tiles:[...screen.querySelectorAll('.service-tile')].map(node=>relative(node,screen)),
@@ -23,8 +24,13 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
     }));
    });
    assert.deepEqual(geometry.map(g=>g.screen.height),[996,846],'both previews use their Figma frame heights');
-   assert.ok(geometry.every(g=>g.status&&g.status.y===0&&g.status.height===32),'shared static status bars');
-   assert.ok(geometry.every(g=>g.indicator&&g.indicator.bottom===10),'home indicator sits below the floating navigation');
+   assert.ok(geometry.every(g=>g.status===null),'no simulated time or device status icons');
+   assert.ok(geometry.every(g=>g.indicator===null),'no simulated home indicator');
+   const footer=geometry[1].footer;
+   assert.equal(footer.content,'""','home has a decorative bottom wash');
+   assert.equal(footer.height,'140px');assert.equal(footer.bottom,'0px');
+   assert.equal(footer.pointerEvents,'none','bottom wash never intercepts map or navigation taps');
+   assert.match(footer.background,/linear-gradient/);
    assert.ok(geometry.every(g=>g.nav.bottom===20&&g.nav.height===72),'navigation floats 20px above the lower edge');
    assert.ok(geometry.every(g=>g.scrollHeight<=g.screen.height),'no clipped or internally scrolling content');
    assert.ok(geometry[0].tiles.every(t=>t.y+t.height<geometry[0].nav.y-14),'all six menus clear the raised barcode button');
@@ -54,6 +60,6 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
     await page.screenshot({path:'/private/tmp/og-reference-pair.png',fullPage:true,animations:'disabled'});
    }
   }
-  console.log('PASS: reference frame sizes, original card/menu geometry, floating navigation, shared status bars and slim touch-safe categories');
+  console.log('PASS: reference frame sizes, original card/menu geometry, floating navigation, no simulated device chrome, pale-blue footer and slim touch-safe categories');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

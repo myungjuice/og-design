@@ -21,12 +21,6 @@ button:active:not(:disabled){transform:translateY(1px)}
 button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .ui-icon{display:block;flex:none}
 .my-info-test{position:relative;width:100%;max-width:390px;height:var(--preview-info-height);margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%)}
-.mobile-status-bar{position:absolute;inset:0 0 auto;z-index:var(--test-nav-z);height:32px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 32px 2px 40px;color:var(--test-ink);pointer-events:none}
-.mobile-status-time{font-size:14px;line-height:18px;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
-.mobile-status-icons{display:flex;align-items:center;gap:var(--app-space-2);height:18px}
-.mobile-status-icons svg{display:block;fill:currentColor}
-.mobile-status-battery text{fill:var(--test-surface);font-family:var(--app-font);font-size:9px;font-weight:var(--app-weight-bold)}
-.mobile-home-indicator{position:absolute;bottom:10px;left:50%;width:98px;height:4px;transform:translateX(-50%);border-radius:var(--app-radius-pill);background:var(--test-home-indicator);z-index:var(--test-nav-z);pointer-events:none}
 .profile-header{padding:var(--app-space-8) var(--app-space-5)}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:0;height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
 .icon-button{display:grid;place-items:center;width:var(--app-touch-min);height:var(--app-touch-min);border:0;padding:0;background:none;border-radius:var(--app-radius-md)}
