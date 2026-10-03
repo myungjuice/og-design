@@ -32,3 +32,10 @@ test('unknown IDs give a safe return route without echoing markup',()=>{
  assert.match(html,/href="\/v2\/design-system\/"/);
  assert.doesNotMatch(html,/<script>bad/);
 });
+test('design system presents five foundation groups as visual specimens',()=>{
+ const html=renderWorkspace({pageId:'design-system'});
+ assert.deepEqual([...html.matchAll(/data-foundation="([^"]+)"/g)].map(x=>x[1]),['colors','typography','spacing','radius','materials']);
+ assert.match(html,/시각 규칙 검토용/);
+ assert.doesNotMatch(html,/<button|<input/);
+ for(const id of ['home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);
+});
