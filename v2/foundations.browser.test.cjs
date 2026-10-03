@@ -25,11 +25,16 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const contrasts=[...document.querySelectorAll('[data-contrast]')].map(n=>{
      const s=getComputedStyle(n);return {name:n.dataset.contrast,ratio:ratio(s.color,s.backgroundColor),min:n.dataset.large==='true'?3:4.5};
     });
-    contrasts.push({name:'focus',ratio:ratio(tokens.getPropertyValue('--v2-focus'),tokens.getPropertyValue('--v2-page')),min:3});
+    const workspace=getComputedStyle(document.documentElement).backgroundColor;
+    for(const selector of ['main h1','.v2-section-copy','.v2-color-row dd','.v2-color-value','.v2-back']){
+     contrasts.push({name:selector,ratio:ratio(getComputedStyle(document.querySelector(selector)).color,workspace),min:4.5});
+    }
+    contrasts.push({name:'workspace focus',ratio:ratio(tokens.getPropertyValue('--v2-workspace-focus'),workspace),min:3});
     const faces=[...document.styleSheets].flatMap(sheet=>[...sheet.cssRules]).filter(r=>r.type===CSSRule.FONT_FACE_RULE).map(r=>r.style.getPropertyValue('font-weight')).sort();
-    return {page:rgba(tokens.getPropertyValue('--v2-page')),muted:rgba(tokens.getPropertyValue('--v2-muted-surface')),fontLoaded:document.fonts.check('400 16px "OG V2 Pretendard"')&&document.fonts.check('700 28px "OG V2 Pretendard"'),faces,amount:[amount.fontSize,amount.lineHeight,amount.fontWeight],bodyWeight:body.fontWeight,contrasts};
+    return {workspace:rgba(workspace),page:rgba(tokens.getPropertyValue('--v2-page')),muted:rgba(tokens.getPropertyValue('--v2-muted-surface')),fontLoaded:document.fonts.check('400 16px "OG V2 Pretendard"')&&document.fonts.check('700 28px "OG V2 Pretendard"'),faces,amount:[amount.fontSize,amount.lineHeight,amount.fontWeight],bodyWeight:body.fontWeight,contrasts};
    });
-   assert.ok(styles.page[0]>=230&&styles.page[0]<250,'workspace is light gray, not white');assert.equal(styles.page[0],styles.page[1]);assert.equal(styles.page[1],styles.page[2]);assert.equal(styles.muted[0],styles.muted[1]);assert.equal(styles.muted[1],styles.muted[2]);
+   assert.ok(styles.workspace[0]>=35&&styles.workspace[0]<=65,'workspace is dark gray');assert.equal(styles.workspace[0],styles.workspace[1]);assert.equal(styles.workspace[1],styles.workspace[2]);
+   assert.ok(styles.page[0]>=230&&styles.page[0]<250,'app page token stays light');assert.equal(styles.muted[0],styles.muted[1]);assert.equal(styles.muted[1],styles.muted[2]);
    await page.waitForFunction(()=>[...document.querySelectorAll('[data-color-token]')].every(n=>/^RGB\(\d+, \d+, \d+\)$/.test(n.textContent)));
    assert.equal(await page.locator('[data-color-token]').count(),13);
    assert.ok(await page.locator('.v2-foundation-end a').evaluate(n=>n.getBoundingClientRect().height>=44));

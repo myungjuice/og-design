@@ -4,7 +4,7 @@ export const foundationGroups=[
 ];
 const colors=[
  ['text','본문','주요 정보와 매장명'],['text-muted','보조 본문','날짜와 안내 문구'],
- ['page','페이지','눈부심을 줄인 연회색 검토 배경'],['surface','표면','카드와 메뉴 타일의 흰 표면'],
+ ['page','페이지','앱 화면의 밝은 기본 배경'],['surface','표면','카드와 메뉴 타일의 흰 표면'],
  ['muted-surface','구분 표면','옅은 중립 회색'],['action','주요 액션','선택 상태와 주요 동작'],
  ['on-action','액션 위 글자','보라색 표면 위 흰 글자'],['edge','경계','영역 구분용, 글자에 사용하지 않음'],
  ['disabled','비활성','사용 불가 상태의 표면'],['error','오류','실패와 오류 안내'],
@@ -22,7 +22,7 @@ const section=(id,description,body)=>`<section class="v2-foundation" id="${id}" 
 export function renderFoundations(){
  return `<p class="v2-intro">현재 3D 시안을 기준으로 기본 스타일을 정리합니다. 버튼·카드의 실제 형태와 상태는 공통 컴포넌트 페이지에서 확인합니다.</p>
  <nav class="v2-section-nav" aria-label="기본 스타일 항목">${foundationGroups.map(g=>`<a href="#${g.id}">${g.title}</a>`).join('')}</nav>
- ${section('colors','보라색은 주요 액션에, 흰색은 카드 표면에 사용합니다. 검토 배경은 연회색입니다. RGB 값은 실제 토큰을 sRGB로 변환해 표시합니다.',`<dl class="v2-colors">${colors.map(([role,label,desc])=>`<div class="v2-color-row" data-sample><dt><span class="v2-swatch v2-color-${role}" aria-hidden="true"></span><span>${label}</span></dt><dd>${desc}<code>--v2-${role}</code><span class="v2-color-value" data-color-token="--v2-${role}">RGB 확인 중</span></dd></div>`).join('')}</dl>`)}
+ ${section('colors','아래는 앱에 사용하는 색상입니다. 다크 그레이 검토 배경은 앱 색상과 별도로 관리합니다. RGB 값은 실제 토큰을 sRGB로 변환해 표시합니다.',`<dl class="v2-colors">${colors.map(([role,label,desc])=>`<div class="v2-color-row" data-sample><dt><span class="v2-swatch v2-color-${role}" aria-hidden="true"></span><span>${label}</span></dt><dd>${desc}<code>--v2-${role}</code><span class="v2-color-value" data-color-token="--v2-${role}">RGB 확인 중</span></dd></div>`).join('')}</dl>`)}
  ${section('typography','Pretendard · 실제 제공 파일의 Regular 400과 Bold 700만 사용합니다.',`<div class="v2-types">${types.map(([id,label,text,meta])=>`<div class="v2-type-row" data-sample><div class="v2-type-meta">${label}<span>${meta}</span></div><div class="v2-type-${id}" data-type="${id}" data-contrast="${id}"${id==='amount'?' data-large="true"':''}>${text}</div></div>`).join('')}</div>`)}
  ${section('spacing','4px 단위로 맞춥니다. 카드 내부 20px, 목록 간격 12px, 섹션 간격 24~32px를 출발점으로 검토합니다.',`<div class="v2-spacing-list">${[4,8,12,16,20,24,32,48].map(n=>`<div class="v2-space-row" data-sample><span>${n}px</span><div class="v2-space-bar" style="--sample-space:${n}px" aria-hidden="true"></div></div>`).join('')}</div>`)}
  ${section('radius','작은 동작과 큰 표면의 곡률을 구분합니다. 바텀시트 상단도 카드 기준 20px에서 검토합니다.',`<div class="v2-radius-list">${[['card','카드 · 20px'],['tile','메뉴 타일 · 16px'],['button','버튼 · 12px'],['chip','칩 · pill']].map(([id,label])=>`<figure data-sample><div class="v2-radius-shape v2-radius-${id}" aria-hidden="true"></div><figcaption>${label}</figcaption></figure>`).join('')}</div>`)}

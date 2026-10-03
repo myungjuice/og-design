@@ -1,32 +1,32 @@
 /* Hallmark · audit target: approved v2 workbench · neutral shell / soft 3D specimens */
 *,*::before,*::after{box-sizing:border-box;}
 html,body{overflow-x:clip;}
-html{background:var(--v2-page);color:var(--v2-text);font-family:var(--v2-font);font-synthesis:none;}
+html{background:var(--v2-workspace-bg);color:var(--v2-workspace-text);font-family:var(--v2-font);font-synthesis:none;}
 body{margin:0;font-size:16px;line-height:24px;word-break:keep-all;overflow-wrap:anywhere;}
-a{color:var(--v2-action);text-underline-offset:4px;}
-a:focus-visible,summary:focus-visible{outline:3px solid var(--v2-focus);outline-offset:3px;}
+a{color:var(--v2-workspace-accent);text-underline-offset:4px;}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:3px;}
 .v2-workspace{display:grid;grid-template-columns:216px minmax(0,1fr);min-height:100vh;}
-.v2-sidebar{padding:var(--v2-space-6) var(--v2-space-4);border-right:1px solid var(--v2-edge);}
-.v2-brand{display:flex;align-items:center;min-height:44px;color:var(--v2-text);font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap;}
+.v2-sidebar{padding:var(--v2-space-6) var(--v2-space-4);border-right:1px solid var(--v2-workspace-edge);}
+.v2-brand{display:flex;align-items:center;min-height:44px;color:var(--v2-workspace-text);font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap;}
 .v2-menu{margin-block:var(--v2-space-6);}
 .v2-menu summary{min-height:44px;padding:var(--v2-space-3);cursor:pointer;font-weight:700;}
-.v2-menu summary::marker{color:var(--v2-action);}
+.v2-menu summary::marker{color:var(--v2-workspace-accent);}
 .v2-menu nav{display:grid;gap:var(--v2-space-1);}
-.v2-menu nav a{display:flex;align-items:center;min-height:48px;padding:var(--v2-space-3);border-left:3px solid transparent;color:var(--v2-text-muted);text-decoration:none;white-space:nowrap;}
-.v2-menu nav a:hover,.v2-menu nav a:active{background:var(--v2-muted-surface);color:var(--v2-text);}
-.v2-menu nav a[aria-current]{border-left-color:var(--v2-action);background:var(--v2-selected-surface);color:var(--v2-action);font-weight:700;}
-.v2-back{display:inline-flex;align-items:center;min-height:44px;color:var(--v2-text-muted);font-size:14px;white-space:nowrap;}
+.v2-menu nav a{display:flex;align-items:center;min-height:48px;padding:var(--v2-space-3);border-left:3px solid transparent;color:var(--v2-workspace-muted);text-decoration:none;white-space:nowrap;}
+.v2-menu nav a:hover,.v2-menu nav a:active{background:var(--v2-workspace-hover);color:var(--v2-workspace-text);}
+.v2-menu nav a[aria-current]{border-left-color:var(--v2-workspace-accent);background:var(--v2-workspace-selected);color:var(--v2-workspace-accent);font-weight:700;}
+.v2-back{display:inline-flex;align-items:center;min-height:44px;color:var(--v2-workspace-muted);font-size:14px;white-space:nowrap;}
 main{min-width:0;padding:var(--v2-space-12);max-width:1320px;}
 h1{margin:0;font-size:24px;line-height:32px;font-weight:700;font-style:normal;min-width:0;overflow-wrap:anywhere;}
-.v2-pending{margin-top:var(--v2-space-8);color:var(--v2-text-muted);}
+.v2-pending{margin-top:var(--v2-space-8);color:var(--v2-workspace-muted);}
 .v2-pending p{margin:0 0 var(--v2-space-3);}
 .v2-pending a{display:inline-flex;align-items:center;min-height:44px;}
-.v2-skip{position:fixed;top:8px;left:8px;z-index:20;padding:var(--v2-space-3);background:var(--v2-surface);transform:translateY(-160%);}
+.v2-skip{position:fixed;top:8px;left:8px;z-index:20;padding:var(--v2-space-3);background:var(--v2-surface);color:var(--v2-text);transform:translateY(-160%);}
 .v2-skip:focus{transform:none;}
 @media(min-width:768px){.v2-menu summary{display:none;}}
 @media(max-width:767px){
  .v2-workspace{display:block;}
- .v2-sidebar{border-right:0;border-bottom:1px solid var(--v2-edge);padding:var(--v2-space-3) var(--v2-space-5);}
+ .v2-sidebar{border-right:0;border-bottom:1px solid var(--v2-workspace-edge);padding:var(--v2-space-3) var(--v2-space-5);}
  .v2-menu{margin:var(--v2-space-2) 0 0;}
  .v2-back{margin-top:var(--v2-space-2);}
  main{padding:var(--v2-space-8) var(--v2-space-5);}

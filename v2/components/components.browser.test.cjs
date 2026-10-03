@@ -28,6 +28,12 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const luminance=color=>{ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((sum,c,i)=>sum+c*[.2126,.7152,.0722][i],0);};
     return nodes.every(n=>{const style=getComputedStyle(n),a=luminance(style.color),b=luminance(style.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});
    }),'button text contrast >= 4.5:1');
+   assert.ok(await page.locator('main h1,.v2-component-section>p,.v2-component-sample figcaption,.v2-component-sample figcaption span,.v2-component-nav a').evaluateAll(nodes=>{
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
+    const l=color=>{ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);};
+    const bg=l(getComputedStyle(document.documentElement).backgroundColor);
+    return nodes.every(n=>{const fg=l(getComputedStyle(n).color);return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)>=4.5;});
+   }),'gallery text remains readable on dark gray');
    const info=page.locator('.v2-card');const before=await info.evaluate(n=>getComputedStyle(n).boxShadow);
    await info.hover();assert.equal(await info.evaluate(n=>getComputedStyle(n).boxShadow),before,'information card has no hover interaction');
    const tile=page.locator('[data-preview-action="tile"]');await tile.focus();
