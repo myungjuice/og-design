@@ -18,12 +18,13 @@
 - `/v2/my-info/`: 내정보 대표 화면을 연결했습니다. 기존 렌더러의 에셋 경로 옵션과 v2 공통 마일리지 카드를 사용합니다. 기존 화면 CSS는 열린 Shadow DOM 안에서 읽기 전용으로 재사용하여 검토 메뉴와 배경에 영향을 주지 않습니다. iframe·스크린샷으로 화면을 대체하지 않습니다. 상단에는 화면 기능에 대한 짧은 설명만 표시합니다.
 - 내정보는 390 × 996을 기준으로 프로필·최근 방문·6개 메뉴·하단 네비게이션의 기존 크기와 위치를 유지합니다. 앱 배경은 Figma 35:76의 흰색→연한 파랑(RGB 222, 233, 249), 155.7683도 그라데이션이며 `--v2-screen-top`/`--v2-screen-bottom`으로 관리합니다. 하단 현재 메뉴에는 작은 연보라색 선택 배경(`--v2-nav-selected-surface`)과 진한 보라색·700 굵기 글자를 적용합니다. 기존 26px 3D 아이콘과 중앙 바코드 에셋은 유지하며 발광·애니메이션은 추가하지 않습니다. 토큰 별칭으로 v2 공통 컬러와 글꼴을 연결합니다. 버튼은 시안 확인용 안내창만 열고 실제 서비스에 연결하지 않습니다.
 - `/v2/barcode/`: 390 × 846 지도 위 시트 형태를 유지합니다. 기존 바코드 렌더러에 선택적 `renderBalance`를 추가해 내정보와 동일한 v2 공통 마일리지 카드·원본 M 에셋을 사용합니다. 기존 기본 렌더링은 유지합니다. 스캔 영역은 96px이며 바에는 입체 효과를 적용하지 않습니다. 사용 가능 금액이 0이면 사용 버튼만 비활성화하고 적립 버튼과 이유 설명은 유지합니다. 시트 닫기·다시 보기와 검토용 안내창을 제공하며 실제 회원 조회·적립·사용 API는 호출하지 않습니다. 시트 안에는 하단 내비게이션을 중복 추가하지 않습니다.
-- 화면 토큰 별칭(`components/screen.css`), 검토 레이아웃(`components/screen-stage.css`), Shadow DOM과 안내창(`components/screen-preview.mjs`)은 내정보·바코드에서 함께 사용합니다.
-- 마이랜드·오지파크는 제목만 표시합니다. 홈화면은 연결 예정 안내와 현재 3D 테스트 페이지 링크만 제공합니다.
+- `/v2/home/`: 390 × 846 지도 탐색 화면을 연결했습니다. 네이버 지도 정적 배경과 Figma 원본 검색·카테고리·핀·하단 메뉴 에셋을 유지합니다. 검색바는 상단 24px, 업종 칩은 기존 76/72/64 × 38px, 하단 메뉴는 바닥에서 20px 띄우고 C안 선택 받침·밑줄을 적용합니다. 검색은 검토 안내만 열고 업종은 선택 표시만 전환합니다. 실제 지도 API·위치·검색·적립 호출은 하지 않습니다. 하단 옅은 파랑 처리는 기존 시안을 재사용합니다.
+- 화면 토큰 별칭(`components/screen.css`), 검토 레이아웃(`components/screen-stage.css`), Shadow DOM과 안내창(`components/screen-preview.mjs`)은 홈·내정보·바코드에서 함께 사용합니다. 공통 안내창은 검색 폼에서도 같은 `showPreview`를 사용합니다.
+- 마이랜드·오지파크는 제목만 표시합니다.
 
 하단 내비게이션의 선택 표시는 승인된 C안으로 통일합니다. `components/bottom-navigation.css`에서 기존 연보라색 받침과 아이콘 색감을 유지하고 현재 메뉴명 아래에 20×2px 밑줄을 표시합니다. 중앙 바코드 버튼에는 밑줄을 붙이지 않습니다. 내정보는 기존 공통 렌더러와 이 스타일을 연결하며, 우측 A/B/C 비교 영역과 비교 전용 코드·스타일은 제거했습니다. 현재 메뉴는 `aria-current="page"`와 기존 `is-selected`로 지정하며 다른 메뉴를 눌러도 검토 안내만 열고 현재 화면의 선택 표시는 유지합니다. 확인 주소: `/v2/my-info/`.
 
-다음은 홈 대표 화면을 v2에 연결하고 C안 공통 하단 내비게이션 스타일을 재사용합니다. 화면을 복사해 각각 별도 스타일로 관리하지 않습니다.
+다음은 공통 컴포넌트 페이지에 홈 검색바·업종 칩·하단 메뉴를 정리하고 재사용 기준을 점검합니다. 화면을 복사해 각각 별도 스타일로 관리하지 않습니다.
 
 ## 로컬 검증
 
@@ -36,6 +37,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/home/home.browser.test.cjs
 ```
 
 기존 `scripts/serve-preview.py`로 `dist/`만 제공합니다. 켜진 서버가 있으면 중복 실행하지 않습니다. 브라우저 테스트 주소는 `V2_BASE_URL`로 바꿀 수 있습니다. 테스트는 로컬 Chrome을 사용합니다.

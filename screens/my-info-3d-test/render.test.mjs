@@ -128,3 +128,11 @@ test('barcode renderer accepts shared balance rendering without changing legacy 
  assert.match(html.match(/<button\b[^>]+data-preview="마일리지 사용"[^>]*>/)?.[0]||'',/disabled/);
  assert.doesNotMatch(renderBarcodeTest(),/v2-mileage/);
 });
+test('home resolves every original sprite from a different route without changing default rendering',async()=>{
+ const {renderHomeTest}=await import('./home.mjs');
+ const html=renderHomeTest({assetBase:'/screens/my-info-3d-test/media/figma/'});
+ const sprites=[...html.matchAll(/<img[^>]+src="([^"]*bottom-navigation-source.png)"/g)].map(m=>m[1]);
+ assert.ok(sprites.length>10);
+ assert.ok(sprites.every(src=>src==='/screens/my-info-3d-test/media/figma/bottom-navigation-source.png'));
+ assert.match(renderHomeTest(),/src="\.\/media\/figma\/bottom-navigation-source.png"/);
+});

@@ -34,3 +34,7 @@ if(document.body.dataset.page==='barcode'){
  const {setupBarcodePreview}=await import('./barcode/preview.mjs');
  setupBarcodePreview(root);
 }
+if(document.body.dataset.page==='home'){
+ const {setupHomePreview}=await import('./home/preview.mjs');
+ setupHomePreview(root);
+}

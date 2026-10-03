@@ -1,3 +1,4 @@
+import {escapeHTML as e} from '../../design-system/components/core.mjs';
 // Figma 35:39 is one original image fill. These windows use its 390px reference
 // coordinates; the local PNG is unchanged. No screenshot or generated replacement.
 const regions={
@@ -7,8 +8,8 @@ const regions={
  target:[338,608,28,29],quick:[340,663,24,25],
  home:[35,764,30,29],compass:[111,765,29,27],star:[251,765,29,27],user:[327,765,29,27],
 };
-export function homeArt(name,{width=24,height}={}){
+export function homeArt(name,{width=24,height,assetBase='./media/figma/'}={}){
  const [x,y,w,h]=regions[name];
  const scale=width/w;
- return '<span class="home-art home-art-'+name+'" aria-hidden="true" style="width:'+width+'px;height:'+(height??h*scale)+'px;--sprite-width:'+390*scale+'px;--sprite-left:'+(-x*scale)+'px;--sprite-top:'+(-y*scale)+'px"><img src="./media/figma/bottom-navigation-source.png" width="851" height="1847" alt="" decoding="async" draggable="false"></span>';
+ return '<span class="home-art home-art-'+name+'" aria-hidden="true" style="width:'+width+'px;height:'+(height??h*scale)+'px;--sprite-width:'+390*scale+'px;--sprite-left:'+(-x*scale)+'px;--sprite-top:'+(-y*scale)+'px"><img src="'+e(assetBase+'bottom-navigation-source.png')+'" width="851" height="1847" alt="" decoding="async" draggable="false"></span>';
 }

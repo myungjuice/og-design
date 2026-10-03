@@ -19,13 +19,17 @@ test('blank future destinations contain only their title in main',()=>{
   assert.match(html,new RegExp(`<main[^>]*>\\s*<h1[^>]*>${title}</h1>\\s*</main>`));
  }
 });
-test('pending representative screens link to the preserved test page',()=>{
- for(const id of ['home']){
-  const html=renderWorkspace({pageId:id});
-  assert.match(html,/대표 화면 연결 예정/);
-  assert.match(html,/href="\/screens\/my-info-3d-test\/"/);
-  assert.doesNotMatch(html,/class="(?:my-info-test|home-test|barcode-test)"/);
- }
+test('home exposes one map explorer with route-safe original assets and shared navigation',()=>{
+ const html=renderWorkspace({pageId:'home'});
+ assert.equal((html.match(/class="home-test"/g)||[]).length,1);
+ assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,1);
+ assert.match(html,/망원동 네이버지도 정적 배경/);assert.match(html,/매장명으로 검색해 주세요/);
+ assert.match(html,/href="\/v2\/components\/bottom-navigation.css"/);
+ assert.match(html,/data-preview="홈" aria-current="page"/);
+ assert.doesNotMatch(html,/대표 화면 연결 예정|승인된|class="my-info-test"|class="barcode-test"/);
+ const assets=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
+ assert.ok(assets.length>10);
+ assert.ok(assets.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||src.includes('/design-system/pages/home/media/naver-mangwon.png')));
 });
 test('barcode exposes one shared sheet and route-safe mileage assets without other screens',()=>{
  const html=renderWorkspace({pageId:'barcode'});
