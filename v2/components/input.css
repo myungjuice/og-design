@@ -9,23 +9,28 @@
 .v2-input{min-width:0;font-family:var(--v2-font);color:var(--v2-text)}
 .v2-input label{display:block;margin-bottom:var(--v2-space-2);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere;text-shadow:none}
 .v2-input .og-field-control{position:relative;display:flex;min-width:0}
-.v2-input input{appearance:none;width:100%;min-width:0;min-height:var(--v2-input-height);padding:calc((var(--v2-input-height) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid transparent;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-input-depth);text-shadow:none}
-.v2-input input::placeholder{color:var(--v2-input-muted);opacity:1}
+.v2-input :is(input,textarea){appearance:none;width:100%;min-width:0;min-height:var(--v2-input-height);padding:calc((var(--v2-input-height) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid transparent;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-input-depth);text-shadow:none}
+.v2-input :is(input,textarea)::placeholder{color:var(--v2-input-muted);opacity:1}
 .v2-input-password input{padding-right:calc(var(--v2-space-12) + var(--v2-space-6))}
 .v2-input .og-field-help{min-height:var(--v2-line-secondary);margin:var(--v2-space-1) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere;text-shadow:none}
 .v2-input .og-field-slot{position:absolute;inset-inline-end:var(--v2-space-1);top:0;display:grid;place-items:center;width:var(--v2-space-12);height:var(--v2-input-height);color:var(--v2-input-muted);pointer-events:none}
 .v2-input .og-password-toggle{position:absolute;inset-inline-end:var(--v2-space-1);top:0;min-width:64px;min-height:var(--v2-input-height);padding:var(--v2-space-2);border:0;border-radius:var(--v2-input-radius);background:none;color:var(--v2-focus);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap;cursor:pointer}
-@media(hover:hover) and (pointer:fine){.v2-input input:not(:disabled):not([readonly]):hover{border-color:var(--v2-input-muted)}.v2-input .og-password-toggle:not(:disabled):hover{background:var(--v2-selected-surface)}}
-.v2-input input:focus-visible,.v2-input button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
-.v2-input input:not(:disabled):not([readonly]):active,.v2-input[data-state="active"] input{box-shadow:var(--v2-depth-inset)}
+@media(hover:hover) and (pointer:fine){.v2-input :is(input,textarea):not(:disabled):not([readonly]):hover{border-color:var(--v2-input-muted)}.v2-input .og-password-toggle:not(:disabled):hover{background:var(--v2-selected-surface)}}
+.v2-input :is(input,textarea,button):focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-input :is(input,textarea):not(:disabled):not([readonly]):active,.v2-input[data-state="active"] :is(input,textarea){box-shadow:var(--v2-depth-inset)}
 .v2-input .og-password-toggle:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
-.v2-input input:disabled,.v2-input button:disabled{background:var(--v2-disabled);color:var(--v2-text-muted);box-shadow:none;cursor:not-allowed}
-.v2-input input:disabled::placeholder{color:var(--v2-text-muted)}
-.v2-input input[readonly]{background:var(--v2-page);box-shadow:none;color:var(--v2-text-muted)}
-.v2-input input[aria-invalid="true"]{border-color:var(--v2-error)}
-.v2-input:has(input[aria-invalid="true"]) .og-field-help,.v2-input:has(input[aria-invalid="true"]) .og-field-slot{color:var(--v2-error)}
-.v2-input[data-state="success"] input{border-color:var(--v2-success)}
+.v2-input :is(input,textarea,button):disabled{background:var(--v2-disabled);color:var(--v2-text-muted);box-shadow:none;cursor:not-allowed}
+.v2-input :is(input,textarea):disabled::placeholder{color:var(--v2-text-muted)}
+.v2-input :is(input,textarea)[readonly]{background:var(--v2-page);box-shadow:none;color:var(--v2-text-muted)}
+.v2-input :is(input,textarea)[aria-invalid="true"]{border-color:var(--v2-error)}
+.v2-input:has([aria-invalid="true"]) .og-field-help,.v2-input:has([aria-invalid="true"]) .og-field-slot{color:var(--v2-error)}
+.v2-input[data-state="success"] :is(input,textarea){border-color:var(--v2-success)}
 .v2-input[data-state="success"] .og-field-help,.v2-input[data-state="success"] .og-field-slot{color:var(--v2-success)}
 .v2-input-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
 .v2-input-note{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-workspace-muted)}
+/* Multiline inherits the input material; only geometry and outside metadata differ. */
+.v2-input-textarea textarea{min-height:calc(3 * var(--v2-space-12));max-height:320px;padding:var(--v2-space-3) var(--v2-space-4);border-radius:var(--v2-radius-tile);resize:vertical;overflow:auto;overflow-wrap:anywhere}
+.v2-input-textarea .og-field-footer{display:flex;align-items:baseline;flex-wrap:wrap;justify-content:space-between;gap:var(--v2-space-1) var(--v2-space-3)}
+.v2-input-textarea .og-field-help{flex:1;min-width:120px}
+.v2-input-textarea .og-field-count{flex:none;font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums;color:var(--v2-text-muted);white-space:nowrap}
 @media(min-width:60rem){.v2-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

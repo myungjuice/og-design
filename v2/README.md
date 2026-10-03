@@ -11,7 +11,7 @@
 - 눈부심을 줄인 다크 그레이 검토 배경과 흰 컴포넌트 표면. 검토용 `--v2-workspace-*` 토큰은 앱 토큰과 분리합니다. 앱 대표 화면 안의 승인된 배경은 유지하고, 검토 영역에는 하늘색 배경·별 장식·OS 표시선을 추가하지 않습니다.
 - 컬러의 RGB 값은 실제 CSS 스와치를 sRGB로 변환합니다. CSS 토큰 변경 후 새로고침 또는 루트의 스타일·클래스 변경 시 갱신됩니다.
 - `/v2/components/`: 3D 주요·보조·후기 버튼 3종의 앱 기준 6개 상태(기본·눌림·비활성·처리 중·오류·성공), 비상호작용 정보 카드, 메뉴 타일의 6개 상태와 선택 상태. 마우스 올림·키보드 포커스 비교 시안은 제외하고 실제 웹 키보드 조작과 포커스 기능은 유지합니다. 점검 안내는 접힌 ‘접근성 점검’에 분리합니다.
-- 모든 v2 페이지는 ‘주 메뉴 / 보조 메뉴 / 본문’의 2단 사이드바를 공유합니다. 주 메뉴에는 7개 목적지만, 보조 메뉴에는 현재 페이지의 그룹과 들여쓴 하위 항목을 표시합니다. 그룹을 선택하면 연관 시안을 함께 표시하고, 하위 항목을 누르면 같은 그룹을 유지한 채 해당 위치로 이동합니다. 공통 컴포넌트는 버튼 3종, 카드·마일리지·섹션 제목, 목록, 선택 요소, 입력(매장 검색·텍스트·비밀번호), 지도 탐색(업종 카테고리), 내비게이션, 동작 확인으로 묶습니다. 디자인 시스템은 컬러, 타이포·여백, 곡률·3D 재질로 묶습니다.
+- 모든 v2 페이지는 ‘주 메뉴 / 보조 메뉴 / 본문’의 2단 사이드바를 공유합니다. 주 메뉴에는 7개 목적지만, 보조 메뉴에는 현재 페이지의 그룹과 들여쓴 하위 항목을 표시합니다. 그룹을 선택하면 연관 시안을 함께 표시하고, 하위 항목을 누르면 같은 그룹을 유지한 채 해당 위치로 이동합니다. 공통 컴포넌트는 버튼 3종, 카드·마일리지·섹션 제목, 목록, 선택 요소, 입력(매장 검색·텍스트·비밀번호·여러 줄 입력), 지도 탐색(업종 카테고리), 내비게이션, 동작 확인으로 묶습니다. 디자인 시스템은 컬러, 타이포·여백, 곡률·3D 재질로 묶습니다.
 - 보조 메뉴 검색은 하위 목록만 걸러 현재 미리보기를 유지합니다. 그룹명 검색·결과 없음 안내·검색 지우기·Escape 지우기를 지원합니다. 분류는 `subnavigation.mjs`와 `components/catalog.mjs`, 그룹 선택·검색·이동은 `review-navigation.mjs`, 공통 탐색 외형은 `shell.css`에서 관리합니다. `components/explorer.mjs`는 공통 탐색 연결만 담당합니다.
 - 기본 형태를 먼저 보여주고 동작 상태는 ‘상태 비교’, 마일리지의 다른 잔액은 ‘잔액별 비교’를 펼쳐 확인합니다. 기존 `#primary`, `#mileage`, `#list-row`와 새 `#group-buttons` 같은 그룹 URL은 공유·새로고침·뒤로/앞으로 가기를 지원합니다. 알 수 없는 항목은 첫 그룹을 표시합니다. 데스크톱 두 메뉴는 고정 위치에서 독립적으로 스크롤하며, 1024px 미만에서는 접이식 메뉴와 네이티브 그룹 선택을 제공합니다. 검토 화면 변경이며 앱 시안과 실제 공통 컴포넌트의 외형은 변경하지 않습니다.
 - 내정보는 현재 메인만 연결되어 있습니다. 내역·예약, 문의, 계정·설정의 하위 화면은 ‘이관 예정’으로 표시하며 클릭 링크나 빈 시안을 만들지 않습니다. 이번 탐색 구조 변경에서는 기존 캔버스의 하위 화면을 이관하지 않습니다. 마이랜드·오지파크에도 가짜 하위 화면을 만들지 않습니다.
@@ -39,7 +39,9 @@
 
 공통 컴포넌트 페이지에는 `#search` 검색바, `#categories` 업종 칩, `#navigation` 하단 메뉴를 독립 샘플로 제공합니다. 검색바·업종 칩은 실제 홈의 `screens/my-info-3d-test/home-controls.mjs`, 하단 메뉴는 기존 `navigation.mjs`를 호출합니다. 원본 CSS와 에셋은 열린 Shadow DOM 안에서 재사용하며, 샘플만의 배치 외에 스타일을 복제하지 않습니다. 검색은 확인 문구만 표시하고, 업종·하단 메뉴 선택은 샘플 안에서만 변경됩니다. 기존 대표 화면에는 영향을 주지 않습니다. 업종 칩은 38px 시각 높이와 44px 터치 영역을 유지합니다.
 
-다음 후보는 문의 등에 쓰이는 여러 줄 입력·글자 수 안내 검토입니다. 한 줄 입력의 재질·라벨·오류 규칙을 재사용하고 긴 내용·높이 조절·글자 수 안내가 충돌하지 않도록 검토합니다. 전화번호·숫자 입력과 내정보 하위 화면의 기획 대조는 별도 승인 후 진행합니다.
+여러 줄 입력은 `/v2/components/#multiline-input`에 추가했습니다. 기존 `textarea` 렌더러를 읽기 전용으로 재사용하고 `components/input.mjs`·`.css`에서 한 줄 입력과 같은 재질·글꼴·상태 규칙을 공유합니다. 16px 곡률, 기본 최소 높이 144px, 세로 크기 조절(최대 320px), 아래쪽 안내·카운터를 제공합니다. 기본은 `maxLength:null`이며 제한·카운터가 없습니다. 선택형 200자 예시는 기존 공통 textarea의 기본 제한을 보여줄 뿐 실제 문의 정책을 바꾸지 않습니다. 카운터는 브라우저 maxlength와 같은 UTF-16 단위이며 이모지 등은 2자 이상으로 계산될 수 있습니다. 한글 조합 중 내용을 다시 쓰거나 자르지 않으며 오류 재검증은 조합 완료 후 진행합니다. 비활성·읽기 전용은 값을 유지하고, 확인 중은 계속 작성할 수 있습니다. 입력값은 API·로그·저장소에 전송하지 않습니다. 원본 의견보내기의 제한·카운터 없음은 유지합니다.
+
+다음 후보는 기존 캔버스의 알림·확인창 공통 컴포넌트 이관 검토입니다. 전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -58,6 +60,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/section-heading.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/selection.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/input.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

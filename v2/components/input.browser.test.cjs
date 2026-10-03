@@ -17,7 +17,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    await page.locator('#text-input').waitFor();await page.evaluate(()=>document.fonts.ready);
    assert.deepEqual(await page.locator('#text-input-live input').evaluate(material),homeMaterial,'text input shares Home search surface, depth, curvature and height');
    assert.deepEqual(await page.locator('#password-input-live input').evaluate(material),homeMaterial,'password belongs to the same input family');
-   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['search','text-input','password-input']);
+   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['search','text-input','password-input','multiline-input']);
    const field=page.locator('#text-input-live input'),help=page.locator('#text-input-live .og-field-help');
    await field.fill('');assert.notEqual(await field.getAttribute('aria-invalid'),'true','no error before blur');
    const before=await field.boundingBox();await page.locator('#text-input-title').click();

@@ -12,6 +12,7 @@ export const componentItems=[
  {id:'search',label:'매장 검색바',group:'입력'},
  {id:'text-input',label:'텍스트 입력',group:'입력'},
  {id:'password-input',label:'비밀번호 입력',group:'입력'},
+ {id:'multiline-input',label:'여러 줄 입력',group:'입력'},
  {id:'categories',label:'업종 카테고리',group:'지도 탐색'},
  {id:'navigation',label:'하단 메뉴',group:'내비게이션'},
  {id:'try',label:'직접 눌러보기',group:'동작 확인'}

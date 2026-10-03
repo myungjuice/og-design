@@ -12,7 +12,7 @@ import {menuArt} from '../../screens/my-info-3d-test/render.mjs';
 export {renderListRow} from './list-row.mjs';
 export {renderSectionHeading} from './section-heading.mjs';
 export {renderSelection} from './selection.mjs';
-export {renderInput} from './input.mjs';
+export {renderInput,renderMultiline} from './input.mjs';
 export const componentStates=[
  ['default','기본','동작하기 전'],['active','누르는 중','손가락으로 누르는 동안 얕게 눌림'],
  ['disabled','비활성','사용 가능한 마일리지가 없을 때'],['loading','처리 중','중복 실행을 막는 상태'],
