@@ -5,9 +5,9 @@ import {renderComponents} from './render.mjs';
 import {renderMileage} from './mileage.mjs';
 
 test('shared mileage card accepts a sharing count without changing legacy defaults',()=>{
- assert.match(sharedCard({sharedCount:0,shared:0}),/공유인 0/);
- assert.match(sharedCard({sharedCount:7}),/공유인 7/);
- assert.match(sharedCard(),/공유인 3/);
+ assert.match(sharedCard({sharedCount:0,shared:0}),/공유인 0명/);
+ assert.match(sharedCard({sharedCount:7}),/공유인 7명/);
+ assert.match(sharedCard(),/공유인 3명/);
 });
 test('shared card resolves original assets from a different route and escapes path attributes',()=>{
  const html=sharedCard({assetBase:'/screens/my-info-3d-test/media/figma/',className:'v2-mileage'});

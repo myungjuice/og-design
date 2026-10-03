@@ -18,7 +18,7 @@ test('standalone screen uses original Figma assets with six distinct sprite regi
  assert.doesNotMatch(html,/프로필 캐릭터 미적용/);
  assert.ok(images.includes('./media/figma/mileage-marker.svg'));
  assert.ok(images.includes('./media/figma/mileage-info.svg'));
- assert.match(html,/공유인 3<\/span> \|/);
+ assert.match(html,/공유인 3명<\/span> \| 1,250 M/);
 });
 
 test('balances remain readable as text rather than being baked into imagery',async()=>{

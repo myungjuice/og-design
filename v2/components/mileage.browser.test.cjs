@@ -11,6 +11,8 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/#mileage`);
    await page.locator('.v2-mileage').first().waitFor();await page.evaluate(()=>document.fonts.ready);
    assert.equal(await page.locator('.v2-mileage').count(),4);
+   assert.equal(await page.locator('.v2-mileage .mileage-rows>div:last-child dd').first().innerText(),'공유인 3명 | 1,250 M');
+   assert.ok(await page.locator('.v2-mileage .mileage-rows>div:last-child dd').evaluateAll(nodes=>nodes.every(n=>{const r=document.createRange();r.selectNodeContents(n);return r.getBoundingClientRect().height<=parseFloat(getComputedStyle(n).lineHeight)+1;})),'sharing count/unit and amount stay on one line '+width);
    assert.ok(await page.locator('.v2-mileage img').evaluateAll(nodes=>nodes.every(n=>n.complete&&n.naturalWidth>0)));
    assert.equal(await page.locator('#mileage [role="slider"],#mileage input').count(),0);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'page overflow '+width);
