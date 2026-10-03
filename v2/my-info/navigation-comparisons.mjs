@@ -1,14 +1,15 @@
 import {renderBottomNavigation} from '../../screens/my-info-3d-test/navigation.mjs';
 
-const variants=[['underline','A안 · 짧은 밑줄형','아이콘 받침 없이, 진한 보라색 아이콘과 짧은 밑줄로 선택을 표시합니다.'],['label-chip','B안 · 메뉴명 칩형','아이콘 받침 없이, 메뉴명에만 보라색 칩을 붙여 선택을 표시합니다.']];
+const variants=[['underline','A안 · 짧은 밑줄형','아이콘 받침 없이, 진한 보라색 아이콘과 짧은 밑줄로 선택을 표시합니다.'],['label-chip','B안 · 메뉴명 칩형','아이콘 받침 없이, 메뉴명에만 보라색 칩을 붙여 선택을 표시합니다.'],['backed-underline','C안 · 기존 선택 표시 + 밑줄','기존 연보라색 아이콘 받침과 색감은 유지하고, 메뉴명 아래에 짧은 밑줄만 추가합니다.']];
 
 export function renderNavigationComparisons(){
  return `<aside class="v2-nav-comparisons" id="navigation-comparisons" aria-labelledby="navigation-comparisons-title">
  <h2 id="navigation-comparisons-title">하단 메뉴 선택 표시</h2>
- ${variants.map(([variant,title,copy])=>`<section class="v2-nav-comparison" data-variant="${variant}">
+ ${variants.map(([variant,title,copy])=>`<section class="v2-nav-comparison" data-variant="${variant}" id="navigation-comparison-${variant}">
  <h3>${title}</h3><p>${copy}</p>
  <div class="v2-nav-comparison-host"><template data-nav-template>
  <link rel="stylesheet" href="/screens/my-info-3d-test/styles.css">
+ ${variant==='backed-underline'?'<link rel="stylesheet" href="/v2/my-info/screen.css">':''}
  <link rel="stylesheet" href="/v2/my-info/navigation-comparisons.css">
  <div class="v2-nav-sample" data-variant="${variant}">${renderBottomNavigation({assetBase:'/screens/my-info-3d-test/media/figma/'})}</div>
  </template></div></section>`).join('')}

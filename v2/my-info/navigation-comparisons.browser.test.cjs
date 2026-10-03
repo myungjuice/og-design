@@ -12,14 +12,14 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    await page.locator('.v2-nav-sample').first().waitFor();await page.evaluate(()=>document.fonts.ready);
    await page.locator('.v2-nav-sample img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
    assert.equal(await page.locator('.my-info-test').count(),1);
-   assert.equal(await page.locator('.v2-nav-sample').count(),2);
+   assert.equal(await page.locator('.v2-nav-sample').count(),3);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no page overflow '+width);
    const primary=page.locator('.my-info-test');
    const original=await primary.locator('.bottom-navigation').evaluate(n=>n.outerHTML);
    const primaryBox=await primary.boundingBox(),comparisonBox=await page.locator('.v2-nav-comparisons').boundingBox();
    if(width>=1200)assert.ok(comparisonBox.x>=primaryBox.x+primaryBox.width+32,'comparisons sit to the right');
    else assert.ok(comparisonBox.y>=primaryBox.y+primaryBox.height,'comparisons stack below on narrow screens');
-   for(const variant of ['underline','label-chip']){
+   for(const variant of ['underline','label-chip','backed-underline']){
     const section=page.locator(`.v2-nav-comparison[data-variant="${variant}"]`),sample=section.locator('.v2-nav-sample');
     assert.equal(await sample.getByRole('button').count(),5);
     assert.equal(await sample.locator('nav').getAttribute('aria-label'),`${await section.locator('h3').innerText()} 비교 메뉴`);
@@ -35,9 +35,14 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
       underline:[pseudo.content,pseudo.width,pseudo.height],targets:[...nav.querySelectorAll('button')].map(button=>{const r=button.getBoundingClientRect();return[r.width,r.height];})};
     });
     assert.equal(appearance.height,120);assert.equal(appearance.navHeight,72);assert.equal(appearance.bottom,20);
-    assert.equal(appearance.overflow,false);assert.equal(appearance.faceAlpha,0);assert.equal(appearance.iconWidth,26);
+    assert.equal(appearance.overflow,false);assert.equal(appearance.iconWidth,26);
+    if(variant==='backed-underline'){
+     assert.equal(appearance.faceAlpha,255);
+     const faceStyle=face=>{const r=face.getBoundingClientRect(),cs=getComputedStyle(face);return[r.width,r.height,cs.backgroundColor,cs.borderRadius,...[...face.querySelectorAll('stop')].map(n=>getComputedStyle(n).stopColor)];};
+     assert.deepEqual(await sample.locator('[aria-current] .nav-face').evaluate(faceStyle),await primary.locator('[aria-current] .nav-face').evaluate(faceStyle),'C keeps original backing and icon material');
+    }else assert.equal(appearance.faceAlpha,0);
     assert.ok(appearance.targets.every(([w,h])=>w>=44&&h>=44),'touch targets '+width+' '+variant);
-    if(variant==='underline'){
+    if(variant!=='label-chip'){
      assert.deepEqual(appearance.underline,['""','20px','3px']);assert.equal(appearance.labelBackground[3],0);
     }else{
      assert.equal(appearance.labelBackground[3],255);assert.deepEqual(appearance.labelColor,[255,255,255,255]);
@@ -67,6 +72,6 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    }
   }
   assert.deepEqual(errors,[]);
-  console.log('navigation comparisons: A/B shape cues, original preserved, central artwork reused, 6 widths, touch targets, chip contrast, preview selection and focus passed');
+  console.log('navigation comparisons: A/B/C shape cues, C retains original backing/material, original preserved, central artwork reused, 6 widths, touch targets, chip contrast, preview selection and focus passed');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
