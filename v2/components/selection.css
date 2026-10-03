@@ -1,0 +1,46 @@
+/* Hallmark · component: selection · genre: playful · theme: existing OG soft 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Labels remain flat; restrained depth is limited to marks, radio dots and switch thumbs.
+ * Native inputs own semantics. Hover/focus work without web-only comparison panels.
+ * Component-scope slop check: pass; existing OG tokens/type are intentional.
+ * Verified: 7 widths, text contrast >=4.5:1, 48px rows, touch/keyboard/forced colors.
+ * No animation added; original canvas and representative screens remain unchanged.
+ */
+.v2-selection-stage{width:100%;max-width:390px;min-width:0;padding:var(--v2-space-3);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
+.v2-selection-stage .og-divider{height:1px;margin:var(--v2-space-2) var(--v2-space-3);border:0;background:var(--v2-edge)}
+.v2-selection-group{min-width:0;padding:0;margin:0;border:0}
+.v2-selection-group legend{padding:var(--v2-space-2) var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-selection-control{min-width:0}
+.v2-selection{position:relative;display:flex;align-items:center;gap:var(--v2-space-2);width:100%;min-height:48px;min-width:0;padding:var(--v2-space-3);border-radius:var(--v2-radius-button);color:var(--v2-text);cursor:pointer;outline-color:var(--v2-focus)}
+.v2-selection .og-choice-copy{min-width:0;font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere;text-shadow:none}
+.v2-selection .og-choice-copy small{display:block;margin-top:var(--v2-space-1);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);color:var(--v2-text-muted)}
+.v2-selection input{position:absolute;left:var(--v2-space-3);top:50%;width:20px;height:20px;margin:0;transform:translateY(-50%);opacity:0;cursor:inherit}
+.v2-selection-mark{position:relative;flex:none;display:block;width:20px;height:20px;border:1px solid var(--v2-control-edge);border-radius:var(--v2-space-1);background:var(--v2-surface);color:var(--v2-on-action);box-shadow:var(--v2-depth-raised);pointer-events:none}
+.v2-selection-checkbox input:checked+.v2-selection-mark,.v2-selection-checkbox input:indeterminate+.v2-selection-mark{background:var(--v2-action);border-color:var(--v2-primary-edge)}
+.v2-selection-checkbox input:checked+.v2-selection-mark::after{content:"";position:absolute;width:5px;height:9px;top:3px;left:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.v2-selection-checkbox input:indeterminate+.v2-selection-mark::after{content:"";position:absolute;left:4px;right:4px;top:8px;height:2px;background:currentColor}
+.v2-selection-radio .v2-selection-mark{border-radius:var(--v2-radius-chip);box-shadow:var(--v2-depth-inset)}
+.v2-selection-radio input:checked+.v2-selection-mark{border-color:var(--v2-action)}
+.v2-selection-radio input:checked+.v2-selection-mark::after{content:"";position:absolute;inset:4px;border-radius:var(--v2-radius-chip);background:var(--v2-action);box-shadow:inset 0 1px 2px var(--v2-primary-light)}
+.v2-selection-switch{justify-content:space-between;gap:var(--v2-space-4)}
+.v2-selection-switch input{left:auto;right:var(--v2-space-3);width:44px;height:28px}
+.v2-selection-switch .v2-selection-mark{width:44px;height:28px;border-radius:var(--v2-radius-chip);background:var(--v2-disabled);box-shadow:var(--v2-depth-inset)}
+.v2-selection-switch .v2-selection-mark::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:var(--v2-radius-chip);background:var(--v2-surface);border:1px solid var(--v2-material-edge);box-shadow:var(--v2-depth-raised)}
+.v2-selection-switch input:checked+.v2-selection-mark{background:var(--v2-action);border-color:var(--v2-primary-edge)}
+.v2-selection-switch input:checked+.v2-selection-mark::after{transform:translateX(16px)}
+.v2-selection:has(input:focus-visible){outline:3px solid var(--v2-focus);outline-offset:2px}
+@media(hover:hover) and (pointer:fine){.v2-selection:not(:has(input:disabled)):hover{background:var(--v2-selected-surface)}}
+.v2-selection:not(:has(input:disabled)):active .v2-selection-mark,.v2-selection:has(input[data-state="active"]) .v2-selection-mark{box-shadow:var(--v2-depth-inset)}
+.v2-selection:has(input:disabled){color:var(--v2-text-muted);cursor:not-allowed}
+.v2-selection input:disabled+.v2-selection-mark{background:var(--v2-disabled);border-color:var(--v2-control-edge);color:var(--v2-text-muted);box-shadow:none}
+.v2-selection-radio input:disabled:checked+.v2-selection-mark::after{background:var(--v2-text-muted);box-shadow:none}
+.v2-selection-switch input:disabled:checked+.v2-selection-mark{background:var(--v2-text-muted)}
+.v2-selection-switch input:disabled+.v2-selection-mark::after{box-shadow:none}
+.v2-selection-result{min-height:var(--v2-line-secondary);margin:0 var(--v2-space-3) var(--v2-space-2);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere}
+.v2-selection-result[data-state="error"]{color:var(--v2-error)}
+.v2-selection-result[data-state="success"]{color:var(--v2-success)}
+.v2-selection-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-selection-note,.v2-selection-feedback{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-workspace-muted)}
+.v2-selection-feedback{min-height:44px;margin-block:var(--v2-space-3) var(--v2-space-6)}
+@media(min-width:960px){.v2-selection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-selection input{position:static;transform:none;opacity:1;appearance:auto;accent-color:auto;flex:none;width:20px;height:20px}.v2-selection-mark{display:none}.v2-selection:has(input:focus-visible){outline-color:Highlight}}
