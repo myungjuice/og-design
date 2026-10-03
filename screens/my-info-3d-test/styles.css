@@ -4,6 +4,7 @@
  * Isolated route; no shared canvas, component or global token file is changed.
  * Contrast: pass for card/body/muted text; mobile: 320/375/390/414/768.
  * Reference overrides: white surfaces, accent-card footprint, 3-column menu, source icon sets and 3D shadows retained by request.
+ * Requested static OS indicators are presentation chrome, not live device information.
  * Source-fidelity corrections only; no macrostructure/theme rotation or new interactions. */
 @import url('./tokens.css');
 @import url('../../design-system/components/shared.css');
@@ -19,7 +20,13 @@ button:disabled{opacity:.5;cursor:not-allowed}
 button:active:not(:disabled){transform:translateY(1px)}
 button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .ui-icon{display:block;flex:none}
-.my-info-test{position:relative;max-width:390px;margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
+.my-info-test{position:relative;width:100%;max-width:390px;height:var(--preview-info-height);margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%)}
+.mobile-status-bar{position:absolute;inset:0 0 auto;z-index:var(--test-nav-z);height:32px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 32px 2px 40px;color:var(--test-ink);pointer-events:none}
+.mobile-status-time{font-size:14px;line-height:18px;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
+.mobile-status-icons{display:flex;align-items:center;gap:var(--app-space-2);height:18px}
+.mobile-status-icons svg{display:block;fill:currentColor}
+.mobile-status-battery text{fill:var(--test-surface);font-family:var(--app-font);font-size:9px;font-weight:var(--app-weight-bold)}
+.mobile-home-indicator{position:absolute;bottom:10px;left:50%;width:98px;height:4px;transform:translateX(-50%);border-radius:var(--app-radius-pill);background:var(--test-home-indicator);z-index:var(--test-nav-z);pointer-events:none}
 .profile-header{padding:var(--app-space-8) var(--app-space-5)}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:0;height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
 .icon-button{display:grid;place-items:center;width:var(--app-touch-min);height:var(--app-touch-min);border:0;padding:0;background:none;border-radius:var(--app-radius-md)}
@@ -66,7 +73,7 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .mileage-breakdown dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
 .recent-card.og-surface{padding:var(--app-space-5);border:0;border-radius:20px;background:var(--test-surface);box-shadow:var(--test-shadow-panel)}
 .recent-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--app-space-5)}
-.recent-heading h2{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
+.recent-heading h2{margin:0;font-size:var(--app-body-1-size);line-height:22px;font-weight:var(--app-weight-bold)}
 .recent-heading .icon-button{width:20px;height:20px;color:var(--test-muted)}
 .visit-list{display:grid;gap:var(--app-space-4);list-style:none;margin:0;padding:0}
 .visit-list li{display:flex;align-items:center;gap:var(--app-space-2);min-height:35px}
@@ -79,8 +86,8 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .review-button,.recent-heading .icon-button{position:relative}
 .review-button::before,.recent-heading .icon-button::before{content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;min-width:var(--app-touch-min);min-height:var(--app-touch-min);transform:translate(-50%,-50%)}
 .review-write{min-width:32px;height:24px;color:var(--test-on-card);background:var(--test-violet);border-color:var(--test-violet)}
-.service-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--app-space-4);row-gap:var(--app-space-5);padding:var(--app-space-4) var(--app-space-2) var(--app-space-8)}
-.service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:var(--app-space-2);padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--test-ink);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium)}
+.service-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:0;row-gap:var(--app-space-4);padding:var(--app-space-4) 0}
+.service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:6px;padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--test-ink);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:19px;font-weight:var(--app-weight-regular)}
 .service-face{display:grid;place-items:center;position:relative;width:80px;height:80px;border:0;border-radius:var(--app-radius-lg);background:var(--test-surface);box-shadow:var(--test-shadow-tile)}
 /* Preserve the Figma crop viewport; an overlay adds the plate lip without resizing the art. */
 .service-face::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--test-inset-tile);pointer-events:none}
@@ -88,22 +95,24 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .service-art img{display:block;position:absolute;max-width:none;width:300.68%;height:200.45%;left:var(--art-left);top:var(--art-top)}
 .visit-symbol img,.review-write img{display:block}
 .service-tile>span:last-child{white-space:nowrap}
-.bottom-navigation{position:relative;z-index:var(--test-nav-z);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;padding:var(--app-space-2) var(--app-space-2) calc(var(--app-space-3) + env(safe-area-inset-bottom,0px));border-top:1px solid var(--test-surface);border-radius:32px;background:linear-gradient(180deg,var(--test-surface),var(--test-page-top));box-shadow:0 7px 12px -7px var(--test-shadow)}
+.bottom-navigation{position:absolute;inset:auto 0 var(--preview-nav-bottom);height:72px;z-index:var(--test-nav-z);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;padding:var(--app-space-2) var(--app-space-2) var(--app-space-3);border:0;border-radius:32px;background:linear-gradient(180deg,var(--test-surface),var(--test-page-top));box-shadow:0 7px 12px -7px var(--test-shadow)}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:var(--app-space-1);border:0;background:none;padding:0;min-width:0;color:var(--test-muted);font-size:10px;line-height:16px;white-space:nowrap}
 .nav-face{height:32px;display:grid;place-items:center}
 .nav-icon{filter:drop-shadow(0 2px 1px var(--test-shadow-soft))}
 .is-selected{color:var(--test-accent);font-weight:var(--app-weight-bold);--icon-lit:var(--test-nav-active-lit);--icon-shade:var(--test-nav-active-shade);--icon-stroke:var(--test-nav-active-lit)}
-.nav-barcode .nav-face{width:64px;height:64px;margin-top:-28px;border-radius:var(--app-radius-pill);border:0;background:none}
+.nav-barcode{position:relative;height:52px;justify-content:flex-end}
+.nav-barcode .nav-face{position:absolute;top:-14px;width:64px;height:64px;border-radius:var(--app-radius-pill);border:0;background:none}
 /* Original image fill, not a screen capture. Clip only the circular barcode artwork;
  * the 390px-wide source mapping centers native (425.5,1697.5) in this 60px viewport. */
 .barcode-art{display:block;position:relative;width:60px;height:60px;border-radius:var(--app-radius-pill);overflow:clip;box-shadow:var(--test-shadow-barcode);pointer-events:none}
 .barcode-art img{display:block;position:absolute;max-width:none;width:390px;height:auto;left:-165px;top:-747.93772px}
-.nav-barcode>span:last-child{color:var(--test-accent)}
+/* The supplied navigation labels the scan action through its raised artwork only.
+ * Retain its accessible name without painting a caption across that artwork. */
+.nav-barcode>span:last-child{position:absolute;width:1px;height:1px;overflow:clip;clip-path:inset(50%);white-space:nowrap;color:var(--test-accent)}
 #preview-dialog{width:calc(100% - 40px);max-width:360px;border:1px solid var(--test-rule);border-radius:var(--app-radius-xl);padding:var(--app-space-6);background:var(--test-surface);color:var(--test-ink);box-shadow:0 12px 32px -8px var(--test-shadow)}
 #preview-dialog::backdrop{background:var(--test-overlay)}
 #preview-dialog h2{font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);margin:0 0 var(--app-space-3)}
 #preview-dialog p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--test-muted);word-break:keep-all}
 .preview-close{min-height:var(--app-touch-min);width:100%;border:0;border-radius:var(--app-radius-md);margin-top:var(--app-space-4);background:var(--test-accent);color:var(--test-on-card);font-weight:var(--app-weight-bold)}
-@media(min-width:25rem){.service-menu{column-gap:var(--app-space-6)}}
-@media(max-width:22rem){.page-content{padding-inline:var(--app-space-4)}.mileage-card.og-surface{padding:var(--app-space-4)}.m-coin{width:40px;height:40px}.mileage-title>div{font-size:10px}.mileage-title strong{font-size:26px}.mileage-history{font-size:9px}.service-menu{column-gap:var(--app-space-2)}.service-face{width:72px;height:72px}.recent-card.og-surface{padding-inline:var(--app-space-4)}}
+@media(max-width:22rem){.page-content{padding-inline:var(--app-space-4)}.mileage-card.og-surface{padding:var(--app-space-4)}.m-coin{width:40px;height:40px}.mileage-title>div{font-size:10px}.mileage-title strong{font-size:26px}.mileage-history{font-size:9px}.service-face{width:72px;height:72px}.recent-card.og-surface{padding-inline:var(--app-space-4)}}
 @media(prefers-reduced-motion:reduce){button{transition:none}}

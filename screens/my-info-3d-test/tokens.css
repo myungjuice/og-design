@@ -2,6 +2,8 @@
  * Existing OG font and spacing preserved. Test-only appearance overrides. */
 @import url('../../design-system/foundations/app-tokens.css');
 :root{
+ --preview-info-height:996px;--preview-home-height:846px;--preview-nav-bottom:20px;
+ --test-home-indicator:oklch(73% .045 260);
  --test-page-top:oklch(100% 0 0);--test-page-bottom:oklch(93.052482% .02473482 257.646471);
  --test-desktop:oklch(97% .012 258);--test-surface:oklch(100% 0 0);
  --test-ink:var(--app-ink);--test-muted:oklch(46% .025 267);--test-rule:oklch(92% .01 270);

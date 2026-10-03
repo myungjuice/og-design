@@ -20,7 +20,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    assert.equal(await page.locator('.home-test .barcode-art img').count(),1);
    assert.equal(await page.locator('.home-test [aria-current="page"]').textContent(),'홈');
    assert.equal(await page.locator('.my-info-test [aria-current="page"]').textContent(),'내 정보');
-   assert.ok(await page.locator('.home-map button').evaluateAll(buttons=>buttons.every(button=>button.getBoundingClientRect().height>=44)),'44px home touch targets at '+width);
+   assert.ok(await page.locator('.home-map button').evaluateAll(buttons=>buttons.every(button=>{
+    const box=button.getBoundingClientRect(),extra=getComputedStyle(button,'::before');
+    const extension=extra.content!=='none'?Math.max(0,-parseFloat(extra.top))+Math.max(0,-parseFloat(extra.bottom)):0;
+    return box.height+extension>=44;
+   })),'44px home touch targets including slim visual-chip extensions at '+width);
    assert.ok(await page.locator('.home-test .nav-item>span:last-child,.home-category>span:last-child,.home-explore>span:last-child').evaluateAll(nodes=>nodes.every(node=>node.getBoundingClientRect().height<=Number.parseFloat(getComputedStyle(node).lineHeight)+1)),'single line actions at '+width);
    await page.locator('.home-test').screenshot({path:'/private/tmp/og-home-3d-'+width+'.png',animations:'disabled'});
    if(width===1100)await page.screenshot({path:'/private/tmp/og-home-pair-1100.png',fullPage:true,animations:'disabled'});

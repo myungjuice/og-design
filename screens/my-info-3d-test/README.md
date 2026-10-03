@@ -87,10 +87,22 @@
 
 글꼴은 프로젝트와 같은 Pretendard를 사용합니다. 로컬 WOFF2를 포함해 외부 폰트 연결 없이 표시합니다. Pretendard는 SIL Open Font License 1.1로 배포됩니다. `media/font-license.html`에 공식 저작권·라이선스 문구를 포함했습니다.
 
-## 검증
+## 모바일 프레임과 시안 비율 보정 (2026-10-03)
+
+- 홈은 Figma `35:39`의 390×846px, 내정보는 `35:76`의 390×996px를 기준으로 표시합니다. 브라우저 창 높이로 늘어나지 않으며 내정보 내용을 압축하거나 내부 스크롤을 추가하지 않습니다.
+- 내정보의 마일리지 카드는 기존 350×228px와 상단 156px를 유지합니다. 최근 방문은 350×219px, 메뉴 아이콘은 80×80px, 메뉴 라벨 간격은 6px, 두 메뉴 행 간격은 16px로 원본 좌표에 맞췄습니다.
+- 공통 하단 내비게이션은 높이 72px, 아래 여백 20px입니다. 하단 홈 표시선과 상단 시간·네트워크·와이파이·배터리는 시안용 고정 표시이며 실제 기기 상태를 읽지 않습니다. 중앙 바코드는 원본 그림만 표시하고 접근성 이름은 유지합니다.
+- 홈 카테고리는 전체 76×38px, 업종 72×38px, 더 보기 64×38px입니다. 주변을 포함한 44px 터치 높이와 좁은 화면의 가로 스크롤을 유지합니다. 단일 이미지인 홈 시안에서 측정한 근사 치수이며 편집 가능한 Figma 버튼 노드 수치가 아닙니다.
+- 네이버 지도 배경, 기존 원본 에셋, OG 메뉴 명칭과 Pretendard는 유지합니다. 캔버스나 공유 토큰은 변경하지 않습니다.
+
+## 검증 명령
 
 `node --test screens/my-info-3d-test/render.test.mjs`
 
 `PLAYWRIGHT_PATH=<playwright module path> node screens/my-info-3d-test/preview.browser.test.cjs`
+
+`PLAYWRIGHT_PATH=<playwright module path> node screens/my-info-3d-test/home.browser.test.cjs`
+
+`PLAYWRIGHT_PATH=<playwright module path> node screens/my-info-3d-test/geometry.browser.test.cjs`
 
 브라우저 검증은 로컬 서버가 켜진 상태에서 실행합니다. 320 / 375 / 390 / 414 / 768px 가로폭, 카드 치수와 그래프 방향·흰색 표시점 포함, 원본 프로필 이미지 로딩, 텍스트 겹침, 내비게이션 줄바꿈, 안내창과 포커스 복귀를 검사합니다.
