@@ -1,0 +1,14 @@
+/* Reference styles live in the open shadow root; tokens inherit from v2. */
+:host{
+ display:block;color:var(--v2-text);font-family:var(--v2-font);font-size:var(--v2-type-secondary);line-height:normal;
+ --app-font:var(--v2-font);
+ --test-ink:var(--v2-text);--test-muted:var(--v2-text-muted);
+ --test-page-top:var(--v2-page);--test-page-bottom:var(--v2-page);
+ --test-surface:var(--v2-surface);--test-violet:var(--v2-action);--test-accent:var(--v2-focus);
+ --test-tint:var(--v2-selected-surface);--test-control-border:var(--v2-material-edge);
+ --test-on-card:var(--v2-on-action);--test-shadow:var(--v2-contact);
+ --test-surface-edge:var(--v2-material-edge);--test-focus:var(--v2-focus);
+}
+button{font-family:var(--v2-font)}
+.my-info-test{background:var(--v2-page);min-height:996px;height:auto;padding-bottom:calc(2 * var(--v2-space-12) + var(--v2-space-3))}
+.mileage-card.v2-mileage{width:100%}

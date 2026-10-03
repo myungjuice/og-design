@@ -111,3 +111,11 @@ test('barcode retains earning actions but disables use when the available balanc
  assert.match(renderer.renderBarcodeTest(),/실제 회원 정보가 아닌 샘플 바코드/);
  assert.doesNotMatch(renderer.renderBarcodeTest(),/PAY|맑은 땅콩|mobile-status|mobile-home/);
 });
+test('my-info renderer accepts route-safe assets and the shared v2 balance renderer',async()=>{
+ const {renderMyInfoTest}=await import('./render.mjs');
+ const {renderMileage}=await import('../../v2/components/mileage.mjs');
+ const html=renderMyInfoTest({available:0,total:2400,shared:0,sharedCount:0,assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderMileage});
+ assert.match(html,/class="og-surface mileage-card v2-mileage"/);
+ assert.match(html,/공유인 0/);assert.match(html,/2,400 M/);
+ assert.ok([...html.matchAll(/src="([^"]+)"/g)].every(m=>m[1].startsWith('/screens/my-info-3d-test/media/figma/')));
+});

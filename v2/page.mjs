@@ -26,3 +26,7 @@ if(document.body.dataset.page==='components'){
  const {setupComponentPreview}=await import('./components/preview.mjs');
  setupComponentPreview(root);
 }
+if(document.body.dataset.page==='my-info'){
+ const {setupMyInfoPreview}=await import('./my-info/preview.mjs');
+ setupMyInfoPreview(root);
+}

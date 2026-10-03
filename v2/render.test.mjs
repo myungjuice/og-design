@@ -20,12 +20,23 @@ test('blank future destinations contain only their title in main',()=>{
  }
 });
 test('pending representative screens link to the preserved test page',()=>{
- for(const id of ['home','barcode','my-info']){
+ for(const id of ['home','barcode']){
   const html=renderWorkspace({pageId:id});
   assert.match(html,/대표 화면 연결 예정/);
   assert.match(html,/href="\/screens\/my-info-3d-test\/"/);
   assert.doesNotMatch(html,/class="(?:my-info-test|home-test|barcode-test)"/);
  }
+});
+test('my-info exposes one approved representative screen without pulling home or barcode screens',()=>{
+ const html=renderWorkspace({pageId:'my-info'});
+ assert.equal((html.match(/class="my-info-test"/g)||[]).length,1);
+ assert.match(html,/class="og-surface mileage-card v2-mileage"/);
+ assert.match(html,/최근 방문/);assert.match(html,/스시산원 반주헌/);
+ assert.doesNotMatch(html,/대표 화면 연결 예정|class="home-test"|class="barcode-test"/);
+ const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
+ assert.ok(images.length>10);
+ assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')),'shared assets resolve from the v2 route');
+ assert.match(html,/스타일을 격리/);
 });
 test('unknown IDs give a safe return route without echoing markup',()=>{
  const html=renderWorkspace({pageId:'<script>bad</script>'});
