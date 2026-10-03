@@ -24,6 +24,12 @@
  --v2-inset-shadow:oklch(38% .01 270 / .12);
  --v2-primary-edge:oklch(38.555232% .15746975 276.507992);
  --v2-primary-light:oklch(75.536185% .12605768 275.985545);
+ /* Exact approved mileage material, shared by future v2 screens. */
+ --v2-mileage-track:oklch(31.352074% .11584333 276.752711);
+ --v2-mileage-held:var(--v2-primary-edge);
+ --v2-mileage-lit:oklch(95.457469% .02301675 246.036948);
+ --v2-mileage-fill:oklch(75.376646% .13233224 248.825771);
+ --v2-line-compact:16px;
  --v2-depth-flat:none;
  --v2-depth-inset:inset 2px 3px 6px var(--v2-inset-shadow),inset -1px -1px 2px var(--v2-surface);
  --v2-depth-raised:inset 1px 2px 3px var(--v2-surface),inset -1px -4px 6px var(--v2-material-edge),0 4px 12px var(--v2-contact);

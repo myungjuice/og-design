@@ -1,5 +1,12 @@
 export function setupComponentPreview(root){
  root.addEventListener('click',event=>{
+  const mileage=event.target.closest('.v2-mileage [data-preview]');
+  if(mileage){
+   root.querySelector('.v2-mileage-feedback').textContent=mileage.dataset.preview==='마일리지 안내'
+    ?'밝은 구간과 흰 원은 사용 가능 금액, 짙은 보라 구간은 총 보유 금액입니다. 진행바는 표시용이며 조작하지 않습니다.'
+    :'마일리지 내역보기 동작 위치입니다. 실제 내역 화면 연결은 다음 화면 작업에서 진행합니다.';
+   return;
+  }
   const target=event.target.closest('[data-preview-action]');
   if(!target||target.disabled)return;
   const status=root.querySelector('.v2-preview-status');

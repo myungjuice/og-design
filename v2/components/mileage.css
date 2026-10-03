@@ -1,0 +1,50 @@
+/* Hallmark · component scope / approved OG 3D reference
+ * Pre-emit critique: P4 H5 E5 S5 R4 V4. Preserve Pretendard 400/700,
+ * violet material, original M/marker assets and 4pt spacing; no theme rotation.
+ * Read-only meter, no hover lift or animated balances. Scoped to v2 only.
+ * Contrast: pass (40–41); mobile: pass (320/375/390/414/768/1440).
+ * Reference overrides: white text, violet card, cyan fill, original 3D shadows. */
+.v2-mileage-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-8)}
+.v2-mileage.og-surface{width:350px;max-width:100%;min-width:0;padding:var(--v2-space-5);border:0;border-radius:var(--v2-radius-card);background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-depth-primary);container-type:inline-size}
+.v2-mileage .mileage-top{display:flex;gap:var(--v2-space-2);align-items:center;position:relative}
+.v2-mileage .m-coin{display:block;width:48px;height:48px;flex:none;border-radius:50%}
+.v2-mileage .mileage-title{min-width:0;flex:1}
+.v2-mileage .mileage-title>div{display:flex;align-items:center;gap:2px;font-size:var(--v2-type-caption);line-height:var(--v2-line-compact);white-space:nowrap}
+.v2-mileage .mileage-title strong{display:block;font-size:var(--v2-type-amount);line-height:var(--v2-line-amount);margin:0;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.v2-mileage :is(.mileage-info,.mileage-history){position:relative;background:none;border:0;padding:0;color:var(--v2-on-action);font:400 var(--v2-type-caption)/var(--v2-line-compact) var(--v2-font);cursor:pointer;white-space:nowrap}
+.v2-mileage .mileage-info{display:grid;place-items:center;width:10px;height:10px;flex:none}
+/* Small reference glyphs keep 44px touch areas without enlarging the artwork. */
+.v2-mileage .mileage-info::before{content:"";position:absolute;inset:-17px}
+.v2-mileage .mileage-history{display:flex;align-items:center;align-self:flex-start;min-height:16px;margin-inline-start:var(--v2-space-1)}
+.v2-mileage .mileage-history::before{content:"";position:absolute;inset:-14px 0}
+.v2-mileage button:focus-visible{outline:3px solid var(--v2-on-action);outline-offset:4px}
+.v2-mileage button:active{opacity:.8}
+.v2-mileage button img{display:block}
+.v2-mileage .mileage-graph{position:relative;isolation:isolate;height:20px;border-radius:var(--v2-radius-chip);margin-top:var(--v2-space-4);background:var(--v2-mileage-track);overflow:clip}
+.v2-mileage .mileage-graph>span{position:absolute;inset:0 auto 0 0;border-radius:inherit}
+.v2-mileage .graph-held{width:min(100%,calc(var(--progress) + var(--cap)));background:var(--v2-mileage-held)}
+.v2-mileage .graph-available{width:min(100%,max(var(--fill-min),calc(var(--progress) + var(--cap))));background:linear-gradient(90deg,var(--v2-mileage-lit),var(--v2-mileage-fill));box-shadow:inset 0 0 10px var(--v2-on-action)}
+.v2-mileage .mileage-graph>.graph-marker{width:20px;left:clamp(10px,var(--progress),calc(100% - 10px));transform:translateX(-50%)}
+.v2-mileage .graph-marker img{display:block}
+.v2-mileage [hidden]{display:none}
+.v2-mileage .graph-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));font-size:var(--v2-type-caption);line-height:var(--v2-line-compact);margin-top:var(--v2-space-1);font-variant-numeric:tabular-nums}
+.v2-mileage .graph-labels>span:nth-child(2){text-align:center}
+.v2-mileage .graph-labels>span:last-child{text-align:right}
+.v2-mileage .mileage-breakdown{position:relative;padding-top:var(--v2-space-4);margin-top:var(--v2-space-4);font-size:var(--v2-type-secondary);line-height:19px}
+.v2-mileage .mileage-divider{position:absolute;inset:0 auto auto 0;width:100%;height:1px;overflow:clip;display:block}
+.v2-mileage .mileage-divider img{display:block;max-width:none}
+.v2-mileage .mileage-rows{margin:0;display:grid;gap:var(--v2-space-2)}
+.v2-mileage .mileage-rows>div{display:flex;justify-content:space-between;gap:var(--v2-space-2);align-items:center;flex-wrap:wrap}
+.v2-mileage .mileage-rows dd{margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;min-width:0}
+.v2-mileage-note{max-width:78ch}
+@container(max-width:290px){
+ .v2-mileage .m-coin{width:40px;height:40px}
+ .v2-mileage .mileage-title>div{font-size:10px}
+ .v2-mileage .mileage-history{font-size:10px}
+ .v2-mileage .mileage-title strong{font-size:24px;line-height:32px}
+}
+@container(max-width:245px){
+ .v2-mileage .mileage-top{flex-wrap:wrap}
+ .v2-mileage .mileage-history{margin-inline-start:auto}
+}
+@media(min-width:1100px){.v2-mileage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
