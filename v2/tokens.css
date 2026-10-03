@@ -40,6 +40,10 @@
  --v2-depth-primary:inset 0 4px 12px var(--v2-primary-light),inset -4px -8px 14px var(--v2-primary-edge),0 4px 12px var(--v2-contact);
  /* Action buttons are shallower than the balance card, matching the barcode screen. */
  --v2-button-fill:var(--home-selected-fill);--v2-button-depth:var(--home-shadow-selected);
+ /* Destructive actions use the same shallow material in a red colorway. */
+ --v2-button-danger-light:oklch(52% .17 25);--v2-button-danger-face:oklch(49% .17 25);
+ --v2-button-danger-fill:linear-gradient(155deg,var(--v2-button-danger-light),var(--v2-button-danger-face));
+ --v2-button-danger-depth:inset 1px 2px 4px var(--v2-button-danger-light),inset -1px -2px 4px var(--v2-error),0 4px 8px var(--home-contact);
  /* Foundation specimens expose the existing screen materials, without changing consumers. */
  --v2-button-light:var(--home-selected-lit);--v2-button-face:var(--home-selected-face);
  --v2-depth-panel:inset -1px -4px 6px var(--v2-material-edge),0 4px 12px var(--v2-contact);

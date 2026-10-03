@@ -7,6 +7,23 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'/v2/components/#dialogs');
   assert.equal(await page.locator('#dialogs .v2-dialog-static').count(),3,'all three approved variants');
+  assert.ok(await page.locator('.v2-dialog-static').evaluateAll(panels=>{
+   const primary=getComputedStyle(panels[0].querySelector('.v2-button'));
+   const danger=getComputedStyle(panels[2].querySelector('[data-variant="danger"]'));
+   const geometry=value=>value.replace(/oklch\([^)]*\)|rgba?\([^)]*\)/g,'COLOR');
+   return danger.backgroundImage.startsWith('linear-gradient(155deg,')&&danger.borderWidth==='0px'&&geometry(danger.boxShadow)===geometry(primary.boxShadow)&&danger.height===primary.height&&danger.borderRadius===primary.borderRadius;
+  }),'danger uses the primary button material geometry, not secondary white bevels');
+  for(const [id,label] of [['notice','확인'],['delete','삭제']]){
+   await page.locator(`[data-dialog-open="v2-dialog-${id}"]`).click();
+   const button=page.locator(`#v2-dialog-${id}`).getByRole('button',{name:label,exact:true});
+   await button.hover();await page.mouse.down();
+   assert.ok(await button.evaluate(n=>{
+    const probe=document.createElement('span');probe.style.boxShadow='var(--v2-depth-inset)';n.parentElement.append(probe);
+    const expected=getComputedStyle(probe).boxShadow;probe.remove();
+    return n.matches(':active')&&getComputedStyle(n).boxShadow===expected;
+   }),'filled '+id+' button shows pressed depth while hovered');
+   await page.mouse.up();await page.keyboard.press('Escape');
+  }
   for(const width of [320,375,390,414,768,1024,1440]){
    await page.setViewportSize({width,height:900});await page.reload();
    assert.ok(await page.locator('#dialogs .v2-dialog-static').evaluateAll(ns=>ns.every(n=>n.inert)));
