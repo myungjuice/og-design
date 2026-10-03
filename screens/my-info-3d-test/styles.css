@@ -1,9 +1,10 @@
-/* Hallmark · macrostructure: member dashboard · studied-DNA (user screenshot)
- * P4 H5 E5 S5 R4 V4 · font/spacing: OG shared system · imagery: Figma original assets
+/* Hallmark · macrostructure: member dashboard · studied-DNA (Figma 35:76)
+ * pre-emit critique: P4 H5 E5 S5 R4 V4 · font/spacing: OG shared system · imagery: Figma originals
  * Deliberate reference choices: directional material depth, violet balance card, 3-column menu.
  * Isolated route; no shared canvas, component or global token file is changed.
- * Contrast: pass for card/body/muted text; mobile: 320/375/414/768.
- * Reference overrides: accent-card footprint, 3-column menu, and layered 3D material shadows retained by request. */
+ * Contrast: pass for card/body/muted text; mobile: 320/375/390/414/768.
+ * Reference overrides: white surfaces, accent-card footprint, 3-column menu, source icon sets and 3D shadows retained by request.
+ * Source-fidelity corrections only; no macrostructure/theme rotation or new interactions. */
 @import url('./tokens.css');
 @import url('../../design-system/components/shared.css');
 @import url('../../design-system/components/surfaces/surfaces.css');
@@ -18,50 +19,66 @@ button:disabled{opacity:.5;cursor:not-allowed}
 button:active:not(:disabled){transform:translateY(1px)}
 button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .ui-icon{display:block;flex:none}
-.my-info-test{position:relative;max-width:414px;min-height:100dvh;margin-inline:auto;background:linear-gradient(180deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
-.profile-header{padding:var(--app-space-6) var(--app-space-5) var(--app-space-8)}
-.header-actions{display:flex;justify-content:flex-end;gap:var(--app-space-2);height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
+.my-info-test{position:relative;max-width:390px;min-height:100dvh;margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
+.profile-header{padding:var(--app-space-8) var(--app-space-5)}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:0;height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
 .icon-button{display:grid;place-items:center;width:var(--app-touch-min);height:var(--app-touch-min);border:0;padding:0;background:none;border-radius:var(--app-radius-md)}
-.profile-row{display:flex;align-items:center;gap:var(--app-space-3);padding-top:var(--app-space-3)}
-.profile-placeholder{display:grid;place-items:center;width:var(--app-space-16);height:var(--app-space-16);flex:none;border:2px solid var(--test-card-light);border-radius:var(--app-radius-pill);color:var(--test-muted);background:var(--test-surface)}
-.profile-row h1{margin:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);letter-spacing:var(--app-tracking-heading);color:var(--test-accent);overflow-wrap:anywhere}
-.profile-edit{display:flex;align-items:center;gap:var(--app-space-1);border:0;background:none;padding:var(--app-space-1) 0;color:var(--test-muted);font-size:var(--app-caption-size);line-height:var(--app-caption-line);min-height:32px;white-space:nowrap}
-.page-content{padding-inline:var(--app-space-5);display:grid;gap:var(--app-space-4)}
-.mileage-card.og-surface{padding:var(--app-space-5);border:1px solid var(--test-card-rim);border-radius:var(--app-radius-xl);background:linear-gradient(160deg,var(--test-card-top),var(--test-card-bottom));color:var(--test-on-card);box-shadow:var(--test-shadow-card)}
+/* Adjacent 44px targets never overlap; glyph centers retain Figma's 40px separation. */
+.header-actions .icon-button{position:relative;left:12px;width:44px;height:44px}
+.header-actions .icon-button:first-child img{position:relative;left:4px}
+.profile-row{display:flex;align-items:center;gap:var(--app-space-3)}
+.profile-avatar{position:relative;display:block;width:60px;height:60px;flex:none;border:2px solid var(--test-avatar-border);border-radius:var(--app-radius-pill)}
+.avatar-layer{position:absolute;inset:0;border-radius:inherit;overflow:clip;pointer-events:none}
+.avatar-layer img{position:absolute;display:block;max-width:none}
+.avatar-base img{width:263.33%;height:175.56%;left:-81.53%;top:-.5%}
+.avatar-overlay img{width:321.55%;height:568.67%;left:-19.98%;top:-135.46%}
+.profile-row h1{margin:0;min-width:0;font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);letter-spacing:var(--app-tracking-heading);color:var(--test-accent);overflow-wrap:anywhere}
+.profile-edit{display:flex;align-items:center;gap:0;border:0;background:none;padding:0;margin-top:2px;color:var(--test-muted);font-size:var(--app-caption-size);line-height:16px;min-height:16px;white-space:nowrap;position:relative}
+.profile-edit::before{content:"";position:absolute;inset:-14px 0}
+.page-content{padding-inline:var(--app-space-5);display:grid;gap:var(--app-space-3)}
+.mileage-card.og-surface{padding:var(--app-space-5);border:0;border-radius:20px;background:var(--test-card-top);color:var(--test-on-card);box-shadow:var(--test-shadow-card)}
 .mileage-card button:focus-visible{outline-color:var(--test-on-card)}
-.mileage-top{display:flex;gap:var(--app-space-2);align-items:center;position:relative;padding-top:var(--app-space-1)}
+.mileage-top{display:flex;gap:var(--app-space-2);align-items:center;position:relative}
 .m-coin{width:48px;height:48px;flex:none;border-radius:50%;font-family:var(--app-font)}
 .mileage-title{min-width:0;flex:1}
-.mileage-title>div{display:flex;align-items:center;gap:2px;font-size:var(--app-caption-size);line-height:var(--app-caption-line);white-space:nowrap}
-.mileage-title strong{display:block;font-size:28px;line-height:32px;margin-top:2px;letter-spacing:-.02em;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
-.mileage-info{display:grid;place-items:center;background:none;border:0;color:inherit;padding:0;width:24px;height:24px;flex:none}
-.mileage-history{display:flex;align-items:center;gap:0;align-self:flex-start;background:none;color:var(--test-on-card-muted);border:0;padding:0;min-height:24px;white-space:nowrap;font-size:10px;line-height:16px;margin-left:var(--app-space-1)}
-.mileage-graph{position:relative;isolation:isolate;height:20px;border-radius:var(--app-radius-pill);margin-top:var(--app-space-5);background:var(--test-track);overflow:clip}
+.mileage-title>div{display:flex;align-items:center;gap:2px;font-size:var(--app-caption-size);line-height:16px;white-space:nowrap}
+.mileage-title strong{display:block;font-size:28px;line-height:38px;margin-top:0;letter-spacing:0;font-weight:var(--app-weight-bold);font-variant-numeric:tabular-nums}
+.mileage-info{position:relative;display:grid;place-items:center;background:none;border:0;color:inherit;padding:0;width:10px;height:10px;flex:none}
+/* A 44px invisible target leaves the original 10px symbol and layout intact. */
+.mileage-info::before{content:"";position:absolute;inset:-17px}
+.mileage-history{position:relative;display:flex;align-items:center;gap:0;align-self:flex-start;background:none;color:var(--test-on-card);border:0;padding:0;min-height:16px;white-space:nowrap;font-size:12px;line-height:16px;margin-left:var(--app-space-1)}
+.mileage-history::before{content:"";position:absolute;inset:-14px 0}
+.mileage-graph{position:relative;isolation:isolate;height:20px;border-radius:var(--app-radius-pill);margin-top:var(--app-space-4);background:var(--test-track);overflow:clip}
 .mileage-graph>span{position:absolute;inset:0 auto 0 0;border-radius:inherit}
-.graph-held{width:var(--progress);background:var(--test-held)}
-.graph-available{width:var(--progress);background:linear-gradient(180deg,var(--test-progress-lit),var(--test-progress-bottom));box-shadow:inset 0 1px 2px var(--test-on-card)}
-.mileage-graph>.graph-marker{width:20px;left:clamp(10px,var(--progress),calc(100% - 10px));transform:translateX(-50%);background:var(--test-on-card)}
-.graph-labels{display:flex;justify-content:space-between;gap:var(--app-space-1);font-size:var(--app-caption-size);line-height:var(--app-caption-line);margin-top:var(--app-space-1);font-variant-numeric:tabular-nums;color:var(--test-on-card-muted)}
-.mileage-breakdown{display:grid;gap:var(--app-space-2);border-top:1px solid var(--test-card-rule);padding-top:var(--app-space-3);margin:var(--app-space-4) 0 0;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line)}
-.mileage-breakdown>div{display:flex;justify-content:space-between;gap:var(--app-space-2);align-items:center}
-.mileage-breakdown dt{color:var(--test-on-card-muted)}
+.graph-held{width:min(100%,calc(var(--progress) + var(--cap)));background:var(--test-held)}
+/* Rounded visual cap extends past the value's center, matching Figma's 164/189px bars. */
+.graph-available{width:min(100%,max(var(--fill-min),calc(var(--progress) + var(--cap))));background:linear-gradient(90deg,var(--test-progress-lit),var(--test-progress-bottom));box-shadow:inset 0 0 10px var(--test-on-card)}
+.mileage-graph>.graph-marker{width:20px;left:clamp(10px,var(--progress),calc(100% - 10px));transform:translateX(-50%)}
+.graph-marker img{display:block}
+.graph-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));font-size:var(--app-caption-size);line-height:16px;margin-top:var(--app-space-1);font-variant-numeric:tabular-nums;color:var(--test-on-card)}
+.graph-labels>span:nth-child(2){text-align:center}.graph-labels>span:last-child{text-align:right}
+.mileage-breakdown{position:relative;border:0;padding-top:var(--app-space-4);margin:var(--app-space-4) 0 0;font-size:var(--app-body-2-size);line-height:19px}
+.mileage-divider{position:absolute;top:0;left:0;width:100%;height:1px;overflow:clip;display:block}
+.mileage-divider img{display:block;max-width:none}
+.mileage-rows{margin:0;display:grid;gap:var(--app-space-2)}
+.mileage-rows>div{display:flex;justify-content:space-between;gap:var(--app-space-2);align-items:center}
+.mileage-breakdown dt{color:var(--test-on-card)}
 .mileage-breakdown dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
-.mileage-breakdown dd>span{padding-right:var(--app-space-1)}
-.recent-card.og-surface{padding:var(--app-space-4) var(--app-space-5) var(--app-space-5);border:1px solid var(--test-surface);border-radius:var(--app-radius-xl);background:var(--test-surface);box-shadow:var(--test-shadow-panel)}
-.recent-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--app-space-2)}
+.recent-card.og-surface{padding:var(--app-space-5);border:0;border-radius:20px;background:var(--test-surface);box-shadow:var(--test-shadow-panel)}
+.recent-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--app-space-5)}
 .recent-heading h2{margin:0;font-size:var(--app-body-1-size);line-height:var(--app-body-1-line);font-weight:var(--app-weight-bold)}
-.recent-heading .icon-button{width:32px;height:32px;color:var(--test-muted)}
-.visit-list{display:grid;gap:var(--app-space-2);list-style:none;margin:0;padding:0}
-.visit-list li{display:flex;align-items:center;gap:var(--app-space-2);min-height:var(--app-touch-min)}
+.recent-heading .icon-button{width:20px;height:20px;color:var(--test-muted)}
+.visit-list{display:grid;gap:var(--app-space-4);list-style:none;margin:0;padding:0}
+.visit-list li{display:flex;align-items:center;gap:var(--app-space-2);min-height:35px}
 .visit-symbol{width:32px;height:32px;display:grid;place-items:center;flex:none;background:var(--test-tint);color:var(--test-violet);border-radius:var(--app-radius-sm)}
 .visit-copy{flex:1;min-width:0}
-.visit-copy strong{display:block;font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-bold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.visit-copy>span{display:block;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--test-muted)}
-.review-button{flex:none;display:grid;place-items:center;white-space:nowrap;min-width:56px;height:32px;padding:0 var(--app-space-2);background:var(--test-surface);border:1px solid var(--app-control-border);border-radius:var(--app-radius-pill);font-size:var(--app-caption-size);color:var(--test-muted)}
-/* Invisible hit area stays inside the 44px visit row; visible pills remain 32px high. */
+.visit-copy strong{display:block;font-size:var(--app-body-2-size);line-height:19px;font-weight:var(--app-weight-bold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visit-copy>span{display:block;font-size:var(--app-caption-size);line-height:16px;color:var(--test-muted)}
+.review-button{flex:none;display:grid;place-items:center;white-space:nowrap;min-width:56px;height:26px;padding:0 var(--app-space-2);background:var(--test-surface);border:1px solid var(--test-control-border);border-radius:var(--app-radius-pill);font-size:var(--app-caption-size);color:var(--test-muted)}
+/* Expanded hit areas fit the 35px rows plus their 16px inter-row gaps without overlap. */
 .review-button,.recent-heading .icon-button{position:relative}
 .review-button::before,.recent-heading .icon-button::before{content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;min-width:var(--app-touch-min);min-height:var(--app-touch-min);transform:translate(-50%,-50%)}
-.review-write{min-width:36px;color:var(--test-on-card);background:var(--test-violet);border-color:var(--test-violet)}
+.review-write{min-width:32px;height:24px;color:var(--test-on-card);background:var(--test-violet);border-color:var(--test-violet)}
 .service-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--app-space-4);row-gap:var(--app-space-5);padding:var(--app-space-4) var(--app-space-2) var(--app-space-8)}
 .service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:var(--app-space-2);padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--test-ink);font-family:var(--app-font);font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);font-weight:var(--app-weight-medium)}
 .service-face{display:grid;place-items:center;position:relative;width:80px;height:80px;border:0;border-radius:var(--app-radius-lg);background:var(--test-surface);box-shadow:var(--test-shadow-tile)}
@@ -83,6 +100,6 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 #preview-dialog h2{font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);margin:0 0 var(--app-space-3)}
 #preview-dialog p{font-size:var(--app-body-2-size);line-height:var(--app-body-2-line);color:var(--test-muted);word-break:keep-all}
 .preview-close{min-height:var(--app-touch-min);width:100%;border:0;border-radius:var(--app-radius-md);margin-top:var(--app-space-4);background:var(--test-accent);color:var(--test-on-card);font-weight:var(--app-weight-bold)}
-@media(min-width:25rem){.service-menu{column-gap:var(--app-space-6)}.mileage-title>div{font-size:13px}.mileage-history{font-size:11px}}
+@media(min-width:25rem){.service-menu{column-gap:var(--app-space-6)}}
 @media(max-width:22rem){.page-content{padding-inline:var(--app-space-4)}.mileage-card.og-surface{padding:var(--app-space-4)}.m-coin{width:40px;height:40px}.mileage-title>div{font-size:10px}.mileage-title strong{font-size:26px}.mileage-history{font-size:9px}.service-menu{column-gap:var(--app-space-2)}.service-face{width:72px;height:72px}.recent-card.og-surface{padding-inline:var(--app-space-4)}}
 @media(prefers-reduced-motion:reduce){button{transition:none}}

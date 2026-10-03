@@ -2,22 +2,24 @@
  * Existing OG font and spacing preserved. Test-only appearance overrides. */
 @import url('../../design-system/foundations/app-tokens.css');
 :root{
- --test-page-top:oklch(99.2% .006 260);--test-page-bottom:oklch(93.5% .025 258);
- --test-desktop:oklch(97% .012 258);--test-surface:oklch(99.8% .002 260);
+ --test-page-top:oklch(100% 0 0);--test-page-bottom:oklch(93.052482% .02473482 257.646471);
+ --test-desktop:oklch(97% .012 258);--test-surface:oklch(100% 0 0);
  --test-ink:var(--app-ink);--test-muted:oklch(46% .025 267);--test-rule:oklch(92% .01 270);
- --test-accent:oklch(48% .22 281);--test-violet:oklch(54% .22 286);--test-tint:oklch(92% .042 282);
- --test-card-top:oklch(56% .218 282);--test-card-bottom:oklch(49% .195 282);
- --test-card-edge:oklch(44% .155 282);--test-card-light:oklch(87% .065 279);
- --test-on-card:oklch(99% .004 278);--test-on-card-muted:oklch(98% .006 278);
- --test-track:oklch(34% .105 281);--test-held:oklch(43% .16 280);
- --test-progress-lit:oklch(96% .025 228);--test-progress-bottom:oklch(77% .086 241);
- --test-shadow:oklch(34% .035 266 / .16);--test-shadow-soft:oklch(44% .035 266 / .1);
+ /* Exact sRGB reference colors converted to OKLCH; shared tokens stay untouched. */
+ --test-accent:oklch(45.556667% .19385339 276.139489);--test-violet:oklch(52.766136% .21490493 276.409976);--test-tint:oklch(92% .042 282);
+ --test-avatar-border:oklch(58.666873% .21566321 276.863203);
+ --test-card-top:var(--test-violet);--test-card-bottom:var(--test-violet);
+ --test-card-edge:oklch(38.555232% .15746975 276.507992);--test-card-light:oklch(75.536185% .12605768 275.985545);
+ --test-on-card:oklch(100% 0 0);--test-on-card-muted:var(--test-on-card);
+ --test-track:oklch(31.352074% .11584333 276.752711);--test-held:var(--test-card-edge);
+ --test-progress-lit:oklch(95.457469% .02301675 246.036948);--test-progress-bottom:oklch(75.376646% .13233224 248.825771);
+ --test-shadow:oklch(31.352074% .11584333 276.752711 / .2);--test-shadow-soft:oklch(44% .035 266 / .1);
  /* Test-only material roles. Top-left light, soft lower contact; no ambient glow. */
  --test-card-rim:oklch(70% .135 282);--test-card-rule:oklch(65% .13 282);
  --test-card-highlight:oklch(96% .018 278 / .45);
- --test-surface-edge:oklch(84% .018 268 / .48);
- --test-shadow-card:inset 1px 1px 2px var(--test-card-highlight),inset -1px -3px 5px var(--test-card-edge),0 8px 16px -7px var(--test-shadow);
- --test-shadow-panel:inset 1px 1px 1px var(--test-surface),inset 0 -2px 3px var(--test-surface-edge),0 7px 12px -6px var(--test-shadow);
+ --test-surface-edge:oklch(84.043907% .01400481 277.025601);--test-control-border:var(--test-surface-edge);
+ --test-shadow-card:inset 0 4px 12px var(--test-card-light),inset -4px -8px 14px var(--test-card-edge),0 4px 12px var(--test-shadow);
+ --test-shadow-panel:inset -1px -4px 6px var(--test-surface-edge),0 4px 12px var(--test-shadow);
  --test-shadow-tile:0 5px 10px -4px var(--test-shadow);
  --test-inset-tile:inset 1px 1px 2px var(--test-surface),inset -1px -4px 6px var(--test-surface-edge);
  --coin-rim-light:oklch(87% .06 285);--coin-rim-dark:oklch(56% .19 281);
