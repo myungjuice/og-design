@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderMileageCard as sharedCard} from '../../screens/my-info-3d-test/mileage-card.mjs';
 import {renderComponents} from './render.mjs';
-import {renderSidebar} from '../navigation.mjs';
+import {renderSubnavigation} from '../subnavigation.mjs';
 import {renderMileage} from './mileage.mjs';
 
 test('shared mileage card accepts a sharing count without changing legacy defaults',()=>{
@@ -20,7 +20,7 @@ test('shared card resolves original assets from a different route and escapes pa
 });
 test('gallery renders four independently labelled balance cases using resolved original assets',()=>{
  const html=renderComponents();
- assert.match(renderSidebar({activeId:'components'}),/href="#mileage"/);
+ assert.match(renderSubnavigation({pageId:'components',label:'공통 컴포넌트'}),/href="#mileage"/);
  assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,4);
  for(const label of ['기본 잔액','사용 가능 금액 없음','잔액 0','진행바 상한'])assert.ok(html.includes(label));
  assert.match(html,/공유인 0/);

@@ -4,7 +4,7 @@ import {escapeHTML as e} from '../../design-system/components/core.mjs';
 import {renderMileageSamples} from './mileage.mjs';
 import {renderHomeControlSamples} from './home-controls.mjs';
 import {renderListRowSamples} from './list-row.mjs';
-import {renderComponentPicker,stateComparison} from './catalog.mjs';
+import {stateComparison} from './catalog.mjs';
 export {renderListRow} from './list-row.mjs';
 export const componentStates=[
  ['default','기본','동작하기 전'],['active','누르는 중','손가락으로 누르는 동안 얕게 눌림'],
@@ -27,8 +27,7 @@ export function renderMenuTile({label='이용내역',state='default',selected=fa
 const figure=(name,description,control)=>`<figure class="v2-component-sample"><figcaption><strong>${name}</strong><span>${description}</span></figcaption>${control}</figure>`;
 export function renderComponents(){
  const variants=[['primary','주요 버튼','마일리지 사용','보라색 표면 · 가장 중요한 동작'],['secondary','보조 버튼','영수증 적립','흰 표면 · 주요 버튼 옆의 보조 동작'],['review','작은 후기 버튼','후기 작성','작은 시각 크기 · 터치 영역은 44px 이상']];
- return `<p class="v2-intro">컴포넌트를 선택해 기본 형태와 동작 상태를 확인합니다.</p>
- ${renderComponentPicker()}
+ return `<p class="v2-intro">그룹별로 컴포넌트의 기본 형태와 동작 상태를 확인합니다.</p>
  ${variants.map(([id,title,label,description])=>{
   const sample=([state,name,desc])=>figure(name,state==='disabled'&&id!=='primary'?(id==='review'?'후기 작성을 진행할 수 없는 상태':'적립을 진행할 수 없는 상태'):desc,renderButton({variant:id,label,state,attributes:{'data-component':'button','aria-label':`${stateLabel(label,state)} · ${title} · ${name}`}}));
   return `<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title"${id!=='primary'?' hidden':''}><h2 id="${id}-title">${title}</h2><p>${description}</p>

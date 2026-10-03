@@ -9,9 +9,5 @@ export const navigationItems = [
 ];
 export function renderSidebar({activeId}={}) {
  return `<details class="v2-menu" open><summary>메뉴</summary>
- <nav class="v2-primary-nav" aria-label="3D컨셉 디자인 v2">${navigationItems.map(item=>{
-  const link=`<a href="${item.href}"${item.id===activeId?' aria-current="page"':''}>${item.label}</a>`;
-  return item.id==='components'&&activeId==='components'?`<div>${link}${renderComponentExplorer()}</div>`:link;
- }).join('')}</nav></details>`;
+ <nav class="v2-primary-nav" aria-label="3D컨셉 디자인 v2">${navigationItems.map(item=>`<a href="${item.href}"${item.id===activeId?' aria-current="page"':''}>${item.label}</a>`).join('')}</nav></details>`;
 }
-import {renderComponentExplorer} from './components/catalog.mjs';

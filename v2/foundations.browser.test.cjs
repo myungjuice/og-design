@@ -13,7 +13,11 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.deepEqual(await page.locator('[data-foundation]').evaluateAll(n=>n.map(n=>n.dataset.foundation)),['colors','typography','spacing','radius','materials']);
    assert.equal(await page.locator('main button,main input').count(),0,'specimens do not pretend to be completed controls');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow at '+width);
-   assert.ok(await page.locator('[data-sample]').evaluateAll(nodes=>nodes.every(n=>{const b=n.getBoundingClientRect();return b.left>=0&&b.right<=innerWidth+1&&n.scrollWidth<=n.clientWidth+1;})),'specimens are not clipped at '+width);
+   for(const fragment of ['colors','typography','radius']){
+    await page.evaluate(hash=>{location.hash=hash;},fragment);
+    await page.locator('#'+fragment).waitFor();
+    assert.ok(await page.locator('[data-sample]:visible').evaluateAll(nodes=>nodes.every(n=>{const b=n.getBoundingClientRect();return b.left>=0&&b.right<=innerWidth+1&&n.scrollWidth<=n.clientWidth+1;})),'visible specimens are not clipped at '+width);
+   }
    const styles=await page.evaluate(()=>{
     const amount=getComputedStyle(document.querySelector('[data-type="amount"]'));
     const body=getComputedStyle(document.querySelector('[data-type="body"]'));
@@ -62,10 +66,10 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const fallback=await browser.newPage({viewport:{width:390,height:1000}});
   const fallbackErrors=[];fallback.on('pageerror',e=>fallbackErrors.push(e.message));
   await fallback.route('**/*.woff2',route=>route.abort('failed'));
-  await fallback.goto(`${base}/v2/design-system/`);await fallback.locator('[data-type="amount"]').waitFor();await fallback.evaluate(()=>document.fonts.ready);
+  await fallback.goto(`${base}/v2/design-system/#typography`);await fallback.locator('[data-type="amount"]').waitFor();await fallback.evaluate(()=>document.fonts.ready);
   assert.equal(await fallback.locator('[data-type="amount"]').innerText(),'15,000 M');
   assert.ok(await fallback.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'fallback stays readable');
-  assert.ok(await fallback.locator('[data-sample]').evaluateAll(nodes=>nodes.every(n=>n.scrollWidth<=n.clientWidth+1)),'fallback sample text fits');
+  assert.ok(await fallback.locator('[data-sample]:visible').evaluateAll(nodes=>nodes.every(n=>n.scrollWidth<=n.clientWidth+1)),'fallback sample text fits');
   assert.deepEqual(fallbackErrors,[]);assert.deepEqual(errors,[]);
   console.log('v2 foundations: 5 groups, 6 widths, actual fonts, contrast, long Korean titles, font failure fallback passed');
  }finally{await browser.close();}

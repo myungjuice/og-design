@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {navigationItems,renderSidebar} from './navigation.mjs';
 import {renderWorkspace} from './render.mjs';
+import {renderFoundations} from './design-system/foundations.mjs';
 
 test('menu anchors expose all seven destinations in the approved order',()=>{
  assert.deepEqual(navigationItems.map(({id,label,href})=>[id,label,href]),[
@@ -69,7 +70,7 @@ test('design system presents five foundation groups as visual specimens',()=>{
  const html=renderWorkspace({pageId:'design-system'});
  assert.deepEqual([...html.matchAll(/data-foundation="([^"]+)"/g)].map(x=>x[1]),['colors','typography','spacing','radius','materials']);
  assert.match(html,/시각 규칙 검토용/);
- assert.doesNotMatch(html,/<button|<input/);
+ assert.doesNotMatch(renderFoundations(),/<button|<input/);
  assert.equal((html.match(/data-color-token=/g)||[]).length,13);
  for(const id of ['components','home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);
 });

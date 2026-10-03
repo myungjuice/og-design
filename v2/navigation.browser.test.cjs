@@ -29,7 +29,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   for(const width of [320,375,390,414,768,1440]){
    await page.setViewportSize({width,height:1000});await page.reload();await page.locator('main > h1').waitFor();
    const menu=page.locator('.v2-menu'),summary=menu.locator('summary');
-   if(width<768){
+   if(width<1024){
     assert.equal(await menu.evaluate(n=>n.open),false,'mobile menu starts closed');
     await summary.focus();await page.keyboard.press('Enter');
     assert.equal(await menu.evaluate(n=>n.open),true,'Enter opens menu');

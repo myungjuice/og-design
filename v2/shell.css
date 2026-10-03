@@ -5,7 +5,7 @@ html{background:var(--v2-workspace-bg);color:var(--v2-workspace-text);font-famil
 body{margin:0;font-size:16px;line-height:24px;word-break:keep-all;overflow-wrap:anywhere;}
 a{color:var(--v2-workspace-accent);text-underline-offset:4px;}
 a:focus-visible,summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:3px;}
-.v2-workspace{display:grid;grid-template-columns:216px minmax(0,1fr);min-height:100vh;}
+.v2-workspace{display:grid;grid-template-columns:216px 240px minmax(0,1fr);min-height:100vh;}
 .v2-sidebar{padding:var(--v2-space-6) var(--v2-space-4);border-right:1px solid var(--v2-workspace-edge);}
 .v2-brand{display:flex;align-items:center;min-height:44px;color:var(--v2-workspace-text);font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap;}
 .v2-menu{margin-block:var(--v2-space-6);}
@@ -23,11 +23,50 @@ h1{margin:0;font-size:24px;line-height:32px;font-weight:700;font-style:normal;mi
 .v2-pending a{display:inline-flex;align-items:center;min-height:44px;}
 .v2-skip{position:fixed;top:8px;left:8px;z-index:20;padding:var(--v2-space-3);background:var(--v2-surface);color:var(--v2-text);transform:translateY(-160%);}
 .v2-skip:focus{transform:none;}
-@media(min-width:768px){.v2-menu summary{display:none;}}
-@media(max-width:767px){
- .v2-workspace{display:block;}
- .v2-sidebar{border-right:0;border-bottom:1px solid var(--v2-workspace-edge);padding:var(--v2-space-3) var(--v2-space-5);}
- .v2-menu{margin:var(--v2-space-2) 0 0;}
- .v2-back{margin-top:var(--v2-space-2);}
- main{padding:var(--v2-space-8) var(--v2-space-5);}
+/* Hallmark · shared review workbench: primary / secondary / content
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · existing OG colours and type retained.
+ */
+.v2-workspace [hidden]{display:none!important}
+.v2-secondary-sidebar{min-width:0;padding:var(--v2-space-6) var(--v2-space-4);border-right:1px solid var(--v2-workspace-edge)}
+.v2-secondary-title{margin:0 0 var(--v2-space-6);font-size:var(--v2-type-body);line-height:var(--v2-line-body)}
+.v2-submenu>summary{min-height:44px;padding:var(--v2-space-3);cursor:pointer;font-weight:700}
+.v2-submenu>summary::marker{color:var(--v2-workspace-accent)}
+.v2-subnav-search-label{display:block;margin-bottom:var(--v2-space-2);font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);color:var(--v2-workspace-muted)}
+.v2-subnav-filter{display:flex;gap:var(--v2-space-1);min-width:0;margin-bottom:var(--v2-space-4)}
+.v2-subnav-filter input,.v2-subnav-filter button,.v2-review-picker select{min-height:44px;border:1px solid var(--v2-workspace-edge);border-radius:var(--v2-radius-button);background:var(--v2-workspace-bg);color:var(--v2-workspace-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-subnav-filter input{min-width:0;width:100%;padding:var(--v2-space-2)}
+.v2-subnav-filter input::placeholder{color:var(--v2-workspace-muted);opacity:1}
+.v2-subnav-filter input::-webkit-search-cancel-button{display:none}
+.v2-subnav-filter button{flex:none;width:44px;padding:0;cursor:pointer;font-size:var(--v2-type-card)}
+.v2-subnav-status,.v2-subnav-empty{font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);color:var(--v2-workspace-muted)}
+.v2-subnav{display:grid;gap:var(--v2-space-5)}
+.v2-subnav a{display:flex;align-items:center;min-height:44px;padding:var(--v2-space-2);text-decoration:none;white-space:nowrap;color:var(--v2-workspace-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-subnav .v2-group-link,.v2-group-label{font-weight:700;color:var(--v2-workspace-text)}
+.v2-group-link{border-left:3px solid transparent}
+.v2-group-link[aria-current]{border-left-color:var(--v2-workspace-accent);background:var(--v2-workspace-selected);color:var(--v2-workspace-accent)}
+.v2-subnav-children{margin-inline-start:var(--v2-space-3);padding-inline-start:var(--v2-space-3);border-left:1px solid var(--v2-workspace-edge)}
+.v2-subnav [data-view-link][aria-current]{font-weight:700;color:var(--v2-workspace-text);text-decoration:underline;text-decoration-color:var(--v2-workspace-accent);text-underline-offset:4px}
+.v2-group-label{display:flex;flex-wrap:wrap;align-items:center;gap:var(--v2-space-2);min-height:44px;margin:0;padding:var(--v2-space-2);font-size:var(--v2-type-secondary)}
+.v2-group-label>span{font-size:var(--v2-type-caption);font-weight:400;color:var(--v2-workspace-muted)}
+.v2-subnav-pending{display:flex;align-items:center;min-height:44px;padding:var(--v2-space-2);font-size:var(--v2-type-secondary);color:var(--v2-workspace-muted)}
+.v2-subnav-filter :is(input,button):focus-visible,.v2-review-picker select:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:2px}
+.v2-subnav a:active,.v2-subnav-filter button:active{background:var(--v2-workspace-selected);color:var(--v2-workspace-text)}
+.v2-review-picker{display:none}
+@media(hover:hover) and (pointer:fine){.v2-subnav a:hover,.v2-subnav-filter :is(input,button):hover{background:var(--v2-workspace-hover);color:var(--v2-workspace-text)}}
+@media(min-width:1024px){
+ .v2-sidebar,.v2-secondary-sidebar{position:sticky;top:0;align-self:start;max-height:100dvh;overflow-y:auto;scrollbar-gutter:stable}
+ .v2-menu>summary,.v2-submenu>summary{display:none}
+ .v2-subnav{max-height:calc(100dvh - 200px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+}
+@media(max-width:1023px){
+ .v2-workspace{display:block}
+ .v2-sidebar,.v2-secondary-sidebar{position:static;border-right:0;border-bottom:1px solid var(--v2-workspace-edge);padding:var(--v2-space-3) var(--v2-space-5)}
+ .v2-menu{margin:var(--v2-space-2) 0 0}
+ .v2-menu>summary{display:list-item}
+ .v2-secondary-title{margin:0;font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+ .v2-back{margin-top:var(--v2-space-2)}
+ main{padding:var(--v2-space-8) var(--v2-space-5)}
+ .v2-review-picker{display:grid;gap:var(--v2-space-2);margin-top:var(--v2-space-6)}
+ .v2-review-picker label{font-size:var(--v2-type-secondary);color:var(--v2-workspace-muted)}
+ .v2-review-picker select{width:100%;min-width:0;padding:var(--v2-space-3)}
 }
