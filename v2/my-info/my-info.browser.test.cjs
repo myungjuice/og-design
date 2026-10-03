@@ -58,7 +58,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').isVisible(),false);
     assert.equal(await target.evaluate(n=>n.getRootNode().activeElement===n),true,'dialog restores focus');
    }
-   await page.getByRole('button',{name:'바코드',exact:true}).click();
+   await page.locator('.my-info-test').getByRole('button',{name:'바코드',exact:true}).click();
    assert.match(await page.locator('#preview-copy').innerText(),/실제 회원 정보 조회나 서비스 이용은 진행되지 않습니다/);
    await page.getByRole('button',{name:'닫기',exact:true}).click();
    if([390,1440].includes(width))await page.locator('.my-info-test').screenshot({path:`/private/tmp/og-v2-my-info-${width}.png`});

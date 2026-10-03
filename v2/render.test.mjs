@@ -37,6 +37,15 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.ok(images.length>10);
  assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')),'shared assets resolve from the v2 route');
 });
+test('my-info adds two navigation-only comparisons without duplicating the representative screen',()=>{
+ const html=renderWorkspace({pageId:'my-info'});
+ assert.deepEqual([...html.matchAll(/class="v2-nav-comparison" data-variant="([^"]+)"/g)].map(m=>m[1]),['underline','label-chip']);
+ assert.match(html,/A안 · 짧은 밑줄형/);assert.match(html,/B안 · 메뉴명 칩형/);
+ assert.equal((html.match(/class="my-info-test"/g)||[]).length,1);
+ assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,1);
+ assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,3);
+ assert.match(html,/선택 표시만 비교하며 실제 화면으로 이동하지 않습니다/);
+});
 test('unknown IDs give a safe return route without echoing markup',()=>{
  const html=renderWorkspace({pageId:'<script>bad</script>'});
  assert.match(html,/href="\/v2\/design-system\/"/);

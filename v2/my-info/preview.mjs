@@ -1,3 +1,5 @@
+import {setupNavigationComparisons} from './navigation-comparisons.mjs';
+
 export function setupMyInfoPreview(root){
  const host=root.querySelector('.v2-screen-host'),template=host.querySelector('template');
  const screen=host.attachShadow({mode:'open'});
@@ -17,4 +19,5 @@ export function setupMyInfoPreview(root){
   const r=dialog.getBoundingClientRect();
   if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();
  });
+ setupNavigationComparisons(root);
 }
