@@ -3,12 +3,14 @@ import {setupComponentExplorer} from './explorer.mjs';
 import {setupSectionHeadingSamples} from './section-heading.mjs';
 import {setupSelectionSamples} from './selection.mjs';
 import {setupInputSamples} from './input.mjs';
+import {setupDialogSamples} from './dialog.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
  setupSectionHeadingSamples(root);
  setupSelectionSamples(root);
  setupInputSamples(root);
+ setupDialogSamples(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){

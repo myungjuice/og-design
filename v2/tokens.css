@@ -24,6 +24,7 @@
  --v2-warning:oklch(43% .09 65);--v2-info:oklch(44% .12 255);
  --v2-material-edge:oklch(84.043907% .01400481 277.025601);
  --v2-contact:oklch(31.352074% .11584333 276.752711 / .2);
+ --v2-dialog-scrim:oklch(23% .012 270 / .48);
  --v2-inset-shadow:oklch(38% .01 270 / .12);
  --v2-primary-edge:oklch(38.555232% .15746975 276.507992);
  --v2-primary-light:oklch(75.536185% .12605768 275.985545);

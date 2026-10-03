@@ -1,0 +1,21 @@
+/* Hallmark · component: dialog · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Shallow panel material; existing action buttons; no ornamental icons or motion. */
+.v2-dialog-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-dialog-stage{box-sizing:border-box;display:flex;justify-content:center;align-items:center;width:100%;padding:var(--v2-space-6) var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-page)}
+.v2-dialog-static{width:100%;max-width:320px}
+.v2-dialog-panel{box-sizing:border-box;width:100%;padding:var(--v2-space-6);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-card);background:var(--v2-surface);box-shadow:var(--v2-depth-raised);color:var(--v2-text);font-family:var(--v2-font);text-align:start}
+.v2-dialog-panel .og-dialog-title{margin:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);overflow-wrap:anywhere}
+.v2-dialog .og-dialog-title:focus-visible{outline:3px solid var(--v2-focus);outline-offset:4px}
+.v2-dialog-panel .og-dialog-body{margin:var(--v2-space-3) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);white-space:pre-line;word-break:keep-all;overflow-wrap:anywhere}
+.v2-dialog-panel .og-dialog-actions{display:flex;flex-wrap:wrap;gap:var(--v2-space-2);margin-top:var(--v2-space-6)}
+.v2-dialog-panel .v2-button{flex:1 1 96px;width:auto}
+.v2-dialog-panel .v2-button[data-variant="danger"]{background:var(--v2-error);color:var(--v2-on-action);border-color:var(--v2-error)}
+.v2-dialog-panel .v2-button[data-variant="danger"]:not(:disabled):hover{color:var(--v2-on-action)}
+.v2-dialog-panel .v2-button:focus-visible{outline-color:var(--v2-text);box-shadow:0 0 0 2px var(--v2-surface),var(--v2-button-secondary-depth)}
+.v2-dialog-panel .v2-button[data-variant="primary"]:focus-visible{box-shadow:0 0 0 2px var(--v2-surface),var(--v2-button-depth)}
+.v2-dialog{box-sizing:border-box;position:fixed;inset:0;margin:auto;padding:0;width:min(320px,calc(100% - 32px));max-width:320px;height:fit-content;max-height:calc(100dvh - 48px);border:0;border-radius:var(--v2-radius-card);background:var(--v2-surface);overflow:auto;overscroll-behavior:contain;box-shadow:var(--v2-depth-panel)}
+.v2-dialog:not([open]){display:none}
+.v2-dialog::backdrop{background:var(--v2-dialog-scrim)}
+.v2-dialog-note{color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+@media(min-width:80rem){.v2-dialog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

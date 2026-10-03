@@ -41,7 +41,9 @@
 
 여러 줄 입력은 `/v2/components/#multiline-input`에 추가했습니다. 기존 `textarea` 렌더러를 읽기 전용으로 재사용하고 `components/input.mjs`·`.css`에서 한 줄 입력과 같은 재질·글꼴·상태 규칙을 공유합니다. 16px 곡률, 기본 최소 높이 144px, 세로 크기 조절(최대 320px), 아래쪽 안내·카운터를 제공합니다. 기본은 `maxLength:null`이며 제한·카운터가 없습니다. 선택형 200자 예시는 기존 공통 textarea의 기본 제한을 보여줄 뿐 실제 문의 정책을 바꾸지 않습니다. 카운터는 브라우저 maxlength와 같은 UTF-16 단위이며 이모지 등은 2자 이상으로 계산될 수 있습니다. 한글 조합 중 내용을 다시 쓰거나 자르지 않으며 오류 재검증은 조합 완료 후 진행합니다. 비활성·읽기 전용은 값을 유지하고, 확인 중은 계속 작성할 수 있습니다. 입력값은 API·로그·저장소에 전송하지 않습니다. 원본 의견보내기의 제한·카운터 없음은 유지합니다.
 
-다음 후보는 기존 캔버스의 알림·확인창 공통 컴포넌트 이관 검토입니다. 전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+확인창은 `/v2/components/#dialogs`의 ‘안내·확인’ 그룹에 추가했습니다. 기존 `dialog`와 `button` 렌더러는 수정하지 않고 재사용하며, 안내·일반 확인·삭제 확인 3종을 함께 보여줍니다. 너비 최대 320px, 안쪽 여백 24px, 곡률 20px와 얕은 흰 표면 재질을 사용합니다. 주요·보조 버튼은 기존 v2 마감, 삭제 버튼은 붉은색으로 구분합니다. 정적 예시는 `inert`이고 ‘열어보기’는 네이티브 `dialog`로 열립니다. 짧은 내용은 취소 버튼 우선 포커스, 긴 내용은 제목부터 읽도록 초기 포커스와 스크롤을 맞춥니다. Escape·취소·확인·배경 클릭으로 닫고 호출 버튼으로 포커스를 돌려줍니다. 결과는 예시 안내만 갱신하고 실제 설정·리뷰·데이터는 변경하지 않습니다. 원본 캔버스와 대표 화면의 검토용 안내창은 유지합니다.
+
+다음 후보는 같은 그룹의 영역 내 안내(정보·주의·오류·완료) 이관입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -61,6 +63,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/selection.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/input.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs
