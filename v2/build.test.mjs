@@ -9,7 +9,8 @@ test('actual public build includes every v2 route and first home entry without d
  execFileSync(process.execPath,['scripts/build-preview.mjs'],{cwd:root});
  for(const path of ['index.html','design-system/index.html','home/index.html','my-land/index.html','barcode/index.html','og-park/index.html','my-info/index.html','page.mjs','render.mjs','navigation.mjs','tokens.css','shell.css','design-system/foundations.mjs','design-system/foundations.css','design-system/color-values.mjs','components/index.html','components/render.mjs','components/preview.mjs','components/styles.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/mileage.mjs','components/mileage.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
- for(const path of ['my-info/render.mjs','my-info/preview.mjs','my-info/styles.css','my-info/screen.css','my-info/navigation-comparisons.mjs','my-info/navigation-comparisons.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
+ for(const path of ['my-info/render.mjs','my-info/preview.mjs','my-info/styles.css','my-info/screen.css','components/bottom-navigation.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
+ for(const path of ['my-info/navigation-comparisons.mjs','my-info/navigation-comparisons.css'])assert.equal(existsSync(join(root,'dist/v2',path)),false,path+' is retired');
  const home=readFileSync(join(root,'dist/index.html'),'utf8');
  const entries=[...home.matchAll(/<a class="artifact-link"[^>]*href="([^"]+)"[^>]*>[\s\S]*?<strong>([^<]+)<\/strong>/g)].map(x=>[x[1],x[2]]);
  assert.deepEqual(entries.slice(0,2),[['v2/','3D컨셉 디자인 v2'],['design-system/canvas/','디자인 캔버스 열기']]);

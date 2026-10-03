@@ -1,15 +1,6 @@
-/* Original screen stays intact; navigation-only comparisons sit alongside. */
+/* Single approved representative screen; app styles stay in its shadow root. */
 .v2-intro{color:var(--v2-workspace-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);max-width:70ch}
 .v2-intro{margin-block:var(--v2-space-4) var(--v2-space-8)}
 .v2-screen-stage{width:100%;max-width:390px}
 .v2-screen-host{display:block;width:100%;max-width:390px}
-.v2-info-comparison-layout{display:grid;gap:var(--v2-space-12);align-items:start;min-width:0}
-.v2-nav-comparisons{width:100%;max-width:390px;min-width:0;scroll-margin-top:var(--v2-space-6)}
-.v2-nav-comparisons h2{font-size:var(--v2-type-card);line-height:var(--v2-line-card);margin:0 0 var(--v2-space-6)}
-.v2-nav-comparison{margin-bottom:var(--v2-space-8)}
-.v2-nav-comparison h3{font-size:var(--v2-type-body);line-height:var(--v2-line-body);margin:0 0 var(--v2-space-2)}
-.v2-nav-comparison p,.v2-nav-comparison-note,.v2-nav-comparison-status{color:var(--v2-workspace-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);margin:0 0 var(--v2-space-4)}
-.v2-nav-comparison-host{display:block;width:100%}
-.v2-nav-comparison-status:empty{display:none}
-@media(min-width:1200px){.v2-info-comparison-layout{grid-template-columns:390px 390px;gap:var(--v2-space-8)}}
 @media(max-width:767px){.v2-screen-stage{max-width:none;width:calc(100% + 2 * var(--v2-space-5));margin-inline:calc(-1 * var(--v2-space-5))}.v2-screen-host{margin-inline:auto}}

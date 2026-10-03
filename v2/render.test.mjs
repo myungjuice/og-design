@@ -37,15 +37,13 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.ok(images.length>10);
  assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')),'shared assets resolve from the v2 route');
 });
-test('my-info adds three navigation-only comparisons without duplicating the representative screen',()=>{
+test('my-info presents only the approved representative screen with shared navigation styling',()=>{
  const html=renderWorkspace({pageId:'my-info'});
- assert.deepEqual([...html.matchAll(/class="v2-nav-comparison" data-variant="([^"]+)"/g)].map(m=>m[1]),['underline','label-chip','backed-underline']);
- assert.match(html,/A안 · 짧은 밑줄형/);assert.match(html,/B안 · 메뉴명 칩형/);
- assert.match(html,/C안 · 기존 선택 표시 \+ 밑줄/);
+ assert.doesNotMatch(html,/v2-nav-comparison|data-nav-template|A안 ·|B안 ·|C안 ·/);
+ assert.match(html,/href="\/v2\/components\/bottom-navigation.css"/);
  assert.equal((html.match(/class="my-info-test"/g)||[]).length,1);
  assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,1);
- assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,4);
- assert.match(html,/선택 표시만 비교하며 실제 화면으로 이동하지 않습니다/);
+ assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,1);
 });
 test('unknown IDs give a safe return route without echoing markup',()=>{
  const html=renderWorkspace({pageId:'<script>bad</script>'});

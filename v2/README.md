@@ -19,9 +19,9 @@
 - 내정보는 390 × 996을 기준으로 프로필·최근 방문·6개 메뉴·하단 네비게이션의 기존 크기와 위치를 유지합니다. 앱 배경은 Figma 35:76의 흰색→연한 파랑(RGB 222, 233, 249), 155.7683도 그라데이션이며 `--v2-screen-top`/`--v2-screen-bottom`으로 관리합니다. 하단 현재 메뉴에는 작은 연보라색 선택 배경(`--v2-nav-selected-surface`)과 진한 보라색·700 굵기 글자를 적용합니다. 기존 26px 3D 아이콘과 중앙 바코드 에셋은 유지하며 발광·애니메이션은 추가하지 않습니다. 토큰 별칭으로 v2 공통 컬러와 글꼴을 연결합니다. 버튼은 시안 확인용 안내창만 열고 실제 서비스에 연결하지 않습니다.
 - 마이랜드·오지파크는 제목만 표시합니다. 홈화면·바코드는 연결 예정 안내와 현재 3D 테스트 페이지 링크만 제공합니다.
 
-내정보 대표 화면 우측에 하단 메뉴만 A안(짧은 밑줄형), B안(메뉴명 칩형), C안(기존 선택 표시 + 밑줄)으로 비교합니다. 원본 대표 화면과 A/B안은 유지하며 모든 안이 기존 26px 아이콘과 중앙 바코드 에셋을 재사용합니다. C안은 원본 `screen.css`의 선택 받침·아이콘 색감을 그대로 재사용하고 메뉴명 아래에 20×2px 밑줄만 추가합니다. 좁은 화면에서는 비교안이 아래로 내려옵니다. 비교 메뉴는 선택 표시만 전환하며 실제 화면 이동이나 서비스 호출을 하지 않습니다. 확인 주소: `/v2/my-info/#navigation-comparisons`, C안 바로가기: `/v2/my-info/#navigation-comparison-backed-underline`.
+하단 내비게이션의 선택 표시는 승인된 C안으로 통일합니다. `components/bottom-navigation.css`에서 기존 연보라색 받침과 아이콘 색감을 유지하고 현재 메뉴명 아래에 20×2px 밑줄을 표시합니다. 중앙 바코드 버튼에는 밑줄을 붙이지 않습니다. 내정보는 기존 공통 렌더러와 이 스타일을 연결하며, 우측 A/B/C 비교 영역과 비교 전용 코드·스타일은 제거했습니다. 현재 메뉴는 `aria-current="page"`와 기존 `is-selected`로 지정하며 다른 메뉴를 눌러도 검토 안내만 열고 현재 화면의 선택 표시는 유지합니다. 확인 주소: `/v2/my-info/`.
 
-다음은 선택 표시 검토 후 승인된 안을 공통 하단 메뉴로 정리하고, 승인 후 바코드 대표 화면을 v2에 연결합니다. 화면을 복사해 각각 별도 스타일로 관리하지 않습니다.
+다음은 승인 후 바코드 대표 화면을 v2에 연결하고 공통 하단 내비게이션 스타일을 재사용합니다. 화면을 복사해 각각 별도 스타일로 관리하지 않습니다.
 
 ## 로컬 검증
 
@@ -33,7 +33,6 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/components.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
-PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/navigation-comparisons.browser.test.cjs
 ```
 
 기존 `scripts/serve-preview.py`로 `dist/`만 제공합니다. 켜진 서버가 있으면 중복 실행하지 않습니다. 브라우저 테스트 주소는 `V2_BASE_URL`로 바꿀 수 있습니다. 테스트는 로컬 Chrome을 사용합니다.

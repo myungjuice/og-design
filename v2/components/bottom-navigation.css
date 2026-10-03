@@ -1,0 +1,7 @@
+/* Approved C selection: original 3D icon/backing plus a 20 × 2px underline.
+ * Load after the shared screen CSS inside a screen's shadow root.
+ * The raised barcode artwork stays unchanged and never gains a caption underline. */
+.bottom-navigation .nav-item[aria-current="page"]:not(.nav-barcode){color:var(--v2-focus);font-weight:700}
+.bottom-navigation .nav-item[aria-current="page"]:not(.nav-barcode) .nav-face{width:calc(2 * var(--v2-space-5));border-radius:var(--v2-radius-chip);background:var(--v2-nav-selected-surface)}
+.bottom-navigation .nav-item[aria-current="page"]:not(.nav-barcode)>span:last-child{position:relative}
+.bottom-navigation .nav-item[aria-current="page"]:not(.nav-barcode)>span:last-child::after{content:"";position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:20px;height:2px;border-radius:var(--v2-radius-chip);background:var(--v2-focus)}
