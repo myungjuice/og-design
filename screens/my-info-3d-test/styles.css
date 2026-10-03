@@ -19,7 +19,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 button:active:not(:disabled){transform:translateY(1px)}
 button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .ui-icon{display:block;flex:none}
-.my-info-test{position:relative;max-width:390px;min-height:100dvh;margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
+.my-info-test{position:relative;max-width:390px;margin-inline:auto;background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);padding-bottom:var(--app-space-6)}
 .profile-header{padding:var(--app-space-8) var(--app-space-5)}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:0;height:var(--app-space-8);color:var(--app-primary09,var(--primary09))}
 .icon-button{display:grid;place-items:center;width:var(--app-touch-min);height:var(--app-touch-min);border:0;padding:0;background:none;border-radius:var(--app-radius-md)}

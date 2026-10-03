@@ -25,6 +25,13 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    await page.locator('.home-test').screenshot({path:'/private/tmp/og-home-3d-'+width+'.png',animations:'disabled'});
    if(width===1100)await page.screenshot({path:'/private/tmp/og-home-pair-1100.png',fullPage:true,animations:'disabled'});
   }
+  // A tall browser window must not stretch either reference screen into empty space.
+  const compact=await page.locator('.my-info-test,.home-test').evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().height));
+  await page.setViewportSize({width:1100,height:1300});
+  const tall=await page.locator('.my-info-test,.home-test').evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().height));
+  assert.deepEqual(tall,compact,'screen height is independent of browser height');
+  assert.equal(tall[1],846,'home uses the reference screen height');
+  await page.setViewportSize({width:1100,height:1024});
   const contrast=await page.evaluate(()=>{
    const style=getComputedStyle(document.documentElement),context=document.createElement('canvas').getContext('2d',{willReadFrequently:true});
    const luminance=key=>{
