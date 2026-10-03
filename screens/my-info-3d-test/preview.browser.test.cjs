@@ -23,6 +23,9 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    assert.equal(await page.locator('.review-write img').evaluate(image=>image.getBoundingClientRect().width),16);
    assert.equal(await page.locator('.profile-avatar img').count(),2,'original layered Figma profile');
    assert.equal(await page.locator('.profile-avatar').evaluate(node=>node.getBoundingClientRect().width),60);
+   assert.equal(await page.locator('.barcode-art img').count(),1,'central button uses original image rather than a substitute SVG');
+   assert.deepEqual(await page.locator('.barcode-art img').evaluate(image=>[image.naturalWidth,image.naturalHeight]),[851,1847]);
+   assert.deepEqual(await page.locator('.barcode-art').evaluate(node=>{const r=node.getBoundingClientRect();return [r.width,r.height,getComputedStyle(node).overflow];}),[60,60,'clip']);
    assert.ok(await page.locator('.header-actions .icon-button').evaluateAll(buttons=>{
     const [a,b]=buttons.map(n=>n.getBoundingClientRect());
     return a.width>=44&&a.height>=44&&b.width>=44&&b.height>=44&&a.right<=b.left;
@@ -94,6 +97,24 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#preview-dialog').evaluate(node=>node.open),false);
   assert.equal(await review.evaluate(node=>node===document.activeElement),true);
+  const barcode=page.locator('.nav-barcode');
+  await barcode.click();
+  assert.equal(await page.locator('#preview-title').textContent(),'바코드');
+  await page.keyboard.press('Escape');
+  assert.equal(await barcode.evaluate(node=>node===document.activeElement),true);
+  const barcodeFace=page.locator('.nav-barcode .nav-face');
+  const faceBox=await barcodeFace.boundingBox();
+  // Compare inside the circle: transparent corners belong to the unchanged parent nav,
+  // whose own shadow is intentionally outside this button's isolation contract.
+  const circleClip={x:faceBox.x+12,y:faceBox.y+12,width:40,height:40};
+  const originalFace=await page.screenshot({clip:circleClip,animations:'disabled'});
+  const originalShadow=await page.locator('.barcode-art').evaluate(node=>getComputedStyle(node).boxShadow);
+  await page.evaluate(()=>{
+   for(const name of ['--test-violet','--test-accent','--test-card-light','--coin-rim-light','--test-shadow'])document.documentElement.style.setProperty(name,'black');
+  });
+  assert.ok((await page.screenshot({clip:circleClip,animations:'disabled'})).equals(originalFace),'card palette changes must not recolor the central barcode artwork');
+  assert.equal(await page.locator('.barcode-art').evaluate(node=>getComputedStyle(node).boxShadow),originalShadow,'button shadow must not share the mileage palette');
+  await page.evaluate(()=>document.documentElement.removeAttribute('style'));
   await page.locator('.mileage-info').click();
   assert.match(await page.locator('#preview-copy').textContent(),/시안용 데이터/);
   await page.locator('.preview-close').click();

@@ -50,3 +50,14 @@ test('graph round caps preserve empty, tiny, and full balances',async()=>{
  assert.match(full,/class="graph-available" style="--progress:100%/);
  assert.doesNotMatch(full,/class="graph-marker"[^>]+ hidden/);
 });
+
+test('barcode navigation keeps its action while displaying the original Figma button',async()=>{
+ const {renderMyInfoTest}=await import('./render.mjs');
+ const html=renderMyInfoTest();
+ const barcode=html.match(/<button class="nav-item nav-barcode"[\s\S]*?<\/button>/)?.[0];
+ assert.ok(barcode);
+ assert.match(barcode,/data-preview="바코드"/);
+ assert.match(barcode,/<img[^>]+src="\.\/media\/figma\/bottom-navigation-source\.png"/);
+ assert.doesNotMatch(barcode,/<svg/);
+ assert.match(barcode,/<span>바코드<\/span>/);
+});

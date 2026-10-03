@@ -93,7 +93,11 @@ button{transition:transform var(--test-press-duration) var(--test-ease-out)}
 .nav-face{height:32px;display:grid;place-items:center}
 .nav-icon{filter:drop-shadow(0 2px 1px var(--test-shadow-soft))}
 .is-selected{color:var(--test-accent);font-weight:var(--app-weight-bold);--icon-lit:var(--test-nav-active-lit);--icon-shade:var(--test-nav-active-shade);--icon-stroke:var(--test-nav-active-lit)}
-.nav-barcode .nav-face{width:64px;height:64px;margin-top:-28px;border-radius:var(--app-radius-pill);border:3px solid var(--coin-rim-light);background:linear-gradient(155deg,var(--test-violet),var(--test-accent));box-shadow:inset 0 2px 4px var(--test-card-light),0 4px 8px -2px var(--test-shadow);color:var(--test-on-card)}
+.nav-barcode .nav-face{width:64px;height:64px;margin-top:-28px;border-radius:var(--app-radius-pill);border:0;background:none}
+/* Original image fill, not a screen capture. Clip only the circular barcode artwork;
+ * the 390px-wide source mapping centers native (425.5,1697.5) in this 60px viewport. */
+.barcode-art{display:block;position:relative;width:60px;height:60px;border-radius:var(--app-radius-pill);overflow:clip;box-shadow:var(--test-shadow-barcode);pointer-events:none}
+.barcode-art img{display:block;position:absolute;max-width:none;width:390px;height:auto;left:-165px;top:-747.93772px}
 .nav-barcode>span:last-child{color:var(--test-accent)}
 #preview-dialog{width:calc(100% - 40px);max-width:360px;border:1px solid var(--test-rule);border-radius:var(--app-radius-xl);padding:var(--app-space-6);background:var(--test-surface);color:var(--test-ink);box-shadow:0 12px 32px -8px var(--test-shadow)}
 #preview-dialog::backdrop{background:var(--test-overlay)}
