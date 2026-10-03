@@ -8,7 +8,7 @@ export {renderBarcodeTest};
 const menus=[['이용내역','receipt'],['공지·알림','bell'],['멤버십','membership'],['문의하기','support'],['설정','settings'],['내 정보','account']];
 // Crop positions exported by Figma from the shared, unmodified 384×256 menu sheet.
 const menuRegions={receipt:['-2.16%','-7.31%'],bell:['-93.39%','-7.31%'],membership:['-196.02%','-8.56%'],support:['-3.71%','-96.78%'],settings:['-100.34%','-96.47%'],account:['-196.54%','-96.99%']};
-const menuArt=(name,assetBase)=>'<span class="service-face"><span class="service-art" data-art="'+name+'" style="--art-left:'+menuRegions[name][0]+';--art-top:'+menuRegions[name][1]+'"><img src="'+e(assetBase+'menu-icons.png')+'" width="384" height="256" alt="" decoding="async"></span></span>';
+export const menuArt=(name,assetBase)=>'<span class="service-face"><span class="service-art" data-art="'+name+'" style="--art-left:'+menuRegions[name][0]+';--art-top:'+menuRegions[name][1]+'"><img src="'+e(assetBase+'menu-icons.png')+'" width="384" height="256" alt="" decoding="async"></span></span>';
 const exampleVisits=[{name:'스시산원 반주헌',date:'09.24 목',reviewed:false},{name:'준오헤어 용산아이파크몰',date:'09.11 금',reviewed:true},{name:'석암생소금구이 종로익선점',date:'05.30 토',reviewed:true}];
 export function renderMyInfoTest({available=15000,total=16000,shared=1250,sharedCount=3,visits=exampleVisits,assetBase='./media/figma/',renderBalance=renderMileageCard}={}){
  const figmaIcon=(name,width,height=width)=>'<img src="'+e(assetBase+name+'.svg')+'" width="'+width+'" height="'+height+'" alt="" decoding="async">';

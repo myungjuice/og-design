@@ -10,6 +10,7 @@ test('actual public build includes every v2 route and first home entry without d
  for(const path of ['index.html','design-system/index.html','home/index.html','my-land/index.html','barcode/index.html','og-park/index.html','my-info/index.html','page.mjs','render.mjs','navigation.mjs','tokens.css','shell.css','design-system/foundations.mjs','design-system/foundations.css','design-system/color-values.mjs','components/index.html','components/render.mjs','components/preview.mjs','components/styles.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/mileage.mjs','components/mileage.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/home-controls.mjs','components/home-controls.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
+ for(const path of ['components/list-row.mjs','components/list-row.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  assert.ok(existsSync(join(root,'dist/screens/my-info-3d-test/home-controls.mjs')),'shared home controls are published');
  for(const path of ['barcode/render.mjs','barcode/preview.mjs','barcode/screen.css','components/screen.css','components/screen-stage.css','components/screen-preview.mjs'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['home/render.mjs','home/preview.mjs','home/screen.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');

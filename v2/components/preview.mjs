@@ -2,6 +2,11 @@ import {setupHomeControlSamples} from './home-controls.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  root.addEventListener('click',event=>{
+  const row=event.target.closest('[data-preview-row]');
+  if(row&&!row.disabled){
+   root.querySelector('.v2-list-feedback').textContent=row.dataset.previewRow+' 동작 위치입니다. 실제 조회나 화면 이동은 진행되지 않습니다.';
+   return;
+  }
   const mileage=event.target.closest('.v2-mileage [data-preview]');
   if(mileage){
    root.querySelector('.v2-mileage-feedback').textContent=mileage.dataset.preview==='마일리지 안내'
