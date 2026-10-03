@@ -43,7 +43,11 @@
 
 확인창은 `/v2/components/#dialogs`의 ‘안내·확인’ 그룹에 추가했습니다. 기존 `dialog`와 `button` 렌더러는 수정하지 않고 재사용하며, 안내·일반 확인·삭제 확인 3종을 함께 보여줍니다. 너비 최대 320px, 안쪽 여백 24px, 곡률 20px와 얕은 흰 표면 재질을 사용합니다. 주요·보조 버튼은 기존 v2 마감, 삭제 버튼은 붉은색으로 구분합니다. 정적 예시는 `inert`이고 ‘열어보기’는 네이티브 `dialog`로 열립니다. 짧은 내용은 취소 버튼 우선 포커스, 긴 내용은 제목부터 읽도록 초기 포커스와 스크롤을 맞춥니다. Escape·취소·확인·배경 클릭으로 닫고 호출 버튼으로 포커스를 돌려줍니다. 결과는 예시 안내만 갱신하고 실제 설정·리뷰·데이터는 변경하지 않습니다. 원본 캔버스와 대표 화면의 검토용 안내창은 유지합니다.
 
-다음 후보는 같은 그룹의 영역 내 안내(정보·주의·오류·완료) 이관입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+영역 안 안내는 `/v2/components/#notices`의 ‘안내·확인’ 그룹에 추가했습니다. 기존 `notice` 렌더러를 읽기 전용으로 재사용하며 정보·주의·오류·완료 4종을 함께 보여줍니다. 16px 안쪽 여백·12px 간격·12px 곡률·20px 아이콘을 유지합니다. 옅은 상태색 표면은 평면이며 32px 아이콘 받침에만 얕은 입체감을 줍니다. 문구와 아이콘으로도 상태를 구분하고 안내 전체를 버튼처럼 만들지 않습니다. 기존 아이콘과 같은 1.75px 선 굵기의 SVG를 사용하므로 아이콘 글꼴 다운로드에 의존하지 않습니다. `components/notice.mjs`·`.css`와 `tokens.css`의 전용 별칭에서 관리합니다.
+
+기본 출력과 정적 예시는 live region이 아닙니다. 실제 동작 이후 갱신 안내가 필요할 때만 `renderNotice({live:true})`로 오류는 `alert`, 나머지는 `status`를 지정할 수 있습니다. 안내를 자동으로 닫거나 포커스를 이동하지 않습니다. 실제 앱 저장·사진 선택·네트워크와 연결하지 않으며 원본 캔버스와 홈·바코드·내정보 대표 화면은 변경하지 않습니다.
+
+다음 후보는 빈 화면·불러오기 오류입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -64,6 +68,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/input.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs
