@@ -42,9 +42,9 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
     assert.deepEqual([info.recent.x,info.recent.y,info.recent.width,info.recent.height],[20,396,350,219]);
     assert.ok(info.tiles.slice(0,3).every(t=>t.y===643&&t.height===105));
     assert.ok(info.tiles.slice(3).every(t=>t.y===764&&t.height===105));
-    assert.equal(home.search.y,58);
+    assert.equal(home.search.y,24,'search starts 24px below the frame after removing device chrome');
     assert.deepEqual(home.categories.map(c=>[c.width,c.height]),[[76,38],[72,38],[72,38],[72,38],[64,38]]);
-    assert.ok(home.categories.every(c=>c.y===116),'category row matches the reference vertical placement');
+    assert.ok(home.categories.every(c=>c.y===82),'category row moves up with search while preserving their gap');
    }
    // A slim visual chip keeps a separate 44px touch area, including above its face.
    await page.locator('.home-test').scrollIntoViewIfNeeded();

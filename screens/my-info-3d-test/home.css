@@ -10,7 +10,7 @@
 .home-map{position:absolute;inset:0;overflow:clip;isolation:isolate}
 .home-map::before{content:"";position:absolute;inset:auto 0 0;height:140px;background:var(--home-footer-fill);pointer-events:none}
 .home-map-ground{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
-.home-map-controls{position:absolute;inset:58px var(--app-space-4) auto;z-index:2}
+.home-map-controls{position:absolute;inset:var(--app-space-6) var(--app-space-4) auto;z-index:2}
 .home-search-form{display:flex;align-items:center;gap:var(--app-space-2);padding-inline:var(--app-space-4) var(--app-space-2);min-height:48px;border-radius:var(--app-radius-pill);background:var(--home-control-fill);box-shadow:var(--home-shadow-control)}
 .home-search{flex:1;min-width:0}
 .home-search>label,.home-search .og-field-help,.home-search .og-search-icon{display:none}
