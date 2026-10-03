@@ -7,7 +7,7 @@ import {renderWorkspace} from './render.mjs';
 test('all component entries belong to one related preview group',()=>{
  const groups=reviewGroups('components');
  assert.deepEqual(groups.map(g=>g.items.map(item=>item.id)),[
-  ['primary','secondary','review'],['cards','mileage','section-heading'],['list-row'],['checkbox','radio','switch'],['search','categories'],['navigation'],['try']
+  ['primary','secondary','review'],['cards','mileage','section-heading'],['list-row'],['checkbox','radio','switch'],['text-input','password-input'],['search','categories'],['navigation'],['try']
  ]);
  assert.deepEqual(groups.flatMap(g=>g.items.map(item=>item.id)).sort(),componentItems.map(item=>item.id).sort());
 });

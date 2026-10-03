@@ -1,0 +1,30 @@
+/* Hallmark · component: input · genre: playful · theme: existing OG soft 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Labels and values remain flat. Only the input plane uses restrained inset depth.
+ * Real hover/focus work without web-only comparison panels; no animation added.
+ * Component-scope review: 7 widths, constant borders, 48px targets and readable states.
+ * Existing OG palette/type is intentional; page-theme rotation and macrostructure skipped.
+ */
+.v2-input-stage{width:100%;max-width:390px;min-width:0;padding:var(--v2-space-5);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
+.v2-input{min-width:0;font-family:var(--v2-font);color:var(--v2-text)}
+.v2-input label{display:block;margin-bottom:var(--v2-space-2);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere;text-shadow:none}
+.v2-input .og-field-control{position:relative;display:flex;min-width:0}
+.v2-input input{appearance:none;width:100%;min-width:0;min-height:48px;padding:calc((var(--v2-space-12) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid var(--v2-control-edge);border-radius:var(--v2-radius-button);background:var(--v2-muted-surface);color:var(--v2-text);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-depth-inset);text-shadow:none}
+.v2-input input::placeholder{color:var(--v2-text-muted);opacity:1}
+.v2-input-password input{padding-right:calc(var(--v2-space-12) + var(--v2-space-6))}
+.v2-input .og-field-help{min-height:var(--v2-line-secondary);margin:var(--v2-space-1) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere;text-shadow:none}
+.v2-input .og-field-slot{position:absolute;inset-inline-end:var(--v2-space-1);top:0;display:grid;place-items:center;width:var(--v2-space-12);height:48px;color:var(--v2-text-muted);pointer-events:none}
+.v2-input .og-password-toggle{position:absolute;inset-inline-end:var(--v2-space-1);top:0;min-width:64px;min-height:48px;padding:var(--v2-space-2);border:0;border-radius:var(--v2-radius-button);background:none;color:var(--v2-action);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap;cursor:pointer}
+@media(hover:hover) and (pointer:fine){.v2-input input:not(:disabled):not([readonly]):hover{background:var(--v2-selected-surface)}.v2-input .og-password-toggle:not(:disabled):hover{background:var(--v2-selected-surface)}}
+.v2-input input:focus-visible,.v2-input button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-input input:not(:disabled):not([readonly]):active,.v2-input[data-state="active"] input{background:var(--v2-selected-surface)}
+.v2-input .og-password-toggle:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
+.v2-input input:disabled,.v2-input button:disabled{background:var(--v2-disabled);color:var(--v2-text-muted);box-shadow:none;cursor:not-allowed}
+.v2-input input[readonly]{background:var(--v2-page);box-shadow:none}
+.v2-input input[aria-invalid="true"]{border-color:var(--v2-error)}
+.v2-input:has(input[aria-invalid="true"]) .og-field-help,.v2-input:has(input[aria-invalid="true"]) .og-field-slot{color:var(--v2-error)}
+.v2-input[data-state="success"] input{border-color:var(--v2-success)}
+.v2-input[data-state="success"] .og-field-help,.v2-input[data-state="success"] .og-field-slot{color:var(--v2-success)}
+.v2-input-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-input-note{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-workspace-muted)}
+@media(min-width:60rem){.v2-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

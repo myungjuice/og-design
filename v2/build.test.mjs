@@ -13,6 +13,7 @@ test('actual public build includes every v2 route and first home entry without d
  for(const path of ['components/list-row.mjs','components/list-row.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/section-heading.mjs','components/section-heading.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/selection.mjs','components/selection.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
+ for(const path of ['components/input.mjs','components/input.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/catalog.mjs','components/explorer.mjs','components/explorer.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['subnavigation.mjs','review-navigation.mjs'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  assert.ok(existsSync(join(root,'dist/screens/my-info-3d-test/home-controls.mjs')),'shared home controls are published');
