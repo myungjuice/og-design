@@ -1,4 +1,6 @@
+import {setupHomeControlSamples} from './home-controls.mjs';
 export function setupComponentPreview(root){
+ setupHomeControlSamples(root);
  root.addEventListener('click',event=>{
   const mileage=event.target.closest('.v2-mileage [data-preview]');
   if(mileage){

@@ -20,7 +20,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.locator('[data-foundation]').count(),0);
    assert.equal(await page.locator('link[href$="foundations.css"]').count(),0);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow '+width);
-   assert.ok(await page.locator('main button:not(.mileage-info):not(.mileage-history)').evaluateAll(nodes=>nodes.every(n=>{
+   assert.ok(await page.locator('.v2-button,.v2-menu-tile').evaluateAll(nodes=>nodes.every(n=>{
     const r=n.getBoundingClientRect();return r.width>=44&&r.height>=44&&n.scrollWidth<=n.clientWidth+1&&r.left>=0&&r.right<=innerWidth;
    })),'touch targets / single-line fit '+width);
    for(const id of ['primary','secondary','review']){
@@ -29,7 +29,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    }
    assert.ok(await page.locator('[data-state="loading"]').evaluateAll(nodes=>nodes.every(n=>n.disabled&&n.getAttribute('aria-busy')==='true')));
    assert.ok(await page.locator('[data-state="disabled"]').evaluateAll(nodes=>nodes.every(n=>n.disabled)));
-   assert.ok(await page.locator('main button').evaluateAll(nodes=>{
+   assert.ok(await page.locator('.v2-button,.v2-menu-tile,.v2-mileage button').evaluateAll(nodes=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
     const luminance=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((sum,c,i)=>sum+c*[.2126,.7152,.0722][i],0);};
     return nodes.every(n=>{

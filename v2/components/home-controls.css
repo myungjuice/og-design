@@ -1,0 +1,7 @@
+/* Only the specimen stage is new; controls retain the actual Home CSS. */
+.component-stage{position:relative;width:100%;padding:24px 16px;background:var(--v2-screen-bottom);overflow:clip}
+.component-stage-categories{padding-block:12px}
+.component-stage-categories .home-categories{margin-top:0}
+.component-stage-navigation{height:120px;padding:0}
+.component-stage-navigation .nav-item{color:var(--test-muted)}
+.component-stage button:focus-visible{outline:var(--app-focus-width) solid var(--test-focus);outline-offset:var(--app-focus-gap);box-shadow:0 0 0 2px var(--test-surface)}

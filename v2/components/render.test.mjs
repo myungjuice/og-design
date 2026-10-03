@@ -32,3 +32,15 @@ test('gallery covers three button roles, two card roles and readable state expla
  assert.match(html,/사용 가능한 마일리지가 없을 때/);
  assert.match(html,/다시 시도/);assert.match(html,/완료/);
 });
+test('gallery isolates real home controls without embedding a map or full screen',()=>{
+ const html=renderComponents();
+ for(const id of ['search','categories','navigation']){
+  assert.match(html,new RegExp(`id="${id}"`));
+  assert.match(html,new RegExp(`data-home-component="${id}"`));
+ }
+ assert.match(html,/id="component-store-search"/);
+ assert.match(html,/data-category="전체" aria-pressed="true"/);
+ assert.match(html,/aria-current="page"/);
+ assert.match(html,/\/screens\/my-info-3d-test\/media\/figma\/bottom-navigation-source.png/);
+ assert.doesNotMatch(html,/class="home-map"|class="home-test"|<iframe/);
+});

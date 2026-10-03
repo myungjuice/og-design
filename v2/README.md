@@ -24,7 +24,9 @@
 
 하단 내비게이션의 선택 표시는 승인된 C안으로 통일합니다. `components/bottom-navigation.css`에서 기존 연보라색 받침과 아이콘 색감을 유지하고 현재 메뉴명 아래에 20×2px 밑줄을 표시합니다. 중앙 바코드 버튼에는 밑줄을 붙이지 않습니다. 내정보는 기존 공통 렌더러와 이 스타일을 연결하며, 우측 A/B/C 비교 영역과 비교 전용 코드·스타일은 제거했습니다. 현재 메뉴는 `aria-current="page"`와 기존 `is-selected`로 지정하며 다른 메뉴를 눌러도 검토 안내만 열고 현재 화면의 선택 표시는 유지합니다. 확인 주소: `/v2/my-info/`.
 
-다음은 공통 컴포넌트 페이지에 홈 검색바·업종 칩·하단 메뉴를 정리하고 재사용 기준을 점검합니다. 화면을 복사해 각각 별도 스타일로 관리하지 않습니다.
+공통 컴포넌트 페이지에는 `#search` 검색바, `#categories` 업종 칩, `#navigation` 하단 메뉴를 독립 샘플로 제공합니다. 검색바·업종 칩은 실제 홈의 `screens/my-info-3d-test/home-controls.mjs`, 하단 메뉴는 기존 `navigation.mjs`를 호출합니다. 원본 CSS와 에셋은 열린 Shadow DOM 안에서 재사용하며, 샘플만의 배치 외에 스타일을 복제하지 않습니다. 검색은 확인 문구만 표시하고, 업종·하단 메뉴 선택은 샘플 안에서만 변경됩니다. 기존 대표 화면에는 영향을 주지 않습니다. 업종 칩은 38px 시각 높이와 44px 터치 영역을 유지합니다.
+
+다음 후보는 설정·이용내역 등 내정보 하위 화면의 기획 대조와 3D 공통 컴포넌트 적용입니다. 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -34,6 +36,7 @@ node --test v2/render.test.mjs v2/build.test.mjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/navigation.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/foundations.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/components.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/home-controls.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs
