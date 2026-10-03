@@ -1,0 +1,34 @@
+/* Hallmark · macrostructure: payment sheet · genre: playful · theme: existing OG 3D
+ * Audience: members · job: mileage earning/use · voice: soft dimensional, precise barcode
+ * Existing Pretendard, original M asset, 4pt spacing and shared mileage card retained.
+ * Reference override: violet card and white dimensional surfaces; no theme rotation.
+ * Nav: underlying app sheet flow · footer: mileage guide · enrichment: existing sample SVG
+ * Motion: press feedback only · pre-emit critique: P4 H5 E4 S5 R5 V4 */
+@import url('../../design-system/components/button/button.css');
+.barcode-test{position:relative;width:100%;max-width:390px;height:var(--preview-home-height);background:var(--test-page-bottom);overflow:clip;isolation:isolate}
+.barcode-map-backdrop{position:absolute;inset:0;pointer-events:none}
+.barcode-map-backdrop img{display:block;width:100%;height:100%;object-fit:cover}
+.barcode-sheet-scrim{position:absolute;inset:0;background:var(--test-overlay);pointer-events:none}
+.barcode-sheet{position:absolute;inset:auto 0 0;border-radius:32px 32px 0 0;background:linear-gradient(155deg,var(--test-page-top),var(--test-page-bottom));color:var(--test-ink);box-shadow:0 -4px 16px var(--test-shadow-soft)}
+.barcode-sheet-header{position:relative;height:52px;display:flex;justify-content:flex-end;align-items:center;padding-inline:var(--app-space-4)}
+.barcode-sheet-handle{position:absolute;top:var(--app-space-3);left:50%;transform:translateX(-50%);width:var(--app-space-8);height:var(--app-space-1);border-radius:var(--app-radius-pill);background:var(--test-control-border)}
+.barcode-close{color:var(--test-muted)}
+.barcode-content{display:grid;gap:var(--app-space-4);padding:0 var(--app-space-5) var(--app-space-6)}
+.barcode-code-card.og-surface{padding:var(--app-space-5);border:0;border-radius:20px;background:var(--test-surface);color:var(--test-ink);box-shadow:var(--test-shadow-panel)}
+.barcode-code-card h2{margin:0;font-size:var(--app-body-1-size);line-height:22px;font-weight:var(--app-weight-bold)}
+/* Depth belongs to the holder, never the scan bars. Native SVG quiet zones stay intact. */
+.barcode-code{height:128px;margin-block:var(--app-space-4) var(--app-space-3)}
+.barcode-code .og-barcode-bars{display:block;width:100%;height:100%;fill:var(--test-ink)}
+.barcode-member-number{margin:0;text-align:center;font-size:var(--app-body-2-size);line-height:20px;font-weight:var(--app-weight-medium);letter-spacing:.04em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.barcode-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);margin-top:var(--app-space-6)}
+.barcode-action.og-button{height:52px;min-width:0;padding:0 var(--app-space-2);border-radius:var(--app-radius-md);font-size:var(--app-body-2-size);line-height:20px;white-space:nowrap;font-weight:var(--app-weight-bold)}
+.barcode-earn.og-button{border:1px solid var(--test-control-border);background:var(--test-surface);color:var(--test-accent);box-shadow:var(--test-inset-tile),var(--test-shadow-tile)}
+.barcode-use.og-button{border:0;background:var(--home-selected-fill);color:var(--test-on-card);box-shadow:var(--home-shadow-selected)}
+.barcode-use.og-button:focus-visible{outline-color:var(--test-ink);box-shadow:0 0 0 2px var(--test-surface),var(--home-shadow-selected)}
+.barcode-action.og-button:disabled{opacity:1;background:var(--test-rule);color:var(--test-muted);box-shadow:none;cursor:not-allowed}
+.barcode-empty-hint{margin:var(--app-space-3) 0 0;font-size:var(--app-caption-size);line-height:var(--app-caption-line);color:var(--test-muted);word-break:keep-all}
+.barcode-guide{display:flex;align-items:center;justify-content:center;gap:var(--app-space-2);min-height:44px;padding:0;border:0;border-radius:var(--app-radius-md);background:none;color:var(--test-accent);font-size:var(--app-body-2-size);line-height:20px;font-weight:var(--app-weight-bold);white-space:nowrap}
+.barcode-reopen{position:absolute;inset:auto var(--app-space-5) var(--app-space-6);min-height:52px;border:0;border-radius:var(--app-radius-md);background:var(--test-violet);color:var(--test-on-card);box-shadow:var(--home-shadow-selected);font-weight:var(--app-weight-bold)}
+.barcode-test [hidden]{display:none}
+@media(hover:hover){.barcode-action.og-button:hover:not(:disabled),.barcode-close:hover,.barcode-guide:hover{transform:translateY(-1px)}}
+@media(max-width:352px){.barcode-content{padding-inline:var(--app-space-4)}.barcode-code-card.og-surface{padding:var(--app-space-4)}.barcode-empty-hint{font-size:10px;white-space:nowrap}}

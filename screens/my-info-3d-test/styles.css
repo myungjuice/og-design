@@ -4,7 +4,7 @@
  * Isolated route; no shared canvas, component or global token file is changed.
  * Contrast: pass for card/body/muted text; mobile: 320/375/390/414/768.
  * Reference overrides: white surfaces, accent-card footprint, 3-column menu, source icon sets and 3D shadows retained by request.
- * Requested static OS indicators are presentation chrome, not live device information.
+ * OS status indicators and the home indicator are deliberately omitted.
  * Source-fidelity corrections only; no macrostructure/theme rotation or new interactions. */
 @import url('./tokens.css');
 @import url('../../design-system/components/shared.css');

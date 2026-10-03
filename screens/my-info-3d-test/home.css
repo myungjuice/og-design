@@ -4,6 +4,7 @@
  * pre-emit critique: P5 H5 E5 S5 R5 V4 */
 .test-screen-pair{display:grid;grid-template-columns:repeat(2,minmax(0,390px));justify-content:center;align-items:start;gap:var(--app-space-12,48px);padding:var(--app-space-8)}
 .test-screen{min-width:0}
+@media(min-width:1312px){.test-screen-pair{grid-template-columns:repeat(3,minmax(0,390px))}}
 .test-screen-label{margin:0 0 var(--app-space-4);font-size:var(--app-title-2-size);line-height:var(--app-title-2-line);font-weight:var(--app-weight-bold);overflow-wrap:anywhere}
 .test-screen-note{margin:var(--app-space-4) var(--app-space-4) 0;color:var(--test-muted);font-size:var(--app-caption-size);line-height:var(--app-caption-line);word-break:keep-all}
 .home-test{position:relative;width:100%;height:var(--preview-home-height);background:var(--test-page-bottom);overflow:clip}

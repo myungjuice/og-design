@@ -81,3 +81,33 @@ test('test pair keeps my-info intact and places a Naver-backed home alongside it
  assert.match(home,/마이랜드/);assert.match(home,/오지파크/);
  assert.doesNotMatch(home,/회원점명|My OG|핫플|PAY/);
 });
+
+test('standalone comparison appends one barcode screen after the existing home',async()=>{
+ const {renderTestPair}=await import('./render.mjs');
+ const html=renderTestPair();
+ assert.equal((html.match(/class="barcode-test"/g)||[]).length,1);
+ assert.ok(html.indexOf('class="home-test"')<html.indexOf('class="barcode-test"'));
+});
+
+test('my-info and barcode render the same mileage card for the same balances',async()=>{
+ const renderer=await import('./render.mjs');
+ assert.equal(typeof renderer.renderBarcodeTest,'function');
+ const {renderMileageCard}=await import('./mileage-card.mjs');
+ const props={available:5000,total:6250,shared:1250};
+ const card=renderMileageCard(props);
+ assert.ok(renderer.renderMyInfoTest(props).includes(card));
+ assert.ok(renderer.renderBarcodeTest(props).includes(card));
+});
+
+test('barcode retains earning actions but disables use when the available balance is zero',async()=>{
+ const renderer=await import('./render.mjs');
+ assert.equal(typeof renderer.renderBarcodeTest,'function');
+ const html=renderer.renderBarcodeTest({available:0,total:2400,shared:0});
+ const receipt=html.match(/<button\b[^>]+data-preview="영수증 적립"[^>]*>/)?.[0];
+ const use=html.match(/<button\b[^>]+data-preview="마일리지 사용"[^>]*>/)?.[0];
+ assert.ok(receipt);assert.doesNotMatch(receipt,/disabled/);
+ assert.ok(use);assert.match(use,/disabled/);
+ assert.match(html,/사용 가능한 마일리지가 없어/);
+ assert.match(renderer.renderBarcodeTest(),/실제 회원 정보가 아닌 샘플 바코드/);
+ assert.doesNotMatch(renderer.renderBarcodeTest(),/PAY|맑은 땅콩|mobile-status|mobile-home/);
+});

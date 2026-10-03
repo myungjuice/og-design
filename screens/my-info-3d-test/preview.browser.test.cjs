@@ -17,8 +17,8 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow at '+width);
    assert.equal(await page.locator('.service-face img').count(),6);
    assert.ok(await page.locator('.service-face img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)));
-   assert.deepEqual(await page.locator('.m-coin').evaluate(image=>[image.naturalWidth,image.naturalHeight]),[48,48]);
-   assert.equal(await page.locator('.m-coin').evaluate(image=>getComputedStyle(image).borderRadius),'50%','mask the exported background outside the circular M coin');
+   assert.deepEqual(await page.locator('.my-info-test .m-coin').evaluate(image=>[image.naturalWidth,image.naturalHeight]),[48,48]);
+   assert.equal(await page.locator('.my-info-test .m-coin').evaluate(image=>getComputedStyle(image).borderRadius),'50%','mask the exported background outside the circular M coin');
    assert.ok(await page.locator('.visit-symbol img').evaluateAll(images=>images.every(image=>image.getBoundingClientRect().width===32&&image.getBoundingClientRect().height===32)));
    assert.equal(await page.locator('.review-write img').evaluate(image=>image.getBoundingClientRect().width),16);
    assert.equal(await page.locator('.profile-avatar img').count(),2,'original layered Figma profile');
@@ -39,13 +39,13 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    assert.match(graph.gradient,/90deg|to right/,'gradient must run left to right');
    if(width===390){
     assert.deepEqual(await page.locator('.header-actions img').evaluateAll(images=>images.map(n=>{const r=n.getBoundingClientRect();return r.x+r.width/2;})),[320,360]);
-    const card=await page.locator('.mileage-card').boundingBox();
+    const card=await page.locator('.my-info-test .mileage-card').boundingBox();
     const screen=await page.locator('.my-info-test').boundingBox();
     assert.equal(card.width,350);assert.equal(card.height,228);assert.equal(card.y-screen.y,156);
     assert.equal(graph.track.width,310);assert.equal(graph.track.height,20);
     assert.equal(graph.fill.width,164);assert.equal(graph.held.width,189);
     assert.equal(graph.marker.left-graph.track.left,145);
-    assert.equal(await page.locator('.mileage-info img').evaluate(node=>node.getBoundingClientRect().width),10);
+    assert.equal(await page.locator('.my-info-test .mileage-info img').evaluate(node=>node.getBoundingClientRect().width),10);
    }
    const regions=await page.locator('.service-art').evaluateAll(nodes=>nodes.map(node=>{
     const image=node.querySelector('img'),box=node.getBoundingClientRect(),style=getComputedStyle(node);
@@ -116,7 +116,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
   assert.ok((await page.screenshot({clip:circleClip,animations:'disabled'})).equals(originalFace),'card palette changes must not recolor the central barcode artwork');
   assert.equal(await page.locator('.my-info-test .barcode-art').evaluate(node=>getComputedStyle(node).boxShadow),originalShadow,'button shadow must not share the mileage palette');
   await page.evaluate(()=>document.documentElement.removeAttribute('style'));
-  await page.locator('.mileage-info').click();
+  await page.locator('.my-info-test .mileage-info').click();
   assert.match(await page.locator('#preview-copy').textContent(),/시안용 데이터/);
   await page.locator('.preview-close').click();
   assert.equal(await page.locator('#preview-dialog').evaluate(node=>node.open),false);
