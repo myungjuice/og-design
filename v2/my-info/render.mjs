@@ -9,6 +9,5 @@ export function renderMyInfoPreview(){
  <link rel="stylesheet" href="/v2/components/mileage.css">
  <link rel="stylesheet" href="/v2/my-info/screen.css">${screen}
  <dialog id="preview-dialog" aria-labelledby="preview-title"><h2 id="preview-title"></h2><p id="preview-copy"></p><form method="dialog"><button class="preview-close" autofocus>닫기</button></form></dialog>
- </template></div></div>
- <p class="v2-screen-note">390 × 996 기준 · 기존 화면의 렌더러와 에셋 재사용 · 스타일을 격리하여 검토 메뉴에 영향을 주지 않습니다.</p>`;
+ </template></div></div>`;
 }

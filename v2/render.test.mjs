@@ -36,7 +36,6 @@ test('my-info exposes one approved representative screen without pulling home or
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.length>10);
  assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')),'shared assets resolve from the v2 route');
- assert.match(html,/스타일을 격리/);
 });
 test('unknown IDs give a safe return route without echoing markup',()=>{
  const html=renderWorkspace({pageId:'<script>bad</script>'});

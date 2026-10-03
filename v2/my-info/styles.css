@@ -1,7 +1,6 @@
 /* Approved screen port only; no new layout or assets. */
-.v2-intro,.v2-screen-note{color:var(--v2-workspace-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);max-width:70ch}
+.v2-intro{color:var(--v2-workspace-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);max-width:70ch}
 .v2-intro{margin-block:var(--v2-space-4) var(--v2-space-8)}
 .v2-screen-stage{width:100%;max-width:390px}
 .v2-screen-host{display:block;width:100%;max-width:390px}
-.v2-screen-note{margin-top:var(--v2-space-6)}
 @media(max-width:767px){.v2-screen-stage{max-width:none;width:calc(100% + 2 * var(--v2-space-5));margin-inline:calc(-1 * var(--v2-space-5))}.v2-screen-host{margin-inline:auto}}
