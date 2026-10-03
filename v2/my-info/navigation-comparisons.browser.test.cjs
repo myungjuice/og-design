@@ -43,7 +43,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     }else assert.equal(appearance.faceAlpha,0);
     assert.ok(appearance.targets.every(([w,h])=>w>=44&&h>=44),'touch targets '+width+' '+variant);
     if(variant!=='label-chip'){
-     assert.deepEqual(appearance.underline,['""','20px','3px']);assert.equal(appearance.labelBackground[3],0);
+     assert.deepEqual(appearance.underline,['""','20px',variant==='backed-underline'?'2px':'3px']);assert.equal(appearance.labelBackground[3],0);
     }else{
      assert.equal(appearance.labelBackground[3],255);assert.deepEqual(appearance.labelColor,[255,255,255,255]);
      const luminance=rgb=>rgb.slice(0,3).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
