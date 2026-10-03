@@ -7,10 +7,17 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const page=await browser.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)errors.push(r.url()+':'+r.status());});
   for(const width of [320,375,390,414,768,1024,1440]){
-   await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/#text-input`);await page.reload();
+   await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/#search`);await page.reload();
+   const search=page.locator('[data-home-component="search"] .home-search-form');
+   await search.waitFor();
+   const material=n=>{const s=getComputedStyle(n);return {fill:s.backgroundImage,depth:s.boxShadow,radius:s.borderRadius,height:n.getBoundingClientRect().height};};
+   const homeMaterial=await search.evaluate(material);
+   await page.goto(`${base}/v2/components/#text-input`);
    assert.equal(await page.locator('#text-input').count(),1,'v2 offers text input previews');
    await page.locator('#text-input').waitFor();await page.evaluate(()=>document.fonts.ready);
-   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['text-input','password-input']);
+   assert.deepEqual(await page.locator('#text-input-live input').evaluate(material),homeMaterial,'text input shares Home search surface, depth, curvature and height');
+   assert.deepEqual(await page.locator('#password-input-live input').evaluate(material),homeMaterial,'password belongs to the same input family');
+   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['search','text-input','password-input']);
    const field=page.locator('#text-input-live input'),help=page.locator('#text-input-live .og-field-help');
    await field.fill('');assert.notEqual(await field.getAttribute('aria-invalid'),'true','no error before blur');
    const before=await field.boundingBox();await page.locator('#text-input-title').click();
@@ -42,7 +49,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     assert.ok(await page.locator(`#${kind} label,#${kind} .og-field-help,#${kind} input,#${kind} button`).evaluateAll(ns=>{
      const c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=c.height=1;
      const l=color=>{ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4).reduce((a,x,i)=>a+x*[.2126,.7152,.0722][i],0);};
-     return ns.every(n=>{let s=n;while(s.parentElement&&getComputedStyle(s).backgroundColor==='rgba(0, 0, 0, 0)')s=s.parentElement;const a=l(getComputedStyle(n).color),b=l(getComputedStyle(s).backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});
+     return ns.every(n=>{let s=n.matches('.og-password-toggle')?n.closest('.og-field-control').querySelector('input'):n;while(s.parentElement&&getComputedStyle(s).backgroundImage==='none'&&getComputedStyle(s).backgroundColor==='rgba(0, 0, 0, 0)')s=s.parentElement;const style=getComputedStyle(s),colors=style.backgroundImage==='none'?[style.backgroundColor]:style.backgroundImage.match(/oklch\([^)]*\)|rgba?\([^)]*\)/g),textColors=[getComputedStyle(n).color];if(n.matches('input'))textColors.push(getComputedStyle(n,'::placeholder').color);return colors&&textColors.every(text=>{const a=l(text);return colors.every(color=>{const b=l(color);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});});});
     }),'text contrast '+kind+' '+width);
     await details.locator('summary').click();
    }
@@ -71,6 +78,6 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   assert.deepEqual(nullBlur,{invalid:'false',state:'default',type:'text'},'null-target blur during visibility press stays inside field');
   await page.locator('#password-input-live input').evaluate(input=>input.dispatchEvent(new FocusEvent('focusout',{bubbles:true,relatedTarget:null})));
   assert.equal(await page.locator('#password-input-live input').getAttribute('aria-invalid'),'true','later genuine outside blur still validates');
-  assert.deepEqual(errors,[]);console.log('Input: grouped text/password, touched validation, editable checking, visibility/disabled/readonly, stable geometry, contrast, 7 widths and keyboard/touch passed');
+  assert.deepEqual(errors,[]);console.log('Input: grouped Home search/text/password, matching material, touched validation, editable checking, visibility/disabled/readonly, stable geometry, gradient/placeholder contrast, 7 widths and keyboard/touch passed');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
