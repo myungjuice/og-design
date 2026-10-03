@@ -32,4 +32,13 @@
  --test-focus:var(--app-focus-ring);--test-overlay:oklch(20% .025 270 / .32);
  --test-press-duration:120ms;--test-ease-out:cubic-bezier(.16,1,.3,1);
  --test-nav-z:10;
+ /* Home controls match the supplied soft blue Figma material; map pixels stay intact. */
+ --home-ink:oklch(39% .065 265);--home-muted:oklch(50% .06 265);
+ --home-action:oklch(52% .22 278);--home-control-fill:linear-gradient(140deg,var(--test-surface),var(--test-page-bottom));
+ --home-selected-lit:oklch(57% .2 276);--home-selected-face:oklch(54% .25 278);
+ --home-selected-fill:linear-gradient(155deg,var(--home-selected-lit),var(--home-selected-face));
+ --home-edge:oklch(81% .065 260);--home-contact:oklch(50% .055 265 / .22);
+ --home-shadow-control:inset 1px 2px 3px var(--test-surface),inset -1px -2px 4px var(--home-edge),0 4px 8px var(--home-contact);
+ --home-shadow-chip:inset 1px 1px 2px var(--test-surface),inset -1px -2px 3px var(--home-edge),0 3px 6px var(--home-contact);
+ --home-shadow-selected:inset 1px 2px 4px var(--home-selected-lit),inset -1px -2px 4px var(--home-action),0 4px 8px var(--home-contact);
 }

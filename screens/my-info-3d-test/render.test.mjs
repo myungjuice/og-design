@@ -61,3 +61,23 @@ test('barcode navigation keeps its action while displaying the original Figma bu
  assert.doesNotMatch(barcode,/<svg/);
  assert.match(barcode,/<span>바코드<\/span>/);
 });
+
+test('test pair keeps my-info intact and places a Naver-backed home alongside it',async()=>{
+ const renderer=await import('./render.mjs');
+ assert.equal(typeof renderer.renderTestPair,'function','both screens must be available on the existing route');
+ const html=renderer.renderTestPair();
+ assert.ok(html.indexOf('class="my-info-test"')<html.indexOf('class="home-test"'));
+ assert.match(html,/naver-mangwon\.png/);
+ assert.match(html,/© NAVER Corp\./);
+ assert.match(html,/지도는 네이버 지도 정적 배경/);
+ assert.equal((html.match(/class="barcode-art"/g)||[]).length,2);
+ const home=html.slice(html.indexOf('class="home-test"'));
+ assert.match(home,/aria-label="매장 검색"/);
+ assert.match(home,/type="search"/);
+ assert.match(home,/aria-label="현 지도 위치 둘러보기"/);
+ assert.match(home,/aria-label="현 위치"/);
+ assert.match(home,/aria-label="퀵적립"/);
+ assert.match(home,/오시 망원본점/);
+ assert.match(home,/마이랜드/);assert.match(home,/오지파크/);
+ assert.doesNotMatch(home,/회원점명|My OG|핫플|PAY/);
+});
