@@ -1,0 +1,17 @@
+/* Hallmark · component: action button · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E5 S5 R5 V4
+ * Barcode reference material; mileage-card depth is not a button material.
+ * Native hover/focus and app pressed/disabled/loading/error/success states retained. */
+.v2-button,.barcode-action.og-button{appearance:none;height:52px;min-height:48px;min-width:0;max-width:100%;padding:0 var(--v2-space-2);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-focus);font:700 var(--v2-type-secondary)/var(--v2-line-button) var(--v2-font);white-space:nowrap;cursor:pointer;box-shadow:var(--v2-button-secondary-depth)}
+.v2-button{width:164px}
+.v2-button[data-variant="primary"],.barcode-use.og-button{border:0;background:var(--v2-button-fill);color:var(--v2-on-action);box-shadow:var(--v2-button-depth)}
+.v2-button[data-variant="review"]{min-height:44px;height:44px;width:100px;padding:0 var(--v2-space-3);border-radius:var(--v2-radius-chip)}
+@media(hover:hover) and (pointer:fine){.v2-button:not(:disabled):hover,.barcode-action.og-button:not(:disabled):hover{color:var(--v2-focus)}.v2-button[data-variant="primary"]:not(:disabled):hover,.barcode-use.og-button:not(:disabled):hover{color:var(--v2-on-action);box-shadow:var(--v2-button-depth)}}
+.v2-button:focus-visible,.barcode-action.og-button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:4px}
+.v2-button[data-variant="primary"]:focus-visible,.barcode-use.og-button:focus-visible{outline-color:var(--v2-text);box-shadow:0 0 0 2px var(--v2-surface),var(--v2-button-depth)}
+.v2-component-section .v2-button:focus-visible{outline-color:var(--v2-workspace-focus)}
+.v2-button:not(:disabled):active,.v2-button[data-state="active"],.barcode-action.og-button:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
+.v2-button:disabled,.barcode-action.og-button:disabled{opacity:1;background:var(--v2-disabled);color:var(--v2-text-muted);border-color:var(--v2-edge);box-shadow:none;cursor:not-allowed}
+/* State labels communicate the result; a quiet outline never changes button geometry. */
+.v2-button[data-state="error"]:not(:focus-visible){outline:1px solid var(--v2-error);outline-offset:2px}
+.v2-button[data-state="success"]:not(:focus-visible){outline:1px solid var(--v2-success);outline-offset:2px}

@@ -45,6 +45,12 @@ test('action result states have readable feedback and invalid states are rejecte
  assert.match(success,/확인 완료/);assert.match(success,/확인했습니다/);
  assert.throws(()=>render({title:'최근 방문',state:'unknown'}),RangeError);
 });
+test('whole-list action carries a decorative direction cue without changing its accessible name',()=>{
+ const html=render({title:'최근 방문',action:'전체보기'});
+ assert.match(html,/aria-label="최근 방문 전체보기"/);
+ assert.match(html,/전체보기<svg[^>]*aria-hidden="true"/);
+ assert.doesNotMatch(html,/material-icons/);
+});
 test('gallery integrates headings into the existing cards-information group',()=>{
  const html=components.renderComponents();
  assert.match(html,/id="section-heading"/);

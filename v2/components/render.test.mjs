@@ -22,6 +22,16 @@ test('tiles expose selection and block loading/disabled interaction',()=>{
  for(const state of ['loading','disabled'])assert.match(renderMenuTile({state}),/ disabled/);
  assert.match(renderMenuTile({state:'loading'}),/aria-busy="true"/);
 });
+test('default menu tiles reuse the supplied My Info icon rather than inventing artwork',()=>{
+ const html=renderMenuTile({label:'이용내역',art:'receipt'});
+ assert.match(html,/data-layout="icon"/);assert.match(html,/data-art="receipt"/);
+ assert.match(html,/\/screens\/my-info-3d-test\/media\/figma\/menu-icons.png/);
+ assert.match(html,/<img[^>]* alt=""/);
+ assert.match(renderMenuTile({layout:'text',label:'<b>설정</b>'}),/data-layout="text"/);
+ assert.doesNotMatch(renderMenuTile({layout:'text'}),/<img/);
+ assert.throws(()=>renderMenuTile({art:'unknown'}),RangeError);
+ assert.throws(()=>renderMenuTile({layout:'unknown'}),RangeError);
+});
 test('gallery covers three button roles, two card roles and readable state explanations',()=>{
  const html=renderComponents();
  for(const id of ['primary','secondary','review','cards'])assert.match(html,new RegExp(`id="${id}"`));

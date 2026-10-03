@@ -37,6 +37,12 @@
  --v2-depth-inset:inset 2px 3px 6px var(--v2-inset-shadow),inset -1px -1px 2px var(--v2-surface);
  --v2-depth-raised:inset 1px 2px 3px var(--v2-surface),inset -1px -4px 6px var(--v2-material-edge),0 4px 12px var(--v2-contact);
  --v2-depth-primary:inset 0 4px 12px var(--v2-primary-light),inset -4px -8px 14px var(--v2-primary-edge),0 4px 12px var(--v2-contact);
+ /* Action buttons are shallower than the balance card, matching the barcode screen. */
+ --v2-button-fill:var(--home-selected-fill);--v2-button-depth:var(--home-shadow-selected);
+ --v2-tile-contact:0 5px 10px -4px var(--v2-contact);
+ --v2-tile-lip:inset 1px 1px 2px var(--v2-surface),inset -1px -4px 6px var(--v2-material-edge);
+ --v2-button-secondary-depth:var(--v2-tile-lip),var(--v2-tile-contact);
+ --v2-line-button:20px;--v2-line-menu:19px;--v2-menu-gap:6px;--v2-menu-face:80px;
  /* Input family inherits the existing Home search material, without changing Home. */
  --v2-input-fill:var(--home-control-fill);--v2-input-depth:var(--home-shadow-control);
  --v2-input-ink:var(--home-ink);--v2-input-muted:var(--home-muted);

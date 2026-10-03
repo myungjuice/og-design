@@ -1,0 +1,25 @@
+/* Hallmark · component: menu tile · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E5 S5 R5 V4
+ * Shared supplied artwork and crop; plate is dimensional, caption stays flat. */
+.v2-menu-tile-stage{display:flex;align-items:center;justify-content:center;width:164px;max-width:100%;padding:var(--v2-space-5);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
+.v2-menu-tile{appearance:none;max-width:100%;cursor:pointer;font-family:var(--v2-font);white-space:nowrap}
+.v2-menu-tile[data-layout="text"]{width:112px;min-height:80px;padding:var(--v2-space-4);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-button-secondary-depth)}
+.v2-menu-tile[data-layout="icon"],.service-tile.og-menu-tile{display:flex;align-items:center;flex-direction:column;gap:var(--v2-menu-gap);padding:0;min-width:0;min-height:0;border:0;background:none;box-shadow:none;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-menu) var(--v2-font)}
+.v2-menu-tile[data-layout="icon"]{width:112px}
+.v2-menu-tile[data-layout="icon"] .service-face,.service-tile.og-menu-tile .service-face{display:grid;place-items:center;position:relative;width:var(--v2-menu-face);height:var(--v2-menu-face);border:0;border-radius:var(--v2-radius-tile);background:var(--v2-surface);box-shadow:var(--v2-tile-contact)}
+.v2-menu-tile[data-layout="icon"] .service-face::after,.service-tile.og-menu-tile .service-face::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--v2-tile-lip);pointer-events:none}
+.v2-menu-tile[data-layout="icon"] .service-art,.service-tile.og-menu-tile .service-art{position:absolute;inset:0;border-radius:inherit;overflow:clip;pointer-events:none}
+.v2-menu-tile[data-layout="icon"] .service-art img,.service-tile.og-menu-tile .service-art img{display:block;position:absolute;max-width:none;width:300.68%;height:200.45%;left:var(--art-left);top:var(--art-top)}
+.v2-menu-tile:focus-visible{outline:3px solid var(--v2-focus);outline-offset:4px}
+@media(hover:hover) and (pointer:fine){.v2-menu-tile:not(:disabled):hover{color:var(--v2-focus)}}
+.v2-menu-tile[data-layout="text"][aria-pressed="true"]{background:var(--v2-selected-surface);color:var(--v2-focus)}
+.v2-menu-tile[data-layout="icon"][aria-pressed="true"] .service-face{outline:1px solid var(--v2-action);outline-offset:2px}
+.v2-menu-tile[data-layout="text"]:not(:disabled):active,.v2-menu-tile[data-layout="text"][data-state="active"],.v2-menu-tile[data-layout="icon"]:not(:disabled):active .service-face::after,.v2-menu-tile[data-layout="icon"][data-state="active"] .service-face::after{box-shadow:var(--v2-depth-inset)}
+.v2-menu-tile:disabled{color:var(--v2-text-muted);cursor:not-allowed}
+.v2-menu-tile[data-layout="text"]:disabled{background:var(--v2-disabled);box-shadow:none}
+.v2-menu-tile[data-layout="icon"]:disabled .service-face{background:var(--v2-disabled);box-shadow:none}
+.v2-menu-tile[data-layout="icon"]:disabled .service-face::after{box-shadow:none}
+.v2-menu-tile[data-layout="icon"]:disabled img{filter:grayscale(1);opacity:.65}
+.v2-menu-tile[data-state="error"]:not(:focus-visible){outline:1px solid var(--v2-error);outline-offset:2px}
+.v2-menu-tile[data-state="success"]:not(:focus-visible){outline:1px solid var(--v2-success);outline-offset:2px}
+@media(max-width:22rem){.service-tile.og-menu-tile .service-face{width:72px;height:72px}}

@@ -7,8 +7,9 @@ export function button({label='',type='button',variant='primary',size,state,clas
 export function iconButton({label, name='info_outline',info=false,expanded,className='',iconHTML='',attributes={}}={}) {
  return '<button type="button" class="og-icon-button'+(info?' og-info-button':'')+(className?' '+e(className):'')+'"'+attrs({'aria-label':label,'aria-expanded':expanded===undefined?undefined:String(expanded),...attributes})+'>'+(iconHTML||icon(name))+'</button>';
 }
-export function textButton({label='',className='',disabled=false,attributes={}}={}) {
- return '<button type="button" class="og-text-button'+(className?' '+e(className):'')+'"'+attrs({disabled,...attributes})+'>'+e(label)+'</button>';
+export function textButton({label='',className='',disabled=false,suffixHTML='',attributes={}}={}) {
+ // suffixHTML is trusted caller-authored decorative markup; user-visible labels remain escaped.
+ return '<button type="button" class="og-text-button'+(className?' '+e(className):'')+'"'+attrs({disabled,...attributes})+'>'+e(label)+suffixHTML+'</button>';
 }
 export function favorite({selected=false,label='즐겨찾기',...props}={}) {
  return button({...props,label,variant:'icon',className:'og-favorite',iconHTML:heart,attributes:{'aria-pressed':String(selected),'aria-label':label,...props.attributes}});

@@ -26,7 +26,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await action.evaluate(n=>n.matches(':focus-visible')),true);assert.equal(await action.evaluate(n=>getComputedStyle(n).outlineWidth),'3px');
    assert.ok(await page.locator('#section-heading button:visible').evaluateAll(ns=>ns.every(n=>{const r=n.getBoundingClientRect();return r.width>=44&&r.height>=44&&n.scrollWidth<=n.clientWidth+1&&r.left>=0&&r.right<=innerWidth;})),'separate touch targets fit '+width);
    assert.ok(await page.locator('#section-heading h3').evaluateAll(ns=>ns.every(n=>getComputedStyle(n).textShadow==='none'&&n.scrollWidth<=n.clientWidth+1)),'headings stay plain and wrap '+width);
-   assert.equal(await action.evaluate(n=>getComputedStyle(n).boxShadow==='none'),false,'only the action owns low elevation');
+   assert.equal(await action.evaluate(n=>getComputedStyle(n).boxShadow),'none','whole-list action stays below the review CTA');
    const title=page.locator('#heading-long h3'),originalTitle=await title.innerText();await title.evaluate(n=>{n.textContent='오지고랜드최근방문한회원점과이용내역을확인하는아주긴제목'.repeat(3);});
    assert.ok(await title.evaluate(n=>n.scrollWidth<=n.clientWidth+1),'unbroken long Korean title fits');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow '+width);

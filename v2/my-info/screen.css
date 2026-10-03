@@ -1,3 +1,4 @@
 /* Screen-specific geometry; shared aliases and navigation stay reusable. */
 @import url('../components/screen.css');
+@import url('../components/menu-tile.css');
 .my-info-test{background:linear-gradient(155.7683deg,var(--test-page-top) 0%,var(--test-page-bottom) 100%);min-height:996px;height:auto;padding-bottom:calc(2 * var(--v2-space-12) + var(--v2-space-3))}

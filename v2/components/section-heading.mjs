@@ -3,6 +3,7 @@ import {surface} from '../../design-system/components/surfaces/render.mjs';
 import {escapeHTML as e,uid} from '../../design-system/components/core.mjs';
 import {stateComparison} from './catalog.mjs';
 const infoIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v7M12 7v1"/></svg>';
+const actionIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
 const states=['default','active','disabled','loading','error','success'];
 const labels={loading:'확인 중…',error:'다시 시도',success:'확인 완료'};
 const messages={disabled:'지금은 내역을 확인할 수 없습니다.',loading:'내역을 확인하는 중입니다.',error:'내역을 불러오지 못했습니다. 다시 시도해 주세요.',success:'내역을 확인했습니다.'};
@@ -12,14 +13,14 @@ export function renderSectionHeading({title='',description='',action='',infoButt
  const helpId=infoButton?uid('v2-heading-help'):undefined;
  const actionLabel=labels[state]||action;
  return `<div class="v2-heading-block">${sectionHeading({title,description,action:action?actionLabel:'',className:'v2-section-heading',
-  infoButton,helpId,infoIconHTML:infoIcon,actionDisabled:['disabled','loading'].includes(state),
+  infoButton,helpId,infoIconHTML:infoIcon,actionIconHTML:actionIcon,actionDisabled:['disabled','loading'].includes(state),
   actionAttributes:{'data-state':state,'data-heading-action':action,'aria-label':title+' '+actionLabel,'aria-busy':state==='loading'?'true':undefined}})}
  ${infoButton?`<p class="v2-heading-help" id="${helpId}" hidden>${e(helpText)}</p>`:''}
  ${action&&messages[state]?`<p class="v2-heading-result" data-state="${state}">${e(messages[state])}</p>`:''}</div>`;
 }
 const sample=(id,label,description,options)=>`<figure class="v2-component-sample" id="${id}"><figcaption><strong>${e(label)}</strong><span>${e(description)}</span></figcaption>${surface({className:'v2-heading-stage',contentHTML:renderSectionHeading(options)})}</figure>`;
 export function renderSectionHeadingSamples(){
- return `<section class="v2-component-section" id="section-heading" aria-labelledby="section-heading-title" hidden><h2 id="section-heading-title">섹션 제목·우측 액션</h2><p>제목과 설명은 평면으로, 우측 동작에는 얕은 입체감을 적용합니다. 정보 버튼과 우측 버튼은 별도의 터치 영역입니다.</p>
+ return `<section class="v2-component-section" id="section-heading" aria-labelledby="section-heading-title" hidden><h2 id="section-heading-title">섹션 제목·우측 액션</h2><p>제목과 설명은 평면으로, 전체보기는 텍스트와 화살표로 가볍게 표시합니다. 정보 버튼과 우측 동작은 별도의 터치 영역입니다.</p>
  <div class="v2-heading-grid">
  ${sample('heading-basic','기본형','제목만 있는 정보 묶음',{title:'최근 방문'})}
  ${sample('heading-description','설명형','제목 아래에 간단한 안내를 표시합니다.',{title:'마일리지 내역',description:'적립하고 사용한 마일리지를 확인하세요.'})}

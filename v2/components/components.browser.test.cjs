@@ -26,7 +26,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const disclosure=page.locator('#'+id+' .v2-state-comparison > summary');
     if(await disclosure.count()){
      if(!await disclosure.locator('..').evaluate(n=>n.open))await disclosure.click();
-     assert.equal(await page.locator('#'+id+' :is(.v2-button,.v2-menu-tile):visible').count(),id==='cards'?7:6);
+     assert.equal(await page.locator('#'+id+' :is(.v2-button,.v2-menu-tile):visible').count(),id==='cards'?8:6);
     }
     assert.ok(await page.locator('#'+id+' :is(.v2-button,.v2-menu-tile):visible').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>{
      const r=n.getBoundingClientRect();return r.width>=44&&r.height>=44&&n.scrollWidth<=n.clientWidth+1&&r.left>=0&&r.right<=innerWidth;
@@ -43,11 +43,12 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const luminance=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((sum,c,i)=>sum+c*[.2126,.7152,.0722][i],0);};
     return nodes.every(n=>{
      const style=getComputedStyle(n);let surface=n;
-     while(surface.parentElement&&getComputedStyle(surface).backgroundColor==='rgba(0, 0, 0, 0)')surface=surface.parentElement;
-     const a=luminance(style.color),b=luminance(getComputedStyle(surface).backgroundColor);
-     return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
+     while(surface.parentElement&&getComputedStyle(surface).backgroundImage==='none'&&getComputedStyle(surface).backgroundColor==='rgba(0, 0, 0, 0)')surface=surface.parentElement;
+     const background=getComputedStyle(surface),colors=background.backgroundImage==='none'?[background.backgroundColor]:background.backgroundImage.match(/oklch\([^)]*\)|rgba?\([^)]*\)/g);
+     const a=luminance(style.color);
+     return colors&&colors.every(color=>{const b=luminance(color);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});
     });
-   }),'button text contrast >= 4.5:1');
+   }),'button text contrast >= 4.5:1 against solid fills and every gradient endpoint');
    assert.ok(await page.locator('main h1,.v2-component-section>p,.v2-component-sample figcaption,.v2-component-sample figcaption span,.v2-component-nav a').evaluateAll(nodes=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
     const l=color=>{ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);};
