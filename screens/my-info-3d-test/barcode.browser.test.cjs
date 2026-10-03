@@ -27,8 +27,12 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
    }),'sheet overlays home with the original bottom-sheet flow');
    assert.ok(await page.locator('.barcode-test .barcode-code').evaluate(node=>{
     const code=node.getBoundingClientRect(),card=node.closest('.barcode-code-card').getBoundingClientRect(),style=getComputedStyle(node),bars=[...node.querySelectorAll('rect')].map(bar=>bar.getBoundingClientRect());
-    return code.height>=128&&bars[0].left>=card.left+24&&bars.at(-1).right<=card.right-24&&style.filter==='none';
-   }),'barcode has a tall, unfiltered scan region with quiet space');
+    return code.height===96&&bars[0].left>=card.left+24&&bars.at(-1).right<=card.right-24&&style.filter==='none';
+   }),'barcode has a compact 96px, unfiltered scan region with unchanged quiet space');
+   assert.ok(await page.locator('.barcode-code-card').evaluate(node=>{
+    const card=node.getBoundingClientRect(),number=node.querySelector('.barcode-member-number').getBoundingClientRect(),actions=node.querySelector('.barcode-actions').getBoundingClientRect();
+    return card.height<=274&&Math.abs(actions.top-number.bottom-16)<.1;
+   }),'barcode holder stays compact with a 16px number-to-actions gap');
    assert.equal(await page.locator('.barcode-test .mobile-status-bar,.barcode-test .mobile-home-indicator').count(),0);
    assert.ok(await page.locator('.barcode-actions button').evaluateAll(buttons=>buttons.every(button=>{
     const r=button.getBoundingClientRect(),text=document.createRange();text.selectNodeContents(button);
@@ -88,6 +92,6 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
   await page.locator('.barcode-test [data-preview="영수증 적립"]').click();
   assert.equal(await page.locator('#preview-title').textContent(),'영수증 적립');await page.keyboard.press('Escape');
   assert.deepEqual(errors,[]);
-  console.log('PASS: three-screen comparison, shared mileage materials, seven widths, tall quiet barcode, disabled use, preview actions and sheet focus');
+  console.log('PASS: three-screen comparison, shared mileage materials, seven widths, compact quiet barcode, disabled use, preview actions and sheet focus');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

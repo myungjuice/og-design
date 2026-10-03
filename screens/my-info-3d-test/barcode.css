@@ -17,10 +17,10 @@
 .barcode-code-card.og-surface{padding:var(--app-space-5);border:0;border-radius:20px;background:var(--test-surface);color:var(--test-ink);box-shadow:var(--test-shadow-panel)}
 .barcode-code-card h2{margin:0;font-size:var(--app-body-1-size);line-height:22px;font-weight:var(--app-weight-bold)}
 /* Depth belongs to the holder, never the scan bars. Native SVG quiet zones stay intact. */
-.barcode-code{height:128px;margin-block:var(--app-space-4) var(--app-space-3)}
+.barcode-code{height:96px;margin-block:var(--app-space-4) var(--app-space-3)}
 .barcode-code .og-barcode-bars{display:block;width:100%;height:100%;fill:var(--test-ink)}
 .barcode-member-number{margin:0;text-align:center;font-size:var(--app-body-2-size);line-height:20px;font-weight:var(--app-weight-medium);letter-spacing:.04em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.barcode-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);margin-top:var(--app-space-6)}
+.barcode-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--app-space-3);margin-top:var(--app-space-4)}
 .barcode-action.og-button{height:52px;min-width:0;padding:0 var(--app-space-2);border-radius:var(--app-radius-md);font-size:var(--app-body-2-size);line-height:20px;white-space:nowrap;font-weight:var(--app-weight-bold)}
 .barcode-earn.og-button{border:1px solid var(--test-control-border);background:var(--test-surface);color:var(--test-accent);box-shadow:var(--test-inset-tile),var(--test-shadow-tile)}
 .barcode-use.og-button{border:0;background:var(--home-selected-fill);color:var(--test-on-card);box-shadow:var(--home-shadow-selected)}
