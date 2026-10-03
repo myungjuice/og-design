@@ -10,6 +10,9 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   for(const width of [320,375,390,414,768,1440]){
    await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/#list-row`);
    await page.locator('#list-row button').first().waitFor();await page.evaluate(()=>document.fonts.ready);
+   const comparison=page.locator('#list-row .v2-state-comparison');
+   if(!await comparison.evaluate(n=>n.open))await comparison.locator('summary').click();
+   assert.equal(await page.locator('#list-row-state-error').isVisible(),true);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'page fits '+width);
    const basic=page.locator('#list-row-basic'),icons=page.locator('#list-row-icons'),info=page.locator('#list-row-information');
    assert.equal(await basic.locator('button').count(),2);

@@ -7,7 +7,7 @@ const samples=[
  ['navigation','하단 메뉴','현재 메뉴는 아이콘 배경과 밑줄로 구분합니다. 메뉴를 눌러 선택 표시를 비교해 보세요.',()=>renderBottomNavigation({assetBase,home:true,active:'홈'})]
 ];
 export function renderHomeControlSamples(){
- return samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title"><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>
+ return samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>
  <link rel="stylesheet" href="/screens/my-info-3d-test/styles.css">
  <link rel="stylesheet" href="/screens/my-info-3d-test/home.css">
  <link rel="stylesheet" href="/v2/components/screen.css">

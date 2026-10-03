@@ -1,6 +1,8 @@
 import {setupHomeControlSamples} from './home-controls.mjs';
+import {setupComponentExplorer} from './explorer.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
+ setupComponentExplorer(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){

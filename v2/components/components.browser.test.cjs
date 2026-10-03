@@ -9,10 +9,11 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   page.on('response',r=>{if(r.status()>=400)errors.push(r.url()+':'+r.status());});
   for(const width of [320,375,390,414,768,1440]){
    await page.setViewportSize({width,height:1000});await page.goto(`${base}/v2/components/`);
-   await page.locator('#try').waitFor();await page.evaluate(()=>document.fonts.ready);
+   await page.locator('#primary').waitFor();await page.evaluate(()=>document.fonts.ready);
    assert.equal(await page.locator('[data-component="button"]').count(),18);
    assert.equal(await page.locator('main [data-state="hover"],main [data-state="focus"]').count(),0);
    const accessibility=page.locator('.v2-accessibility-check');
+   await page.evaluate(()=>location.hash='try');await page.locator('#try').waitFor();
    assert.equal(await accessibility.evaluate(n=>n.open),false);
    await accessibility.locator('summary').focus();await page.keyboard.press('Enter');
    assert.equal(await accessibility.evaluate(n=>n.open),true);
@@ -20,12 +21,20 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.locator('[data-foundation]').count(),0);
    assert.equal(await page.locator('link[href$="foundations.css"]').count(),0);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow '+width);
-   assert.ok(await page.locator('.v2-button,.v2-menu-tile').evaluateAll(nodes=>nodes.every(n=>{
-    const r=n.getBoundingClientRect();return r.width>=44&&r.height>=44&&n.scrollWidth<=n.clientWidth+1&&r.left>=0&&r.right<=innerWidth;
-   })),'touch targets / single-line fit '+width);
-   for(const id of ['primary','secondary','review']){
-    const heights=await page.locator(`#${id} button`).evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().height));
-    assert.equal(new Set(heights).size,1,'state changes do not shift height '+id);
+   for(const id of ['primary','secondary','review','cards','try']){
+    await page.evaluate(id=>location.hash=id,id);await page.locator('#'+id).waitFor();
+    const disclosure=page.locator('#'+id+' .v2-state-comparison > summary');
+    if(await disclosure.count()){
+     if(!await disclosure.locator('..').evaluate(n=>n.open))await disclosure.click();
+     assert.equal(await page.locator('#'+id+' :is(.v2-button,.v2-menu-tile):visible').count(),id==='cards'?7:6);
+    }
+    assert.ok(await page.locator('#'+id+' :is(.v2-button,.v2-menu-tile):visible').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>{
+     const r=n.getBoundingClientRect();return r.width>=44&&r.height>=44&&n.scrollWidth<=n.clientWidth+1&&r.left>=0&&r.right<=innerWidth;
+    })),'touch targets / single-line fit '+id+' '+width);
+    if(['primary','secondary','review'].includes(id)){
+     const heights=await page.locator(`#${id} button`).evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().height));
+     assert.equal(new Set(heights).size,1,'state changes do not shift height '+id);
+    }
    }
    assert.ok(await page.locator('[data-state="loading"]').evaluateAll(nodes=>nodes.every(n=>n.disabled&&n.getAttribute('aria-busy')==='true')));
    assert.ok(await page.locator('[data-state="disabled"]').evaluateAll(nodes=>nodes.every(n=>n.disabled)));
@@ -45,9 +54,12 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const bg=l(getComputedStyle(document.documentElement).backgroundColor);
     return nodes.every(n=>{const fg=l(getComputedStyle(n).color);return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)>=4.5;});
    }),'gallery text remains readable on dark gray');
+   await page.evaluate(()=>location.hash='cards');await page.locator('#cards').waitFor();
    const info=page.locator('.v2-card');const before=await info.evaluate(n=>getComputedStyle(n).boxShadow);
    await info.hover();assert.equal(await info.evaluate(n=>getComputedStyle(n).boxShadow),before,'information card has no hover interaction');
+   await page.evaluate(()=>location.hash='try');await page.locator('#try').waitFor();
    const tile=page.locator('[data-preview-action="tile"]');await tile.focus();
+   await page.keyboard.press('Shift+Tab');await page.keyboard.press('Tab');
    assert.equal(await tile.evaluate(n=>n.matches(':focus-visible')),true);
    assert.equal(await tile.evaluate(n=>getComputedStyle(n).outlineWidth),'3px');
    await page.keyboard.press('Space');assert.equal(await tile.getAttribute('aria-pressed'),'true');
@@ -59,7 +71,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   await page.emulateMedia({reducedMotion:'reduce'});
   assert.ok(await page.locator('main button').evaluateAll(nodes=>nodes.every(n=>getComputedStyle(n).animationName==='none')));
   const touch=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
-  const touchPage=await touch.newPage();await touchPage.goto(`${base}/v2/components/`);
+  const touchPage=await touch.newPage();await touchPage.goto(`${base}/v2/components/#try`);
   await touchPage.locator('[data-preview-action="tile"]').tap();
   assert.equal(await touchPage.locator('[data-preview-action="tile"]').getAttribute('aria-pressed'),'true');
   assert.deepEqual(errors,[]);
