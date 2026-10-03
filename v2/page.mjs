@@ -18,3 +18,11 @@ export function setupResponsiveMenu(root) {
 const root=document.querySelector('#v2-root');
 root.innerHTML=renderWorkspace({pageId:document.body.dataset.page});
 setupResponsiveMenu(root);
+if(document.body.dataset.page==='design-system'){
+ const {setupColorValues}=await import('./design-system/color-values.mjs');
+ setupColorValues(root);
+}
+if(document.body.dataset.page==='components'){
+ const {setupComponentPreview}=await import('./components/preview.mjs');
+ setupComponentPreview(root);
+}

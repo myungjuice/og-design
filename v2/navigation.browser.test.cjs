@@ -7,14 +7,14 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{if(r.status()>=400)errors.push(r.url()+':'+r.status());});
-  const routes=[['design-system','디자인 시스템'],['home','홈화면'],['my-land','마이랜드'],['barcode','바코드'],['og-park','오지파크'],['my-info','내정보']];
+  const routes=[['design-system','디자인 시스템'],['components','공통 컴포넌트'],['home','홈화면'],['my-land','마이랜드'],['barcode','바코드'],['og-park','오지파크'],['my-info','내정보']];
   for(const [id,title] of routes){
    await page.goto(`${base}/v2/${id}/`);
    await page.locator('main h1').waitFor();
    assert.equal(await page.locator('main h1').textContent(),title);
    assert.equal(await page.locator('.v2-menu nav [aria-current="page"]').count(),1);
    assert.equal(await page.locator('.v2-menu nav [aria-current="page"]').textContent(),title);
-   assert.equal(await page.locator('.v2-menu nav a').count(),6);
+   assert.equal(await page.locator('.v2-menu nav a').count(),7);
    if(['my-land','og-park'].includes(id))assert.equal((await page.locator('main').innerText()).trim(),title);
    assert.equal(await page.locator('.my-info-test,.home-test,.barcode-test').count(),0);
    if(id!=='design-system')assert.equal(await page.locator('link[href$="foundations.css"]').count(),0);
@@ -52,6 +52,6 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   await page.waitForFunction(()=>document.querySelector('.v2-menu').open);
   assert.ok(await page.getByRole('navigation',{name:'3D컨셉 디자인 v2'}).isVisible());
   assert.deepEqual(errors,[]);
-  console.log('v2 navigation: 6 direct routes/reloads, redirect, history, keyboard menu, resize, 6 widths passed');
+  console.log('v2 navigation: 7 direct routes/reloads, redirect, history, keyboard menu, resize, 6 widths passed');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

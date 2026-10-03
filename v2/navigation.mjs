@@ -1,5 +1,6 @@
 export const navigationItems = [
  {id:'design-system',label:'디자인 시스템',href:'/v2/design-system/'},
+ {id:'components',label:'공통 컴포넌트',href:'/v2/components/'},
  {id:'home',label:'홈화면',href:'/v2/home/'},
  {id:'my-land',label:'마이랜드',href:'/v2/my-land/'},
  {id:'barcode',label:'바코드',href:'/v2/barcode/'},

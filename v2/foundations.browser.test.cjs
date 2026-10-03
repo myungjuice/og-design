@@ -29,7 +29,22 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const faces=[...document.styleSheets].flatMap(sheet=>[...sheet.cssRules]).filter(r=>r.type===CSSRule.FONT_FACE_RULE).map(r=>r.style.getPropertyValue('font-weight')).sort();
     return {page:rgba(tokens.getPropertyValue('--v2-page')),muted:rgba(tokens.getPropertyValue('--v2-muted-surface')),fontLoaded:document.fonts.check('400 16px "OG V2 Pretendard"')&&document.fonts.check('700 28px "OG V2 Pretendard"'),faces,amount:[amount.fontSize,amount.lineHeight,amount.fontWeight],bodyWeight:body.fontWeight,contrasts};
    });
-   assert.deepEqual(styles.page,[255,255,255,255]);assert.equal(styles.muted[0],styles.muted[1]);assert.equal(styles.muted[1],styles.muted[2]);
+   assert.ok(styles.page[0]>=230&&styles.page[0]<250,'workspace is light gray, not white');assert.equal(styles.page[0],styles.page[1]);assert.equal(styles.page[1],styles.page[2]);assert.equal(styles.muted[0],styles.muted[1]);assert.equal(styles.muted[1],styles.muted[2]);
+   await page.waitForFunction(()=>[...document.querySelectorAll('[data-color-token]')].every(n=>/^RGB\(\d+, \d+, \d+\)$/.test(n.textContent)));
+   assert.equal(await page.locator('[data-color-token]').count(),13);
+   assert.ok(await page.locator('.v2-foundation-end a').evaluate(n=>n.getBoundingClientRect().height>=44));
+   assert.ok(await page.locator('[data-color-token]').evaluateAll(outputs=>{
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;
+    const ctx=canvas.getContext('2d');
+    return outputs.every(output=>{
+     ctx.fillStyle=getComputedStyle(output.closest('.v2-color-row').querySelector('.v2-swatch')).backgroundColor;
+     ctx.fillRect(0,0,1,1);const [r,g,b]=ctx.getImageData(0,0,1,1).data;
+     return output.textContent===`RGB(${r}, ${g}, ${b})`;
+    });
+   }),'every displayed RGB matches the rendered swatch');
+   await page.evaluate(()=>document.documentElement.style.setProperty('--v2-action','rgb(12, 34, 56)'));
+   await page.waitForFunction(()=>document.querySelector('[data-color-token="--v2-action"]').textContent==='RGB(12, 34, 56)');
+   await page.evaluate(()=>document.documentElement.style.removeProperty('--v2-action'));
    assert.equal(styles.fontLoaded,true);assert.deepEqual(styles.faces,['400','700']);
    assert.deepEqual(styles.amount,['28px','38px','700']);assert.equal(styles.bodyWeight,'400');
    assert.ok(styles.contrasts.every(c=>c.ratio>=c.min),JSON.stringify(styles.contrasts));

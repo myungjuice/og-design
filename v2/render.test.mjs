@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {navigationItems,renderSidebar} from './navigation.mjs';
 import {renderWorkspace} from './render.mjs';
 
-test('menu anchors expose all six destinations in the approved order',()=>{
+test('menu anchors expose all seven destinations in the approved order',()=>{
  assert.deepEqual(navigationItems.map(({id,label,href})=>[id,label,href]),[
-  ['design-system','디자인 시스템','/v2/design-system/'],['home','홈화면','/v2/home/'],
+  ['design-system','디자인 시스템','/v2/design-system/'],['components','공통 컴포넌트','/v2/components/'],['home','홈화면','/v2/home/'],
   ['my-land','마이랜드','/v2/my-land/'],['barcode','바코드','/v2/barcode/'],
   ['og-park','오지파크','/v2/og-park/'],['my-info','내정보','/v2/my-info/']
  ]);
@@ -37,5 +37,14 @@ test('design system presents five foundation groups as visual specimens',()=>{
  assert.deepEqual([...html.matchAll(/data-foundation="([^"]+)"/g)].map(x=>x[1]),['colors','typography','spacing','radius','materials']);
  assert.match(html,/시각 규칙 검토용/);
  assert.doesNotMatch(html,/<button|<input/);
- for(const id of ['home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);
+ assert.equal((html.match(/data-color-token=/g)||[]).length,13);
+ for(const id of ['components','home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);
+});
+test('components have their own route and use the actual shared renderers',()=>{
+ const html=renderWorkspace({pageId:'components'});
+ assert.match(html,/<h1>공통 컴포넌트<\/h1>/);
+ assert.match(html,/class="og-button v2-button/);
+ assert.match(html,/class="og-surface v2-card/);
+ assert.match(html,/class="og-menu-tile v2-menu-tile/);
+ for(const state of ['default','hover','focus','active','disabled','loading','error','success'])assert.match(html,new RegExp(`data-state="${state}"`));
 });

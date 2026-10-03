@@ -3,7 +3,8 @@
 @font-face{font-family:'OG V2 Pretendard';src:url('/screens/my-info-3d-test/media/Pretendard-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
 :root{
  --v2-font:'OG V2 Pretendard',system-ui,-apple-system,sans-serif;
- --v2-page:oklch(100% 0 0);--v2-surface:oklch(100% 0 0);
+ --v2-page:oklch(96% 0 0);--v2-surface:oklch(100% 0 0);
+ --v2-control-edge:oklch(61% 0 0);
  --v2-muted-surface:oklch(97% 0 0);--v2-text:oklch(23% .012 270);
  --v2-text-muted:oklch(46% .025 267);--v2-edge:oklch(89% 0 0);
  --v2-action:oklch(52.766136% .21490493 276.409976);--v2-on-action:oklch(100% 0 0);
