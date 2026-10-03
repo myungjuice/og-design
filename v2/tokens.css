@@ -39,6 +39,10 @@
  --v2-depth-primary:inset 0 4px 12px var(--v2-primary-light),inset -4px -8px 14px var(--v2-primary-edge),0 4px 12px var(--v2-contact);
  /* Action buttons are shallower than the balance card, matching the barcode screen. */
  --v2-button-fill:var(--home-selected-fill);--v2-button-depth:var(--home-shadow-selected);
+ /* Foundation specimens expose the existing screen materials, without changing consumers. */
+ --v2-button-light:var(--home-selected-lit);--v2-button-face:var(--home-selected-face);
+ --v2-depth-panel:inset -1px -4px 6px var(--v2-material-edge),0 4px 12px var(--v2-contact);
+ --v2-radius-sheet:32px;--v2-radius-navigation:32px;
  --v2-tile-contact:0 5px 10px -4px var(--v2-contact);
  --v2-tile-lip:inset 1px 1px 2px var(--v2-surface),inset -1px -4px 6px var(--v2-material-edge);
  --v2-button-secondary-depth:var(--v2-tile-lip),var(--v2-tile-contact);

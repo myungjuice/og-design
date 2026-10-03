@@ -13,7 +13,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.deepEqual(await page.locator('[data-foundation]').evaluateAll(n=>n.map(n=>n.dataset.foundation)),['colors','typography','spacing','radius','materials']);
    assert.equal(await page.locator('main button,main input').count(),0,'specimens do not pretend to be completed controls');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow at '+width);
-   for(const fragment of ['colors','typography','radius']){
+   for(const fragment of ['colors','typography','spacing','radius','materials']){
     await page.evaluate(hash=>{location.hash=hash;},fragment);
     await page.locator('#'+fragment).waitFor();
     assert.ok(await page.locator('[data-sample]:visible').evaluateAll(nodes=>nodes.every(n=>{const b=n.getBoundingClientRect();return b.left>=0&&b.right<=innerWidth+1&&n.scrollWidth<=n.clientWidth+1;})),'visible specimens are not clipped at '+width);
@@ -27,7 +27,8 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const l=color=>rgba(color).slice(0,3).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((a,c,i)=>a+c*[.2126,.7152,.0722][i],0);
     const ratio=(a,b)=>(Math.max(l(a),l(b))+.05)/(Math.min(l(a),l(b))+.05);
     const contrasts=[...document.querySelectorAll('[data-contrast]')].map(n=>{
-     const s=getComputedStyle(n);return {name:n.dataset.contrast,ratio:ratio(s.color,s.backgroundColor),min:n.dataset.large==='true'?3:4.5};
+     const s=getComputedStyle(n),stops=s.backgroundImage.match(/(?:oklch|rgba?|color)\([^)]*\)/g);
+     return {name:n.dataset.contrast,ratio:Math.min(...(stops||[s.backgroundColor]).map(bg=>ratio(s.color,bg))),min:n.dataset.large==='true'?3:4.5};
     });
     const workspace=getComputedStyle(document.documentElement).backgroundColor;
     for(const selector of ['main h1','.v2-section-copy','.v2-color-row dd','.v2-color-value','.v2-back']){
@@ -40,7 +41,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.ok(styles.workspace[0]>=35&&styles.workspace[0]<=65,'workspace is dark gray');assert.equal(styles.workspace[0],styles.workspace[1]);assert.equal(styles.workspace[1],styles.workspace[2]);
    assert.ok(styles.page[0]>=230&&styles.page[0]<250,'app page token stays light');assert.equal(styles.muted[0],styles.muted[1]);assert.equal(styles.muted[1],styles.muted[2]);
    await page.waitForFunction(()=>[...document.querySelectorAll('[data-color-token]')].every(n=>/^RGB\(\d+, \d+, \d+\)$/.test(n.textContent)));
-   assert.equal(await page.locator('[data-color-token]').count(),13);
+   for(const role of ['screen-top','screen-bottom','button-light','button-face','input-ink','input-muted'])assert.equal(await page.locator(`[data-color-token="--v2-${role}"]`).count(),1);
    assert.ok(await page.locator('.v2-foundation-end a').evaluate(n=>n.getBoundingClientRect().height>=44));
    assert.ok(await page.locator('[data-color-token]').evaluateAll(outputs=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;

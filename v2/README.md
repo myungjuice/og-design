@@ -7,7 +7,7 @@
 ## 현재 범위
 
 - 좌측 7개 메뉴와 독립 HTML 주소: 디자인 시스템, 공통 컴포넌트, 홈화면, 마이랜드, 바코드, 오지파크, 내정보.
-- 디자인 시스템: 컬러, 타이포, 여백, 곡률, 3D 재질의 시각 규칙 검토용 샘플.
+- 디자인 시스템: 컬러, 타이포, 여백, 곡률, 3D 재질의 시각 규칙 검토용 샘플. 실제 화면을 기준으로 앱 카드 제목(16/22), 마일리지 제목(12/16), 금액(28/38), 매장명·메뉴명(14/19)을 공통 제목·본문과 구분합니다. 카드 간격 12px, 방문 행 간격 16px, 아이콘과 이름의 예외 간격 6px을 안내합니다. 시트 상단과 떠 있는 하단 메뉴 곡률은 32px입니다. 검색·입력의 밝은 돌출, 흰 카드, 아이콘 받침, 얕은 주요 버튼, 깊은 마일리지 카드 재질을 구분하고 실제 대표 화면과 계산된 스타일을 비교 검증합니다. 이 샘플은 완성 컴포넌트가 아니며 앱 화면 자체를 변경하지 않습니다.
 - 눈부심을 줄인 다크 그레이 검토 배경과 흰 컴포넌트 표면. 검토용 `--v2-workspace-*` 토큰은 앱 토큰과 분리합니다. 앱 대표 화면 안의 승인된 배경은 유지하고, 검토 영역에는 하늘색 배경·별 장식·OS 표시선을 추가하지 않습니다.
 - 컬러의 RGB 값은 실제 CSS 스와치를 sRGB로 변환합니다. CSS 토큰 변경 후 새로고침 또는 루트의 스타일·클래스 변경 시 갱신됩니다.
 - `/v2/components/`: 3D 주요·보조·후기 버튼 3종의 앱 기준 6개 상태(기본·눌림·비활성·처리 중·오류·성공), 비상호작용 정보 카드, 메뉴 타일의 6개 상태와 선택 상태. 마우스 올림·키보드 포커스 비교 시안은 제외하고 실제 웹 키보드 조작과 포커스 기능은 유지합니다. 점검 안내는 접힌 ‘접근성 점검’에 분리합니다.
@@ -15,12 +15,12 @@
 - 보조 메뉴 검색은 하위 목록만 걸러 현재 미리보기를 유지합니다. 그룹명 검색·결과 없음 안내·검색 지우기·Escape 지우기를 지원합니다. 분류는 `subnavigation.mjs`와 `components/catalog.mjs`, 그룹 선택·검색·이동은 `review-navigation.mjs`, 공통 탐색 외형은 `shell.css`에서 관리합니다. `components/explorer.mjs`는 공통 탐색 연결만 담당합니다.
 - 기본 형태를 먼저 보여주고 동작 상태는 ‘상태 비교’, 마일리지의 다른 잔액은 ‘잔액별 비교’를 펼쳐 확인합니다. 기존 `#primary`, `#mileage`, `#list-row`와 새 `#group-buttons` 같은 그룹 URL은 공유·새로고침·뒤로/앞으로 가기를 지원합니다. 알 수 없는 항목은 첫 그룹을 표시합니다. 데스크톱 두 메뉴는 고정 위치에서 독립적으로 스크롤하며, 1024px 미만에서는 접이식 메뉴와 네이티브 그룹 선택을 제공합니다. 검토 화면 변경이며 앱 시안과 실제 공통 컴포넌트의 외형은 변경하지 않습니다.
 - 내정보는 현재 메인만 연결되어 있습니다. 내역·예약, 문의, 계정·설정의 하위 화면은 ‘이관 예정’으로 표시하며 클릭 링크나 빈 시안을 만들지 않습니다. 이번 탐색 구조 변경에서는 기존 캔버스의 하위 화면을 이관하지 않습니다. 마이랜드·오지파크에도 가짜 하위 화면을 만들지 않습니다.
-- 기존 공통 `button`, `surface`, `menuTile` 렌더러를 사용합니다. v2 외형은 `components/styles.css`, v2 래퍼는 `components/render.mjs`에서 한 번만 관리합니다. 기존 CSS를 전역 수정하지 않습니다.
+- 기존 공통 `button`, `surface`, `menuTile` 렌더러를 사용합니다. v2 외형은 `components/styles.css`와 역할별 CSS에서, v2 래퍼는 `components/render.mjs`에서 관리합니다. 버튼은 `components/button.css`, 아이콘 메뉴 받침은 `components/menu-tile.css`로 대표 화면과 공유합니다. 기존 CSS를 전역 수정하지 않습니다.
 - 공통 마일리지 카드·진행바: `/v2/components/#mileage`에서 기본·사용 가능 0·잔액 0·상한 4가지 검토용 잔액을 비교합니다. 기존 내정보·바코드의 `screens/my-info-3d-test/mileage-card.mjs`를 그대로 호출하며 원본 Figma M·원형 표시점 에셋을 참조합니다. `components/mileage.mjs`는 v2 경로·데이터 검증, `components/mileage.css`는 v2 재질만 담당합니다.
 - 마일리지 입력은 `available`, `total`, `shared`, `sharedCount`로 나눕니다. 진행바는 표시용 meter이며 슬라이더가 아닙니다. `rangeMin`/`rangeMax`는 시각적 표시 범위만 정하고 실제 잔액이나 사용 가능 금액을 계산하지 않습니다. 범위 초과 시 그래픽만 제한하고 실제 금액 텍스트는 유지합니다. 안내·내역보기 버튼은 검토용 안내만 표시하며 실제 API에 연결하지 않습니다.
 - 공통 목록 행: `/v2/components/#list-row`에 기본·설명형, 3D 아이콘형, 우측 정보형과 긴 내용 예시를 제공합니다. 기존 `listRow`, `surface`, `divider` 렌더러와 내정보의 `menuArt`·디자이너 에셋을 재사용합니다. `components/list-row.mjs`와 `components/list-row.css`에서 v2 조합과 재질을 관리하며 카드 가장자리만 입체적으로, 각 행의 글자·금액·화살표는 평면으로 표현합니다. 정보 행은 버튼이 아니며 이동 화살표·눌림 효과가 없습니다.
 - 목록 행의 6개 상태는 기본·누르는 중·비활성·처리 중·오류·성공입니다. 처리 중과 비활성은 네이티브 버튼을 비활성화하고, 처리 중에는 `aria-busy`를 표시합니다. 오류·성공은 문구와 색을 함께 표시합니다. 클릭·키보드·터치는 검토용 상태 문구만 갱신하며 실제 조회나 화면 이동은 하지 않습니다.
-- 공통 섹션 제목·우측 액션: `/v2/components/#section-heading`에 기본형·설명형·우측 액션형·정보 안내형·긴 제목 5개 예시를 제공합니다. 기존 `sectionHeading`, `textButton`, `iconButton`, `surface` 렌더러를 재사용하고 기본 출력은 유지합니다. 제목·설명·정보 아이콘은 평면, 우측 액션만 기존 보조 버튼의 낮은 입체감으로 표현합니다. 긴 제목은 생략하지 않고 줄바꿈하며 좁은 폭에서는 액션을 다음 줄로 배치합니다.
+- 공통 섹션 제목·우측 액션: `/v2/components/#section-heading`에 기본형·설명형·우측 액션형·정보 안내형·긴 제목 5개 예시를 제공합니다. 기존 `sectionHeading`, `textButton`, `iconButton`, `surface` 렌더러를 재사용하고 기본 출력은 유지합니다. 제목·설명·정보 아이콘은 평면이며 우측 ‘전체보기’ 액션도 회색 글자·화살표로 차분하게 표시합니다. 후기작성 등 주요 행동과 위계를 구분하고 터치 영역은 유지합니다. 긴 제목은 생략하지 않고 줄바꿈하며 좁은 폭에서는 액션을 다음 줄로 배치합니다.
 - 정보 버튼은 독립된 48px 터치 영역이며 `aria-controls`·`aria-expanded`와 인라인 안내를 연결합니다. 우측 액션의 6개 상태는 ‘상태 비교’에서 확인합니다. 비활성·처리 중은 네이티브 버튼을 비활성화하며 처리 중에는 `aria-busy`를 표시합니다. 샘플 동작은 검토용 문구만 갱신하며 실제 내역을 조회하지 않습니다. `components/section-heading.mjs`와 `.css`에서 조합·외형을 관리하며 이번 단계에는 앱 대표 화면에 적용하지 않습니다.
 - 공통 선택 요소: `/v2/components/#group-selection`에 체크박스·라디오·토글을 함께 표시합니다. 기존 `choice`·`toggle` 렌더러와 네이티브 입력을 재사용하며 기본 출력은 유지합니다. 체크박스 사각형·라디오 중앙 점·토글 손잡이에만 낮은 입체감을 주고 글자·설명은 평면으로 유지합니다. 전체 행은 최소 48px 터치 영역이며 외형과 조합은 `components/selection.css`·`.mjs`에서 관리합니다.
 - 공통 입력: `/v2/components/#group-inputs`에 실제 홈의 매장 검색바·텍스트·비밀번호를 함께 표시합니다. 기존 `textField`·`passwordField` 렌더러와 네이티브 입력을 재사용하며 기본 출력은 유지합니다. v2 조합과 외형은 `components/input.mjs`·`.css`에서 관리합니다. 텍스트·비밀번호 입력은 `tokens.css`의 `--v2-input-*` 별칭으로 실제 홈의 연한 하늘색 그라데이션·부드러운 raised 그림자·캡슐 곡률을 공유합니다. 홈 자체는 수정하지 않습니다. 48px 높이, 16px 입력 글자, 16px 좌우 여백, 모든 상태의 1px 테두리를 유지하며 라벨·입력값·도움말에는 입체 효과를 넣지 않습니다. 입력 중은 눌린 마감, 비활성·읽기 전용은 평면 중립 표면으로 구분합니다.
@@ -49,6 +49,8 @@ node --test v2/render.test.mjs v2/build.test.mjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/navigation.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/subnavigation.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/foundations.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/design-system/foundation-parity.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/style-parity.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/components.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/explorer.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/home-controls.browser.test.cjs

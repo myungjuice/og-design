@@ -71,7 +71,7 @@ test('design system presents five foundation groups as visual specimens',()=>{
  assert.deepEqual([...html.matchAll(/data-foundation="([^"]+)"/g)].map(x=>x[1]),['colors','typography','spacing','radius','materials']);
  assert.match(html,/시각 규칙 검토용/);
  assert.doesNotMatch(renderFoundations(),/<button|<input/);
- assert.equal((html.match(/data-color-token=/g)||[]).length,13);
+ for(const role of ['screen-top','screen-bottom','button-light','button-face','input-ink','input-muted'])assert.match(html,new RegExp(`data-color-token="--v2-${role}"`));
  for(const id of ['components','home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);
 });
 test('components have their own route and use the actual shared renderers',()=>{
