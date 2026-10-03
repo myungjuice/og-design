@@ -16,7 +16,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.locator('.v2-menu nav [aria-current="page"]').textContent(),title);
    assert.equal(await page.locator('.v2-menu nav a').count(),7);
    if(['my-land','og-park'].includes(id))assert.equal((await page.locator('main').innerText()).trim(),title);
-   assert.equal(await page.locator('.my-info-test,.home-test,.barcode-test').count(),id==='my-info'?1:0);
+   assert.equal(await page.locator('.my-info-test,.home-test,.barcode-test').count(),['my-info','barcode'].includes(id)?1:0);
    if(id!=='design-system')assert.equal(await page.locator('link[href$="foundations.css"]').count(),0);
    await page.reload();await page.locator('main > h1').waitFor();
    assert.equal(await page.locator('.v2-menu nav [aria-current="page"]').textContent(),title);

@@ -30,3 +30,7 @@ if(document.body.dataset.page==='my-info'){
  const {setupMyInfoPreview}=await import('./my-info/preview.mjs');
  setupMyInfoPreview(root);
 }
+if(document.body.dataset.page==='barcode'){
+ const {setupBarcodePreview}=await import('./barcode/preview.mjs');
+ setupBarcodePreview(root);
+}

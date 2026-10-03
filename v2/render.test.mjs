@@ -20,12 +20,23 @@ test('blank future destinations contain only their title in main',()=>{
  }
 });
 test('pending representative screens link to the preserved test page',()=>{
- for(const id of ['home','barcode']){
+ for(const id of ['home']){
   const html=renderWorkspace({pageId:id});
   assert.match(html,/대표 화면 연결 예정/);
   assert.match(html,/href="\/screens\/my-info-3d-test\/"/);
   assert.doesNotMatch(html,/class="(?:my-info-test|home-test|barcode-test)"/);
  }
+});
+test('barcode exposes one shared sheet and route-safe mileage assets without other screens',()=>{
+ const html=renderWorkspace({pageId:'barcode'});
+ assert.equal((html.match(/class="barcode-test"/g)||[]).length,1);
+ assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,1);
+ assert.match(html,/내 바코드/);assert.match(html,/영수증 적립/);assert.match(html,/마일리지 사용/);
+ assert.match(html,/실제 회원 정보가 아닌 샘플 바코드/);
+ assert.doesNotMatch(html,/대표 화면 연결 예정|class="my-info-test"|class="home-test"|승인된/);
+ const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
+ assert.ok(images.some(src=>src.endsWith('/mileage-m.png')));
+ assert.ok(images.every(src=>src.startsWith('/screens/')||src.includes('/design-system/pages/home/media/naver-mangwon.png')));
 });
 test('my-info exposes one approved representative screen without pulling home or barcode screens',()=>{
  const html=renderWorkspace({pageId:'my-info'});

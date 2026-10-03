@@ -1,0 +1,7 @@
+/* Reference payment sheet · soft OG 3D · existing compact scan geometry.
+ * Shared mileage owns its material; scan bars stay flat and unfiltered. */
+@import url('../components/screen.css');
+.barcode-sheet{max-height:100%;overflow-y:auto}
+.barcode-action.og-button{font-weight:700}
+.barcode-action.og-button:disabled{background:var(--v2-disabled);color:var(--v2-text-muted)}
+@media(hover:hover){.barcode-action.og-button:hover:not(:disabled),.barcode-close:hover,.barcode-guide:hover{transform:none}}

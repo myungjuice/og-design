@@ -119,3 +119,12 @@ test('my-info renderer accepts route-safe assets and the shared v2 balance rende
  assert.match(html,/공유인 0/);assert.match(html,/2,400 M/);
  assert.ok([...html.matchAll(/src="([^"]+)"/g)].every(m=>m[1].startsWith('/screens/my-info-3d-test/media/figma/')));
 });
+test('barcode renderer accepts shared balance rendering without changing legacy defaults',async()=>{
+ const {renderBarcodeTest}=await import('./render.mjs');
+ const {renderMileage}=await import('../../v2/components/mileage.mjs');
+ const props={available:0,total:2400,shared:0,sharedCount:0};
+ const html=renderBarcodeTest({...props,renderBalance:renderMileage});
+ assert.ok(html.includes(renderMileage(props)));
+ assert.match(html.match(/<button\b[^>]+data-preview="마일리지 사용"[^>]*>/)?.[0]||'',/disabled/);
+ assert.doesNotMatch(renderBarcodeTest(),/v2-mileage/);
+});
