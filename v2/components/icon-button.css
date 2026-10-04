@@ -1,0 +1,35 @@
+/* Hallmark · component: icon button · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E5 S5 R5 V4
+ * 20px artwork / 48px touch, shallow 40px face only for standalone actions.
+ * Native hover/focus; pressed/disabled/pending/error/success retain selection semantics. */
+.v2-icon-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-icon-stage,.v2-icon-live{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text)}
+.v2-icon-button{appearance:none;position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--v2-space-12);height:var(--v2-space-12);min-width:var(--v2-space-12);min-height:var(--v2-space-12);margin:0;padding:0;border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text-muted);box-shadow:none;cursor:pointer}
+.v2-icon-button[data-face="raised"]::before{content:"";position:absolute;inset:var(--v2-space-1);border-radius:var(--v2-radius-button);background:var(--v2-surface);box-shadow:var(--v2-button-secondary-depth);pointer-events:none}
+.v2-icon-button[data-face="raised"]{color:var(--v2-focus)}
+.v2-icon-button svg{position:relative;display:block;width:var(--v2-space-5);height:var(--v2-space-5);flex:none;pointer-events:none}
+.v2-icon-button.og-favorite svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linejoin:round}
+.v2-icon-button.og-favorite[aria-pressed="true"]{color:var(--v2-focus)}
+.v2-icon-button.og-favorite[aria-pressed="true"] svg{fill:currentColor}
+.v2-icon-button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-icon-button:not(:disabled):active,.v2-icon-button[data-state="active"]{color:var(--v2-focus)}
+.v2-icon-button[data-face="raised"]:not(:disabled):active::before,.v2-icon-button[data-face="raised"][data-state="active"]::before{box-shadow:var(--v2-depth-inset)}
+.v2-icon-button:disabled,.v2-icon-button.og-favorite:disabled{opacity:1;color:var(--v2-text-muted);cursor:not-allowed}
+.v2-icon-button[data-face="raised"]:disabled::before{background:var(--v2-disabled);box-shadow:none}
+.v2-icon-button[data-state="loading"]{cursor:wait}
+.v2-icon-button[data-state="loading"] svg{opacity:0}
+.v2-icon-button[data-state="loading"]::after{content:"";box-sizing:border-box;position:absolute;width:var(--v2-space-5);height:var(--v2-space-5);border:2px solid currentColor;border-inline-end-color:transparent;border-radius:var(--v2-radius-chip);animation:v2-icon-pending var(--v2-loading-cycle) var(--v2-loading-ease) infinite;pointer-events:none}
+.v2-icon-button[data-state="error"]:not(:focus-visible){outline:1px solid var(--v2-error);outline-offset:2px}
+.v2-icon-button[data-state="success"]:not(:focus-visible){outline:1px solid var(--v2-success);outline-offset:2px}
+.v2-icon-demo{margin-top:var(--v2-space-8)}
+.v2-icon-demo>p,.v2-icon-rules{color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-icon-demo-row{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-2);min-height:var(--v2-space-12);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-icon-demo-row>span{min-width:0;overflow-wrap:anywhere}
+.v2-icon-demo [data-icon-feedback]{min-height:var(--v2-space-12)}
+.v2-icon-rules{padding-inline-start:var(--v2-space-5)}
+.v2-icon-rules li{margin-top:var(--v2-space-2)}
+@media(hover:hover) and (pointer:fine){.v2-icon-button:not(:disabled):hover{color:var(--v2-focus)}}
+@media(min-width:80rem){.v2-icon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@keyframes v2-icon-pending{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.v2-icon-button[data-state="loading"]::after{animation:none}}
+@media(forced-colors:active){.v2-icon-button{color:ButtonText}.v2-icon-button:disabled{color:GrayText}.v2-icon-button[aria-pressed="true"]{color:Highlight;outline:2px solid Highlight}.v2-icon-button[data-face="raised"]::before{border:1px solid ButtonText;box-shadow:none}.v2-icon-button[data-face="raised"]:disabled::before{border-color:GrayText}}

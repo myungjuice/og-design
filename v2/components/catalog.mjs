@@ -2,6 +2,7 @@ export const componentItems=[
  {id:'primary',label:'주요 버튼',group:'버튼'},
  {id:'secondary',label:'보조 버튼',group:'버튼'},
  {id:'review',label:'후기 버튼',group:'버튼'},
+ {id:'icon-buttons',label:'아이콘 버튼·즐겨찾기',group:'버튼'},
  {id:'cards',label:'카드·메뉴 타일',group:'카드·정보'},
  {id:'mileage',label:'마일리지 카드·진행바',group:'카드·정보'},
  {id:'section-heading',label:'섹션 제목·우측 액션',group:'카드·정보'},

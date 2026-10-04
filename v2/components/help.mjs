@@ -1,8 +1,7 @@
 import {tooltip,popover} from '../../design-system/components/help/render.mjs';
 import {iconButton} from '../../design-system/components/button/render.mjs';
+import {renderIconButton} from './icon-button.mjs';
 import {attributes as attrs,uid} from '../../design-system/components/core.mjs';
-const info='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></svg>';
-const close='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
 export function renderHelp({kind='popover',id=uid('v2-help'),title='마일리지 안내',body='',live=false}={}){
  if(!['tooltip','popover'].includes(kind))throw new RangeError('Unsupported help kind');
  if(!body.trim())throw new TypeError('Help requires visible explanation');
@@ -11,9 +10,9 @@ export function renderHelp({kind='popover',id=uid('v2-help'),title='마일리지
  if(kind==='tooltip')return tooltip({id,message:body}).replace('class="og-tooltip"','class="og-tooltip v2-help-panel v2-help-tooltip"'+liveAttrs);
  return popover({id,title,body,attributes:live?{popover:'auto','data-help-panel':kind}:{}})
   .replace('class="og-popover"','class="og-popover v2-help-panel"')
-  .replace('<span class="material-icons" aria-hidden="true">close</span>',close);
+  .replace(iconButton({label:'안내 닫기',name:'close',className:'og-help-close',attributes:{'data-help-close':true}}),renderIconButton({kind:'close',face:'plain',label:'안내 닫기',className:'og-help-close',attributes:{'data-help-close':true}}));
 }
-const trigger=(kind,id,label)=>iconButton({label,iconHTML:info,className:'v2-help-trigger',attributes:{'data-help-trigger':kind,...(kind==='popover'?{'aria-haspopup':'dialog','aria-expanded':'false','aria-controls':id}:{'aria-describedby':id})}});
+const trigger=(kind,id,label)=>renderIconButton({kind:'info',face:'plain',label,className:'v2-help-trigger',attributes:{'data-help-trigger':kind,...(kind==='popover'?{'aria-haspopup':'dialog','aria-expanded':'false','aria-controls':id}:{'aria-describedby':id})}});
 const body='사용 가능 마일리지는 지금 사용할 수 있는 금액입니다. 총 보유 마일리지에는 사용 가능 금액이 포함됩니다.';
 const brief='사용 가능한 금액을 포함한 전체 마일리지입니다.';
 export function renderHelpSamples(){
