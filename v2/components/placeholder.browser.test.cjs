@@ -21,9 +21,9 @@ const appearance=n=>{
     const data=await page.locator(selector).evaluate(appearance);
     assert.ok(Math.max(...data.rgb)-Math.min(...data.rgb)<=12,'placeholder remains near-neutral gray, not blue: '+selector);
     assert.equal(data.ink,'oklch(0.39 0.065 265)','actual input ink stays unchanged');
-    assert.ok(data.separation>=3.5,'placeholder has a clear lightness separation from entered values: '+selector);
-    // User-approved #A0A3AA review variant: placeholder alone has a 2:1 floor, not normal-text AA.
-    assert.ok(data.contrast>=2,'lighter placeholder retains the review contrast floor: '+selector);
+    assert.ok(data.separation>=4.3,'placeholder has the requested lighter separation from entered values: '+selector);
+    // User-approved #ADB0B7 review variant: placeholder alone has a 1.7:1 floor, not normal-text AA.
+    assert.ok(data.contrast>=1.7,'lighter placeholder retains the review contrast floor: '+selector);
     assert.equal(data.opacity,'1');shared??=data.placeholder;assert.equal(data.placeholder,shared,'all input kinds share a placeholder token');
    }
    const field=page.locator('#numeric-input-live input');assert.equal(await field.inputValue(),'');await field.fill('1234');
@@ -35,6 +35,6 @@ const appearance=n=>{
   }
   await page.goto(base+'/screens/my-info-3d-test/');await page.locator('.home-search input').waitFor();
   assert.equal((await page.locator('.home-search input').evaluate(appearance)).placeholder,'oklch(0.5 0.06 265)','original test screen stays unchanged');
-  assert.deepEqual(errors,[]);console.log('Placeholder: clear lightness separation, unchanged value ink, user-approved 2:1 review floor (not normal-text AA), empty/filled states, actual Home, six widths and original screen preservation passed');
+  assert.deepEqual(errors,[]);console.log('Placeholder: requested lighter separation, unchanged value ink, user-approved 1.7:1 review floor (not normal-text AA), empty/filled states, actual Home, six widths and original screen preservation passed');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
