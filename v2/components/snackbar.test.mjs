@@ -23,6 +23,8 @@ test('pending/disabled snackbar actions cannot run twice while retaining their v
 test('gallery groups three original snackbar use cases with a contained non-service preview',()=>{
  const html=components.renderComponents().match(/<section[^>]*id="snackbar"[\s\S]*?<\/section>/)?.[0];
  assert.ok(html,'snackbar is included in the actual gallery');
+ assert.match(html,/<h2 id="snackbar-title">토스트·스낵바<\/h2>/);
+ assert.equal(reviewGroups('components').find(g=>g.id==='feedback').items.find(i=>i.id==='snackbar').label,'토스트·스낵바');
  for(const kind of ['saved','undo','retry'])assert.match(html,new RegExp('data-snackbar-example="'+kind+'"'));
  assert.match(html,/data-snackbar-host/);assert.match(html,/data-snackbar-announcement[^>]*role="status"/);
  assert.match(html,/data-snackbar-close[^>]*disabled/);
