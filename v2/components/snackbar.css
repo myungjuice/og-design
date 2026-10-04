@@ -1,0 +1,39 @@
+/* Hallmark · component: snackbar · genre: playful · theme: existing OG 3D
+ * audience: OG app users; use: notice a recent result; tone: soft/direct.
+ * Component-scope: no macrostructure/theme rotation; preserve Pretendard 400/700.
+ * Default/focus/pressed/disabled/loading/error/success; hover is web-only, no gallery specimen.
+ * Pre-emit critique: P5 H5 E4 S5 R5 V4. Depth on the surface only, no decorative asset.
+ */
+.og-snackbar.v2-snackbar{box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:var(--v2-space-2) var(--v2-space-4);width:100%;max-width:360px;min-width:0;min-height:44px;padding:var(--v2-space-3) var(--v2-space-4);border-radius:var(--v2-radius-button);background:var(--v2-snackbar-surface);color:var(--v2-on-action);box-shadow:var(--v2-snackbar-depth);font-family:var(--v2-font)}
+.v2-snackbar .og-snackbar-message{flex:1 1 160px;min-width:0;margin:0;font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);font-weight:400;word-break:keep-all;overflow-wrap:anywhere}
+.v2-snackbar .og-snackbar-action{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:var(--v2-space-2);flex:none;min-width:44px;min-height:44px;margin-inline-start:auto;padding:var(--v2-space-2);border:0;border-radius:var(--v2-space-2);background:transparent;color:var(--v2-on-action);font:inherit;font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);font-weight:700;text-decoration:underline;text-underline-offset:var(--v2-space-1);white-space:nowrap;cursor:pointer}
+.v2-snackbar .og-snackbar-action:focus-visible{outline:3px solid var(--v2-on-action);outline-offset:3px}
+.v2-snackbar .og-snackbar-action:active:not(:disabled){background:var(--v2-snackbar-pressed)}
+.v2-snackbar .og-snackbar-action:disabled{opacity:.6;cursor:not-allowed;text-decoration:none}
+.v2-snackbar[data-state="loading"] .og-snackbar-action{opacity:1}
+.v2-snackbar[data-state="loading"] .og-snackbar-action::before{content:"";box-sizing:border-box;width:16px;height:16px;flex:none;border:2px solid var(--v2-snackbar-lip);border-top-color:var(--v2-on-action);border-radius:var(--v2-radius-chip);animation:v2-snackbar-turn var(--v2-loading-cycle) linear infinite}
+.v2-snackbar-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-snackbar-stage{box-sizing:border-box;display:flex;align-items:center;width:100%;max-width:390px;padding:var(--v2-space-4);background:var(--v2-page);color:var(--v2-text);border-radius:var(--v2-radius-tile)}
+.v2-snackbar-demo{margin-top:var(--v2-space-8)}
+.v2-snackbar-demo>h3{margin:0;font-size:var(--v2-type-body);line-height:var(--v2-line-body)}
+.v2-snackbar-demo>p,.v2-snackbar-rules{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);color:var(--v2-workspace-muted)}
+.v2-snackbar-tools{display:flex;align-items:flex-end;flex-wrap:wrap;gap:var(--v2-space-3);margin-block:var(--v2-space-4)}
+.v2-snackbar-tools label{display:flex;flex-direction:column;gap:var(--v2-space-2);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-snackbar-tools select,.v2-snackbar-tool{box-sizing:border-box;min-height:44px;max-width:100%;padding:var(--v2-space-2) var(--v2-space-3);border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);font:inherit;font-size:var(--v2-type-secondary);background:var(--v2-surface);color:var(--v2-text);white-space:nowrap}
+.v2-snackbar-tool{cursor:pointer}
+.v2-snackbar-tool:disabled{color:var(--v2-text-muted);background:var(--v2-disabled);cursor:not-allowed}
+.v2-snackbar-tool:active:not(:disabled){background:var(--v2-edge)}
+.v2-snackbar-tools :is(select,button):focus-visible{outline:3px solid var(--v2-workspace-text);outline-offset:3px}
+.v2-snackbar-preview{box-sizing:border-box;position:relative;width:100%;max-width:390px;min-height:220px;padding:var(--v2-space-4);border-radius:var(--v2-radius-tile);background:var(--v2-page);color:var(--v2-text-muted)}
+.v2-snackbar-preview>p{margin:0;font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-snackbar-host{position:absolute;inset-inline:var(--v2-space-4);bottom:var(--v2-space-4)}
+.v2-snackbar-host .v2-snackbar{animation:v2-snackbar-enter var(--v2-snackbar-duration) var(--v2-snackbar-ease)}
+.v2-snackbar-demo .v2-snackbar-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.v2-snackbar-rules{padding-left:var(--v2-space-5);margin-block:var(--v2-space-6) 0}
+.v2-snackbar-rules li+li{margin-top:var(--v2-space-2)}
+@media(min-width:1100px){.v2-snackbar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(hover:hover) and (pointer:fine){.v2-snackbar .og-snackbar-action:hover:not(:disabled){background:var(--v2-snackbar-pressed)}.v2-snackbar-tool:hover:not(:disabled){background:var(--v2-muted-surface)}}
+@keyframes v2-snackbar-turn{to{transform:rotate(360deg)}}
+@keyframes v2-snackbar-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.v2-snackbar-host .v2-snackbar,.v2-snackbar[data-state="loading"] .og-snackbar-action::before{animation:none}}
+@media(forced-colors:active){.og-snackbar.v2-snackbar{box-shadow:none;border:1px solid CanvasText}.v2-snackbar .og-snackbar-action:focus-visible,.v2-snackbar-tools :is(select,button):focus-visible{outline-color:Highlight}.v2-snackbar .og-snackbar-action:disabled{opacity:1;color:GrayText}}

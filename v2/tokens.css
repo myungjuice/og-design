@@ -32,6 +32,11 @@
  --v2-skeleton:var(--v2-disabled);
  --v2-skeleton-on-action:color-mix(in oklab,var(--v2-on-action) 22%,var(--v2-action));
  --v2-loading-cycle:1600ms;--v2-loading-ease:cubic-bezier(.65,0,.35,1);
+ --v2-snackbar-surface:var(--v2-text);
+ --v2-snackbar-lip:color-mix(in oklab,var(--v2-on-action) 16%,var(--v2-snackbar-surface));
+ --v2-snackbar-pressed:color-mix(in oklab,var(--v2-on-action) 12%,var(--v2-snackbar-surface));
+ --v2-snackbar-depth:inset 0 1px 1px var(--v2-snackbar-lip),0 4px 10px var(--v2-contact);
+ --v2-snackbar-duration:400ms;--v2-snackbar-ease:cubic-bezier(.16,1,.3,1);
  --v2-material-edge:oklch(84.043907% .01400481 277.025601);
  --v2-contact:oklch(31.352074% .11584333 276.752711 / .2);
  --v2-dialog-scrim:oklch(23% .012 270 / .48);

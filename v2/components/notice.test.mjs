@@ -30,7 +30,7 @@ test('notice gallery is reachable with confirmation dialogs in the related feedb
  assert.match(html,/id="notices" aria-labelledby="notices-title" hidden/);
  assert.equal((html.match(/class="og-notice v2-notice"/g)||[]).length,4);
  const feedback=reviewGroups('components').find(g=>g.id==='feedback');
- assert.deepEqual(feedback.items.map(item=>item.id),['dialogs','notices','empty-feedback']);
+ assert.deepEqual(feedback.items.map(item=>item.id),['dialogs','notices','empty-feedback','snackbar']);
 });
 test('original notice markup remains independent of the v2 presentation',()=>{
  const html=notice({tone:'info',title:'안내',body:'본문'});

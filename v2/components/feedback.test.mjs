@@ -28,7 +28,7 @@ test('related empty/error specimens stay together with feedback navigation',()=>
  const html=components.renderComponents();
  assert.match(html,/id="empty-feedback" aria-labelledby="empty-feedback-title" hidden/);
  assert.match(html,/data-feedback-demo/);assert.match(html,/data-feedback-result/);assert.match(html,/data-feedback-status[^>]*role="status"/);
- assert.deepEqual(reviewGroups('components').find(g=>g.id==='feedback').items.map(i=>i.id),['dialogs','notices','empty-feedback']);
+ assert.deepEqual(reviewGroups('components').find(g=>g.id==='feedback').items.map(i=>i.id),['dialogs','notices','empty-feedback','snackbar']);
 });
 test('legacy feedback is not modified by v2 rendering',()=>{
  const html=feedback({title:'원본',symbol:'search'});

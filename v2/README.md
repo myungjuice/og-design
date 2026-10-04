@@ -55,7 +55,11 @@
 
 ‘표시 상태’에서 불러오는 중과 내용 표시를 전환합니다. 대기 중 값과 컨트롤은 `aria-hidden`·`inert`로 제외하고, 내용을 표시하면 금액은 읽을 수 있으며 연결되지 않은 비교용 버튼만 비활성으로 유지합니다. 포커스를 이동하지 않으며 API·저장소·실제 앱 데이터에는 접근하지 않습니다. 움직임 줄이기 설정에서는 정지하고 고대비 모드에서도 복제된 금액이 다시 보이지 않도록 마스킹합니다. 원본 캔버스와 대표 화면은 변경하지 않습니다.
 
-다음 후보는 스낵바입니다. 전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+스낵바는 `/v2/components/#snackbar`의 ‘안내·확인’ 그룹에 추가했습니다. 기존 `snackbar` 렌더러를 읽기 전용으로 재사용하며 완료 안내·실행 취소·재시도 3종을 함께 보여줍니다. 짙은 표면·흰 글자·밑줄 동작 버튼과 16px 가로/12px 세로 여백·12px 곡률을 유지하고, 얕은 입체감은 표면 가장자리에만 적용합니다. 긴 문장은 줄바꿈하고 좁은 곳에서는 44px 동작 버튼을 다음 줄로 배치합니다. 처리 중·비활성 비교는 접힌 ‘상태 비교’에 분리했습니다.
+
+‘열어보기’는 검토 영역 안에서만 한 개씩 표시하고 동일 안내를 중복해서 만들지 않습니다. 검토용 알림은 자동으로 닫지 않으며 실행 취소·재시도는 예시 문구만 표시합니다. 초기 시안은 `inert`이고 자동으로 읽지 않으며, 사용자가 동작한 뒤에만 별도 `status`로 안내합니다. 알림을 열 때 포커스를 가져가지 않고 포커스된 버튼이 사라지면 ‘알림 열기’로 이어 줍니다. 실제 API·저장소·앱 데이터에 접근하지 않습니다. 원본 캔버스와 대표 화면은 유지합니다.
+
+다음 후보는 전화번호·숫자 입력입니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -79,6 +83,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/feedback.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/loading.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/snackbar.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

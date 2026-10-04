@@ -16,6 +16,7 @@ export const componentItems=[
  {id:'dialogs',label:'확인창',group:'안내·확인'},
  {id:'notices',label:'영역 안 안내',group:'안내·확인'},
  {id:'empty-feedback',label:'빈 화면·불러오기 오류',group:'안내·확인'},
+ {id:'snackbar',label:'스낵바',group:'안내·확인'},
  {id:'loading',label:'로딩·스켈레톤',group:'로딩'},
  {id:'categories',label:'업종 카테고리',group:'지도 탐색'},
  {id:'navigation',label:'하단 메뉴',group:'내비게이션'},
