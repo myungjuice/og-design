@@ -47,7 +47,11 @@
 
 기본 출력과 정적 예시는 live region이 아닙니다. 실제 동작 이후 갱신 안내가 필요할 때만 `renderNotice({live:true})`로 오류는 `alert`, 나머지는 `status`를 지정할 수 있습니다. 안내를 자동으로 닫거나 포커스를 이동하지 않습니다. 실제 앱 저장·사진 선택·네트워크와 연결하지 않으며 원본 캔버스와 홈·바코드·내정보 대표 화면은 변경하지 않습니다.
 
-다음 후보는 빈 화면·불러오기 오류입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+빈 화면·불러오기 오류는 `/v2/components/#empty-feedback`에 함께 추가했습니다. 원본 공통 `feedback`·`button` 렌더러를 변경하지 않고 재사용하며, 방문 내역 없음과 검색 결과 없음의 문구를 구분합니다. 390px 이내의 흰 표면, 20px 곡률, 56px 아이콘 받침과 24px SVG를 사용합니다. 3D 효과는 작은 아이콘 받침과 기존 주요 버튼에만 적용하고 본문과 표면은 평면으로 유지합니다. 빈 상태에는 의미 없는 새 버튼을 추가하지 않습니다.
+
+‘다시 시도’는 실제 조회가 아닌 500ms 검토용 전환입니다. 처리 중에는 버튼 위치·영역 높이를 유지하고 중복 실행을 막으며, 내용 표시·내역 없음·오류 유지 결과를 같은 영역에 보여줍니다. 초기 예시는 자동으로 읽지 않고 동작 후 안내만 `status`로 갱신합니다. 오류가 유지되면 원래 버튼으로, 버튼이 사라지면 결과 제목으로 키보드 포커스를 이어 줍니다. 다른 컨트롤로 이동한 사용자의 포커스를 빼앗지 않습니다. ‘오류 다시 보기’는 대기 중 결과도 취소합니다. API·저장소·실제 앱 데이터에는 접근하지 않습니다.
+
+다음 후보는 로딩·스켈레톤입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -69,6 +73,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/feedback.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

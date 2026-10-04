@@ -15,6 +15,7 @@ export const componentItems=[
  {id:'multiline-input',label:'여러 줄 입력',group:'입력'},
  {id:'dialogs',label:'확인창',group:'안내·확인'},
  {id:'notices',label:'영역 안 안내',group:'안내·확인'},
+ {id:'empty-feedback',label:'빈 화면·불러오기 오류',group:'안내·확인'},
  {id:'categories',label:'업종 카테고리',group:'지도 탐색'},
  {id:'navigation',label:'하단 메뉴',group:'내비게이션'},
  {id:'try',label:'직접 눌러보기',group:'동작 확인'}
