@@ -10,4 +10,6 @@
  --test-surface-edge:var(--v2-material-edge);--test-focus:var(--v2-focus);
 }
 button{font-family:var(--v2-font)}
+/* Home and its search specimen share the v2 placeholder, not the value ink. */
+.home-search input::placeholder{color:var(--v2-input-placeholder);opacity:1}
 .mileage-card.v2-mileage{width:100%}

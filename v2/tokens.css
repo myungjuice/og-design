@@ -70,6 +70,8 @@
  /* Input family inherits the existing Home search material, without changing Home. */
  --v2-input-fill:var(--home-control-fill);--v2-input-depth:var(--home-shadow-control);
  --v2-input-ink:var(--home-ink);--v2-input-muted:var(--home-muted);
+ /* Placeholder is lighter and neutral; value, hint and border inks stay intact. */
+ --v2-input-placeholder:oklch(51% .005 270);
  --v2-input-radius:var(--v2-radius-chip);--v2-input-height:48px;
  --v2-type-page:24px;--v2-line-page:32px;
  --v2-type-card:20px;--v2-line-card:28px;

@@ -10,7 +10,7 @@
 .v2-input label{display:block;margin-bottom:var(--v2-space-2);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere;text-shadow:none}
 .v2-input .og-field-control{position:relative;display:flex;min-width:0}
 .v2-input :is(input,textarea){appearance:none;width:100%;min-width:0;min-height:var(--v2-input-height);padding:calc((var(--v2-input-height) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid transparent;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-input-depth);text-shadow:none}
-.v2-input :is(input,textarea)::placeholder{color:var(--v2-input-muted);opacity:1}
+.v2-input :is(input,textarea)::placeholder{color:var(--v2-input-placeholder);opacity:1}
 .v2-input-password input{padding-right:calc(var(--v2-space-12) + var(--v2-space-6))}
 .v2-input .og-field-help{min-height:var(--v2-line-secondary);margin:var(--v2-space-1) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere;text-shadow:none}
 .v2-input .og-field-slot{position:absolute;inset-inline-end:var(--v2-space-1);top:0;display:grid;place-items:center;width:var(--v2-space-12);height:var(--v2-input-height);color:var(--v2-input-muted);pointer-events:none}

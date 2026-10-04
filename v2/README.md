@@ -63,6 +63,8 @@
 
 처음에는 오류를 표시하지 않고 입력창을 벗어난 뒤 형식을 안내합니다. 이후 수정하면 다시 검사하되 한글 조합 중에는 안내를 갱신하지 않습니다. 자동 포맷·값 삭제·숫자 변환·고정 길이 제한 없이 앞자리 0과 긴 문자열도 유지합니다. 기본·입력 중·입력 완료·비활성·읽기 전용·확인 중·오류·완료는 접힌 상태 비교에서 확인하며 실제 인증·저장·API·저장소에 연결하지 않습니다. 원본 캔버스와 대표 화면은 유지합니다.
 
+v2 홈 검색바와 텍스트·비밀번호·전화번호·숫자·여러 줄 입력의 placeholder는 별도 `--v2-input-placeholder` 토큰의 연한 중립 회색으로 통일합니다. 실제 입력값·도움말·테두리 색상은 유지하고 밝은 입력 배경 양 끝에서 4.5:1 이상의 대비를 확인합니다. 원본 캔버스와 기존 `/screens/my-info-3d-test/` 화면은 변경하지 않습니다.
+
 다음 후보는 도움말·툴팁입니다. 마일리지 설명과 연결할 수 있는 공통 패턴부터 검토합니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
@@ -83,6 +85,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/selection.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/input.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/typed-input.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/placeholder.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
