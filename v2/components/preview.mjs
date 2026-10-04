@@ -7,6 +7,8 @@ import {setupDialogSamples} from './dialog.mjs';
 import {setupFeedbackSamples} from './feedback.mjs';
 import {setupLoadingSamples} from './loading.mjs';
 import {setupSnackbarSamples} from './snackbar.mjs';
+import '../../design-system/components/help/help.js';
+import {setupHelpSamples} from './help.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
@@ -17,6 +19,7 @@ export function setupComponentPreview(root){
  setupFeedbackSamples(root);
  setupLoadingSamples(root);
  setupSnackbarSamples(root);
+ setupHelpSamples(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){

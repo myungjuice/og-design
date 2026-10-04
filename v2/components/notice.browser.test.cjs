@@ -8,7 +8,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   for(const width of [320,375,390,414,768,1024,1440]){
    await page.setViewportSize({width,height:1000});await page.goto(base+'/v2/components/#notices');await page.reload();
    await page.locator('#notices').waitFor();await page.evaluate(()=>document.fonts.ready);
-   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['dialogs','notices','empty-feedback','snackbar'],'related feedback remains grouped');
+   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['dialogs','notices','empty-feedback','snackbar','help'],'related feedback remains grouped');
    const notices=page.locator('#notices .v2-notice');
    assert.deepEqual(await notices.evaluateAll(ns=>ns.map(n=>n.dataset.tone)),['info','warning','error','success']);
    assert.equal(await notices.locator(':is(button,[tabindex],[role="alert"],[role="status"])').count(),0,'static examples have no controls');

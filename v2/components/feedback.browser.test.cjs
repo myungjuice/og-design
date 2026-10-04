@@ -8,7 +8,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const url=base+'/v2/components/#empty-feedback';
   for(const width of [320,375,390,414,768,1024,1440]){
    await page.setViewportSize({width,height:1000});await page.goto(url);await page.reload();await page.locator('#empty-feedback').waitFor();await page.evaluate(()=>document.fonts.ready);
-   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['dialogs','notices','empty-feedback','snackbar']);
+   assert.deepEqual(await page.locator('.v2-component-section:visible').evaluateAll(ns=>ns.map(n=>n.id)),['dialogs','notices','empty-feedback','snackbar','help']);
    const panels=page.locator('#empty-feedback .v2-feedback');
    assert.equal(await panels.count(),3);assert.equal(await panels.locator('.material-icons').count(),0);
    assert.equal(await page.locator('.v2-feedback-grid button').count(),0,'empty does not invent a next action');
