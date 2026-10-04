@@ -1,17 +1,17 @@
 /* Anchored top-layer help; canvas callers may provide clipped bounds and a transformed ancestor. */
-window.ogAttachHelp=function(trigger,panel,{tooltip=false,boundsElement=null,observeElement=null}={}){
+window.ogAttachHelp=function(trigger,panel,{tooltip=false,boundsElement=null,observeElement=null,anchorElement=trigger}={}){
  let showTimer,hideTimer,frame;
  const opened=()=>panel.matches(':popover-open');
  const position=()=>{
   if(!opened())return;
-  const r=trigger.getBoundingClientRect(),clip=boundsElement?.getBoundingClientRect();
+  const r=trigger.getBoundingClientRect(),anchor=anchorElement.getBoundingClientRect(),clip=boundsElement?.getBoundingClientRect();
   const left=Math.max(0,clip?.left??0),right=Math.min(innerWidth,clip?.right??innerWidth),top=Math.max(0,clip?.top??0),bottom=Math.min(innerHeight,clip?.bottom??innerHeight);
   if(r.bottom<=top||r.top>=bottom||r.right<=left||r.left>=right){hide();return;}
   const gap=8,inset=12;
   panel.style.maxWidth=Math.max(0,right-left-inset*2)+'px';panel.style.maxHeight=Math.max(0,bottom-top-inset*2)+'px';
-  const size=panel.getBoundingClientRect();let y=r.bottom+gap;
-  if(y+size.height>bottom-inset&&r.top-gap-size.height>=top+inset)y=r.top-gap-size.height;
-  panel.style.left=Math.max(left+inset,Math.min(r.left,right-inset-size.width))+'px';
+  const size=panel.getBoundingClientRect();let y=anchor.bottom+gap;
+  if(y+size.height>bottom-inset&&anchor.top-gap-size.height>=top+inset)y=anchor.top-gap-size.height;
+  panel.style.left=Math.max(left+inset,Math.min(anchor.left,right-inset-size.width))+'px';
   panel.style.top=Math.max(top+inset,Math.min(y,bottom-inset-size.height))+'px';
  };
  function hide(){clearTimeout(showTimer);clearTimeout(hideTimer);if(opened())panel.hidePopover();if(!tooltip)trigger.setAttribute('aria-expanded','false');}
@@ -32,5 +32,6 @@ window.ogAttachHelp=function(trigger,panel,{tooltip=false,boundsElement=null,obs
  window.addEventListener('resize',schedule);window.addEventListener('scroll',schedule,true);
  if(observeElement)new MutationObserver(schedule).observe(observeElement,{attributes:true,attributeFilter:['style']});
  const observer=new ResizeObserver(schedule);observer.observe(trigger);observer.observe(panel);
+ if(anchorElement!==trigger)observer.observe(anchorElement);
  return {show,hide};
 };

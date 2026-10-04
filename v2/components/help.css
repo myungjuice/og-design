@@ -1,17 +1,19 @@
-/* Hallmark · component scope · existing OG soft 3D.
- * Flat readable text, shallow panel lip only; no new palette, assets or motion. */
+/* Hallmark · component scope · existing OG soft 3D · pre-emit critique: P5 H5 E5 S5 R5 V4
+ * Flat readable text, shallow panel lip only; no new palette, assets or motion.
+ * Compact visual header; the 48px close target does not determine its height. */
 .v2-help-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
 .v2-help-stage,.v2-help-live-stage{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-page);color:var(--v2-text)}
 .v2-help-panel{box-sizing:border-box;width:320px;max-width:100%;margin:0;padding:var(--v2-space-4);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-depth-panel);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);word-break:keep-all;overflow-wrap:anywhere;overflow:auto;overscroll-behavior:contain}
 .v2-help-panel[popover]{position:fixed;inset:auto;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px)}
 .v2-help-panel[popover]::backdrop{background:transparent}
-.v2-help-panel .og-popover-header{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-2)}
+.v2-help-panel .og-popover-header{box-sizing:border-box;position:relative;display:flex;align-items:center;min-height:var(--v2-line-body);padding-inline-end:calc((var(--v2-space-12) + var(--v2-space-5))/2 + var(--v2-space-2))}
 .v2-help-panel h3{margin:0;min-width:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere}
-.v2-help-panel p{margin:var(--v2-space-2) 0 0;color:var(--v2-text-muted);white-space:pre-line}
+.v2-help-panel p{margin:var(--v2-space-3) 0 0;color:var(--v2-text-muted);white-space:pre-line}
 .v2-help-tooltip{width:max-content;max-width:min(28ch,100%);padding:var(--v2-space-2) var(--v2-space-3);border-radius:var(--v2-space-2);font-size:13px;line-height:18px}
 .v2-help-term{display:flex;align-items:center;gap:var(--v2-space-1);min-height:48px;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
-.v2-help-trigger,.v2-help-panel .og-help-close{display:inline-flex;align-items:center;justify-content:center;flex:none;width:48px;height:48px;padding:0;border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text-muted);cursor:pointer}
-.v2-help-trigger svg,.v2-help-panel .og-help-close svg{width:20px;height:20px;pointer-events:none}
+.v2-help-trigger,.v2-help-panel .og-help-close{display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--v2-space-12);height:var(--v2-space-12);padding:0;border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text-muted);cursor:pointer}
+.v2-help-panel .og-help-close{position:absolute;top:calc((var(--v2-line-body) - var(--v2-space-12))/2);inset-inline-end:calc(-1 * var(--v2-space-3))}
+.v2-help-trigger svg,.v2-help-panel .og-help-close svg{width:var(--v2-space-5);height:var(--v2-space-5);pointer-events:none}
 .v2-help-trigger:active,.v2-help-trigger[aria-expanded="true"]{color:var(--v2-focus);background:var(--v2-selected-surface)}
 .v2-help-trigger:focus-visible,.v2-help-panel .og-help-close:focus-visible,.v2-help-outside:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
 .v2-help-outside{display:block;margin-top:var(--v2-space-3);min-height:44px;padding:var(--v2-space-2);border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-text-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);cursor:pointer}

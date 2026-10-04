@@ -67,6 +67,8 @@ v2 홈 검색바와 텍스트·비밀번호·전화번호·숫자·여러 줄 �
 
 도움말·툴팁은 `/v2/components/#help`의 ‘안내·확인’ 그룹에 추가했습니다. 원본 tooltip·popover·iconButton 렌더러와 앵커 위치 계산을 재사용합니다. 흰 설명창의 가장자리에만 기존 얕은 입체감을 적용하고 본문은 평면으로 유지합니다. 앱 기본 방식은 48px 정보 버튼을 탭해서 여는 비모달 도움말이며, 닫기·바깥 터치·Escape로 닫습니다. 짧은 툴팁에는 동작을 넣지 않습니다. 8px 앵커 간격·12px 화면 여백, 공간 부족 시 위쪽 배치, 긴 설명 스크롤을 유지하며 그룹 이동 시 열린 설명을 닫습니다. 원본 캔버스와 대표 화면에는 적용하지 않습니다.
 
+도움말 헤더의 시각적 높이와 닫기의 48px 터치 영역을 분리했습니다. 제목은 16px 안쪽 여백, 본문 간격은 12px이며 닫기 아이콘은 제목 첫 줄과 수직 정렬합니다. 닫기의 터치·포커스 영역은 카드 안에 유지하고 긴 제목에도 겹치지 않게 공간을 확보합니다. 공통 위치 계산의 선택 옵션 `anchorElement`를 v2에서만 SVG로 지정해 아이콘과 설명 사이가 실제 8px이 되도록 합니다. 옵션을 생략한 원본 캔버스는 기존 버튼 기준 배치를 유지합니다.
+
 ### 기본 컴포넌트 v2 이관 현황
 
 원본 `docs/planning/component-inventory.md`의 기본 25묶음을 기준으로 15묶음을 이관했습니다. 화면에서 일부 사용한 것과 공통 갤러리에 종류·상태를 갖춘 것은 구분합니다. 갤러리의 메뉴 25개는 입력·버튼 등의 세부 종류를 나눈 수이므로 이관 묶음 수와 다릅니다. 앱 전용 조합 26묶음과 실제 하위 화면은 별도입니다.
@@ -103,6 +105,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/loading.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/snackbar.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/help.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/help-spacing.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

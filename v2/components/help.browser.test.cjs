@@ -39,7 +39,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   await page.goto(url);await page.setViewportSize({width:390,height:700});
   const trigger=page.locator('[data-help-trigger="popover"]'),panel=page.locator('#v2-mileage-help');
   await trigger.evaluate(n=>{n.style.position='fixed';n.style.right='12px';n.style.bottom='12px';n.style.zIndex='10';});
-  await trigger.click();assert.ok(await panel.evaluate(n=>n.getBoundingClientRect().bottom<document.querySelector('[data-help-trigger="popover"]').getBoundingClientRect().top),'flips above');
+  await trigger.click();assert.ok(await panel.evaluate(n=>n.getBoundingClientRect().bottom<=document.querySelector('[data-help-trigger="popover"] svg').getBoundingClientRect().top-7),'flips above visible icon');
   await panel.locator('p').evaluate(n=>n.textContent='총 보유 마일리지에는 사용 가능한 금액이 포함됩니다. '.repeat(100));
   await page.waitForTimeout(100);assert.ok(await panel.evaluate(n=>n.scrollHeight>n.clientHeight&&n.scrollWidth<=n.clientWidth),'long help scrolls without horizontal clipping');
   await page.setViewportSize({width:320,height:500});await page.waitForTimeout(100);assert.ok(await panel.evaluate(n=>n.getBoundingClientRect().right<=innerWidth-11),'resize repositions');

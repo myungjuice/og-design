@@ -21,7 +21,7 @@ export function renderHelpSamples(){
  '<figure class="v2-component-sample"><figcaption><strong>탭으로 여는 도움말</strong><span>짧은 제목과 설명, 닫기 버튼을 둡니다. 배경을 어둡게 가리지 않습니다.</span></figcaption><div class="v2-help-stage" inert>'+renderHelp({body})+'</div></figure>'+
  '<figure class="v2-component-sample"><figcaption><strong>짧은 툴팁</strong><span>한 용어의 뜻만 설명하며 버튼이나 링크를 넣지 않습니다.</span></figcaption><div class="v2-help-stage" inert>'+renderHelp({kind:'tooltip',body:brief})+'</div></figure></div>'+
  '<div class="v2-help-demo"><h3>열어보기</h3><p>정보 버튼을 눌러 위치와 닫기 동작을 확인합니다. 실제 조회나 저장은 하지 않습니다.</p><div class="v2-help-live-stage"><div class="v2-help-term"><span>마일리지</span>'+trigger('popover','v2-mileage-help','마일리지 안내')+'</div><div class="v2-help-term"><span>총 보유</span>'+trigger('tooltip','v2-total-help','총 보유 설명')+'</div><button type="button" class="v2-help-outside">설명 밖 터치 영역</button></div>'+renderHelp({id:'v2-mileage-help',body,live:true})+renderHelp({kind:'tooltip',id:'v2-total-help',body:brief,live:true})+'</div>'+
- '<ul class="v2-help-rules"><li>버튼과 설명 사이를 8px 띄우고 화면 가장자리에서 12px 이상 확보합니다. 아래 공간이 부족하면 위쪽으로 옮깁니다.</li><li>도움말은 바깥 영역·닫기 버튼·Escape로 닫습니다. 긴 설명이나 추가 동작은 바텀시트 또는 별도 화면으로 보냅니다.</li><li>툴팁은 탭하거나 웹 검토 화면에서 포커스하면 열립니다. 필수 정보나 오류를 툴팁에만 넣지 않습니다.</li></ul></section>';
+ '<ul class="v2-help-rules"><li>아이콘과 설명 사이를 8px 띄우고 화면 가장자리에서 12px 이상 확보합니다. 아래 공간이 부족하면 위쪽으로 옮깁니다.</li><li>도움말은 바깥 영역·닫기 버튼·Escape로 닫습니다. 긴 설명이나 추가 동작은 바텀시트 또는 별도 화면으로 보냅니다.</li><li>툴팁은 탭하거나 웹 검토 화면에서 포커스하면 열립니다. 필수 정보나 오류를 툴팁에만 넣지 않습니다.</li></ul></section>';
 }
 export function setupHelpSamples(root){
  const section=root.querySelector('#help');if(!section||section.dataset.helpReady)return;
@@ -29,7 +29,7 @@ export function setupHelpSamples(root){
  const controls=[];
  for(const button of section.querySelectorAll('[data-help-trigger]')){
   const id=button.getAttribute('aria-controls')||button.getAttribute('aria-describedby'),panel=section.querySelector('#'+id);
-  controls.push(window.ogAttachHelp(button,panel,{tooltip:button.dataset.helpTrigger==='tooltip'}));
+  controls.push(window.ogAttachHelp(button,panel,{tooltip:button.dataset.helpTrigger==='tooltip',anchorElement:button.querySelector('svg')}));
   // A hidden native popover has no scroll box. Reset after the shared click
   // handler has shown it, so the title and focused close remain visible.
   const resetScroll=()=>{if(panel.matches(':popover-open'))panel.scrollTop=0;};
