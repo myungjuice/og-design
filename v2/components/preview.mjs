@@ -10,6 +10,7 @@ import {setupSnackbarSamples} from './snackbar.mjs';
 import '../../design-system/components/help/help.js';
 import {setupHelpSamples} from './help.mjs';
 import {setupIconButtonSamples} from './icon-button.mjs';
+import {setupTabs} from './tabs.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
@@ -22,6 +23,7 @@ export function setupComponentPreview(root){
  setupSnackbarSamples(root);
  setupHelpSamples(root);
  setupIconButtonSamples(root);
+ setupTabs(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){

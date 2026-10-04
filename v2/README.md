@@ -73,13 +73,15 @@ v2 홈 검색바와 텍스트·비밀번호·전화번호·숫자·여러 줄 �
 
 아이콘 버튼·즐겨찾기는 `/v2/components/#icon-buttons`의 ‘버튼’ 그룹에 추가했습니다. 정보·닫기는 기존 SVG 형태를 유지하고, 하트는 원본 즐겨찾기 렌더러를 재사용합니다. 20px 아이콘과 48px 터치 영역을 분리하고 독립형에만 흰 40px 받침과 기존 얕은 입체감을 적용합니다. 도움말의 정보·닫기 버튼에도 같은 렌더러를 사용하되 기존 제목 여백과 8px 앵커 간격은 유지합니다. 선택 여부는 하트 채움과 `aria-pressed`로 구분하며 검토용 동작은 실제 저장·API에 연결하지 않습니다. 원본 캔버스와 대표 화면은 유지합니다.
 
-원본 `docs/planning/component-inventory.md`의 기본 25묶음을 기준으로 16묶음을 이관했습니다. 화면에서 일부 사용한 것과 공통 갤러리에 종류·상태를 갖춘 것은 구분합니다. 갤러리의 메뉴 26개는 입력·버튼 등의 세부 종류를 나눈 수이므로 이관 묶음 수와 다릅니다. 앱 전용 조합 26묶음과 실제 하위 화면은 별도입니다.
+탭·분할 선택은 `/v2/components/#tabs`와 `#segmented`의 ‘내용·보기 전환’ 그룹에서 함께 확인합니다. 원본 tabs·tabPanel·segment 렌더러를 재사용합니다. 탭은 48px 높이와 2px 밑줄로 내용을 전환하고, 분할 선택은 얕은 트랙 위 흰 선택판으로 2~3개의 짧은 선택을 구분합니다. 웹 검토에서는 방향키·Home·End, 비활성 건너뛰기, 고유 라디오 그룹을 유지합니다. 긴 탭은 가로로 노출하되 문서의 세로 위치를 바꾸지 않습니다. 로딩·오류·빈 결과·완료는 연결된 내용에서 기존 공통 로딩·피드백을 재사용합니다. 상태 비교는 inert 예시이며 실제 비동기 조회·정렬·저장은 연결하지 않습니다. 원본 캔버스와 대표 화면은 변경하지 않습니다.
 
-- 이관한 16묶음: C01 버튼, C02 아이콘 버튼·즐겨찾기, C03 텍스트·비밀번호, C04 여러 줄 입력, C05 검색, C06 체크박스, C07 라디오, C08 스위치, C14 목록 행, C15 섹션 제목, C16 진행바, C17 로딩·스켈레톤, C18 빈 화면·오류·영역 안내, C19 도움말·툴팁, C22 확인창, C23 토스트·스낵바.
-- 남은 9묶음: C09 탭·분할 선택, C10 일반 칩, C11 배지·상태 라벨, C12 프로필·썸네일, C13 표면·구분선, C20 수량 조절, C21 바텀시트, C24 날짜·시간 선택, C25 이미지 보기·첨부.
+원본 `docs/planning/component-inventory.md`의 기본 25묶음을 기준으로 17묶음을 이관했습니다. 화면에서 일부 사용한 것과 공통 갤러리에 종류·상태를 갖춘 것은 구분합니다. 갤러리의 메뉴 28개는 입력·버튼 등의 세부 종류를 나눈 수이므로 이관 묶음 수와 다릅니다. 앱 전용 조합 26묶음과 실제 하위 화면은 별도입니다.
+
+- 이관한 17묶음: C01 버튼, C02 아이콘 버튼·즐겨찾기, C03 텍스트·비밀번호, C04 여러 줄 입력, C05 검색, C06 체크박스, C07 라디오, C08 스위치, C09 탭·분할 선택, C14 목록 행, C15 섹션 제목, C16 진행바, C17 로딩·스켈레톤, C18 빈 화면·오류·영역 안내, C19 도움말·툴팁, C22 확인창, C23 토스트·스낵바.
+- 남은 8묶음: C10 일반 칩, C11 배지·상태 라벨, C12 프로필·썸네일, C13 표면·구분선, C20 수량 조절, C21 바텀시트, C24 날짜·시간 선택, C25 이미지 보기·첨부.
 - C10·C12·C13은 업종 칩·프로필·카드/구분선처럼 일부를 이미 활용하고 있습니다. 용도별 변형과 상태를 공통 갤러리로 정리하는 보완이 남았습니다. ‘남음’은 전부 새로 만들어야 한다는 뜻이 아닙니다.
 
-다음 후보는 탭·분할 선택입니다. 관련 화면의 전환과 짧은 선택을 구분해 정리합니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+다음 후보는 일반 칩입니다. 이미 사용하는 홈 업종 카테고리와 연결하면서 단일·복수 선택, 선택된 필터 해제를 정리합니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -109,6 +111,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/help.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/help-spacing.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/icon-button.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/tabs.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

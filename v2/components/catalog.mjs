@@ -10,6 +10,8 @@ export const componentItems=[
  {id:'checkbox',label:'체크박스',group:'선택 요소'},
  {id:'radio',label:'라디오',group:'선택 요소'},
  {id:'switch',label:'토글·스위치',group:'선택 요소'},
+ {id:'tabs',label:'탭',group:'내용·보기 전환'},
+ {id:'segmented',label:'분할 선택',group:'내용·보기 전환'},
  {id:'search',label:'매장 검색바',group:'입력'},
  {id:'text-input',label:'텍스트 입력',group:'입력'},
  {id:'password-input',label:'비밀번호 입력',group:'입력'},
@@ -26,5 +28,5 @@ export const componentItems=[
  {id:'navigation',label:'하단 메뉴',group:'내비게이션'},
  {id:'try',label:'직접 눌러보기',group:'동작 확인'}
 ];
-export const componentGroups=[['buttons','버튼'],['cards-information','카드·정보'],['lists','목록'],['selection','선택 요소'],['inputs','입력'],['feedback','안내·확인'],['loading','로딩'],['map-exploration','지도 탐색'],['navigation','내비게이션'],['preview','동작 확인']].map(([id,label])=>({id,label,items:componentItems.filter(item=>item.group===label)}));
+export const componentGroups=[['buttons','버튼'],['cards-information','카드·정보'],['lists','목록'],['selection','선택 요소'],['content-switching','내용·보기 전환'],['inputs','입력'],['feedback','안내·확인'],['loading','로딩'],['map-exploration','지도 탐색'],['navigation','내비게이션'],['preview','동작 확인']].map(([id,label])=>({id,label,items:componentItems.filter(item=>item.group===label)}));
 export const stateComparison=(content,label='상태 비교')=>`<details class="v2-state-comparison"><summary>${label}</summary>${content}</details>`;

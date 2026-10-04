@@ -7,7 +7,7 @@ import {renderWorkspace} from './render.mjs';
 test('all component entries belong to one related preview group',()=>{
  const groups=reviewGroups('components');
  assert.deepEqual(groups.map(g=>g.items.map(item=>item.id)),[
-  ['primary','secondary','review','icon-buttons'],['cards','mileage','section-heading'],['list-row'],['checkbox','radio','switch'],['search','text-input','password-input','phone-input','numeric-input','multiline-input'],['dialogs','notices','empty-feedback','snackbar','help'],['loading'],['categories'],['navigation'],['try']
+  ['primary','secondary','review','icon-buttons'],['cards','mileage','section-heading'],['list-row'],['checkbox','radio','switch'],['tabs','segmented'],['search','text-input','password-input','phone-input','numeric-input','multiline-input'],['dialogs','notices','empty-feedback','snackbar','help'],['loading'],['categories'],['navigation'],['try']
  ]);
  assert.deepEqual(groups.flatMap(g=>g.items.map(item=>item.id)).sort(),componentItems.map(item=>item.id).sort());
 });

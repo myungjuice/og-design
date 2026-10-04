@@ -14,6 +14,7 @@ import {renderLoadingSamples} from './loading.mjs';
 import {renderSnackbarSamples} from './snackbar.mjs';
 import {renderHelpSamples} from './help.mjs';
 import {renderIconButtonSamples} from './icon-button.mjs';
+import {renderTabsSamples} from './tabs.mjs';
 import {stateComparison} from './catalog.mjs';
 import {menuArt} from '../../screens/my-info-3d-test/render.mjs';
 export {renderListRow} from './list-row.mjs';
@@ -27,6 +28,7 @@ export {renderLoading,renderLoadingFrame,renderLoadingRow,renderLoadingMileage} 
 export {renderSnackbar} from './snackbar.mjs';
 export {renderHelp} from './help.mjs';
 export {renderIconButton} from './icon-button.mjs';
+export {renderTabs,renderSegment} from './tabs.mjs';
 export const componentStates=[
  ['default','기본','동작하기 전'],['active','누르는 중','손가락으로 누르는 동안 얕게 눌림'],
  ['disabled','비활성','사용 가능한 마일리지가 없을 때'],['loading','처리 중','중복 실행을 막는 상태'],
@@ -59,6 +61,7 @@ export function renderComponents(){
   <div class="v2-component-grid">${sample(componentStates[0])}</div>${stateComparison(`<div class="v2-component-grid">${componentStates.slice(1).map(sample).join('')}</div>`)}</section>`;
  }).join('')}
  ${renderIconButtonSamples()}
+ ${renderTabsSamples()}
  <section class="v2-component-section" id="cards" aria-labelledby="cards-title" hidden><h2 id="cards-title">카드·메뉴 타일</h2><p>정보 카드에는 눌림 상태를 적용하지 않습니다. 동작이 있는 메뉴 타일만 상태를 갖습니다.</p>
  <div class="v2-info-card-sample">${renderCard({title:'최근 방문',description:'정보를 담는 흰 카드입니다. 클릭 대상이 아닙니다.'})}</div>
  <div class="v2-component-grid">${figure('아이콘형 · 기본','내정보와 같은 3D 아이콘 판 아래에 이름을 표시합니다.',tileStage({attributes:{'aria-label':'이용내역 · 메뉴 타일 · 기본'}}))}${figure('텍스트형','아이콘 없이 짧은 메뉴명을 판 안에 표시하는 별도 형태입니다.',tileStage({layout:'text',attributes:{'aria-label':'이용내역 · 텍스트형 메뉴 타일'}}))}</div>
