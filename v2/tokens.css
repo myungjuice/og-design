@@ -70,9 +70,9 @@
  /* Input family inherits the existing Home search material, without changing Home. */
  --v2-input-fill:var(--home-control-fill);--v2-input-depth:var(--home-shadow-control);
  --v2-input-ink:var(--home-ink);--v2-input-muted:var(--home-muted);
- /* User-approved lighter review variant; placeholder alone has a 3:1 floor, not normal-text AA. */
+ /* User-approved #A0A3AA review variant; placeholder alone has a 2:1 floor, not normal-text AA. */
  /* Value, label, hint and border inks stay intact. */
- --v2-input-placeholder:oklch(60% .005 270);
+ --v2-input-placeholder:oklch(71.52069956% .01067570 267.32861513);
  --v2-input-radius:var(--v2-radius-chip);--v2-input-height:48px;
  --v2-type-page:24px;--v2-line-page:32px;
  --v2-type-card:20px;--v2-line-card:28px;
