@@ -1,0 +1,43 @@
+/* Hallmark · component: loading · genre: playful · theme: existing OG 3D
+ * audience: OG app users; use: understand waiting without losing layout; tone: soft.
+ * Component-scope: no macrostructure/theme rotation. Native preview select only.
+ * Pre-emit critique: P5 H5 E4 S5 R5 V4. Preserve shared card/art, Pretendard 400/700.
+ */
+.og-loading.v2-loading{display:inline-flex;align-items:center;gap:var(--v2-space-2);color:var(--v2-text-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-loading .og-spinner{box-sizing:border-box;display:inline-block;flex:none;width:24px;height:24px;border:2px solid var(--v2-edge);border-top-color:var(--v2-focus);border-radius:var(--v2-radius-chip);animation:v2-loading-turn var(--v2-loading-cycle) linear infinite}
+.v2-loading .og-spinner[data-size="small"]{width:16px;height:16px}
+.v2-loading-indicators{display:flex;flex-wrap:wrap;gap:var(--v2-space-6)}
+.v2-loading-indicators .v2-loading{box-sizing:border-box;padding:var(--v2-space-4);background:var(--v2-surface);border-radius:var(--v2-radius-button)}
+.v2-loading-frame{position:relative;min-width:0}
+.v2-loading-frame>[data-skeleton]{position:absolute;inset:0;pointer-events:none}
+.v2-loading-frame>[data-skeleton][hidden]{display:none}
+.v2-loading-frame[aria-busy="true"]>[data-content]{visibility:hidden}
+.v2-loading-frame .og-skeleton{display:block;background:var(--v2-skeleton);border-radius:var(--v2-space-1);box-shadow:none;border:0;animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
+.v2-loading-row .og-loading-row{display:flex;align-items:center;gap:var(--v2-space-3);padding:var(--v2-space-4);min-height:56px}
+.v2-loading-row .og-loading-copy{display:grid;gap:var(--v2-space-1);flex:1;min-width:0}
+.v2-loading-row .og-skeleton:is([data-shape="circle"],[data-shape="square"]){width:40px;height:40px;flex:none;border-radius:var(--v2-radius-button)}
+.v2-loading-row .og-skeleton[data-shape="circle"]{border-radius:var(--v2-radius-chip)}
+.v2-loading-row .og-skeleton[data-shape="title"]{height:var(--v2-line-body);width:62%}
+.v2-loading-row .og-skeleton[data-shape="text"]{height:var(--v2-line-caption);width:82%}
+.v2-loading-mileage>[data-skeleton]{--v2-skeleton:var(--v2-skeleton-on-action)}
+.v2-loading-mileage>[data-skeleton] .m-coin{border-radius:var(--v2-radius-chip)}
+.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd){color:transparent;background:var(--v2-skeleton);border-radius:var(--v2-space-1);box-shadow:none;animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
+.v2-loading-mileage>[data-skeleton] :is(img,.mileage-info,.mileage-graph>span){visibility:hidden}
+.v2-loading-mileage>[data-skeleton] .mileage-graph{background:var(--v2-skeleton);box-shadow:none;animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
+.v2-loading-mileage>[data-skeleton] .mileage-history{cursor:default}
+.v2-loading-mileage>[data-content] button:disabled{cursor:default}
+.v2-loading-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-loading-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--v2-space-3);margin-top:var(--v2-space-6);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-loading-tools select{box-sizing:border-box;min-height:44px;max-width:100%;padding:var(--v2-space-2) var(--v2-space-3);border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);font:inherit;background:var(--v2-surface);color:var(--v2-text)}
+.v2-loading-tools select:focus-visible{outline:3px solid var(--v2-workspace-text);outline-offset:3px}
+.v2-loading-status,.v2-loading-rules{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);color:var(--v2-workspace-muted)}
+.v2-loading-status{min-height:22px;margin-block:var(--v2-space-2) var(--v2-space-4)}
+.v2-loading-rules{padding-left:var(--v2-space-5);margin-block:var(--v2-space-6) 0}
+.v2-loading-rules li+li{margin-top:var(--v2-space-2)}
+@keyframes v2-loading-turn{to{transform:rotate(360deg)}}
+@keyframes v2-loading-breathe{from{opacity:1}to{opacity:.65}}
+@media(min-width:1100px){.v2-loading-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.v2-loading .og-spinner,.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd,.mileage-graph){animation:none}}
+/* Decorative masks opt out of foreground remapping only; system GrayText still
+ * supplies their background. Otherwise forced colors reveal the copied values. */
+@media(forced-colors:active){.v2-loading .og-spinner{border-color:CanvasText;border-top-color:Highlight}.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd,.mileage-graph){background:GrayText}.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd){forced-color-adjust:none;color:transparent}.v2-loading-tools select:focus-visible{outline-color:Highlight}}

@@ -19,7 +19,7 @@ test('shared card resolves original assets from a different route and escapes pa
  assert.match(sharedCard({assetBase:'" onerror="bad/'}),/src="&quot; onerror=&quot;bad\/mileage-m.png"/);
 });
 test('gallery renders four independently labelled balance cases using resolved original assets',()=>{
- const html=renderComponents();
+ const html=renderComponents().match(/<section[^>]*id="mileage"[\s\S]*?<\/section>/)[0];
  assert.match(renderSubnavigation({pageId:'components',label:'공통 컴포넌트'}),/href="#mileage"/);
  assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,4);
  for(const label of ['기본 잔액','사용 가능 금액 없음','잔액 0','진행바 상한'])assert.ok(html.includes(label));

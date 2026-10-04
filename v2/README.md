@@ -51,7 +51,11 @@
 
 ‘다시 시도’는 실제 조회가 아닌 500ms 검토용 전환입니다. 처리 중에는 버튼 위치·영역 높이를 유지하고 중복 실행을 막으며, 내용 표시·내역 없음·오류 유지 결과를 같은 영역에 보여줍니다. 초기 예시는 자동으로 읽지 않고 동작 후 안내만 `status`로 갱신합니다. 오류가 유지되면 원래 버튼으로, 버튼이 사라지면 결과 제목으로 키보드 포커스를 이어 줍니다. 다른 컨트롤로 이동한 사용자의 포커스를 빼앗지 않습니다. ‘오류 다시 보기’는 대기 중 결과도 취소합니다. API·저장소·실제 앱 데이터에는 접근하지 않습니다.
 
-다음 후보는 로딩·스켈레톤입니다. 스낵바·전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+로딩·스켈레톤은 `/v2/components/#loading`의 별도 ‘로딩’ 그룹에 추가했습니다. 기존 `loading`·`skeletonRow` 렌더러를 읽기 전용으로 재사용하며 24px·16px 표시와 프로필 요약·방문 내역·마일리지 예시를 함께 보여줍니다. 목록은 현재 공통 목록 행을, 마일리지는 현재 공통 카드의 렌더러·에셋·구조를 그대로 사용합니다. 별도 마일리지 디자인을 만들지 않고 불러오기 전후 카드 크기를 유지합니다. 3D 재질은 바깥 표면에만 남기고 임시 면은 평면으로 표현합니다.
+
+‘표시 상태’에서 불러오는 중과 내용 표시를 전환합니다. 대기 중 값과 컨트롤은 `aria-hidden`·`inert`로 제외하고, 내용을 표시하면 금액은 읽을 수 있으며 연결되지 않은 비교용 버튼만 비활성으로 유지합니다. 포커스를 이동하지 않으며 API·저장소·실제 앱 데이터에는 접근하지 않습니다. 움직임 줄이기 설정에서는 정지하고 고대비 모드에서도 복제된 금액이 다시 보이지 않도록 마스킹합니다. 원본 캔버스와 대표 화면은 변경하지 않습니다.
+
+다음 후보는 스낵바입니다. 전화번호·숫자 입력과 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -74,6 +78,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/feedback.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/loading.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/mileage.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/my-info/my-info.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/barcode/barcode.browser.test.cjs

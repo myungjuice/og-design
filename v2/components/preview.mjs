@@ -5,6 +5,7 @@ import {setupSelectionSamples} from './selection.mjs';
 import {setupInputSamples} from './input.mjs';
 import {setupDialogSamples} from './dialog.mjs';
 import {setupFeedbackSamples} from './feedback.mjs';
+import {setupLoadingSamples} from './loading.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
@@ -13,6 +14,7 @@ export function setupComponentPreview(root){
  setupInputSamples(root);
  setupDialogSamples(root);
  setupFeedbackSamples(root);
+ setupLoadingSamples(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){
