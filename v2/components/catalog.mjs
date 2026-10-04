@@ -12,6 +12,8 @@ export const componentItems=[
  {id:'search',label:'매장 검색바',group:'입력'},
  {id:'text-input',label:'텍스트 입력',group:'입력'},
  {id:'password-input',label:'비밀번호 입력',group:'입력'},
+ {id:'phone-input',label:'전화번호 입력',group:'입력'},
+ {id:'numeric-input',label:'숫자 입력',group:'입력'},
  {id:'multiline-input',label:'여러 줄 입력',group:'입력'},
  {id:'dialogs',label:'확인창',group:'안내·확인'},
  {id:'notices',label:'영역 안 안내',group:'안내·확인'},

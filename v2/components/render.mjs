@@ -17,7 +17,7 @@ import {menuArt} from '../../screens/my-info-3d-test/render.mjs';
 export {renderListRow} from './list-row.mjs';
 export {renderSectionHeading} from './section-heading.mjs';
 export {renderSelection} from './selection.mjs';
-export {renderInput,renderMultiline} from './input.mjs';
+export {renderInput,renderMultiline,renderPhoneInput,renderNumericInput} from './input.mjs';
 export {renderDialog} from './dialog.mjs';
 export {renderNotice} from './notice.mjs';
 export {renderFeedback} from './feedback.mjs';

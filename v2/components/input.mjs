@@ -5,7 +5,7 @@ import {stateComparison} from './catalog.mjs';
 const states=['default','active','filled','disabled','readonly','loading','error','success'];
 const hints={disabled:'이전 단계 완료 후 입력할 수 있습니다.',readonly:'조회·복사는 가능하고 수정은 할 수 없습니다.',loading:'입력값 확인 중입니다. 내용을 수정할 수 있습니다.',error:'입력 내용을 확인해 주세요. 오류 상태의 예시입니다.',success:'입력값 확인 완료 · 검토용 예시입니다.'};
 export function renderInput({id=uid('v2-input'),type='text',label='',value='',placeholder='',hint,state='default',disabled=false,readonly=false,required=false,attributes={}}={}){
- if(!['text','password'].includes(type))throw new RangeError('Unsupported input type: '+type);
+ if(!['text','password','tel'].includes(type))throw new RangeError('Unsupported input type: '+type);
  if(!states.includes(state))throw new RangeError('Unsupported input state: '+state);
  if(!label.trim())throw new TypeError('Input requires a visible label');
  const unavailable=disabled||state==='disabled',readOnly=readonly||state==='readonly';
@@ -14,9 +14,27 @@ export function renderInput({id=uid('v2-input'),type='text',label='',value='',pl
   className:'v2-input v2-input-'+type,helpReferences,
   attributes:{...extra,disabled:unavailable,readonly:readOnly,required,'aria-required':required?'true':undefined,'aria-invalid':state==='error'?'true':'false','aria-busy':state==='loading'?'true':undefined},
   helpAttributes:{'aria-live':'polite','aria-atomic':'true'},
-  slot:type==='text'?({error:'!',loading:'…',success:'✓'}[state]||''):'',
+  slot:type!=='password'?({error:'!',loading:'…',success:'✓'}[state]||''):'',
   toggleAttributes:{disabled:unavailable}};
  return type==='password'?passwordField(options):textField(options);
+}
+const typedKinds={
+ phone:{title:'전화번호 입력',label:'휴대전화 번호',type:'tel',inputmode:'tel',placeholder:'010-0000-0000',hint:'숫자 10~11자리 · 공백과 하이픈도 사용할 수 있습니다.',value:'010-0000-0000',partial:'010',bad:'010-0000'},
+ numeric:{title:'숫자 입력',label:'숫자 입력',type:'text',inputmode:'numeric',placeholder:'예: 1000',hint:'0 이상의 정수를 입력해 주세요.',value:'1000',partial:'10',bad:'1,000'}
+};
+function renderTypedInput(kind,props={}){
+ const config=typedKinds[kind];
+ return renderInput({label:config.label,placeholder:config.placeholder,...props,type:config.type,
+  hint:props.hint??hints[props.state]??config.hint,
+  attributes:{...props.attributes,type:undefined,inputmode:config.inputmode,autocomplete:'off','data-input-kind':kind}});
+}
+export const renderPhoneInput=props=>renderTypedInput('phone',props);
+export const renderNumericInput=props=>renderTypedInput('numeric',props);
+export function inputValidationMessage({kind='text',value='',required=false}={}){
+ if(!value.trim())return required?'입력값이 비어 있습니다. 검토용 값을 입력해 주세요.':'';
+ if(kind==='phone'&&(!/^[0-9 -]+$/.test(value)||!/^\d{10,11}$/.test(value.replace(/[ -]/g,''))))return '숫자 10~11자리로 입력해 주세요. 공백과 하이픈만 사용할 수 있습니다.';
+ if(kind==='numeric'&&!/^\d+$/.test(value))return '0 이상의 정수를 입력해 주세요. 쉼표·소수점·문자는 사용할 수 없습니다.';
+ return '';
 }
 export function renderMultiline({id=uid('v2-multiline'),label='',value='',placeholder='',hint,state='default',maxLength=null,disabled=false,readonly=false,required=false,attributes={}}={}){
  if(!label.trim())throw new TypeError('Multiline input requires a visible label');
@@ -38,9 +56,16 @@ function comparisons(type,id){
  const cases=[['default','기본',{}],['filled','입력 완료',{value:type==='password'?'test-only':'맑은 땅콩'}],['active','입력 중',{state:'active',value:type==='password'?'test':'맑은'}],['disabled','비활성',{state:'disabled',value:'검토용 값'}],['readonly','읽기 전용',{state:'readonly',value:'검토용 값'}],['loading','확인 중',{state:'loading',value:'검토용 값'}],['error','오류',{state:'error',hint:'입력값이 비어 있습니다. 검토용 값을 입력해 주세요.'}],['success','확인 완료',{state:'success',value:'검토용 값'}]];
  return stateComparison(`<p class="v2-input-note">확인 중·오류·완료는 상태 예시입니다. 실제 계정 조회나 저장은 하지 않습니다.</p><div class="v2-input-grid">${cases.map(([key,title,props])=>`<figure class="v2-component-sample" id="${id}-state-${key}"><figcaption><strong>${title}</strong></figcaption>${stage(renderInput({type,label,...props}))}</figure>`).join('')}</div>`);
 }
+function typedSamples(){
+ return Object.entries(typedKinds).map(([kind,config])=>{
+  const id=kind+'-input',cases=[['default','기본',{}],['filled','입력 완료',{value:config.value}],['active','입력 중',{value:config.partial}],['disabled','비활성',{value:config.value}],['readonly','읽기 전용',{value:config.value}],['loading','확인 중',{value:config.value}],['error','형식 오류',{value:config.bad,hint:inputValidationMessage({kind,value:config.bad})}],['success','확인 완료',{value:config.value}]];
+  return `<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${config.title}</h2><p>홈 검색·텍스트 입력과 같은 밝은 표면과 얕은 입체감을 사용합니다. 입력값은 자동으로 고치거나 지우지 않고, 수정 방법을 입력창 아래에 안내합니다.</p><div id="${id}-live" data-input-live>${stage(renderTypedInput(kind,{required:true}))}</div><p class="v2-input-note">검토용 값만 입력해 주세요. 입력창을 벗어난 뒤 형식을 안내하며 실제 번호 확인·인증·저장은 하지 않습니다.</p>${stateComparison(`<div class="v2-input-grid">${cases.map(([state,title,props])=>`<figure class="v2-component-sample" id="${id}-state-${state}"><figcaption><strong>${title}</strong></figcaption>${stage(renderTypedInput(kind,{state,...props}))}</figure>`).join('')}</div>`)}</section>`;
+ }).join('');
+}
 export function renderInputSamples(){
  return `<section class="v2-component-section" id="text-input" aria-labelledby="text-input-title" hidden><h2 id="text-input-title">텍스트 입력</h2><p>홈 검색바와 같은 연한 하늘색·둥근 표면·부드러운 입체 마감을 사용합니다. 항목명과 안내 문구는 입력창 밖에 표시합니다.</p><div id="text-input-live" data-input-live>${stage(renderInput({label:'닉네임',placeholder:'예: 맑은 땅콩',required:true,attributes:{autocomplete:'off'}}))}</div><p class="v2-input-note">입력창을 벗어난 뒤 빈 값만 안내하는 검토용 예시입니다. 실제 닉네임 규칙을 정하지 않습니다.</p>${comparisons('text','text-input')}</section>
  <section class="v2-component-section" id="password-input" aria-labelledby="password-input-title" hidden><h2 id="password-input-title">비밀번호 입력</h2><p>오른쪽 표시·숨기기로 내용을 확인합니다. 입력값과 버튼 위치는 그대로 유지합니다.</p><div id="password-input-live" data-input-live>${stage(renderInput({type:'password',label:'비밀번호',placeholder:'test-only',hint:'실제 비밀번호를 입력하지 마세요. 검토용 문자열만 사용합니다.',required:true,attributes:{autocomplete:'off',spellcheck:'false'}}))}</div>${comparisons('password','password-input')}</section>
+ ${typedSamples()}
  <section class="v2-component-section" id="multiline-input" aria-labelledby="multiline-input-title" hidden><h2 id="multiline-input-title">여러 줄 입력</h2><p>기존 입력의 밝은 표면과 얕은 입체감을 유지합니다. 긴 내용은 둥근 사각형 안에, 안내와 글자 수는 입력창 아래에 표시합니다.</p>
  <div class="v2-input-grid"><figure class="v2-component-sample"><figcaption><strong>기본 · 제한 없음</strong></figcaption><div id="multiline-input-live" data-multiline-live>${stage(renderMultiline({label:'내용',placeholder:'예: 적립 내역이 보이지 않아요.',required:true,hint:'실제 개인정보 없이 검토용 내용을 입력해 주세요.'}))}</div></figure>
  <figure class="v2-component-sample"><figcaption><strong>글자 수 안내 · 선택형</strong></figcaption><div id="multiline-limit-live" data-multiline-live>${stage(renderMultiline({label:'내용',maxLength:200,placeholder:'예: 적립 내역이 보이지 않아요.'}))}</div></figure></div>
@@ -52,9 +77,10 @@ export function setupInputSamples(root){
  let pointerField=null;
  const validate=field=>{
   const input=field.querySelector('input'),help=field.querySelector('.og-field-help');
-  const invalid=input.required&&!input.value.trim();
+  if(input.disabled||input.readOnly||field.dataset.composing==='true')return;
+  const message=inputValidationMessage({kind:input.dataset.inputKind,value:input.value,required:input.required}),invalid=!!message;
   input.setAttribute('aria-invalid',String(invalid));field.dataset.state=invalid?'error':'default';
-  help.textContent=invalid?'입력값이 비어 있습니다. 검토용 값을 입력해 주세요.':field.dataset.baseHint;
+  help.textContent=message||field.dataset.baseHint;
  };
  root.querySelectorAll('.v2-input').forEach(field=>{field.dataset.baseHint=field.querySelector('.og-field-help').textContent;});
  root.addEventListener('pointerdown',event=>{
@@ -73,17 +99,20 @@ export function setupInputSamples(root){
   const field=event.target.closest('.v2-input:not(.v2-input-textarea)');if(!field?.closest('[data-input-live]')||field.contains(event.relatedTarget)||field===pointerField)return;
   field.dataset.touched='true';validate(field);
  });
- root.addEventListener('input',event=>{
-  const input=event.target;if(!input.matches('.v2-input input'))return;
+ const changed=input=>{
+  if(!input.matches('.v2-input input'))return;
   const field=input.closest('.v2-input');
-  if(input.disabled||input.readOnly)return;
+  if(input.disabled||input.readOnly||field.dataset.composing==='true')return;
   if(field.closest('[data-input-live]')){if(field.dataset.touched==='true')validate(field);return;}
   if(['loading','error','success'].includes(field.dataset.state)){
    field.dataset.state='default';input.removeAttribute('aria-busy');input.setAttribute('aria-invalid','false');
    field.querySelector('.og-field-help').textContent='입력 내용을 변경했습니다. 실제 설정은 저장하지 않습니다.';
    const slot=field.querySelector('.og-field-slot');if(slot)slot.textContent='';
   }
- });
+ };
+ root.addEventListener('compositionstart',event=>{if(event.target.matches('.v2-input input'))event.target.closest('.v2-input').dataset.composing='true';});
+ root.addEventListener('compositionend',event=>{if(!event.target.matches('.v2-input input'))return;delete event.target.closest('.v2-input').dataset.composing;changed(event.target);});
+ root.addEventListener('input',event=>{if(!event.isComposing)changed(event.target);});
  setupMultilineSamples(root);
 }
 function setupMultilineSamples(root){

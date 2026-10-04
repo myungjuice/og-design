@@ -11,7 +11,7 @@
 - 눈부심을 줄인 다크 그레이 검토 배경과 흰 컴포넌트 표면. 검토용 `--v2-workspace-*` 토큰은 앱 토큰과 분리합니다. 앱 대표 화면 안의 승인된 배경은 유지하고, 검토 영역에는 하늘색 배경·별 장식·OS 표시선을 추가하지 않습니다.
 - 컬러의 RGB 값은 실제 CSS 스와치를 sRGB로 변환합니다. CSS 토큰 변경 후 새로고침 또는 루트의 스타일·클래스 변경 시 갱신됩니다.
 - `/v2/components/`: 3D 주요·보조·후기 버튼 3종의 앱 기준 6개 상태(기본·눌림·비활성·처리 중·오류·성공), 비상호작용 정보 카드, 메뉴 타일의 6개 상태와 선택 상태. 마우스 올림·키보드 포커스 비교 시안은 제외하고 실제 웹 키보드 조작과 포커스 기능은 유지합니다. 점검 안내는 접힌 ‘접근성 점검’에 분리합니다.
-- 모든 v2 페이지는 ‘주 메뉴 / 보조 메뉴 / 본문’의 2단 사이드바를 공유합니다. 주 메뉴에는 7개 목적지만, 보조 메뉴에는 현재 페이지의 그룹과 들여쓴 하위 항목을 표시합니다. 그룹을 선택하면 연관 시안을 함께 표시하고, 하위 항목을 누르면 같은 그룹을 유지한 채 해당 위치로 이동합니다. 공통 컴포넌트는 버튼 3종, 카드·마일리지·섹션 제목, 목록, 선택 요소, 입력(매장 검색·텍스트·비밀번호·여러 줄 입력), 지도 탐색(업종 카테고리), 내비게이션, 동작 확인으로 묶습니다. 디자인 시스템은 컬러, 타이포·여백, 곡률·3D 재질로 묶습니다.
+- 모든 v2 페이지는 ‘주 메뉴 / 보조 메뉴 / 본문’의 2단 사이드바를 공유합니다. 주 메뉴에는 7개 목적지만, 보조 메뉴에는 현재 페이지의 그룹과 들여쓴 하위 항목을 표시합니다. 그룹을 선택하면 연관 시안을 함께 표시하고, 하위 항목을 누르면 같은 그룹을 유지한 채 해당 위치로 이동합니다. 공통 컴포넌트는 버튼 3종, 카드·마일리지·섹션 제목, 목록, 선택 요소, 입력(매장 검색·텍스트·비밀번호·전화번호·숫자·여러 줄 입력), 지도 탐색(업종 카테고리), 내비게이션, 동작 확인으로 묶습니다. 디자인 시스템은 컬러, 타이포·여백, 곡률·3D 재질로 묶습니다.
 - 보조 메뉴 검색은 하위 목록만 걸러 현재 미리보기를 유지합니다. 그룹명 검색·결과 없음 안내·검색 지우기·Escape 지우기를 지원합니다. 분류는 `subnavigation.mjs`와 `components/catalog.mjs`, 그룹 선택·검색·이동은 `review-navigation.mjs`, 공통 탐색 외형은 `shell.css`에서 관리합니다. `components/explorer.mjs`는 공통 탐색 연결만 담당합니다.
 - 기본 형태를 먼저 보여주고 동작 상태는 ‘상태 비교’, 마일리지의 다른 잔액은 ‘잔액별 비교’를 펼쳐 확인합니다. 기존 `#primary`, `#mileage`, `#list-row`와 새 `#group-buttons` 같은 그룹 URL은 공유·새로고침·뒤로/앞으로 가기를 지원합니다. 알 수 없는 항목은 첫 그룹을 표시합니다. 데스크톱 두 메뉴는 고정 위치에서 독립적으로 스크롤하며, 1024px 미만에서는 접이식 메뉴와 네이티브 그룹 선택을 제공합니다. 검토 화면 변경이며 앱 시안과 실제 공통 컴포넌트의 외형은 변경하지 않습니다.
 - 내정보는 현재 메인만 연결되어 있습니다. 내역·예약, 문의, 계정·설정의 하위 화면은 ‘이관 예정’으로 표시하며 클릭 링크나 빈 시안을 만들지 않습니다. 이번 탐색 구조 변경에서는 기존 캔버스의 하위 화면을 이관하지 않습니다. 마이랜드·오지파크에도 가짜 하위 화면을 만들지 않습니다.
@@ -59,7 +59,11 @@
 
 ‘열어보기’는 검토 영역 안에서만 한 개씩 표시하고 동일 안내를 중복해서 만들지 않습니다. 검토용 알림은 자동으로 닫지 않으며 실행 취소·재시도는 예시 문구만 표시합니다. 초기 시안은 `inert`이고 자동으로 읽지 않으며, 사용자가 동작한 뒤에만 별도 `status`로 안내합니다. 알림을 열 때 포커스를 가져가지 않고 포커스된 버튼이 사라지면 ‘알림 열기’로 이어 줍니다. 실제 API·저장소·앱 데이터에 접근하지 않습니다. 원본 캔버스와 대표 화면은 유지합니다.
 
-다음 후보는 전화번호·숫자 입력입니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
+전화번호·숫자 입력은 `/v2/components/#phone-input`과 `#numeric-input`의 기존 ‘입력’ 그룹에 추가했습니다. 기존 입력 렌더러와 홈 검색바의 표면·입체감·48px 높이를 그대로 재사용하며 전용 CSS나 별도 색상을 만들지 않습니다. 전화번호는 `tel`/`inputmode=tel`, 숫자는 `text`/`inputmode=numeric`을 사용합니다. 공백·하이픈을 허용한 숫자 10~11자리와 0 이상의 정수는 원본 캔버스의 검토용 규칙이며 실제 앱 인증·금액 정책을 새로 정하지 않습니다.
+
+처음에는 오류를 표시하지 않고 입력창을 벗어난 뒤 형식을 안내합니다. 이후 수정하면 다시 검사하되 한글 조합 중에는 안내를 갱신하지 않습니다. 자동 포맷·값 삭제·숫자 변환·고정 길이 제한 없이 앞자리 0과 긴 문자열도 유지합니다. 기본·입력 중·입력 완료·비활성·읽기 전용·확인 중·오류·완료는 접힌 상태 비교에서 확인하며 실제 인증·저장·API·저장소에 연결하지 않습니다. 원본 캔버스와 대표 화면은 유지합니다.
+
+다음 후보는 도움말·툴팁입니다. 마일리지 설명과 연결할 수 있는 공통 패턴부터 검토합니다. 내정보 하위 화면의 기획 대조도 별도 승인 후 진행합니다.
 
 ## 로컬 검증
 
@@ -78,6 +82,7 @@ PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependenci
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/section-heading.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/selection.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/input.browser.test.cjs
+PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/typed-input.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/multiline.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/dialog.browser.test.cjs
 PLAYWRIGHT_PATH=/Users/mj/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright node v2/components/notice.browser.test.cjs
