@@ -1,0 +1,29 @@
+/* Hallmark · macrostructure: menu photo → description → base price/optional choices
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app · anchor hue: 276
+ * audience: OG design review · use: compare menu detail conditions · tone: soft, restrained
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · enrichment/motion: none
+ * Shared shallow media/control edges only; menu facts remain flat.
+ * Verified: 4 conditions × 8 widths; visual QA 320/375/390/414/768px;
+ * menu/label text and badges ≥4.5:1, scroll focus ≥3:1.
+ * User-directed OG white surfaces/type retained; no new chrome or motion. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-home-menu-detail-frame{width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text)}
+.v2-menu-detail{display:flex;flex-direction:column;width:100%;height:100%;overflow:clip;background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-menu-detail-photo{height:264px;flex:none;position:relative}
+.og-menu-detail-photo>.v2-thumbnail{width:100%;height:100%;border-radius:0;aspect-ratio:auto}
+.og-menu-detail-photo>.v2-icon-button{position:absolute;left:var(--v2-space-2);top:var(--v2-space-2)}
+.og-menu-detail-no-photo{height:100px;flex:none;padding:var(--v2-space-2)}
+.og-menu-detail-heading{display:flex;align-items:flex-start;gap:var(--v2-space-2);padding:var(--v2-space-5) var(--v2-space-4);border-bottom:var(--v2-space-2) solid var(--v2-page);flex:none;max-height:calc(50% - var(--v2-space-2));overflow:auto;overscroll-behavior:contain}
+.og-menu-detail-heading>div{min-width:0;flex:1}
+.v2-menu-detail h4,.v2-menu-detail h5{margin:0;min-width:0;overflow-wrap:anywhere;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal}
+.og-menu-detail-heading p{margin:var(--v2-space-2) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere}
+.v2-menu-detail[data-scrolled="true"] .og-menu-detail-heading{align-items:center;padding-left:var(--v2-space-2)}
+.og-menu-detail-body{flex:1;padding:var(--v2-space-5) var(--v2-space-4);overflow:auto;overscroll-behavior:contain;min-height:0}
+.og-menu-detail-section-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-3);margin-bottom:var(--v2-space-2)}
+.og-menu-detail-row{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-3);min-height:var(--v2-space-12);padding-block:var(--v2-space-1)}
+.og-menu-detail-row>.v2-selection-control{flex:1;min-width:0}
+.og-menu-detail-row .v2-selection{padding-inline:0;cursor:default}
+.og-menu-detail-row>strong{flex:none;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums;white-space:nowrap}
+.og-menu-detail-options{border-top:1px solid var(--v2-edge);padding-top:var(--v2-space-6);margin-top:var(--v2-space-3);padding-bottom:var(--v2-space-3)}
+.og-menu-detail-heading:focus-visible,.og-menu-detail-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}

@@ -30,6 +30,11 @@ test('error and success have readable instructions and correct native semantics'
  assert.match(render({label:'닉네임',state:'success'}),/확인/);
  assert.doesNotMatch(render({label:'닉네임',state:'success'}),/aria-invalid="true"/);
 });
+test('input errors retain invalid semantics and inline instructions without an exclamation decoration',()=>{
+ const html=render({label:'닉네임',state:'error',hint:'닉네임을 입력해 주세요.'});
+ assert.match(html,/aria-invalid="true"/);assert.match(html,/닉네임을 입력해 주세요/);
+ assert.doesNotMatch(html,/og-field-slot/);
+});
 test('unsupported input kinds and missing labels fail explicitly',()=>{
  assert.throws(()=>render({type:'range',label:'금액'}),RangeError);
  assert.throws(()=>render({state:'missing',label:'닉네임'}),RangeError);

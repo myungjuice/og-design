@@ -1,0 +1,29 @@
+/* Existing OG soft 3D account domain. The shared source adapter owns materials;
+ * these rules retain the certificate, PIN and security layouts at narrow widths. */
+.og-membership .og-membership-content,.og-settings .og-settings-groups,.og-account .og-account-groups{min-width:0}
+.og-membership .og-membership-identity .v2-avatar{flex:none}
+.og-membership .og-membership-qr svg{width:100%;height:100%}
+.og-membership .og-membership-code>div,.og-membership .og-membership-export,.og-membership .og-membership-channels{min-width:0}
+.og-membership .og-membership-export>.og-button,.og-membership .og-membership-channels>.og-text-button{padding-inline:var(--v2-space-2)}
+.og-settings .og-settings-group .og-choice{gap:var(--v2-space-3)}
+.og-settings .og-settings-group .og-choice-copy{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.og-settings .og-settings-group .og-row-copy{min-width:0}
+.og-settings .og-settings-group .og-row-value{font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);overflow-wrap:anywhere;text-align:right}
+.og-account .og-account-inviter .v2-avatar{flex:none}
+.og-account .og-field-control:has(.v2-nickname-edit){position:relative}
+.og-account .og-field-control:has(.v2-nickname-edit)>input{padding-right:var(--v2-space-12);text-align:left}
+.og-account .v2-nickname-edit{position:absolute;right:0;top:0;width:48px;height:48px;color:var(--v2-focus)}
+.v2-nickname-overlay .og-dialog-body{margin:0}
+.v2-nickname-overlay .og-field-control input{text-align:left}
+.og-account .og-account-status{min-width:0}
+.og-account .og-account-withdrawal input{text-align:left}
+.og-account .og-account-status>svg{width:var(--v2-space-6);height:var(--v2-space-6);flex:none;color:var(--v2-text-muted)}
+.og-account .og-account-status.is-checked>svg{color:var(--v2-action)}
+.og-account .og-account-auth>.og-button{flex:none;width:auto;padding-inline:var(--v2-space-4)}
+.og-account .og-account-withdraw{white-space:normal;overflow-wrap:anywhere}
+.og-password .og-password-space>svg{width:var(--v2-space-12);height:var(--v2-space-12);color:var(--v2-action)}
+.og-password .og-pin-display{font-variant-numeric:tabular-nums}
+.og-password .og-pin-key.og-button{border-color:var(--v2-material-edge);background:var(--v2-input-fill);box-shadow:var(--v2-button-secondary-depth);color:var(--v2-text)}
+.og-password .og-pin-key svg{color:var(--v2-action)}
+.og-password .og-password-snack .og-snackbar{background:var(--v2-error);color:var(--v2-on-action)}
+.og-password .og-password-snack .og-snackbar :is(p,span){color:inherit}

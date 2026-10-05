@@ -1,0 +1,32 @@
+/* Hallmark · component: date/time · genre: playful · theme: existing OG 3D
+ * P5 H5 E4 S5 R5 V4 · flat calendar, shallow selection and controls. */
+.v2-picker-stage{box-sizing:border-box;width:100%;max-width:390px;padding:16px;background:var(--v2-surface);border-radius:20px;color:var(--v2-text);container:date-stage / inline-size}
+.v2-picker-viewport{overflow-x:auto;overscroll-behavior:contain;padding:4px}
+.v2-calendar{min-width:0;font:400 14px/20px var(--v2-font)}
+.v2-calendar-days{overflow-x:auto;overscroll-behavior:contain;padding:4px;margin:-4px}
+.v2-calendar .og-calendar-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px}
+.v2-calendar .og-calendar-nav{width:48px;height:48px;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-surface);box-shadow:var(--v2-button-secondary-depth);font-size:24px;color:var(--v2-text)}
+.v2-calendar .og-calendar-week,.v2-calendar .og-calendar-grid{display:grid;min-width:0;grid-template-columns:repeat(7,minmax(0,1fr))}
+.v2-calendar .og-calendar-week{text-align:center;margin-bottom:8px;color:var(--v2-text-muted)}
+.v2-calendar .og-calendar-day{position:relative;border:0;background:transparent;min-width:0;min-height:44px;padding:2px;color:var(--v2-text);font:inherit}
+.v2-calendar .og-calendar-day span{box-sizing:border-box;display:grid;place-items:center;width:min(36px,100%);aspect-ratio:1;margin:auto;border-radius:50%}
+.v2-calendar .og-calendar-day[aria-current=date] span{border:1px solid var(--v2-action);box-sizing:border-box}
+.v2-calendar .og-calendar-day[data-in-range=true]{background:var(--v2-selected-surface)}
+.v2-calendar .og-calendar-day[aria-pressed=true] span{background:var(--v2-chip-fill);box-shadow:var(--v2-chip-depth);color:var(--v2-action);font-weight:700;border:1px solid var(--v2-action)}
+.v2-calendar .og-calendar-day:disabled{color:var(--v2-chip-disabled-ink)}
+.v2-calendar .og-calendar-day:disabled span{text-decoration:line-through}
+.v2-calendar .og-calendar-nav:disabled{background:var(--v2-disabled);box-shadow:none;color:var(--v2-chip-disabled-ink)}
+.v2-calendar .og-calendar-nav:active:not(:disabled){box-shadow:var(--v2-depth-inset)}
+.v2-calendar .og-calendar-day:active:not(:disabled) span{background:var(--v2-selected-surface);box-shadow:var(--v2-depth-inset)}
+.v2-calendar :focus-visible,.v2-time-picker :focus-visible{outline:3px solid var(--v2-focus);outline-offset:1px}
+.v2-calendar .og-picker-summary,.v2-time-picker .og-picker-summary{margin:20px 0 12px;min-height:40px;overflow-wrap:anywhere;font-size:14px;line-height:20px}
+.v2-picker-error{color:var(--v2-error);margin:8px 0}.v2-picker-error:empty,.v2-picker-applied:empty{display:none}
+.v2-calendar .og-picker-footer,.v2-time-picker .og-picker-footer{display:flex;gap:12px}
+.v2-calendar .og-picker-footer .v2-button,.v2-time-picker .og-picker-footer .v2-button{flex:1;min-width:0;width:auto}
+.v2-time-picker{font:400 14px/20px var(--v2-font)}
+.v2-time-picker .og-time-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.v2-time-picker label{display:flex;flex-direction:column;gap:12px;font-weight:700}
+.v2-time-picker select{appearance:none;box-sizing:border-box;min-width:0;width:100%;min-height:48px;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-input-fill);box-shadow:var(--v2-input-depth);padding:8px;padding-inline-end:32px;color:var(--v2-text);font:400 16px/24px var(--v2-font)}
+/* Compact only the calendar inset, not time controls, labels or footer actions. */
+@container date-stage (max-width:318px){.v2-picker-viewport:has(.v2-calendar){margin-inline:-12px}}
+@media(forced-colors:active){.v2-calendar .og-calendar-day[aria-pressed=true] span{color:HighlightText;background:Highlight}.v2-calendar .og-calendar-nav,.v2-time-picker select{box-shadow:none}.v2-calendar .og-calendar-day:disabled{color:GrayText}}

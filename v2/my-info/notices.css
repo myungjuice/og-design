@@ -1,0 +1,40 @@
+/* Hallmark · audit: grouped notice/notification lists · existing OG soft 3D
+ * P5 H5 E4 S5 R5 V4 · shared sheet rim and icon controls, flat readable records.
+ * No side stripes, nested cards, theme rotation, invented announcements or motion. */
+.v2-notices-base{position:absolute;inset:0;isolation:isolate}
+.v2-notices-base>.v2-sheet-static{position:absolute;inset:64px 0 0;max-width:none}
+.v2-notices-frame .v2-tabs [role="tab"]{flex:1;min-width:0}
+.v2-notices-frame .v2-tabs-panel{padding-top:var(--v2-space-4)}
+.og-notice-tabs .v2-unread-dot{position:absolute;top:var(--v2-space-3);margin-left:var(--v2-space-1);box-shadow:none}
+.v2-notices-frame .og-sheet-body:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+.v2-notices-frame .og-announcement-list,.v2-notices-frame .og-notification-list{padding:0;overflow:clip;box-shadow:none}
+.og-announcement-row{padding:var(--v2-space-4)}
+.og-announcement-row+.og-announcement-row,.og-notification-row+.og-notification-row{border-top:1px solid var(--v2-edge)}
+.og-announcement-meta{display:flex;justify-content:space-between;align-items:center;gap:var(--v2-space-2);color:var(--v2-text-muted);font-size:var(--v2-type-caption);font-variant-numeric:tabular-nums}
+.og-announcement-meta time{overflow-wrap:anywhere;min-width:0;text-align:right}
+.v2-notices-frame .og-announcement-row h3{margin:var(--v2-space-2) 0 0;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere}
+.og-announcement-row[data-important="true"]{background:var(--v2-notice-info-surface)}
+.og-notification-toolbar,.og-notice-read-all{display:flex;justify-content:flex-end;gap:var(--v2-space-1);margin-bottom:var(--v2-space-2)}
+.og-notification-edit{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--v2-space-1);margin-bottom:var(--v2-space-3)}
+.v2-notice-text{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:48px;padding:var(--v2-space-2);border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-focus);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap}
+.v2-notice-text.og-notice-danger{color:var(--v2-error)}
+.og-notification-row{display:flex;align-items:flex-start;gap:var(--v2-space-2);padding:var(--v2-space-4);background:var(--v2-notice-info-surface)}
+.og-notification-row[data-read="true"]{background:var(--v2-surface)}
+.og-notification-copy{flex:1;min-width:0}
+.og-notification-meta{display:flex;flex-direction:column;align-items:flex-start;gap:var(--v2-space-1)}
+.v2-notices-frame .og-notification-meta h3{margin:0;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere}
+.og-notification-meta time{color:var(--v2-text-muted);font-size:var(--v2-type-caption);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.v2-notices-frame .og-notification-copy p{margin:var(--v2-space-2) 0 0;color:var(--v2-text);font-size:var(--v2-type-secondary);overflow-wrap:anywhere}
+.v2-notices-frame .og-notification-row[data-read="true"] :is(h3,p){color:var(--v2-text-muted)}
+.og-notification-type{display:grid;place-items:center;flex:none;width:calc(2 * var(--v2-space-5));height:calc(2 * var(--v2-space-5));border-radius:var(--v2-radius-chip);background:var(--v2-input-fill);box-shadow:var(--v2-media-rim);color:var(--v2-info)}
+.og-notification-type svg{width:var(--v2-space-5);height:var(--v2-space-5)}
+.og-notification-row>.v2-selection{flex:none;width:48px;min-height:48px;gap:0;padding:0}
+.og-notification-row>.v2-selection .og-choice-copy{display:none}
+.og-notification-row>.v2-icon-button{flex:none}
+.v2-notices-frame .v2-feedback{margin-top:var(--v2-space-6)}
+.v2-notice-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--v2-space-4);background:var(--v2-dialog-scrim)}
+.v2-notice-overlay>.v2-dialog-static{width:100%;max-width:320px}
+.v2-notice-item-overlay{align-items:flex-end;padding:0}
+.v2-notice-item-menu{display:grid;gap:var(--v2-space-3);width:100%;border-radius:var(--v2-radius-sheet) var(--v2-radius-sheet) 0 0;padding:var(--v2-space-4)}
+.v2-notice-item-menu .v2-button{width:100%}
+@media(forced-colors:active){.og-announcement-row[data-important="true"],.og-notification-row{background:Canvas;color:CanvasText}.og-notification-type{background:Canvas;color:CanvasText;border:1px solid CanvasText;box-shadow:none}.v2-notice-overlay{background:Canvas}}

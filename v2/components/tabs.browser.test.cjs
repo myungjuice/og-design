@@ -43,6 +43,16 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.evaluate(()=>scrollY),radioY,'native radio stays in-flow');
    const radio=period.getByRole('radio',{name:'6개월',exact:true});assert.equal(await radio.isDisabled(),true);
    await radio.dispatchEvent('change');assert.equal(await period.getByRole('radio',{name:'1개월',exact:true}).isChecked(),true);
+   assert.ok(await page.evaluate(()=>{
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
+    const lum=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);};
+    const background=document.createElement('div');background.style.background='var(--v2-disabled)';document.body.append(background);
+    const preservedBackground=getComputedStyle(background).backgroundColor;background.remove();
+    return [
+     [document.querySelector('#v2-history-tabs-tab-3'),document.querySelector('#v2-history-tabs-tab-2')],
+     [document.querySelector('#v2-period-segment-2+span'),document.querySelector('#v2-period-segment-1+span')]
+    ].every(([disabled,enabled])=>{const style=getComputedStyle(disabled);return lum(style.color)>lum(getComputedStyle(enabled).color)+.28&&style.backgroundColor===preservedBackground&&style.filter==='none'&&style.opacity==='1';});
+   }),'disabled text is visibly lighter, without blur or changing its background '+width);
    assert.ok(await page.locator('#segmented .v2-segment input:visible').evaluateAll(ns=>ns.every(n=>{const r=n.getBoundingClientRect();return r.width>=48&&r.height>=48;})),'segment touch sizes '+width);
    assert.notEqual(await sort.locator('input:checked+span').evaluate(n=>getComputedStyle(n).boxShadow),'none');
    await widget.getByRole('tab',{name:'전체',exact:true}).focus();await page.keyboard.press('ArrowRight');
@@ -59,7 +69,8 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.match(await page.locator('#tabs [data-state="error"] [role="tabpanel"]:visible').textContent(),/다시 시도/);
    assert.match(await page.locator('#tabs [data-state="empty"] [role="tabpanel"]:visible').textContent(),/아직 방문 내역/);
    assert.equal(await page.locator('#tabs [data-state="success"] [aria-selected="true"]').textContent(),'적립');
-   assert.ok(await page.locator('.v2-tabs [role="tab"],.v2-segment span').evaluateAll(ns=>{
+   // Native unavailable controls are contrast-exempt; enabled text keeps its AA floor.
+   assert.ok(await page.locator('.v2-tabs [role="tab"]:not(:disabled),.v2-segment input:not(:disabled)+span').evaluateAll(ns=>{
     const c=document.createElement('canvas');c.width=c.height=1;const ctx=c.getContext('2d');
     const lum=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);};
     return ns.every(n=>{let surface=n;while(surface.parentElement&&getComputedStyle(surface).backgroundColor==='rgba(0, 0, 0, 0)')surface=surface.parentElement;const a=lum(getComputedStyle(n).color),b=lum(getComputedStyle(surface).backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});

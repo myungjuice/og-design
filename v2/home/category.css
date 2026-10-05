@@ -1,0 +1,21 @@
+/* Hallmark · macrostructure: map backdrop + scrollable category sheet · genre: playful
+ * theme: existing OG 3D · violet anchor, Pretendard, original CI/MCI assets.
+ * Preserve source single selection / 40% height; shallow sheet and chip material.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · no new confirmation or check marks. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+.v2-home-category-frame{position:relative;width:100%;height:846px;overflow:clip;background:var(--v2-screen-bottom)}
+.v2-home-category-backdrop{position:absolute;inset:0;isolation:isolate}
+.v2-home-category-overlay{position:absolute;inset:0;display:flex;align-items:flex-end}
+.v2-home-category-scrim{position:absolute;inset:0;background:var(--v2-dialog-scrim)}
+.v2-home-category-overlay>.v2-sheet-panel{position:relative;box-sizing:border-box;width:100%;height:40%;max-height:40%;padding-top:var(--v2-space-2)}
+.v2-home-category-handle{flex:none;align-self:center;width:var(--v2-space-8);height:var(--v2-space-1);border-radius:var(--v2-radius-chip);background:var(--v2-control-edge)}
+.v2-home-category-overlay h3{flex:1;min-width:0;margin:0;padding-top:var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-home-category-overlay .og-sheet-body{flex:1;min-height:0;overflow:auto}
+.v2-home-category-overlay .og-sheet-footer{display:none}
+.v2-home-category-options{display:flex;flex-wrap:wrap;align-content:flex-start;gap:var(--v2-space-2);padding:var(--v2-space-1) 0 var(--v2-space-2)}
+.v2-home-category-options .v2-chip{padding-inline:var(--v2-space-3);gap:var(--v2-space-2);border-radius:var(--v2-radius-button)}
+.v2-home-category-options img,.v2-home-category-selected img{flex:none;object-fit:contain}
+.v2-home-category-selected{width:auto;min-width:72px;padding-inline:var(--v2-space-3)}
+.home-category.v2-home-category-selected[aria-pressed="true"]{background:var(--v2-button-fill);color:var(--v2-on-action);box-shadow:var(--v2-chip-selected-depth)}
+.v2-home-cafe-pin{display:block;object-fit:contain;flex:none}
+.v2-home-category-frame .home-categories:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}

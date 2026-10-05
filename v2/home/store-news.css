@@ -1,0 +1,18 @@
+/* Hallmark · macrostructure: store identity → section rail → optional-photo news rows
+ * genre: playful · theme: existing OG/Figma 3D · tone: soft, restrained · designed-as-app
+ * audience: OG design review · use: read registered news and photo/no-photo layout
+ * pre-emit critique: P5 H5 E5 S5 R5 V4. User-requested system continuity, no catalog rotation.
+ * Shared media rim only; text/rows flat, no new theme, generated art, motion or OS chrome.
+ * contrast: pass (40–41) · tokens: pass (48) · responsive: pass (34,49–57)
+ * 3 states at 320/375/390/414/768px visually inspected; service controls remain inert. */
+.v2-store-news{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6);font-variant-numeric:tabular-nums;color:var(--v2-text)}
+.v2-store-news .v2-heading-block{margin:0 0 var(--v2-space-2)}
+.v2-store-news .og-heading-title-line{min-height:var(--v2-space-12);align-items:center}
+.v2-store-news .og-heading-title-line :is(h3,h4){font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-store-news .og-heading-action{min-height:var(--v2-space-12)}
+.v2-store-news .og-update-row{display:flex;align-items:center;gap:var(--v2-space-3);padding:var(--v2-space-4) 0;border-bottom:1px solid var(--v2-edge);background:var(--v2-surface)}
+.v2-store-news .og-update-row:last-child{border-bottom:0}
+.v2-store-news .og-update-copy{flex:1;min-width:0}
+.v2-store-news .og-update-date{margin:0 0 var(--v2-space-2);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);color:var(--v2-text-muted)}
+.v2-store-news h4{margin:0;font-size:var(--v2-type-body);line-height:var(--v2-line-body);font-weight:700;overflow-wrap:anywhere}
+.v2-store-news .v2-thumbnail{flex:0 0 calc(var(--v2-space-5)*4);width:calc(var(--v2-space-5)*4);height:calc(var(--v2-space-5)*4);aspect-ratio:1}

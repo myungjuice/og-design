@@ -1,0 +1,20 @@
+/* Hallmark · macrostructure: store identity → section rail → compact menu list
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG design review · use: compare menu facts and absent-field branches
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Shared shallow action seats/media rim; flat rows, facts and section heading.
+ * Enrichment/motion: none; original menu photos and locked v2 tokens only.
+ * Verified: scoped text contrast ≥4.5:1, focus ≥3:1; visual review at
+ * 320/375/390/414/768px for both states; no document overflow at eight widths. */
+.og-main-menu{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6)}
+.og-main-menu .v2-section-heading{align-items:center;flex-wrap:nowrap}
+.og-main-menu .v2-section-heading .og-heading-copy{flex:1;min-width:0}
+.og-main-menu .v2-section-heading h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere;min-width:0}
+.og-main-menu .v2-section-heading .og-heading-action{min-height:var(--v2-space-12);min-width:var(--v2-space-12)}
+.og-main-menu-row{display:flex;align-items:center;gap:var(--v2-space-4);padding-block:var(--v2-space-3);min-height:104px}
+.og-main-menu-row+.og-main-menu-row{border-top:1px solid var(--v2-edge)}
+.og-main-menu-copy{flex:1;min-width:0}
+.og-main-menu-copy h5{margin:0;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere;min-width:0}
+.og-main-menu-description{margin:var(--v2-space-1) 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--v2-text-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-main-menu-price{margin:var(--v2-space-2) 0 0;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums}
+.og-main-menu-row>.v2-thumbnail{flex:none;width:93px;height:93px}

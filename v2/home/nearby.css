@@ -1,0 +1,29 @@
+/* Hallmark · macrostructure: photo-led nearby list over map · genre: playful
+ * theme: existing OG/Figma 3D · violet anchor, Pretendard and shared tokens.
+ * Shallow sheet rim, flat photo/copy, no nested cards or invented actions.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · static three-state migration.
+ * panel contrast: text >=4.5:1, focus >=3:1 · tokens/mobile: pass.
+ * Existing map/search chrome is preserved; no new OS chrome or fabricated data. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+.v2-home-nearby-frame{position:relative;width:100%;height:846px;overflow:clip;background:var(--v2-screen-bottom)}
+.v2-home-nearby-backdrop{position:absolute;inset:0;isolation:isolate}
+.v2-home-nearby-backdrop .bottom-navigation{display:none}
+.v2-home-nearby-overlay{position:absolute;inset:20% 0 0;display:flex}
+.v2-home-nearby-overlay>.v2-sheet-panel{box-sizing:border-box;width:100%;height:100%;padding-top:var(--v2-space-2)}
+.v2-home-nearby-handle{flex:none;align-self:center;width:var(--v2-space-8);height:var(--v2-space-1);border-radius:var(--v2-radius-chip);background:var(--v2-control-edge)}
+.v2-home-nearby-overlay .og-sheet-header{padding:var(--v2-space-5) var(--v2-space-6)}
+.v2-home-nearby-overlay h3{display:flex;align-items:center;gap:var(--v2-space-3);min-width:0;margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-home-nearby-overlay h3 svg{flex:none}
+.v2-home-nearby-overlay h3 span{min-width:0;overflow-wrap:anywhere}
+.v2-home-nearby-overlay .og-sheet-body{flex:1;min-height:0;overflow:auto;padding:0 var(--v2-space-6) var(--v2-space-6);overscroll-behavior:contain}
+.og-nearby-card{min-width:0}
+.og-nearby-card+.og-nearby-card{border-top:1px solid var(--v2-edge);padding-top:var(--v2-space-6);margin-top:var(--v2-space-6)}
+.og-nearby-photo{position:relative;height:350px}
+.og-nearby-photo .v2-thumbnail{width:100%;height:100%;aspect-ratio:auto;border-radius:var(--v2-radius-button)}
+.og-nearby-count{position:absolute;right:var(--v2-space-4);bottom:var(--v2-space-4);border-radius:var(--v2-radius-chip);padding:var(--v2-space-1) var(--v2-space-2);background:var(--v2-text);color:var(--v2-on-action);font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums}
+.og-nearby-card-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-3);padding-top:var(--v2-space-2)}
+.og-nearby-card-heading h4{min-width:0;overflow-wrap:anywhere;margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.og-nearby-card-heading .v2-button{flex:none;padding-inline:0}
+.og-nearby-promotion{margin:var(--v2-space-2) 0 0;white-space:pre-line;overflow-wrap:anywhere;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-nearby-empty{height:300px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--v2-space-3);text-align:center;color:var(--v2-text-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-nearby-empty p{margin:0;overflow-wrap:anywhere}

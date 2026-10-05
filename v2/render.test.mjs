@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import {navigationItems,renderSidebar} from './navigation.mjs';
 import {renderWorkspace} from './render.mjs';
 import {renderFoundations} from './design-system/foundations.mjs';
+import {renderHomePreview} from './home/render.mjs';
+import {reviewGroups} from './subnavigation.mjs';
+
+test('restored store subviews are grouped ready routes with lazy templates',()=>{
+ const html=renderWorkspace({pageId:'home'}),groups=reviewGroups('home');
+ for(const [id,groupId] of [['store-share','store'],['store-photo','store'],['praise-write','store-reviews']]){
+  assert.ok(groups.find(group=>group.id===groupId)?.items.some(item=>item.id===id&&!item.pending),id+' grouped ready route');
+  assert.match(html,new RegExp(`<section id="${id}"[^>]*data-review-screen hidden`));
+  assert.match(html,new RegExp(`<template data-${id}-template>`));
+ }
+});
 
 test('menu anchors expose all seven destinations in the approved order',()=>{
  assert.deepEqual(navigationItems.map(({id,label,href})=>[id,label,href]),[
@@ -20,8 +31,8 @@ test('blank future destinations contain only their title in main',()=>{
   assert.match(html,new RegExp(`<main[^>]*>\\s*<h1[^>]*>${title}</h1>\\s*</main>`));
  }
 });
-test('home exposes one map explorer with route-safe original assets and shared navigation',()=>{
- const html=renderWorkspace({pageId:'home'});
+test('home overview exposes one map explorer with route-safe original assets and shared navigation',()=>{
+ const html=renderHomePreview();
  assert.equal((html.match(/class="home-test"/g)||[]).length,1);
  assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,1);
  assert.match(html,/망원동 네이버지도 정적 배경/);assert.match(html,/매장명으로 검색해 주세요/);

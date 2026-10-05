@@ -1,2 +1,62 @@
 /* Shared review layout; app styles stay in the screen's shadow root. */
 @import url('../components/screen-stage.css');
+.v2-mileage-review-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-8)}
+.v2-mileage-review-sample{min-width:0;margin:0}
+.v2-mileage-review-sample figcaption{margin:0 0 var(--v2-space-4);color:var(--v2-workspace-text);font-weight:700}
+.v2-mileage-history-host{display:block;max-width:390px;width:100%}
+.v2-mileage-extra{margin-block:var(--v2-space-6);color:var(--v2-workspace-muted)}
+.v2-mileage-extra summary{cursor:pointer;min-height:44px}
+.v2-mileage-extra summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:3px}
+@media(max-width:767px){.v2-mileage-review-grid{width:calc(100% + 2 * var(--v2-space-5));margin-inline:calc(-1 * var(--v2-space-5))}.v2-mileage-review-sample figcaption{padding-inline:var(--v2-space-5)}.v2-mileage-history-host{margin-inline:auto}}
+@media(min-width:1280px){.v2-mileage-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1840px){.v2-mileage-review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.v2-use-review-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-8)}
+.v2-use-review-sample{min-width:0;margin:0}
+.v2-use-review-sample figcaption{margin:0 0 var(--v2-space-4);color:var(--v2-workspace-text);font-weight:700}
+.v2-use-history-host{display:block;width:100%;max-width:390px}
+.v2-use-extra{margin-block:var(--v2-space-6);color:var(--v2-workspace-muted)}
+.v2-use-extra summary{cursor:pointer;min-height:44px;margin-bottom:var(--v2-space-4)}
+.v2-use-extra summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:3px}
+@media(max-width:767px){.v2-use-review-grid{width:calc(100% + 2 * var(--v2-space-5));margin-inline:calc(-1 * var(--v2-space-5))}.v2-use-review-sample figcaption{padding-inline:var(--v2-space-5)}.v2-use-history-host{margin-inline:auto}}
+@media(min-width:1280px){.v2-use-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1840px){.v2-use-review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.v2-reservation-review-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-8)}
+.v2-review-history-host{display:block;width:100%;max-width:390px;min-width:0}
+.v2-notices-history-host{display:block;width:100%;max-width:390px;min-width:0}
+.v2-notice-detail-host{display:block;width:100%;max-width:390px;min-width:0}
+@media(max-width:47.9375rem){.v2-notice-detail-host{margin-inline:auto}}
+@media(max-width:47.9375rem){.v2-notices-history-host{margin-inline:auto}}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-notices-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-notice-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.v2-review-history-extra{margin-top:var(--v2-space-8)}
+.v2-review-history-extra>summary{cursor:pointer;margin-bottom:var(--v2-space-4)}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-review-history-grid,.v2-reservation-review-grid.v2-review-history-extra-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.v2-reservation-review-sample{margin:0;min-width:0}
+.v2-reservation-review-sample figcaption{margin-bottom:var(--v2-space-4);color:var(--v2-workspace-text);font-weight:700}
+.v2-reservation-history-host{width:100%;max-width:390px}
+.v2-change-history-host{width:100%;max-width:390px}
+.v2-picker-history-host{display:block;width:100%;max-width:390px}
+.v2-waiting-history-host{display:block;width:100%;max-width:390px}
+.v2-waiting-dialog-history-host{display:block;width:100%;max-width:390px}
+@media(max-width:47.9375rem){.v2-waiting-dialog-history-host{margin-inline:auto}}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-waiting-dialogs-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.v2-reservation-review-grid.v2-waiting-review-grid{grid-template-columns:minmax(0,1fr)}
+@media(max-width:47.9375rem){.v2-waiting-history-host{margin-inline:auto}}
+.v2-reservation-extra{margin-block:var(--v2-space-6)}
+.v2-reservation-extra>summary{display:flex;align-items:center;min-height:44px;margin-bottom:var(--v2-space-4);cursor:pointer}
+.v2-reservation-extra>summary::before{content:'▸';margin-right:var(--v2-space-2);color:var(--v2-workspace-accent)}
+.v2-reservation-extra[open]>summary::before{content:'▾'}
+.v2-reservation-extra>summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:2px}
+@media(min-width:80rem){.v2-reservation-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:115rem){.v2-reservation-review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Only two before/after states: do not reserve a third column or shrink 390px. */
+@media(min-width:115rem){.v2-change-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:115rem){.v2-picker-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:47.9375rem){.v2-picker-history-host{margin-inline:auto}}
+@media(max-width:47.9375rem){.v2-reservation-review-grid{width:calc(100% + 2 * var(--v2-space-5));margin-inline:calc(-1 * var(--v2-space-5))}.v2-reservation-review-sample figcaption{padding-inline:var(--v2-space-5)}.v2-reservation-history-host,.v2-change-history-host{margin-inline:auto}}
+.v2-source-host{display:block;width:100%;max-width:390px;min-width:0}
+.v2-character-main-host,.v2-character-selection-host{display:block;width:100%;max-width:390px;min-width:0}
+@media(max-width:47.9375rem){.v2-character-main-host,.v2-character-selection-host{margin-inline:auto}}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-character-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:47.9375rem){.v2-source-host{margin-inline:auto}}
+@media(min-width:115rem){.v2-reservation-review-grid.v2-source-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

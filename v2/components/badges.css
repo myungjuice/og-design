@@ -1,0 +1,34 @@
+/* Hallmark · component: badge/status · genre: playful · theme: existing OG 3D
+ * audience: OG design review · use: short status and unread meaning · tone: soft, restrained
+ * Component-scope: no macrostructure/theme rotation; pre-emit critique P5 H5 E5 S5 R5 V4.
+ * Informational spans: no hover/focus/pressed or fabricated action states. No motion.
+ * Brand compact label preserves 10px/400; depth stays on the edge, not the text.
+ * Scoped slop check: contrast 4.5:1, mobile 320/375/414/768, honest samples, token-only styles.
+ * Existing white surfaces and single Korean font are preserved by the user's established system. */
+.v2-badge-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-badge-stage{box-sizing:border-box;width:100%;max-width:390px;min-width:0;padding:var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-badge-row{display:flex;align-items:center;flex-wrap:wrap;gap:var(--v2-space-2);min-width:0}
+.v2-badge{--v2-badge-ink:var(--v2-text-muted);--v2-badge-surface:var(--v2-muted-surface);box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;max-width:100%;min-width:0;min-height:var(--v2-space-6);padding:calc(var(--v2-space-1)/2) var(--v2-space-2);border:0;border-radius:var(--v2-space-1);background:var(--v2-badge-surface);color:var(--v2-badge-ink);box-shadow:var(--v2-badge-depth);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);text-align:center;text-shadow:none;white-space:normal;overflow-wrap:anywhere;cursor:default}
+.v2-badge[data-tone="brand"]{--v2-badge-ink:var(--v2-focus);--v2-badge-surface:var(--v2-selected-surface)}
+.v2-badge[data-tone="info"]{--v2-badge-ink:var(--v2-info);--v2-badge-surface:var(--v2-notice-info-surface)}
+.v2-badge[data-tone="success"]{--v2-badge-ink:var(--v2-success);--v2-badge-surface:var(--v2-notice-success-surface)}
+.v2-badge[data-tone="warning"]{--v2-badge-ink:var(--v2-warning);--v2-badge-surface:var(--v2-notice-warning-surface)}
+.v2-badge[data-tone="error"]{--v2-badge-ink:var(--v2-error);--v2-badge-surface:var(--v2-notice-error-surface)}
+.v2-badge[data-variant="solid"]{background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-badge-solid-depth)}
+.v2-badge[data-size="compact"]{min-height:var(--v2-badge-compact-height);border-radius:var(--v2-radius-chip);font-size:var(--v2-badge-compact-type);line-height:var(--v2-line-compact)}
+.v2-badge[data-size="medium"]{min-height:var(--v2-badge-medium-height);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-count-badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-width:var(--v2-space-6);min-height:var(--v2-space-6);padding:calc(var(--v2-space-1)/2) var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-badge-solid-depth);font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;cursor:default}
+.v2-unread-dot{display:inline-block;width:var(--v2-space-2);height:var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-action);box-shadow:var(--v2-badge-solid-depth);flex:none;cursor:default}
+.v2-count-badge[hidden],.v2-unread-dot[hidden]{display:none}
+.v2-badge-context-name{min-width:0;overflow-wrap:anywhere;font-weight:700}
+.v2-badge-context-row{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-3);min-width:0;margin-top:var(--v2-space-4)}
+.v2-badge-context-row>span:first-child{min-width:0;overflow-wrap:anywhere}
+.v2-badge-context-row>span:last-child{flex:none;display:flex;align-items:center}
+.v2-badge-preview-controls{display:flex;align-items:center;flex-wrap:wrap;gap:var(--v2-space-3);font-weight:700}
+.v2-badge-preview-controls select{min-height:var(--v2-space-12);padding:var(--v2-space-2);border:1px solid var(--v2-control-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-badge-preview-controls select:focus-visible{outline:3px solid var(--v2-focus);outline-offset:3px}
+.v2-badge-preview-message{margin:var(--v2-space-3) 0 0;min-height:var(--v2-line-secondary);color:var(--v2-text-muted);overflow-wrap:anywhere}
+.v2-badge-rules{padding-inline-start:var(--v2-space-5);color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-badge-rules li+li{margin-top:var(--v2-space-2)}
+@media(min-width:80rem){.v2-badge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-badge,.v2-count-badge{border:1px solid CanvasText;background:Canvas;color:CanvasText;box-shadow:none}.v2-unread-dot{background:CanvasText;box-shadow:none}}

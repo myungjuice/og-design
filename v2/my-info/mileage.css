@@ -1,0 +1,69 @@
+/* Hallmark · OG 3D mileage history · existing app system, not a new theme.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Sheet/chips carry depth; dates, signed amounts and records remain flat.
+ * Fixture-only previews; native OS chrome and decorative motion omitted. */
+:host{display:block;width:100%;max-width:390px;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-mileage-history-frame{position:relative;width:100%;height:846px;overflow:clip;background:linear-gradient(155.7683deg,var(--v2-screen-top),var(--v2-screen-bottom));font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-mileage-backdrop{position:absolute;inset:0;color:var(--v2-text)}
+.v2-history-scrim{position:absolute;inset:0;background:var(--v2-dialog-scrim)}
+.v2-mileage-history-frame>.v2-sheet-static{position:absolute;inset:64px 0 0;max-width:none}
+.v2-mileage-history-frame .v2-sheet-panel{height:100%;max-height:100%}
+.v2-mileage-history-frame .og-sheet-body{flex:1;display:flex;flex-direction:column}
+.v2-history-balance{display:grid;gap:var(--v2-space-1);padding:var(--v2-space-2) 0 var(--v2-space-6)}
+.v2-history-balance>span{color:var(--v2-text-muted);font-size:var(--v2-type-secondary)}
+.v2-history-balance>strong{font:700 var(--v2-type-amount)/var(--v2-line-amount) var(--v2-font);color:var(--v2-action);font-variant-numeric:tabular-nums}
+.v2-history-periods{display:flex;gap:var(--v2-space-1);flex-wrap:wrap;padding-block:var(--v2-space-1)}
+.v2-history-periods .v2-chip{min-width:60px;padding-inline:var(--v2-space-2);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-history-periods .v2-chip-check{position:static;display:none;margin:0}
+.v2-history-periods .v2-chip[aria-pressed=true] .v2-chip-check{display:block}
+.v2-history-periods .v2-chip[aria-pressed=true]{font-weight:700}
+.v2-history-range{margin:var(--v2-space-3) 0 var(--v2-space-5);color:var(--v2-text-muted);font-variant-numeric:tabular-nums}
+.v2-history-record{border-top:1px solid var(--v2-edge);padding-block:var(--v2-space-4)}
+.v2-history-record h3{margin:0 0 var(--v2-space-2);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);color:var(--v2-text-muted);font-variant-numeric:tabular-nums}
+.v2-history-record .v2-list-row{min-height:44px;padding:0;border-radius:0;gap:var(--v2-space-2)}
+.v2-history-record .og-row-copy{flex-basis:120px}
+.v2-history-record[data-record-direction=earned] .og-row-value{color:var(--v2-action)}
+.v2-history-empty{display:grid;flex:1;place-items:center;padding:var(--v2-space-5);color:var(--v2-text-muted);text-align:center}
+.v2-history-empty p{margin:0;overflow-wrap:anywhere}
+.v2-history-period-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--v2-space-4);background:var(--v2-dialog-scrim)}
+.v2-history-period-panel{width:100%;max-width:358px;max-height:calc(100% - 32px);overflow:auto;padding:var(--v2-space-4);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-card);background:var(--v2-surface);box-shadow:var(--v2-depth-panel)}
+.v2-history-period-panel>h2{margin:0 0 var(--v2-space-5);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-history-period-panel .og-picker-summary{font-variant-numeric:tabular-nums}
+/* Read-only calendar: all seven columns remain visible, including at 320px.
+ * The live date-picker retains its original 44px touch targets unchanged. */
+.v2-history-period-panel .og-calendar-week,.v2-history-period-panel .og-calendar-grid{min-width:0;grid-template-columns:repeat(7,minmax(0,1fr))}
+.v2-history-period-panel .og-calendar-day{min-width:0}
+.v2-history-period-panel .og-picker-footer .v2-button{font-family:var(--v2-font)}
+@media(forced-colors:active){.v2-history-period-panel,.v2-mileage-history-frame .v2-sheet-panel{border:1px solid CanvasText}.v2-history-record[data-record-direction=earned] .og-row-value{color:CanvasText}}
+/* The compact candidate keeps month/summary/filters stationary; only rows scroll. */
+.v2-monthly-frame .og-sheet-body{overflow:clip;padding:var(--v2-space-4);gap:var(--v2-space-3)}
+.v2-monthly-frame .og-sheet-footer{display:none}
+.v2-monthly-controls{flex:none;min-width:0}
+.v2-monthly-month{display:flex;align-items:center;gap:var(--v2-space-1);min-height:48px}
+.v2-monthly-month button{display:grid;place-items:center;width:44px;height:44px;flex:none;padding:0;border:0;border-radius:var(--v2-radius-button);background:none;color:var(--v2-text-muted)}
+.v2-monthly-month svg,.v2-monthly-symbol svg{width:20px;height:20px}
+.v2-monthly-month strong{font-size:var(--v2-type-card);font-weight:700;white-space:nowrap}
+.v2-monthly-month .v2-monthly-filter{margin-left:auto}
+.v2-monthly-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:var(--v2-space-3) 0;margin:var(--v2-space-2) 0 var(--v2-space-3);border-radius:var(--v2-radius-button);background:var(--v2-selected-surface)}
+.v2-monthly-summary>div{display:grid;gap:var(--v2-space-1);text-align:center;min-width:0}
+.v2-monthly-summary>div+div{border-left:1px solid var(--v2-edge)}
+.v2-monthly-summary dt{color:var(--v2-text-muted);font-size:var(--v2-type-caption)}
+.v2-monthly-summary dd{margin:0;color:var(--v2-focus);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.v2-monthly-summary>div:nth-child(2) dd{color:var(--v2-error)}
+.v2-monthly-types{display:flex;gap:var(--v2-space-1);padding-block:var(--v2-space-1);min-width:0}
+.v2-monthly-types .v2-chip{flex:1;min-width:0;min-height:44px;padding-inline:var(--v2-space-1);font-size:var(--v2-type-secondary);gap:var(--v2-space-1)}
+.v2-monthly-types .v2-chip-check{position:static;display:none;margin:0;width:12px;height:12px}
+.v2-monthly-types .v2-chip[aria-pressed=true] .v2-chip-check{display:block}
+.v2-monthly-records{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.v2-monthly-records:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+.v2-monthly-records h3{margin:var(--v2-space-2) 0 0;color:var(--v2-text-muted);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
+.v2-monthly-records ul{margin:0;padding:0;list-style:none}
+.v2-monthly-records li{display:flex;align-items:center;gap:var(--v2-space-2);min-height:72px;border-bottom:1px solid var(--v2-edge);padding-block:var(--v2-space-2)}
+.v2-monthly-symbol{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:var(--v2-radius-button);background:var(--v2-selected-surface);color:var(--v2-focus)}
+.v2-monthly-copy{display:grid;gap:var(--v2-space-1);min-width:0;flex:1}
+.v2-monthly-copy strong{font-size:var(--v2-type-secondary);font-weight:700;overflow-wrap:anywhere}
+.v2-monthly-value{display:grid;gap:var(--v2-space-1);flex:none;text-align:right;font-variant-numeric:tabular-nums}
+.v2-monthly-value strong{color:var(--v2-focus);font-size:var(--v2-type-secondary)}
+.v2-monthly-copy span,.v2-monthly-value span{color:var(--v2-text-muted);font-size:var(--v2-type-caption);white-space:nowrap}
+[data-mileage-type=spent] .v2-monthly-value strong{color:var(--v2-error)}

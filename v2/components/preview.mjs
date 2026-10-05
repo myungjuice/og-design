@@ -11,6 +11,13 @@ import '../../design-system/components/help/help.js';
 import {setupHelpSamples} from './help.mjs';
 import {setupIconButtonSamples} from './icon-button.mjs';
 import {setupTabs} from './tabs.mjs';
+import {setupChips} from './chips.mjs';
+import {setupBadgeSamples} from './badges.mjs';
+import {setupMediaSamples} from './media.mjs';
+import {setupQuantitySamples} from './quantity.mjs';
+import {setupSheetSamples} from './sheet.mjs';
+import {setupDateTimeSamples} from './date-time.mjs';
+import {setupAttachmentSamples} from './attachments.mjs';
 export function setupComponentPreview(root){
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
@@ -24,6 +31,13 @@ export function setupComponentPreview(root){
  setupHelpSamples(root);
  setupIconButtonSamples(root);
  setupTabs(root);
+ setupChips(root);
+ setupBadgeSamples(root);
+ setupMediaSamples(root);
+ setupQuantitySamples(root);
+ setupSheetSamples(root);
+ setupDateTimeSamples(root);
+ setupAttachmentSamples(root);
  root.addEventListener('click',event=>{
   const row=event.target.closest('[data-preview-row]');
   if(row&&!row.disabled){

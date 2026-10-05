@@ -1,0 +1,9 @@
+/* Hallmark audit: existing OG soft 3D. One shared containment layer per record;
+ * restrained content, shared rim on avatar/menu, no decorative icons or new colors. */
+.v2-review-history-stage{position:relative;width:100%;max-width:390px}
+.v2-review-history-frame .og-app-bar>.v2-avatar{flex:none;margin:0 var(--v2-space-2)}
+.v2-review-history-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:var(--v2-space-4);font-variant-numeric:tabular-nums}
+.v2-review-history-body:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+.v2-review-history-body .v2-feedback{margin:var(--v2-space-12) 0;box-shadow:none}
+.v2-review-floating-menu{position:absolute;top:128px;right:var(--v2-space-4);width:128px}
+.v2-review-delete-frame .v2-dialog-static{width:100%;max-width:320px}

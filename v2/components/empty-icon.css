@@ -1,0 +1,5 @@
+/* Hallmark · component: decorative empty-state icon · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E5 S5 R5 V4 · reservation icon-seat material, no motion or interactive states. */
+.v2-empty-icon{display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:var(--v2-radius-chip);background:var(--v2-notice-info-surface);color:var(--v2-focus);box-shadow:var(--v2-notice-icon-depth)}
+.v2-empty-icon svg{display:block;width:24px;height:24px;flex:none}
+@media(forced-colors:active){.v2-empty-icon{box-shadow:none;border:1px solid CanvasText}}

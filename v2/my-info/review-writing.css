@@ -1,0 +1,22 @@
+/* Existing source layouts and state conditions; shared v2 surfaces own materials.
+ * SVG geometry replaces icon-font selectors inside these static specimens. */
+.og-photo-review :is(.og-photo-profile,.og-photo-body,.og-photo-entry,.og-photo-preview),
+.og-review-write :is(.og-write-body,.og-write-heading,.og-write-images,.og-write-footer){min-width:0}
+.og-photo-action>svg{flex:none;width:18px;height:18px}
+.og-photo-store-icon>svg{width:24px;height:24px}
+.og-write-inline>svg,.og-write-help h4>svg{flex:none;width:18px;height:18px}
+.og-write-help h4>svg{color:var(--v2-text-muted)}
+.v2-source-frame .og-write-delete{padding:0;color:var(--v2-text-muted);background:transparent}
+.v2-source-frame .og-write-delete::before{content:"";position:absolute;inset:var(--v2-space-3);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-chip);background:var(--v2-surface);box-shadow:var(--v2-media-rim)}
+.v2-source-frame .og-write-delete>svg{position:relative;width:var(--v2-space-5);height:var(--v2-space-5);padding:var(--v2-space-1);box-sizing:border-box;background:transparent;color:inherit}
+.v2-source-frame.og-photo-review .og-photo-menu{width:128px}
+.v2-source-frame.og-photo-review .og-feedback-icon{background:transparent;box-shadow:none;color:var(--v2-action)}
+.v2-source-frame.og-photo-review .og-feedback-icon>svg{width:var(--v2-space-8);height:var(--v2-space-8)}
+.v2-source-frame.og-review-write .og-write-footer{grid-template-columns:auto minmax(0,1fr)}
+.v2-source-frame.og-review-write .og-write-footer>.v2-button:first-child{width:auto;padding-inline:var(--v2-space-4);justify-self:start}
+.v2-source-frame.og-review-write .og-write-footer>.v2-button:last-child{justify-self:end}
+.og-photo-body,.og-write-body{overscroll-behavior:contain;scrollbar-width:thin}
+.og-review-write .v2-input-textarea textarea{resize:none;max-height:none}
+/* Retain source overlay positioning after the shared icon's relative base rule. */
+.og-review-write :is(.og-write-help-close,.og-write-delete){position:absolute}
+.og-review-write .og-write-overlay .og-dialog-title{padding-right:var(--v2-space-12)}

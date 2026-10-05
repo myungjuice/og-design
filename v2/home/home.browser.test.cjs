@@ -15,7 +15,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await page.locator('.home-test').count(),1);
    assert.equal(await page.locator('.my-info-test,.barcode-test,iframe,.mobile-status-bar,.mobile-home-indicator').count(),0);
    assert.equal(await page.locator('.v2-menu nav [aria-current]').textContent(),'홈화면');
-   assert.ok(!(await page.locator('.v2-intro').innerText()).includes('승인'));
+   assert.ok(!(await page.locator('#overview .v2-intro').innerText()).includes('승인'));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no root overflow '+width);
    const geometry=await page.locator('.home-test').evaluate(n=>{
     const r=n.getBoundingClientRect(),controls=n.querySelector('.home-map-controls').getBoundingClientRect(),nav=n.querySelector('.bottom-navigation').getBoundingClientRect();

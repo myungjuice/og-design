@@ -1,0 +1,44 @@
+/* Hallmark · component: character choice · pre-emit critique: P5 H4 E5 S5 R5 V4
+ * genre: playful · theme: existing OG 3D · app character selection
+ * Hallmark · macrostructure: app-choice-list · three one-tap radios
+ * Reference-based transparent mascots on low oval stands; rolled soft edges, no outlined plate.
+ * No fake OS chrome, parts UI, or decorative motion. */
+.v2-character-screen,.v2-character-screen *{box-sizing:border-box}
+.v2-character-main .profile-edit{gap:var(--v2-space-2)}
+.v2-character-screen{width:100%;max-width:390px;height:846px;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom));color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);display:flex;flex-direction:column;overflow:clip}
+.v2-character-screen svg,.v2-character-avatar svg{display:block;width:24px;height:24px;flex:none}
+.v2-character-header{display:flex;align-items:center;height:64px;flex:none;padding:var(--v2-space-2);gap:var(--v2-space-2)}
+.v2-character-header h2{flex:1;min-width:0;margin:0;text-align:center;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-character-header>span,.v2-character-back{width:48px;height:48px;flex:none}
+.v2-character-back{display:grid;place-items:center;border:0;background:none;color:var(--v2-text);border-radius:var(--v2-radius-button);padding:0;cursor:pointer}
+.v2-character-body{padding:var(--v2-space-6) var(--v2-space-4);flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.v2-character-body>h3{font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);margin:0;min-width:0;overflow-wrap:anywhere}
+.v2-character-body>p{margin:var(--v2-space-2) 0;color:var(--v2-text-muted)}
+.v2-character-options{display:grid;gap:var(--v2-space-4);margin-top:var(--v2-space-6)}
+.v2-character-choice{display:flex;align-items:center;text-align:left;width:100%;min-width:0;min-height:168px;padding:var(--v2-space-4) calc(var(--v2-space-4) + 2px);gap:var(--v2-space-3);border:0;border-radius:var(--v2-radius-card);background:var(--v2-character-face);color:var(--v2-text);font:inherit;box-shadow:var(--v2-character-depth);cursor:pointer}
+.v2-character-choice[aria-checked="true"]{background:var(--v2-character-selected-face)}
+.v2-character-copy{display:grid;gap:var(--v2-space-2);flex:1;min-width:0}
+.v2-character-copy strong{font-size:var(--v2-type-card);line-height:var(--v2-line-card);font-weight:700;white-space:nowrap}
+.v2-character-copy>span{font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);white-space:nowrap;color:var(--v2-text-muted)}
+.v2-character-check{display:grid;place-items:center;width:24px;height:24px;flex:none;border:1px solid var(--v2-control-edge);border-radius:var(--v2-radius-chip);color:var(--v2-on-action)}
+.v2-character-check svg{visibility:hidden;width:18px;height:18px}
+.v2-character-choice[aria-checked="true"] .v2-character-check{border-color:var(--v2-action);background:var(--v2-action);box-shadow:var(--v2-badge-solid-depth)}
+.v2-character-choice[aria-checked="true"] .v2-character-check svg{visibility:visible}
+.v2-character-art{display:block;flex:none;width:104px;height:120px;background-image:url('/v2/my-info/media/bear-cutout-v2.png');background-repeat:no-repeat;background-size:contain;background-position:center;filter:drop-shadow(0 2px 2px var(--v2-contact))}
+/* The display/stand belongs only to choices; avatars and membership stay untouched. */
+.v2-character-display{position:relative;display:block;flex:none;width:104px;height:132px;isolation:isolate}
+.v2-character-display::before{content:"";position:absolute;left:var(--v2-space-2);right:var(--v2-space-2);bottom:var(--v2-space-1);height:var(--v2-space-4);border-radius:50%;background:var(--v2-character-stand-face);box-shadow:var(--v2-character-stand-depth);pointer-events:none}
+.v2-character-choice .v2-character-art{position:relative;width:100%;filter:none;background-position:center bottom}
+.v2-character-choice .v2-character-art::before{content:"";position:absolute;left:var(--v2-space-6);right:var(--v2-space-6);bottom:0;height:var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-character-foot);pointer-events:none}
+.v2-character-art[data-character-art="penguin"]{background-image:url('/v2/my-info/media/penguin-cutout-v2.png')}
+.v2-character-art[data-character-art="raccoon"]{background-image:url('/v2/my-info/media/raccoon-cutout-v2.png')}
+.v2-character-avatar{display:grid;place-items:center;padding:0;background:var(--v2-surface);color:var(--v2-action);box-shadow:var(--v2-media-rim);cursor:pointer;overflow:clip}
+.v2-character-avatar .v2-character-art{width:56px;height:56px;background-size:88px auto;background-position:center top;filter:none}
+.v2-character-main [data-character-open]:focus-visible,.v2-character-screen button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-character-choice:active{transform:translateY(1px);box-shadow:var(--v2-depth-inset)}
+.v2-character-choice:disabled,.v2-character-back:disabled{color:var(--v2-text-muted);background:var(--v2-disabled);box-shadow:none;cursor:not-allowed}
+.v2-character-back:active{background:var(--v2-selected-surface)}
+@media(hover:hover){.v2-character-choice:not([aria-checked="true"]):hover{background:var(--v2-character-selected-face)}.v2-character-back:hover{background:var(--v2-selected-surface)}}
+@media(prefers-reduced-motion:reduce){.v2-character-choice:active{transform:none}}
+@media(max-width:350px){.v2-character-choice{gap:var(--v2-space-2);padding:var(--v2-space-3) calc(var(--v2-space-3) + 2px)}.v2-character-display{width:96px}.v2-character-copy>span{font-size:11px}}
+@media(forced-colors:active){.v2-character-choice{outline:1px solid ButtonText;box-shadow:none}.v2-character-choice[aria-checked="true"]{outline-color:Highlight}.v2-character-choice[aria-checked="true"] .v2-character-check{background:Highlight;color:HighlightText}.v2-character-choice .v2-character-art::before,.v2-character-display::before{display:none}}

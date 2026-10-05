@@ -7,7 +7,7 @@ import {renderWorkspace} from './render.mjs';
 test('all component entries belong to one related preview group',()=>{
  const groups=reviewGroups('components');
  assert.deepEqual(groups.map(g=>g.items.map(item=>item.id)),[
-  ['primary','secondary','review','icon-buttons'],['cards','mileage','section-heading'],['list-row'],['checkbox','radio','switch'],['tabs','segmented'],['search','text-input','password-input','phone-input','numeric-input','multiline-input'],['dialogs','notices','empty-feedback','snackbar','help'],['loading'],['categories'],['navigation'],['try']
+  ['primary','secondary','review','icon-buttons'],['cards','mileage','section-heading'],['surfaces','dividers'],['avatar','thumbnail'],['attachment-picker','image-viewer'],['list-row'],['quantity'],['checkbox','radio','switch'],['chip-single','chip-multiple','chip-filters'],['badges','notification-badges'],['tabs','segmented'],['search','text-input','password-input','phone-input','numeric-input','multiline-input'],['date-picker','range-picker','time-picker'],['dialogs','notices','empty-feedback','snackbar','help'],['bottom-sheet'],['loading'],['categories'],['navigation'],['try']
  ]);
  assert.deepEqual(groups.flatMap(g=>g.items.map(item=>item.id)).sort(),componentItems.map(item=>item.id).sort());
 });
@@ -26,10 +26,10 @@ test('every destination separates primary destinations from secondary items',()=
 });
 test('unported screens are non-links and excluded from the ready group picker',()=>{
  const html=renderSubnavigation({pageId:'my-info',label:'내정보'});
- assert.match(html,/이관 예정/);
- assert.equal((html.match(/data-view-link=/g)||[]).length,1);
- assert.equal((html.match(/aria-disabled="true"/g)||[]).length,9);
- assert.equal(renderReviewPicker('my-info'),'');
+ assert.match(html,/작업 보류/);
+ assert.equal((html.match(/data-view-link=/g)||[]).length,25);
+ assert.equal((html.match(/aria-disabled="true"/g)||[]).length,2);
+ assert.match(renderReviewPicker('my-info'),/value="mileage-history"/);
  for(const id of ['my-land','og-park']){
   assert.deepEqual(reviewGroups(id),[]);
   assert.doesNotMatch(renderSubnavigation({pageId:id,label:id}),/<a\b/);

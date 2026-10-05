@@ -3,6 +3,8 @@
 @import url('../components/screen.css');
 @import url('../components/button.css');
 .barcode-sheet{max-height:100%;overflow-y:auto}
+/* Keep the explanation readable rather than shrinking it to force a single line. */
+.barcode-empty-hint{font-size:var(--v2-type-caption);white-space:normal}
 .barcode-action.og-button{font-weight:700}
 .barcode-action.og-button:disabled{background:var(--v2-disabled);color:var(--v2-text-muted)}
 @media(hover:hover){.barcode-action.og-button:hover:not(:disabled),.barcode-close:hover,.barcode-guide:hover{transform:none}}

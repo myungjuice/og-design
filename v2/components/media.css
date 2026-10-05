@@ -1,0 +1,48 @@
+/* Hallmark · component: profile/thumbnail · genre: playful · theme: existing OG 3D
+ * audience: OG design review · use: image identity, ratios and resilient fallback · tone: soft, restrained
+ * Component-scope: no macrostructure/nav/footer or theme rotation.
+ * pre-emit critique P5 H5 E5 S5 R5 V4. Existing OG font/white surfaces are preserved.
+ * Passive image states: ready/loading/empty/error; no invented hover, pressed, disabled or success actions.
+ * Existing designer profile layers are unchanged; no generated media, glow or decorative motion. */
+.v2-media-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-media-stage{box-sizing:border-box;width:100%;max-width:390px;min-width:0;padding:var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-avatar{--v2-avatar-size:var(--v2-space-12);position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;box-sizing:border-box;width:var(--v2-avatar-size);height:var(--v2-avatar-size);border:2px solid var(--v2-material-edge);border-radius:var(--v2-radius-chip);background:var(--v2-input-fill);color:var(--v2-focus);box-shadow:var(--v2-media-rim);overflow:clip;cursor:default}
+.v2-avatar[data-size="small"]{--v2-avatar-size:var(--v2-space-8)}
+.v2-avatar[data-size="large"]{--v2-avatar-size:calc(var(--v2-space-8)*2)}
+.v2-avatar-image{position:absolute;inset:0;overflow:clip;border-radius:inherit;pointer-events:none}
+.v2-avatar-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.v2-avatar-base img,.v2-avatar-overlay img{position:absolute;max-width:none;object-fit:fill}
+.v2-avatar-base img{width:263.33%;height:175.56%;left:-81.53%;top:-.5%}
+.v2-avatar-overlay img{width:321.55%;height:568.67%;left:-19.98%;top:-135.46%}
+.v2-avatar-fallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.v2-avatar-fallback svg{width:60%;height:60%}
+.v2-avatar[data-state="ready"] .v2-avatar-fallback{display:none}
+.v2-avatar:not([data-state="ready"]) .v2-avatar-image{visibility:hidden}
+.v2-avatar[data-state="loading"]{background:var(--v2-skeleton);box-shadow:none}
+.v2-avatar[data-state="loading"] .v2-avatar-fallback{visibility:hidden}
+.v2-thumbnail{position:relative;display:flex;align-items:center;justify-content:center;flex:none;box-sizing:border-box;width:calc(var(--v2-space-8)*2);aspect-ratio:1;border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);background:var(--v2-muted-surface);color:var(--v2-text-muted);box-shadow:var(--v2-media-rim);overflow:clip;cursor:default}
+.v2-thumbnail[data-ratio="wide"]{width:100%;aspect-ratio:16/9}
+.v2-thumbnail>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.v2-thumbnail[data-fit="contain"]>img{object-fit:contain}
+.v2-thumbnail:not([data-state="ready"])>img{visibility:hidden}
+.v2-thumbnail .og-media-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--v2-space-2);padding:var(--v2-space-2);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);text-align:center;overflow-wrap:anywhere}
+.v2-thumbnail .og-media-fallback svg{width:var(--v2-space-6);height:var(--v2-space-6);flex:none}
+.v2-thumbnail[data-ratio="square"] .og-media-fallback>span{display:none}
+.v2-thumbnail[data-state="ready"] .og-media-fallback{display:none}
+.v2-thumbnail[data-state="loading"]{background:var(--v2-skeleton);box-shadow:none}
+.v2-thumbnail[data-state="loading"] .og-media-fallback svg{display:none}
+.v2-avatar-sizes{display:flex;align-items:end;flex-wrap:wrap;gap:var(--v2-space-4)}
+.v2-avatar-sizes>div{display:flex;flex-direction:column;align-items:center;gap:var(--v2-space-2)}
+.v2-avatar-sizes>div>span:last-child{font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);color:var(--v2-text-muted)}
+.v2-media-context{display:flex;align-items:center;gap:var(--v2-space-4);min-width:0}
+.v2-avatar-sizes+.v2-media-context{margin-top:var(--v2-space-6)}
+.v2-media-context>div{min-width:0;overflow-wrap:anywhere}
+.v2-media-context p{margin:var(--v2-space-1) 0 0;color:var(--v2-text-muted)}
+.v2-media-controls{display:flex;align-items:center;flex-wrap:wrap;gap:var(--v2-space-3);font-weight:700}
+.v2-media-controls select{min-height:var(--v2-space-12);padding:var(--v2-space-2);border:1px solid var(--v2-control-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-media-controls select:focus-visible{outline:3px solid var(--v2-focus);outline-offset:3px}
+.v2-media-preview-title{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);margin:var(--v2-space-6) 0 var(--v2-space-3)}
+.v2-media-preview-slot{margin-top:var(--v2-space-4)}
+.v2-media-message{min-height:var(--v2-line-secondary);margin:var(--v2-space-3) 0 0;color:var(--v2-text-muted);overflow-wrap:anywhere}
+@media(min-width:80rem){.v2-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-avatar,.v2-thumbnail{border-color:CanvasText;background:Canvas;color:CanvasText;box-shadow:none}.v2-avatar[data-state="loading"],.v2-thumbnail[data-state="loading"]{background:Canvas}}

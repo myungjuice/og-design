@@ -1,0 +1,51 @@
+/* Hallmark · macrostructure: store identity → section rail → photo/introduction
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG design review · use: read store identity and available sections
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · original data and 3 states preserved.
+ * Shallow shared action seats/media rim only; flat identity and section rail.
+ * contrast: pass (40–41, store text/icons/focus only) · tokens: pass (48)
+ * chrome: pass (47) · mobile: pass (34,49–57), 320/375/390/414/768px inspected. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+.v2-home-store-frame{width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text)}
+.og-store{width:100%;height:100%;display:flex;flex-direction:column;overflow:clip;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-store-toolbar{display:flex;align-items:center;justify-content:space-between;flex:none;padding:var(--v2-space-2)}
+.og-store-toolbar>div{display:flex;align-items:center;gap:var(--v2-space-1)}
+.og-store-identity{display:flex;align-items:flex-start;gap:var(--v2-space-3);padding:var(--v2-space-3) var(--v2-space-4) var(--v2-space-5)}
+.v2-store-logo{flex:none;width:34px;height:34px;margin-top:var(--v2-space-1)}
+.v2-store-logo .v2-thumbnail{width:100%;height:100%;aspect-ratio:auto}
+.v2-store-logo .og-media-fallback{padding:0}
+.og-store-identity-copy{flex:1;min-width:0}
+.og-store-name{display:flex;align-items:baseline;gap:var(--v2-space-2);flex-wrap:wrap}
+.og-store-name h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);min-width:0;overflow-wrap:anywhere}
+.og-store-name>span,.og-store-identity p{color:var(--v2-text-muted)}
+.og-store-identity p{margin:var(--v2-space-1) 0 0;overflow-wrap:anywhere}
+.og-store-status{display:flex;gap:var(--v2-space-2);align-items:center;flex-wrap:wrap}
+.og-store-status strong{color:var(--v2-text)}
+.og-store-event{display:flex;flex-direction:column;align-items:center;flex:none;font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);color:var(--v2-warning)}
+.og-store-event svg{width:var(--v2-space-5);height:var(--v2-space-5)}
+/* Same flat text + underline vocabulary as common tabs, but these are section
+ * shortcuts, not tab panels. No false aria-controls/content-switching contract. */
+.v2-store-sections{display:flex;flex:none;min-width:0;gap:var(--v2-space-5);overflow-x:auto;overscroll-behavior-inline:contain;padding-inline:var(--v2-space-4);border-bottom:1px solid var(--v2-edge);scrollbar-width:none}
+.v2-store-sections button{box-sizing:border-box;position:relative;flex:none;min-width:var(--v2-space-12);min-height:var(--v2-space-12);padding:var(--v2-space-3) 0;border:0;border-radius:0;background:var(--v2-surface);color:var(--v2-text-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap}
+.v2-store-sections [aria-current="location"]{color:var(--v2-focus);font-weight:700}
+.v2-store-sections [aria-current="location"]::after{content:"";position:absolute;inset-inline:0;bottom:0;height:2px;background:var(--v2-focus)}
+.v2-store-sections:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.og-store-body{flex:1;overflow:auto;min-height:0;padding-top:var(--v2-space-4);overscroll-behavior:contain}
+.og-store-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.og-store-photo{position:relative;margin-inline:var(--v2-space-4);aspect-ratio:1}
+.og-store-photo .v2-thumbnail{height:100%;width:100%;aspect-ratio:auto}
+.og-store-photo[data-store-hero-closed="true"] .v2-thumbnail{filter:grayscale(1) brightness(.55)}
+.v2-store-hero-status{box-sizing:border-box;position:absolute;inset-inline:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--v2-space-2);padding:var(--v2-space-4) var(--v2-space-5);background:color-mix(in oklab,var(--v2-text) 60%,transparent);backdrop-filter:blur(12px);color:var(--v2-on-action);text-align:center;pointer-events:none}
+.v2-store-hero-status svg{width:var(--v2-space-6);height:var(--v2-space-6);color:color-mix(in oklab,var(--v2-warning) 35%,var(--v2-on-action))}
+.v2-store-hero-status[data-hero-status="tempHoliday"] svg{color:color-mix(in oklab,var(--v2-action) 35%,var(--v2-on-action))}
+.v2-store-hero-status:is([data-hero-status="regularHoliday"],[data-hero-status="holiday"]) svg{color:color-mix(in oklab,var(--v2-success) 35%,var(--v2-on-action))}
+.v2-store-hero-status strong{font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere}
+.v2-store-hero-status span{font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
+.og-store-count{position:absolute;right:var(--v2-space-4);bottom:var(--v2-space-4);background:var(--v2-text);color:var(--v2-on-action);padding:var(--v2-space-1) var(--v2-space-2);border-radius:var(--v2-radius-chip);font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums}
+.og-store-promotion{padding:var(--v2-space-8) var(--v2-space-4)}
+.og-store-promotion h4{margin:0 0 var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);min-width:0;overflow-wrap:anywhere;white-space:pre-line}
+.og-store-promotion p{margin:0;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.og-store-promotion[data-promotion-expanded="true"] p{display:block;-webkit-line-clamp:unset;overflow:visible;white-space:pre-line}
+.v2-store-promotion-affordance{display:flex;align-items:center;justify-content:flex-end;gap:var(--v2-space-1);min-width:var(--v2-space-12);min-height:var(--v2-space-12);margin-left:auto;padding:0;border:0;background:transparent;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-store-promotion-affordance svg{width:var(--v2-space-5);height:var(--v2-space-5);color:var(--v2-text-muted)}
+@media(forced-colors:active){.og-store-photo[data-store-hero-closed="true"] .v2-thumbnail{filter:none}.v2-store-hero-status{background:Canvas;color:CanvasText;border:1px solid CanvasText;backdrop-filter:none}.v2-store-hero-status svg{color:CanvasText}}

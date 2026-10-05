@@ -43,7 +43,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    const barcodeCard=await page.locator('.mileage-card').evaluate(cardStyle);
    await page.goto(`${base}/v2/my-info/`);await page.locator('.mileage-card').waitFor();
    assert.deepEqual(await page.locator('.mileage-card').evaluate(cardStyle),barcodeCard,'same shared mileage markup and material as My Info '+width);
-   assert.equal(await page.locator('.v2-intro').innerText(),'마일리지와 최근 방문 내역, 주요 메뉴를 한눈에 확인하는 화면입니다.');
+   assert.equal(await page.locator('#overview .v2-intro').innerText(),'마일리지와 최근 방문 내역, 주요 메뉴를 한눈에 확인하는 화면입니다.');
    await page.goto(`${base}/v2/barcode/`);await page.locator('.barcode-test').waitFor();
    await page.evaluate(async()=>{
     const {renderBarcodeScreen}=await import('/v2/barcode/render.mjs');

@@ -1,5 +1,5 @@
 import {tooltip,popover} from '../../design-system/components/help/render.mjs';
-import {iconButton} from '../../design-system/components/button/render.mjs';
+import {iconButton,button} from '../../design-system/components/button/render.mjs';
 import {renderIconButton} from './icon-button.mjs';
 import {attributes as attrs,uid} from '../../design-system/components/core.mjs';
 export function renderHelp({kind='popover',id=uid('v2-help'),title='마일리지 안내',body='',live=false}={}){
@@ -11,6 +11,10 @@ export function renderHelp({kind='popover',id=uid('v2-help'),title='마일리지
  return popover({id,title,body,attributes:live?{popover:'auto','data-help-panel':kind}:{}})
   .replace('class="og-popover"','class="og-popover v2-help-panel"')
   .replace(iconButton({label:'안내 닫기',name:'close',className:'og-help-close',attributes:{'data-help-close':true}}),renderIconButton({kind:'close',face:'plain',label:'안내 닫기',className:'og-help-close',attributes:{'data-help-close':true}}));
+}
+// The menu supplies one raised container; its actions remain quiet text rows.
+export function renderActionMenu({label='리뷰 관리 메뉴',items=[{label:'수정'},{label:'삭제',danger:true}]}={}){
+ return '<div class="v2-action-menu" role="group"'+attrs({'aria-label':label})+'>'+items.map(item=>button({label:item.label,variant:'text',className:'v2-button v2-action-menu-item',disabled:!!item.disabled,attributes:{'data-tone':item.danger?'danger':undefined}})).join('')+'</div>';
 }
 const trigger=(kind,id,label)=>renderIconButton({kind:'info',face:'plain',label,className:'v2-help-trigger',attributes:{'data-help-trigger':kind,...(kind==='popover'?{'aria-haspopup':'dialog','aria-expanded':'false','aria-controls':id}:{'aria-describedby':id})}});
 const body='사용 가능 마일리지는 지금 사용할 수 있는 금액입니다. 총 보유 마일리지에는 사용 가능 금액이 포함됩니다.';

@@ -1,0 +1,21 @@
+/* Hallmark · component: surface/divider · genre: playful · theme: existing OG 3D
+ * audience: OG review · use: informational hierarchy · tone: restrained soft
+ * Passive surfaces: no invented interactive states. Pre-emit critique: P5 H5 E5 S5 R5 V4 */
+.v2-surface-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+.v2-surface-stage{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);background:var(--v2-page);color:var(--v2-text);border-radius:var(--v2-radius-card)}
+.v2-surface{box-sizing:border-box;min-width:0;padding:var(--v2-space-4);border:1px solid var(--v2-edge);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-depth-raised);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere}
+.v2-surface[data-depth="flat"]{box-shadow:var(--v2-depth-flat)}
+.v2-surface[data-depth="inset"]{background:var(--v2-muted-surface);box-shadow:var(--v2-depth-inset)}
+.v2-surface h3{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-surface p{margin:var(--v2-space-2) 0 0;color:var(--v2-text-muted)}
+.v2-divider{display:block;flex:none;margin:0;border:0;height:1px;background:var(--v2-edge);box-shadow:none}
+.v2-divider[data-inset="true"]{margin-inline:var(--v2-space-4)}
+.v2-divider[aria-orientation="vertical"]{width:1px;height:auto;align-self:stretch}
+.v2-divider-demo{background:var(--v2-surface);color:var(--v2-text);border-radius:var(--v2-radius-button)}
+.v2-divider-demo p{margin:0;padding:var(--v2-space-4);font-size:var(--v2-type-secondary)}
+.v2-divider-columns{display:flex;gap:var(--v2-space-4);font-size:var(--v2-type-secondary);font-variant-numeric:tabular-nums}
+.v2-divider-columns>div{display:grid;gap:var(--v2-space-2);min-width:0;flex:1}
+.v2-divider-columns span{color:var(--v2-text-muted)}
+@media(max-width:24rem){.v2-divider-columns{flex-direction:column}.v2-divider-columns>.v2-divider{height:1px;width:100%;align-self:auto}}
+@media(min-width:80rem){.v2-surface-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-surface{background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none}.v2-divider{background:CanvasText}}

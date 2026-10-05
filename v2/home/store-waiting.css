@@ -1,0 +1,27 @@
+/* Hallmark · macrostructure: store identity → section rail → waiting state
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG review · use: compare waiting availability/current ticket · tone: restrained soft
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Existing tokens, original five conditions and two runtime preparing states.
+ * Verified: text ≥4.5:1, icons/focus ≥3:1, eight viewport widths;
+ * five states visually reviewed at 320/375/390/414/768px. */
+.v2-store-waiting{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6);font-variant-numeric:tabular-nums}
+.v2-store-waiting .v2-heading-block{margin-bottom:var(--v2-space-4)}
+.v2-store-waiting .og-heading-title-line,.v2-store-waiting .og-heading-action{min-height:var(--v2-space-12)}
+.v2-store-waiting .og-heading-action{min-width:var(--v2-space-12)}
+.v2-store-waiting .og-section-heading h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);min-width:0;overflow-wrap:anywhere}
+.v2-store-waiting .og-store-service-card{display:flex;align-items:center;gap:var(--v2-space-3);margin-bottom:var(--v2-space-3)}
+.v2-store-waiting .og-store-service-icon{display:grid;place-items:center;width:var(--v2-space-12);height:var(--v2-space-12);flex:none;border-radius:var(--v2-radius-button);background:var(--v2-selected-surface);color:var(--v2-focus);box-shadow:var(--v2-notice-icon-depth)}
+.v2-store-waiting .og-store-service-icon svg{width:var(--v2-space-5);height:var(--v2-space-5)}
+.v2-store-waiting .og-store-service-card>.v2-icon-button{flex:none}
+.v2-store-waiting .og-store-service-copy{flex:1;min-width:0}
+.v2-store-waiting .og-store-service-copy p{margin:0;color:var(--v2-text);overflow-wrap:anywhere}
+.v2-store-waiting .og-store-service-copy p+p,.v2-store-waiting .og-store-service-total+p,.v2-store-waiting .og-store-service-ticket+p{margin-top:var(--v2-space-1)}
+.v2-store-waiting .og-store-service-sub{font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);color:var(--v2-text-muted)}
+.v2-store-waiting .og-store-service-total{display:flex;align-items:baseline;justify-content:space-between;gap:var(--v2-space-2);flex-wrap:wrap}
+.v2-store-waiting .og-store-service-total>strong{font:700 var(--v2-type-amount)/var(--v2-line-amount) var(--v2-font);color:var(--v2-focus);white-space:nowrap}
+.v2-store-waiting .og-store-service-total small{font-size:var(--v2-type-secondary);color:var(--v2-text)}
+.v2-store-waiting .og-store-service-ticket{display:flex;gap:var(--v2-space-2) var(--v2-space-3);flex-wrap:wrap}
+.v2-store-waiting .og-store-service-ticket strong{font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap}
+.v2-store-waiting .og-store-service-ticket em{font-style:normal;color:var(--v2-focus)}
+.v2-store-waiting>.v2-button{width:100%}

@@ -1,0 +1,58 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V4
+ * genre: playful · theme: existing OG 3D · app membership certificate
+ * Hallmark · macrostructure: app-certificate · identity/portrait + QR/code
+ * Planning reference: larger mascot, compact QR/code and readable identity.
+ * No fabricated levels/rewards; existing values and static service controls. */
+.v2-membership-screen,.v2-membership-screen *{box-sizing:border-box}
+.v2-membership-screen{position:relative;isolation:isolate;display:flex;flex-direction:column;width:100%;max-width:390px;height:846px;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom));color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow:clip}
+.v2-membership-screen>.og-history-backdrop,.v2-membership-screen>.og-history-scrim{position:absolute;inset:0}
+.v2-membership-screen>.og-history-scrim{background:var(--v2-dialog-scrim)}
+.v2-member-sheet{position:absolute;inset:64px 0 0;display:flex;flex-direction:column;min-height:0;border-radius:var(--v2-radius-sheet) var(--v2-radius-sheet) 0 0;background:var(--v2-surface);box-shadow:var(--v2-depth-panel);overflow:clip}
+.v2-membership-screen svg{display:block;flex:none;width:20px;height:20px}
+.v2-member-header{display:flex;align-items:center;flex:none;min-height:64px;padding:var(--v2-space-2) var(--v2-space-4);gap:var(--v2-space-2);background:var(--v2-surface)}
+.v2-member-header h2{flex:1;margin:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-member-header button,.v2-member-link button,.v2-member-referral button{display:grid;place-items:center;flex:none;width:48px;height:48px;border:0;border-radius:var(--v2-radius-button);padding:0;background:none;color:var(--v2-text)}
+.v2-member-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--v2-space-4);display:grid;align-content:start;gap:var(--v2-space-4);scrollbar-width:thin;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom))}
+.v2-member-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.v2-member-certificate{position:relative;margin:0;padding:var(--v2-space-5);border:0;border-radius:var(--v2-radius-card);background:linear-gradient(135deg,var(--v2-certificate-dark),var(--v2-certificate-face));color:var(--v2-on-action);box-shadow:var(--v2-certificate-depth);min-width:0}
+.v2-member-brand{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-2);font-size:var(--v2-type-secondary);font-weight:700;color:var(--v2-certificate-rim);white-space:nowrap;border-bottom:1px solid var(--v2-certificate-line);padding-bottom:var(--v2-space-4)}
+.v2-member-brand span{font-size:10px;letter-spacing:.08em;font-weight:400}
+.v2-member-identity{display:grid;grid-template-columns:minmax(0,1fr) 196px;align-items:center;gap:var(--v2-space-2);padding-block:var(--v2-space-5)}
+.v2-member-copy{min-width:0}
+.v2-member-copy>p{margin:0 0 var(--v2-space-1);font-size:var(--v2-type-caption);color:var(--v2-certificate-muted)}
+.v2-member-copy h3{margin:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);overflow-wrap:anywhere;min-width:0}
+.v2-member-copy dl{display:grid;gap:var(--v2-space-3);margin:var(--v2-space-5) 0 0;font-variant-numeric:tabular-nums}
+.v2-member-copy dt{font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);color:var(--v2-certificate-muted)}
+.v2-member-copy dd{margin:0;font-size:var(--v2-type-caption);overflow-wrap:anywhere}
+.v2-member-portrait{position:absolute;right:-12px;top:40px;display:grid;place-items:center;width:224px;height:300px;pointer-events:none}
+.v2-member-portrait .v2-character-art{width:100%;height:100%;background-size:calc(100% + 16px) auto;background-position:center bottom;filter:drop-shadow(-6px 8px 5px var(--v2-certificate-shadow))}
+.v2-member-portrait .v2-character-art[data-character-art="raccoon"]{background-size:calc(100% + 32px) auto}
+.v2-member-code-row{display:flex;align-items:center;gap:var(--v2-space-3);padding-top:var(--v2-space-4);border-top:1px solid var(--v2-certificate-line);min-width:0}
+.v2-member-qr{display:grid;place-items:center;flex:none;width:64px;height:64px;border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-certificate-dark);box-shadow:var(--v2-media-rim)}
+.v2-member-qr svg{width:52px;height:52px}
+.v2-member-code-row>div{display:grid;gap:var(--v2-space-1);min-width:0;flex:1}
+.v2-member-code-row>div>span{font-size:var(--v2-type-caption);color:var(--v2-certificate-muted)}
+.v2-member-code-row strong{font-size:var(--v2-type-card);line-height:var(--v2-line-card);font-weight:700;letter-spacing:.04em;overflow-wrap:anywhere}
+.v2-member-copy-code{display:grid;place-items:center;width:48px;height:48px;flex:none;padding:0;border:0;border-radius:var(--v2-radius-button);background:none;color:var(--v2-on-action)}
+.v2-member-actions{display:flex;gap:var(--v2-space-3)}
+.v2-member-actions .v2-button{flex:1;width:auto;padding-inline:var(--v2-space-2)}
+.v2-member-link{display:flex;align-items:center;justify-content:space-between;padding-inline:var(--v2-space-1);border-bottom:1px solid var(--v2-edge)}
+.v2-member-referral{padding:var(--v2-space-5);background:var(--v2-surface);color:var(--v2-text);border-radius:var(--v2-radius-card);box-shadow:var(--v2-depth-raised)}
+.v2-member-referral h3{font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);margin:0 0 var(--v2-space-4)}
+.v2-member-referral label{display:block;margin-bottom:var(--v2-space-2);font-size:var(--v2-type-caption);color:var(--v2-text-muted)}
+.v2-member-referral>div{display:flex;align-items:center;min-width:0;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);box-shadow:var(--v2-input-depth)}
+.v2-member-referral input{min-width:0;flex:1;width:100%;height:48px;padding:var(--v2-space-3) var(--v2-space-4);border:0;background:none;color:var(--v2-input-ink);font:inherit}
+.v2-member-referral input::placeholder{color:var(--v2-input-placeholder);opacity:1}
+.v2-member-footer{flex:none;padding:var(--v2-space-4);background:var(--v2-surface);border-top:1px solid var(--v2-edge)}
+.v2-member-footer .v2-button{width:100%}
+.v2-member-no-code{padding-top:var(--v2-space-4);border-top:1px solid var(--v2-certificate-line)}
+.v2-member-no-code h3{margin:0 0 var(--v2-space-2);font-size:var(--v2-type-secondary)}
+.v2-member-no-code p{margin:0;color:var(--v2-certificate-muted);font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);max-width:22ch}
+.v2-member-referral[data-registered="true"]>div{background:var(--v2-disabled);box-shadow:var(--v2-depth-inset)}
+.og-membership-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;background:var(--v2-dialog-scrim)}
+.og-membership-overlay>.og-sheet-panel{width:100%;max-height:calc(100% - 64px)}
+.og-membership-overlay .og-sheet-footer{display:none}
+.v2-member-share-channels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--v2-space-3)}
+.v2-member-share-channels .v2-button{width:100%;padding-inline:var(--v2-space-2)}
+@media(max-width:350px){.v2-member-certificate{padding:var(--v2-space-4)}.v2-member-identity{grid-template-columns:minmax(0,1fr) 152px}.v2-member-portrait{top:64px;width:184px;height:272px}}
+@media(forced-colors:active){.v2-member-certificate{background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none}.v2-member-brand,.v2-member-copy>p,.v2-member-copy dt,.v2-member-code-row>div>span{color:CanvasText}}

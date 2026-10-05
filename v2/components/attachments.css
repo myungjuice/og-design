@@ -1,0 +1,39 @@
+/* Hallmark · component: attachment/viewer · genre: playful · theme: existing OG 3D
+ * P5 H5 E4 S5 R5 V4 · shallow frames, image content stays flat. */
+.v2-attachment-grid{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+.v2-attachment-stage{box-sizing:border-box;width:100%;max-width:390px;padding:16px;background:var(--v2-surface);border-radius:20px;color:var(--v2-text);font:400 14px/20px var(--v2-font)}
+.v2-attachments{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.v2-attachments .og-attachment-item{position:relative;width:96px;height:96px;border:1px solid var(--v2-material-edge);border-radius:12px;box-sizing:border-box;background:var(--v2-page);box-shadow:var(--v2-media-rim)}
+.v2-attachments img{display:block;width:100%;height:100%;object-fit:contain;border-radius:12px}
+.v2-attachments .og-attachment-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:96px;min-height:96px;padding:12px;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-input-fill);box-shadow:var(--v2-input-depth);font:400 12px/16px var(--v2-font);color:var(--v2-action)}
+.v2-attachments .og-attachment-remove{position:absolute;top:-8px;right:-8px;width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-button-secondary-depth)}
+.v2-attachments .og-attachment-remove svg{width:20px;height:20px}
+.v2-attachments :is(.og-attachment-add,.og-attachment-remove):active{box-shadow:var(--v2-depth-inset)}
+.v2-attachment-image-error{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;border-radius:12px;background:var(--v2-page);color:var(--v2-text-muted);font:400 12px/16px var(--v2-font)}
+.v2-attachment-image-error[hidden]{display:none}.v2-attachments .og-attachment-item[data-image-error=true]>img{visibility:hidden}
+.v2-attachment-image-error button{border:0;background:transparent;color:var(--v2-action);font:700 12px/16px var(--v2-font);min-height:48px;padding:8px}
+.v2-attachments .og-attachment-status{flex:1;min-width:140px}.v2-attachments .og-attachment-status p{margin:0 0 12px}
+.v2-attachments .og-attachment-status[data-state=error]{color:var(--v2-error)}
+.v2-attachments .og-attachment-track{height:8px;background:var(--v2-disabled);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.v2-attachments .og-attachment-track span{display:block;height:100%;background:var(--v2-action)}
+.v2-attachment-tools{margin-top:16px}.v2-attachment-stage>p{margin:16px 0 0}
+.v2-attachment-stage label{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.v2-attachment-stage select{min-height:48px;padding:8px;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-surface);color:var(--v2-text);font:inherit}
+.v2-viewer-dialog{position:fixed;inset:0;margin:auto;box-sizing:border-box;width:min(100%,768px);height:min(100dvh,var(--v2-overlay-height,100dvh));max-width:100%;max-height:100dvh;padding:0;border:1px solid var(--v2-material-edge);background:var(--v2-snackbar-surface);color:var(--v2-on-action)}
+.v2-viewer-dialog:not([open]){display:none}.v2-viewer-dialog::backdrop{background:var(--v2-dialog-scrim)}
+.v2-image-viewer{display:flex;flex-direction:column;height:100%;font:400 14px/20px var(--v2-font)}
+.v2-image-viewer .og-viewer-header{display:flex;gap:12px;align-items:center;flex-shrink:0;padding:12px 16px}
+.v2-image-viewer .og-viewer-header>span{flex:1}.v2-image-viewer .og-viewer-header .v2-button{width:auto;min-width:80px}
+.v2-image-viewer .v2-icon-button{color:var(--v2-on-action)}
+/* Plain close controls stay readable on the dark viewer in every pressed state. */
+.v2-image-viewer .v2-icon-button:not(:disabled):active,.v2-image-viewer .v2-icon-button[data-state="active"]{color:var(--v2-on-action)}
+@media(hover:hover) and (pointer:fine){.v2-image-viewer .v2-icon-button:not(:disabled):hover{color:var(--v2-on-action)}}
+.v2-image-viewer .og-viewer-image{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;place-items:center;padding:16px}
+.v2-image-viewer img{display:block;width:100%;height:100%;object-fit:contain;min-height:0;min-width:0}
+.v2-image-viewer[data-view=zoom] .og-viewer-image{display:block}.v2-image-viewer[data-view=zoom] img{width:200%;height:200%;max-width:none;object-fit:contain}
+.v2-image-viewer .og-viewer-error{text-align:center}.v2-image-viewer .og-viewer-error .v2-button{width:auto;margin:16px auto}
+.v2-viewer-static{height:320px;max-width:390px}
+.v2-attachments :focus-visible,.v2-attachment-stage :focus-visible,.v2-image-viewer :focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-image-viewer :focus-visible{outline-color:var(--v2-on-action)}
+@media(min-width:80rem){.v2-attachment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-attachments button,.v2-attachments .og-attachment-item{box-shadow:none;border:1px solid ButtonText}.v2-attachments .og-attachment-track{border:1px solid CanvasText}.v2-attachments .og-attachment-track span{background:Highlight}}

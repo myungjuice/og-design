@@ -1,0 +1,57 @@
+/* Hallmark · macrostructure: appbar → store identity / reading region → action
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG design review · tone: restrained soft · tokens: existing v2
+ * Only shared controls and shallow sheet edges carry depth; photos stay flat. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-home-store-secondary-frame{position:relative;width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums;overflow:clip}
+.v2-secondary-background{position:absolute;inset:0}
+.v2-secondary-overlay{position:absolute;inset:0;display:flex;padding:var(--v2-space-4);background:var(--v2-dialog-scrim)}
+.v2-secondary-sheet-overlay{align-items:flex-end;padding:0}
+.v2-secondary-sheet-overlay .v2-sheet-static{width:100%;max-width:none}
+.v2-secondary-sheet-overlay .og-sheet-header h2{padding-top:var(--v2-space-3);font-size:var(--v2-type-body);text-align:center}
+.v2-store-share-choices{display:flex;justify-content:center;gap:var(--v2-space-6);padding-block:var(--v2-space-2) var(--v2-space-4)}
+.v2-store-share-choice{appearance:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v2-space-2);min-width:104px;min-height:88px;padding:var(--v2-space-2);border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-store-share-icon{display:grid;place-items:center;width:40px;height:40px}
+.v2-store-share-icon img{width:34px;height:35px;object-fit:contain}
+.v2-store-share-icon svg{width:32px;height:32px;color:var(--v2-share-link)}
+.v2-secondary-appbar{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;align-items:center;gap:var(--v2-space-2);flex:none;padding:var(--v2-space-2);border-bottom:1px solid var(--v2-edge)}
+.v2-secondary-appbar h4{margin:0;text-align:center;min-width:0;overflow-wrap:anywhere;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-secondary-appbar svg{width:24px;height:24px}
+.v2-store-photo-page,.v2-store-praise-page{height:100%;display:flex;flex-direction:column;overflow:clip}
+.v2-store-photo-page{background:var(--v2-text);color:var(--v2-on-action)}
+.v2-store-photo-page .v2-secondary-appbar{border:0}
+.v2-store-photo-page .v2-secondary-appbar h4{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-store-photo-page .v2-icon-button{border:0;background:transparent;box-shadow:none;color:var(--v2-on-action)}
+.v2-store-photo-image{flex:1;min-height:0;padding-bottom:30px}
+.v2-store-photo-image>.v2-thumbnail{width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0;background:var(--v2-text);box-shadow:none;color:var(--v2-on-action)}
+.v2-store-photo-image .og-media-fallback{color:var(--v2-on-action)}
+.v2-praise-profile{padding:var(--v2-space-6) var(--v2-space-4);background:var(--v2-selected-surface);border-bottom:1px solid var(--v2-edge)}
+.v2-praise-profile>div{display:flex;align-items:center;gap:var(--v2-space-3)}
+.v2-praise-profile .v2-thumbnail{width:45px;height:45px;flex:none}
+.v2-praise-profile h5{margin:0;min-width:0;overflow-wrap:anywhere;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-praise-profile p{margin:var(--v2-space-2) 0 0;text-align:right;overflow-wrap:anywhere}
+.v2-praise-targets,.v2-praise-selection{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.v2-praise-target{display:flex;align-items:center;gap:var(--v2-space-3);padding:var(--v2-space-4);border-bottom:1px solid var(--v2-edge)}
+.v2-praise-target:nth-child(odd){background:var(--v2-muted-surface)}
+.v2-praise-target>div{flex:1;min-width:0;overflow-wrap:anywhere}
+.v2-praise-target p{margin:var(--v2-space-1) 0 0;color:var(--v2-text-muted)}
+.v2-praise-target>.v2-button{flex:none;font-weight:400;max-width:112px;min-width:48px;min-height:48px;height:48px}
+.v2-praise-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--v2-space-6);text-align:center;color:var(--v2-text-muted)}
+.v2-praise-empty>svg{width:32px;height:32px;color:var(--v2-control-edge)}
+.v2-praise-empty p{margin:var(--v2-space-2) 0 0;overflow-wrap:anywhere}
+.v2-praise-instruction{margin:0;padding:var(--v2-space-4);text-align:center;overflow-wrap:anywhere}
+.v2-praise-selection{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6)}
+.v2-praise-category+.v2-praise-category{margin-top:var(--v2-space-5)}
+.v2-praise-category h5{margin:0 0 var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-praise-options{display:flex;flex-wrap:wrap;gap:var(--v2-space-2);align-items:flex-start}
+.v2-praise-options>.v2-chip{max-width:100%;height:auto;min-height:48px;font-weight:400}
+.v2-praise-options .v2-chip-label{white-space:normal;overflow-wrap:anywhere;text-align:start}
+.v2-praise-option-icon{display:inline-flex;flex:none}
+.v2-praise-option-icon svg{width:18px;height:18px;flex:none}
+.v2-praise-save{flex:none;padding:var(--v2-space-4);border-top:1px solid var(--v2-edge)}
+.v2-praise-save>.v2-button{width:100%}
+.v2-secondary-dialog-overlay{align-items:center;justify-content:center}
+.v2-secondary-dialog-overlay .v2-dialog-static{max-width:320px}
+.v2-praise-targets:focus-visible,.v2-praise-selection:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+@media(max-width:360px){.v2-praise-target{gap:var(--v2-space-2)}.v2-praise-target>.v2-button{padding-inline:var(--v2-space-2)}.v2-store-share-choices{gap:var(--v2-space-4)}}

@@ -1,0 +1,19 @@
+/* Hallmark · component: sheet · genre: playful · theme: existing OG 3D
+ * P5 H5 E4 S5 R5 V4 · shallow panel edge, existing actions, no drag affordance. */
+.v2-sheet-grid{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+.v2-sheet-stage{max-width:390px;padding:24px 16px;background:var(--v2-page);border-radius:20px;color:var(--v2-text)}
+.v2-sheet-stage p{margin:16px 0 0;font-size:14px}
+.v2-sheet-dialog{box-sizing:border-box;position:fixed;inset:auto 0 var(--v2-overlay-bottom,0px);margin:0 auto;padding:0;width:min(100%,390px);max-width:390px;max-height:85dvh;max-height:calc(var(--v2-overlay-height,100dvh)*.85);border:0;border-radius:32px 32px 0 0;background:var(--v2-surface);color:var(--v2-text);overflow:hidden;font-family:var(--v2-font);box-shadow:var(--v2-depth-panel)}
+.v2-sheet-dialog:not([open]){display:none}.v2-sheet-dialog::backdrop{background:var(--v2-dialog-scrim)}
+.v2-sheet-panel{display:flex;flex-direction:column;max-height:inherit;background:var(--v2-surface);border-radius:32px 32px 0 0;box-shadow:var(--v2-depth-panel)}
+.v2-sheet-panel .og-sheet-header{display:flex;align-items:flex-start;gap:8px;flex-shrink:0;padding:16px 12px 8px 20px}
+.v2-sheet-panel h2{flex:1;min-width:0;margin:0;padding-top:12px;max-height:max(24px,min(144px,calc(var(--v2-overlay-height,100dvh)*.85 - 160px)));overflow:auto;overscroll-behavior:contain;font:700 18px/24px var(--v2-font);overflow-wrap:anywhere}
+.v2-sheet-panel .og-sheet-close{flex:0 0 48px}
+.v2-sheet-panel .og-sheet-body{min-height:0;overflow:auto;overscroll-behavior:contain;padding:8px 20px 20px}
+.v2-sheet-panel fieldset{border:0;padding:0;margin:0;min-width:0}
+.v2-sheet-panel .og-sheet-footer{display:flex;gap:12px;padding:16px 20px max(20px,env(safe-area-inset-bottom));border-top:1px solid var(--v2-edge);flex-shrink:0}
+.v2-sheet-panel .og-sheet-footer .v2-button{flex:1;min-width:0;width:auto}
+.v2-sheet-panel .v2-tabs-panel{min-height:200px}.v2-sheet-panel .v2-feedback{box-shadow:none;padding-inline:8px}
+.v2-sheet-static{max-width:390px}.v2-sheet-panel :focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+@media(min-width:80rem){.v2-sheet-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-sheet-panel{box-shadow:none;border:1px solid CanvasText}.v2-sheet-dialog::backdrop{background:Canvas}}

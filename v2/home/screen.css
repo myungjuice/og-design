@@ -1,3 +1,9 @@
 /* Map explorer · original soft OG 3D controls and Naver map pixels.
- * Shared v2 typography/selection; no new map renderer or device chrome. */
+ * Shared v2 typography/selection; no new map renderer or device chrome.
+ * Hallmark · component: category rail · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E5 S5 R5 V4 · More is fixed; category art/size unchanged. */
 @import url('../components/screen.css');
+.v2-home-category-row{display:grid;grid-template-columns:minmax(0,1fr) 64px;align-items:start;gap:var(--v2-space-1);margin:var(--v2-space-1) calc(-1 * var(--v2-space-3)) 0 calc(-1 * var(--v2-space-1))}
+.v2-home-category-row .home-categories{min-width:0;margin:0}
+/* Align with the original rail's 6px optical top inset; keep its shadow clearance. */
+.v2-home-category-row>.home-category-more{margin-top:6px}

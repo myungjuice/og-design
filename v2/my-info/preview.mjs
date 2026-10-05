@@ -1,2 +1,43 @@
 import {setupScreenPreview} from '../components/screen-preview.mjs';
-export const setupMyInfoPreview=setupScreenPreview;
+import {setupMileageHistoryReview} from './mileage.mjs';
+import {setupUseHistoryReview} from './use-history.mjs';
+import {setupReservationDetailReview} from './reservation-detail.mjs';
+import {setupReservationChangeReview} from './reservation-change.mjs';
+import {setupReservationPickersReview} from './reservation-pickers.mjs';
+import {setupWaitingDetailReview} from './waiting-detail.mjs';
+import {setupWaitingDialogsReview} from './waiting-dialogs.mjs';
+import {setupReviewHistoryReview} from './review-history.mjs';
+import {setupNoticesReview} from './notices.mjs';
+import {setupNoticeDetailReview} from './notice-detail.mjs';
+import {setupAccountSettingsReview} from './account-settings.mjs';
+import {setupSupportPagesReview} from './support-pages.mjs';
+import {setupReviewWritingReview} from './review-writing.mjs';
+import {setupCharacterReview} from './character.mjs';
+export function setupMyInfoPreview(root){
+ setupScreenPreview(root,{onClick:event=>{
+  const entry=event.target.closest('[data-preview]');
+  const destination={'프로필 수정':'profile-character','마일리지 내역':'mileage-history','이용내역':'use-history','공지·알림':'notices','알림':'notices','멤버십':'membership','문의하기':'support','설정':'settings','내 정보':'account'}[entry?.dataset.preview];
+  if(!destination)return false;
+  const focus=()=>root.querySelector('#'+destination+'-title').focus({preventScroll:true});
+  if(location.hash==='#'+destination)focus();
+  else window.addEventListener('hashchange',focus,{once:true});
+  location.hash=destination;return true;
+ }});
+ setupMileageHistoryReview(root);
+ setupUseHistoryReview(root);
+ setupReservationDetailReview(root);
+ setupReservationChangeReview(root);
+ setupReservationPickersReview(root);
+ setupWaitingDetailReview(root);
+ setupWaitingDialogsReview(root);
+ setupReviewHistoryReview(root);
+ setupNoticesReview(root);
+ setupNoticeDetailReview(root);
+ setupAccountSettingsReview(root);
+ setupSupportPagesReview(root);
+ setupReviewWritingReview(root);
+ const section=root.querySelector('#profile-character');
+ const mountCharacter=()=>{if(!section.hidden)setupCharacterReview(root);};
+ new MutationObserver(mountCharacter).observe(section,{attributes:true,attributeFilter:['hidden']});
+ mountCharacter();
+}

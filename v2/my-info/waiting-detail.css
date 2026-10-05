@@ -1,0 +1,16 @@
+/* Hallmark · waiting detail audit · genre: playful · existing OG soft 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Source hierarchy: store, ticket, guidance, actions. Shared tokens only. */
+.v2-wait-detail .og-wait-ticket{background:var(--v2-notice-info-surface);border-color:var(--v2-material-edge)}
+.v2-wait-detail .og-wait-ticket h3{text-align:center;overflow-wrap:anywhere}
+.v2-wait-detail .og-wait-ticket .og-wait-label{margin:var(--v2-space-6) 0 var(--v2-space-3);text-align:center;color:var(--v2-text-muted)}
+.og-wait-numbers{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:var(--v2-space-6)}
+.og-wait-numbers>span{display:flex;align-items:baseline;gap:var(--v2-space-2);max-width:100%;font-size:var(--v2-type-body);color:var(--v2-text-muted)}
+.og-wait-numbers strong{min-width:0;overflow-wrap:anywhere;font-size:var(--v2-type-amount);line-height:var(--v2-line-amount);color:var(--v2-text);font-variant-numeric:tabular-nums}
+.og-wait-numbers>span:last-child strong{font-size:var(--v2-space-12);line-height:1.2;color:var(--v2-focus)}
+.og-wait-people{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--v2-space-3);margin-top:var(--v2-space-6);padding-top:var(--v2-space-4);border-top:1px dashed var(--v2-control-edge)}
+.og-wait-people>span{display:flex;align-items:center;gap:var(--v2-space-1);color:var(--v2-text-muted);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
+.og-wait-people svg{color:var(--v2-text-muted)}
+.v2-wait-detail .og-wait-ticket .og-wait-time{margin:var(--v2-space-4) 0 0;text-align:center;color:var(--v2-text-muted);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums}
+.v2-wait-detail .og-reservation-actions .v2-button{min-width:0;padding-inline:var(--v2-space-2);font-size:var(--v2-type-secondary);white-space:nowrap}
+@media(forced-colors:active){.v2-wait-detail .og-wait-ticket{background:Canvas;color:CanvasText;border-color:CanvasText}.og-wait-numbers>span:last-child strong{color:Highlight}}

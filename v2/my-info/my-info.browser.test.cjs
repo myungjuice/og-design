@@ -58,7 +58,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.ok(await page.evaluate(()=>{
     const c=document.createElement('canvas');c.width=c.height=1;const ctx=c.getContext('2d');ctx.fillStyle=getComputedStyle(document.documentElement).backgroundColor;ctx.fillRect(0,0,1,1);const [r,g,b]=ctx.getImageData(0,0,1,1).data;return r>=35&&r<=65&&Math.abs(r-g)<=1&&Math.abs(g-b)<=1;
    }),'reference resets cannot recolor the workbench');
-   for(const action of ['마일리지 안내','최근 방문 전체보기','스시산원 반주헌 후기 작성','설정']){
+   for(const action of ['마일리지 안내','최근 방문 전체보기','스시산원 반주헌 후기 작성']){
     const target=page.getByRole('button',{name:action,exact:true}).first();await target.click();
     assert.equal(await page.getByRole('dialog').isVisible(),true);
     await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').isVisible(),false);

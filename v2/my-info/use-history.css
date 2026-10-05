@@ -1,0 +1,38 @@
+/* Hallmark · existing OG 3D app system · audit scope: use-history hub.
+ * Sheet/button/control edges carry depth, records and type remain flat.
+ * No new theme, OS chrome, stock photography or decorative motion. */
+:host{display:block;width:100%;max-width:390px;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-use-history-frame{position:relative;width:100%;height:846px;overflow:clip;background:linear-gradient(155.7683deg,var(--v2-screen-top),var(--v2-screen-bottom));font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-use-backdrop,.v2-use-scrim{position:absolute;inset:0}
+.v2-use-scrim{background:var(--v2-dialog-scrim)}
+.v2-use-history-frame>.v2-sheet-static{position:absolute;inset:64px 0 0;max-width:none}
+.v2-use-history-frame .v2-sheet-panel{height:100%;max-height:100%}
+.v2-use-history-frame .og-sheet-body{flex:1}
+.v2-use-history-frame .v2-tabs [role=tab]{flex:1 1 0;min-width:0;padding-inline:var(--v2-space-1)}
+.v2-use-history-frame .v2-selection{padding-inline:0;font-size:var(--v2-type-secondary)}
+.v2-use-history-frame .v2-selection .og-choice-copy{font-size:var(--v2-type-secondary)}
+.v2-use-records{display:grid;gap:var(--v2-space-4)}
+.v2-use-records .v2-surface{padding:var(--v2-space-4);border:1px solid var(--v2-edge);box-shadow:none;background:var(--v2-surface)}
+.v2-use-store{display:flex;align-items:flex-start;gap:var(--v2-space-3);min-width:0}
+.v2-use-store>.v2-thumbnail{width:56px;height:56px;flex:0 0 56px}
+.v2-use-store-copy{flex:1;min-width:0}
+.v2-use-store h3{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere}
+.v2-use-store p{margin:var(--v2-space-1) 0 0;color:var(--v2-text-muted);font-size:var(--v2-type-caption);overflow-wrap:anywhere}
+.v2-use-store .v2-badge{flex-shrink:0}
+.v2-use-details{margin:var(--v2-space-4) 0 0;display:grid;gap:var(--v2-space-2)}
+.v2-use-details>div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--v2-space-2)}
+.v2-use-details dt{color:var(--v2-text-muted)}
+.v2-use-details dd{margin:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.v2-use-stamp{margin:var(--v2-space-4) 0 0;font-size:var(--v2-type-caption);color:var(--v2-text-muted);overflow-wrap:anywhere}
+.v2-use-action{margin-top:var(--v2-space-4)}
+.v2-use-action .v2-button{width:100%;font-family:var(--v2-font)}
+.v2-use-order-summary{display:grid;gap:var(--v2-space-2);margin-top:var(--v2-space-4)}
+.v2-use-order-summary strong{font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-variant-numeric:tabular-nums}
+.v2-use-review-photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--v2-space-2);margin-top:var(--v2-space-4)}
+.v2-use-review-photos .v2-thumbnail{width:100%;height:auto;aspect-ratio:1;min-width:0}
+.v2-use-review-text{margin:var(--v2-space-4) 0 0;overflow-wrap:anywhere}
+.v2-use-review-menu{display:flex;gap:var(--v2-space-3);margin-top:var(--v2-space-4)}
+.v2-use-review-menu .v2-button{flex:1;min-width:0}
+.v2-use-history-frame .v2-feedback{margin-top:var(--v2-space-12);box-shadow:none}
+@media(forced-colors:active){.v2-use-records .v2-surface,.v2-use-history-frame .v2-sheet-panel{border:1px solid CanvasText}}

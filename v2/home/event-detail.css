@@ -1,0 +1,9 @@
+/* Hallmark · macrostructure: fixed app title → date/title/period/divider → prose → optional attachment.
+ * genre: playful · theme: existing OG/Figma 3D · tone: soft, restrained · anchor hue: OG indigo.
+ * Audience: OG design review; use: read event details. Shared raised back/media only, flat article.
+ * Preserve existing tokens, Pretendard, original period/content and continuous reading surface.
+ * No new theme, assets, motion or OS chrome. Pre-emit critique: P5 H5 E4 S5 R5 V4.
+ * Verified: 3 states × 8 widths, 15 mobile captures; natural photo ratio, fixed header/scroll/failure.
+ * Text >= 4.5:1, back/focus >= 3:1. Retain existing OG surface/font over catalog rotation. */
+.v2-event-detail .og-news-article.has-period>h5{border:0;padding-bottom:0}
+.v2-event-detail .og-reading-period{margin:var(--v2-space-2) 0 0;padding-bottom:var(--v2-space-6);border-bottom:1px solid var(--v2-edge);text-align:center;overflow-wrap:anywhere;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}

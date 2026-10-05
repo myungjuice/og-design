@@ -1,0 +1,73 @@
+/* Hallmark · macrostructure: store identity → praise / review rows → photo-led reading
+ * genre: playful · theme: existing OG/Figma 3D · tone: soft, restrained · designed-as-app
+ * audience: OG design review · use: inspect real anonymous reviews and photo layouts
+ * Flat reading surfaces; shared shallow control seats, avatar and media rims only.
+ * Original content, praise order and eligibility branches preserved. No OS chrome/motion.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-home-store-reviews-frame,.v2-home-review-list-frame,.v2-home-review-photo-frame{width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums}
+.og-store-reviews{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6)}
+.og-section-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-2);min-width:0;margin-bottom:var(--v2-space-2)}
+.og-heading-copy{min-width:0}
+.og-section-heading h5{margin:0;overflow-wrap:anywhere;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal}
+.og-text-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;flex:none;gap:var(--v2-space-1);min-height:var(--v2-space-12);min-width:var(--v2-space-12);padding:var(--v2-space-2);border:0;background:transparent;color:var(--v2-focus);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap}
+.og-praise-row{position:relative;display:flex;align-items:center;gap:var(--v2-space-3);height:var(--v2-space-8);margin-top:var(--v2-space-2);padding-inline-start:var(--v2-space-3);border-radius:var(--v2-space-2);overflow:clip}
+.og-praise-fill{position:absolute;inset:0 auto 0 0;width:calc(15px + var(--praise-ratio)*(100% - 55px));opacity:var(--praise-opacity);background:var(--v2-action);border-radius:var(--v2-space-2) var(--v2-radius-chip) var(--v2-radius-chip) var(--v2-space-2)}
+.og-praise-fill[hidden]{display:none}
+.og-praise-row>svg{position:relative;flex:none;width:18px;height:18px;color:var(--v2-focus)}
+.og-praise-name{position:relative;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.og-praise-row>strong{position:relative;flex:none;width:40px;text-align:center;color:var(--v2-focus)}
+.og-store-review-more{display:flex;align-items:center;justify-content:center;gap:var(--v2-space-1);margin-block:var(--v2-space-2);color:var(--v2-focus)}
+.og-store-review-more>svg{width:var(--v2-space-5);height:var(--v2-space-5)}
+.og-store-review-section{margin-top:var(--v2-space-5);padding-top:var(--v2-space-5);border-top:1px solid var(--v2-edge)}
+.og-store-review-card{border:0;border-radius:0;background:transparent;box-shadow:none;padding-block:var(--v2-space-3)}
+.og-store-review-card+.og-store-review-card{border-top:1px solid var(--v2-edge);margin-top:var(--v2-space-3);padding-top:var(--v2-space-6)}
+.og-store-review-author{display:flex;align-items:center;gap:var(--v2-space-2);min-width:0}
+.og-store-review-author>.v2-avatar{width:25px;height:25px;flex:none}
+.og-store-review-author>strong{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.og-store-review-author>time{flex:none;color:var(--v2-text-muted);font-size:var(--v2-type-caption);line-height:var(--v2-line-caption)}
+.og-store-review-images{display:flex;gap:var(--v2-space-2);overflow:auto;overscroll-behavior-inline:contain;scrollbar-width:none;margin-top:var(--v2-space-3)}
+.og-store-review-images>.v2-thumbnail{width:120px;height:120px;flex:none}
+.og-store-review-text{margin:var(--v2-space-3) 0 0;white-space:pre-line;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.og-store-review-card.is-expanded .og-store-review-text{display:block;white-space:pre-wrap}
+.og-review-expand{display:flex;justify-content:flex-end;margin-top:var(--v2-space-2)}
+.og-store-review-empty{padding-block:var(--v2-space-6);text-align:center;color:var(--v2-text-muted)}
+.og-store-review-empty p{margin:0 0 var(--v2-space-5);overflow-wrap:anywhere}
+.og-store-review-empty p:first-child{display:flex;align-items:center;justify-content:center;gap:var(--v2-space-3)}
+.og-store-review-empty svg{width:var(--v2-space-6);height:var(--v2-space-6);flex:none}
+.og-review-list-page,.og-review-photo-page{height:100%;display:flex;flex-direction:column;overflow:clip}
+.og-app-bar{display:grid;grid-template-columns:var(--v2-space-12) minmax(0,1fr) var(--v2-space-12);align-items:center;gap:var(--v2-space-2);flex:none;padding:var(--v2-space-2);border-bottom:1px solid var(--v2-edge)}
+.og-app-bar h4{margin:0;text-align:center;overflow-wrap:anywhere;min-width:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal}
+.og-app-bar .og-icon-button{display:inline-flex;align-items:center;justify-content:center;width:var(--v2-space-12);height:var(--v2-space-12);flex:none;border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-chip);background:var(--v2-surface);box-shadow:var(--v2-depth-raised);color:var(--v2-focus)}
+.og-icon-button>svg{width:var(--v2-space-6);height:var(--v2-space-6)}
+.og-review-brand{display:flex;align-items:center;gap:var(--v2-space-2);padding:var(--v2-space-4);border-bottom:1px solid var(--v2-edge);min-width:0}
+.og-review-brand>.v2-thumbnail{width:30px;height:30px;flex:none}
+.og-review-brand .og-media-fallback{padding:0}
+.og-review-brand>strong{flex:1;min-width:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere}
+.og-review-brand>span{flex:none;color:var(--v2-text-muted)}
+.og-review-list-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--v2-space-4)}
+.og-review-list-body:focus-visible,.og-review-photo-copy:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.og-review-photo-page{background:var(--v2-text);color:var(--v2-on-action)}
+.og-review-photo-page>.og-app-bar{border:0}
+.og-review-photo-page .og-app-bar h4{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.og-review-photo-page .og-icon-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;width:var(--v2-space-12);height:var(--v2-space-12);border:0;border-radius:var(--v2-radius-chip);background:transparent;box-shadow:none;color:var(--v2-on-action)}
+.og-review-photo-body{position:relative;flex:1;min-height:0}
+.og-review-photo-image{position:absolute;inset:0 0 156px;overflow:clip;border-radius:var(--v2-radius-button)}
+.og-review-photo-image>.v2-thumbnail{width:100%;height:100%;aspect-ratio:auto;border:0;background:var(--v2-text);color:var(--v2-on-action);box-shadow:none}
+.og-review-photo-image>.v2-thumbnail .og-media-fallback{color:var(--v2-on-action)}
+.og-review-photo-image>.og-icon-button{position:absolute;bottom:var(--v2-space-2);background:color-mix(in srgb,var(--v2-text) 80%,transparent)}
+.og-review-photo-prev{left:var(--v2-space-2)}
+.og-review-photo-next{right:var(--v2-space-2)}
+.og-review-photo-copy{position:absolute;bottom:0;inset-inline:0;height:150px;padding:var(--v2-space-2) var(--v2-space-4);overflow:hidden;mask-image:linear-gradient(to bottom,var(--v2-text) 60%,transparent)}
+.og-review-photo-author{display:flex;align-items:center;gap:var(--v2-space-2)}
+.og-review-photo-author>.v2-avatar{width:45px;height:45px;flex:none}
+.og-review-photo-author>div{flex:1;min-width:0}
+.og-review-photo-author strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.og-review-photo-author time{display:block;color:color-mix(in srgb,var(--v2-on-action) 80%,var(--v2-text));font-size:var(--v2-type-caption);line-height:var(--v2-line-caption)}
+.og-review-photo-author>svg{width:var(--v2-space-6);height:var(--v2-space-6);flex:none}
+.og-review-photo-copy p{margin:var(--v2-space-3) 0 var(--v2-space-6);padding-inline-start:calc(45px + var(--v2-space-2));white-space:pre-line;overflow-wrap:anywhere}
+.og-review-photo-shade{position:absolute;inset:0;background:linear-gradient(to bottom,color-mix(in srgb,var(--v2-text) 50%,transparent),color-mix(in srgb,var(--v2-text) 90%,transparent))}
+.og-review-photo-page.is-expanded .og-review-photo-copy{height:auto;min-height:150px;max-height:100%;overflow:auto;overscroll-behavior:contain;mask-image:none}
+.og-review-photo-page.is-expanded .og-review-photo-copy p{white-space:pre-wrap}
+.og-review-photo-copy:focus-visible{outline-color:var(--v2-on-action)}

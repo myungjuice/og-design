@@ -1,0 +1,18 @@
+/* Hallmark · component: quantity · genre: playful · theme: existing OG 3D
+ * audience: OG review · use: integer quantity · tone: restrained soft
+ * Native hover/focus, press/disabled/loading/error/success. Pre-emit critique: P5 H5 E5 S5 R5 V4 */
+.v2-quantity-stage{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
+.v2-quantity{display:inline-flex;align-items:center;max-width:100%;border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-button);background:var(--v2-input-fill);color:var(--v2-text);box-shadow:var(--v2-input-depth);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-quantity button{display:grid;place-items:center;flex:none;box-sizing:border-box;width:48px;height:48px;padding:0;border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-focus);cursor:pointer}
+.v2-quantity output{min-width:4ch;padding-inline:var(--v2-space-2);text-align:center;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.v2-quantity .og-quantity-unit{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.v2-quantity button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
+.v2-quantity button:not(:disabled):active,.v2-quantity .is-pressed{box-shadow:var(--v2-depth-inset);background:var(--v2-selected-surface)}
+.v2-quantity button:disabled{color:var(--v2-chip-disabled-ink);cursor:not-allowed;box-shadow:none}
+.v2-quantity[aria-disabled="true"]{background:var(--v2-disabled);box-shadow:none}
+.v2-quantity-stage p{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);margin:var(--v2-space-3) 0 0}
+.v2-quantity-message[data-state="error"]{color:var(--v2-error)}
+.v2-quantity-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+@media(hover:hover) and (pointer:fine){.v2-quantity button:not(:disabled):hover{background:var(--v2-selected-surface)}}
+@media(min-width:80rem){.v2-quantity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.v2-quantity{background:Canvas;color:CanvasText;border-color:ButtonText;box-shadow:none}.v2-quantity button{color:ButtonText}.v2-quantity button:disabled{color:GrayText}}

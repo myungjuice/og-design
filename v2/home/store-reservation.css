@@ -1,0 +1,35 @@
+/* Hallmark · macrostructure: store identity → section rail → reservation state
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG review · use: compare booking availability/current booking · tone: restrained soft
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * Original five conditions plus the source no-show notice; no live booking.
+ * Verified: text ≥4.5:1, focus ≥3:1, eight viewport widths;
+ * five states visually reviewed at 320/375/390/414/768px. */
+.v2-store-reservation{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6);font-variant-numeric:tabular-nums}
+.v2-store-reservation .v2-heading-block{margin-bottom:var(--v2-space-4)}
+.v2-store-reservation .og-heading-action{min-height:var(--v2-space-12);min-width:var(--v2-space-12)}
+.v2-store-reservation .og-heading-title-line{min-height:var(--v2-space-12)}
+.v2-store-reservation .og-section-heading h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);min-width:0;overflow-wrap:anywhere}
+.v2-store-reservation .og-store-service-card{display:flex;align-items:center;gap:var(--v2-space-3);margin-bottom:var(--v2-space-3)}
+.v2-store-reservation .og-store-service-icon{display:grid;place-items:center;width:var(--v2-space-12);height:var(--v2-space-12);flex:none;border-radius:var(--v2-radius-button);background:var(--v2-selected-surface);color:var(--v2-focus);box-shadow:var(--v2-notice-icon-depth)}
+.v2-store-reservation .og-store-service-icon svg{width:var(--v2-space-5);height:var(--v2-space-5)}
+.v2-store-reservation .og-store-service-copy{flex:1;min-width:0}
+.v2-store-reservation .og-store-service-copy p{margin:0;color:var(--v2-text);overflow-wrap:anywhere}
+.v2-store-reservation .og-store-service-copy p+p{margin-top:var(--v2-space-1)}
+.v2-store-reservation .og-store-service-copy .og-store-service-expired{color:var(--v2-error);font-weight:700}
+.v2-store-reservation .og-store-service-actions{display:flex;align-items:center;gap:var(--v2-space-3)}
+.v2-store-reservation .og-store-service-actions>.v2-button{flex:1;min-width:0}
+.v2-store-reservation>.v2-button{width:100%}
+.v2-store-reservation .og-store-service-dates{display:flex;gap:var(--v2-space-2);overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;min-width:0;padding:var(--v2-space-1) var(--v2-space-1) var(--v2-space-4);margin-bottom:var(--v2-space-2)}
+.v2-store-reservation .og-store-service-dates:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.v2-store-reservation .og-store-service-date{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v2-space-1);flex:none;width:80px;min-height:64px;border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-button-secondary-depth);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);white-space:nowrap}
+.v2-store-reservation .og-store-service-date[data-available="false"]{color:var(--v2-text-muted);background:var(--v2-disabled);box-shadow:var(--v2-depth-flat)}
+.v2-store-reservation .og-store-service-date[data-available="false"] span{color:var(--v2-error)}
+.v2-store-reservation-limit-frame{position:relative;isolation:isolate;overflow:clip}
+.v2-store-reservation-backdrop{height:100%;width:100%}
+.v2-store-reservation-limit-overlay{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:var(--v2-space-4);background:var(--v2-dialog-scrim)}
+.v2-store-reservation-limit-overlay .v2-dialog-static{max-height:100%;display:flex;flex-direction:column}
+.v2-store-reservation-limit-overlay .v2-dialog-panel{max-height:100%;display:flex;flex-direction:column;min-height:0}
+.v2-store-reservation-limit-overlay .og-dialog-title,.v2-store-reservation-limit-overlay .og-dialog-actions{flex:none}
+.v2-store-reservation-limit-overlay .og-dialog-body{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.v2-store-reservation-limit-overlay .og-dialog-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}

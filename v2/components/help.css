@@ -2,6 +2,15 @@
  * Flat readable text, shallow panel lip only; no new palette, assets or motion.
  * Compact visual header; the 48px close target does not determine its height. */
 .v2-help-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
+/* Hallmark: one containment layer; removal is red text, not a nested red CTA. */
+.v2-action-menu{box-sizing:border-box;width:128px;max-width:100%;padding:var(--v2-space-1);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-depth-panel)}
+.v2-action-menu .v2-action-menu-item{display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box;width:100%;height:48px;min-height:48px;padding:0 var(--v2-space-3);border:0;background:transparent;box-shadow:none;text-align:left;font-weight:400;color:var(--v2-focus)}
+.v2-action-menu .v2-action-menu-item[data-tone="danger"]{color:var(--v2-error)}
+.v2-action-menu .v2-action-menu-item:disabled{background:transparent;color:var(--v2-text-muted)}
+.v2-action-menu .v2-action-menu-item:not(:disabled):active{background:var(--v2-selected-surface);box-shadow:none}
+.v2-action-menu .v2-action-menu-item:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+@media(hover:hover) and (pointer:fine){.v2-action-menu .v2-action-menu-item:not(:disabled):hover{background:var(--v2-selected-surface)}.v2-action-menu .v2-action-menu-item[data-tone="danger"]:not(:disabled):hover{color:var(--v2-error)}}
+@media(forced-colors:active){.v2-action-menu{background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none}.v2-action-menu .v2-action-menu-item{color:ButtonText}.v2-action-menu .v2-action-menu-item:disabled{color:GrayText}}
 .v2-help-stage,.v2-help-live-stage{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);border-radius:var(--v2-radius-card);background:var(--v2-page);color:var(--v2-text)}
 .v2-help-panel{box-sizing:border-box;width:320px;max-width:100%;margin:0;padding:var(--v2-space-4);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text);box-shadow:var(--v2-depth-panel);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);word-break:keep-all;overflow-wrap:anywhere;overflow:auto;overscroll-behavior:contain}
 .v2-help-panel[popover]{position:fixed;inset:auto;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px)}

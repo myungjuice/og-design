@@ -1,0 +1,26 @@
+/* Hallmark · macrostructure: store identity → section rail → dated event rows with state text
+ * genre: playful · theme: existing OG/Figma 3D · tone: soft, restrained · designed-as-app
+ * audience: OG design review · use: event periods, remaining days, optional photo
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · system continuity, dated-state variation.
+ * Shared media rim only; text/rows flat, no new theme, generated art, motion or OS chrome.
+ * User-requested system continuity; filled/outline stars and explicit text carry the states.
+ * contrast: pass (40–41) · tokens: pass (48) · responsive: pass (34,49–57)
+ * 3 states at 320/375/390/414/768px visually inspected; service controls remain inert. */
+.v2-store-event{padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-6);font-variant-numeric:tabular-nums;color:var(--v2-text)}
+.v2-store-event .v2-heading-block{margin:0 0 var(--v2-space-2)}
+.v2-store-event .og-heading-title-line{min-height:var(--v2-space-12);align-items:center}
+.v2-store-event .og-heading-title-line :is(h3,h4){font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-store-event .og-heading-action{min-height:var(--v2-space-12)}
+.v2-store-event .og-update-row{display:flex;align-items:flex-start;gap:var(--v2-space-3);padding:var(--v2-space-4) 0;border-bottom:1px solid var(--v2-edge);background:var(--v2-surface)}
+.v2-store-event .og-update-row:last-child{border-bottom:0}
+.v2-store-event .og-update-copy{flex:1;min-width:0}
+.v2-store-event .og-update-title{display:flex;align-items:flex-start;gap:var(--v2-space-1)}
+.v2-store-event h4{margin:0;font-size:var(--v2-type-body);line-height:var(--v2-line-body);font-weight:700;overflow-wrap:anywhere;min-width:0}
+.v2-store-event .v2-event-star{width:var(--v2-space-6);height:var(--v2-space-6);flex:0 0 var(--v2-space-6);color:var(--v2-text)}
+.v2-store-event [data-status="active"] .v2-event-star{color:var(--v2-warning)}
+.v2-store-event .og-update-event-copy{padding-left:calc(var(--v2-space-6) + var(--v2-space-1))}
+.v2-store-event .og-update-status,.v2-store-event .og-update-date{margin:var(--v2-space-1) 0 0;font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary);overflow-wrap:anywhere}
+.v2-store-event .og-update-date{color:var(--v2-text-muted)}
+.v2-store-event .og-update-status strong{color:var(--v2-focus);font-weight:700}
+.v2-store-event [data-status="ended"] :is(h4,.v2-event-star,.og-update-status){color:var(--v2-text-muted)}
+.v2-store-event .v2-thumbnail{flex:0 0 calc(var(--v2-space-5)*4);width:calc(var(--v2-space-5)*4);height:calc(var(--v2-space-5)*4);aspect-ratio:1}

@@ -21,6 +21,8 @@
  --v2-selected-surface:oklch(96% .018 278);
  --v2-disabled:oklch(93% 0 0);
  --v2-error:oklch(44% .16 25);--v2-success:oklch(42% .10 155);
+ /* Legacy ShopPanel's Colors.green for the existing SMS share icon. */
+ --v2-share-link:#4caf50;
  --v2-warning:oklch(43% .09 65);--v2-info:oklch(44% .12 255);
  /* Local notices stay quiet; only their icon seats carry shallow depth. */
  /* Cartesian mixing keeps each hue when the white token has a numeric 0deg hue. */
@@ -48,6 +50,22 @@
  --v2-mileage-held:var(--v2-primary-edge);
  --v2-mileage-lit:oklch(95.457469% .02301675 246.036948);
  --v2-mileage-fill:oklch(75.376646% .13233224 248.825771);
+ /* Membership comparison only: deep OG violet with a restrained certificate rim. */
+ --v2-certificate-dark:oklch(28% .068 278);--v2-certificate-face:oklch(40% .14 278);
+ --v2-certificate-rim:oklch(83% .085 85);--v2-certificate-lip:oklch(63% .08 278);
+ --v2-certificate-muted:oklch(90% .016 278);--v2-certificate-line:oklch(66% .05 278);
+ --v2-certificate-shadow:oklch(16% .035 278 / .4);
+ --v2-certificate-depth:0 8px 16px -4px var(--v2-contact);
+ /* One gently curved character surface, not a stack of outlined plates. */
+ --v2-character-shade:color-mix(in oklab,var(--v2-screen-bottom) 42%,var(--v2-surface));
+ --v2-character-soft-edge:color-mix(in oklab,var(--v2-material-edge) 35%,var(--v2-surface));
+ --v2-character-face:linear-gradient(145deg,var(--v2-surface),var(--v2-character-shade));
+ --v2-character-selected-face:linear-gradient(155deg,var(--v2-selected-surface),var(--v2-nav-selected-surface));
+ --v2-character-depth:inset 3px 4px 10px var(--v2-surface),inset -3px -5px 10px var(--v2-character-soft-edge),0 8px 16px -8px var(--v2-contact);
+ --v2-character-foot:radial-gradient(ellipse,var(--v2-contact),transparent 72%);
+ --v2-character-stand-face:linear-gradient(to bottom,var(--v2-selected-surface),var(--v2-nav-selected-surface));
+ --v2-character-stand-side:color-mix(in oklab,var(--v2-material-edge) 72%,var(--v2-nav-selected-surface));
+ --v2-character-stand-depth:inset 0 -4px 3px var(--v2-character-stand-side),0 4px 6px -2px var(--v2-contact);
  --v2-line-compact:16px;
  --v2-depth-flat:none;
  --v2-depth-inset:inset 2px 3px 6px var(--v2-inset-shadow),inset -1px -1px 2px var(--v2-surface);
@@ -70,6 +88,19 @@
  /* Input family inherits the existing Home search material, without changing Home. */
  --v2-input-fill:var(--home-control-fill);--v2-input-depth:var(--home-shadow-control);
  --v2-input-ink:var(--home-ink);--v2-input-muted:var(--home-muted);
+ /* General chips reuse Home materials; selected edges get chip-only light/depth. */
+ --v2-chip-fill:var(--home-control-fill);--v2-chip-depth:var(--home-shadow-chip);
+ --v2-chip-selected-light:color-mix(in oklab,var(--home-selected-lit) 72%,var(--v2-surface));
+ --v2-chip-selected-edge:color-mix(in oklab,var(--home-action) 70%,var(--v2-primary-edge));
+ --v2-chip-selected-depth:inset 1px 2px 3px var(--v2-chip-selected-light),inset -1px -3px 4px var(--v2-chip-selected-edge),0 3px 6px var(--home-contact);
+ --v2-chip-disabled-ink:color-mix(in oklab,var(--v2-text-muted) 40%,var(--v2-disabled));
+ /* Information labels have an inset edge only, distinct from raised choice chips. */
+ --v2-badge-depth:inset 0 1px 1px var(--v2-surface),inset 0 -1px 1px var(--v2-material-edge);
+ --v2-badge-solid-light:color-mix(in oklab,var(--v2-on-action) 40%,var(--v2-action));
+ --v2-badge-solid-depth:inset 0 1px 2px var(--v2-badge-solid-light),inset 0 -1px 2px var(--v2-primary-edge);
+ --v2-badge-compact-type:10px;--v2-badge-compact-height:20px;--v2-badge-medium-height:28px;
+ /* Passive media gets an inset rim only, never a button-like lift or glow. */
+ --v2-media-rim:inset 1px 1px 2px var(--v2-surface),inset -1px -2px 3px var(--v2-material-edge);
  /* User-approved #ADB0B7 review variant; placeholder alone has a 1.7:1 floor, not normal-text AA. */
  /* Value, label, hint and border inks stay intact. */
  --v2-input-placeholder:oklch(75.69381106% .01052252 267.33538759);

@@ -1,0 +1,22 @@
+/* Hallmark · component: reservation change sheet · genre: playful
+ * theme: existing OG 3D · tone: restrained soft · anchor: shared violet
+ * Current data flat; changed values tinted; shared sheet/actions retain depth. */
+.v2-change-frame,.v2-change-frame *{box-sizing:border-box}
+.v2-change-frame{position:relative;width:100%;max-width:390px;height:846px;overflow:hidden;color:var(--v2-text);background:var(--v2-page);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-change-backdrop,.v2-change-scrim{position:absolute;inset:0;pointer-events:none}
+.v2-change-backdrop{isolation:isolate}
+.v2-change-scrim{background:var(--v2-dialog-scrim)}
+.v2-change-frame>.v2-sheet-static{position:absolute;inset:var(--v2-space-12) 0 0;display:flex;flex-direction:column;justify-content:flex-end;max-width:none}
+.v2-change-frame .v2-sheet-panel{max-height:100%;min-height:0}
+.v2-change-frame svg{display:block;flex:none;width:var(--v2-space-5);height:var(--v2-space-5)}
+.og-change-summary{margin-bottom:var(--v2-space-4);background:var(--v2-muted-surface)}
+.og-change-summary h3{color:var(--v2-text-muted);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-change-summary p{display:flex;align-items:center;gap:var(--v2-space-2);color:var(--v2-text)}
+.og-change-summary p svg{color:var(--v2-text-muted)}
+.og-change-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--v2-space-2);padding-block:var(--v2-space-3)}
+.og-change-label{display:flex;align-items:center;gap:var(--v2-space-2);min-width:0}
+.og-change-label svg{color:var(--v2-focus)}
+.v2-change-frame .og-change-value{display:inline-flex;align-items:center;justify-content:center;width:auto;max-width:100%;margin-left:auto;gap:var(--v2-space-1);padding-inline:var(--v2-space-3);font-weight:400}
+.v2-change-frame .og-change-value.is-changed{background:var(--v2-notice-info-surface);border-color:var(--v2-focus);color:var(--v2-focus)}
+@media(max-width:359px){.og-change-row{align-items:stretch;flex-direction:column}.v2-change-frame .og-change-value{width:100%;margin-left:0}}
+@media(forced-colors:active){.v2-change-scrim{background:Canvas}.v2-change-frame .og-change-value.is-changed{border-color:Highlight;color:Highlight}}

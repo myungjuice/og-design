@@ -14,7 +14,7 @@ export function renderInput({id=uid('v2-input'),type='text',label='',value='',pl
   className:'v2-input v2-input-'+type,helpReferences,
   attributes:{...extra,disabled:unavailable,readonly:readOnly,required,'aria-required':required?'true':undefined,'aria-invalid':state==='error'?'true':'false','aria-busy':state==='loading'?'true':undefined},
   helpAttributes:{'aria-live':'polite','aria-atomic':'true'},
-  slot:type!=='password'?({error:'!',loading:'…',success:'✓'}[state]||''):'',
+  slot:type!=='password'?({loading:'…',success:'✓'}[state]||''):'',
   toggleAttributes:{disabled:unavailable}};
  return type==='password'?passwordField(options):textField(options);
 }

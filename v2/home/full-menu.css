@@ -1,0 +1,58 @@
+/* Hallmark · macrostructure: store image → catalogue rail → featured cards/list
+ * genre: playful · theme: existing OG/Figma 3D · designed-as-app
+ * audience: OG design review · use: compare full menu, compact header and search
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · motion/enrichment: none
+ * Shared shallow control/media edges only; menu facts remain flat.
+ * Verified: 3 states × 8 widths; visual QA 320/375/390/414/768px;
+ * normal menu text ≥4.5:1, scroll focus ≥3:1; inert service controls.
+ * Existing user-directed OG palette/materials retained; no new chrome/motion. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-home-full-menu-frame{width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text)}
+.v2-full-menu{position:relative;display:flex;flex-direction:column;width:100%;height:100%;overflow:clip;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-full-menu h4,.v2-full-menu h5,.v2-full-menu h6{margin:0;min-width:0;overflow-wrap:anywhere;font-style:normal}
+.v2-full-menu h4,.v2-full-menu h5{font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-full-menu h6{font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-full-menu-hero{position:relative;height:224px;flex:none}
+.og-full-menu-hero>.v2-thumbnail{width:100%;height:100%;border-radius:0;aspect-ratio:auto}
+.og-full-menu-hero>.v2-icon-button{position:absolute;top:var(--v2-space-2);left:var(--v2-space-2)}
+.og-full-menu-heading{display:flex;align-items:center;gap:var(--v2-space-2);padding:var(--v2-space-4);flex:none}
+.og-full-menu-heading>div{flex:1;min-width:0}
+.og-full-menu-heading p{margin:var(--v2-space-2) 0 0;color:var(--v2-text-muted)}
+.og-full-menu-heading p:empty{display:none}
+.og-full-menu-categories{display:flex;gap:var(--v2-space-2);padding:var(--v2-space-2) var(--v2-space-4) var(--v2-space-3);overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;flex:none;min-width:0;border-bottom:1px solid var(--v2-edge)}
+.og-full-menu-categories .v2-chip{padding-inline:var(--v2-space-6)}
+.og-full-menu-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.og-full-menu-featured{padding:var(--v2-space-4);background:var(--v2-page)}
+.og-full-menu-featured>div{display:flex;gap:var(--v2-space-3);overflow-x:auto;overscroll-behavior-inline:contain;padding:var(--v2-space-3) 0 var(--v2-space-2);scrollbar-width:thin;min-width:0}
+.og-full-menu-item{position:relative}
+.og-full-menu-item-content{display:flex;align-items:center;gap:var(--v2-space-4);min-height:104px;padding-block:var(--v2-space-4)}
+.og-full-menu-copy{flex:1;min-width:0}
+.og-full-menu-description{margin:var(--v2-space-1) 0;min-height:var(--v2-line-secondary);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.og-full-menu-price{margin:var(--v2-space-2) 0 0;font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums}
+.og-full-menu-item-content>.v2-thumbnail,.og-full-menu-image-space{width:93px;height:64px;flex:none;border-radius:var(--v2-radius-button);aspect-ratio:auto}
+.og-full-menu-item.is-featured{width:160px;flex:none;background:var(--v2-surface);border-radius:var(--v2-radius-button);box-shadow:var(--v2-tile-lip),var(--v2-tile-contact);overflow:clip}
+.og-full-menu-item.is-featured .og-full-menu-item-content{display:flex;flex-direction:column;align-items:stretch;gap:0;height:100%;padding:0}
+.is-featured .v2-thumbnail{width:160px;height:119px;border-radius:0;aspect-ratio:auto}
+.is-featured .og-full-menu-copy{padding:var(--v2-space-3);display:flex;flex-direction:column;min-width:0}
+.is-featured .og-full-menu-price{margin-top:auto;padding-top:var(--v2-space-2)}
+.is-sold-out .og-full-menu-item-content{opacity:.3}
+.og-full-menu-sold-out{position:absolute;right:var(--v2-space-2);top:50%;transform:translateY(-50%) rotate(-6deg);color:var(--v2-error);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap}
+.is-featured .og-full-menu-sold-out{top:var(--v2-space-8);left:0;right:0;text-align:center}
+.og-full-menu-list,.og-full-menu-results{padding:var(--v2-space-4)}
+.og-full-menu-list>h5{margin-bottom:var(--v2-space-2)}
+.og-full-menu-list>.og-full-menu-item,.og-full-menu-results>.og-full-menu-item+.og-full-menu-item{border-top:1px solid var(--v2-edge)}
+.og-full-menu-caution{padding:var(--v2-space-5) var(--v2-space-4);background:var(--v2-page)}
+.og-full-menu-caution ul{margin:var(--v2-space-2) 0 0;padding-inline-start:var(--v2-space-4)}
+.og-full-menu-caution li+li{margin-top:var(--v2-space-2)}
+.v2-full-menu-background{display:contents}
+.og-full-menu-search-scrim{position:absolute;inset:0;background:var(--v2-dialog-scrim)}
+.og-full-menu-search-panel{display:flex;flex-direction:column;max-height:calc(100% - var(--v2-space-12));padding:var(--v2-space-2) 0 var(--v2-space-6);background:var(--v2-page);border-radius:0 0 var(--v2-radius-tile) var(--v2-radius-tile);box-shadow:var(--v2-depth-panel)}
+.og-full-menu-search-panel>.v2-icon-button{margin-inline-start:var(--v2-space-2)}
+.og-full-menu-search-panel>.og-search{margin:var(--v2-space-2) var(--v2-space-4);flex:none}
+.og-search label,.og-search .og-field-help{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:clip;white-space:nowrap}
+.og-search .og-field-control{position:relative;display:flex;align-items:center;min-width:0}
+.og-search-icon{position:absolute;left:var(--v2-space-4);width:var(--v2-space-5);height:var(--v2-space-5);color:var(--v2-focus)}
+.og-search input{width:100%;min-width:0;min-height:var(--v2-input-height);padding:var(--v2-space-3) var(--v2-space-4) var(--v2-space-3) var(--v2-space-12);border:0;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);box-shadow:var(--v2-input-depth);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.og-full-menu-results{background:var(--v2-surface);min-height:0;overflow:auto;overscroll-behavior:contain;margin-top:var(--v2-space-4)}
+.og-full-menu-categories:focus-visible,.og-full-menu-body:focus-visible,.og-full-menu-featured>div:focus-visible,.og-full-menu-search-panel:focus-visible,.og-full-menu-results:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}

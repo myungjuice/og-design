@@ -1,0 +1,18 @@
+/* Hallmark · existing OG/Figma playful 3D · restrained event reading list.
+ * Fixed identity and title; dated rows stay flat, shared back/media keep shallow depth.
+ * Existing tokens, font and source sorting; no new artwork, theme, motion or OS chrome.
+ * Verified 3 states × 8 widths, 15 mobile captures, fixed identity/scroll and media failure.
+ * Text >= 4.5:1; icons/focus >= 3:1. Keep reading rhythm flat, not shadowed row cards. */
+.v2-event-list .og-event-brand{display:flex;align-items:center;flex:none;gap:var(--v2-space-2);padding:var(--v2-space-4) var(--v2-space-4) 0}
+.v2-event-list .og-event-brand>.v2-thumbnail{width:30px;height:30px;aspect-ratio:1;border-radius:var(--v2-space-1)}
+.v2-event-list .og-event-brand .og-media-fallback{padding:0}
+.v2-event-list .og-event-brand strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-event-list .og-update-row{align-items:flex-start}
+.v2-event-list .og-update-title{display:flex;align-items:flex-start;gap:var(--v2-space-1)}
+.v2-event-list .v2-event-star{width:var(--v2-space-6);height:var(--v2-space-6);flex:0 0 var(--v2-space-6);color:var(--v2-text)}
+.v2-event-list [data-status="active"] .v2-event-star{color:var(--v2-warning)}
+.v2-event-list .og-update-event-copy{padding-left:calc(var(--v2-space-6) + var(--v2-space-1))}
+.v2-event-list .og-update-status,.v2-event-list .og-update-date{margin:var(--v2-space-1) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere}
+.v2-event-list .og-update-status strong{color:var(--v2-focus);font-weight:700}
+.v2-event-list [data-status="ended"] :is(h5,.v2-event-star,.og-update-status){color:var(--v2-text-muted)}
+.v2-event-list .og-news-empty{min-height:440px}

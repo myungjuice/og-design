@@ -1,0 +1,24 @@
+/* Hallmark · macrostructure: fixed app title → date/title/divider → preserved prose → optional full-width attachment
+ * genre: playful · theme: existing OG/Figma 3D · tone: soft, restrained · designed-as-app
+ * audience: OG design review · use: read a store news article and compare optional attachments
+ * Shared raised back action/media rim only; the article remains one flat reading surface.
+ * Existing palette/font/spacing inherited; no new theme, artwork, motion or OS chrome.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · text contrast >= 4.5:1, icon/focus >= 3:1.
+ * 3 states × 8 widths verified; 320/375/390/414/768 captures reviewed;
+ * long title/prose, keyboard scroll, fixed header and failed attachment checks passed. */
+:host{display:block;color:var(--v2-text);font-family:var(--v2-font)}
+*,*::before,*::after{box-sizing:border-box}
+.v2-home-news-detail-frame{width:100%;height:846px;background:var(--v2-surface);color:var(--v2-text)}
+.v2-news-detail{display:flex;flex-direction:column;width:100%;height:100%;overflow:clip;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums}
+.v2-news-detail>.og-app-bar{display:grid;grid-template-columns:var(--v2-space-12) minmax(0,1fr) var(--v2-space-12);align-items:center;flex:none;gap:var(--v2-space-2);padding:var(--v2-space-2);border-bottom:1px solid var(--v2-edge);background:var(--v2-surface)}
+.v2-news-detail .og-app-bar h4{margin:0;text-align:center;min-width:0;overflow-wrap:anywhere;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal}
+.v2-news-detail .og-app-bar-spacer{width:var(--v2-space-12)}
+.v2-news-detail .og-news-page-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--v2-space-4)}
+.v2-news-detail .og-news-page-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
+.v2-news-detail .og-news-article{border:0;border-radius:0;background:transparent;box-shadow:none}
+.v2-news-detail .og-news-registered{margin:0;text-align:right;color:var(--v2-text-muted);overflow-wrap:anywhere;font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
+.v2-news-detail h5{margin:var(--v2-space-6) 0 0;padding-bottom:var(--v2-space-6);border-bottom:1px solid var(--v2-edge);text-align:center;min-width:0;overflow-wrap:anywhere;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal}
+.v2-news-detail .og-news-contents{padding-top:var(--v2-space-6);white-space:pre-wrap;overflow-wrap:anywhere;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.v2-news-detail .og-news-article>.v2-thumbnail{display:block;width:100%;height:auto;aspect-ratio:auto;margin-top:var(--v2-space-6)}
+.v2-news-detail .og-news-article>.v2-thumbnail>img{display:block;width:100%;height:auto;object-fit:contain}
+.v2-news-detail .og-news-article>.v2-thumbnail:not([data-state="ready"]){min-height:calc(var(--v2-space-5)*9)}

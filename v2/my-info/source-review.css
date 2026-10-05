@@ -1,0 +1,47 @@
+/* Hallmark audit · existing OG soft 3D · source composition preserved.
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · shared tokens/control materials.
+ * Local source styles are scoped here; no remote fonts, new theme or phone chrome. */
+:host{
+ --app-font:var(--v2-font);--app-white:var(--v2-surface);--app-background:var(--v2-page);--app-surface:var(--v2-surface);--app-ink:var(--v2-text);--app-text-primary:var(--v2-text);--app-muted:var(--v2-text-muted);--app-text-secondary:var(--v2-text-muted);
+ --app-brand:var(--v2-action);--app-brand-violet:var(--v2-action);--app-action:var(--v2-action);--app-on-action:var(--v2-on-action);--app-selected:var(--v2-selected-surface);--app-edge:var(--v2-edge);--app-control-border:var(--v2-control-edge);--app-focus-ring:var(--v2-focus);--app-disabled-surface:var(--v2-disabled);--app-disabled-text:var(--v2-text-muted);
+ --app-error:var(--v2-error);--app-error-surface:var(--v2-notice-error-surface);--app-success:var(--v2-success);--app-success-surface:var(--v2-notice-success-surface);--app-warning:var(--v2-warning);--app-warning-surface:var(--v2-notice-warning-surface);--app-info:var(--v2-info);--app-info-surface:var(--v2-notice-info-surface);
+ --app-gradient-header:linear-gradient(155deg,var(--v2-screen-top),var(--v2-screen-bottom));--app-gradient-menu:linear-gradient(to bottom,var(--v2-surface),var(--v2-selected-surface));--app-gradient-brand:var(--v2-action);--app-gradient-number:var(--v2-action);--app-shadow-card:var(--v2-depth-raised);--app-shadow-menu:var(--v2-depth-raised);--app-shadow-sheet:var(--v2-depth-panel);--app-shadow-pressed:var(--v2-depth-inset);--app-scrim:var(--v2-dialog-scrim);
+ --app-radius-card:var(--v2-radius-card);--app-radius-menu:var(--v2-radius-tile);--app-radius-sheet:var(--v2-radius-sheet);--app-radius-lg:var(--v2-radius-button);--app-radius-xl:var(--v2-radius-card);--app-content-max:390px;
+ --app-space-1:var(--v2-space-1);--app-space-2:var(--v2-space-2);--app-space-3:var(--v2-space-3);--app-space-4:var(--v2-space-4);--app-space-5:var(--v2-space-5);--app-space-6:var(--v2-space-6);--app-space-8:var(--v2-space-8);--app-space-12:var(--v2-space-12);
+ --app-body-1-size:var(--v2-type-body);--app-body-1-line:var(--v2-line-body);--app-body-2-size:var(--v2-type-secondary);--app-body-2-line:var(--v2-line-secondary);--app-title-2-size:var(--v2-type-card);--app-title-2-line:var(--v2-line-card);--app-caption-size:var(--v2-type-caption);--app-caption-line:var(--v2-line-caption);
+ --test-ink:var(--v2-text);--test-muted:var(--v2-text-muted);--test-page-top:var(--v2-screen-top);--test-page-bottom:var(--v2-screen-bottom);
+ display:block;color:var(--v2-text);font-family:var(--v2-font)
+}
+.v2-source-frame,.v2-source-frame *{box-sizing:border-box}
+.v2-source-frame{position:relative;isolation:isolate;display:flex;flex-direction:column;width:100%;max-width:390px;height:846px;border:0;overflow:clip;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom));color:var(--v2-text);font-family:var(--v2-font)}
+.v2-source-frame svg{display:block;flex:none;width:20px;height:20px;color:inherit}
+.v2-source-frame h2,.v2-source-frame h3,.v2-source-frame h4{font-style:normal;overflow-wrap:anywhere}
+.v2-source-frame>.og-app-bar{flex:none;min-height:64px;height:auto;align-items:center;padding:var(--v2-space-2);background:var(--v2-surface);border-bottom:1px solid var(--v2-edge)}
+.v2-source-frame>.og-app-bar h2{min-width:0;white-space:normal;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);word-break:keep-all}
+.v2-source-frame>.og-sheet-panel{inset:64px 0 0;display:flex;flex-direction:column;min-height:0;border-radius:var(--v2-radius-sheet) var(--v2-radius-sheet) 0 0;background:var(--v2-surface);box-shadow:var(--v2-depth-panel)}
+.v2-source-frame .og-sheet-handle{flex:none}
+.v2-source-frame .og-sheet-header{flex:none;min-width:0}
+.v2-source-frame .og-sheet-header h3{min-width:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}
+.v2-source-frame .og-sheet-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--v2-space-4);background:var(--v2-surface)}
+.v2-source-frame .og-sheet-footer{flex:none;display:flex;gap:var(--v2-space-3);padding:var(--v2-space-4);background:var(--v2-surface)}
+.v2-source-frame .og-sheet-footer .v2-button{width:auto;flex:1}
+.v2-source-frame .v2-surface{min-width:0}
+.v2-source-frame .og-menu-tile{min-width:0;min-height:96px;white-space:normal;color:var(--v2-text);border-radius:var(--v2-radius-tile);background:var(--v2-surface);box-shadow:var(--v2-depth-raised)}
+.v2-source-frame .og-menu-tile>svg{width:28px;height:28px;color:var(--v2-focus)}
+.v2-source-frame .og-text-button{min-height:48px;white-space:nowrap;color:var(--v2-focus);font-family:var(--v2-font)}
+.v2-source-frame .og-choice{min-height:48px}
+.v2-source-frame .og-switch input{background:var(--v2-disabled);box-shadow:var(--v2-depth-inset)}
+.v2-source-frame .og-switch input:checked{background:var(--v2-action)}
+.v2-source-frame .og-switch input::after{box-shadow:var(--v2-depth-raised)}
+.v2-source-frame .og-sheet-close,.v2-source-frame .v2-icon-button{min-width:48px;min-height:48px}
+.v2-source-frame [role="region"]{min-width:0;overscroll-behavior:contain;scrollbar-width:thin;overflow-wrap:anywhere}
+.v2-source-frame [role="region"]:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+.v2-source-frame>[class*="-overlay"]{z-index:2;background:var(--v2-dialog-scrim)}
+.v2-source-frame .og-dialog-panel{max-width:320px;max-height:calc(100% - 32px);display:flex;flex-direction:column;border-radius:var(--v2-radius-card);background:var(--v2-surface);box-shadow:var(--v2-depth-panel)}
+.v2-source-frame .og-dialog-body{min-height:0;overflow:auto;overscroll-behavior:contain}
+.v2-source-frame .og-dialog-actions{flex:none}
+.v2-source-frame .og-history-backdrop{isolation:isolate}
+.v2-source-frame .og-history-scrim{background:var(--v2-dialog-scrim)}
+.v2-source-frame .v2-avatar,.v2-source-frame .v2-thumbnail{flex:none}
+.v2-source-frame .v2-input input::placeholder,.v2-source-frame .v2-input textarea::placeholder{color:var(--v2-input-placeholder);opacity:1}
+@media(forced-colors:active){.v2-source-frame,.v2-source-frame .og-sheet-body{background:Canvas;color:CanvasText}.v2-source-frame .og-menu-tile{border:1px solid ButtonText;box-shadow:none}}
