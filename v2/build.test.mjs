@@ -50,7 +50,10 @@ test('actual public build includes every v2 route and first home entry without d
  for(const path of ['my-info/navigation-comparisons.mjs','my-info/navigation-comparisons.css'])assert.equal(existsSync(join(root,'dist/v2',path)),false,path+' is retired');
  const home=readFileSync(join(root,'dist/index.html'),'utf8');
  const entries=[...home.matchAll(/<a class="artifact-link"[^>]*href="([^"]+)"[^>]*>[\s\S]*?<strong>([^<]+)<\/strong>/g)].map(x=>[x[1],x[2]]);
- assert.deepEqual(entries.slice(0,2),[['v2/','3D컨셉 디자인 v2'],['design-system/canvas/','디자인 캔버스 열기']]);
+ assert.deepEqual(entries.slice(0,1),[['v2/','3D컨셉 디자인 v2']]);
+ assert.ok(entries.every(([href])=>!href.includes('design-system/canvas/')),'retired canvas has no home entry');
+ assert.equal(existsSync(join(root,'dist/design-system/canvas/index.html')),false,'retired canvas is not published');
+ for(const path of ['design-system/components/index.mjs','design-system/components/index.css','design-system/pages/my-info/order-detail.mjs','screens/my-info-3d-test/home-controls.mjs'])assert.ok(existsSync(join(root,'dist',path)),path+' remains shared and published');
  function walk(path){return readdirSync(path,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(join(path,entry.name)):[join(path,entry.name)]);}
  const files=walk(join(root,'dist'));
  assert.ok(files.every(path=>!path.includes('.test.')&&!path.endsWith('.md')&&!path.split('/').some(name=>name.startsWith('.'))),'public build excludes tests, Markdown, dotfiles and credentials');

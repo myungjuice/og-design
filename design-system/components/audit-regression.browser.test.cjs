@@ -6,19 +6,19 @@ test.before(async()=>{browser=await chromium.launch({executablePath:'/Applicatio
 test.after(async()=>{await browser?.close();});
 const base='http://127.0.0.1:4173';
 test('favorite preview preserves 48px width',async()=>{
- await page.goto(base+'/design-system/canvas/');
+ await isolated();await page.evaluate(async()=>{const ui=await import('/design-system/components/index.mjs');document.querySelector('#probe').innerHTML=ui.favorite()+ui.favorite({selected:true});});
  const widths=await page.locator('.og-favorite').evaluateAll(ns=>ns.map(n=>n.offsetWidth));
  assert.ok(widths.length);assert.ok(widths.every(w=>w===48),JSON.stringify(widths));
 });
 test('short heading and action share a row',async()=>{
- await page.goto(base+'/design-system/canvas/');await page.evaluate(()=>document.fonts.ready);
+ await isolated();await page.evaluate(async()=>{const ui=await import('/design-system/components/index.mjs');document.querySelector('#probe').innerHTML=ui.sectionHeading({title:'내역',infoButton:true,action:'전체 보기'});});await page.evaluate(()=>document.fonts.ready);
  const deltas=await page.locator('.og-section-heading').evaluateAll(ns=>ns.filter(n=>n.querySelector('.og-heading-info')).map(n=>{const a=n.querySelector('.og-heading-action'),b=n.querySelector('.og-heading-title-line');return a?Math.abs(a.offsetTop+a.offsetHeight/2-b.offsetTop-b.offsetHeight/2):0;}));
  assert.ok(deltas.length);assert.ok(deltas.every(d=>d<2),JSON.stringify(deltas));
 });
 async function isolated(){await page.goto(base+'/');await page.setContent('<link rel="stylesheet" href="/design-system/components/index.css"><main id="probe"></main>');}
-test('viewer retry uses shared button and same styles outside canvas',async()=>{
+test('viewer retry uses shared button and matches the direct shared renderer',async()=>{
  const style=n=>{const s=getComputedStyle(n);return ['padding','borderRadius','borderWidth','fontSize'].map(k=>s[k]);};
- await page.goto(base+'/design-system/canvas/');const expected=await page.locator('.og-viewer-error button').evaluate(style);
+ await isolated();await page.evaluate(async()=>{const ui=await import('/design-system/components/index.mjs');document.querySelector('#probe').innerHTML=ui.button({label:'다시 시도',variant:'secondary'});});const expected=await page.locator('.og-button').evaluate(style);
  await isolated();await page.evaluate(async()=>{const ui=await import('/design-system/components/index.mjs');document.querySelector('#probe').innerHTML=ui.imageViewer({mode:'error'});});
  assert.equal(await page.locator('.og-viewer-error .og-button').count(),1);
  assert.deepEqual(await page.locator('.og-viewer-error button').evaluate(style),expected);
