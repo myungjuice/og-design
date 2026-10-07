@@ -27,8 +27,8 @@ test('every destination separates primary destinations from secondary items',()=
 test('unported screens are non-links and excluded from the ready group picker',()=>{
  const html=renderSubnavigation({pageId:'my-info',label:'내정보'});
  assert.match(html,/작업 보류/);
- assert.equal((html.match(/data-view-link=/g)||[]).length,25);
- assert.equal((html.match(/aria-disabled="true"/g)||[]).length,2);
+ assert.equal((html.match(/data-view-link=/g)||[]).length,26);
+ assert.equal((html.match(/aria-disabled="true"/g)||[]).length,1);
  assert.match(renderReviewPicker('my-info'),/value="mileage-history"/);
  for(const id of ['my-land','og-park']){
   assert.deepEqual(reviewGroups(id),[]);

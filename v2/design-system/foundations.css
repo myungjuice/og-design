@@ -64,7 +64,7 @@ figcaption span{display:block;color:var(--v2-workspace-muted);font-size:12px;lin
 .v2-material-panel{box-shadow:var(--v2-depth-panel);}
 .v2-material-tile{position:relative;flex:none;width:var(--v2-menu-face);height:var(--v2-menu-face);min-height:0;padding:0;border-radius:var(--v2-radius-tile);box-shadow:var(--v2-tile-contact);}
 .v2-material-tile::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--v2-tile-lip);}
-.v2-material-action{align-items:center;width:164px;height:52px;min-height:48px;padding:0 var(--v2-space-2);border-radius:var(--v2-radius-button);background:var(--v2-button-fill);color:var(--v2-on-action);box-shadow:var(--v2-button-depth);font:700 var(--v2-type-secondary)/var(--v2-line-button) var(--v2-font);}
+.v2-material-action{align-items:center;width:164px;height:52px;min-height:48px;padding:0 var(--v2-space-2);border-radius:var(--v2-radius-button);background:var(--v2-action);color:var(--v2-on-action);box-shadow:none;font:700 var(--v2-type-secondary)/var(--v2-line-button) var(--v2-font);}
 .v2-material-inset{min-height:var(--v2-input-height);padding:var(--v2-space-3) var(--v2-space-4);border-radius:var(--v2-input-radius);background:var(--v2-muted-surface);box-shadow:var(--v2-depth-inset);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);}
 .v2-material-primary{background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-depth-primary);}
 .v2-material .v2-material-mileage-title{font-size:var(--v2-type-caption);line-height:var(--v2-line-compact);}

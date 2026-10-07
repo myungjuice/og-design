@@ -20,6 +20,7 @@ const domains=[
 // Adapt action roles for v2 only; the original board and its state conditions stay intact.
 function reviewActions(html,id,key){
  if(id==='photo-review'&&key==='menu')html=html.replace(reviewMenu(),()=>renderActionMenu());
+ if(id==='review-write'&&key==='help')html=html.replace(/(<h4>)<span class="material-icons"[^>]*>(?:move_down|delete_outline)<\/span>/g,'$1');
  return html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g,button=>{
   if((button.includes('og-write-inline')&&button.includes('>add</span>'))||
      (button.includes('og-photo-action')&&button.includes('>photo_camera</span>')))

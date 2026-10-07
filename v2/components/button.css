@@ -2,21 +2,21 @@
  * pre-emit critique: P5 H5 E5 S5 R5 V4
  * Barcode reference material; mileage-card depth is not a button material.
  * Native hover/focus and app pressed/disabled/loading/error/success states retained. */
-.v2-button,.barcode-action.og-button{appearance:none;height:52px;min-height:48px;min-width:0;max-width:100%;padding:0 var(--v2-space-2);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-focus);font:700 var(--v2-type-secondary)/var(--v2-line-button) var(--v2-font);white-space:nowrap;cursor:pointer;box-shadow:var(--v2-button-secondary-depth)}
+.v2-button,.barcode-action.og-button{appearance:none;height:52px;min-height:48px;min-width:0;max-width:100%;padding:0 var(--v2-space-2);border:1px solid var(--v2-edge);border-radius:var(--v2-radius-button);background:var(--v2-surface);color:var(--v2-focus);font:700 var(--v2-type-secondary)/var(--v2-line-button) var(--v2-font);white-space:nowrap;cursor:pointer;box-shadow:none;transform:none}
 .v2-button{width:164px}
-/* Inline secondary actions keep their shallow material without CTA-sized width. */
+/* Inline secondary actions keep their flat Line surface without CTA-sized width. */
 .v2-button[data-size="compact"]{width:auto;height:44px;min-height:44px;padding-inline:var(--v2-space-3)}
 /* Text actions share hit targets, not the raised action-button surface. */
 .v2-button[data-variant="text"]{width:auto;min-width:48px;height:48px;background:transparent;border-color:transparent;box-shadow:none;font-weight:400}
-.v2-button[data-variant="danger"]{--v2-button-material-fill:var(--v2-button-danger-fill);--v2-button-material-depth:var(--v2-button-danger-depth)}
-.v2-button:is([data-variant="primary"],[data-variant="danger"]),.barcode-use.og-button{border:0;background:var(--v2-button-material-fill,var(--v2-button-fill));color:var(--v2-on-action);box-shadow:var(--v2-button-material-depth,var(--v2-button-depth))}
+/* Fill actions, including destructive confirmations, share the same hierarchy. */
+.v2-button:is([data-variant="primary"],[data-variant="danger"]),.barcode-use.og-button{border:0;background:var(--v2-action);color:var(--v2-on-action);box-shadow:none}
 .v2-button[data-variant="review"]{min-height:44px;height:44px;width:100px;padding:0 var(--v2-space-3);border-radius:var(--v2-radius-chip)}
 @media(hover:hover) and (pointer:fine){.v2-button:not(:disabled):hover,.barcode-action.og-button:not(:disabled):hover{color:var(--v2-focus)}.v2-button:is([data-variant="primary"],[data-variant="danger"]):not(:disabled):hover,.barcode-use.og-button:not(:disabled):hover{color:var(--v2-on-action)}}
 .v2-button:focus-visible,.barcode-action.og-button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:4px}
-.v2-button:is([data-variant="primary"],[data-variant="danger"]):focus-visible,.barcode-use.og-button:focus-visible{outline-color:var(--v2-text);box-shadow:0 0 0 2px var(--v2-surface),var(--v2-button-material-depth,var(--v2-button-depth))}
+.v2-button:is([data-variant="primary"],[data-variant="danger"]):focus-visible,.barcode-use.og-button:focus-visible{outline-color:var(--v2-text);box-shadow:0 0 0 2px var(--v2-surface)}
 /* Workspace focus is for dark review chrome, not the light app specimens nested inside it. */
 .v2-component-section .v2-button:not(:where(.v2-sheet-stage *,.v2-sheet-panel *,.v2-picker-stage *,.v2-attachment-stage *)):focus-visible{outline-color:var(--v2-workspace-focus)}
-.v2-button:not(:disabled):active,.v2-button[data-state="active"],.barcode-action.og-button:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
+.v2-button:not(:disabled):active,.v2-button[data-state="active"],.barcode-action.og-button:not(:disabled):active{box-shadow:none;transform:none}
 .v2-button[data-variant="text"]:not(:disabled):active,.v2-button[data-variant="text"][data-state="active"]{background:var(--v2-selected-surface);box-shadow:none}
 .v2-button:disabled,.barcode-action.og-button:disabled{opacity:1;background:var(--v2-disabled);color:var(--v2-text-muted);border-color:var(--v2-edge);box-shadow:none;cursor:not-allowed}
 /* State labels communicate the result; a quiet outline never changes button geometry. */

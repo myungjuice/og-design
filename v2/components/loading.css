@@ -22,6 +22,9 @@
 .v2-loading-mileage>[data-skeleton]{--v2-skeleton:var(--v2-skeleton-on-action)}
 .v2-loading-mileage>[data-skeleton] .m-coin{border-radius:var(--v2-radius-chip)}
 .v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd){color:transparent;background:var(--v2-skeleton);border-radius:var(--v2-space-1);box-shadow:none;animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
+/* Adjacent title/scale lines form one mask each, without rounded seams. */
+.v2-loading-mileage>[data-skeleton] :is(.mileage-title,.graph-labels){background:var(--v2-skeleton);border-radius:var(--v2-space-1);animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
+.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.graph-labels>span){background:transparent;border-radius:0;animation:none}
 .v2-loading-mileage>[data-skeleton] :is(img,.mileage-info,.mileage-graph>span){visibility:hidden}
 .v2-loading-mileage>[data-skeleton] .mileage-graph{background:var(--v2-skeleton);box-shadow:none;animation:v2-loading-breathe var(--v2-loading-cycle) var(--v2-loading-ease) infinite alternate}
 .v2-loading-mileage>[data-skeleton] .mileage-history{cursor:default}
@@ -37,7 +40,7 @@
 @keyframes v2-loading-turn{to{transform:rotate(360deg)}}
 @keyframes v2-loading-breathe{from{opacity:1}to{opacity:.65}}
 @media(min-width:1100px){.v2-loading-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(prefers-reduced-motion:reduce){.v2-loading .og-spinner,.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd,.mileage-graph){animation:none}}
+@media(prefers-reduced-motion:reduce){.v2-loading .og-spinner,.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title,.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels,.graph-labels>span,.mileage-rows dt,.mileage-rows dd,.mileage-graph){animation:none}}
 /* Decorative masks opt out of foreground remapping only; system GrayText still
  * supplies their background. Otherwise forced colors reveal the copied values. */
-@media(forced-colors:active){.v2-loading .og-spinner{border-color:CanvasText;border-top-color:Highlight}.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd,.mileage-graph){background:GrayText}.v2-loading-mileage>[data-skeleton] :is(.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels>span,.mileage-rows dt,.mileage-rows dd){forced-color-adjust:none;color:transparent}.v2-loading-tools select:focus-visible{outline-color:Highlight}}
+@media(forced-colors:active){.v2-loading .og-spinner{border-color:CanvasText;border-top-color:Highlight}.v2-loading-frame .og-skeleton,.v2-loading-mileage>[data-skeleton] :is(.mileage-title,.mileage-history,.graph-labels,.mileage-rows dt,.mileage-rows dd,.mileage-graph){background:GrayText}.v2-loading-mileage>[data-skeleton] :is(.mileage-title,.mileage-title>div,.mileage-title strong,.mileage-history,.graph-labels,.graph-labels>span,.mileage-rows dt,.mileage-rows dd){forced-color-adjust:none;color:transparent}.v2-loading-tools select:focus-visible{outline-color:Highlight}}

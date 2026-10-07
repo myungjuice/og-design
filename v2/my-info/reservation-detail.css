@@ -29,6 +29,7 @@
 .og-reservation-info dl>div>div{min-width:0;flex:1}
 .og-reservation-info dt{color:var(--v2-text-muted);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
 .og-reservation-info dd{margin:var(--v2-space-1) 0 0;overflow-wrap:anywhere}
+.v2-reservation-detail .og-reservation-notice{box-shadow:none}
 .og-reservation-notice h3{display:flex;align-items:center;gap:var(--v2-space-2)}
 .og-reservation-notice ul{margin:var(--v2-space-3) 0 0;padding-left:var(--v2-space-4);color:var(--v2-text-muted);font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);word-break:keep-all;overflow-wrap:anywhere}
 .og-reservation-notice li+li{margin-top:var(--v2-space-2)}

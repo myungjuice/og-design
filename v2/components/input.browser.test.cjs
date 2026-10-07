@@ -1,6 +1,8 @@
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
 const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
+// Browser focus may scroll the viewport; compare layout coordinates in the document.
+const documentBox=locator=>locator.evaluate(n=>{const r=n.getBoundingClientRect();return{x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height};});
 (async()=>{
  const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
@@ -26,10 +28,10 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    await field.fill('검토용 이름');assert.equal(await field.getAttribute('aria-invalid'),'false');assert.match(await help.innerText(),/실제.*변경하지/);
    assert.equal(await help.getAttribute('aria-live'),'polite');
    const pass=page.locator('#password-input-live input'),toggle=page.locator('#password-input-live button');
-   await pass.fill('test-only-123');const passBefore=await pass.boundingBox();
+   await pass.fill('test-only-123');const passBefore=await documentBox(pass);
    await toggle.click();assert.equal(await pass.getAttribute('type'),'text');assert.equal(await pass.inputValue(),'test-only-123');
    assert.equal(await toggle.getAttribute('aria-pressed'),'true');assert.match(await toggle.getAttribute('aria-label'),/숨기기/);
-   assert.deepEqual(await pass.boundingBox(),passBefore);await toggle.press('Space');assert.equal(await pass.getAttribute('type'),'password');
+   assert.deepEqual(await documentBox(pass),passBefore);await toggle.press('Space');assert.equal(await pass.getAttribute('type'),'password');
    assert.equal(await toggle.getAttribute('aria-pressed'),'false');
    await pass.fill('');await toggle.click();assert.notEqual(await pass.getAttribute('aria-invalid'),'true','visibility is not leaving field');
    await toggle.click();await page.locator('#password-input-title').click();assert.equal(await pass.getAttribute('aria-invalid'),'true');

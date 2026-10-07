@@ -13,3 +13,9 @@ button{font-family:var(--v2-font)}
 /* Home and its search specimen share the v2 placeholder, not the value ink. */
 .home-search input::placeholder{color:var(--v2-input-placeholder);opacity:1}
 .mileage-card.v2-mileage{width:100%}
+/* Map action buttons share flat Line/Fill; the Home search material is unchanged. */
+.home-category,.home-locate,.home-explore{border:1px solid var(--v2-edge);background:var(--v2-surface);box-shadow:none}
+.home-category[data-category][aria-pressed="true"],.home-quick{border:1px solid var(--v2-action);background:var(--v2-action);color:var(--v2-on-action);box-shadow:none}
+.home-category[data-category][aria-pressed="true"]:not(:focus-visible){outline:none}
+.home-search-submit:hover,.home-locate:hover{box-shadow:none}
+.home-explore:active:not(:disabled){transform:translateX(-50%)}

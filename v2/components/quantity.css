@@ -7,7 +7,7 @@
 .v2-quantity output{min-width:4ch;padding-inline:var(--v2-space-2);text-align:center;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .v2-quantity .og-quantity-unit{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .v2-quantity button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
-.v2-quantity button:not(:disabled):active,.v2-quantity .is-pressed{box-shadow:var(--v2-depth-inset);background:var(--v2-selected-surface)}
+.v2-quantity button:not(:disabled):active,.v2-quantity .is-pressed{box-shadow:none;background:var(--v2-selected-surface)}
 .v2-quantity button:disabled{color:var(--v2-chip-disabled-ink);cursor:not-allowed;box-shadow:none}
 .v2-quantity[aria-disabled="true"]{background:var(--v2-disabled);box-shadow:none}
 .v2-quantity-stage p{font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);margin:var(--v2-space-3) 0 0}

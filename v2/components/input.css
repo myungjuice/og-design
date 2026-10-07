@@ -6,22 +6,22 @@
  * Existing OG palette/type is intentional; page-theme rotation and macrostructure skipped.
  */
 .v2-input-stage{width:100%;max-width:390px;min-width:0;padding:var(--v2-space-5);border-radius:var(--v2-radius-card);background:var(--v2-surface);color:var(--v2-text)}
-.v2-input{min-width:0;font-family:var(--v2-font);color:var(--v2-text)}
+.v2-input{min-width:0;text-align:left;font-family:var(--v2-font);color:var(--v2-text)}
 .v2-input label{display:block;margin-bottom:var(--v2-space-2);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);overflow-wrap:anywhere;text-shadow:none}
 .v2-input .og-field-control{position:relative;display:flex;min-width:0}
 /* Native select behavior stays intact; a shared chevron has a reliable 16px inset. */
 .v2-select-control{position:relative;min-width:0;color:var(--v2-input-muted)}
 .v2-select-control::after{content:"";position:absolute;top:50%;right:var(--v2-space-4);box-sizing:border-box;width:var(--v2-space-2);height:var(--v2-space-2);border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-70%) rotate(45deg);pointer-events:none}
-.v2-input .v2-select-control select{appearance:none;box-sizing:border-box;width:100%;min-width:0;min-height:var(--v2-input-height);padding:var(--v2-space-3) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid var(--v2-material-edge);border-radius:var(--v2-input-radius);background:var(--v2-input-fill);box-shadow:var(--v2-input-depth);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
+.v2-input .v2-select-control select{appearance:none;box-sizing:border-box;width:100%;min-width:0;min-height:var(--v2-input-height);padding:var(--v2-space-3) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid var(--v2-input-edge,var(--v2-material-edge));border-radius:var(--v2-input-radius);background:var(--v2-input-fill);box-shadow:var(--v2-input-depth);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
 .v2-select-control select:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
-.v2-select-control select:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
+.v2-select-control select:not(:disabled):active{box-shadow:var(--v2-input-pressed-depth,var(--v2-depth-inset))}
 .v2-select-control select:disabled{background:var(--v2-disabled);color:var(--v2-text-muted);box-shadow:none;cursor:not-allowed}
 .v2-select-control select[aria-invalid="true"]{border-color:var(--v2-error)}
 .v2-input[data-state="success"] .v2-select-control select{border-color:var(--v2-success)}
 .v2-input[data-state="loading"] .v2-select-control select{cursor:progress}
 @media(hover:hover) and (pointer:fine){.v2-select-control select:not(:disabled):hover{border-color:var(--v2-input-muted)}}
 @media(forced-colors:active){.v2-select-control{color:ButtonText}.v2-input .v2-select-control select{background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none}}
-.v2-input :is(input,textarea){appearance:none;width:100%;min-width:0;min-height:var(--v2-input-height);padding:calc((var(--v2-input-height) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid transparent;border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-input-depth);text-shadow:none}
+.v2-input :is(input,textarea){appearance:none;width:100%;min-width:0;min-height:var(--v2-input-height);padding:calc((var(--v2-input-height) - var(--v2-line-body))/2 - 1px) var(--v2-space-4);padding-right:var(--v2-space-12);border:1px solid var(--v2-input-edge,transparent);border-radius:var(--v2-input-radius);background:var(--v2-input-fill);color:var(--v2-input-ink);font:400 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);box-shadow:var(--v2-input-depth);text-shadow:none}
 .v2-input :is(input,textarea)::placeholder{color:var(--v2-input-placeholder);opacity:1}
 .v2-input-password input{padding-right:calc(var(--v2-space-12) + var(--v2-space-6))}
 .v2-input .og-field-help{min-height:var(--v2-line-secondary);margin:var(--v2-space-1) 0 0;font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);color:var(--v2-text-muted);overflow-wrap:anywhere;text-shadow:none}
@@ -29,8 +29,8 @@
 .v2-input .og-password-toggle{position:absolute;inset-inline-end:var(--v2-space-1);top:0;min-width:64px;min-height:var(--v2-input-height);padding:var(--v2-space-2);border:0;border-radius:var(--v2-input-radius);background:none;color:var(--v2-focus);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);white-space:nowrap;cursor:pointer}
 @media(hover:hover) and (pointer:fine){.v2-input :is(input,textarea):not(:disabled):not([readonly]):hover{border-color:var(--v2-input-muted)}.v2-input .og-password-toggle:not(:disabled):hover{background:var(--v2-selected-surface)}}
 .v2-input :is(input,textarea,button):focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
-.v2-input :is(input,textarea):not(:disabled):not([readonly]):active,.v2-input[data-state="active"] :is(input,textarea){box-shadow:var(--v2-depth-inset)}
-.v2-input .og-password-toggle:not(:disabled):active{box-shadow:var(--v2-depth-inset)}
+.v2-input :is(input,textarea):not(:disabled):not([readonly]):active,.v2-input[data-state="active"] :is(input,textarea){box-shadow:var(--v2-input-pressed-depth,var(--v2-depth-inset))}
+.v2-input .og-password-toggle:not(:disabled):active{box-shadow:var(--v2-input-pressed-depth,var(--v2-depth-inset))}
 .v2-input :is(input,textarea,button):disabled{background:var(--v2-disabled);color:var(--v2-text-muted);box-shadow:none;cursor:not-allowed}
 .v2-input :is(input,textarea):disabled::placeholder{color:var(--v2-text-muted)}
 .v2-input :is(input,textarea)[readonly]{background:var(--v2-page);box-shadow:none;color:var(--v2-text-muted)}
@@ -46,3 +46,6 @@
 .v2-input-textarea .og-field-help{flex:1;min-width:120px}
 .v2-input-textarea .og-field-count{flex:none;font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums;color:var(--v2-text-muted);white-space:nowrap}
 @media(min-width:60rem){.v2-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Modal inputs use a lower hierarchy; the default and Home search stay raised. */
+.v2-input-line,.v2-dialog-panel .v2-input,.v2-sheet-panel .v2-input,.v2-source-frame .og-sheet-panel .v2-input,.v2-source-frame.og-opinion .v2-input{--v2-input-fill:var(--v2-surface);--v2-input-depth:none;--v2-input-pressed-depth:none;--v2-input-radius:var(--v2-radius-button);--v2-input-edge:var(--v2-edge)}
+.v2-input-line :is(input,textarea)[readonly],.v2-dialog-panel .v2-input :is(input,textarea)[readonly],.v2-source-frame .og-sheet-panel .v2-input :is(input,textarea)[readonly]{background:var(--v2-surface)}

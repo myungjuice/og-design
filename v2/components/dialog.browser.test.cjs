@@ -10,18 +10,15 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   assert.ok(await page.locator('.v2-dialog-static').evaluateAll(panels=>{
    const primary=getComputedStyle(panels[0].querySelector('.v2-button'));
    const danger=getComputedStyle(panels[2].querySelector('[data-variant="danger"]'));
-   const geometry=value=>value.replace(/oklch\([^)]*\)|rgba?\([^)]*\)/g,'COLOR');
-   return danger.backgroundImage.startsWith('linear-gradient(155deg,')&&danger.borderWidth==='0px'&&geometry(danger.boxShadow)===geometry(primary.boxShadow)&&danger.height===primary.height&&danger.borderRadius===primary.borderRadius;
-  }),'danger uses the primary button material geometry, not secondary white bevels');
+   return danger.backgroundImage==='none'&&danger.backgroundColor===primary.backgroundColor&&danger.borderWidth==='0px'&&danger.boxShadow==='none'&&primary.boxShadow==='none'&&danger.height===primary.height&&danger.borderRadius===primary.borderRadius;
+  }),'destructive confirmation uses the same flat Fill hierarchy as primary');
   for(const [id,label] of [['notice','확인'],['delete','삭제']]){
    await page.locator(`[data-dialog-open="v2-dialog-${id}"]`).click();
    const button=page.locator(`#v2-dialog-${id}`).getByRole('button',{name:label,exact:true});
    await button.hover();await page.mouse.down();
    assert.ok(await button.evaluate(n=>{
-    const probe=document.createElement('span');probe.style.boxShadow='var(--v2-depth-inset)';n.parentElement.append(probe);
-    const expected=getComputedStyle(probe).boxShadow;probe.remove();
-    return n.matches(':active')&&getComputedStyle(n).boxShadow===expected;
-   }),'filled '+id+' button shows pressed depth while hovered');
+    return n.matches(':active')&&getComputedStyle(n).boxShadow==='none'&&getComputedStyle(n).backgroundImage==='none';
+   }),'filled '+id+' button stays flat while pressed and hovered');
    await page.mouse.up();await page.keyboard.press('Escape');
   }
   for(const width of [320,375,390,414,768,1024,1440]){

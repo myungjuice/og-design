@@ -26,7 +26,7 @@ export function renderDialogSamples(){
  return '<section class="v2-component-section" id="dialogs" aria-labelledby="dialogs-title" hidden><h2 id="dialogs-title">확인창</h2><p>짧은 안내나 중요한 선택을 화면 중앙에서 보여줍니다. 흰 표면에 얕은 입체감을 주고, 제목과 본문은 담백하게 유지합니다.</p><div class="v2-dialog-grid">'+cases.map(item=>
   '<figure class="v2-component-sample"><figcaption><strong>'+e(item.name)+'</strong></figcaption><div class="v2-dialog-stage">'+renderDialog({...item,id:'dialog-static-'+item.key})+'</div>'+
   button({label:item.name+' 열어보기',variant:'secondary',className:'v2-button',attributes:{'data-dialog-open':'v2-dialog-'+item.key}})+'</figure>').join('')+
- '</div><p class="v2-dialog-note">확인창은 중요한 선택이 필요할 때만 사용합니다. 버튼은 최대 두 개로 구성하고, 삭제 동작은 붉은색으로 구분합니다.</p><p id="dialog-feedback" class="v2-dialog-note" role="status" aria-live="polite">열어보기에서 동작을 확인할 수 있습니다. 실제 설정 변경이나 삭제는 하지 않습니다.</p>'+cases.map(item=>renderDialog({...item,id:'v2-dialog-'+item.key,modal:true})).join('')+'</section>';
+ '</div><p class="v2-dialog-note">확인창은 중요한 선택이 필요할 때만 사용합니다. 버튼은 최대 두 개로 구성합니다. 주요 행동은 Fill, 취소는 Line으로 구분하고 삭제 여부는 제목과 버튼명으로 명확하게 안내합니다.</p><p id="dialog-feedback" class="v2-dialog-note" role="status" aria-live="polite">열어보기에서 동작을 확인할 수 있습니다. 실제 설정 변경이나 삭제는 하지 않습니다.</p>'+cases.map(item=>renderDialog({...item,id:'v2-dialog-'+item.key,modal:true})).join('')+'</section>';
 }
 export function setupDialogSamples(root){
  const dialogs=new Map();

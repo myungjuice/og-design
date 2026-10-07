@@ -45,8 +45,8 @@ const sample=(title,note,props)=>'<figure class="v2-component-sample"><figcaptio
 const choices=['한식','중식','일식','양식','카페·디저트'];
 export function renderChipSamples(){
  const section=(id,title,note,html,comparison='')=>'<section class="v2-component-section" id="'+id+'" aria-labelledby="'+id+'-title" hidden><h2 id="'+id+'-title">'+title+'</h2><p>'+note+'</p>'+html+(comparison?stateComparison('<div class="v2-chip-grid">'+comparison+'</div>'):'')+'</section>';
- const examples=[['active','누르는 중','선택 여부는 유지하고 면만 얕게 눌립니다.'],['disabled','비활성','기존 선택을 유지한 채 변경을 막습니다.'],['loading','적용 중','이름과 선택은 유지하고 아래에서 진행을 안내합니다.'],['error','적용 실패','선택 여부와 오류 안내를 구분합니다.'],['success','적용 완료','선택 결과는 유지하며 성공 장식을 반복하지 않습니다.']];
- return section('chip-single','단일 선택 칩','기간·내역 종류처럼 하나만 고릅니다. 홈 카테고리의 밝은 면과 보라색 선택 재질을 공유하고 체크로 선택을 구분합니다.',stage(renderChipGroup({id:'v2-chip-single',type:'single',label:'내역 종류',items:['전체','적립','사용',{label:'직접 선택',disabled:true}]})))+
+ const examples=[['active','누르는 중','선택 여부를 유지하고 평면 형태로 표시합니다.'],['disabled','비활성','기존 선택을 유지한 채 변경을 막습니다.'],['loading','적용 중','이름과 선택은 유지하고 아래에서 진행을 안내합니다.'],['error','적용 실패','선택 여부와 오류 안내를 구분합니다.'],['success','적용 완료','선택 결과는 유지하며 성공 장식을 반복하지 않습니다.']];
+ return section('chip-single','단일 선택 칩','기간·내역 종류처럼 하나만 고릅니다. 흰 배경의 Line과 보라색 Fill로 선택을 구분하고 체크를 함께 표시합니다.',stage(renderChipGroup({id:'v2-chip-single',type:'single',label:'내역 종류',items:['전체','적립','사용',{label:'직접 선택',disabled:true}]})))+
  section('chip-multiple','복수 선택 칩','관심 업종처럼 여러 항목을 고릅니다. 아래 3개 제한은 기존 캔버스의 검토 예시이며 모든 칩에 적용되는 정책은 아닙니다.',stage(renderChipGroup({id:'v2-chip-multiple',items:choices,max:3,selected:[0,2]})),
  [[],[0,2],[0,1,2]].map(selected=>sample('선택 '+selected.length+'개','선택 개수와 관계없이 각 칩의 크기는 같습니다.',{items:choices,max:3,selected})).join('')+examples.map(([state,title,note])=>sample(title,note,{items:choices,max:3,selected:[0,2],state})).join(''))+
  section('chip-filters','적용된 필터','선택을 바꾸는 체크 칩과 구분해 ×를 표시합니다. 하나씩 해제하며 필터 이름 전체가 터치 영역입니다.',stage(renderChipGroup({id:'v2-chip-filters',type:'remove',label:'적용된 필터',items:['한식','영업 중','망원동']}))+

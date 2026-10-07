@@ -46,7 +46,7 @@ export {renderSheet} from './sheet.mjs';
 export {renderDatePicker,renderTimePicker} from './date-time.mjs';
 export {renderAttachments,renderImageViewer} from './attachments.mjs';
 export const componentStates=[
- ['default','기본','동작하기 전'],['active','누르는 중','손가락으로 누르는 동안 얕게 눌림'],
+ ['default','기본','동작하기 전'],['active','누르는 중','누르는 동안에도 평면 형태 유지'],
  ['disabled','비활성','사용 가능한 마일리지가 없을 때'],['loading','처리 중','중복 실행을 막는 상태'],
  ['error','오류','실패 안내와 다시 시도'],['success','성공','완료를 텍스트로도 표시']
 ];

@@ -16,7 +16,7 @@ const states={membership:['basic','registered','no-code','share'],settings:['bas
    await page.setViewportSize({width,height:1100});await page.goto(base+'/v2/my-info/#membership');await page.reload();
    await page.waitForFunction(()=>[...document.querySelectorAll('.v2-source-host')].filter(n=>n.dataset.sourceReady==='true').length===12);
    await page.evaluate(()=>document.fonts.ready);
-   assert.equal(await page.locator('.v2-subnav-pending').count(),2);
+   assert.equal(await page.locator('.v2-subnav-pending').count(),1);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'workspace width '+width);
    for(const [domain,keys] of Object.entries(states)){
     await page.evaluate(id=>location.hash=id,domain);await page.locator('#'+domain).waitFor();

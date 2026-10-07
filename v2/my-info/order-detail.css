@@ -1,0 +1,35 @@
+/* Hallmark · macrostructure: app order summary / menu ledger · genre: playful
+ * theme: existing OG v2 · tone: restrained soft · anchor: shared violet
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ * 원본 정보·취소 조건은 유지. 대표 요약만 입체, 목록·버튼·아이콘은 평면. */
+.v2-order-detail,.v2-order-detail *{box-sizing:border-box}
+.v2-order-detail{display:flex;flex-direction:column;width:100%;max-width:390px;height:846px;overflow:clip;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom));color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);font-variant-numeric:tabular-nums}
+.v2-order-detail svg{display:block;flex:none;width:var(--v2-space-5);height:var(--v2-space-5)}
+.v2-order-detail .og-app-bar{display:flex;align-items:center;flex:none;height:64px;padding:var(--v2-space-2);gap:var(--v2-space-2);background:var(--v2-surface);border-bottom:1px solid var(--v2-edge)}
+.v2-order-detail .og-app-bar h2{flex:1;min-width:0;margin:0;text-align:center;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal;overflow-wrap:anywhere}
+.v2-order-detail .og-app-bar-spacer{width:var(--v2-space-12);flex:none}
+.v2-order-detail .og-order-body{display:grid;align-content:start;gap:var(--v2-space-3);flex:1;min-height:0;padding:var(--v2-space-4);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.v2-order-detail .og-order-body:focus-visible{outline:2px solid var(--v2-focus);outline-offset:-2px}
+.v2-order-detail .og-order-store-image .v2-thumbnail{width:100%;height:150px;aspect-ratio:auto;border-radius:var(--v2-radius-tile)}
+.v2-order-detail h3,.v2-order-detail h4{margin:0;min-width:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal;overflow-wrap:anywhere}
+.v2-order-detail .og-order-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--v2-space-2)}
+.v2-order-detail .og-order-heading .v2-badge{flex:none}
+.v2-order-detail .og-order-summary dl{display:grid;gap:var(--v2-space-2);margin:var(--v2-space-4) 0 0}
+.v2-order-detail .og-order-summary dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:var(--v2-space-3)}
+.v2-order-detail .og-order-summary dt{flex:none;color:var(--v2-text-muted)}
+.v2-order-detail .og-order-summary dd{margin:0;min-width:0;text-align:right;overflow-wrap:anywhere}
+.v2-order-detail .og-order-summary dd strong{font-size:var(--v2-type-body)}
+.v2-order-detail .og-order-menus ul{list-style:none;padding:0;margin:var(--v2-space-4) 0 0}
+.v2-order-detail .og-order-menu{display:flex;align-items:stretch;gap:var(--v2-space-3);padding:var(--v2-space-4) 0;min-width:0}
+.v2-order-detail .og-order-menu:first-child{padding-top:0}
+.v2-order-detail .og-order-menu:last-child{padding-bottom:0}
+.v2-order-detail .og-order-menu+.og-order-menu{border-top:1px solid var(--v2-edge)}
+.v2-order-detail .og-order-menu-image{flex:none}
+.v2-order-detail .og-order-menu-image .v2-thumbnail{width:64px;height:64px}
+.v2-order-detail .og-order-menu-copy{flex:1;min-width:0;overflow-wrap:anywhere}
+.v2-order-detail .og-order-menu h4{font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
+.v2-order-detail .og-order-menu p{margin:var(--v2-space-1) 0 0;color:var(--v2-text-muted);font-size:var(--v2-type-caption);line-height:var(--v2-line-caption)}
+.v2-order-detail .og-order-menu-total{display:flex;flex:none;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:var(--v2-space-2);font-size:var(--v2-type-caption);line-height:var(--v2-line-caption);white-space:nowrap}
+.v2-order-detail .og-order-actions{flex:none;padding:var(--v2-space-4);background:var(--v2-surface);border-top:1px solid var(--v2-edge)}
+.v2-order-detail .og-order-actions .v2-button{width:100%}
+@media(forced-colors:active){.v2-order-detail{background:Canvas;color:CanvasText}}

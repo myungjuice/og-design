@@ -6,6 +6,7 @@ import {setupReservationChangeReview} from './reservation-change.mjs';
 import {setupReservationPickersReview} from './reservation-pickers.mjs';
 import {setupWaitingDetailReview} from './waiting-detail.mjs';
 import {setupWaitingDialogsReview} from './waiting-dialogs.mjs';
+import {setupOrderDetailReview} from './order-detail.mjs';
 import {setupReviewHistoryReview} from './review-history.mjs';
 import {setupNoticesReview} from './notices.mjs';
 import {setupNoticeDetailReview} from './notice-detail.mjs';
@@ -30,6 +31,7 @@ export function setupMyInfoPreview(root){
  setupReservationPickersReview(root);
  setupWaitingDetailReview(root);
  setupWaitingDialogsReview(root);
+ setupOrderDetailReview(root);
  setupReviewHistoryReview(root);
  setupNoticesReview(root);
  setupNoticeDetailReview(root);

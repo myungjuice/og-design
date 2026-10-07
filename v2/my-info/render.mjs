@@ -8,6 +8,7 @@ export {renderReservationChangeReview} from './reservation-change.mjs';
 export {renderReservationPickersReview} from './reservation-pickers.mjs';
 export {renderWaitingDetailReview} from './waiting-detail.mjs';
 export {renderWaitingDialogsReview} from './waiting-dialogs.mjs';
+export {renderOrderDetailReview} from './order-detail.mjs';
 export {renderReviewHistoryReview} from './review-history.mjs';
 export {renderNoticesReview} from './notices.mjs';
 export {renderNoticeDetailReview} from './notice-detail.mjs';

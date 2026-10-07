@@ -46,8 +46,8 @@ export function renderFoundations(){
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-input" data-contrast="input">매장명으로 검색해 주세요.</div></div><figcaption>밝은 입력 표면 <span>홈 검색창 · 공통 입력 · 좌상단 빛과 얕은 접촉 그림자</span></figcaption></figure>
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-panel" data-contrast="panel"><strong>최근 방문</strong><span>아래쪽 마감과 부드러운 접촉 그림자</span></div></div><figcaption>흰 정보 카드 <span>최근 방문 · 바코드 카드 · 기본 내부 여백 20px</span></figcaption></figure>
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-tile" aria-hidden="true"></div></div><figcaption>아이콘 받침 <span>80 × 80px · 흰 면의 얕은 두께 · 이름은 받침 밖에 배치</span></figcaption></figure>
- <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-action" data-contrast="action">마일리지 사용</div></div><figcaption>주요 버튼 <span>52px 높이 · 마일리지 카드보다 얕은 그라데이션과 그림자</span></figcaption></figure>
- <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-inset" data-contrast="inset">누른 상태</div></div><figcaption>얕은 홈 <span>컨트롤을 누르는 동안의 피드백 · 기본 입력 표면에는 사용하지 않음</span></figcaption></figure>
+ <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-action" data-contrast="action">마일리지 사용</div></div><figcaption>주요 버튼 <span>52px 높이 · 보라색 평면 Fill · 카드와 위계 구분</span></figcaption></figure>
+ <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-inset" data-contrast="inset">누른 상태</div></div><figcaption>얕은 홈 <span>입체 입력을 누르는 동안의 피드백 · 평면 버튼에는 사용하지 않음</span></figcaption></figure>
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-primary" data-contrast="primary"><span class="v2-material-mileage-title">사용 가능한 OG 마일리지</span><strong class="v2-material-amount">15,000 M</strong><span>강한 입체감은 핵심 금액 영역에 집중</span></div></div><figcaption>마일리지 카드 <span>보라색 표면 · 깊은 하단 마감 · 주요 버튼 재질과 구분</span></figcaption></figure>
  </div>`)}
  <p class="v2-foundation-end"><a href="/v2/components/">공통 버튼·카드의 형태와 상태 검토하기</a></p>`;

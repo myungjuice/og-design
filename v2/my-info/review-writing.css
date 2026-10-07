@@ -6,8 +6,8 @@
 .og-photo-store-icon>svg{width:24px;height:24px}
 .og-write-inline>svg,.og-write-help h4>svg{flex:none;width:18px;height:18px}
 .og-write-help h4>svg{color:var(--v2-text-muted)}
-.v2-source-frame .og-write-delete{padding:0;color:var(--v2-text-muted);background:transparent}
-.v2-source-frame .og-write-delete::before{content:"";position:absolute;inset:var(--v2-space-3);border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-chip);background:var(--v2-surface);box-shadow:var(--v2-media-rim)}
+.v2-source-frame .og-write-delete{padding:0;border:0;color:var(--v2-text-muted);background:transparent;box-shadow:none}
+.v2-source-frame .og-write-delete::before{content:none}
 .v2-source-frame .og-write-delete>svg{position:relative;width:var(--v2-space-5);height:var(--v2-space-5);padding:var(--v2-space-1);box-sizing:border-box;background:transparent;color:inherit}
 .v2-source-frame.og-photo-review .og-photo-menu{width:128px}
 .v2-source-frame.og-photo-review .og-feedback-icon{background:transparent;box-shadow:none;color:var(--v2-action)}

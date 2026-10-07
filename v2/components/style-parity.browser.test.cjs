@@ -11,7 +11,8 @@ const material=n=>{const s=getComputedStyle(n);return Object.fromEntries(['fontS
   await page.goto(base+'/v2/components/#group-buttons');await page.locator('#primary').waitFor();
   for(const [id,selector] of [['primary','.barcode-use'],['secondary','.barcode-earn']]){
    assert.deepEqual(await page.locator(`#${id} .v2-button`).first().evaluate(material),await reference.locator(selector).evaluate(material),'common '+id+' material matches actual barcode action');
-   assert.deepEqual(await reference.locator(selector).evaluate(material),await original.locator(selector).evaluate(material),'representative '+id+' action keeps the original default appearance');
+   assert.equal(await reference.locator(selector).evaluate(n=>getComputedStyle(n).boxShadow),'none','V2 '+id+' follows the approved flat button rule');
+   assert.notEqual(await original.locator(selector).evaluate(n=>getComputedStyle(n).boxShadow),'none','legacy canvas material remains unchanged');
   }
   await reference.goto(base+'/v2/my-info/');await reference.locator('.service-tile').first().waitFor();
   await page.goto(base+'/v2/components/#group-cards-information');await page.locator('#cards').waitFor();

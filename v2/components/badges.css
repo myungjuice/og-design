@@ -17,8 +17,8 @@
 .v2-badge[data-variant="solid"]{background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-badge-solid-depth)}
 .v2-badge[data-size="compact"]{min-height:var(--v2-badge-compact-height);border-radius:var(--v2-radius-chip);font-size:var(--v2-badge-compact-type);line-height:var(--v2-line-compact)}
 .v2-badge[data-size="medium"]{min-height:var(--v2-badge-medium-height);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
-.v2-count-badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-width:var(--v2-space-6);min-height:var(--v2-space-6);padding:calc(var(--v2-space-1)/2) var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-badge-solid-depth);font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;cursor:default}
-.v2-unread-dot{display:inline-block;width:var(--v2-space-2);height:var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-action);box-shadow:var(--v2-badge-solid-depth);flex:none;cursor:default}
+.v2-count-badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-width:var(--v2-space-6);min-height:var(--v2-space-6);padding:calc(var(--v2-space-1)/2) var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-error);color:var(--v2-on-action);box-shadow:none;font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;cursor:default}
+.v2-unread-dot{display:inline-block;width:var(--v2-space-2);height:var(--v2-space-2);border-radius:var(--v2-radius-chip);background:var(--v2-error);box-shadow:none;flex:none;cursor:default}
 .v2-count-badge[hidden],.v2-unread-dot[hidden]{display:none}
 .v2-badge-context-name{min-width:0;overflow-wrap:anywhere;font-weight:700}
 .v2-badge-context-row{display:flex;align-items:center;justify-content:space-between;gap:var(--v2-space-3);min-width:0;margin-top:var(--v2-space-4)}

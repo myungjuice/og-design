@@ -36,7 +36,7 @@ function record(item,selected,menuOpen=false,imageSrc=''){
  const photo=selected===3?(photos.length?'<div class="v2-use-review-photos" role="group" aria-label="리뷰 사진">'+photos.map((src,index)=>renderThumbnail({alt:'리뷰 사진 '+(index+1),src,state:src?'ready':'empty'})).join('')+'</div>':'')+'<p class="v2-use-review-text">'+e(item.review)+'</p>':'';
  const order=selected===2?'<div class="v2-use-order-summary"><span>'+e(item.menu)+'</span><strong>'+e(item.amount)+'</strong></div>':'';
  const menu=menuOpen?'<div class="v2-use-review-menu" aria-label="리뷰 관리 메뉴">'+button({label:'수정',variant:'secondary',className:'v2-button'})+button({label:'삭제',variant:'danger',className:'v2-button'})+'</div>':'';
- const action=item.action?'<div class="v2-use-action">'+button({label:item.action,variant:'secondary',className:'v2-button'})+'</div>':'';
+ const action=item.action?'<div class="v2-use-action">'+button({label:item.action,variant:'primary',className:'v2-button'})+'</div>':'';
  const stamp=item.requested?'<p class="v2-use-stamp">신청일: '+e(item.requested)+'</p>':item.started?'<p class="v2-use-stamp">대기 시작: '+e(item.started)+'</p>':'';
  return '<article data-use-record="'+e(item.state||'리뷰')+'">'+renderSurface({depth:'flat',contentHTML:header+details+stamp+order+photo+menu+action})+'</article>';
 }

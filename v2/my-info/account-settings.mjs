@@ -6,6 +6,7 @@ import {dialog,iconButton} from '../../design-system/components/index.mjs';
 import {renderInput} from '../components/input.mjs';
 import {extractSourceScreens, renderSourceGallery, setupSourceGallery} from './source-review.mjs';
 import {renderMembershipScreen,setupMembershipCharacters} from './membership-comparison.mjs';
+import {adaptPasswordSpecimen} from './password-review.mjs';
 
 // Original boards own fixtures, copy and security conditions. Membership uses
 // the selected certificate layout; other domains retain the shared source adapter.
@@ -28,14 +29,14 @@ export function renderAccountSettingsReview() {
  return domains.map(({id, title, intro, board, rootClass, states}) => {
   const screens = extractSourceScreens(board(), rootClass);
   if (screens.length !== states.length) throw new Error(id + ' source specimens changed');
-  const specimens=states.map(([key, label, props], index) => ({key, label, html:id==='membership'?renderMembershipScreen(props):id==='account'?accountSpecimen(screens[index]):screens[index]}));
+  const specimens=states.map(([key, label, props], index) => ({key, label, html:id==='membership'?renderMembershipScreen(props):id==='account'?accountSpecimen(screens[index]):id==='password'?adaptPasswordSpecimen(screens[index],key):screens[index]}));
   if(id==='account')specimens.push({key:'nickname',label:'닉네임 수정 · 확인창',html:nicknameSpecimen()});
   if(id==='settings')specimens.push({key:'night',label:'야간 알림 · 동의 확인',html:nightSpecimen()});
   return renderSourceGallery({id, title, intro,extraLabel:id==='membership'?'관련 상태':'다른 상태 비교', states:specimens, cssFiles:id==='membership'?[
    '/v2/my-info/character.css','/v2/my-info/membership-comparison.css'
   ]:[
    '/design-system/pages/my-info/' + id + '.css',
-   '/v2/my-info/account-settings.css'
+   '/v2/my-info/account-settings.css',...(id==='password'?['/v2/my-info/password-review.css']:[])
   ]});
  }).join('');
 }

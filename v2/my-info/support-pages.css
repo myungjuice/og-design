@@ -3,6 +3,7 @@
  * Flat text, quiet reading surfaces and a shallow rim around the empty photo examples. */
 .v2-source-frame:is(.og-faq,.og-opinion,.og-customer-center,.og-policies,.og-policy-detail){height:846px;max-width:390px;background:var(--v2-surface)}
 .v2-source-frame.og-support{height:846px;max-width:390px}
+.v2-source-frame .og-support-notification .v2-badge{background:var(--v2-error);color:var(--v2-on-action);box-shadow:none}
 .v2-source-frame.og-support>.og-sheet-panel>.og-sheet-body{background:var(--v2-surface)}
 .v2-source-frame .og-support-grid .og-menu-tile{width:100%;min-width:0}
 .v2-source-frame .og-support-grid .og-menu-tile>span:last-child{white-space:normal;overflow-wrap:anywhere}
@@ -18,6 +19,8 @@
 .v2-access-body li p{margin:var(--v2-space-1) 0 0;color:var(--v2-text-muted);font-size:var(--v2-type-secondary);line-height:var(--v2-line-secondary)}
 .v2-access-body .v2-access-note{padding-top:var(--v2-space-3);border-top:1px solid var(--v2-edge);color:var(--v2-text-muted)}
 .v2-source-frame.og-faq .og-faq-best{background:var(--v2-muted-surface)}
+/* Expand the scroll clip into existing section insets; card content width stays unchanged. */
+.v2-source-frame.og-faq .og-faq-carousel{margin:calc(-1 * var(--v2-space-3)) calc(-1 * var(--v2-space-3)) calc(-1 * var(--v2-space-4));padding:var(--v2-space-3) var(--v2-space-3) var(--v2-space-6);scroll-padding-inline:var(--v2-space-3)}
 /* The source button owns the card inset; shared surface padding must not add a second inset. */
 .v2-source-frame.og-faq .og-faq-best-card{padding:0}
 .v2-source-frame.og-faq .og-faq-best-card button{width:100%;height:auto;max-width:none;white-space:normal;border:0;box-shadow:none;background:transparent;color:inherit;text-align:left}

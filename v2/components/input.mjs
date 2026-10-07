@@ -4,14 +4,15 @@ import {escapeHTML as e,attributes as attrs,uid} from '../../design-system/compo
 import {stateComparison} from './catalog.mjs';
 const states=['default','active','filled','disabled','readonly','loading','error','success'];
 const hints={disabled:'이전 단계 완료 후 입력할 수 있습니다.',readonly:'조회·복사는 가능하고 수정은 할 수 없습니다.',loading:'입력값 확인 중입니다. 내용을 수정할 수 있습니다.',error:'입력 내용을 확인해 주세요. 오류 상태의 예시입니다.',success:'입력값 확인 완료 · 검토용 예시입니다.'};
-export function renderInput({id=uid('v2-input'),type='text',label='',value='',placeholder='',hint,state='default',disabled=false,readonly=false,required=false,attributes={}}={}){
+export function renderInput({id=uid('v2-input'),type='text',appearance='raised',label='',value='',placeholder='',hint,state='default',disabled=false,readonly=false,required=false,attributes={}}={}){
  if(!['text','password','tel'].includes(type))throw new RangeError('Unsupported input type: '+type);
  if(!states.includes(state))throw new RangeError('Unsupported input state: '+state);
+ if(!['raised','line'].includes(appearance))throw new RangeError('Unsupported input appearance: '+appearance);
  if(!label.trim())throw new TypeError('Input requires a visible label');
  const unavailable=disabled||state==='disabled',readOnly=readonly||state==='readonly';
  const {'aria-describedby':helpReferences,...extra}=attributes;
  const options={id,type,label,value,placeholder,hint:hint??hints[state]??'입력 내용을 확인합니다. 실제 설정은 변경하지 않습니다.',state,
-  className:'v2-input v2-input-'+type,helpReferences,
+  className:'v2-input v2-input-'+type+(appearance==='line'?' v2-input-line':''),helpReferences,
   attributes:{...extra,disabled:unavailable,readonly:readOnly,required,'aria-required':required?'true':undefined,'aria-invalid':state==='error'?'true':'false','aria-busy':state==='loading'?'true':undefined},
   helpAttributes:{'aria-live':'polite','aria-atomic':'true'},
   slot:type!=='password'?({loading:'…',success:'✓'}[state]||''):'',
@@ -36,9 +37,10 @@ export function inputValidationMessage({kind='text',value='',required=false}={})
  if(kind==='numeric'&&!/^\d+$/.test(value))return '0 이상의 정수를 입력해 주세요. 쉼표·소수점·문자는 사용할 수 없습니다.';
  return '';
 }
-export function renderMultiline({id=uid('v2-multiline'),label='',value='',placeholder='',hint,state='default',maxLength=null,disabled=false,readonly=false,required=false,attributes={}}={}){
+export function renderMultiline({id=uid('v2-multiline'),appearance='raised',label='',value='',placeholder='',hint,state='default',maxLength=null,disabled=false,readonly=false,required=false,attributes={}}={}){
  if(!label.trim())throw new TypeError('Multiline input requires a visible label');
  if(!states.includes(state))throw new RangeError('Unsupported input state: '+state);
+ if(!['raised','line'].includes(appearance))throw new RangeError('Unsupported input appearance: '+appearance);
  if(maxLength!==null&&(!Number.isSafeInteger(maxLength)||maxLength<0))throw new RangeError('Invalid multiline limit');
  const {'aria-describedby':helpReferences,id:ignoredId,...extra}=attributes;
  const unavailable=disabled||state==='disabled',readOnly=readonly||state==='readonly';
@@ -48,7 +50,7 @@ export function renderMultiline({id=uid('v2-multiline'),label='',value='',placeh
    disabled:unavailable,readonly:readOnly,required,'aria-required':required?'true':undefined,'aria-invalid':state==='error'?'true':'false','aria-busy':state==='loading'?'true':undefined}});
  // HTML parsing discards one newline immediately after a textarea opening tag.
  // Add a sacrificial newline in this wrapper without changing the legacy renderer.
- return `<div class="v2-input v2-input-textarea"${attrs({'data-state':state})}>${fieldHTML.replace(/<textarea\b[^>]*>/,'$&\n')}</div>`;
+ return `<div class="v2-input v2-input-textarea${appearance==='line'?' v2-input-line':''}"${attrs({'data-state':state})}>${fieldHTML.replace(/<textarea\b[^>]*>/,'$&\n')}</div>`;
 }
 const stage=body=>surface({className:'v2-input-stage',contentHTML:body});
 function comparisons(type,id){
@@ -63,7 +65,7 @@ function typedSamples(){
  }).join('');
 }
 export function renderInputSamples(){
- return `<section class="v2-component-section" id="text-input" aria-labelledby="text-input-title" hidden><h2 id="text-input-title">텍스트 입력</h2><p>홈 검색바와 같은 연한 하늘색·둥근 표면·부드러운 입체 마감을 사용합니다. 항목명과 안내 문구는 입력창 밖에 표시합니다.</p><div id="text-input-live" data-input-live>${stage(renderInput({label:'닉네임',placeholder:'예: 맑은 땅콩',required:true,attributes:{autocomplete:'off'}}))}</div><p class="v2-input-note">입력창을 벗어난 뒤 빈 값만 안내하는 검토용 예시입니다. 실제 닉네임 규칙을 정하지 않습니다.</p>${comparisons('text','text-input')}</section>
+ return `<section class="v2-component-section" id="text-input" aria-labelledby="text-input-title" hidden><h2 id="text-input-title">텍스트 입력</h2><p>홈 검색바와 같은 연한 하늘색·둥근 표면·부드러운 입체 마감을 사용합니다. 항목명과 안내 문구는 입력창 밖에 표시합니다. 확인창 안에서는 흰 배경과 연한 경계선의 Line 입력을 사용합니다.</p><div id="text-input-live" data-input-live>${stage(renderInput({label:'닉네임',placeholder:'예: 맑은 땅콩',required:true,attributes:{autocomplete:'off'}}))}</div><p class="v2-input-note">입력창을 벗어난 뒤 빈 값만 안내하는 검토용 예시입니다. 실제 닉네임 규칙을 정하지 않습니다.</p><figure class="v2-component-sample"><figcaption><strong>Line · 확인창 입력</strong></figcaption>${stage(renderInput({label:'닉네임',appearance:'line',placeholder:'예: 맑은 땅콩'}))}</figure>${comparisons('text','text-input')}</section>
  <section class="v2-component-section" id="password-input" aria-labelledby="password-input-title" hidden><h2 id="password-input-title">비밀번호 입력</h2><p>오른쪽 표시·숨기기로 내용을 확인합니다. 입력값과 버튼 위치는 그대로 유지합니다.</p><div id="password-input-live" data-input-live>${stage(renderInput({type:'password',label:'비밀번호',placeholder:'test-only',hint:'실제 비밀번호를 입력하지 마세요. 검토용 문자열만 사용합니다.',required:true,attributes:{autocomplete:'off',spellcheck:'false'}}))}</div>${comparisons('password','password-input')}</section>
  ${typedSamples()}
  <section class="v2-component-section" id="multiline-input" aria-labelledby="multiline-input-title" hidden><h2 id="multiline-input-title">여러 줄 입력</h2><p>기존 입력의 밝은 표면과 얕은 입체감을 유지합니다. 긴 내용은 둥근 사각형 안에, 안내와 글자 수는 입력창 아래에 표시합니다.</p>

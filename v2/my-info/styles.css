@@ -38,6 +38,11 @@
 .v2-picker-history-host{display:block;width:100%;max-width:390px}
 .v2-waiting-history-host{display:block;width:100%;max-width:390px}
 .v2-waiting-dialog-history-host{display:block;width:100%;max-width:390px}
+.v2-order-history-host{display:block;width:100%;max-width:390px;min-width:0}
+.v2-order-extra{margin-block:var(--v2-space-6);color:var(--v2-workspace-muted)}
+.v2-order-extra>summary{min-height:44px;margin-bottom:var(--v2-space-4);cursor:pointer}
+.v2-order-extra>summary:focus-visible{outline:3px solid var(--v2-workspace-focus);outline-offset:3px}
+@media(max-width:47.9375rem){.v2-order-history-host{margin-inline:auto}}
 @media(max-width:47.9375rem){.v2-waiting-dialog-history-host{margin-inline:auto}}
 @media(min-width:115rem){.v2-reservation-review-grid.v2-waiting-dialogs-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .v2-reservation-review-grid.v2-waiting-review-grid{grid-template-columns:minmax(0,1fr)}

@@ -10,7 +10,7 @@ export function renderSheet({id=uid('v2-sheet'),title='안내',bodyHTML='',actio
  if(typeof title!=='string'||!title.trim())throw new TypeError('Sheet needs a title');
  if(!['short','long'].includes(size))throw new RangeError('Unknown sheet size');
  if(typeof modal!=='boolean')throw new TypeError('Modal must be boolean');
- const content=sheetContent({id,title,bodyHTML,actions:actions||[{label:'닫기',className:'v2-button',attributes:{'data-sheet-close':true}}]})
+ const content=sheetContent({id,title,bodyHTML,actions:actions||[{label:'닫기',variant:'secondary',className:'v2-button',attributes:{'data-sheet-close':true}}]})
   .replace(/<button[^>]*class="[^"]*og-sheet-close[^"]*"[\s\S]*?<\/button>/,()=>renderIconButton({label:'시트 닫기',face:'plain',className:'og-sheet-close',attributes:{'data-sheet-close':true}}));
  const panel='<div class="og-sheet-panel v2-sheet-panel" data-size="'+size+'">'+content+'</div>';
  return modal?'<dialog class="v2-sheet-dialog"'+attrs({id,'aria-labelledby':id+'-title'})+'>'+panel+'</dialog>':'<div class="v2-sheet-static" inert>'+panel+'</div>';

@@ -16,6 +16,6 @@
 .v2-home-category-options .v2-chip{padding-inline:var(--v2-space-3);gap:var(--v2-space-2);border-radius:var(--v2-radius-button)}
 .v2-home-category-options img,.v2-home-category-selected img{flex:none;object-fit:contain}
 .v2-home-category-selected{width:auto;min-width:72px;padding-inline:var(--v2-space-3)}
-.home-category.v2-home-category-selected[aria-pressed="true"]{background:var(--v2-button-fill);color:var(--v2-on-action);box-shadow:var(--v2-chip-selected-depth)}
+.home-category.v2-home-category-selected[aria-pressed="true"]{border:1px solid var(--v2-action);background:var(--v2-action);color:var(--v2-on-action);box-shadow:none}
 .v2-home-cafe-pin{display:block;object-fit:contain;flex:none}
 .v2-home-category-frame .home-categories:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}

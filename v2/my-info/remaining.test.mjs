@@ -14,9 +14,9 @@ test('remaining twelve bodies and all fifty-seven source states are integrated o
 });
 test('related body groups include the new views while explicitly held work stays non-navigable',()=>{
  const groups=reviewGroups('my-info'),ready=groups.flatMap(g=>g.items.filter(i=>!i.pending));
- assert.equal(ready.length,25);
+ assert.equal(ready.length,26);
  assert.deepEqual(groups.find(g=>g.id==='history-reviews').items.map(i=>i.id),['review-history','photo-review','review-write']);
  assert.deepEqual(groups.find(g=>g.id==='inquiries').items.map(i=>i.id),['support','faq','opinion','customer-center']);
  assert.deepEqual(groups.find(g=>g.id==='documents').items.map(i=>i.id),['policies','policy-detail']);
- assert.deepEqual(groups.filter(g=>g.id==='held').flatMap(g=>g.items.map(i=>i.label)),['Q오더 상세','캐릭터 파츠 꾸미기']);
+ assert.deepEqual(groups.filter(g=>g.id==='held').flatMap(g=>g.items.map(i=>i.label)),['캐릭터 파츠 꾸미기']);
 });

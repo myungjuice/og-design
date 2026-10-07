@@ -39,7 +39,7 @@
 .og-review-list-page,.og-review-photo-page{height:100%;display:flex;flex-direction:column;overflow:clip}
 .og-app-bar{display:grid;grid-template-columns:var(--v2-space-12) minmax(0,1fr) var(--v2-space-12);align-items:center;gap:var(--v2-space-2);flex:none;padding:var(--v2-space-2);border-bottom:1px solid var(--v2-edge)}
 .og-app-bar h4{margin:0;text-align:center;overflow-wrap:anywhere;min-width:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal}
-.og-app-bar .og-icon-button{display:inline-flex;align-items:center;justify-content:center;width:var(--v2-space-12);height:var(--v2-space-12);flex:none;border:1px solid var(--v2-material-edge);border-radius:var(--v2-radius-chip);background:var(--v2-surface);box-shadow:var(--v2-depth-raised);color:var(--v2-focus)}
+.og-app-bar .og-icon-button{display:inline-flex;align-items:center;justify-content:center;width:var(--v2-space-12);height:var(--v2-space-12);flex:none;border:1px solid var(--v2-edge);border-radius:var(--v2-radius-chip);background:var(--v2-surface);box-shadow:none;color:var(--v2-focus)}
 .og-icon-button>svg{width:var(--v2-space-6);height:var(--v2-space-6)}
 .og-review-brand{display:flex;align-items:center;gap:var(--v2-space-2);padding:var(--v2-space-4);border-bottom:1px solid var(--v2-edge);min-width:0}
 .og-review-brand>.v2-thumbnail{width:30px;height:30px;flex:none}

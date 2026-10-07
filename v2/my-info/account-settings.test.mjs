@@ -52,30 +52,38 @@ test('settings preserves security, login and channel confirmation conditions', (
  assert.ok(kakao.includes('카카오 채널 알림에 동의 하면, 카카오 채널에 친구 등록이 됩니다.'));
 });
 
-test('password keeps PIN counts, last digits and separate confirmation/auth errors', () => {
+test('password uses six fixed Figma slots and preserves separate confirmation/auth errors', () => {
  const [auth, create, confirm, confirmError, authError] = states(render(), 'password');
- assert.ok(auth.includes('암호를 입력해주세요.'));
+ assert.ok(auth.includes('현재 비밀번호를 입력해주세요'));
  assert.ok(auth.includes('aria-label="0자리 입력됨"'));
  assert.ok(!auth.includes('og-pin-steps'));
- assert.ok(create.includes('새로운 비밀번호를 6글자로 입력하세요.'));
+ assert.ok(create.includes('새로운 비밀번호를 입력해주세요'));
  assert.ok(create.includes('aria-label="3자리 입력됨"'));
- assert.equal([...create.matchAll(/class="[^"]*\bog-pin-dot\b[^"]*"/g)].length, 2);
- assert.match(create, /<span aria-hidden="true">3<\/span>/);
+ assert.equal([...create.matchAll(/class="[^"]*\bog-pin-dot\b[^"]*"/g)].length, 6);
+ assert.equal([...create.matchAll(/class="og-pin-dot is-filled[^"]*"/g)].length, 3);
  assert.ok(create.includes('aria-label="1 / 2 단계"'));
  assert.ok(confirm.includes('비밀번호 다시 만들기'));
  assert.ok(confirm.includes('aria-label="2 / 2 단계"'));
  assert.ok(confirmError.includes('aria-label="6자리 입력됨"'));
- assert.equal([...confirmError.matchAll(/class="[^"]*\bog-pin-dot\b[^"]*"/g)].length, 5);
- assert.match(confirmError, /<span aria-hidden="true">6<\/span>/);
+ assert.equal([...confirmError.matchAll(/class="og-pin-dot is-filled[^"]*"/g)].length, 6);
  assert.ok(confirmError.includes('비밀번호가 맞지 않습니다.'));
  assert.ok(authError.includes('aria-label="0자리 입력됨"'));
- assert.ok(!authError.match(/class="[^"]*\bog-pin-dot\b[^"]*"/));
+ assert.equal([...authError.matchAll(/class="og-pin-dot [^"]*"/g)].length, 6);
+ assert.ok(!authError.includes('is-filled'));
  assert.ok(authError.includes('비밀번호가 일치하지 않습니다. 다시 입력해주세요.'));
  for (const screen of [auth, create, confirm, confirmError, authError]) {
-  assert.equal([...screen.matchAll(/data-pin-key=/g)].length, 12);
-  assert.ok(screen.includes('전체 지우기'));
+  assert.equal([...screen.matchAll(/data-pin-key=/g)].length, 11);
+  assert.ok(!screen.includes('전체 지우기'));
+  assert.ok(screen.includes('v2-pin-empty'));
+  assert.ok(screen.includes('/v2/my-info/assets/password-backspace.svg'));
   assert.ok(screen.includes('한 자리 지우기'));
  }
+});
+test('V2 password layout does not change the legacy last-digit and clear-key specimens', async()=>{
+ const {password}=await import('../../design-system/pages/my-info/password.mjs');
+ const legacy=password({entered:3,lastDigit:'3'});
+ assert.match(legacy,/<span aria-hidden="true">3<\/span>/);
+ assert.equal([...legacy.matchAll(/data-pin-key=/g)].length,12);
 });
 
 test('account keeps masking, readonly profile and original withdrawal conditions', () => {

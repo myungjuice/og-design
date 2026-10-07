@@ -5,7 +5,7 @@
 .v2-icon-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-6)}
 .v2-icon-stage,.v2-icon-live{box-sizing:border-box;width:100%;max-width:390px;padding:var(--v2-space-4);border-radius:var(--v2-radius-tile);background:var(--v2-surface);color:var(--v2-text)}
 .v2-icon-button{appearance:none;position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--v2-space-12);height:var(--v2-space-12);min-width:var(--v2-space-12);min-height:var(--v2-space-12);margin:0;padding:0;border:0;border-radius:var(--v2-radius-button);background:transparent;color:var(--v2-text-muted);box-shadow:none;cursor:pointer}
-.v2-icon-button[data-face="raised"]::before{content:"";position:absolute;inset:var(--v2-space-1);border-radius:var(--v2-radius-button);background:var(--v2-surface);box-shadow:var(--v2-button-secondary-depth);pointer-events:none}
+.v2-icon-button[data-face="raised"]::before{content:"";position:absolute;inset:var(--v2-space-1);border-radius:var(--v2-radius-button);border:1px solid var(--v2-edge);background:var(--v2-surface);box-shadow:none;pointer-events:none}
 .v2-icon-button[data-face="raised"]{color:var(--v2-focus)}
 .v2-icon-button svg{position:relative;display:block;width:var(--v2-space-5);height:var(--v2-space-5);flex:none;pointer-events:none}
 .v2-icon-button.og-favorite svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linejoin:round}
@@ -13,7 +13,7 @@
 .v2-icon-button.og-favorite[aria-pressed="true"] svg{fill:currentColor}
 .v2-icon-button:focus-visible{outline:3px solid var(--v2-focus);outline-offset:2px}
 .v2-icon-button:not(:disabled):active,.v2-icon-button[data-state="active"]{color:var(--v2-focus)}
-.v2-icon-button[data-face="raised"]:not(:disabled):active::before,.v2-icon-button[data-face="raised"][data-state="active"]::before{box-shadow:var(--v2-depth-inset)}
+.v2-icon-button[data-face="raised"]:not(:disabled):active::before,.v2-icon-button[data-face="raised"][data-state="active"]::before{background:var(--v2-selected-surface);box-shadow:none}
 .v2-icon-button:disabled,.v2-icon-button.og-favorite:disabled{opacity:1;color:var(--v2-text-muted);cursor:not-allowed}
 .v2-icon-button[data-face="raised"]:disabled::before{background:var(--v2-disabled);box-shadow:none}
 .v2-icon-button[data-state="loading"]{cursor:wait}

@@ -16,12 +16,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     const chip=n.getBoundingClientRect(),label=n.querySelector('.v2-chip-label').getBoundingClientRect();
     return Math.abs((label.left+label.right)/2-(chip.left+chip.right)/2)<.5;
    })),'selected, unselected and disabled labels are centered without a hidden icon offset '+width);
-   assert.ok(await multiple.locator('[aria-pressed="true"]').evaluateAll(ns=>{
-    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
-    const lum=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);};
-    const face=lum(getComputedStyle(document.documentElement).getPropertyValue('--home-selected-face'));
-    return ns.every(n=>{const colors=getComputedStyle(n).boxShadow.match(/(?:oklch|oklab|rgba?|color)\([^)]*\)/g)||[];return colors.length>=3&&lum(colors[0])>face+.12&&lum(colors[1])<face;});
-   }),'selected chips have a visible lit upper edge and darker lower lip '+width);
+   assert.ok(await multiple.locator('[aria-pressed="true"]').evaluateAll(ns=>ns.length>0&&ns.every(n=>{const s=getComputedStyle(n);return s.boxShadow==='none'&&s.backgroundImage==='none'&&s.borderWidth==='1px'&&getComputedStyle(n.querySelector('.v2-chip-check')).visibility==='visible';})),'selected chips keep flat Fill, visible check and stable boundary '+width);
    await single.getByRole('radio',{name:'적립',exact:true}).click();
    assert.equal(await single.getByRole('radio',{name:'적립',exact:true}).isChecked(),true);
    const y=await page.evaluate(()=>scrollY);await page.keyboard.press('ArrowRight');
@@ -50,14 +45,13 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    assert.equal(await filters.locator('[aria-pressed]').count(),0,'removal is not a toggle');
    assert.ok(await page.locator('.v2-chip-stage:not([inert]) .v2-chip').evaluateAll(ns=>ns.every(n=>{const r=n.getBoundingClientRect();return r.width>=48&&r.height>=48&&getComputedStyle(n).whiteSpace==='nowrap';})),'48px chip targets '+width);
    assert.ok(await page.locator('.v2-chip-stage:not([inert]) .v2-chip').evaluateAll(ns=>{
-    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d'),root=getComputedStyle(document.documentElement);
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
     const lum=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);};
     return ns.filter(n=>!n.disabled&&!n.previousElementSibling?.disabled).every(n=>{
-     const isSelected=n.getAttribute('aria-pressed')==='true'||n.previousElementSibling?.checked;
-     const stops=isSelected?['--home-selected-lit','--home-selected-face']:['--test-surface','--test-page-bottom'];
-     return stops.every(stop=>{const a=lum(getComputedStyle(n).color),b=lum(root.getPropertyValue(stop));return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;});
+     const s=getComputedStyle(n),a=lum(s.color),b=lum(s.backgroundColor);
+     return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
     });
-   }),'enabled chip text contrast across both gradient stops '+width);
+   }),'enabled chip text contrast on the actual flat surface '+width);
    await page.locator('#chip-multiple .v2-state-comparison > summary').click();
    for(const state of ['disabled','loading'])assert.ok(await page.locator(`.v2-chip-stage[inert] [data-v2-chips][data-state="${state}"] button`).evaluateAll(ns=>ns.every(n=>n.disabled)));
    assert.ok(await page.locator('[data-v2-chips][data-state="loading"] .v2-loading').count()>0);

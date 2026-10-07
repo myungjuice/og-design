@@ -26,13 +26,14 @@ export function reviewGroups(pageId){
    {id:'mileage-history',label:'마일리지',items:[{id:'mileage-history',label:'내역·기간 선택'},{id:'mileage-monthly',label:'월별 내역·비교안'}]},
    {id:'history-reservations',label:'내역·예약',items:[{id:'use-history',label:'이용내역 · 4탭'},{id:'reservation-detail',label:'예약 상세'},{id:'reservation-change',label:'예약 변경'},{id:'reservation-pickers',label:'날짜·시간·인원 선택'}]},
    {id:'history-waiting',label:'웨이팅',items:[{id:'waiting-detail',label:'웨이팅 상세'},{id:'waiting-dialogs',label:'인원 변경·취소 확인'}]},
+   {id:'history-orders',label:'Q오더',items:[{id:'order-detail',label:'주문 상세·취소 확인'}]},
    {id:'history-reviews',label:'리뷰',items:[{id:'review-history',label:'리뷰 내역·관리'},{id:'photo-review',label:'포토 리뷰'},{id:'review-write',label:'리뷰 작성'}]},
    {id:'notice-notifications',label:'공지·알림',items:[{id:'notices',label:'공지·내 알림'},{id:'notice-detail',label:'공지 상세'}]},
    {id:'membership',label:'멤버십',items:[{id:'membership',label:'회원증·공유'}]},
    {id:'inquiries',label:'문의',items:[{id:'support',label:'문의하기'},{id:'faq',label:'자주 묻는 질문'},{id:'opinion',label:'의견·문의 내역'},{id:'customer-center',label:'고객센터'}]},
    {id:'documents',label:'약관·정책',items:[{id:'policies',label:'약관·정책 목록'},{id:'policy-detail',label:'문서 상세'}]},
    {id:'account-settings',label:'계정·설정',items:[{id:'settings',label:'설정'},{id:'password',label:'비밀번호 변경'},{id:'account',label:'가입 정보·탈퇴'}]},
-   pending('held','보류',['Q오더 상세','캐릭터 파츠 꾸미기'])
+   pending('held','보류',['캐릭터 파츠 꾸미기'])
   );
   return groups;
  }

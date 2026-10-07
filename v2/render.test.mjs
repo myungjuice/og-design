@@ -62,7 +62,7 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.doesNotMatch(html,/대표 화면 연결 예정|class="home-test"|class="barcode-test"/);
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.length>10);
- assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')),'shared assets resolve from the v2 route');
+ assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared assets resolve from the v2 route');
 });
 test('my-info presents only the approved representative screen with shared navigation styling',()=>{
  const html=renderWorkspace({pageId:'my-info'});
