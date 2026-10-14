@@ -26,7 +26,7 @@ test('menu anchors expose all seven destinations in the approved order',()=>{
  assert.match(html,/<a[^>]*href="\/v2\/barcode\/"[^>]*aria-current="page"/);
 });
 test('blank future destinations contain only their title in main',()=>{
- for(const [id,title] of [['my-land','마이랜드'],['og-park','오지파크']]){
+ for(const [id,title] of [['og-park','오지파크']]){
   const html=renderWorkspace({pageId:id});
   assert.match(html,new RegExp(`<main[^>]*>\\s*<h1[^>]*>${title}</h1>\\s*</main>`));
  }

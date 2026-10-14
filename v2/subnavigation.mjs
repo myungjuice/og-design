@@ -3,6 +3,10 @@ import {foundationGroups} from './design-system/foundations.mjs';
 import {escapeHTML as e} from '../design-system/components/core.mjs';
 const pending=(id,label,names)=>({id,label,items:names.map((label,index)=>({id:id+'-'+index,label,pending:true}))});
 export function reviewGroups(pageId){
+ if(pageId==='my-land')return [
+  {id:'myland-design',label:'마이랜드 시안',items:[{id:'myland-design',label:'v1·v2 비교'}]},
+  {id:'myland-feedback',label:'피드백 반영안',items:[{id:'myland-feedback',label:'주간형·월간형 비교'}]}
+ ];
  if(pageId==='components')return componentGroups;
  if(pageId==='design-system')return [
   {id:'colors',label:'컬러',items:foundationGroups.filter(item=>item.id==='colors').map(({id,title})=>({id,label:title}))},
@@ -12,6 +16,7 @@ export function reviewGroups(pageId){
  if(['home','barcode','my-info'].includes(pageId)){
   const labels={home:'홈',barcode:'바코드','my-info':'내정보 메인'};
   const groups=[{id:'overview',label:'기본 화면',items:[{id:'overview',label:labels[pageId]}]}];
+  if(pageId==='home')groups.push({id:'category-design',label:'카테고리 시안',items:[{id:'category-design',label:'홈·선택 전후·전체 화면형'}]});
   if(pageId==='home')groups.push({id:'explore',label:'검색·업종',items:[{id:'search',label:'매장 검색·검색 결과'},{id:'category',label:'업종 선택'}]});
   if(pageId==='home')groups.push({id:'nearby',label:'주변 탐색',items:[{id:'nearby',label:'근처 보기'}]});
   if(pageId==='home')groups.push({id:'store',label:'매장',items:[{id:'store',label:'매장 상세 첫 화면'},{id:'store-share',label:'매장 공유'},{id:'store-photo',label:'매장 사진 상세'},{id:'main-menu',label:'주요 메뉴'},{id:'full-menu',label:'전체 메뉴'},{id:'menu-detail',label:'메뉴 상세'}]});

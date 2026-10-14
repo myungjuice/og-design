@@ -5,7 +5,8 @@
 .v2-calendar{min-width:0;font:400 14px/20px var(--v2-font)}
 .v2-calendar-days{overflow-x:auto;overscroll-behavior:contain;padding:4px;margin:-4px}
 .v2-calendar .og-calendar-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px}
-.v2-calendar .og-calendar-nav{width:48px;height:48px;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-surface);box-shadow:var(--v2-button-secondary-depth);font-size:24px;color:var(--v2-text)}
+.v2-calendar .og-calendar-nav{display:grid;place-items:center;flex:none;width:48px;height:48px;padding:0;line-height:1;border:1px solid var(--v2-material-edge);border-radius:12px;background:var(--v2-surface);box-shadow:var(--v2-button-secondary-depth);color:var(--v2-text)}
+.v2-calendar .og-calendar-nav svg{display:block;width:20px;height:20px}
 .v2-calendar .og-calendar-week,.v2-calendar .og-calendar-grid{display:grid;min-width:0;grid-template-columns:repeat(7,minmax(0,1fr))}
 .v2-calendar .og-calendar-week{text-align:center;margin-bottom:8px;color:var(--v2-text-muted)}
 .v2-calendar .og-calendar-day{position:relative;border:0;background:transparent;min-width:0;min-height:44px;padding:2px;color:var(--v2-text);font:inherit}

@@ -1,5 +1,7 @@
 import {renderWorkspace} from './render.mjs';
 import {setupReviewNavigation} from './review-navigation.mjs';
+import {setupDesignerReview} from './designer-20261013.mjs';
+import {setupMyLandFeedback} from './myland-feedback.mjs';
 export function setupResponsiveMenu(root) {
  const desktop=window.matchMedia('(min-width: 1024px)');
  const picker=root.querySelector('#review-picker');
@@ -41,6 +43,8 @@ export function setupResponsiveMenu(root) {
 const root=document.querySelector('#v2-root');
 root.innerHTML=renderWorkspace({pageId:document.body.dataset.page});
 setupResponsiveMenu(root);
+setupDesignerReview(root);
+if(document.body.dataset.page==='my-land')setupMyLandFeedback(root);
 if(document.body.dataset.page!=='components')setupReviewNavigation(root,document.body.dataset.page);
 if(document.body.dataset.page==='design-system'){
  const {setupColorValues}=await import('./design-system/color-values.mjs');

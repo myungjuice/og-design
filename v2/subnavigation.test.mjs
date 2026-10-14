@@ -30,7 +30,8 @@ test('unported screens are non-links and excluded from the ready group picker',(
  assert.equal((html.match(/data-view-link=/g)||[]).length,26);
  assert.equal((html.match(/aria-disabled="true"/g)||[]).length,1);
  assert.match(renderReviewPicker('my-info'),/value="mileage-history"/);
- for(const id of ['my-land','og-park']){
+ assert.equal(reviewGroups('my-land')[0].items[0].id,'myland-design');
+ for(const id of ['og-park']){
   assert.deepEqual(reviewGroups(id),[]);
   assert.doesNotMatch(renderSubnavigation({pageId:id,label:id}),/<a\b/);
  }
