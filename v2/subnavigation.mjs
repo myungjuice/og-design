@@ -5,7 +5,7 @@ const pending=(id,label,names)=>({id,label,items:names.map((label,index)=>({id:i
 export function reviewGroups(pageId){
  if(pageId==='my-land')return [
   {id:'myland-design',label:'마이랜드 시안',items:[{id:'myland-design',label:'v1·v2 비교'}]},
-  {id:'myland-feedback',label:'피드백 반영안',items:[{id:'myland-feedback',label:'주간형·월간형 비교'}]}
+  {id:'myland-feedback',label:'마이랜드 확정안',items:[{id:'myland-feedback',label:'주간 출석 · 옐로·오렌지'}]}
  ];
  if(pageId==='components')return componentGroups;
  if(pageId==='design-system')return [
