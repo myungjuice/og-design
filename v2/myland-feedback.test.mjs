@@ -6,7 +6,7 @@ import {reviewGroups} from './subnavigation.mjs';
 
 test('마이랜드 보조 메뉴에서 기존 이관 시안 뒤에 확정안으로 이동한다',()=>{
  const groups=reviewGroups('my-land');
- assert.deepEqual(groups.map(group=>group.id),['myland-design','myland-feedback']);
+ assert.deepEqual(groups.slice(0,2).map(group=>group.id),['myland-design','myland-feedback']);
  const html=renderWorkspace({pageId:'my-land'});
  assert.match(html,/id="myland-design"/);
  assert.match(html,/id="myland-feedback" data-review-screen/);

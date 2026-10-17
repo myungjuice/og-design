@@ -7,6 +7,13 @@ import {join} from 'node:path';
 const root=fileURLToPath(new URL('../',import.meta.url));
 test('actual public build includes every v2 route and first home entry without dev files',()=>{
  execFileSync(process.execPath,['scripts/build-preview.mjs'],{cwd:root});
+ for(const path of ['myland-details.mjs','myland-details.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
+ for(const path of ['v2/icon-review/index.html','v2/icon-review/render.mjs','v2/icon-review/styles.css','assets/icon-review-20261016/renewal-my-info.png','assets/icon-review-20261016/pay_on.svg'])assert.ok(existsSync(join(root,'dist',path)),path+' is published');
+ for(let no=1;no<=14;no++){
+  const file=`app-${String(no).padStart(2,'0')}${no===4?'-redacted':''}.png`;
+  assert.ok(existsSync(join(root,'dist/assets/icon-review-20261016',file)),file+' is published');
+ }
+ assert.equal(existsSync(join(root,'dist/assets/icon-review-20261016/app-04.png')),false,'unredacted barcode is not published');
  for(const path of ['index.html','design-system/index.html','home/index.html','my-land/index.html','barcode/index.html','og-park/index.html','my-info/index.html','page.mjs','render.mjs','navigation.mjs','tokens.css','shell.css','design-system/foundations.mjs','design-system/foundations.css','design-system/color-values.mjs','components/index.html','components/render.mjs','components/preview.mjs','components/styles.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/mileage.mjs','components/mileage.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');
  for(const path of ['components/home-controls.mjs','components/home-controls.css'])assert.ok(existsSync(join(root,'dist/v2',path)),path+' is published');

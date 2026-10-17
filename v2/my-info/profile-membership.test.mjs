@@ -40,6 +40,19 @@ test('character selection is reachable without removing the existing main or ena
  assert.ok(reviewGroups('my-info').flatMap(g=>g.items).some(i=>i.pending&&i.label==='캐릭터 파츠 꾸미기'));
 });
 
+test('character main keeps received navigation and industry icons before and after selection',()=>{
+ for(const selected of [null,'bear','penguin','raccoon']){
+  const html=renderCharacterMain({selected});
+  for(const name of ['홈','마이랜드','바코드','오지파크','내 정보']){
+   assert.ok(html.includes('data-received-nav="'+name+'"'),String(selected)+' · '+name);
+  }
+  for(const name of ['일식','헤어/뷰티','한식']){
+   assert.ok(html.includes('data-received-category="'+name+'"'),String(selected)+' · '+name);
+  }
+  assert.doesNotMatch(html,/recent-utensils\.svg|bottom-navigation-source\.png/);
+ }
+});
+
 test('notifications cover earnings, attendance, roulette and notices without inventing settings',()=>{
  const html=renderNotices({selected:1});
  assert.equal((html.match(/class="og-notification-row"/g)||[]).length,4);

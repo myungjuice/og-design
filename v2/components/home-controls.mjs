@@ -1,5 +1,6 @@
 import {renderHomeSearch,renderHomeCategories} from '../../screens/my-info-3d-test/home-controls.mjs';
 import {renderBottomNavigation} from '../../screens/my-info-3d-test/navigation.mjs';
+import {applyReceivedIcons} from '../received-icons.mjs';
 const assetBase='/screens/my-info-3d-test/media/figma/';
 const samples=[
  ['search','매장 검색바','매장명을 입력하고 검색 버튼을 눌러볼 수 있습니다.',()=>renderHomeSearch({assetBase,id:'component-store-search'})],
@@ -7,14 +8,14 @@ const samples=[
  ['navigation','하단 메뉴','현재 메뉴는 아이콘 배경과 밑줄로 구분합니다. 메뉴를 눌러 선택 표시를 비교해 보세요.',()=>renderBottomNavigation({assetBase,home:true,active:'홈'})]
 ];
 export function renderHomeControlSamples(){
- return samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>
+ return applyReceivedIcons(samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>
  <link rel="stylesheet" href="/screens/my-info-3d-test/styles.css">
  <link rel="stylesheet" href="/screens/my-info-3d-test/home.css">
  <link rel="stylesheet" href="/v2/components/screen.css">
  <link rel="stylesheet" href="/v2/components/bottom-navigation.css">
  <link rel="stylesheet" href="/v2/components/home-controls.css">
  <div class="component-stage component-stage-${id}">${render()}</div>
- </template></div></section>`).join('')+'<p class="v2-home-component-status" role="status" aria-live="polite">검색과 메뉴 선택은 이 페이지에서만 확인하며, 실제 서비스로 연결하지 않습니다.</p>';
+ </template></div></section>`).join('')+'<p class="v2-home-component-status" role="status" aria-live="polite">검색과 메뉴 선택은 이 페이지에서만 확인하며, 실제 서비스로 연결하지 않습니다.</p>');
 }
 export function setupHomeControlSamples(root){
  const status=root.querySelector('.v2-home-component-status');

@@ -15,11 +15,11 @@ test('restored store subviews are grouped ready routes with lazy templates',()=>
  }
 });
 
-test('menu anchors expose all seven destinations in the approved order',()=>{
+test('menu anchors preserve screen destinations and append the icon review',()=>{
  assert.deepEqual(navigationItems.map(({id,label,href})=>[id,label,href]),[
   ['design-system','디자인 시스템','/v2/design-system/'],['components','공통 컴포넌트','/v2/components/'],['home','홈화면','/v2/home/'],
   ['my-land','마이랜드','/v2/my-land/'],['barcode','바코드','/v2/barcode/'],
-  ['og-park','오지파크','/v2/og-park/'],['my-info','내정보','/v2/my-info/']
+  ['og-park','오지파크','/v2/og-park/'],['my-info','내정보','/v2/my-info/'],['icon-review','아이콘 제작 검토','/v2/icon-review/']
  ]);
  const html=renderSidebar({activeId:'barcode'});
  assert.equal((html.match(/aria-current="page"/g)||[]).length,1);
@@ -62,7 +62,7 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.doesNotMatch(html,/대표 화면 연결 예정|class="home-test"|class="barcode-test"/);
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.length>10);
- assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared assets resolve from the v2 route');
+ assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||src.startsWith('/assets/received-icons-20261017/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared and received assets resolve from the v2 route');
 });
 test('my-info presents only the approved representative screen with shared navigation styling',()=>{
  const html=renderWorkspace({pageId:'my-info'});

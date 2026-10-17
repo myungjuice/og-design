@@ -1,11 +1,19 @@
 import {componentGroups} from './components/catalog.mjs';
 import {foundationGroups} from './design-system/foundations.mjs';
+import {myLandDetailGroups} from './myland-details.mjs';
 import {escapeHTML as e} from '../design-system/components/core.mjs';
 const pending=(id,label,names)=>({id,label,items:names.map((label,index)=>({id:id+'-'+index,label,pending:true}))});
 export function reviewGroups(pageId){
+ if(pageId==='icon-review')return [
+  {id:'icon-decisions',label:'제작 변경 요약',items:[{id:'icon-decisions',label:'제외·신규·재사용·검토'}]},
+  {id:'mileage-compare',label:'기존 앱 ↔ 리뉴얼 비교',items:[{id:'mileage-compare',label:'내정보·마일리지·바코드'}]},
+  {id:'icon-additions',label:'신규 제작 · 4종',items:[{id:'icon-additions',label:'내정보 메뉴 예시'}]},
+  {id:'capture-guide',label:'실제 앱 캡처',items:[{id:'capture-guide',label:'14장 · 화면별 확인'}]}
+ ];
  if(pageId==='my-land')return [
   {id:'myland-design',label:'마이랜드 시안',items:[{id:'myland-design',label:'v1·v2 비교'}]},
-  {id:'myland-feedback',label:'마이랜드 확정안',items:[{id:'myland-feedback',label:'주간 출석 · 옐로·오렌지'}]}
+  {id:'myland-feedback',label:'마이랜드 확정안',items:[{id:'myland-feedback',label:'주간 출석 · 옐로·오렌지'}]},
+  ...myLandDetailGroups
  ];
  if(pageId==='components')return componentGroups;
  if(pageId==='design-system')return [

@@ -5,7 +5,8 @@ export const navigationItems = [
  {id:'my-land',label:'마이랜드',href:'/v2/my-land/'},
  {id:'barcode',label:'바코드',href:'/v2/barcode/'},
  {id:'og-park',label:'오지파크',href:'/v2/og-park/'},
- {id:'my-info',label:'내정보',href:'/v2/my-info/'}
+ {id:'my-info',label:'내정보',href:'/v2/my-info/'},
+ {id:'icon-review',label:'아이콘 제작 검토',href:'/v2/icon-review/'}
 ];
 export function renderSidebar({activeId}={}) {
  return `<details class="v2-menu" open><summary>메뉴</summary>

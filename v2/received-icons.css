@@ -1,0 +1,27 @@
+/* Hallmark · component: received OG icons · genre: playful · theme: existing OG 3D
+ * Preserve approved surfaces, typography, geometry and interaction states.
+ * pre-emit critique: P5 H4 E5 S5 R5 V4 */
+.received-icon{display:block;position:static;object-fit:contain;flex:none;max-width:none;pointer-events:none}
+.received-nav-art{display:grid;place-items:center;width:24px;height:24px;flex:none}
+.received-nav-art>.received-icon{grid-area:1/1;position:static;left:auto;top:auto;width:24px;height:24px}
+.received-nav-art>[data-received-state="active"]{display:none}
+.nav-item:is(.active,.is-selected,[aria-current="page"]) .received-nav-art>[data-received-state="idle"]{display:none}
+.nav-item:is(.active,.is-selected,[aria-current="page"]) .received-nav-art>[data-received-state="active"]{display:block}
+.nav-item:is(.barcode,.nav-barcode) .received-nav-art{width:32px;height:32px}
+.nav-item:is(.barcode,.nav-barcode) .received-nav-art>.received-icon{width:32px;height:32px;filter:brightness(0) invert(1)}
+.nav-item:is(.barcode,.nav-barcode) .received-nav-art>[data-received-state="idle"]{display:block}
+.nav-item:is(.barcode,.nav-barcode) .received-nav-art>[data-received-state="active"]{display:none}
+.bottom-navigation .nav-barcode .received-nav-art{width:60px;height:60px;border-radius:var(--app-radius-pill);background:var(--home-selected-fill);box-shadow:var(--test-shadow-barcode)}
+.home-category>.received-icon,.rail-chip>.received-icon{width:22px;height:22px}
+.home-category[data-category="전체"][aria-pressed="true"]>.received-icon{filter:brightness(0) invert(1)}
+.category-chip .received-icon{width:24px;height:24px}
+.v2-home-category-options .received-icon{width:20px;height:20px}
+.home-store-pin>.received-icon{width:40px;height:40px}
+.visit-symbol>.received-icon{width:32px;height:32px}
+.quick::before{content:none}
+.quick>.received-icon{position:static;width:24px;height:24px}
+.home-quick>.received-icon{width:24px;height:24px;filter:brightness(0) invert(1)}
+.gps>.received-icon{width:24px;height:24px}
+.search>.received-icon,.explore>.received-icon{width:20px;height:20px}
+.bottom-nav .nav-item>span>.received-nav-art{width:24px;height:24px;background:none;border:0;box-shadow:none;position:static}
+.bottom-nav .nav-item.barcode>span>.received-nav-art{width:32px;height:32px;background:none;border:0;box-shadow:none;position:static}
