@@ -1,0 +1,43 @@
+/* Hallmark · macrostructure: existing map comparison · theme: existing OG 3D
+ * Existing typography and geometry retained; original SVG effects exported to padded 4x PNG pins.
+ * Pre-emit critique: P5 H4 E4 S5 R5 V4. */
+.home-appearance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:var(--v2-space-8);align-items:start}
+.home-appearance-figure{margin:0;min-width:0;max-width:390px}
+.home-appearance-figure figcaption{min-height:88px;margin-bottom:var(--v2-space-4)}
+.home-appearance-figure h3{margin:0 0 var(--v2-space-2);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal;overflow-wrap:anywhere}
+.home-appearance-figure p{margin:0;color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);word-break:keep-all}
+.home-appearance-host{width:100%;max-width:390px;overflow:clip}
+.home-appearance-canvas{--home-pin-gutter:2px;--home-pin-saturation:.8;width:390px;height:846px;overflow:clip}
+.home-appearance-canvas [data-home-labels="large"] .home-review-pin-art{position:absolute;inset:calc(-1 * var(--home-pin-gutter));display:block;width:calc(100% + var(--home-pin-gutter) * 2);height:calc(100% + var(--home-pin-gutter) * 2);max-width:none;object-fit:contain;filter:saturate(var(--home-pin-saturation))}
+.home-appearance-canvas [data-figma-home] .home-store-label{position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);display:block;width:max-content;max-width:132px;box-sizing:border-box;padding:0 4px;border-radius:3px;background:var(--figma-home-surface);color:var(--figma-home-ink);font:700 14px/18px var(--figma-home-font);white-space:nowrap}
+.home-appearance-canvas [data-home-theme="dark"]{
+ color-scheme:dark;
+ --appearance-dark-paper:oklch(20% .025 270);
+ --appearance-dark-surface:oklch(25% .025 270);
+ --appearance-dark-raised:oklch(29% .03 270);
+ --appearance-dark-ink:oklch(96% .012 270);
+ --appearance-dark-muted:oklch(82% .025 270);
+ --appearance-dark-edge:oklch(56% .035 270);
+ --appearance-dark-shadow:oklch(12% .02 270 / .45);
+ --appearance-dark-active:oklch(82% .10 285);
+ --appearance-dark-control-filter:brightness(1.75) saturate(.6);
+ --figma-home-surface:var(--appearance-dark-surface);
+ --figma-home-ink:var(--appearance-dark-ink);
+ --figma-home-muted:var(--appearance-dark-muted);
+ --figma-home-edge:var(--appearance-dark-edge);
+ --figma-home-search-bottom:var(--appearance-dark-raised);
+ --figma-home-search-shade:var(--appearance-dark-paper);
+ --figma-home-search-contact:var(--appearance-dark-shadow);
+ --figma-home-contact:var(--appearance-dark-shadow);
+ --figma-home-sky:var(--appearance-dark-paper);
+ --figma-nav-surface:var(--appearance-dark-paper);
+ --figma-nav-muted:var(--appearance-dark-muted);
+ --figma-nav-active:var(--appearance-dark-active);
+ background:var(--appearance-dark-paper);
+}
+.home-appearance-canvas [data-home-theme="dark"] .home-map-ground{filter:invert(.86) hue-rotate(180deg) saturate(.3) brightness(.95)}
+.home-appearance-canvas [data-home-theme="dark"] .home-search-form{box-shadow:inset 0 1px 0 var(--appearance-dark-edge),0 2px 4px var(--appearance-dark-shadow)}
+.home-appearance-canvas [data-home-theme="dark"] .home-category-more{color:var(--appearance-dark-active)}
+.home-appearance-canvas [data-home-theme="dark"] .home-search input::placeholder{color:var(--appearance-dark-muted)}
+.home-appearance-canvas [data-home-theme="dark"] .figma-search-icon,
+.home-appearance-canvas [data-home-theme="dark"] .home-explore>img{filter:var(--appearance-dark-control-filter)}

@@ -1,4 +1,5 @@
 import {setupScreenPreview} from '../components/screen-preview.mjs';
+import {setupHomeAppearanceReview} from './appearance.mjs';
 import {setupHomeSearchReview} from './search.mjs';
 import {setupHomeCategoryReview} from './category.mjs';
 import {setupHomeNearbyReview} from './nearby.mjs';
@@ -39,6 +40,7 @@ export function setupHomePreview(root){
   event.preventDefault();showPreview('매장 검색');
  });
  setupHomeSearchReview(root);
+ setupHomeAppearanceReview(root);
  setupHomeCategoryReview(root);
  setupHomeNearbyReview(root);
  setupHomeStoreReview(root);

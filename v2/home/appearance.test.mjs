@@ -1,0 +1,65 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {renderWorkspace} from '../render.mjs';
+import {reviewGroups} from '../subnavigation.mjs';
+import {renderFigmaHome} from './figma-home.mjs';
+import {applyReceivedIcons} from '../received-icons.mjs';
+import {readFileSync} from 'node:fs';
+
+test('home appearance comparison is additive and reachable from the review menu',()=>{
+ const html=renderWorkspace({pageId:'home'});
+ assert.ok(reviewGroups('home').some(group=>group.items.some(item=>item.id==='home-appearance'&&!item.pending)));
+ assert.match(html,/<section id="home-appearance"[^>]*data-review-screen hidden/);
+ assert.deepEqual([...html.matchAll(/data-home-appearance="([^"]+)"/g)].map(m=>m[1]),['original','light-large','dark-large']);
+});
+
+test('comparison preserves the original home and changes only pin files in the new options',()=>{
+ const html=renderWorkspace({pageId:'home'});
+ const specimens=Object.fromEntries([...html.matchAll(/<template data-home-appearance="([^"]+)">([\s\S]*?)<\/template>/g)].map(m=>[m[1],m[2]]));
+ assert.ok(specimens.original?.includes(applyReceivedIcons(renderFigmaHome())),'the original must remain the shared renderer output');
+ for(const id of ['light-large','dark-large']){
+  assert.equal((specimens[id]?.match(/class="home-store-label"/g)||[]).length,3);
+  const withoutPins=markup=>[...markup.matchAll(/src="([^"]+)"/g)].map(m=>m[1]).filter(src=>!['55e99.svg','3679c.svg','e20b7.svg'].some(file=>src.endsWith(file))&&!src.startsWith('/assets/home-appearance-20261020/'));
+  assert.deepEqual(withoutPins(specimens[id]),withoutPins(specimens.original));
+ }
+ assert.match(specimens['dark-large'],/data-home-theme="dark"/);
+ assert.doesNotMatch(specimens.original,/data-home-theme|home-store-label/);
+ assert.match(html,/정적 지도 이미지/);
+ assert.match(html,/14px/);
+ for(const pageId of ['my-info','my-land','barcode'])assert.doesNotMatch(renderWorkspace({pageId}),/data-home-appearance=/);
+});
+
+test('enlarged comparisons use padded 4x transparent PNG pins without a second clipping mask',()=>{
+ const html=renderWorkspace({pageId:'home'});
+ const specimens=Object.fromEntries([...html.matchAll(/<template data-home-appearance="([^"]+)">([\s\S]*?)<\/template>/g)].map(m=>[m[1],m[2]]));
+ for(const id of ['light-large','dark-large']){
+  const pins=[...specimens[id].matchAll(/<button\b[^>]*class="figma-map-pin[^\"]*"[^>]*>([\s\S]*?)<\/button>/g)].map(m=>m[1]);
+  assert.equal(pins.length,3);
+  for(const [index,pin] of pins.entries()){
+   const file=pin.match(/<img class="home-review-pin-art"[^>]*src="([^"]+)"/)[1];
+   assert.match(file,/^\/assets\/home-appearance-20261020\/[^/]+@4x\.png$/);
+   const bytes=readFileSync(new URL('../..'+file,import.meta.url));
+   assert.equal(bytes.subarray(1,4).toString(),'PNG');
+   const dimension=index===0?176:112; // 40px / 24px artwork + 2px transparent gutter on each side, at 4x.
+   assert.equal(bytes.readUInt32BE(16),dimension);
+   assert.equal(bytes.readUInt32BE(20),dimension);
+   assert.equal(bytes[25],6,'RGBA PNG must preserve the transparent background');
+   assert.doesNotMatch(pin,/figma-pin-mask|figma-pin-layer/,'avoid clipping an already vector-shaped pin a second time');
+  }
+ }
+ assert.match(specimens.original,/figma-pin-mask/,'reference screen must not be altered');
+});
+
+test('both comparison themes use circular artwork for every map pin',()=>{
+ const html=renderWorkspace({pageId:'home'});
+ const specimens=Object.fromEntries([...html.matchAll(/<template data-home-appearance="([^"]+)">([\s\S]*?)<\/template>/g)].map(m=>[m[1],m[2]]));
+ for(const id of ['light-large','dark-large']){
+  const files=[...specimens[id].matchAll(/class="home-review-pin-art" src="([^"]+)"/g)].map(m=>m[1]);
+  assert.deepEqual(files,[
+   '/assets/home-appearance-20261020/pin-circle-large@4x.png',
+   '/assets/home-appearance-20261020/pin-idle-circle@4x.png',
+   '/assets/home-appearance-20261020/pin-idle-circle@4x.png'
+  ]);
+ }
+ assert.match(specimens.original,/55e99\.svg/);
+});
