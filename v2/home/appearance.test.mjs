@@ -5,6 +5,7 @@ import {reviewGroups} from '../subnavigation.mjs';
 import {renderFigmaHome} from './figma-home.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
 import {readFileSync} from 'node:fs';
+import {renderHomeAppearanceReview} from './appearance.mjs';
 
 test('home appearance comparison is additive and reachable from the review menu',()=>{
  const html=renderWorkspace({pageId:'home'});
@@ -24,9 +25,15 @@ test('comparison preserves the original home and changes only pin files in the n
  }
  assert.match(specimens['dark-large'],/data-home-theme="dark"/);
  assert.doesNotMatch(specimens.original,/data-home-theme|home-store-label/);
- assert.match(html,/정적 지도 이미지/);
- assert.match(html,/14px/);
+ assert.match(html,/지도 색감은 참고용입니다/);
  for(const pageId of ['my-info','my-land','barcode'])assert.doesNotMatch(renderWorkspace({pageId}),/data-home-appearance=/);
+});
+
+test('appearance comparison captions contain just the three option names',()=>{
+ const section=renderHomeAppearanceReview();
+ const captions=[...section.matchAll(/<figcaption>([\s\S]*?)<\/figcaption>/g)].map(m=>m[1]);
+ assert.deepEqual(captions,['<h3>기존 홈</h3>','<h3>라이트</h3>','<h3>다크</h3>']);
+ assert.doesNotMatch(section,/현재 확정 시안 그대로|원본 유지|매장명 14px|채도만 20%|SDK의 야간 스타일/);
 });
 
 test('enlarged comparisons use padded 4x transparent PNG pins without a second clipping mask',()=>{
