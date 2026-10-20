@@ -35,7 +35,7 @@ test('home search preserves result groups and explains both empty states without
   assert.doesNotMatch(byState[state],/empty_history\.jpg|empty_result\.png/);
  }
  for(const markup of Object.values(byState)){
-  assert.match(markup,/naver-mangwon\.png/);
+  assert.match(markup,/figma-home-20261020\/f196c\.png/);
   assert.match(markup,/role="region"[^>]*tabindex="0"/);
   assert.match(markup,/<input[^>]*\breadonly\b[^>]*\binert\b/);
   assert.doesNotMatch(markup,/material-icons|og-home-ground|og-home-filters/);

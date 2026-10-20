@@ -1,11 +1,10 @@
-import {renderHomeSearch,renderHomeCategories} from '../../screens/my-info-3d-test/home-controls.mjs';
-import {renderBottomNavigation} from '../../screens/my-info-3d-test/navigation.mjs';
+import {renderFigmaHomeSearch,renderFigmaHomeCategories} from '../home/figma-home.mjs';
+import {renderFigmaNavigation} from './figma-navigation.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
-const assetBase='/screens/my-info-3d-test/media/figma/';
 const samples=[
- ['search','매장 검색바','매장명을 입력하고 검색 버튼을 눌러볼 수 있습니다.',()=>renderHomeSearch({assetBase,id:'component-store-search'})],
- ['categories','업종 카테고리','업종별 선택 상태를 확인합니다. 좁은 화면에서는 옆으로 넘겨볼 수 있습니다.',()=>renderHomeCategories({assetBase})],
- ['navigation','하단 메뉴','현재 메뉴는 아이콘 배경과 밑줄로 구분합니다. 메뉴를 눌러 선택 표시를 비교해 보세요.',()=>renderBottomNavigation({assetBase,home:true,active:'홈'})]
+ ['search','매장 검색바','홈과 동일한 검색바입니다. 검색 아이콘 20px, 우측 현 위치 아이콘 24px, 높이 48px을 공통 기준으로 사용합니다.',()=>renderFigmaHomeSearch({id:'component-store-search'})],
+ ['categories','업종 카테고리','홈과 동일한 30px 칩과 고정 더보기 버튼입니다. 미선택 상태가 전체보기이며 별도 전체 칩은 사용하지 않습니다.',()=>renderFigmaHomeCategories()],
+ ['navigation','하단 메뉴','모든 현재 시안에서 같은 90px 메뉴를 사용합니다. 현재 메뉴는 아이콘 색상과 밑줄로 구분합니다.',()=>renderFigmaNavigation({active:'홈'})]
 ];
 export function renderHomeControlSamples(){
  return applyReceivedIcons(samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>
@@ -13,8 +12,9 @@ export function renderHomeControlSamples(){
  <link rel="stylesheet" href="/screens/my-info-3d-test/home.css">
  <link rel="stylesheet" href="/v2/components/screen.css">
  <link rel="stylesheet" href="/v2/components/bottom-navigation.css">
+ <link rel="stylesheet" href="/v2/home/figma-home.css">
  <link rel="stylesheet" href="/v2/components/home-controls.css">
- <div class="component-stage component-stage-${id}">${render()}</div>
+ <div class="component-stage component-stage-${id}" data-figma-home>${render()}</div>
  </template></div></section>`).join('')+'<p class="v2-home-component-status" role="status" aria-live="polite">검색과 메뉴 선택은 이 페이지에서만 확인하며, 실제 서비스로 연결하지 않습니다.</p>');
 }
 export function setupHomeControlSamples(root){
@@ -43,7 +43,7 @@ export function setupHomeControlSamples(root){
    const action=event.target.closest('[data-preview]');
    if(action)status.textContent=nav
     ?action.dataset.preview+' 선택 표시를 확인했습니다. 실제 화면 이동은 진행되지 않습니다.'
-    :'업종 더 보기 버튼을 눌렀습니다. 실제 업종 목록은 열리지 않습니다.';
+    :action.dataset.preview==='현 위치'?'현 위치 버튼을 눌렀습니다. 실제 GPS는 조회하지 않습니다.':'업종 더 보기 버튼을 눌렀습니다. 실제 업종 목록은 열리지 않습니다.';
   });
  }
 }

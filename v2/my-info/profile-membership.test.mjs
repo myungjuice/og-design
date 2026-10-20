@@ -43,6 +43,8 @@ test('character selection is reachable without removing the existing main or ena
 test('character main keeps received navigation and industry icons before and after selection',()=>{
  for(const selected of [null,'bear','penguin','raccoon']){
   const html=renderCharacterMain({selected});
+  assert.match(html,/data-preview="내 정보" aria-current="page"/,String(selected)+' keeps My Info selected');
+  assert.match(html,/<nav inert class="bottom-navigation"/,String(selected)+' keeps prototype navigation inert');
   for(const name of ['홈','마이랜드','바코드','오지파크','내 정보']){
    assert.ok(html.includes('data-received-nav="'+name+'"'),String(selected)+' · '+name);
   }

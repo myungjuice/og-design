@@ -3,6 +3,7 @@
 @import url('../components/screen.css');
 @import url('../components/button.css');
 .barcode-sheet{max-height:100%;overflow-y:auto}
+.v2-barcode-map-backdrop{position:absolute;inset:0;isolation:isolate;pointer-events:none}
 /* Keep the explanation readable rather than shrinking it to force a single line. */
 .barcode-empty-hint{font-size:var(--v2-type-caption);white-space:normal}
 .barcode-action.og-button{font-weight:700}

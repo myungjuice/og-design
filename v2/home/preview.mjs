@@ -25,12 +25,8 @@ export function setupHomePreview(root){
   for(const button of screen.querySelectorAll('.home-categories [data-category]'))button.setAttribute('aria-pressed',String(button===category));
   return true;
  }});
- // Keep the original controls/assets; only v2 separates More from the scroll rail.
+ // The shared renderer owns the rail and fixed More button on every specimen.
  const categories=screen.querySelector('.home-categories');
- const more=categories.querySelector('.home-category-more');
- const categoryRow=categories.ownerDocument.createElement('div');
- categoryRow.className='v2-home-category-row';
- categories.before(categoryRow);categoryRow.append(categories,more);
  // Reveal the whole focused chip, not just its partially visible edge.
  categories.addEventListener('focusin',event=>{
   const category=event.target.closest('[data-category]');

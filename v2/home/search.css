@@ -7,7 +7,7 @@
 .v2-home-search-backdrop{position:absolute;inset:0}
 .v2-home-search-backdrop .home-map-controls{display:none}
 .v2-home-search-overlay{position:absolute;inset:var(--v2-space-6) var(--v2-space-4) 118px;display:flex;flex-direction:column;gap:var(--v2-space-3)}
-.v2-home-search-header{display:grid;grid-template-columns:48px minmax(0,1fr);gap:var(--v2-space-1);align-items:center}
+.v2-home-search-header{display:grid;grid-template-columns:48px minmax(0,1fr);gap:var(--v2-space-1);align-items:center;height:auto;flex:none}
 .v2-home-search-back{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:var(--v2-radius-chip);color:var(--v2-input-ink);background:var(--v2-input-fill);box-shadow:var(--v2-input-depth)}
 .v2-home-search-spacer{width:20px;flex:none}
 .home-search-submit{color:var(--v2-input-ink)}

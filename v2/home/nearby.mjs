@@ -1,6 +1,6 @@
 import {nearbyCard} from '../../design-system/pages/home/nearby.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
-import {renderHomeTest} from '../../screens/my-info-3d-test/home.mjs';
+import {renderFigmaHome,figmaHomeStyles} from './figma-home.mjs';
 import {bottomSheet} from '../../design-system/components/sheet/render.mjs';
 import {renderThumbnail,setupMedia} from '../components/media.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
@@ -34,9 +34,9 @@ export function renderHomeNearbyScreen({state='list'}={}){
   .replace('<h2 ','<h3 ').replace('</h2>','</h3>')
   .replace('>망원동 근처 보기</h3>',`>${compass}<span>망원동 근처 보기</span></h3>`)
   .replace('class="og-sheet-body"','class="og-sheet-body" role="region" tabindex="0" aria-label="근처 매장 목록"');
- return `<div class="v2-home-nearby-frame" data-nearby-state="${state}" aria-label="${e(config[1])}"><div class="v2-home-nearby-backdrop" inert aria-hidden="true">${renderHomeTest({assetBase:'/screens/my-info-3d-test/media/figma/'})}</div><div class="v2-home-nearby-overlay">${sheet}</div></div>`;
+ return `<div class="v2-home-nearby-frame" data-nearby-state="${state}" aria-label="${e(config[1])}"><div class="v2-home-nearby-backdrop" inert aria-hidden="true">${renderFigmaHome()}</div><div class="v2-home-nearby-overlay">${sheet}</div></div>`;
 }
-const styles=['/screens/my-info-3d-test/styles.css','/screens/my-info-3d-test/home.css','/v2/home/screen.css','/v2/components/sheet.css','/v2/components/button.css','/v2/components/media.css','/v2/components/empty-icon.css','/v2/home/nearby.css'];
+const styles=[...figmaHomeStyles,'/v2/components/sheet.css','/v2/components/button.css','/v2/components/media.css','/v2/components/empty-icon.css','/v2/home/nearby.css'];
 function example([state,title,copy]){
  return `<figure class="v2-home-search-example"><figcaption><h3>${e(title)}</h3><p>${e(copy)}</p></figcaption><div class="v2-home-search-host v2-home-nearby-host"><template data-nearby-template>${styles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}${renderHomeNearbyScreen({state})}</template></div></figure>`;
 }
@@ -52,8 +52,6 @@ export function setupHomeNearbyReview(root){
    const template=host.querySelector('template'),shadow=host.attachShadow({mode:'open'});
    shadow.append(template.content.cloneNode(true));template.remove();
    shadow.querySelector('form').addEventListener('submit',event=>event.preventDefault());
-   const rail=shadow.querySelector('.home-categories'),more=rail.querySelector('.home-category-more');
-   const row=document.createElement('div');row.className='v2-home-category-row';rail.before(row);row.append(rail,more);
    setupMedia(shadow);
   }
  };

@@ -16,7 +16,7 @@ test('22종 카테고리는 제공된 로컬 SVG를 사용하며 전체 항목�
  assert.equal(names.length,22);
  for(const name of names)assert.ok(existsSync(new URL('../assets/designer-20261013/'+name.replaceAll('/','-')+'.svg',import.meta.url)),name);
  for(const state of ['category-before','category-after','category-full']){
-  const html=renderDesignerScreen(state);
+  const html=renderDesignerScreen(state).split('<section class="filter-panel">')[1];
   assert.equal((html.match(/data-category=/g)||[]).length,22);
   assert.equal((html.match(/aria-pressed="true"/g)||[]).length,state==='category-before'?0:4);
   assert.doesNotMatch(html,/전체\.svg|data-category="전체"/);

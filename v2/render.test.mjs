@@ -35,13 +35,13 @@ test('home overview exposes one map explorer with route-safe original assets and
  const html=renderHomePreview();
  assert.equal((html.match(/class="home-test"/g)||[]).length,1);
  assert.equal((html.match(/class="bottom-navigation"/g)||[]).length,1);
- assert.match(html,/망원동 네이버지도 정적 배경/);assert.match(html,/매장명으로 검색해 주세요/);
+ assert.match(html,/figma-home-20261020\/f196c\.png/);assert.match(html,/매장명으로 검색해 주세요/);
  assert.match(html,/href="\/v2\/components\/bottom-navigation.css"/);
  assert.match(html,/data-preview="홈" aria-current="page"/);
  assert.doesNotMatch(html,/대표 화면 연결 예정|승인된|class="my-info-test"|class="barcode-test"/);
  const assets=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(assets.length>10);
- assert.ok(assets.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||src.includes('/design-system/pages/home/media/naver-mangwon.png')));
+ assert.ok(assets.every(src=>src.startsWith('/assets/figma-home-20261020/')));
 });
 test('barcode exposes one shared sheet and route-safe mileage assets without other screens',()=>{
  const html=renderWorkspace({pageId:'barcode'});
@@ -49,10 +49,11 @@ test('barcode exposes one shared sheet and route-safe mileage assets without oth
  assert.equal((html.match(/class="og-surface mileage-card v2-mileage"/g)||[]).length,1);
  assert.match(html,/내 바코드/);assert.match(html,/영수증 적립/);assert.match(html,/마일리지 사용/);
  assert.match(html,/실제 회원 정보가 아닌 샘플 바코드/);
- assert.doesNotMatch(html,/대표 화면 연결 예정|class="my-info-test"|class="home-test"|승인된/);
+ assert.doesNotMatch(html,/대표 화면 연결 예정|class="my-info-test"|승인된/);
+ assert.equal((html.match(/class="home-test"/g)||[]).length,1,'the barcode sheet overlays the same shared home');
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.some(src=>src.endsWith('/mileage-m.png')));
- assert.ok(images.every(src=>src.startsWith('/screens/')||src.includes('/design-system/pages/home/media/naver-mangwon.png')));
+ assert.ok(images.every(src=>src.startsWith('/screens/')||src.startsWith('/assets/figma-home-20261020/')));
 });
 test('my-info exposes one approved representative screen without pulling home or barcode screens',()=>{
  const html=renderWorkspace({pageId:'my-info'});
@@ -62,7 +63,7 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.doesNotMatch(html,/대표 화면 연결 예정|class="home-test"|class="barcode-test"/);
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.length>10);
- assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||src.startsWith('/assets/received-icons-20261017/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared and received assets resolve from the v2 route');
+ assert.ok(images.every(src=>src.startsWith('/screens/my-info-3d-test/media/figma/')||src.startsWith('/assets/received-icons-20261017/')||src.startsWith('/assets/figma-home-20261020/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared and received assets resolve from the v2 route');
 });
 test('my-info presents only the approved representative screen with shared navigation styling',()=>{
  const html=renderWorkspace({pageId:'my-info'});

@@ -5,9 +5,30 @@ import {renderWorkspace} from './render.mjs';
 import {renderMyLandDesignerReview} from './designer-20261013.mjs';
 import {applyReceivedIcons} from './received-icons.mjs';
 
+test('current navigation keeps the Figma barcode caption and gloss across render paths',()=>{
+ for(const pageId of ['home','my-info','my-land']){
+  const html=renderWorkspace({pageId});
+  assert.match(html,/data-figma-navigation/,pageId);
+  assert.match(html,/figma-nav-label">내 바코드</,pageId);
+  assert.match(html,/60fdf\.svg/,pageId);
+ }
+});
+
+test('home uses the supplied map and three original pin layers without extra labels or current marker',()=>{
+ const html=renderWorkspace({pageId:'home'}).split('<section id="overview"')[1].split('</template>')[0];
+ assert.match(html,/figma-home-20261020\/f196c\.png/);
+ assert.match(html,/55e99\.svg/);
+ assert.match(html,/3679c\.svg/);
+ assert.match(html,/e20b7\.svg/);
+ assert.match(html,/30e02\.svg/);
+ assert.doesNotMatch(html,/home-store-name|home-current-pin|data-category="전체"/);
+});
+
 test('home uses received category, function and map-pin artwork in actual v2 screens',()=>{
  const html=renderWorkspace({pageId:'home'});
- for(const kind of ['category','search','target','quick','pin-on','pin-off','navigation'])assert.match(html,new RegExp('data-received-icon="'+kind+'"'));
+ for(const kind of ['category','navigation'])assert.match(html,new RegExp('data-received-icon="'+kind+'"'));
+ for(const file of ['adbac.svg','55e99.svg','3679c.svg','e20b7.svg'])assert.ok(html.includes('/assets/figma-home-20261020/'+file),file);
+ for(const file of ['aa166.svg','ae1d9.svg','d146b.svg'])assert.ok(html.includes('/assets/figma-home-20261020/'+file),file);
  assert.match(html,/data-received-category="한식"/);
  assert.match(html,/data-received-category="카페\/베이커리"/);
  assert.match(html,/data-received-category="운동\/스포츠\/레저"/);
@@ -25,11 +46,12 @@ test('received bottom navigation reaches all approved current main screens witho
   assert.match(html,/received-icons\.css/,pageId);
  }
  assert.ok(renderWorkspace({pageId:'my-land'}).includes(renderMyLandDesignerReview()),'original v1/v2 markup remains intact');
- assert.ok(renderWorkspace({pageId:'home'}).includes('class="barcode-art received-nav-art"'),'barcode icon retains its raised circular artwork container');
+ assert.ok(renderWorkspace({pageId:'home'}).includes('class="figma-scan-surface"'),'barcode icon retains its raised circular artwork container');
  const barcode=renderWorkspace({pageId:'barcode'});
  assert.match(barcode,/barcode-code-card/);
  assert.match(barcode,/data-preview="영수증 적립"/);
- assert.doesNotMatch(barcode,/class="bottom-navigation"/,'barcode remains the approved sheet, not a new tab layout');
+ assert.match(barcode,/class="v2-barcode-map-backdrop" inert aria-hidden="true"><section class="home-test"/,'the shared map navigation stays in the inert backdrop, not in the barcode sheet');
+ assert.doesNotMatch(barcode.match(/<section class="barcode-sheet"[\s\S]*/)?.[0]||'',/data-figma-navigation/);
 });
 
 test('recent visits use matching industry icons rather than one generic utensils image',()=>{
@@ -40,7 +62,7 @@ test('recent visits use matching industry icons rather than one generic utensils
 
 test('received artwork references are local SVG files present in the site',()=>{
  const html=['home','my-info','barcode','my-land'].map(pageId=>renderWorkspace({pageId})).join('');
- const paths=[...new Set([...html.matchAll(/src="(\/assets\/received-icons-20261017\/[^\"]+)"/g)].map(m=>decodeURIComponent(m[1])))];
+ const paths=[...new Set([...html.matchAll(/src="(\/assets\/(?:received-icons-20261017|figma-home-20261020)\/[^\"]+\.svg)"/g)].map(m=>decodeURIComponent(m[1])))];
  assert.ok(paths.length>=35,'actual renders reference the delivered artwork set');
  for(const path of paths){
   const file=new URL('..'+path,import.meta.url);
@@ -59,7 +81,7 @@ test('received quick-earn artwork uses the current 바로적립 name in the visi
  const html=renderWorkspace({pageId:'home'});
  assert.ok(html.includes('data-preview="바로적립"'));
  assert.ok(html.includes('aria-label="바로적립"'));
- assert.ok(html.includes('<span>바로적립</span>'));
+ assert.ok(html.includes('figma-quick-glyph'),'original artwork includes its own 바로적립 lettering');
 });
 
 test('composing received-icon adapters does not duplicate stylesheet links or artwork',()=>{

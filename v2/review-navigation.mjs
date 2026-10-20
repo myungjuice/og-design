@@ -7,7 +7,7 @@ export function setupReviewNavigation(root,pageId){
  const search=root.querySelector('#review-filter'),picker=root.querySelector('#review-picker');
  const status=root.querySelector('.v2-subnav-status'),menu=root.querySelector('.v2-submenu');
  const main=root.querySelector('main'),homeStatus=root.querySelector('.v2-home-component-status');
- for(const comparison of root.querySelectorAll('.v2-state-comparison'))comparison.open=false;
+ for(const comparison of main.querySelectorAll('details:not(.v2-accessibility-check)'))comparison.open=true;
  for(const section of sections)(section.querySelector('h2')||section).tabIndex=-1;
  root.querySelector('.v2-skip').addEventListener('click',event=>{
   if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;

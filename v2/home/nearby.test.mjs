@@ -47,7 +47,7 @@ test('nearby stays a static scrollable map panel without close, completion, or a
   const frame=html.match(new RegExp(`data-nearby-state="${state}"([\\s\\S]*?)<\\/template>`))?.[1]||'';
   assert.match(frame,/망원동 근처 보기/);
   assert.match(frame,/class="og-sheet-body"[^>]*role="region"[^>]*tabindex="0"/);
-  assert.match(frame,/naver-mangwon\.png/);
+  assert.match(frame,/figma-home-20261020\/f196c\.png/);
   assert.doesNotMatch(frame,/og-sheet-close|og-sheet-footer|data-sheet-close|material-icons|v2-home-nearby-scrim/);
  }
  const empty=html.match(/data-nearby-state="empty"([\s\S]*?)<\/template>/)?.[1]||'';

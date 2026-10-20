@@ -1,6 +1,5 @@
 import {searchScreen,searchStates} from '../../design-system/pages/home/search.mjs';
-import {renderHomeTest} from '../../screens/my-info-3d-test/home.mjs';
-import {renderHomeSearch} from '../../screens/my-info-3d-test/home-controls.mjs';
+import {renderFigmaHome,renderFigmaHomeSearch,figmaHomeStyles} from './figma-home.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
 
 const line=(path)=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
@@ -31,14 +30,14 @@ function sourcePanel(state){
 }
 function frame(state,title){
  const query=['history','empty-history'].includes(state)?'':'성수';
- let search=renderHomeSearch({assetBase:'/screens/my-info-3d-test/media/figma/',id:'search-'+state});
+ let search=renderFigmaHomeSearch({id:'search-'+state});
  search=search.replace('value=""',`value="${query}"`).replace(/<input\b/g,'<input readonly inert')
   .replace(/<button[\s\S]*?<\/button>/,query?`<button inert type="button" class="home-search-submit" aria-label="검색어 지우기">${close}</button>`:'<span class="v2-home-search-spacer" aria-hidden="true"></span>');
  return `<div class="v2-home-search-frame" data-search-state="${state}" aria-label="${e(title)}">
- <div class="v2-home-search-backdrop" inert aria-hidden="true">${renderHomeTest({assetBase:'/screens/my-info-3d-test/media/figma/'})}</div>
- <div class="v2-home-search-overlay"><div class="v2-home-search-header"><button inert type="button" class="v2-home-search-back" aria-label="검색 닫기">${line('M19 12H5m7-7-7 7 7 7')}</button>${search}</div>${sourcePanel(state)}</div></div>`;
+ <div class="v2-home-search-backdrop" inert aria-hidden="true">${renderFigmaHome()}</div>
+ <div class="v2-home-search-overlay"><div class="v2-home-search-header" data-figma-home><button inert type="button" class="v2-home-search-back" aria-label="검색 닫기">${line('M19 12H5m7-7-7 7 7 7')}</button>${search}</div>${sourcePanel(state)}</div></div>`;
 }
-const styles=['/screens/my-info-3d-test/styles.css','/screens/my-info-3d-test/home.css','/v2/components/screen.css','/v2/components/bottom-navigation.css','/v2/components/empty-icon.css','/v2/home/search.css'];
+const styles=[...figmaHomeStyles,'/v2/components/empty-icon.css','/v2/home/search.css'];
 function example([state,title,copy]){
  return `<figure class="v2-home-search-example"><figcaption><h3>${e(title)}</h3><p>${e(copy)}</p></figcaption><div class="v2-home-search-host"><template data-search-template>${styles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}${frame(state,title)}</template></div></figure>`;
 }

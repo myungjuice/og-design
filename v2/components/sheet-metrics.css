@@ -1,0 +1,8 @@
+/* One set of metrics for the same header/body/footer roles across current sheets.
+ * Domain content and sheet heights remain independent. */
+:host{--v2-sheet-title-size:18px;--v2-sheet-title-line:24px;--v2-sheet-inset:20px}
+.v2-sheet-panel.og-sheet-panel>.og-sheet-header,.v2-source-frame .og-sheet-panel .og-sheet-header,.v2-member-sheet>.v2-member-header{display:flex;align-items:flex-start;gap:8px;min-height:0;padding:16px 12px 8px var(--v2-sheet-inset)}
+.v2-sheet-panel.og-sheet-panel>.og-sheet-header :is(h2,h3),.v2-source-frame .og-sheet-panel .og-sheet-header h2,.v2-source-frame .og-sheet-panel .og-sheet-header h3,.v2-member-sheet>.v2-member-header h2{flex:1;min-width:0;margin:0;padding-top:12px;font:700 var(--v2-sheet-title-size)/var(--v2-sheet-title-line) var(--v2-font)}
+.v2-source-frame .og-sheet-panel .og-sheet-header .og-sheet-close,.v2-member-sheet>.v2-member-header button{flex:0 0 48px;width:48px;height:48px}
+.v2-source-frame .og-sheet-panel .og-sheet-body,.v2-member-sheet>.v2-member-body{padding:8px var(--v2-sheet-inset) var(--v2-sheet-inset)}
+.v2-source-frame .og-sheet-panel .og-sheet-footer,.v2-member-sheet>.v2-member-footer{padding:16px var(--v2-sheet-inset) max(20px,env(safe-area-inset-bottom))}

@@ -1,0 +1,24 @@
+/* Hallmark · component: shared navigation · supplied Figma 144:2083
+ * pre-emit critique: P5 H5 E5 S5 R5 V4 · original icon layers, no extra selection backing. */
+:host{--figma-nav-surface:#fff;--figma-nav-active:#5251e3;--figma-nav-muted:#9698a2;--figma-nav-scan:#6264f8;--figma-nav-rim:#c1ccffcc;--figma-nav-shade:#333295;--figma-nav-shadow:#1f203533;--figma-nav-clear:transparent;--figma-nav-font:'OG V2 Pretendard',sans-serif}
+:is(.bottom-navigation,.bottom-nav)[data-figma-navigation]{box-sizing:border-box;position:absolute;inset:auto 0 0;z-index:5;display:flex;align-items:flex-start;justify-content:space-between;gap:0;width:100%;height:90px;padding:8px 12px 32px;border:0;border-radius:20px 20px 0 0;background:var(--figma-nav-surface);box-shadow:0 -4px 10px var(--figma-nav-shadow);font-family:var(--figma-nav-font);letter-spacing:0;overflow:visible}
+[data-figma-navigation]>.figma-nav-item{box-sizing:border-box;position:relative;top:auto;display:flex;flex:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;width:62px;min-width:0;height:50px;padding:0;border:0;background:var(--figma-nav-clear);color:var(--figma-nav-muted);font:400 12px/16px var(--figma-nav-font);white-space:nowrap}
+[data-figma-navigation]>.figma-nav-item::after{content:none}
+[data-figma-navigation]>.figma-nav-item>.figma-nav-face{box-sizing:border-box;position:static;display:grid;place-items:center;flex:none;width:24px;height:24px;border:0;border-radius:0;background:var(--figma-nav-clear);box-shadow:none;overflow:visible}
+[data-figma-navigation] .figma-nav-art{display:grid;place-items:center;width:24px;height:24px}
+[data-figma-navigation] .figma-nav-glyph{display:block;position:static;grid-area:1/1;width:auto;height:auto;max-width:none;object-fit:contain;filter:none;pointer-events:none}
+[data-figma-navigation] [data-received-state="active"]{display:none}
+[data-figma-navigation]>.figma-nav-item:is(.active,.is-selected,[aria-current="page"]){color:var(--figma-nav-active);font-weight:700}
+[data-figma-navigation]>.figma-nav-item:is(.active,.is-selected,[aria-current="page"]) [data-received-state="idle"]{display:none}
+[data-figma-navigation]>.figma-nav-item:is(.active,.is-selected,[aria-current="page"]) [data-received-state="active"]{display:block}
+[data-figma-navigation]>.figma-nav-item>.figma-nav-label{box-sizing:border-box;position:static;display:flex;align-items:center;justify-content:center;flex:none;width:auto;height:24px;padding:0 8px;border:0;border-radius:0;background:var(--figma-nav-clear);box-shadow:none;color:inherit;font:inherit;line-height:16px;clip-path:none;overflow:visible;white-space:nowrap}
+[data-figma-navigation]>.figma-nav-item:is(.active,.is-selected,[aria-current="page"]):not(.figma-nav-scan)>.figma-nav-label{border-bottom:2px solid var(--figma-nav-active)}
+[data-figma-navigation] .figma-nav-label::after{content:none}
+[data-figma-navigation]>.figma-nav-scan{justify-content:flex-end;gap:0}
+[data-figma-navigation]>.figma-nav-scan>.figma-nav-face{position:absolute;top:-38px;left:-1px;width:64px;height:64px;border:4px solid var(--figma-nav-surface);border-radius:999px;background:var(--figma-nav-surface)}
+[data-figma-navigation] .figma-scan-surface{box-sizing:border-box;position:relative;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;background:var(--figma-nav-scan);box-shadow:inset 0 2px 4px var(--figma-nav-rim),inset 0 -2px 6px var(--figma-nav-shade)}
+[data-figma-navigation] .figma-scan-glyph{position:static;display:block;width:auto;height:auto;max-width:none;pointer-events:none;filter:none}
+[data-figma-navigation] .figma-scan-gloss{position:absolute;left:.733px;top:.61px;display:block;width:auto;height:auto;max-width:none;pointer-events:none}
+.bottom-navigation[data-figma-navigation]>.figma-nav-scan>.figma-nav-label,.bottom-nav[data-figma-navigation]>.figma-nav-scan>.figma-nav-label{color:var(--figma-nav-muted);font-weight:400}
+[data-figma-navigation]>.figma-nav-item:focus-visible{outline:2px solid var(--figma-nav-active);outline-offset:3px;border-radius:8px}
+@media(max-width:352px){[data-figma-navigation]>.figma-nav-item{width:20%}[data-figma-navigation]>.figma-nav-scan>.figma-nav-face{left:calc(50% - 32px)}}

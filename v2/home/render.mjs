@@ -1,4 +1,4 @@
-import {renderHomeTest} from '../../screens/my-info-3d-test/home.mjs';
+import {renderFigmaHome,figmaHomeStyles} from './figma-home.mjs';
 import {previewDialog} from '../components/screen-preview.mjs';
 export {renderHomeSearchReview} from './search.mjs';
 export {renderHomeCategoryReview} from './category.mjs';
@@ -20,12 +20,9 @@ export {renderHomeStoreInfoReview,renderHomeStoreLocationReview} from './informa
 export {renderHomeStoreShareReview,renderHomeStorePhotoReview,renderHomeStorePraiseReview} from './store-secondary.mjs';
 
 export function renderHomePreview(){
- return `<p class="v2-intro">지도에서 주변 매장을 찾고, 업종별로 탐색하는 화면입니다.</p>
+ return `<p class="v2-intro">지도에서 주변 매장을 찾고, 업종별로 탐색하는 화면입니다.</p><p class="v2-intro">공통 구현 기준: 390 × 846 화면에서 검색바 상단 24px·높이 48px, 현 위치 버튼 상단 612px, 둘러보기 상단 678px·높이 34px, 하단 메뉴 높이 90px. 검색·업종·근처보기·바코드의 지도 배경도 같은 컴포넌트를 사용하며, 패널로 가려지는 범위만 다릅니다.</p>
  <div class="v2-screen-stage"><div class="v2-screen-host"><template data-screen-template>
- <link rel="stylesheet" href="/screens/my-info-3d-test/styles.css">
- <link rel="stylesheet" href="/screens/my-info-3d-test/home.css">
- <link rel="stylesheet" href="/v2/home/screen.css">
- <link rel="stylesheet" href="/v2/components/bottom-navigation.css">
- ${renderHomeTest({assetBase:'/screens/my-info-3d-test/media/figma/'})}${previewDialog}
+ ${figmaHomeStyles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}
+ ${renderFigmaHome()}${previewDialog}
  </template></div></div>`;
 }

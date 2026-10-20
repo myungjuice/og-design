@@ -50,9 +50,10 @@ test('gallery isolates real home controls without embedding a map or full screen
   assert.match(html,new RegExp(`data-home-component="${id}"`));
  }
  assert.match(html,/id="component-store-search"/);
- assert.match(html,/data-category="전체" aria-pressed="true"/);
+ assert.match(html,/data-category="한식" aria-pressed="false"/);
+ assert.doesNotMatch(html,/data-category="전체"/);
  assert.match(html,/aria-current="page"/);
- assert.match(html,/\/screens\/my-info-3d-test\/media\/figma\/bottom-navigation-source.png/);
+ assert.match(html,/\/assets\/figma-home-20261020\/8f648\.svg/);
  assert.doesNotMatch(html,/class="home-map"|class="home-test"|<iframe/);
 });
 test('gallery exposes basic, icon and non-interactive information list rows',()=>{
