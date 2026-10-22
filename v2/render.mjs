@@ -13,9 +13,10 @@ import {renderMyLandDetailsReview} from './myland-details.mjs';
 import {renderIconReview} from './icon-review/render.mjs';
 import {applyReceivedIcons} from './received-icons.mjs';
 import {renderHomeAppearanceReview} from './home/appearance.mjs';
+import {renderParkReview} from './og-park/render.mjs';
 export function renderWorkspace({pageId}={}) {
  const item=navigationItems.find(item=>item.id===pageId);
- const designer=pageId==='icon-review'?renderIconReview():pageId==='home'?applyReceivedIcons(renderHomeAppearanceReview()+renderCategoryDesignerReview()):pageId==='my-land'?renderMyLandDesignerReview():'';
+ const designer=pageId==='og-park'?applyReceivedIcons(renderParkReview()):pageId==='icon-review'?renderIconReview():pageId==='home'?applyReceivedIcons(renderHomeAppearanceReview()+renderCategoryDesignerReview()):pageId==='my-land'?renderMyLandDesignerReview():'';
  const content=item
   ? `<h1>${item.label}</h1>${renderReviewPicker(pageId)}${pageId==='design-system'?renderFoundations():pageId==='components'?renderComponents():['my-info','barcode','home'].includes(pageId)?`<section id="overview" data-review-screen>${pageId==='my-info'?renderMyInfoPreview():pageId==='barcode'?renderBarcodePreview():renderHomePreview()}</section>`:''}`
   : '<h1>페이지를 찾을 수 없습니다</h1><a href="/v2/design-system/">디자인 시스템으로 돌아가기</a>';

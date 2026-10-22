@@ -67,3 +67,7 @@ if(document.body.dataset.page==='home'){
  const {setupHomePreview}=await import('./home/preview.mjs');
  setupHomePreview(root);
 }
+if(document.body.dataset.page==='og-park'){
+ const {setupParkReview}=await import('./og-park/render.mjs');
+ setupParkReview(root);
+}

@@ -25,11 +25,12 @@ test('menu anchors preserve screen destinations and append the icon review',()=>
  assert.equal((html.match(/aria-current="page"/g)||[]).length,1);
  assert.match(html,/<a[^>]*href="\/v2\/barcode\/"[^>]*aria-current="page"/);
 });
-test('blank future destinations contain only their title in main',()=>{
- for(const [id,title] of [['og-park','오지파크']]){
-  const html=renderWorkspace({pageId:id});
-  assert.match(html,new RegExp(`<main[^>]*>\\s*<h1[^>]*>${title}</h1>\\s*</main>`));
- }
+test('park destination presents a reference and revision without affecting other destinations',()=>{
+ const html=renderWorkspace({pageId:'og-park'});
+ assert.match(html,/<h1>오지파크<\/h1>/);
+ assert.match(html,/data-park-screen="original"/);
+ assert.match(html,/data-park-screen="revised"/);
+ assert.doesNotMatch(renderWorkspace({pageId:'home'}),/data-park-screen/);
 });
 test('home overview exposes one map explorer with route-safe original assets and shared navigation',()=>{
  const html=renderHomePreview();

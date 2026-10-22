@@ -4,6 +4,7 @@ import {myLandDetailGroups} from './myland-details.mjs';
 import {escapeHTML as e} from '../design-system/components/core.mjs';
 const pending=(id,label,names)=>({id,label,items:names.map((label,index)=>({id:id+'-'+index,label,pending:true}))});
 export function reviewGroups(pageId){
+ if(pageId==='og-park')return [{id:'park-main',label:'메인 시안 비교',items:[{id:'park-comparison',label:'기존 시안 ↔ 수정안'}]}];
  if(pageId==='icon-review')return [
   {id:'icon-decisions',label:'제작 변경 요약',items:[{id:'icon-decisions',label:'제외·신규·재사용·검토'}]},
   {id:'mileage-compare',label:'기존 앱 ↔ 리뉴얼 비교',items:[{id:'mileage-compare',label:'내정보·마일리지·바코드'}]},
