@@ -1,10 +1,11 @@
 // 가송 디자이너 전달 시안. 기존 검토 화면과 스타일을 격리한다.
 import {renderFigmaHome,figmaHomeStyles} from './home/figma-home.mjs';
+import {categoryArtwork} from './category-artwork.mjs';
 const base='/assets/designer-20261013/';
 const img=(file,cls='',alt='')=>`<img class="${cls}" src="${base}${file}" alt="${alt}">`;
-export const categoryRows=[['한식','중식','일식','양식'],['분식','아시안/세계음식','치킨'],['패스트푸드/도시락','카페/베이커리'],['샐러드/비건','야식/술집/포차'],['의료/건강','헤어/뷰티'],['반려동물/동물병원','부동산/인테리어'],['운동/스포츠/레저','자동차','교육/학원'],['출산/육아','문구/완구/취미'],['전문서비스업','생활서비스']];
+export const categoryRows=[['한식','중식','일식','양식'],['분식','아시안/세계음식','치킨'],['패스트푸드/도시락','카페/베이커리'],['샐러드/비건','야식/술집/포차'],['의료/건강','헤어/뷰티'],['반려동물/동물병원','부동산/인테리어'],['운동/스포츠/레저','자동차','교육/학원'],['출산/육아','문구/완구/취미','액세서리/잡화'],['전문서비스업','생활서비스']];
 const selected=['치킨','패스트푸드/도시락','헤어/뷰티','운동/스포츠/레저'];
-const icon=name=>img(name.replaceAll('/','-')+'.svg');
+const icon=categoryArtwork;
 function nav(myland=false){return `<nav class="bottom-nav" aria-label="하단 메뉴">${[['홈',myland?'96c0f.svg':'b6889.svg'],['마이랜드',myland?'ce3a9.svg':'e987b.svg'],['내 바코드','77fa8.svg'],['오지파크','c10fd.svg'],['내 정보','eeba5.svg']].map(([label,file],i)=>`<div class="nav-item ${i===(myland?1:0)?'active':''} ${i===2?'barcode':''}"><span>${img(file)}</span><small>${label}</small></div>`).join('')}</nav>`;}
 function home(background=false){return `<div class="screen home"${background?' inert aria-hidden="true"':''}>${renderFigmaHome()}</div>`;}
 function categories(after,full){return `<div class="screen category ${full?'full':''}">${full?'':home(true)+'<div class="dim"></div>'}<section class="filter-panel">${full?'':'<div class="handle"></div>'}<header>${full?img('86134.svg','back'):''}<b>카테고리 전체보기</b><strong data-selection-count>${after?'4':''}</strong></header><div class="category-content" role="region" tabindex="0" aria-label="업종 목록">${categoryRows.map((row,index)=>`${index===0?'<h3>음식점</h3>':index===4?'<h3 class="convenience">생활편의</h3>':''}<div class="category-row">${row.map(name=>`<button class="category-chip" data-category="${name}" aria-pressed="${after&&selected.includes(name)}"><span>${icon(name)}</span>${name}</button>`).join('')}</div>`).join('')}</div><footer><button data-reset>초기화</button><button class="fill" data-browse>${after?'927':'14,367'}개 둘러보기</button></footer></section></div>`;}

@@ -11,13 +11,14 @@ test('카테고리 비교는 홈과 선택 전후 및 전체 화면형을 모두
  assert.equal((html.match(/data-designer-screen="(?:home|category-before|category-after|category-full)"/g)||[]).length,4);
  assert.match(html,/초기화/);
 });
-test('22종 카테고리는 제공된 로컬 SVG를 사용하며 전체 항목을 추가하지 않는다',()=>{
+test('23종 카테고리는 수령한 로컬 SVG를 사용하며 전체 항목을 추가하지 않는다',()=>{
  const names=categoryRows.flat();
- assert.equal(names.length,22);
- for(const name of names)assert.ok(existsSync(new URL('../assets/designer-20261013/'+name.replaceAll('/','-')+'.svg',import.meta.url)),name);
+ assert.equal(names.length,23);
+ for(const name of names)assert.ok(existsSync(new URL('../assets/received-icons-20261022/categories/'+name.replaceAll('/','-')+'.svg',import.meta.url)),name);
  for(const state of ['category-before','category-after','category-full']){
   const html=renderDesignerScreen(state).split('<section class="filter-panel">')[1];
-  assert.equal((html.match(/data-category=/g)||[]).length,22);
+  assert.equal((html.match(/data-category=/g)||[]).length,23);
+  assert.equal((html.match(/data-received-icon="category"/g)||[]).length,23);
   assert.equal((html.match(/aria-pressed="true"/g)||[]).length,state==='category-before'?0:4);
   assert.doesNotMatch(html,/전체\.svg|data-category="전체"/);
  }

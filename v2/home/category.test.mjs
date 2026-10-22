@@ -13,10 +13,11 @@ test('home categories exposes the shared before and after selection specimens',(
  for(const [state,name] of [['open','category-before'],['selected','category-after']])assert.ok(renderHomeCategoryScreen({state}).includes(renderDesignerScreen(name)));
 });
 
-test('current category list contains the same 22 supplied choices, reset and browse actions',()=>{
+test('current category list contains all 23 supplied choices, reset and browse actions',()=>{
  for(const state of ['open','selected']){
   const html=renderHomeCategoryScreen({state}).split('<section class="filter-panel">')[1];
   assert.deepEqual([...html.matchAll(/data-category="([^"]+)"/g)].map(m=>m[1]),categoryRows.flat());
+  assert.equal((html.match(/data-category="/g)||[]).length,23);
   assert.equal((html.match(/aria-pressed="true"/g)||[]).length,state==='open'?0:4);
   assert.match(html,/data-reset/);assert.match(html,/data-browse/);
   assert.doesNotMatch(html,/data-category="전체"|data-category-id="CI1000"/);

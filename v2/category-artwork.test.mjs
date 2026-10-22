@@ -6,9 +6,34 @@ import {renderFigmaHome} from './home/figma-home.mjs';
 import {renderCharacterMain} from './my-info/character.mjs';
 import {renderMyLandDesignerReview,categoryRows} from './designer-20261013.mjs';
 import {categoryArtworkURL,pinArtworkURL} from './category-artwork.mjs';
+import {renderHomeCategoryScreen} from './home/category.mjs';
 
 const base='/assets/received-icons-20261022/';
 const imageSources=html=>[...html.matchAll(/<img\b[^>]*>/g)].map(([tag])=>({tag,src:decodeURIComponent(tag.match(/src="([^"]+)"/)?.[1]||'')}));
+
+test('all three category selection specimens include the received accessories industry once',()=>{
+ const states=[renderHomeCategoryScreen({state:'open'}),renderHomeCategoryScreen({state:'selected'})];
+ const workspace=renderWorkspace({pageId:'home'});
+ states.push(workspace.split('data-designer-screen="category-full"')[1].split('</template>')[0]);
+ for(const html of states){
+  const panel=html.split('<section class="filter-panel">')[1];
+  const choices=[...panel.matchAll(/data-category="([^"]+)"/g)].map(m=>m[1]);
+  assert.equal(choices.length,23);
+  assert.equal(choices.filter(name=>name==='액세서리/잡화').length,1);
+ }
+});
+
+test('every current home specimen displays selected pins at 1.4 times the idle size',()=>{
+ for(const pageId of ['home','barcode']){
+  const html=renderWorkspace({pageId});
+  const pins=[...html.matchAll(/<button\b[^>]*class="figma-map-pin ([^\"]+)"[^>]*>([\s\S]*?)<\/button>/g)];
+  const selected=pins.filter(m=>m[1].includes('selected'));
+  const idle=pins.filter(m=>!m[1].includes('selected'));
+  assert.ok(selected.length>0&&idle.length>0);
+  const dimension=pin=>Number(pin[2].match(/<img\b[^>]*width="([\d.]+)"/)[1]);
+  for(const pin of selected)assert.ok(Math.abs(dimension(pin)/dimension(idle[0])-1.4)<1e-9,pageId);
+ }
+});
 
 test('legacy sports labels and the supplied ON filename typo resolve to one sports/leisure artwork',()=>{
  for(const label of ['운동/헬스','레저','운동-서비스-레저','운동-스포츠-레저']){
@@ -59,7 +84,7 @@ test('every current category consumer resolves the new SVG set including runtime
 });
 
 test('all 23 industries have intact 160px RGBA ON/OFF images using the same canonical filename',()=>{
- for(const name of [...categoryRows.flat(),'액세서리/잡화']){
+ for(const name of categoryRows.flat()){
   for(const state of ['on','off']){
    const path=base+'pins/'+state+'/'+name.replaceAll('/','-')+'.png';
    assert.ok(existsSync(new URL('..'+path,import.meta.url)),path+' exists');
