@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {renderWorkspace} from './render.mjs';
-import {renderMyLandDesignerReview} from './designer-20261013.mjs';
 import {applyReceivedIcons} from './received-icons.mjs';
 
 test('current navigation keeps the Figma barcode caption and gloss across render paths',()=>{
@@ -14,13 +13,15 @@ test('current navigation keeps the Figma barcode caption and gloss across render
  }
 });
 
-test('home keeps the supplied map and uses three received PNG pins without extra labels or current marker',()=>{
+test('home keeps the supplied map and three received PNG pins with opt-in NEW labels and no extra marker',()=>{
  const html=renderWorkspace({pageId:'home'}).split('<section id="overview"')[1].split('</template>')[0];
  assert.match(html,/figma-home-20261020\/f196c\.png/);
  assert.equal((html.match(/data-received-icon="pin-on"/g)||[]).length,1);
  assert.equal((html.match(/data-received-icon="pin-off"/g)||[]).length,2);
  assert.match(html,/30e02\.svg/);
- assert.doesNotMatch(html,/home-store-name|home-current-pin|data-category="전체"/);
+ assert.equal((html.match(/class="home-store-label"/g)||[]).length,3);
+ assert.equal((html.match(/class="home-new-badge"/g)||[]).length,2);
+ assert.doesNotMatch(html,/home-current-pin|data-category="전체"/);
 });
 
 test('home uses received category, function and map-pin artwork in actual v2 screens',()=>{
@@ -45,7 +46,7 @@ test('received bottom navigation reaches all approved current main screens witho
   assert.match(html,/data-received-icon="navigation"/,pageId);
   assert.match(html,/received-icons\.css/,pageId);
  }
- assert.ok(renderWorkspace({pageId:'my-land'}).includes(renderMyLandDesignerReview()),'original v1/v2 markup remains intact');
+ assert.match(renderWorkspace({pageId:'my-land'}),/data-myland-feedback-screen="weekly"/,'current My Land main remains intact');
  assert.ok(renderWorkspace({pageId:'home'}).includes('class="figma-scan-surface"'),'barcode icon retains its raised circular artwork container');
  const barcode=renderWorkspace({pageId:'barcode'});
  assert.match(barcode,/barcode-code-card/);

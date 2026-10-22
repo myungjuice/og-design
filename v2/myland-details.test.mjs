@@ -31,10 +31,10 @@ test('퍼즐 매치 예시의 강조 칸은 같은 과일 세 개를 보여준�
  assert.equal(new Set(matched).size,1);
 });
 
-test('마이랜드 기존 메뉴와 확정안을 보존하고 세부 상태 12개를 탐색할 수 있다',()=>{
+test('마이랜드 확정안과 세부 상태 12개를 탐색할 수 있다',()=>{
  const groups=reviewGroups('my-land');
- assert.deepEqual(groups.slice(0,2).map(g=>g.id),['myland-design','myland-feedback']);
- const details=groups.slice(2).flatMap(g=>g.items);
+ assert.equal(groups[0].id,'myland-feedback');
+ const details=groups.slice(1).flatMap(g=>g.items);
  assert.equal(details.length,12);
  const html=renderWorkspace({pageId:'my-land'});
  for(const {id} of details)assert.ok(html.includes(`id="${id}" data-review-screen`),id);

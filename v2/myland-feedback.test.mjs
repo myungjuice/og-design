@@ -4,11 +4,11 @@ import {renderWorkspace} from './render.mjs';
 import {renderMyLandFeedbackScreen,renderMyLandFeedbackReview} from './myland-feedback.mjs';
 import {reviewGroups} from './subnavigation.mjs';
 
-test('마이랜드 보조 메뉴에서 기존 이관 시안 뒤에 확정안으로 이동한다',()=>{
+test('마이랜드는 v1/v2 비교 없이 확정안에서 시작한다',()=>{
  const groups=reviewGroups('my-land');
- assert.deepEqual(groups.slice(0,2).map(group=>group.id),['myland-design','myland-feedback']);
+ assert.equal(groups[0].id,'myland-feedback');
  const html=renderWorkspace({pageId:'my-land'});
- assert.match(html,/id="myland-design"/);
+ assert.doesNotMatch(html,/id="myland-design"|data-designer-screen="myland-v[12]"|v1·v2 비교/);
  assert.match(html,/id="myland-feedback" data-review-screen/);
  assert.equal((html.match(/data-myland-feedback-screen=/g)||[]).length,1);
  assert.match(html,/주간 출석 · C안 옐로·오렌지/);

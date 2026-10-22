@@ -23,10 +23,9 @@ test('23종 카테고리는 수령한 로컬 SVG를 사용하며 전체 항목�
   assert.doesNotMatch(html,/전체\.svg|data-category="전체"/);
  }
 });
-test('마이랜드 두 배경 비교안과 디자이너 의견이 렌더링된다',()=>{
+test('마이랜드는 폐기한 두 배경 비교안 대신 확정안과 세부시안만 렌더링한다',()=>{
  const html=renderWorkspace({pageId:'my-land'});
- assert.equal((html.match(/data-designer-screen="myland-v[12]"/g)||[]).length,2);
- assert.match(html,/1주 단위/);
- assert.match(html,/티켓 아이콘/);
- assert.match(html,/미션마다 아이콘/);
+ assert.doesNotMatch(html,/data-designer-screen="myland-v[12]"|id="myland-design"|미션마다 아이콘 필요/);
+ assert.equal((html.match(/data-myland-feedback-screen=/g)||[]).length,1);
+ assert.equal((html.match(/data-myland-detail=/g)||[]).length,12);
 });

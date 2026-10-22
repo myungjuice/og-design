@@ -1,5 +1,6 @@
 import {setupScreenPreview} from '../components/screen-preview.mjs';
 import {setupHomeAppearanceReview} from './appearance.mjs';
+import {setupHomeNewStoresReview} from './new-stores.mjs';
 import {setupHomeSearchReview} from './search.mjs';
 import {setupHomeCategoryReview} from './category.mjs';
 import {setupHomeNearbyReview} from './nearby.mjs';
@@ -20,6 +21,7 @@ import {setupHomeInformationReview} from './information.mjs';
 import {setupHomeStoreShareReview,setupHomeStorePhotoReview,setupHomeStorePraiseReview} from './store-secondary.mjs';
 
 export function setupHomePreview(root){
+ setupHomeNewStoresReview(root);
  const {screen,showPreview}=setupScreenPreview(root,{onClick(event,screen){
   const category=event.target.closest('[data-category]');
   if(!category)return false;

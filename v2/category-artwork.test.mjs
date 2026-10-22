@@ -4,7 +4,7 @@ import {existsSync,readFileSync} from 'node:fs';
 import {renderWorkspace} from './render.mjs';
 import {renderFigmaHome} from './home/figma-home.mjs';
 import {renderCharacterMain} from './my-info/character.mjs';
-import {renderMyLandDesignerReview,categoryRows} from './designer-20261013.mjs';
+import {categoryRows} from './designer-20261013.mjs';
 import {categoryArtworkURL,pinArtworkURL} from './category-artwork.mjs';
 import {renderHomeCategoryScreen} from './home/category.mjs';
 
@@ -96,9 +96,9 @@ test('all 23 industries have intact 160px RGBA ON/OFF images using the same cano
  }
 });
 
-test('icon reuse example is current while app captures and historical My Land frames stay untouched',()=>{
+test('icon reuse and app captures remain current while My Land keeps its approved main',()=>{
  const html=renderWorkspace({pageId:'icon-review'});
  assert.ok(imageSources(html).some(({src})=>src===base+'categories/한식.svg'));
  assert.match(html,/app-04-redacted\.png/);
- assert.ok(renderWorkspace({pageId:'my-land'}).includes(renderMyLandDesignerReview()));
+ assert.match(renderWorkspace({pageId:'my-land'}),/data-myland-feedback-screen="weekly"/);
 });
