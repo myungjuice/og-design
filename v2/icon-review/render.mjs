@@ -1,5 +1,6 @@
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
 import {menuArt} from '../../screens/my-info-3d-test/render.mjs';
+import {categoryArtworkURL} from '../category-artwork.mjs';
 
 const base='/assets/icon-review-20261016/';
 const figma='/screens/my-info-3d-test/media/figma/';
@@ -44,7 +45,7 @@ const calendar='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 function renewed(no){
  const supplied={5:'홈600.svg',6:'마이랜드600.svg',7:'오지파크600.svg',8:'내 정보600.svg',16:'검색.svg'};
  if(supplied[no])return '<div class="ir-old-art">'+image(supplied[no],'수령한 리뉴얼 아이콘')+'</div>';
- if(no===12)return `<div class="ir-old-art"><img src="/assets/designer-20261013/${encodeURIComponent('한식.svg')}" alt="수령한 한식 카테고리 아이콘 재사용 예시"></div><span class="ir-renewed-text">업종별 카테고리 재사용 예시</span>`;
+ if(no===12)return `<div class="ir-old-art"><img src="${categoryArtworkURL('한식')}" alt="수령한 한식 카테고리 아이콘 재사용 예시"></div><span class="ir-renewed-text">업종별 카테고리 재사용 예시</span>`;
  const asset={0:'mileage-m.png',13:'header-bell.svg',14:'header-settings.svg',15:'review-pencil.svg'};
  if(asset[no])return `<div class="ir-old-art"><img src="${figma+asset[no]}" alt="임시 시안 예시: 최종 아이콘 제작 필요"></div><span class="ir-renewed-text">시안 예시 · 최종 제작 필요</span>`;
  const text={1:'총 보유 마일리지 · 텍스트',2:'사용 가능한 OG 마일리지 · 텍스트',3:'도움말 새 제작',4:'별도 탭 없음',9:'이벤트용 새 제작',10:'기본 컴포넌트 대체 검토',11:'Q오더 · 텍스트 탭',17:'하트 선택·미선택 새 제작',18:'주소 새 제작',19:'새 시계 재사용',20:'전화 새 제작',21:'웹 새 제작',22:'브랜드 아이콘 새 제작',23:'브랜드 아이콘 새 제작',24:'브랜드 아이콘 새 제작',25:'새 휴무 달력',26:'새 휴무 달력',27:'새 시계 재사용'};

@@ -6,26 +6,14 @@ const specimens=[
  ['light-large','라이트'],
  ['dark-large','다크']
 ];
-const pinRasters={
- '55e99.svg':['pin-circle-large@4x.png',44],
- '3679c.svg':['pin-idle-circle@4x.png',28],
- 'e20b7.svg':['pin-idle-circle@4x.png',28]
-};
-const originalPinRasters={
- '55e99.svg':['pin-selected@4x.png',44],
- '3679c.svg':['pin-idle-circle@4x.png',28],
- 'e20b7.svg':['pin-idle-point@4x.png',28]
-};
 function screen(id){
  let html=renderFigmaHome();
  const original=id==='original';
  if(!original)html=html.replace('data-figma-home',`data-figma-home data-home-labels="large"${id==='dark-large'?' data-home-theme="dark"':''}`);
  return html.replace(/(<button\b[^>]*class="figma-map-pin[^\"]*"[^>]*>)([\s\S]*?)(<\/button>)/g,(_,opening,art,closing)=>{
   const name=opening.match(/data-preview="([^"]+)"/)[1];
-  const source=art.match(/src="[^\"]*\/([^/\"]+)"/)[1], [file,size]=(original?originalPinRasters:pinRasters)[source];
-  const pin=`<img class="home-review-pin-art" src="/assets/home-appearance-20261020/${file}" width="${size}" height="${size}" alt="" aria-hidden="true">`;
-  if(original)return opening+pin+closing;
-  return opening.replace(/aria-label="[^"]+"/,`aria-label="${e(name)} 보기"`)+pin+`<span class="home-store-label" aria-hidden="true">${e(name)}</span>`+closing;
+  if(original)return opening+art+closing;
+  return opening.replace(/aria-label="[^"]+"/,`aria-label="${e(name)} 보기"`)+art+`<span class="home-store-label" aria-hidden="true">${e(name)}</span>`+closing;
  });
 }
 export function renderHomeAppearanceReview(){

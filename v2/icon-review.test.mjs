@@ -15,7 +15,7 @@ test('icon review is reachable and distinguishes source assets from device captu
  const sources=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(sources.some(src=>src.endsWith('/mileage_on.svg')));
  assert.ok(sources.some(src=>src.endsWith('/pay_on.svg')));
- assert.ok(sources.some(src=>src.includes('/designer-20261013/')));
+ assert.ok(sources.some(src=>src.includes('/received-icons-20261022/categories/')));
  for(const src of sources)assert.ok(src.startsWith('/')&&existsSync(new URL('..'+src,import.meta.url)),src+' resolves locally');
 });
 
@@ -63,7 +63,7 @@ test('baseline review omits retained and received work without changing pending 
  assert.match(checkbox,/제외 확정 전까지.*제작 대상 유지/);
  assert.match(checkbox,/상태 표시/);
  const recent=html.match(/<tr data-baseline-no="12">([\s\S]*?)<\/tr>/)?.[1]||'';
- assert.match(recent,/\/assets\/designer-20261013\//);
+ assert.match(recent,/\/assets\/received-icons-20261022\/categories\//);
  assert.doesNotMatch(recent,/recent-utensils/);
 });
 

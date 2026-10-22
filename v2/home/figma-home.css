@@ -20,14 +20,7 @@
 [data-figma-home] .figma-map-pin-selected{left:56.6667%;top:316px;width:40px;height:40px}
 [data-figma-home] .figma-map-pin-first{left:14.359%;top:314px;width:24px;height:24px}
 [data-figma-home] .figma-map-pin-second{left:20.7692%;top:359px;width:24px;height:24px}
-.figma-pin-layer{display:block;position:absolute;inset:0;overflow:clip}
-.figma-pin-mask{display:block;position:absolute;mask-image:var(--figma-pin-mask);mask-mode:alpha;mask-repeat:no-repeat;mask-composite:intersect}
-.figma-pin-on>.figma-pin-mask{inset:.1% 7.4% .49% 7.6%;mask-size:40px 40px;mask-position:-3.042px -.042px}
-.figma-pin-on img{position:absolute;left:-.041px;top:-.04px;display:block;max-width:none}
-.figma-pin-off-first>.figma-pin-mask{inset:7.6% 7.4% 7.4% 7.6%;mask-size:24px 24px;mask-position:-1.825px -1.825px}
-.figma-pin-off-first img{position:absolute;left:-1.628px;top:-1.626px;display:block;max-width:none}
-.figma-pin-off-second>.figma-pin-mask{inset:.1% 7.4% .49% 7.6%;mask-size:24px 24px;mask-position:-1.825px -.025px}
-.figma-pin-off-second img{position:absolute;left:-1.628px;top:-1.626px;display:block;max-width:none}
+[data-figma-home] .received-pin-art{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:contain;pointer-events:none}
 [data-figma-home] .home-map-actions{top:612px;bottom:auto;right:16px;display:flex;flex-direction:column;align-items:center;gap:8px;width:56px}
 [data-figma-home] .home-locate{box-sizing:border-box;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--figma-home-edge);border-radius:999px;background:var(--figma-home-surface);box-shadow:0 2px 4px var(--figma-home-contact)}
 [data-figma-home] .home-quick{position:relative;display:grid;place-items:center;box-sizing:border-box;width:48px;height:48px;min-height:48px;padding:0;border:0;border-radius:999px;overflow:clip;background:var(--figma-home-action);box-shadow:inset 0 4px 6px var(--figma-home-quick-light),inset 0 -4px 4px var(--figma-home-quick-shade),0 2px 4px var(--figma-home-contact)}

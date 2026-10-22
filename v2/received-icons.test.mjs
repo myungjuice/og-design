@@ -14,12 +14,11 @@ test('current navigation keeps the Figma barcode caption and gloss across render
  }
 });
 
-test('home uses the supplied map and three original pin layers without extra labels or current marker',()=>{
+test('home keeps the supplied map and uses three received PNG pins without extra labels or current marker',()=>{
  const html=renderWorkspace({pageId:'home'}).split('<section id="overview"')[1].split('</template>')[0];
  assert.match(html,/figma-home-20261020\/f196c\.png/);
- assert.match(html,/55e99\.svg/);
- assert.match(html,/3679c\.svg/);
- assert.match(html,/e20b7\.svg/);
+ assert.equal((html.match(/data-received-icon="pin-on"/g)||[]).length,1);
+ assert.equal((html.match(/data-received-icon="pin-off"/g)||[]).length,2);
  assert.match(html,/30e02\.svg/);
  assert.doesNotMatch(html,/home-store-name|home-current-pin|data-category="전체"/);
 });
@@ -27,7 +26,8 @@ test('home uses the supplied map and three original pin layers without extra lab
 test('home uses received category, function and map-pin artwork in actual v2 screens',()=>{
  const html=renderWorkspace({pageId:'home'});
  for(const kind of ['category','navigation'])assert.match(html,new RegExp('data-received-icon="'+kind+'"'));
- for(const file of ['adbac.svg','55e99.svg','3679c.svg','e20b7.svg'])assert.ok(html.includes('/assets/figma-home-20261020/'+file),file);
+ assert.ok(html.includes('/assets/figma-home-20261020/adbac.svg'));
+ for(const state of ['on','off'])assert.ok(html.includes('/assets/received-icons-20261022/pins/'+state+'/'),state);
  for(const file of ['aa166.svg','ae1d9.svg','d146b.svg'])assert.ok(html.includes('/assets/figma-home-20261020/'+file),file);
  assert.match(html,/data-received-category="한식"/);
  assert.match(html,/data-received-category="카페\/베이커리"/);
@@ -62,7 +62,7 @@ test('recent visits use matching industry icons rather than one generic utensils
 
 test('received artwork references are local SVG files present in the site',()=>{
  const html=['home','my-info','barcode','my-land'].map(pageId=>renderWorkspace({pageId})).join('');
- const paths=[...new Set([...html.matchAll(/src="(\/assets\/(?:received-icons-20261017|figma-home-20261020)\/[^\"]+\.svg)"/g)].map(m=>decodeURIComponent(m[1])))];
+ const paths=[...new Set([...html.matchAll(/src="(\/assets\/(?:received-icons-20261017|received-icons-20261022|figma-home-20261020)\/[^\"]+\.svg)"/g)].map(m=>decodeURIComponent(m[1])))];
  assert.ok(paths.length>=35,'actual renders reference the delivered artwork set');
  for(const path of paths){
   const file=new URL('..'+path,import.meta.url);

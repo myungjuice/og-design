@@ -1,13 +1,11 @@
-import {escapeHTML as e} from '../design-system/components/core.mjs';
 import {renderFigmaNavigation} from './components/figma-navigation.mjs';
 import {categoryItems} from '../design-system/pages/home/category-assets.mjs';
+import {categoryArtwork,pinArtwork,categoryName} from './category-artwork.mjs';
 
 const base='/assets/received-icons-20261017/';
-const aliases={'아시안':'아시안/세계음식','술집':'야식/술집/포차','패스트푸드':'패스트푸드/도시락','뷰티':'헤어/뷰티','운동/헬스':'운동/스포츠/레저','레저':'운동/스포츠/레저'};
-const categoryFile=name=>(aliases[name]||name).replaceAll('/','-')+'.svg';
 const url=file=>base+file.split('/').map(encodeURIComponent).join('/');
 const picture=(kind,file,extra='',size=24)=>`<img class="received-icon" data-received-icon="${kind}" src="${url(file)}" width="${size}" height="${size}" alt="" aria-hidden="true" decoding="async" ${extra}>`;
-const categoryPicture=(name,size=24)=>picture('category','categories/'+categoryFile(name),`data-received-category="${e(aliases[name]||name)}"`,size);
+const categoryPicture=categoryArtwork;
 const functions={search:'검색.svg',target:'현위치.svg',quick:'바로적립100.svg'};
 
 // Adapt only the v2 rendering boundary. Original screen renderers, supplied files
@@ -19,8 +17,7 @@ export function applyReceivedIcons(source){
   const category=({'오시 망원본점':'일식','밀랍(MILLAB)':'카페/베이커리','육감만족':'한식'})[name];
   if(!category)return button;
   const state=button.includes('v2-home-cafe-pin')?'on':'off';
-  let art=picture('pin-'+state,'pins/'+state+'/'+categoryFile(category),`data-received-category="${e(category)}"`,40);
-  if(state==='on')art=art.replace('class="received-icon"','class="v2-home-cafe-pin"');
+  const art=pinArtwork(category,state,40,state==='on'?'v2-home-cafe-pin':'received-icon');
   return button.replace(/<span class="home-art [^"]*"[^>]*>[\s\S]*?<\/span>|<img class="v2-home-cafe-pin"[^>]*>/,art);
  });
  html=html.replace(/<span class="home-art home-art-(search|target|quick|utensils|rice|dumpling|sushi)"[^>]*>[\s\S]*?<\/span>/g,(_,name)=>{
@@ -38,8 +35,8 @@ export function applyReceivedIcons(source){
   const name=categoryItems.find(item=>item.id===id)?.name;
   return name?button.replace(/<img\b[^>]*>/,categoryPicture(name,20)):button;
  });
- // Existing selected cafe chip already contains a standalone image.
- html=html.replace(/<button\b[^>]*data-category="카페\/베이커리"[^>]*>[\s\S]*?<\/button>/g,button=>button.includes('figma-category-art')?button:button.replace(/<img\b[^>]*>/,categoryPicture('카페/베이커리')));
+ // 칩·선택 시트·공통 샘플의 모든 업종을 같은 수령 SVG로 연결한다.
+ html=html.replace(/<button\b[^>]*data-category="([^"]+)"[^>]*>[\s\S]*?<\/button>/g,(button,name)=>button.replace(/<img\b[^>]*>/,categoryPicture(categoryName(name),button.includes('figma-category-art')?20:24)));
  html=html.replace(/<img\b[^>]*src="\/assets\/designer-20261013\/([^"/]+\.svg)"[^>]*>/g,(image,file)=>{
   const replacements={'adbac.svg':['search','functions/검색.svg'],'2e216.svg':['search','functions/검색.svg'],'7e775.svg':['target','functions/현위치.svg'],'363ea.svg':['quick','functions/바로적립100.svg']};
   if(replacements[file])return picture(...replacements[file]);

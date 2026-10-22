@@ -37,22 +37,21 @@ test('appearance comparison captions contain just the three option names',()=>{
  assert.doesNotMatch(section,/현재 확정 시안 그대로|원본 유지|매장명 14px|채도만 20%|SDK의 야간 스타일/);
 });
 
-test('all three comparisons use padded 4x transparent PNG pins without a second clipping mask',()=>{
+test('all three comparisons preserve delivered 160px transparent PNGs without a second clipping mask',()=>{
  const html=renderWorkspace({pageId:'home'});
  const specimens=Object.fromEntries([...html.matchAll(/<template data-home-appearance="([^"]+)">([\s\S]*?)<\/template>/g)].map(m=>[m[1],m[2]]));
  for(const id of ['original','light-large','dark-large']){
   const pins=[...specimens[id].matchAll(/<button\b[^>]*class="figma-map-pin[^\"]*"[^>]*>([\s\S]*?)<\/button>/g)].map(m=>m[1]);
   assert.equal(pins.length,3);
   for(const [index,pin] of pins.entries()){
-   const art=pin.match(/<img class="home-review-pin-art"[^>]*src="([^"]+)"/);
+   const art=pin.match(/<img class="received-pin-art"[^>]*src="([^"]+)"/);
    assert.ok(art,`${id} pin ${index} must use PNG artwork`);
    const file=art[1];
-   assert.match(file,/^\/assets\/home-appearance-20261020\/[^/]+@4x\.png$/);
+   assert.match(file,/^\/assets\/received-icons-20261022\/pins\/(on|off)\/[^/]+\.png$/);
    const bytes=readFileSync(new URL('../..'+file,import.meta.url));
    assert.equal(bytes.subarray(1,4).toString(),'PNG');
-   const dimension=index===0?176:112; // 40px / 24px artwork + 2px transparent gutter on each side, at 4x.
-   assert.equal(bytes.readUInt32BE(16),dimension);
-   assert.equal(bytes.readUInt32BE(20),dimension);
+   assert.equal(bytes.readUInt32BE(16),160);
+   assert.equal(bytes.readUInt32BE(20),160);
    assert.equal(bytes[25],6,'RGBA PNG must preserve the transparent background');
    assert.doesNotMatch(pin,/figma-pin-mask|figma-pin-layer/,'avoid clipping an already vector-shaped pin a second time');
   }
@@ -60,21 +59,15 @@ test('all three comparisons use padded 4x transparent PNG pins without a second 
  assert.doesNotMatch(specimens.original,/figma-pin-mask/,'rasterized reference pins must not be clipped twice');
 });
 
-test('both comparison themes use circular artwork for every map pin',()=>{
+test('all comparison themes share the delivered selected ON and circular OFF artwork',()=>{
  const html=renderWorkspace({pageId:'home'});
  const specimens=Object.fromEntries([...html.matchAll(/<template data-home-appearance="([^"]+)">([\s\S]*?)<\/template>/g)].map(m=>[m[1],m[2]]));
- for(const id of ['light-large','dark-large']){
-  const files=[...specimens[id].matchAll(/class="home-review-pin-art" src="([^"]+)"/g)].map(m=>m[1]);
+ for(const id of ['original','light-large','dark-large']){
+  const files=[...specimens[id].matchAll(/class="received-pin-art"[^>]*src="([^"]+)"/g)].map(m=>decodeURIComponent(m[1]));
   assert.deepEqual(files,[
-   '/assets/home-appearance-20261020/pin-circle-large@4x.png',
-   '/assets/home-appearance-20261020/pin-idle-circle@4x.png',
-   '/assets/home-appearance-20261020/pin-idle-circle@4x.png'
+   '/assets/received-icons-20261022/pins/on/한식.png',
+   '/assets/received-icons-20261022/pins/off/한식.png',
+   '/assets/received-icons-20261022/pins/off/한식.png'
   ]);
  }
- const originalFiles=[...specimens.original.matchAll(/class="home-review-pin-art" src="([^"]+)"/g)].map(m=>m[1]);
- assert.deepEqual(originalFiles,[
-  '/assets/home-appearance-20261020/pin-selected@4x.png',
-  '/assets/home-appearance-20261020/pin-idle-circle@4x.png',
-  '/assets/home-appearance-20261020/pin-idle-point@4x.png'
- ],'original ON/OFF shapes must stay unchanged');
 });
