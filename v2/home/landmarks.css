@@ -1,0 +1,44 @@
+/* Hallmark · component: passive landmark pin toppers · genre: playful · theme: existing OG 3D
+ * pre-emit critique: P5 H5 E4 S5 R5 V5
+ * Audience: map users; purpose: identify 100-user landmarks; tone: soft 3D, static. */
+:host,.home-landmark-review{
+ --landmark-gold:oklch(82% .12 85);
+ --landmark-gold-light:oklch(96% .055 90);
+ --landmark-gold-shade:oklch(56% .09 70);
+ --landmark-jewel:oklch(53% .16 285);
+ --landmark-ribbon:oklch(65% .10 285);
+ --landmark-shadow:oklch(23% .035 280 / .32);
+ --landmark-detail-paper:oklch(95% .018 85);
+ --landmark-detail-ink:oklch(36% .045 70);
+ --landmark-part-layer:3;
+ --landmark-pin-layer:2;
+}
+.home-landmark-pin{isolation:isolate}
+.home-landmark-pin>.received-pin-art{z-index:var(--landmark-pin-layer)}
+.home-landmark-part{position:absolute;display:block;pointer-events:none;width:24px;height:18px;left:50%;bottom:21px;transform:translateX(-50%);z-index:var(--landmark-part-layer);filter:drop-shadow(0 1px 1px var(--landmark-shadow))}
+.figma-map-pin-selected>.home-landmark-part,.landmark-detail-pin.is-selected>.home-landmark-part{width:32px;height:24px;bottom:30px}
+.home-landmark-part svg{display:block;width:100%;height:100%;overflow:visible}
+.home-landmark-part .lm-gold{fill:var(--landmark-gold);stroke:var(--landmark-gold-shade);stroke-width:.6;stroke-linejoin:round}
+.home-landmark-part .lm-light{fill:var(--landmark-gold-light)}
+.home-landmark-part .lm-shade{fill:var(--landmark-gold-shade)}
+.home-landmark-part .lm-jewel{fill:var(--landmark-jewel)}
+.home-landmark-part .lm-ribbon{fill:var(--landmark-ribbon)}
+.home-landmark-part .lm-glint{fill:none;stroke:var(--landmark-gold-light);stroke-width:1;stroke-linecap:round}
+.home-landmark-part .lm-branch{fill:none;stroke:var(--landmark-gold-shade);stroke-width:1.2;stroke-linecap:round}
+.landmark-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-4);align-items:start}
+.landmark-treatment,.landmark-figure{min-width:0;margin:0}
+.landmark-treatment h3,.landmark-figure h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal;overflow-wrap:anywhere}
+.landmark-treatment>p{margin:var(--v2-space-2) 0 var(--v2-space-4);color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.landmark-detail-row{display:flex;align-items:center;justify-content:space-evenly;gap:var(--v2-space-4);min-height:176px;padding:40px var(--v2-space-4) var(--v2-space-4);background:var(--landmark-detail-paper);border-radius:8px;max-width:390px}
+.landmark-detail-item{display:flex;flex-direction:column;align-items:center;gap:24px;color:var(--landmark-detail-ink);font:400 11px/16px var(--v2-font);white-space:nowrap}
+.landmark-detail-pin{position:relative;display:block;width:40px;height:40px;margin-top:16px;transform:scale(2)}
+.landmark-detail-pin>.received-pin-art{position:absolute;bottom:0;left:50%;width:24px;height:24px;transform:translateX(-50%)}
+.landmark-detail-pin.is-selected>.received-pin-art{width:33.6px;height:33.6px}
+.landmark-section-title{margin:var(--v2-space-8) 0 var(--v2-space-4);font-style:normal;overflow-wrap:anywhere;min-width:0}
+.landmark-figure figcaption{margin-bottom:var(--v2-space-4)}
+.landmark-host{width:100%;max-width:390px;overflow:clip}
+.landmark-combined-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-4);align-items:start}
+.landmark-legend{position:absolute;top:128px;left:16px;display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:4px;background:var(--figma-home-surface);color:var(--figma-home-ink);font:400 11px/16px var(--figma-home-font);white-space:nowrap}
+.landmark-legend .home-landmark-part{position:relative;inset:auto;flex:none;width:24px;height:18px;transform:none;filter:none}
+@media(min-width:40rem){.landmark-grid,.landmark-combined-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.landmark-treatment>p{min-height:3lh}}
+@media(min-width:112rem){.landmark-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
