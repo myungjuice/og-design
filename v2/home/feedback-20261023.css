@@ -1,0 +1,28 @@
+/* Scoped, static feedback specimens. Original delivered pin PNGs stay untouched. */
+:host,.gasong-feedback-block{
+ --gasong-new-red:oklch(56% .20 27);
+ --gasong-new-paper:oklch(99% .005 80);
+ --gasong-crown-band:oklch(66% .14 80);
+ --gasong-crown-gem:oklch(58% .19 27);
+ --gasong-leaf-vein:oklch(94% .04 150);
+ --gasong-gold-filter:grayscale(1) sepia(1) saturate(3.4) hue-rotate(358deg) brightness(1.17);
+}
+.gasong-feedback-block{margin:var(--v2-space-8) 0}
+.gasong-feedback-grid{display:grid;grid-template-columns:minmax(0,1fr);max-width:calc(780px + var(--v2-space-4));gap:var(--v2-space-4);align-items:start}
+.gasong-feedback-figure{margin:0;min-width:0;max-width:390px}
+.gasong-feedback-figure h4{margin:0;font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);font-style:normal}
+.gasong-feedback-figure figcaption>p{margin:var(--v2-space-2) 0 var(--v2-space-4);color:var(--v2-workspace-muted);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
+.gasong-map-host{width:100%;max-width:390px;overflow:clip}
+.gasong-centered-sprout .home-new-sprout{left:50%;bottom:calc(100% - 5px);transform:translateX(-50%);width:24px;height:20px}
+.gasong-centered-sprout .home-new-sprout i:nth-child(1){left:11px;width:2px;height:12px;transform:none}
+.gasong-centered-sprout .home-new-sprout i:nth-child(2){left:0;top:0;width:12px;height:9px;border-radius:70% 40% 55% 45%;transform:rotate(12deg)}
+.gasong-centered-sprout .home-new-sprout i:nth-child(3){left:12px;top:0;width:12px;height:9px;border-radius:40% 70% 45% 55%;transform:rotate(-12deg)}
+.gasong-centered-sprout .home-new-sprout i:nth-child(2)::after,.gasong-centered-sprout .home-new-sprout i:nth-child(3)::after{content:"";position:absolute;top:4px;left:3px;right:2px;height:1px;background:var(--gasong-leaf-vein);border-radius:1px}
+.gasong-new-n{position:absolute;top:-5px;right:-4px;z-index:4;display:flex;align-items:center;justify-content:center;width:14px;height:14px;box-sizing:border-box;border:1px solid var(--gasong-new-paper);border-radius:50%;background:var(--gasong-new-red);color:var(--gasong-new-paper);font:700 10px/1 var(--figma-home-font);pointer-events:none}
+.gasong-worn-crown .home-landmark-part{bottom:17px}
+.gasong-worn-crown .figma-map-pin-selected>.home-landmark-part{bottom:26px}
+.gasong-worn-crown .home-landmark-part .lm-jewel,.gasong-worn-crown .home-landmark-part .lm-shade{fill:var(--gasong-crown-band)}
+.gasong-worn-crown .gasong-crown-gem{fill:var(--gasong-crown-gem)}
+.gasong-gold-pins .figma-map-pin:has(>.gasong-gold-hook)>.received-pin-art{filter:var(--gasong-gold-filter)}
+.gasong-map-legend{position:absolute;top:128px;left:16px;display:flex;align-items:center;height:28px;padding:0 8px;border-radius:4px;background:var(--figma-home-surface);color:var(--figma-home-ink);font:400 11px/16px var(--figma-home-font);white-space:nowrap}
+@media(min-width:40rem){.gasong-feedback-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gasong-feedback-figure figcaption>p{min-height:3lh}}

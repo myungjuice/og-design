@@ -1,0 +1,20 @@
+/* 10/23 가송님 출석 피드백 비교본. 기존 12개 시안에는 로드하지 않는다. */
+:host{
+ --attendance-reward-fill:var(--today);
+ --attendance-next-fill:var(--screen);
+ --attendance-pill-fill:var(--mission-tag);
+}
+.md-attendance-dialog{padding:24px 22px 22px}
+.md-attendance-dialog>.md-close{z-index:1}
+.md-attendance-hero{width:250px;height:186px;margin:0 auto 13px;object-fit:contain}
+.md-attendance-pill{display:table;margin:0 auto 4px;padding:5px 12px;border-radius:99px;background:var(--attendance-pill-fill);color:var(--violet);font-size:12px;font-weight:700}
+.md-attendance-dialog h2{font-size:23px;line-height:1.4;letter-spacing:-.7px;margin:0 0 7px}
+.md-attendance-dialog>p{font-size:13px;line-height:1.7;color:var(--muted)}
+.md-attendance-rewards{display:flex;justify-content:center;gap:10px;margin:22px 0 16px}
+.md-attendance-reward{flex:1;display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:12px 10px;border-radius:15px;background:var(--attendance-reward-fill)}
+.md-attendance-reward>span{font-size:12px;color:var(--muted)}
+.md-attendance-reward>strong{color:var(--violet);font-size:24px;line-height:1.25;letter-spacing:-.5px;white-space:nowrap}
+.md-attendance-next{padding:12px 8px;margin:0 0 22px;background:var(--attendance-next-fill);border-radius:13px}
+.md-attendance-next>b{margin-top:4px}
+.md-attendance-actions{display:grid;grid-template-columns:1fr 1.22fr;gap:9px}
+.md-attendance-actions>.v2-button{width:100%}

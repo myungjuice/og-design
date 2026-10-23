@@ -32,25 +32,18 @@ test('normal maps and non-matching stores do not gain a NEW badge or change pin 
  assert.equal((marked.match(/class="home-new-badge"/g)||[]).length,1);
 });
 
-test('the home overview shows NEW and offers a separate light/dark review without changing old comparisons',()=>{
+test('home overview and appearance remain unchanged while new-store review is light-only',()=>{
  const html=renderWorkspace({pageId:'home'});
  const overview=html.match(/<section id="overview"[\s\S]*?<\/template>/)[0];
  assert.equal((overview.match(/class="home-new-badge"/g)||[]).length,2);
  assert.ok(reviewGroups('home').some(group=>group.items.some(item=>item.id==='home-new-stores'&&!item.pending)));
  assert.match(html,/<section id="home-new-stores"[^>]*data-review-screen hidden/);
- const examples=[...html.matchAll(/<template data-home-new-theme="([^"]+)">([\s\S]*?)<\/template>/g)];
- assert.deepEqual(examples.map(match=>match[1]),['light','dark']);
- for(const example of examples){
-  assert.equal((example[2].match(/class="home-new-badge"/g)||[]).length,2);
-  assert.equal((example[2].match(/class="home-store-label"/g)||[]).length,3);
-  assert.match(example[2],/new-stores\.css/);
- }
- assert.match(examples[1][2],/data-home-theme="dark"/);
  for(const example of html.matchAll(/<template data-home-appearance="[^"]+">([\s\S]*?)<\/template>/g)){
-  assert.doesNotMatch(example[1],/class="home-new-badge"/,'existing comparison remains unchanged');
+  assert.doesNotMatch(example[1],/class="home-new-badge"/,'home appearance is unchanged');
  }
+ assert.match(html,/data-home-appearance="dark-large"/,'home light/dark comparison remains available');
  for(const pageId of ['my-land','my-info','og-park','barcode']){
-  assert.doesNotMatch(renderWorkspace({pageId}),/data-home-new-theme=|class="home-new-badge"/);
+  assert.doesNotMatch(renderWorkspace({pageId}),/data-gasong-map="new-/);
  }
 });
 
@@ -69,17 +62,17 @@ test('three visual treatments decorate only new stores and preserve original ON/
  assert.match(renderFigmaHome({newStores:['세븐일레븐'],newStoreStyle:'unknown'}),/class="home-new-badge"/,'unknown treatment safely falls back to existing badge');
 });
 
-test('comparison exposes all three treatments in both themes while keeping the old badge comparison',()=>{
+test('the two requested new-store options preserve the original selected and idle artwork',()=>{
  const html=renderWorkspace({pageId:'home'});
- const examples=[...html.matchAll(/<template data-home-new-variant="([^"]+)" data-home-new-theme="([^"]+)">([\s\S]*?)<\/template>/g)];
- assert.deepEqual(examples.map(m=>m[1]+':'+m[2]),['sprout:light','ribbon:light','paper:light','sprout:dark','ribbon:dark','paper:dark']);
- for(const [,variant,theme,markup] of examples){
-  assert.equal((markup.match(new RegExp(`data-home-new-mark="${variant}"`,'g'))||[]).length,3,'legend plus selected and idle new pins');
+ const original=pins(renderFigmaHome()).map(pin=>pin.match(/<img[^>]*>/)[0]);
+ const examples=[...html.matchAll(/<template data-gasong-map="(new-[^"]+)">([\s\S]*?)<\/template>/g)];
+ assert.deepEqual(examples.map(m=>m[1]),['new-sprout','new-n']);
+ for(const [,id,markup] of examples){
+  const markers=pins(markup);
+  assert.equal(markers.length,3);
+  for(let i=0;i<3;i++)assert.equal(markers[i].match(/<img[^>]*>/)[0],original[i]);
   assert.equal((markup.match(/class="home-store-label"/g)||[]).length,3);
-  assert.doesNotMatch(markup,/class="home-new-badge"/);
-  assert.match(markup,/새로 들어온 회원점/);
-  if(theme==='dark')assert.match(markup,/data-home-theme="dark"/);
+  assert.doesNotMatch(markup,/data-home-theme="dark"|class="home-new-badge"/);
+  assert.doesNotMatch(markers[2],/gasong-new-n|data-home-new-mark/);
  }
- assert.match(html,/data-home-new-theme="light"/,'previous badge specimen is retained');
- assert.match(html,/data-home-new-theme="dark"/);
 });

@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-23",
+  "purpose": "Gasong feedback comparison only; not final designer-delivered assets",
+  "tool": "built-in image_gen",
+  "mode": "generate",
+  "transparent_background": true,
+  "assets": [
+    {
+      "path": "assets/gasong-feedback-20261023/attendance-ticket.png",
+      "prompt": "Use case: stylized-concept. Asset type: isolated transparent PNG 3D reward illustration for an existing Korean mobile loyalty app mockup. Soft glossy toy-like 3D, rounded bevels, warm gold and muted violet palette, upper-left studio lighting, subtle contact shadows. Entire silhouette and shadow inside frame with 12% transparent padding. Real alpha transparency, no solid/checkerboard background, no words, no watermark, no mascot or characters. This is artwork only, not a UI screen. Subject: one thick purple/violet admission ticket with softly scalloped side notches, three-quarter perspective, golden beveled edge and a small embossed star, two tiny gold celebratory sparkles. Hero ticket large, centered. No coins, no other props. Render as a polished physical object with realistic depth, not a flat icon."
+    },
+    {
+      "path": "assets/gasong-feedback-20261023/attendance-burst.png",
+      "prompt": "Use case: stylized-concept. Asset type: isolated transparent PNG 3D reward illustration for an existing Korean mobile loyalty app mockup. Soft glossy toy-like 3D, rounded bevels, warm gold and muted violet palette, upper-left studio lighting, subtle contact shadows. Entire silhouette and shadow inside frame with 12% transparent padding. Real alpha transparency, no solid/checkerboard background, no words, no watermark, no mascot or characters. This is artwork only, not a UI screen. Subject: a joyful static burst arrangement of two thick violet admission tickets with golden rims and three gold mileage coins. A simple embossed capital M on the front-facing main coin is the ONLY allowed letter. Tickets and coins fly outward together in a compact readable composition, a few gold/violet confetti pieces and sparkles. Emphasize depth and bevels, all objects fully contained. No container or gift box."
+    },
+    {
+      "path": "assets/gasong-feedback-20261023/park-gift.png",
+      "prompt": "Use case: stylized-concept. Asset type: isolated transparent PNG 3D reward illustration for an existing Korean mobile loyalty app mockup. Soft glossy toy-like 3D, rounded bevels, warm gold and muted violet palette, upper-left studio lighting, subtle contact shadows. Entire silhouette and shadow inside frame with 12% transparent padding. Real alpha transparency, no solid/checkerboard background, no words, no watermark, no mascot or characters. This is artwork only, not a UI screen. Subject: one premium rounded violet gift box with a broad warm golden ribbon and sculpted bow, lid slightly lifted and one restrained gold sparkle. Three-quarter view, centered, isolated. Absolutely no coins, currency symbols, tickets, letters, or additional props. This replaces a coin illustration on the LEFT event banner of an existing loyalty app."
+    }
+  ]
+}

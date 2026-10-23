@@ -1,0 +1,7 @@
+/* The feedback specimen inherits the revised layout and existing OG palette. */
+.feedback{--park-feedback-shadow-contact:#24204b42;--park-feedback-shadow-soft:#24204b30}
+.feedback .park-banner-window{top:-32px;height:calc(100% + 64px)}
+.feedback .park-event{box-shadow:0 4px 8px -2px var(--park-feedback-shadow-contact),0 12px 18px -2px var(--park-feedback-shadow-soft)}
+.feedback .park-event[data-position=previous],.feedback .park-event[data-position=next]{box-shadow:0 3px 6px var(--park-feedback-shadow-contact),0 8px 12px -2px var(--park-feedback-shadow-soft)}
+.feedback .park-tags span:first-child{background:var(--park-official);color:var(--park-ink)}
+.feedback .park-tags span+span{background:var(--park-white);color:var(--v2-action)}

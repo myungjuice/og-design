@@ -1,4 +1,5 @@
 import {renderMyLandFeedbackScreen} from './myland-feedback.mjs';
+import {renderButton} from './components/render.mjs';
 
 // 화면 검토용 상태. 보상·한도는 260904 기획서 초안이며 실제 지급 로직과 무관하다.
 export const myLandDetailGroups=[
@@ -12,6 +13,7 @@ const img=(name,cls='',alt='')=>`<img class="${cls}" src="${assets+name}" alt="$
 const ticket=()=>img('70418.svg','md-ticket');
 const coin=()=>'<span class="md-coin" aria-label="마일리지">M</span>';
 const bear=()=>'<img class="md-bear" src="/v2/my-info/media/bear-cutout-v2.png" alt="축하하는 곰 캐릭터">';
+const attendanceAction=(label,to,variant)=>renderButton({label,variant,attributes:{'data-myland-destination':to}});
 const link=(text,to,cls='md-primary')=>`<a class="${cls}" href="#${to}">${text}</a>`;
 const close=(to='myland-feedback')=>link('×',to,'md-close');
 const reward=(kind,value)=>`<div class="md-reward">${kind==='ticket'?ticket():coin()}<span>${kind==='ticket'?'OG 티켓':'마일리지'}<strong>${value}</strong></span></div>`;
@@ -68,6 +70,15 @@ export function renderMyLandDetailScreen(id){
  if(!renders[id])throw new RangeError('Unknown MyLand detail: '+id);
  return renders[id]();
 }
+export function renderMyLandAttendanceFeedbackScreen(id){
+ if(!['attendance-daily','attendance-milestone'].includes(id))throw new RangeError('Unknown attendance feedback: '+id);
+ const milestone=id==='attendance-milestone';
+ const art=milestone?'attendance-burst.png':'attendance-ticket.png';
+ return `<div class="md-screen md-attendance-feedback">${mainBackdrop(milestone?7:6)}<div class="md-shade"></div><section class="md-dialog md-attendance-dialog" aria-label="출석 완료 · 피드백 반영본">${close()}${milestone?'<span class="md-attendance-pill">7일 연속 출석</span>':''}<img class="md-attendance-hero" src="/assets/gasong-feedback-20261023/${art}" alt="${milestone?'입체 티켓과 마일리지 코인 보상':'입체 OG 티켓 보상'}"><h2>${milestone?'꾸준함에 보상을 더해요':'출석 완료!'}</h2><p>${milestone?'일주일 동안 모은 출석, 선물이 도착했어요.':'6일 연속 출석했어요.'}</p><div class="md-attendance-rewards"><div class="md-attendance-reward"><span>OG 티켓</span><strong>${milestone?'3장':'1장'}</strong></div>${milestone?'<div class="md-attendance-reward"><span>마일리지</span><strong>50 M</strong></div>':''}</div><div class="md-next md-attendance-next"><span>다음 출석 보상</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 3장 + 50 M'}</span></b></div><div class="md-attendance-actions">${attendanceAction('마이랜드로','myland-feedback','secondary')}${attendanceAction('바로 룰렛 돌리기','roulette-ready','primary')}</div></section></div>`;
+}
+function attendanceFeedbackFigure(id){
+ return `<figure class="md-review-figure"><figcaption>가송님 피드백 반영본 · 10/23</figcaption><div class="md-review-host" data-myland-attendance-feedback="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css"><link rel="stylesheet" href="/v2/components/button.css"><link rel="stylesheet" href="/v2/myland-attendance-feedback.css">${renderMyLandAttendanceFeedbackScreen(id)}</template></div><p>팝업의 곰 캐릭터를 덜고 입체 보상을 중심에 배치했습니다. 두 버튼은 가로로 구성하고 기존 OG 보라색을 적용했습니다.</p></figure>`;
+}
 const notes={
  'attendance-daily':'일반 출석: 티켓 1장. 6일 연속 출석한 경우를 예시로 구성했습니다.',
  'attendance-milestone':'7일 보상: 티켓 3장 + 50 M. 다음 14일 보상은 티켓 5장 + 100 M. 21·30일 보상 수치는 미정입니다.',
@@ -83,15 +94,19 @@ const notes={
  'limit-monthly':'월간 마일리지 한도 1,500 M 예시. 초과 후 티켓·배지 전환의 상세 지급 방식은 추가 확정이 필요합니다.'
 };
 export function renderMyLandDetailsReview(){
- return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p><div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${renderMyLandDetailScreen(id)}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure></div></section>`)).join('');
+ return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p><div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${renderMyLandDetailScreen(id)}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure>${id.startsWith('attendance-')?attendanceFeedbackFigure(id):''}</div></section>`)).join('');
 }
 export function setupMyLandDetails(root){
- for(const host of root.querySelectorAll('[data-myland-detail]')){
+ for(const host of root.querySelectorAll('[data-myland-detail], [data-myland-attendance-feedback]')){
   if(host.shadowRoot)continue;
   const template=host.querySelector('template');
   const shadow=host.attachShadow({mode:'open'});
   shadow.append(template.content.cloneNode(true));template.remove();
   for(const anchor of shadow.querySelectorAll('.md-close'))anchor.setAttribute('aria-label','마이랜드로 닫기');
+  shadow.addEventListener('click',event=>{
+   const action=event.target.closest('[data-myland-destination]');
+   if(action)window.location.hash=action.dataset.mylandDestination;
+  });
   const screen=shadow.querySelector('.md-screen');
   const resize=()=>{const scale=Math.min(1,host.clientWidth/390);screen.style.zoom=scale;host.style.height=844*scale+'px';};
   new ResizeObserver(resize).observe(host);resize();

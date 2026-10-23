@@ -32,18 +32,20 @@ test('new membership and landmark decorations coexist without losing their acces
  assert.doesNotMatch(renderFigmaHome({landmarkStores:['없는 매장']}),/data-home-landmark/);
 });
 
-test('landmark review exposes four styles in two themes and preserves all prior design routes',()=>{
+test('landmark review exposes only crown and gold while preserving review routes',()=>{
  const html=renderWorkspace({pageId:'home'});
  assert.ok(reviewGroups('home').some(g=>g.items.some(i=>i.id==='home-landmarks')));
  assert.match(html,/<section id="home-landmarks"[^>]*data-review-screen hidden/);
- const examples=[...html.matchAll(/<template data-home-landmark-style="([^"]+)" data-home-landmark-theme="([^"]+)">([\s\S]*?)<\/template>/g)];
- assert.deepEqual(examples.map(m=>m[1]+':'+m[2]),['crown:light','medal:light','laurel:light','castle:light','crown:dark','medal:dark','laurel:dark','castle:dark']);
- for(const [,style,theme,markup] of examples){
-  assert.equal((markup.match(new RegExp(`data-home-landmark="${style}"`,'g'))||[]).length,3,'two marked stores and a legend');
+ const examples=[...html.matchAll(/<template data-gasong-map="(best-[^"]+)">([\s\S]*?)<\/template>/g)];
+ assert.deepEqual(examples.map(m=>m[1]),['best-crown','best-gold']);
+ for(const [,style,markup] of examples){
   assert.match(markup,/유저 100명 이상/);
-  if(theme==='dark')assert.match(markup,/data-home-theme="dark"/);
+  assert.doesNotMatch(markup,/data-home-theme="dark"|data-home-landmark="(?:medal|laurel|castle)"/);
+  const markers=pins(markup);
+  assert.match(markers[0],/랜드마크 매장/);assert.match(markers[1],/랜드마크 매장/);
+  assert.doesNotMatch(markers[2],/랜드마크 매장|data-feedback-gold/);
  }
- assert.match(html,/data-home-landmark-combined="true"/);
+ assert.doesNotMatch(html,/data-home-landmark-combined="true"/);
  assert.match(html,/id="home-new-stores"/);
  assert.match(html,/id="home-appearance"/);
  for(const pageId of ['my-land','my-info','og-park','barcode'])assert.doesNotMatch(renderWorkspace({pageId}),/id="home-landmarks"|data-home-landmark=/);
