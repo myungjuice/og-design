@@ -62,17 +62,13 @@ test('three visual treatments decorate only new stores and preserve original ON/
  assert.match(renderFigmaHome({newStores:['세븐일레븐'],newStoreStyle:'unknown'}),/class="home-new-badge"/,'unknown treatment safely falls back to existing badge');
 });
 
-test('the two requested new-store options preserve the original selected and idle artwork',()=>{
+test('new-store review shows only the final Figma N option',()=>{
  const html=renderWorkspace({pageId:'home'});
- const original=pins(renderFigmaHome()).map(pin=>pin.match(/<img[^>]*>/)[0]);
- const examples=[...html.matchAll(/<template data-gasong-map="(new-[^"]+)">([\s\S]*?)<\/template>/g)];
- assert.deepEqual(examples.map(m=>m[1]),['new-sprout','new-n']);
- for(const [,id,markup] of examples){
-  const markers=pins(markup);
-  assert.equal(markers.length,3);
-  for(let i=0;i<3;i++)assert.equal(markers[i].match(/<img[^>]*>/)[0],original[i]);
-  assert.equal((markup.match(/class="home-store-label"/g)||[]).length,3);
-  assert.doesNotMatch(markup,/data-home-theme="dark"|class="home-new-badge"/);
-  assert.doesNotMatch(markers[2],/gasong-new-n|data-home-new-mark/);
- }
+ const examples=[...html.matchAll(/<template data-approved-store-map="new">([\s\S]*?)<\/template>/g)];
+ assert.equal(examples.length,1);
+ const markup=examples[0][1],markers=pins(markup);
+ assert.equal(markers.length,3);
+ assert.equal((markup.match(/class="approved-new-badge"/g)||[]).length,2);
+ assert.match(markup,/267:2353/);
+ assert.doesNotMatch(markup,/data-home-theme="dark"|home-store-label|new-sprout/);
 });

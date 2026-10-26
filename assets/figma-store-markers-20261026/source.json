@@ -1,0 +1,17 @@
+{
+  "sourceFile": "A633JxBlHU0GoJyC3zI3Oz",
+  "sourceNodes": { "new": "267:2353", "best": "267:2494" },
+  "retrievedAt": "2026-10-26",
+  "usage": "Final light-mode NEW and BEST review screens only. Shared home components are reused; supplied art is kept as separate files.",
+  "canvas": { "width": 390, "height": 846 },
+  "map": "f196c.png",
+  "pins": {
+    "off": { "art": "3679c.svg", "mask": "b53b1.svg", "frame": [24, 24] },
+    "on": { "art": "55e99.svg", "mask": "149e5.svg", "frame": [40, 40] }
+  },
+  "crown": {
+    "selected": ["3c62c.svg", "66a13.svg", "9d749.svg", "7a667.svg"],
+    "idle": ["7ac27.svg", "a0421.svg", "757f5.svg", "83de9.svg"],
+    "contactShadow": "15e42.svg"
+  }
+}

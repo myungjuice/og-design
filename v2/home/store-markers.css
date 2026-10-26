@@ -1,0 +1,27 @@
+/* Approved Figma NEW/BEST only. Shared home components remain unchanged. */
+.approved-store-figure{margin:0;max-width:390px;min-width:0}
+.approved-store-figure>figcaption{margin-bottom:var(--v2-space-4);font-weight:700}
+.approved-store-host{width:100%;max-width:390px;overflow:clip}
+.approved-store-canvas{width:390px;height:846px;overflow:clip}
+.approved-store-canvas .approved-static{display:block;max-width:none;pointer-events:none}
+.approved-store-canvas .home-map-pins .figma-map-pin-selected{left:220px;top:314px;width:40px;height:40px}
+.approved-store-canvas .home-map-pins .figma-map-pin-first{left:56px;top:314px;width:24px;height:24px}
+.approved-store-canvas .home-map-pins .figma-map-pin-second{left:80px;top:359px;width:24px;height:24px}
+.approved-pin-mask{position:absolute;display:block;mask-mode:alpha;mask-repeat:no-repeat;overflow:visible}
+.approved-pin-mask-off{inset:7.6% 7.4% 7.4% 7.6%;mask-image:url('/assets/figma-store-markers-20261026/b53b1.svg');mask-position:-1.825px -1.825px;mask-size:24px 24px}
+.approved-pin-mask-on{inset:.1% 7.4% .49% 7.6%;mask-image:url('/assets/figma-store-markers-20261026/149e5.svg');mask-position:-3.042px -.042px;mask-size:40px 40px}
+.approved-pin-art{position:absolute;display:block}
+.approved-pin-mask-off>.approved-pin-art{inset:-7.97% -7.72% -7.72% -7.97%}
+.approved-pin-mask-on>.approved-pin-art{inset:-.1% 0 0 -.12%}
+.approved-new-badge{position:absolute;right:0;top:0;display:flex;align-items:center;justify-content:center;width:10px;height:10px;padding-bottom:1px;border-radius:999px;background:#ff383c;color:#fff;font:800 7px/normal 'Noto Sans Display','Noto Sans',sans-serif;pointer-events:none}
+.figma-map-pin-selected>.approved-new-badge{width:12px;height:12px;font-size:8px}
+.approved-crown{position:absolute;display:block;pointer-events:none}
+.approved-crown-selected{left:226px;top:291px;width:28px;height:28px}
+.approved-crown-idle{left:59px;top:301px;width:18px;height:18px}
+.approved-crown-shadow{position:absolute;bottom:0;left:50%;width:16px;height:2px;transform:translateX(-50%)}
+.approved-crown-shadow>.approved-static{position:absolute;left:-4px;top:-4px}
+.approved-crown-layer{position:absolute}
+.approved-crown-layer-0{left:11.81%;top:68.5%}
+.approved-crown-layer-1{left:6.25%;top:21.88%}
+.approved-crown-layer-2{left:42.16%;top:65.63%}
+.approved-crown-layer-3{left:25%;top:68.75%}

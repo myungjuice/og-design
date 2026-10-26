@@ -32,18 +32,18 @@ test('new membership and landmark decorations coexist without losing their acces
  assert.doesNotMatch(renderFigmaHome({landmarkStores:['없는 매장']}),/data-home-landmark/);
 });
 
-test('landmark review exposes only crown and gold while preserving review routes',()=>{
+test('landmark review exposes only the final Figma crown while preserving review routes',()=>{
  const html=renderWorkspace({pageId:'home'});
  assert.ok(reviewGroups('home').some(g=>g.items.some(i=>i.id==='home-landmarks')));
  assert.match(html,/<section id="home-landmarks"[^>]*data-review-screen hidden/);
- const examples=[...html.matchAll(/<template data-gasong-map="(best-[^"]+)">([\s\S]*?)<\/template>/g)];
- assert.deepEqual(examples.map(m=>m[1]),['best-crown','best-gold']);
- for(const [,style,markup] of examples){
-  assert.match(markup,/유저 100명 이상/);
-  assert.doesNotMatch(markup,/data-home-theme="dark"|data-home-landmark="(?:medal|laurel|castle)"/);
+ const examples=[...html.matchAll(/<template data-approved-store-map="best">([\s\S]*?)<\/template>/g)];
+ assert.equal(examples.length,1);
+ for(const [,markup] of examples){
+  assert.match(markup,/267:2494/);
+  assert.doesNotMatch(markup,/data-home-theme="dark"|best-gold|data-home-landmark="(?:medal|laurel|castle)"/);
   const markers=pins(markup);
-  assert.match(markers[0],/랜드마크 매장/);assert.match(markers[1],/랜드마크 매장/);
-  assert.doesNotMatch(markers[2],/랜드마크 매장|data-feedback-gold/);
+  assert.match(markers[0],/랜드마크 매장/);assert.match(markers[2],/랜드마크 매장/);
+  assert.doesNotMatch(markers[1],/랜드마크 매장|data-feedback-gold/);
  }
  assert.doesNotMatch(html,/data-home-landmark-combined="true"/);
  assert.match(html,/id="home-new-stores"/);

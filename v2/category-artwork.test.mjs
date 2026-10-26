@@ -23,12 +23,12 @@ test('all three category selection specimens include the received accessories in
  }
 });
 
-test('every current home specimen displays selected pins at 1.4 times the idle size',()=>{
+test('shared home specimens retain the 1.4 ratio outside the final Figma review screens',()=>{
  for(const pageId of ['home','barcode']){
   const html=renderWorkspace({pageId});
   const pins=[...html.matchAll(/<button\b[^>]*class="figma-map-pin ([^\"]+)"[^>]*>([\s\S]*?)<\/button>/g)];
-  const selected=pins.filter(m=>m[1].includes('selected'));
-  const idle=pins.filter(m=>!m[1].includes('selected'));
+  const selected=pins.filter(m=>m[1].includes('selected')&&!m[1].includes('approved-store-pin'));
+  const idle=pins.filter(m=>!m[1].includes('selected')&&!m[1].includes('approved-store-pin'));
   assert.ok(selected.length>0&&idle.length>0);
   const dimension=pin=>Number(pin[2].match(/<img\b[^>]*width="([\d.]+)"/)[1]);
   for(const pin of selected)assert.ok(Math.abs(dimension(pin)/dimension(idle[0])-1.4)<1e-9,pageId);
@@ -54,13 +54,14 @@ test('shared home uses delivered outlined ON/OFF PNGs without clipping their tra
  for(const pin of pins)assert.doesNotMatch(pin,/figma-pin-mask|figma-pin-layer/);
 });
 
-test('all current map backdrops and three comparison options use the new PNG set',()=>{
+test('shared map backdrops use delivered PNGs; approved review pins use final Figma art',()=>{
  for(const pageId of ['home','barcode']){
   const html=renderWorkspace({pageId});
   const mapButtons=[...html.matchAll(/<button\b[^>]*class="(?:figma-map-pin|home-store-pin)[^\"]*"[^>]*>([\s\S]*?)<\/button>/g)];
   assert.ok(mapButtons.length>=3,pageId+' has map samples');
   for(const [,pin] of mapButtons){
    const sources=imageSources(pin).filter(({src})=>src.endsWith('.png')||src.endsWith('.svg'));
+   if(sources.some(({src})=>src.startsWith('/assets/figma-store-markers-20261026/')))continue;
    assert.ok(sources.some(({src})=>src.startsWith(base+'pins/')),pageId+' uses delivered PNGs');
   }
  }

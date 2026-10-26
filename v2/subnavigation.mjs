@@ -25,8 +25,8 @@ export function reviewGroups(pageId){
   const labels={home:'홈',barcode:'바코드','my-info':'내정보 메인'};
   const groups=[{id:'overview',label:'기본 화면',items:[{id:'overview',label:labels[pageId]}]}];
   if(pageId==='home')groups.push({id:'home-appearance',label:'홈 비교안',items:[{id:'home-appearance',label:'라이트·다크'}]});
-  if(pageId==='home')groups.push({id:'home-new-stores',label:'신규 회원점',items:[{id:'home-new-stores',label:'중앙 새싹·빨간 N'}]});
-  if(pageId==='home')groups.push({id:'home-landmarks',label:'랜드마크 매장',items:[{id:'home-landmarks',label:'밀착 왕관·황금색 핀'}]});
+  if(pageId==='home')groups.push({id:'home-new-stores',label:'신규 회원점',items:[{id:'home-new-stores',label:'NEW · 확정 시안'}]});
+  if(pageId==='home')groups.push({id:'home-landmarks',label:'랜드마크 매장',items:[{id:'home-landmarks',label:'BEST · 확정 시안'}]});
   if(pageId==='home')groups.push({id:'category-design',label:'카테고리 시안',items:[{id:'category-design',label:'홈·선택 전후·전체 화면형'}]});
   if(pageId==='home')groups.push({id:'explore',label:'검색·업종',items:[{id:'search',label:'매장 검색·검색 결과'},{id:'category',label:'업종 선택'}]});
   if(pageId==='home')groups.push({id:'nearby',label:'주변 탐색',items:[{id:'nearby',label:'근처 보기'}]});
