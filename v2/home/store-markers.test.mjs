@@ -21,9 +21,18 @@ test('NEW route contains only the approved Figma screen and marks Samho plus the
  assert.doesNotMatch(html,/gasong-map|새싹|new-sprout|data-home-theme="dark"|home-store-label|gasong-map-legend/);
 });
 
-test('BEST route contains only the approved crown screen with both supplied crown layer sets',()=>{
+test('BEST route preserves supplied crown layers beside an isolated neon comparison',()=>{
  const html=renderHomeLandmarkReview();
- assert.equal((html.match(/<template/g)||[]).length,1);
+ assert.equal((html.match(/<template/g)||[]).length,4);
+ assert.match(html,/data-approved-store-map="best-figma-20261028"/);
+ assert.match(html,/data-figma-node="306:3424"/);
+ assert.match(html,/data-approved-store-map="best-neon-matched"/);
+ assert.equal((html.match(/data-neon-crown=/g)||[]).length,4);
+ const examples=[...html.matchAll(/<template[^>]*>([\s\S]*?)<\/template>/g)].map(m=>m[1]);
+ const matchedPins=markup=>[...markup.matchAll(/<span class="landmark-figma-pin[^\"]*"[^>]*>[\s\S]*?<\/span>/g)].map(m=>m[0]);
+ assert.equal(matchedPins(examples[0]).length,2);
+ assert.deepEqual(matchedPins(examples[0]),matchedPins(examples[1]),'crown comparisons must use the identical supplied pin artwork and placements');
+ assert.equal(pins(examples[1]).length,0,'neon comparison must not fall back to the old 24/40px home pins');
  assert.match(html,/data-approved-store-map="best"/);
  assert.match(html,/data-figma-node="267:2494"/);
  assert.equal((html.match(/data-approved-crown=/g)||[]).length,2);
@@ -48,6 +57,6 @@ test('approved screens reference nonempty local assets, shared navigation and co
  }
  const workspace=renderWorkspace({pageId:'home'});
  assert.match(workspace,/id="home-new-stores"/);assert.match(workspace,/id="home-landmarks"/);
- assert.match(workspace,/NEW · 확정 시안/);assert.match(workspace,/BEST · 확정 시안/);
+ assert.match(workspace,/NEW · 확정 시안/);assert.match(workspace,/피그마 왕관 시안 · 10\/28/);
  assert.match(workspace,/data-home-appearance="dark-large"/,'existing home light/dark review remains');
 });

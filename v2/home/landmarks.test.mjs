@@ -32,7 +32,7 @@ test('new membership and landmark decorations coexist without losing their acces
  assert.doesNotMatch(renderFigmaHome({landmarkStores:['없는 매장']}),/data-home-landmark/);
 });
 
-test('landmark review exposes only the final Figma crown while preserving review routes',()=>{
+test('landmark review keeps the final Figma crown alongside the requested neon comparison',()=>{
  const html=renderWorkspace({pageId:'home'});
  assert.ok(reviewGroups('home').some(g=>g.items.some(i=>i.id==='home-landmarks')));
  assert.match(html,/<section id="home-landmarks"[^>]*data-review-screen hidden/);

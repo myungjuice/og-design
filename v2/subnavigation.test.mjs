@@ -31,6 +31,7 @@ test('unported screens are non-links and excluded from the ready group picker',(
  assert.equal((html.match(/aria-disabled="true"/g)||[]).length,1);
  assert.match(renderReviewPicker('my-info'),/value="mileage-history"/);
  assert.equal(reviewGroups('my-land')[0].items[0].id,'myland-feedback');
- assert.equal(reviewGroups('og-park')[0].items[0].id,'park-comparison');
+ assert.equal(reviewGroups('og-park')[0].items[0].id,'park-latest');
+ assert.match(renderSubnavigation({pageId:'og-park',label:'오지파크'}),/href="#park-latest"/);
  assert.match(renderSubnavigation({pageId:'og-park',label:'오지파크'}),/href="#park-comparison"/);
 });

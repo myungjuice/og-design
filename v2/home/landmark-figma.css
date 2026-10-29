@@ -1,0 +1,25 @@
+/* Exact placements from Figma 306:3424, isolated to the latest specimen. */
+[data-landmark-comparison]{border:0;border-radius:0}
+.landmark-figma-pin{position:absolute;width:60px;height:60px}
+.landmark-figma-pin-first{left:118px;top:263px}
+.landmark-figma-pin-second{left:123px;top:381px}
+.landmark-figma-crown{position:absolute;left:126.984px;top:230px;width:41.34px;height:41.34px}
+.landmark-figma-crown-layer{position:absolute}
+.landmark-figma-crown .layer-0{left:11.81%;top:68.5%}
+.landmark-figma-crown .layer-1{left:6.25%;top:21.88%}
+.landmark-figma-crown .layer-2{left:42.16%;top:65.63%}
+.landmark-figma-crown .layer-3{left:25%;top:68.75%}
+.landmark-figma-crown-shadow{position:absolute;bottom:0;left:50%;width:23.619px;height:2.952px;transform:translateX(-50%)}
+.landmark-figma-crown-shadow img{position:absolute;left:-25%;top:-200%}
+.landmark-figma-tilted-crown{position:absolute;left:137px;top:352px;width:48.99px;height:48.99px;display:grid;place-items:center}
+.landmark-figma-tilted-crown>span{position:relative;width:40px;height:40px;transform:rotate(15deg);overflow:clip}
+.landmark-figma-tilted-crown>span>img{position:absolute;left:2.25%;top:18.75%}
+.landmark-neon-ink{position:absolute;display:block;overflow:visible}
+.landmark-neon-first{left:6.25%;top:21.88%;width:36.1506px;height:29.4796px}
+.landmark-neon-second{left:2.25%;top:18.75%;width:38.264px;height:25.012px}
+.landmark-neon-ink>.landmark-neon-art{position:absolute;left:0;top:0;width:40px;height:36px;transform-origin:0 0;transform:scale(var(--neon-scale-x),var(--neon-scale-y)) translate(-4.45px,-5.25px)}
+.landmark-figma-tilted-crown[data-neon-crown]>span{overflow:visible}
+/* Gold outline uses the revised crown's 15deg upper-right placement, behind the pin. */
+[data-landmark-comparison="gold-neon"] .landmark-figma-pin{z-index:2}
+[data-landmark-comparison="gold-neon"] .landmark-figma-tilted-crown{z-index:1}
+[data-landmark-comparison="gold-neon"] .landmark-gold-crown-first{left:132px;top:234px}

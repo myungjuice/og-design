@@ -2,6 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderWorkspace} from '../render.mjs';
 import {renderParkReview,renderParkScreen} from './render.mjs';
+import {existsSync,statSync} from 'node:fs';
+
+test('latest park is the supplied four-category Figma frame, separate from the previous three-card PDF',()=>{
+ const html=renderParkScreen('latest');
+ assert.match(html,/data-figma-node="304:2931"/);
+ assert.equal((html.match(/class="park-interest-card"/g)||[]).length,4);
+ for(const [label,count] of [['한식','357'],['카페/베이커리','163'],['헤어/뷰티','15'],['부동산/인테리어','4']])assert.ok(html.includes(`aria-label="${label} · 매장 ${count}개"`));
+ assert.doesNotMatch(html,/interest-emphasis|park-interest-heart|data-park-duplicate-event/);
+ assert.equal((html.match(/data-park-card/g)||[]).length,3);
+ for(const [,path] of html.matchAll(/src="(\/assets\/[^\"]+)"/g)){
+  const file=new URL('../..'+path,import.meta.url);
+  assert.ok(existsSync(file),path);assert.ok(statSync(file).size>0,path);
+ }
+ assert.equal((renderParkScreen('feedback').match(/class="park-category"/g)||[]).length,3);
+ assert.match(renderParkReview(),/id="park-latest" data-review-screen/);
+});
 
 test('revised park is a fixed PDF specimen with three visible-layout cards and a static page indicator',()=>{
  const html=renderParkScreen('revised');
@@ -42,7 +58,12 @@ test('feedback park replaces only the previous card artwork and keeps the revise
 
 test('park comparison adds an isolated feedback specimen while preserving both earlier specimens',()=>{
  const html=renderParkReview();
- assert.equal((html.match(/data-park-screen=/g)||[]).length,3);
+ const earlierComparison=html.slice(html.indexOf('<section id="park-comparison"'));
+ assert.equal((earlierComparison.match(/data-park-screen=/g)||[]).length,3);
+ assert.match(html,/id="park-interest-comparison"/);
+ const emphasis=html.split('data-park-screen="interest"')[1]?.split('</template>')[0]||'';
+ assert.match(emphasis,/href="\/v2\/og-park\/interest.css"/);
+ assert.equal((emphasis.match(/class="park-category"/g)||[]).length,3);
  assert.match(html,/가송님 피드백 반영본 · 10\/23/);
  const feedback=html.split('data-park-screen="feedback"')[1]?.split('</template>')[0]||'';
  assert.match(feedback,/href="\/v2\/og-park\/feedback.css"/);

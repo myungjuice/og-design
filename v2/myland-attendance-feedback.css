@@ -1,20 +1,40 @@
-/* 10/23 가송님 출석 피드백 비교본. 기존 12개 시안에는 로드하지 않는다. */
-:host{
- --attendance-reward-fill:var(--today);
- --attendance-next-fill:var(--screen);
- --attendance-pill-fill:var(--mission-tag);
-}
-.md-attendance-dialog{padding:24px 22px 22px}
-.md-attendance-dialog>.md-close{z-index:1}
-.md-attendance-hero{width:250px;height:186px;margin:0 auto 13px;object-fit:contain}
-.md-attendance-pill{display:table;margin:0 auto 4px;padding:5px 12px;border-radius:99px;background:var(--attendance-pill-fill);color:var(--violet);font-size:12px;font-weight:700}
-.md-attendance-dialog h2{font-size:23px;line-height:1.4;letter-spacing:-.7px;margin:0 0 7px}
-.md-attendance-dialog>p{font-size:13px;line-height:1.7;color:var(--muted)}
-.md-attendance-rewards{display:flex;justify-content:center;gap:10px;margin:22px 0 16px}
-.md-attendance-reward{flex:1;display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:12px 10px;border-radius:15px;background:var(--attendance-reward-fill)}
-.md-attendance-reward>span{font-size:12px;color:var(--muted)}
-.md-attendance-reward>strong{color:var(--violet);font-size:24px;line-height:1.25;letter-spacing:-.5px;white-space:nowrap}
-.md-attendance-next{padding:12px 8px;margin:0 0 22px;background:var(--attendance-next-fill);border-radius:13px}
-.md-attendance-next>b{margin-top:4px}
-.md-attendance-actions{display:grid;grid-template-columns:1fr 1.22fr;gap:9px}
-.md-attendance-actions>.v2-button{width:100%}
+/* 10/26 Figma 268:2638 / 280:2935. Latest feedback specimens only. */
+.md-attendance-feedback .md-main-backdrop{isolation:isolate;z-index:0}
+.md-attendance-feedback .md-shade{background:#0008;backdrop-filter:blur(2px)}
+.md-attendance-confetti{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.md-attendance-confetti>img{position:absolute;top:0;left:-16.79%;width:162.31%;height:100%;max-width:none}
+.md-attendance-confetti>img+img{left:-57%}
+.md-attendance-dialog{padding:32px 20px 20px;border-radius:20px;box-shadow:0 4px 12px #25266a33,inset -1px -4px 6px #c8cad4}
+.md-attendance-heading{display:flex;flex-direction:column;align-items:center;gap:4px}
+.md-attendance-pill{padding:1px 3px;background:#edeeff;border-radius:4px;color:#514de4;font-size:12px;line-height:17px}
+.md-attendance-dialog h2{margin:0;font-size:32px;line-height:44px;font-weight:900;letter-spacing:-.7px}
+.md-attendance-title{background:linear-gradient(90deg,#6264f8,#833dd5);background-clip:text;color:transparent}
+.md-attendance-earned{display:flex;align-items:center;justify-content:center;gap:4px;padding:4px 6px;font-size:18px;line-height:26px}
+.md-attendance-earned img{width:20px;height:20px}
+.md-attendance-art{position:relative;margin:0 auto;height:241px}
+.md-bear-gift{width:263.846px}
+.md-gift-bear{width:100%;height:100%;object-fit:cover}
+.md-gift-ticket{position:absolute;left:112.92px;top:64px;width:120px;height:80px}
+.md-gift-ticket-glow{position:absolute;left:107.92px;top:45px;width:136.831px;height:110.159px;display:grid;place-items:center}
+.md-gift-ticket-glow img{width:144px;height:107px;transform:rotate(-14.35deg);max-width:none}
+.md-attendance-next{padding:12px 0;margin:20px 0 28px;border-radius:12px;background:#eff7ff;color:#434450;font-size:14px;line-height:21px}
+.md-attendance-next>b{margin-top:8px;font-size:16px;line-height:22px}
+.md-attendance-next>b>span{margin-left:8px;color:#5251e3}
+.md-attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.md-attendance-actions>.v2-button{width:100%;height:44px;min-height:44px;border-radius:8px;font-size:16px;font-weight:400;line-height:20px}
+.md-attendance-actions>.v2-button[data-variant="secondary"]{border-color:#c8cad4;color:#111}
+.md-attendance-milestone .md-attendance-dialog{border:2px solid #ffd988;left:18px;right:18px;box-shadow:0 0 120px #ffbd2f66,0 4px 12px #25266a33,inset -1px -4px 6px #c8cad4}
+.md-milestone-art{width:350px;height:238px;margin-left:-21px}
+.md-milestone-reward{position:absolute;left:46.88px;top:0;width:260px;height:238px;object-fit:cover}
+.md-reward-confetti>img{position:absolute;max-width:none}
+.md-reward-confetti>img:nth-child(1){width:301.557px;height:161.217px;left:19.05px;top:16px}
+.md-reward-confetti>img:nth-child(2){width:21.407px;height:22.939px;left:72.1px;top:176.9px}
+.md-reward-confetti>img:nth-child(3){width:19.917px;height:29.212px;left:65.5px;top:60.05px}
+/* Extra requested treatment: a folded gold ribbon and static light rays. */
+.md-attendance-ribbon{position:relative;isolation:isolate;width:302px;filter:drop-shadow(0 4px 4px #97601538)}
+.md-attendance-ribbon>span{position:relative;display:block;padding:9px 0 11px;border:1px solid #efb52d;border-radius:6px 6px 10px 10px;background:linear-gradient(180deg,#fff4ac 0%,#ffda5a 14%,#ffc438 65%,#f4a919 100%);color:#604014;box-shadow:inset 0 2px 1px #fff6c9,inset 0 -3px 3px #dc911c;font-size:29px;line-height:38px;text-shadow:0 1px #ffe58a}
+.md-attendance-ribbon::before,.md-attendance-ribbon::after{content:"";position:absolute;top:13px;width:40px;height:58px;z-index:-1;background:linear-gradient(#e8a31e,#ffd253);clip-path:polygon(0 0,100% 8%,100% 100%,0 92%,20% 49%)}
+.md-attendance-ribbon::before{left:-18px}
+.md-attendance-ribbon::after{right:-18px;transform:scaleX(-1)}
+.md-attendance-milestone .md-attendance-heading{gap:12px}
+.md-attendance-rays{position:absolute;inset:-60px;z-index:3;pointer-events:none;background:repeating-conic-gradient(from 7deg at 50% 47%,#ffe9a152 0deg 4deg,transparent 7deg 20deg);filter:blur(3px);mask-image:radial-gradient(ellipse at 50% 47%,#000 9%,#0009 40%,transparent 72%)}

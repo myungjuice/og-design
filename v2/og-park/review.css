@@ -5,3 +5,6 @@
 .park-host{width:100%;overflow:clip}
 .park-review-intro,.park-review-note{max-width:78ch;color:var(--v2-workspace-muted);line-height:1.65}
 .park-review-note{font-size:14px;margin-bottom:var(--v2-space-6)}
+.park-review-pair{grid-template-columns:repeat(2,minmax(0,390px));gap:32px}
+#park-interest-comparison{margin-bottom:64px}
+@media(max-width:1000px){.park-review-pair{grid-template-columns:minmax(0,390px)}}

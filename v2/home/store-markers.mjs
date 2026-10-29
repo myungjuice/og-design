@@ -16,18 +16,19 @@ function pin(name,position,kind){
  const label=name+(isNew?' · 신규 회원점':isBest?' · 랜드마크 매장':'')+' 보기';
  return `<button type="button" class="figma-map-pin figma-map-pin-${position} approved-store-pin" data-preview="${name}" aria-label="${label}"${isNew?' data-approved-new="true"':''}${isBest?' data-approved-landmark="true"':''}>${pinArtwork(selected)}${isNew?'<span class="approved-new-badge" aria-hidden="true">N</span>':''}</button>`;
 }
-function crown(selected){
+function crown(selected,style='solid'){
  const name=selected?'selected':'idle';
+ if(style==='neon')return `<span class="review-neon-crown review-neon-crown-${name}" data-neon-crown="${name}" aria-hidden="true"><img src="/assets/review-20261028/neon-crown.svg" alt="" class="approved-static"></span>`;
  const files=selected?[['3c62c.svg',21.3675,2.765],['66a13.svg',24.4825,19.9663],['9d749.svg',4.375,4.375],['7a667.svg',14,2.625]]:[['7ac27.svg',13.7363,1.7775],['a0421.svg',15.7387,12.8355],['757f5.svg',2.8125,2.8125],['83de9.svg',9,1.6875]];
  return `<span class="approved-crown approved-crown-${name}" data-approved-crown="${name}" aria-hidden="true"><span class="approved-crown-shadow">${image('15e42.svg','',24,10)}</span>${files.map(([file,w,h],i)=>image(file,'approved-crown-layer approved-crown-layer-'+i,w,h)).join('')}</span>`;
 }
 
-export function renderApprovedStoreMap(kind){
+export function renderApprovedStoreMap(kind,{crownStyle='solid'}={}){
  if(!nodes[kind])throw new RangeError('Unknown approved store map: '+kind);
  // Compose the existing home/search/category/navigation components, changing only
  // these opt-in specimens. No screenshot is used as implementation artwork.
- let html=renderFigmaHome().replace('data-figma-home',`data-figma-home data-approved-store-kind="${kind}" data-figma-node="${nodes[kind]}"`);
- const pins=pin('세븐일레븐','first',kind)+pin('삼호가든','second',kind)+pin('파샤도 망원','selected',kind)+(kind==='best'?crown(true)+crown(false):'');
+ let html=renderFigmaHome().replace('data-figma-home',`data-figma-home data-approved-store-kind="${kind}" ${crownStyle==='neon'?'data-review-crown="neon"':`data-figma-node="${nodes[kind]}"`}`);
+ const pins=pin('세븐일레븐','first',kind)+pin('삼호가든','second',kind)+pin('파샤도 망원','selected',kind)+(kind==='best'?crown(true,crownStyle)+crown(false,crownStyle):'');
  html=html.replace(/<div class="home-map-pins">[\s\S]*?<\/div><div class="home-map-actions">/,`<div class="home-map-pins">${pins}</div><div class="home-map-actions">`);
  html=html.replace(/(<button\b[^>]*data-category="([^"]+)"[^>]*>)([\s\S]*?)(<\/button>)/g,(_,opening,name,body,closing)=>opening.replace('data-category=','data-approved-category=')+body.replace(/<img\b[^>]*>/,image(categories[name],'',20))+closing);
  // The authoritative Figma exports must not be remapped by the legacy icon
@@ -38,9 +39,9 @@ export function renderApprovedStoreMap(kind){
  return html;
 }
 
-export function renderApprovedStoreReview(kind){
- const title=kind==='new'?'NEW · 확정 시안':'BEST · 확정 시안';
- return `<link rel="stylesheet" href="${stylesheet}"><figure class="approved-store-figure"><figcaption>${title}</figcaption><div class="approved-store-host"><template data-approved-store-map="${kind}">${[...figmaHomeStyles.filter(href=>!['/v2/home/new-stores.css','/v2/home/landmarks.css'].includes(href)),stylesheet].map(href=>`<link rel="stylesheet" href="${href}">`).join('')}<div class="approved-store-canvas" inert>${renderApprovedStoreMap(kind)}</div></template></div></figure>`;
+export function renderApprovedStoreReview(kind,{crownStyle='solid'}={}){
+ const title=kind==='new'?'NEW · 확정 시안':crownStyle==='neon'?'네온 왕관 비교안 · 10/28':'이전 피그마 왕관 시안';
+ return `<link rel="stylesheet" href="${stylesheet}"><figure class="approved-store-figure"><figcaption>${title}</figcaption><div class="approved-store-host"><template data-approved-store-map="${kind}${crownStyle==='neon'?'-neon':''}">${[...figmaHomeStyles.filter(href=>!['/v2/home/new-stores.css','/v2/home/landmarks.css'].includes(href)),stylesheet].map(href=>`<link rel="stylesheet" href="${href}">`).join('')}<div class="approved-store-canvas" inert>${renderApprovedStoreMap(kind,{crownStyle})}</div></template></div></figure>`;
 }
 
 export function setupApprovedStoreMaps(root){

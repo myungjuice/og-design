@@ -1,0 +1,24 @@
+/* Figma 304:2931. Isolated from the earlier PDF and interest-emphasis specimens. */
+.park-screen.latest{height:1165px;padding-bottom:130px}
+.latest .park-title h3{letter-spacing:.0455px;text-shadow:none}
+.latest .park-search{margin-right:0}
+.latest .park-contest strong{font-size:18px;line-height:21px;letter-spacing:0}
+.latest .park-countdown{gap:2px;height:20px;line-height:14px}
+.latest .park-countdown span{background:linear-gradient(180deg,#ffffff80 2.5%,#ffffffb3 102.5%);border-radius:4px}
+.latest .park-interests header{height:24px}
+.latest .park-interests h4{font-size:20px;line-height:24px;color:#000}
+.latest .park-interests header>span{display:flex;align-items:center;letter-spacing:-.35px}
+.park-interest-grid{display:grid;grid-template-columns:repeat(2,171px);gap:8px;height:368px}
+.park-interest-card{width:171px;height:180px;position:relative;overflow:clip;border-radius:12px;filter:drop-shadow(0 6px 7px #5c74a330)}
+.park-interest-photo{width:100%;height:100%;object-fit:cover}
+.park-interest-card::after{content:'';position:absolute;inset:0;background:linear-gradient(#6660,#0009)}
+.park-interest-caption{position:absolute;z-index:1;bottom:0;left:0;width:171px;padding:8px;display:flex;align-items:center;gap:6px;color:#fff}
+.park-interest-symbol{display:grid;place-items:center;flex:none;width:32px;height:32px;background:#ffffffe6;backdrop-filter:blur(2px);border-radius:50%}
+.park-interest-name{display:flex;align-items:center;white-space:nowrap;height:20px}
+.park-interest-name strong{font-size:14px;line-height:17px;font-weight:700}
+.park-interest-count{display:flex;align-items:center;gap:2px;font-size:12px;line-height:14px}
+.park-interest-count-pin{display:grid;place-items:center;width:12px;height:12px}
+.park-interest-count-pin img{mask:url('/assets/figma-ogpark-20261028/38200.svg') -0.837px -0.011px/11px 11px no-repeat;mask-mode:alpha}
+.latest .park-community-symbol{background:#e5edf5}
+.latest .park-community p{letter-spacing:-.35px;line-height:14px}
+.latest .park-community h4{display:flex;align-items:center;letter-spacing:-.35px;line-height:20px}

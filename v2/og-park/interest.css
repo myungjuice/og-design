@@ -1,0 +1,9 @@
+/* 10/28 compact interest-section study. Keep the original 174px section. */
+.interest-emphasis .park-interests{isolation:isolate}
+.interest-emphasis .park-interests::before{content:"";position:absolute;z-index:-1;inset:-10px -10px -8px;border:1px solid #dcd6fb;border-radius:18px;background:linear-gradient(135deg,#fff 0%,#f0ecff 100%);box-shadow:0 3px 8px #514de410;pointer-events:none}
+.interest-emphasis .park-interests header{height:22px;margin-bottom:12px}
+.interest-emphasis .park-interests h4{display:flex;align-items:center;gap:5px;font-size:17px;letter-spacing:-.5px;color:#352c66}
+.park-interest-heart{display:block;width:18px;height:18px;fill:#7771ed;flex:none}
+.interest-emphasis .park-category{box-shadow:none;outline:1px solid #fff8;outline-offset:-1px}
+.interest-emphasis .park-category::after{inset:38% 0 0;background:linear-gradient(transparent,#262136b8 72%,#262136e6)}
+.interest-emphasis .park-category>span{font-size:12px;font-weight:700;line-height:20px;bottom:9px;letter-spacing:-.6px}

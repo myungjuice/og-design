@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="TapIcon">
+<path id="Vector" d="M10.0068 3.77119C11.1434 2.76105 12.8566 2.76105 13.9932 3.77119L19.9932 9.10518C20.6335 9.67448 21 10.4905 21 11.3474V17.9997C21 19.6566 19.6569 20.9997 18 20.9997H14.5V16.6247C14.4998 15.1751 13.3806 13.9997 12 13.9997C10.6194 13.9997 9.50015 15.1751 9.5 16.6247V20.9997H6C4.34315 20.9997 3 19.6566 3 17.9997V11.3474C3 10.4905 3.36646 9.67448 4.00684 9.10518L10.0068 3.77119Z" fill="url(#paint0_linear_0_201)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_201" x1="12" y1="2.67549" x2="12" y2="20.9879" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C1CCFF"/>
+<stop offset="0.317308" stop-color="#9BA7FF"/>
+<stop offset="0.899038" stop-color="#5251E3"/>
+</linearGradient>
+</defs>
+</svg>

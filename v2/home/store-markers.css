@@ -25,3 +25,10 @@
 .approved-crown-layer-1{left:6.25%;top:21.88%}
 .approved-crown-layer-2{left:42.16%;top:65.63%}
 .approved-crown-layer-3{left:25%;top:68.75%}
+.landmark-crown-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:32px;align-items:start}
+.landmark-comparison-note{max-width:78ch;color:var(--v2-workspace-muted);line-height:1.65}
+.review-neon-crown{position:absolute;display:block;pointer-events:none;transform:rotate(25deg);transform-origin:50% 80%}
+.review-neon-crown-selected{left:235px;top:294px;width:32px;height:28.8px}
+.review-neon-crown-idle{left:64px;top:301px;width:22px;height:19.8px}
+.review-neon-crown>.approved-static{width:100%;height:100%}
+@media(max-width:1000px){.landmark-crown-comparison{grid-template-columns:minmax(0,390px)}}
