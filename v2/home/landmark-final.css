@@ -1,0 +1,7 @@
+/* The same 60px unit is scaled as a whole, so crown size/attachment tracks the pin. */
+.landmark-final-marker{position:relative;display:block;overflow:visible}
+.landmark-final-unit{position:absolute;left:0;top:0;width:60px;height:60px;transform-origin:0 0;isolation:isolate}
+.landmark-final-pin{position:absolute;left:0;top:0;width:60px;height:60px;z-index:1;display:block}
+.landmark-final-crown{position:absolute;left:24px;top:-18px;width:49.373px;height:34.107px;z-index:2;display:block;transform:rotate(25deg);transform-origin:50% 80%}
+.landmark-final-first{position:absolute;left:126.571px;top:271.571px}
+.landmark-final-second{position:absolute;left:123px;top:381px}

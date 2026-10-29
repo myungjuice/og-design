@@ -21,18 +21,24 @@ test('NEW route contains only the approved Figma screen and marks Samho plus the
  assert.doesNotMatch(html,/gasong-map|새싹|new-sprout|data-home-theme="dark"|home-store-label|gasong-map-legend/);
 });
 
-test('BEST route preserves supplied crown layers beside an isolated neon comparison',()=>{
+test('BEST route compares the previous states with the final placement while preserving supplied crown history',()=>{
  const html=renderHomeLandmarkReview();
  assert.equal((html.match(/<template/g)||[]).length,4);
  assert.match(html,/data-approved-store-map="best-figma-20261028"/);
  assert.match(html,/data-figma-node="306:3424"/);
- assert.match(html,/data-approved-store-map="best-neon-matched"/);
- assert.equal((html.match(/data-neon-crown=/g)||[]).length,4);
+ assert.match(html,/data-approved-store-map="best-neon-yellow"/);
+ assert.match(html,/data-approved-store-map="best-final"/);
+ assert.equal((html.match(/data-neon-crown=/g)||[]).length,2);
  const examples=[...html.matchAll(/<template[^>]*>([\s\S]*?)<\/template>/g)].map(m=>m[1]);
- const matchedPins=markup=>[...markup.matchAll(/<span class="landmark-figma-pin[^\"]*"[^>]*>[\s\S]*?<\/span>/g)].map(m=>m[0]);
- assert.equal(matchedPins(examples[0]).length,2);
- assert.deepEqual(matchedPins(examples[0]),matchedPins(examples[1]),'crown comparisons must use the identical supplied pin artwork and placements');
- assert.equal(pins(examples[1]).length,0,'neon comparison must not fall back to the old 24/40px home pins');
+ const [previous,current]=examples;
+ assert.match(previous,/랜드마크 매장 · 미선택/);
+ assert.match(previous,/pins\/off\//);
+ assert.match(previous,/landmark-figma-pin-second/);
+ for(const state of ['off','on'])assert.match(current,new RegExp(`data-landmark-state="${state}"`));
+ for(const state of ['off','on'])assert.match(current,new RegExp(`pins/${state}/`));
+ assert.match(current,/landmark-final-crown/);
+ assert.match(current,/neon-crown-gold\.svg/);
+ assert.equal(pins(current).length,0,'comparison must use the dedicated final pin composition');
  assert.match(html,/data-approved-store-map="best"/);
  assert.match(html,/data-figma-node="267:2494"/);
  assert.equal((html.match(/data-approved-crown=/g)||[]).length,2);
