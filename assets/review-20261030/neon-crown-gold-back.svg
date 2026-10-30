@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="36" viewBox="0 0 40 36" fill="none" overflow="visible">
+  <defs>
+    <filter id="glow-wide" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <filter id="glow-tight" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation=".55"/></filter>
+    <linearGradient id="gold" x1="20" y1="6" x2="20" y2="31" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF5BB"/><stop offset=".5" stop-color="#FFE47A"/><stop offset="1" stop-color="#FFD54B"/></linearGradient>
+    <g id="crown" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 26.7c0-2.2 5.7-3.9 12.5-3.8 7.1 0 12.6 1.6 12.5 3.8"/></g>
+  </defs>
+  <use href="#crown" stroke="#FFC02E" stroke-width="4.5" opacity=".55" filter="url(#glow-wide)"/>
+  <use href="#crown" stroke="#FFD64A" stroke-width="3.3" opacity=".85" filter="url(#glow-tight)"/>
+  <use href="#crown" stroke="#E99C21" stroke-width="2.2"/>
+  <use href="#crown" stroke="url(#gold)" stroke-width="1.6"/>
+  <use href="#crown" stroke="#FFFDED" stroke-width="1.05"/>
+</svg>

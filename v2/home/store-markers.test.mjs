@@ -26,18 +26,20 @@ test('BEST route compares the previous states with the final placement while pre
  assert.equal((html.match(/<template/g)||[]).length,4);
  assert.match(html,/data-approved-store-map="best-figma-20261028"/);
  assert.match(html,/data-figma-node="306:3424"/);
- assert.match(html,/data-approved-store-map="best-neon-yellow"/);
+ assert.match(html,/data-approved-store-map="best-fourth"/);
  assert.match(html,/data-approved-store-map="best-final"/);
- assert.equal((html.match(/data-neon-crown=/g)||[]).length,2);
+ assert.equal((html.match(/data-neon-crown=/g)||[]).length,0);
  const examples=[...html.matchAll(/<template[^>]*>([\s\S]*?)<\/template>/g)].map(m=>m[1]);
  const [previous,current]=examples;
- assert.match(previous,/랜드마크 매장 · 미선택/);
- assert.match(previous,/pins\/off\//);
- assert.match(previous,/landmark-figma-pin-second/);
- for(const state of ['off','on'])assert.match(current,new RegExp(`data-landmark-state="${state}"`));
- for(const state of ['off','on'])assert.match(current,new RegExp(`pins/${state}/`));
- assert.match(current,/landmark-final-crown/);
- assert.match(current,/neon-crown-gold\.svg/);
+ for(const example of [previous,current]){
+  for(const state of ['off','on'])assert.match(example,new RegExp(`data-landmark-state="${state}"`));
+  for(const state of ['off','on'])assert.match(example,new RegExp(`pins/${state}/`));
+ }
+ assert.doesNotMatch(previous,/landmark-crown-back|landmark-crown-front/,'previous approved composition stays intact');
+ for(const layer of ['back','front']){
+  assert.match(current,new RegExp(`landmark-crown-${layer}`));
+  assert.match(current,new RegExp(`neon-crown-gold-${layer}\\.svg`));
+ }
  assert.equal(pins(current).length,0,'comparison must use the dedicated final pin composition');
  assert.match(html,/data-approved-store-map="best"/);
  assert.match(html,/data-figma-node="267:2494"/);

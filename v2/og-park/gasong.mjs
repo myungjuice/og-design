@@ -9,7 +9,7 @@ const categories=[
 ];
 
 export function renderGasongParkLower(version){
- const section=version==='gasong-section'||version==='final';
+ const section=version==='gasong-section'||version==='final'||version==='feedback-4';
  const cards=categories.map(([label,count,squarePhotos,tallPhotos],i)=>{
   const photos=section?squarePhotos:tallPhotos;
   const pin=section?(i===0?'f059c.svg':'c1e20.svg'):(i===0?'774bc.svg':'4017b.svg');

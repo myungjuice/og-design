@@ -5,3 +5,7 @@
 .landmark-final-crown{position:absolute;left:24px;top:-18px;width:49.373px;height:34.107px;z-index:2;display:block;transform:rotate(25deg);transform-origin:50% 80%}
 .landmark-final-first{position:absolute;left:126.571px;top:271.571px}
 .landmark-final-second{position:absolute;left:123px;top:381px}
+/* Fourth feedback B direction: tuck the rear ring behind the head, keeping the front over it. */
+.landmark-wrapped .landmark-final-crown{left:16px;top:-18px;transform:rotate(28deg)}
+.landmark-wrapped .landmark-crown-back{z-index:0}
+.landmark-wrapped .landmark-crown-front{z-index:2}
