@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderWorkspace} from '../render.mjs';
 import {reviewGroups} from '../subnavigation.mjs';
-import {renderHomeStoreContent,renderHomeStoreScreen} from './store.mjs';
+import {renderHomeStoreContent,renderHomeStoreScreen,renderHomeStoreReview} from './store.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
 const frame=(html,state)=>html.match(new RegExp(`data-store-state="${state}"([\\s\\S]*?)<\\/template>`))?.[1]||'';
 
@@ -11,10 +11,12 @@ test('store review retains its three primary states and adds bounded source comp
  const html=renderWorkspace({pageId:'home'});
  assert.ok(reviewGroups('home').some(group=>group.items.some(item=>item.id==='store'&&!item.pending)));
  assert.match(html,/<section id="store"[^>]*data-review-screen/);
- assert.deepEqual([...html.matchAll(/data-store-state="([^"]+)"/g)].map(m=>m[1]),['basic','limited','no-photo','promotion-expanded','bookmarked','closed','break-time','before-open','opening-soon','temporary-holiday','regular-holiday','holiday']);
- assert.equal((html.match(/data-store-template/g)||[]).length,12);
- assert.match(html,/다른 상태 비교 · 11개/);
- assert.doesNotMatch(html,/<details[^>]*v2-home-store-extra[^>]*\bopen\b/);
+ // Other reviews can reuse store frames; assert this gallery's own states.
+ const review=renderHomeStoreReview();
+ assert.deepEqual([...review.matchAll(/data-store-state="([^"]+)"/g)].map(m=>m[1]),['basic','limited','no-photo','promotion-expanded','bookmarked','closed','break-time','before-open','opening-soon','temporary-holiday','regular-holiday','holiday']);
+ assert.equal((review.match(/data-store-template/g)||[]).length,12);
+ assert.match(review,/다른 상태 비교 · 11개/);
+ assert.doesNotMatch(review,/<details[^>]*v2-home-store-extra[^>]*\bopen\b/);
 });
 
 // Catches omitted detail addresses, fallback loss, and stringified missing fields.

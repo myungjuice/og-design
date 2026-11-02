@@ -1,3 +1,4 @@
+import {setupDirectUseReview} from './direct-use.mjs';
 import {setupScreenPreview} from '../components/screen-preview.mjs';
 import {setupHomeAppearanceReview} from './appearance.mjs';
 import {setupApprovedStoreMaps} from './store-markers.mjs';
@@ -41,6 +42,7 @@ export function setupHomePreview(root){
  screen.querySelector('.home-search-form').addEventListener('submit',event=>{
   event.preventDefault();showPreview('매장 검색');
  });
+ setupDirectUseReview(root);
  setupHomeSearchReview(root);
  setupHomeAppearanceReview(root);
  setupHomeCategoryReview(root);

@@ -1,3 +1,4 @@
+import {renderDirectUseReview} from './home/direct-use.mjs';
 import {navigationItems,renderSidebar} from './navigation.mjs';
 import {renderFoundations} from './design-system/foundations.mjs';
 import {renderComponents} from './components/render.mjs';
@@ -27,5 +28,5 @@ export function renderWorkspace({pageId}={}) {
  return `<a class="v2-skip" href="#v2-content">본문으로 이동</a>
  <div class="v2-workspace${pageId==='components'?' v2-component-workspace':''}"><aside class="v2-sidebar"><a class="v2-brand" href="/v2/">3D컨셉 디자인 v2</a>${renderSidebar({activeId:pageId})}<a class="v2-back" href="/">자료 홈으로</a></aside>
  ${renderSubnavigation({pageId,label:item?.label||'하위 메뉴'})}
- <main id="v2-content" tabindex="-1">${applyReceivedIcons(content)}${additional}${pageId==='home'?applyReceivedIcons(renderHomeSearchReview()+renderHomeCategoryReview()+renderHomeNearbyReview()+renderHomeStoreReview()+renderHomeStoreShareReview()+renderHomeStorePhotoReview()+renderHomeMainMenuReview()+renderHomeFullMenuReview()+renderHomeMenuDetailReview()+renderHomeStoreReservationReview()+renderHomeStoreWaitingReview()+renderHomeStoreNewsReview()+renderHomeStoreEventReview()+renderHomeNewsListReview()+renderHomeNewsDetailReview()+renderHomeEventListReview()+renderHomeEventDetailReview()+renderHomeStoreReviewsReview()+renderHomeStorePraiseReview()+renderHomeReviewListReview()+renderHomeReviewPhotoReview()+renderHomeStoreInfoReview()+renderHomeStoreLocationReview()):''}</main></div>`;
+ <main id="v2-content" tabindex="-1">${applyReceivedIcons(content)}${additional}${pageId==='home'?applyReceivedIcons(renderDirectUseReview()+renderHomeSearchReview()+renderHomeCategoryReview()+renderHomeNearbyReview()+renderHomeStoreReview()+renderHomeStoreShareReview()+renderHomeStorePhotoReview()+renderHomeMainMenuReview()+renderHomeFullMenuReview()+renderHomeMenuDetailReview()+renderHomeStoreReservationReview()+renderHomeStoreWaitingReview()+renderHomeStoreNewsReview()+renderHomeStoreEventReview()+renderHomeNewsListReview()+renderHomeNewsDetailReview()+renderHomeEventListReview()+renderHomeEventDetailReview()+renderHomeStoreReviewsReview()+renderHomeStorePraiseReview()+renderHomeReviewListReview()+renderHomeReviewPhotoReview()+renderHomeStoreInfoReview()+renderHomeStoreLocationReview()):''}</main></div>`;
 }
