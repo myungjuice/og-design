@@ -10,7 +10,7 @@
 .du-footer{flex:none;padding:16px 20px 28px;background:var(--v2-surface);border-top:1px solid var(--v2-edge)}
 .du-action.og-button{width:100%}
 .du-store-screen{width:390px}
-.du-entry.og-button{position:absolute;z-index:2;right:14px;bottom:54px;display:flex;align-items:center;justify-content:center;gap:4px;width:auto;min-width:110px;height:48px;border:2px solid var(--v2-surface);border-radius:28px;background:linear-gradient(145deg,var(--v2-primary-light),var(--v2-action) 55%,var(--v2-primary-edge));box-shadow:0 3px 8px var(--v2-contact);font-size:14px;padding:0 16px 0 12px}
+.du-entry.og-button{position:absolute;z-index:2;right:16px;bottom:16px;display:flex;align-items:center;justify-content:center;gap:4px;width:auto;min-width:110px;height:48px;border:2px solid var(--v2-surface);border-radius:28px;background:linear-gradient(145deg,var(--v2-primary-light),var(--v2-action) 55%,var(--v2-primary-edge));box-shadow:0 3px 8px var(--v2-contact);font-size:14px;padding:0 16px 0 12px}
 .du-entry :is(svg,img){display:block;width:20px;height:20px}
 .du-store{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--v2-material-edge);border-radius:20px;background:var(--v2-selected-surface);box-shadow:inset 0 1px 0 var(--v2-surface)}
 .du-store-icon{width:48px;height:48px;flex:none;border-radius:14px;overflow:hidden;background:var(--v2-surface)}
@@ -59,3 +59,25 @@
 .du-entry-quick>span{position:relative;z-index:1;font-size:10px;line-height:12px;letter-spacing:-.5px}
 .du-entry-quick>img:not(.du-entry-gloss){position:relative;z-index:1;width:20px;height:20px}
 .du-entry-quick>img.du-entry-gloss{display:block;position:absolute;left:-2.55px;top:-2.6px;width:46.89px;height:45.45px;max-width:none;pointer-events:none}
+
+/* Feedback applies only to direct-use specimens; original store stays intact. */
+.du-store-screen .og-store-count{top:16px;bottom:auto;background:color-mix(in oklab,var(--v2-text) 50%,transparent)}
+.du-proof[data-proof-state="expired"]{--du-expired-text:color-mix(in oklab,var(--v2-text-muted) 65%,var(--v2-muted-surface));color:var(--du-expired-text)}
+.du-proof[data-proof-state="expired"] .du-motion>span{color:var(--du-expired-text)}
+
+/* Code-first comparison: amount is retained in the transaction summary below. */
+.du-proof-code-first .du-code-label{display:block;margin-top:22px;margin-bottom:12px;font-size:12px}
+.du-proof-code-first .du-code-cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:0;letter-spacing:0;font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.du-code-cell{display:grid;place-items:center;height:72px;min-width:0;border:1px solid color-mix(in oklab,var(--v2-on-action) 45%,transparent);border-radius:12px;background:color-mix(in oklab,var(--v2-on-action) 10%,transparent)}
+.du-proof-code-first .du-motion{margin:18px auto 14px;height:44px}
+.du-proof-code-first .du-motion i{width:36px;height:36px}
+.du-proof-code-first .du-motion i:nth-child(2){width:48px;height:48px}
+.du-proof-code-first .du-motion i:nth-child(3){width:60px;height:60px}
+.du-proof-code-first[data-proof-state="expired"] .du-code-cell{background:var(--v2-surface);border-color:var(--v2-edge)}
+/* A delayed connection does not reverse the completed use. */
+.du-proof-code-first[data-proof-state="stale"]{background:linear-gradient(145deg,color-mix(in oklab,var(--v2-action) 85%,var(--v2-primary-light)),var(--v2-action) 50%,var(--v2-primary-edge));color:var(--v2-on-action);border-color:var(--v2-primary-light)}
+.du-proof-code-first[data-proof-state="stale"] .du-proof-status{background:var(--v2-notice-warning-surface);color:var(--v2-warning);border-color:transparent}
+.du-proof-code-first[data-proof-state="stale"] .du-motion>span{background:var(--v2-on-action);color:var(--v2-action)}
+.du-proof-code-first[data-proof-state="stale"] .du-timer{border-color:color-mix(in oklab,var(--v2-on-action) 30%,transparent)}
+
+.du-status-attention{display:grid;place-items:center;width:14px;height:14px;font-size:13px;line-height:1}

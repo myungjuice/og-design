@@ -1,1 +1,3 @@
 .du-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),390px));gap:32px;align-items:start;margin-bottom:48px}.du-review-figure{margin:0;min-width:0;max-width:390px}.du-review-figure>figcaption{font-weight:700;line-height:1.5;margin-bottom:16px}.du-review-host{width:100%;overflow:clip}.du-review-description{max-width:88ch;color:var(--v2-workspace-muted);line-height:1.8;margin:16px 0 24px}.du-review-description>span{display:inline-block;font-size:12px;line-height:20px;border:1px solid var(--v2-workspace-accent);color:var(--v2-workspace-accent);padding:1px 8px;border-radius:4px;margin-right:8px}
+
+.du-review-subtitle{margin:40px 0 20px;font-size:18px}

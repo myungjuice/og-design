@@ -19,7 +19,7 @@ function shell(title,body,footer,state=''){
 function storeIdentity(){
  return `<section class="du-store"><div class="du-store-icon">${renderThumbnail({src:store.logo,alt:store.name+' 로고',fit:'contain',decorative:true})}</div><div><span>마일리지 사용할 매장</span><h3>${e(store.name)}</h3><p>${e(store.address)}</p></div></section>`;
 }
-export function renderDirectUseEntry({appearance='quick'}={}){
+export function renderDirectUseEntry({appearance='capsule'}={}){
  if(!['quick','capsule'].includes(appearance))throw new RangeError('Unsupported entry appearance');
  const gloss=appearance==='quick'?'<img class="du-entry-gloss" src="/assets/figma-home-20261020/d146b.svg" width="47" height="45" alt="" aria-hidden="true">':'';
  const entry=action('바로사용','primary','du-entry'+(appearance==='quick'?' du-entry-quick':''),bolt+'<span>바로사용</span>'+gloss);
@@ -38,18 +38,32 @@ export function renderDirectUseConfirmation(state='active'){
  const receipt=`<section class="du-proof" data-proof-state="${state}"><div class="du-proof-status">${normal?check:''}<span>${status}</span></div><p class="du-proof-store">${e(store.name)}</p><div class="du-proof-amount">${number(transaction.amount)} <small>M 사용</small></div><div class="du-motion" aria-hidden="true"><i></i><i></i><i></i><span>${normal?check:expired?'−':'!'}</span></div><span class="du-code-label">확인 번호</span><strong class="du-code">${transaction.code}</strong><div class="du-timer"><span>${expired?'확인 시간 종료':stale?'남은 시간 확인 필요':'남은 확인 시간'}</span><strong>${normal?'2:33':expired?'0:00':'—:—'}</strong></div><div class="du-proof-clock"><span>${stale?'마지막 확인 시각':'현재 시각'}</span><time>${expired?'15:33:05':'15:30:32'}</time></div></section>`;
  return shell('바로사용 확인',`<section class="du-intro du-confirm-intro"><span class="du-eyebrow">${expired?'확인 종료':stale?'연결 상태 확인':'사용 완료'}</span><h1>${title}</h1><p>${e(copy).replaceAll('\n','<br>')}</p></section>${receipt}<dl class="du-summary du-receipt-summary">${summaryRow('사용 일시','2026.11.02 '+transaction.usedAt)}${summaryRow('사용 마일리지',number(transaction.amount)+' M')}${summaryRow('사용 후 사용 가능',number(transaction.available-transaction.amount)+' M')}</dl><p class="du-location">${expired?'이미 사용한 마일리지가 자동으로 반환되지는 않아요.':stale?'상태 확인 전에는 사용을 다시 시도하지 마세요.':'확인 화면은 사용 후 3분 동안 유효해요.'}</p>`,action('확인'),'confirm-'+state);
 }
+// Number hierarchy proposal. Original receipt stays intact for comparison.
+export function renderDirectUseFocusedConfirmation(state='active'){
+ const original=renderDirectUseConfirmation(state);
+ const expired=state==='expired',stale=state==='stale';
+ const status=expired?'확인 시간 만료':stale?'최신 상태 확인이 필요해요':'서버 확인됨';
+ const cells=[...transaction.code].map(digit=>`<span class="du-code-cell" aria-hidden="true">${digit}</span>`).join('');
+ const receipt=`<section class="du-proof du-proof-code-first" data-proof-state="${state}"><div class="du-proof-status">${stale?'<span class="du-status-attention" aria-hidden="true">!</span>':!expired?check:''}<span>${status}</span></div><p class="du-proof-store">${e(store.name)}</p><span class="du-code-label">점주 확인 번호</span><strong class="du-code du-code-cells" aria-label="확인 번호 ${[...transaction.code].join(' ')}">${cells}</strong><div class="du-motion" aria-hidden="true"><i></i><i></i><i></i><span>${expired?'−':check}</span></div><div class="du-timer"><span>${expired?'확인 시간 종료':stale?'남은 시간 확인 중':'남은 확인 시간'}</span><strong>${expired?'0:00':stale?'—:—':'2:33'}</strong></div></section>`;
+ let html=original.replace(/<section class="du-proof"[\s\S]*?<\/section>/,()=>receipt).replace(`data-du-state="confirm-${state}"`,`data-du-state="confirm-focused-${state}"`);
+ if(stale){
+  html=html.replace(/<section class="du-intro du-confirm-intro">[\s\S]*?<\/section>/,'<section class="du-intro du-confirm-intro"><span class="du-eyebrow">사용 완료</span><h1>마일리지 사용은 완료되었어요</h1><p>완료된 사용 내역은 유지돼요.<br>서버 연결 상태를 다시 확인하고 있어요.</p></section>')
+   .replace('상태 확인 전에는 사용을 다시 시도하지 마세요.','연결이 확인되면 상태 안내가 자동으로 바뀌어요.');
+ }
+ return html;
+}
 const styles=['/v2/tokens.css','/v2/components/button.css','/v2/components/icon-button.css','/v2/components/media.css','/v2/home/store.css','/v2/home/direct-use.css'];
 function specimen(key,label,html){
  return `<figure class="du-review-figure"><figcaption>${e(label)}</figcaption><div class="du-review-host" data-direct-use-screen="${e(key)}"><template>${styles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}${html}</template></div></figure>`;
 }
-function section(id,title,copy,specimens){
- return `<section id="${id}" hidden data-review-screen data-review-status="pending" data-review-since="2026-11-02T00:00:00+09:00"><h2>${title}</h2><p class="du-review-description"><span>사용자 검토 대기</span> ${copy}</p><div class="du-review-grid">${specimens.map(args=>specimen(...args)).join('')}</div></section>`;
+function section(id,title,copy,specimens,{status='pending',extra=''}={}){
+ return `<section id="${id}" hidden data-review-screen data-review-status="${status}" data-review-since="2026-11-02T00:00:00+09:00"><h2>${title}</h2><p class="du-review-description"><span>${status==='confirmed'?'A안 확정':'사용자 검토 대기'}</span> ${copy}</p><div class="du-review-grid">${specimens.map(args=>specimen(...args)).join('')}</div>${extra}</section>`;
 }
 export function renderDirectUseReview(){
  return '<link rel="stylesheet" href="/v2/home/direct-use-review.css">'+[
-  section('direct-use-entry','바로사용 · 진입 버튼 2안 비교','A안은 캡슐형, B안은 바로적립과 같은 원형·보라색 입체감·광택을 사용한 제안입니다. 두 안 모두 검토용이며, 기존 상세는 매장 메뉴에 보존했습니다.',[['entry-capsule','A안 · 캡슐형',renderDirectUseEntry({appearance:'capsule'})],['entry-after','B안 · 원형',renderDirectUseEntry()]]),
+  section('direct-use-entry','바로사용 · A안 확정','캡슐형 A안으로 확정했습니다. 페이지네이션은 우측 상단, 바로사용 버튼은 우측 하단입니다. 기존 상세는 매장 메뉴에 보존했습니다.',[['entry-capsule','A안 · 캡슐형',renderDirectUseEntry()]],{status:'confirmed'}),
   section('direct-use-amount','바로사용 · 금액 선택','매장명을 먼저 확인하고 휠에서 금액을 선택합니다. 보유 총액과 사용 가능한 금액을 구분했습니다. 금액 선택·사용 버튼은 실행하지 않는 정적 시안입니다.',[['amount','10,000 M 선택 예시',renderDirectUseAmount()]]),
-  section('direct-use-confirm','바로사용 · 점주 확인·만료','같은 거래의 정상·만료·연결 지연 상태를 비교합니다. 점주는 사용 완료 사실만 확인하며 별도 승인하지 않습니다. 금액·시간·번호와 보안 모션은 정지된 예시입니다.',[['confirm-active','사용 완료 · 남은 시간 2:33',renderDirectUseConfirmation()],['confirm-expired','3분 경과 · 확인 화면 만료',renderDirectUseConfirmation('expired')],['confirm-stale','연결 지연 · 최신 상태 확인 필요',renderDirectUseConfirmation('stale')]])
+  section('direct-use-confirm','바로사용 · 기존안과 번호 강조안','확인번호를 4칸으로 나누고 금액을 하단 사용 내역으로 옮긴 비교안입니다. 기존 박스 아래의 현재 시각 줄만 생략하고, 연결 상태 문구·남은 확인 시간·사용 일시는 유지했습니다.',[['confirm-active','기존안 · 현재 시각 표시',renderDirectUseConfirmation()],['confirm-focused','번호 강조안 · 금액은 하단 내역으로',renderDirectUseFocusedConfirmation()]],{extra:'<h3 class="du-review-subtitle">번호 강조안 · 다른 상태</h3><div class="du-review-grid">'+specimen('confirm-expired','확인 시간 만료',renderDirectUseFocusedConfirmation('expired'))+specimen('confirm-stale','연결 지연 · 사용 내역은 유지',renderDirectUseFocusedConfirmation('stale'))+'</div>'})
  ].join('');
 }
 export function setupDirectUseReview(root){

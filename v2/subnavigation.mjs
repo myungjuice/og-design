@@ -32,7 +32,7 @@ export function reviewGroups(pageId){
   if(pageId==='home')groups.push({id:'explore',label:'검색·업종',items:[{id:'search',label:'매장 검색·검색 결과'},{id:'category',label:'업종 선택'}]});
   if(pageId==='home')groups.push({id:'nearby',label:'주변 탐색',items:[{id:'nearby',label:'근처 보기'}]});
   if(pageId==='home')groups.push({id:'store',label:'매장',items:[{id:'store',label:'매장 상세 첫 화면'},{id:'store-share',label:'매장 공유'},{id:'store-photo',label:'매장 사진 상세'},{id:'main-menu',label:'주요 메뉴'},{id:'full-menu',label:'전체 메뉴'},{id:'menu-detail',label:'메뉴 상세'}]});
-  if(pageId==='home')groups.push({id:'direct-use',label:'바로사용 · 검토 대기',items:[{id:'direct-use-entry',label:'매장 상세 진입'},{id:'direct-use-amount',label:'사용 금액 선택'},{id:'direct-use-confirm',label:'점주 확인·만료'}]});
+  if(pageId==='home')groups.push({id:'direct-use',label:'바로사용 · 검토 대기',items:[{id:'direct-use-entry',label:'매장 상세 · A안 확정'},{id:'direct-use-amount',label:'사용 금액 선택'},{id:'direct-use-confirm',label:'번호 강조 비교·만료'}]});
   if(pageId==='home')groups.push({id:'store-services',label:'예약·웨이팅',items:[{id:'store-reservation',label:'매장 예약 영역'},{id:'store-waiting',label:'매장 웨이팅 영역'}]});
   if(pageId==='home')groups.push({id:'store-updates',label:'소식·이벤트',items:[{id:'store-news',label:'매장 소식 영역'},{id:'store-event',label:'매장 이벤트 영역'},{id:'news-list',label:'소식 전체 목록'},{id:'news-detail',label:'소식 상세'},{id:'event-list',label:'이벤트 전체 목록'},{id:'event-detail',label:'이벤트 상세'}]});
   if(pageId==='home')groups.push(

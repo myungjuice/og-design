@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderHomeStoreScreen} from './store.mjs';
-import {renderDirectUseEntry,renderDirectUseAmount,renderDirectUseConfirmation,renderDirectUseReview} from './direct-use.mjs';
+import {renderDirectUseEntry,renderDirectUseAmount,renderDirectUseConfirmation,renderDirectUseFocusedConfirmation,renderDirectUseReview} from './direct-use.mjs';
 import {reviewGroups} from '../subnavigation.mjs';
 import {renderWorkspace} from '../render.mjs';
 test('direct use is additive; original store has no entry and new entry is inside photo',()=>{
@@ -25,11 +25,11 @@ test('proof expiry and stale states cannot create another use or falsely verify 
  assert.doesNotMatch(expired,/다시 사용|재결제|승인 요청/);
  assert.doesNotMatch(stale,/서버 확인 완료/);assert.match(stale,/최신 상태 확인이 필요해요/);
 });
-test('new review routes are reachable while original routes remain and all are pending',()=>{
+test('new review routes are reachable while original routes remain and only the entry is confirmed',()=>{
  const ids=['direct-use-entry','direct-use-amount','direct-use-confirm'];
  const groups=reviewGroups('home'),html=renderDirectUseReview(),workspace=renderWorkspace({pageId:'home'});
  for(const id of ids){assert.ok(groups.some(g=>g.items.some(i=>i.id===id)));assert.ok(workspace.includes('id="'+id+'"'));}
- assert.equal((html.match(/data-review-status="pending"/g)||[]).length,3);
+ assert.equal((html.match(/data-review-status="pending"/g)||[]).length,2);
  assert.ok(groups.some(g=>g.items.some(i=>i.id==='store')));
  assert.match(html,/기존 상세/);
 });
@@ -41,17 +41,36 @@ test('entry reuses the actual rounded Material symbol and headers use the shared
  assert.match(summary,/사용 후 사용 가능<\/dt><dd>180,000 M/);
 });
 test('quick-family comparison reuses gloss while keeping earn artwork and capsule separate',()=>{
- const next=renderDirectUseEntry(),previous=renderDirectUseEntry({appearance:'capsule'}),review=renderDirectUseReview();
+ const next=renderDirectUseEntry({appearance:'quick'}),previous=renderDirectUseEntry({appearance:'capsule'}),review=renderDirectUseReview();
  assert.match(next,/du-entry-quick/);
  assert.match(next,/figma-home-20261020\/d146b\.svg/);
  assert.doesNotMatch(next,/ae1d9\.svg|바로적립<\/span>/);
  assert.doesNotMatch(previous,/du-entry-quick|d146b\.svg/);
  assert.match(review,/entry-capsule/);
 });
-test('entry review shows exactly two button choices and keeps the original detail in its existing route',()=>{
+test('entry uses confirmed A and retains original store and B renderer for history',()=>{
  const html=renderDirectUseReview(),entry=html.slice(html.indexOf('id="direct-use-entry"'),html.indexOf('id="direct-use-amount"'));
- assert.equal((entry.match(/data-direct-use-screen=/g)||[]).length,2);
- assert.match(entry,/A안 · 캡슐형/);assert.match(entry,/B안 · 원형/);
- assert.doesNotMatch(entry,/entry-before/);
+ assert.equal((entry.match(/data-direct-use-screen=/g)||[]).length,1);
+ assert.match(entry,/A안 · 캡슐형/);assert.match(entry,/data-review-status="confirmed"/);
+ assert.doesNotMatch(entry,/B안|저는 이것을 추천합니다|du-entry-quick/);
+ assert.doesNotMatch(renderDirectUseEntry(),/du-entry-quick/);
  assert.match(renderWorkspace({pageId:'home'}),/<section id="store"/);
+});
+test('code-first specimen separates all four digits, demotes amount and omits only server clock',()=>{
+ const html=renderDirectUseFocusedConfirmation(),proof=html.match(/<section class="du-proof[\s\S]*?<\/section>/)?.[0]||'';
+ assert.match(html,/aria-label="확인 번호 4 3 6 8"/);
+ assert.equal((proof.match(/class="du-code-cell"/g)||[]).length,4);
+ assert.doesNotMatch(proof,/du-proof-amount|10,000|du-proof-clock|현재 시각/);
+ assert.match(proof,/서버 확인됨/);assert.match(proof,/2:33/);
+ assert.match(html,/사용 일시/);assert.match(html,/15:30:05/);assert.match(html,/10,000/);
+ assert.match(renderDirectUseConfirmation(),/du-proof-clock/);
+});
+test('focused network warning is temporary connectivity feedback, not a reversed transaction',()=>{
+ const html=renderDirectUseFocusedConfirmation('stale');
+ assert.match(html,/최신 상태 확인이 필요해요/);assert.match(html,/완료된 사용 내역은 유지/);
+ assert.match(html,/연결이 확인되면 상태 안내가 자동으로 바뀌어요/);assert.match(html,/du-status-attention/);
+ assert.doesNotMatch(html,/사용 취소|사용 실패|서버 확인 완료|du-proof-clock/);
+ assert.equal((html.match(/class="du-code-cell"/g)||[]).length,4);
+ const expired=renderDirectUseFocusedConfirmation('expired');
+ assert.match(expired,/0:00/);assert.match(expired,/사용 내역은 그대로 유지/);
 });
