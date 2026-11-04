@@ -55,11 +55,13 @@ test('direct-use routes and static specimens render without clipping, overlap or
   assert.equal(colors.outsideExpired,colors.outsideActive,'outside heading should retain its color');
   const codeFirst=await page.evaluate(()=>{
    const shadow=key=>document.querySelector('[data-direct-use-screen="'+key+'"]').shadowRoot;
-   const focused=shadow('confirm-focused'),stale=shadow('confirm-stale');
-   return {digits:[...focused.querySelectorAll('.du-code-cell')].map(e=>e.textContent),digitSize:parseFloat(getComputedStyle(focused.querySelector('.du-code-cell')).fontSize),amountSize:parseFloat(getComputedStyle(focused.querySelector('.du-summary dd')).fontSize),focusedClock:!!focused.querySelector('.du-proof-clock'),originalClock:!!shadow('confirm-active').querySelector('.du-proof-clock'),staleBackground:getComputedStyle(stale.querySelector('.du-proof')).backgroundImage,entryConfirmed:document.querySelector('#direct-use-entry').dataset.reviewStatus};
+   const focused=shadow('confirm-balanced'),stale=shadow('confirm-stale');
+   return {digits:[...focused.querySelectorAll('.du-code-cell')].map(e=>e.textContent),digitSize:parseFloat(getComputedStyle(focused.querySelector('.du-code-cell')).fontSize),amountSize:parseFloat(getComputedStyle(focused.querySelector('.du-proof-secondary-amount strong')).fontSize),originalAmountSize:parseFloat(getComputedStyle(shadow('confirm-active').querySelector('.du-proof-amount')).fontSize),focusedClock:!!focused.querySelector('.du-proof-clock'),originalClock:!!shadow('confirm-active').querySelector('.du-proof-clock'),staleBackground:getComputedStyle(stale.querySelector('.du-proof')).backgroundImage,entryConfirmed:document.querySelector('#direct-use-entry').dataset.reviewStatus};
   });
   assert.deepEqual(codeFirst.digits,['4','3','6','8']);
-  assert.ok(codeFirst.digitSize>codeFirst.amountSize*2,'code has visual priority over amount');
+  assert.ok(codeFirst.digitSize>codeFirst.amountSize,'code has visual priority over amount');
+  assert.equal(codeFirst.amountSize,codeFirst.originalAmountSize,'amount retains original size');
+  assert.match(await page.locator('[data-direct-use-screen="confirm-expired"] .du-confirm-intro').textContent(),/매장에 확인번호를 알려주고 확인을 요청해 주세요/);
   assert.equal(codeFirst.focusedClock,false);assert.equal(codeFirst.originalClock,true);
   assert.match(codeFirst.staleBackground,/linear-gradient/,'stale connection does not gray out completed transaction');
   assert.equal(codeFirst.entryConfirmed,'confirmed');

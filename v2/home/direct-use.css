@@ -81,3 +81,18 @@
 .du-proof-code-first[data-proof-state="stale"] .du-timer{border-color:color-mix(in oklab,var(--v2-on-action) 30%,transparent)}
 
 .du-status-attention{display:grid;place-items:center;width:14px;height:14px;font-size:13px;line-height:1}
+
+/* Extra comparison only: verification code stays primary, amount stays readable. */
+.du-proof-with-amount .du-proof-secondary-amount{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:18px}
+.du-proof-secondary-amount>span{font-size:12px;font-weight:400}
+.du-proof-secondary-amount>strong{font-size:34px;line-height:44px;font-weight:700;font-variant-numeric:tabular-nums}
+.du-proof-secondary-amount small{font-size:16px}
+.du-proof-with-amount .du-motion{height:36px;margin:12px auto 8px}
+.du-proof-with-amount .du-motion i:nth-child(2){width:42px;height:42px}
+.du-proof-with-amount .du-motion i:nth-child(3){width:48px;height:48px}
+
+/* Restore the original ripple spread on completed-use proposals. */
+.du-proof-with-amount:not([data-proof-state="expired"]) .du-motion{height:56px}
+.du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i{width:42px;height:42px}
+.du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i:nth-child(2){width:58px;height:58px}
+.du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i:nth-child(3){width:74px;height:74px}

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderHomeStoreScreen} from './store.mjs';
-import {renderDirectUseEntry,renderDirectUseAmount,renderDirectUseConfirmation,renderDirectUseFocusedConfirmation,renderDirectUseReview} from './direct-use.mjs';
+import {renderDirectUseEntry,renderDirectUseAmount,renderDirectUseConfirmation,renderDirectUseFocusedConfirmation,renderDirectUseBalancedConfirmation,renderDirectUseReview} from './direct-use.mjs';
 import {reviewGroups} from '../subnavigation.mjs';
 import {renderWorkspace} from '../render.mjs';
 test('direct use is additive; original store has no entry and new entry is inside photo',()=>{
@@ -73,4 +73,11 @@ test('focused network warning is temporary connectivity feedback, not a reversed
  assert.equal((html.match(/class="du-code-cell"/g)||[]).length,4);
  const expired=renderDirectUseFocusedConfirmation('expired');
  assert.match(expired,/0:00/);assert.match(expired,/사용 내역은 그대로 유지/);
+});
+
+test('visible expiry specimen guides the user to request store confirmation',()=>{
+ const html=renderDirectUseBalancedConfirmation('expired');
+ assert.match(html,/매장에 확인번호를 알려주고 확인을 요청해 주세요\./);
+ assert.match(html,/이미 사용한 마일리지가 자동으로 반환되지는 않아요/);
+ assert.match(html,/10,000/);
 });
