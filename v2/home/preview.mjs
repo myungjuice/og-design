@@ -1,3 +1,4 @@
+import {setupStoreLandmarkReview} from './store-landmark.mjs';
 import {setupDirectUseReview} from './direct-use.mjs';
 import {setupScreenPreview} from '../components/screen-preview.mjs';
 import {setupHomeAppearanceReview} from './appearance.mjs';
@@ -48,6 +49,7 @@ export function setupHomePreview(root){
  setupHomeCategoryReview(root);
  setupHomeNearbyReview(root);
  setupHomeStoreReview(root);
+ setupStoreLandmarkReview(root);
  setupHomeMainMenuReview(root);
  setupHomeFullMenuReview(root);
  setupHomeMenuDetailReview(root);

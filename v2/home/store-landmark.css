@@ -1,0 +1,30 @@
+/* Hallmark · component: informational landmark label · existing OG tokens
+ * Pre-emit critique: P5 H4 E4 S5 R5 V4. Static comparison of three placements. */
+.sl-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  align-items: start;
+  gap: var(--v2-space-6);
+  margin-top: var(--v2-space-6);
+}
+.sl-example { margin: 0; min-width: 0; max-width: 390px; }
+.sl-example figcaption { min-height: 76px; margin-bottom: var(--v2-space-4); }
+.sl-example h3 { margin: 0 0 var(--v2-space-2); font-size: var(--v2-type-body); }
+.sl-example p { margin: 0; color: var(--v2-workspace-muted); font-size: var(--v2-type-secondary); line-height: var(--v2-line-secondary); }
+.sl-host { width: 100%; min-width: 0; }
+.sl-store-screen, .sl-store-screen * { box-sizing: border-box; }
+.sl-store-screen { width: 390px; }
+.sl-store-screen .og-store-identity { min-height: 140px; }
+.sl-label { display: inline-flex; flex: none; vertical-align: middle; }
+.sl-label .v2-badge { gap: var(--v2-space-1); white-space: nowrap; }
+.sl-crown { display: block; flex: none; width: 24px; height: 22px; object-fit: contain; }
+.sl-label .sl-crown { width: 18px; height: 16px; }
+.sl-logo-group { display: flex; flex: none; flex-direction: column; align-items: center; width: 56px; gap: var(--v2-space-1); }
+.sl-logo-group>.sl-crown { width: 28px; height: 25px; }
+.sl-logo-group .v2-store-logo { margin-top: 0; }
+.sl-store-screen[data-store-landmark="name"] .og-store-name { align-items: center; gap: var(--v2-space-1) var(--v2-space-2); }
+.sl-store-screen[data-store-landmark="above"] .og-store-identity-copy>.sl-label { margin-bottom: var(--v2-space-2); }
+@media (max-width: 767px) {
+  .sl-comparison { grid-template-columns: minmax(0, 1fr); }
+  .sl-example figcaption { min-height: 0; }
+}

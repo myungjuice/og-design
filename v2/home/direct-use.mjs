@@ -52,12 +52,13 @@ export function renderDirectUseFocusedConfirmation(state='active'){
  }
  return html;
 }
-// Additive proposal: keep the existing number-only specimen unchanged.
+// Amount-first receipt requested after the stakeholder review on November 5.
 export function renderDirectUseBalancedConfirmation(state='active'){
  const amount=`<div class="du-proof-secondary-amount"><span>사용 마일리지</span><strong>${number(transaction.amount)} <small>M</small></strong></div>`;
  let html=renderDirectUseFocusedConfirmation(state)
-  .replace('class="du-proof du-proof-code-first"','class="du-proof du-proof-code-first du-proof-with-amount"')
-  .replace('</strong><div class="du-motion"',()=>'</strong>'+amount+'<div class="du-motion"')
+  .replace('class="du-proof du-proof-code-first"','class="du-proof du-proof-code-first du-proof-with-amount du-proof-amount-first"')
+  .replace('<span class="du-code-label">',()=>amount+'<div class="du-proof-code-row"><span class="du-code-label">')
+  .replace('</strong><div class="du-motion"','</strong></div><div class="du-motion"')
   .replace(`data-du-state="confirm-focused-${state}"`,`data-du-state="confirm-balanced-${state}"`);
  if(state==='expired')html=html.replace('확인 화면만 만료되었어요.<br>완료된 사용 내역은 그대로 유지돼요.','매장에 확인번호를 알려주고 확인을 요청해 주세요.');
  return html;
@@ -73,7 +74,7 @@ export function renderDirectUseReview(){
  return '<link rel="stylesheet" href="/v2/home/direct-use-review.css">'+[
   section('direct-use-entry','바로사용 · A안 확정','캡슐형 A안으로 확정했습니다. 페이지네이션은 우측 상단, 바로사용 버튼은 우측 하단입니다. 기존 상세는 매장 메뉴에 보존했습니다.',[['entry-capsule','A안 · 캡슐형',renderDirectUseEntry()]],{status:'confirmed'}),
   section('direct-use-amount','바로사용 · 금액 선택','매장명을 먼저 확인하고 휠에서 금액을 선택합니다. 보유 총액과 사용 가능한 금액을 구분했습니다. 금액 선택·사용 버튼은 실행하지 않는 정적 시안입니다.',[['amount','10,000 M 선택 예시',renderDirectUseAmount()]]),
-  section('direct-use-confirm','바로사용 · 확인번호·사용 금액 구분 비교','기존안과 확인번호를 4칸으로 구분한 안을 비교합니다. 사용 금액은 기존 크기를 유지하고 라벨·배치·간격으로 확인번호와 구분했습니다. 상태 문구·남은 확인 시간·사용 일시는 유지하며 현재 시각 줄만 생략합니다.',[['confirm-active','기존안 · 현재 시각 표시',renderDirectUseConfirmation()],['confirm-balanced','번호 분리 · 금액 크기 유지',renderDirectUseBalancedConfirmation()]],{extra:'<h3 class="du-review-subtitle">번호 분리안 · 다른 상태</h3><div class="du-review-grid">'+specimen('confirm-expired','확인 시간 만료',renderDirectUseBalancedConfirmation('expired'))+specimen('confirm-stale','연결 지연 · 사용 내역은 유지',renderDirectUseBalancedConfirmation('stale'))+'</div>'})
+  section('direct-use-confirm','바로사용 · 금액 우선 표시','사용 금액을 상단에 크게 표시하고, 아래 확인번호 라벨과 숫자 4칸을 가로로 배치했습니다. 완료·확인 만료·연결 지연 화면을 함께 확인합니다.',[['confirm-active','기존안 · 현재 시각 표시',renderDirectUseConfirmation()],['confirm-balanced','금액 강조 · 확인번호 가로 배치',renderDirectUseBalancedConfirmation()]],{extra:'<h3 class="du-review-subtitle">상태별 화면</h3><div class="du-review-grid">'+specimen('confirm-expired','확인 시간 만료',renderDirectUseBalancedConfirmation('expired'))+specimen('confirm-stale','연결 지연 · 사용 내역은 유지',renderDirectUseBalancedConfirmation('stale'))+'</div>'})
  ].join('');
 }
 export function setupDirectUseReview(root){

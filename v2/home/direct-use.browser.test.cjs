@@ -53,18 +53,52 @@ test('direct-use routes and static specimens render without clipping, overlap or
   });
   assert.ok(colors.expired.every((v,i)=>v>colors.muted[i]),'expired proof text should be lighter');
   assert.equal(colors.outsideExpired,colors.outsideActive,'outside heading should retain its color');
-  const codeFirst=await page.evaluate(()=>{
+  const amountFirst=await page.evaluate(()=>{
    const shadow=key=>document.querySelector('[data-direct-use-screen="'+key+'"]').shadowRoot;
-   const focused=shadow('confirm-balanced'),stale=shadow('confirm-stale');
-   return {digits:[...focused.querySelectorAll('.du-code-cell')].map(e=>e.textContent),digitSize:parseFloat(getComputedStyle(focused.querySelector('.du-code-cell')).fontSize),amountSize:parseFloat(getComputedStyle(focused.querySelector('.du-proof-secondary-amount strong')).fontSize),originalAmountSize:parseFloat(getComputedStyle(shadow('confirm-active').querySelector('.du-proof-amount')).fontSize),focusedClock:!!focused.querySelector('.du-proof-clock'),originalClock:!!shadow('confirm-active').querySelector('.du-proof-clock'),staleBackground:getComputedStyle(stale.querySelector('.du-proof')).backgroundImage,entryConfirmed:document.querySelector('#direct-use-entry').dataset.reviewStatus};
+   const active=shadow('confirm-balanced');
+   const states=['confirm-balanced','confirm-expired','confirm-stale'].map(key=>{
+    const root=shadow(key);
+    const amount=root.querySelector('.du-proof-secondary-amount strong');
+    const code=root.querySelector('.du-code-cells');
+    const label=root.querySelector('.du-code-label');
+    const labelRect=label.getBoundingClientRect();
+    const codeRect=code.getBoundingClientRect();
+    return {
+     key,
+     digits:[...code.querySelectorAll('.du-code-cell')].map(element=>element.textContent),
+     amountSize:parseFloat(getComputedStyle(amount).fontSize),
+     digitSize:parseFloat(getComputedStyle(code).fontSize),
+     amountBottom:amount.getBoundingClientRect().bottom,
+     codeTop:code.getBoundingClientRect().top,
+     amountWidth:amount.getBoundingClientRect().width,
+     codeWidth:codeRect.width,
+     labelRight:labelRect.right,
+     labelCenter:(labelRect.top+labelRect.bottom)/2,
+     codeLeft:codeRect.left,
+     codeCenter:(codeRect.top+codeRect.bottom)/2,
+     cellsFit:[...code.children].every(cell=>cell.scrollHeight<=cell.clientHeight&&cell.scrollWidth<=cell.clientWidth)
+    };
+   });
+   return {
+    states,
+    activeClock:!!active.querySelector('.du-proof-clock'),
+    originalClock:!!shadow('confirm-active').querySelector('.du-proof-clock'),
+    staleBackground:getComputedStyle(shadow('confirm-stale').querySelector('.du-proof')).backgroundImage,
+    entryConfirmed:document.querySelector('#direct-use-entry').dataset.reviewStatus
+   };
   });
-  assert.deepEqual(codeFirst.digits,['4','3','6','8']);
-  assert.ok(codeFirst.digitSize>codeFirst.amountSize,'code has visual priority over amount');
-  assert.equal(codeFirst.amountSize,codeFirst.originalAmountSize,'amount retains original size');
+  for(const state of amountFirst.states){
+   assert.deepEqual(state.digits,['4','3','6','8'],state.key);
+   assert.ok(state.amountSize>=state.digitSize*1.4,'amount has clear visual priority '+state.key);
+   assert.ok(state.codeTop>state.amountBottom,'code follows amount '+state.key);
+   assert.ok(state.labelRight<state.codeLeft,'label sits left of digits '+state.key);
+   assert.ok(Math.abs(state.labelCenter-state.codeCenter)<1,'label and digits share a row '+state.key);
+   assert.ok(state.cellsFit,'digits fit inside cells '+state.key);
+  }
   assert.match(await page.locator('[data-direct-use-screen="confirm-expired"] .du-confirm-intro').textContent(),/매장에 확인번호를 알려주고 확인을 요청해 주세요/);
-  assert.equal(codeFirst.focusedClock,false);assert.equal(codeFirst.originalClock,true);
-  assert.match(codeFirst.staleBackground,/linear-gradient/,'stale connection does not gray out completed transaction');
-  assert.equal(codeFirst.entryConfirmed,'confirmed');
+  assert.equal(amountFirst.activeClock,false);assert.equal(amountFirst.originalClock,true);
+  assert.match(amountFirst.staleBackground,/linear-gradient/,'stale connection does not gray out completed transaction');
+  assert.equal(amountFirst.entryConfirmed,'confirmed');
   await page.locator('[data-view-link="store"]').click();await page.waitForSelector('#store:not([hidden])');
   assert.equal(await page.locator('#store .du-entry').count(),0);
   assert.deepEqual(errors,[]);

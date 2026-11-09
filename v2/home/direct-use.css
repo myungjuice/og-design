@@ -82,7 +82,7 @@
 
 .du-status-attention{display:grid;place-items:center;width:14px;height:14px;font-size:13px;line-height:1}
 
-/* Extra comparison only: verification code stays primary, amount stays readable. */
+/* Amount displayed inside the receipt card. */
 .du-proof-with-amount .du-proof-secondary-amount{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:18px}
 .du-proof-secondary-amount>span{font-size:12px;font-weight:400}
 .du-proof-secondary-amount>strong{font-size:34px;line-height:44px;font-weight:700;font-variant-numeric:tabular-nums}
@@ -96,3 +96,54 @@
 .du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i{width:42px;height:42px}
 .du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i:nth-child(2){width:58px;height:58px}
 .du-proof-with-amount:not([data-proof-state="expired"]) .du-motion i:nth-child(3){width:74px;height:74px}
+
+/* 11/4 feedback: lift supporting copy one type step without changing proof numbers. */
+.du-proof-with-amount .du-proof-status{font-size:12px}
+.du-proof-with-amount .du-proof-store{font-size:18px}
+.du-proof-with-amount .du-code-label,
+.du-proof-with-amount .du-proof-secondary-amount>span,
+.du-proof-with-amount .du-timer>span{font-size:14px}
+
+/* November 5 feedback places the amount above a compact confirmation number. */
+.du-proof-amount-first .du-proof-secondary-amount {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.du-proof-amount-first .du-proof-secondary-amount>strong {
+  font-size: 48px;
+  line-height: 60px;
+}
+
+.du-proof-amount-first .du-proof-secondary-amount small {
+  font-size: 22px;
+}
+
+.du-proof-code-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 192px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.du-proof-amount-first .du-code-label {
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.du-proof-amount-first .du-code-cells {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  gap: 6px;
+  font-size: 32px;
+}
+
+.du-proof-amount-first .du-code-cell {
+  height: 48px;
+  border-radius: 8px;
+}

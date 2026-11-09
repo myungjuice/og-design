@@ -8,7 +8,7 @@ const screen=(state)=>section().match(new RegExp(`data-main-menu-state="${state}
 // Catches a missing route/group or eager opening of the optional condition comparison.
 test('main menu joins the store group and keeps its condition comparison collapsed',()=>{
  const group=reviewGroups('home').find(group=>group.id==='store');
- assert.deepEqual(group.items.map(item=>item.id),['store','store-share','store-photo','main-menu','full-menu','menu-detail']);
+ assert.deepEqual(group.items.map(item=>item.id),['store','store-landmark','store-share','store-photo','main-menu','full-menu','menu-detail']);
  assert.match(renderWorkspace({pageId:'home'}),/<section id="main-menu"[^>]*data-review-screen/);
  assert.match(section(),/data-main-menu-state="basic"/);
  assert.match(section(),/data-main-menu-state="conditions"/);
