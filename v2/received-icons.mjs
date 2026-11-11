@@ -1,3 +1,4 @@
+import {applyFunctionIcons} from './function-artwork.mjs';
 import {renderFigmaNavigation} from './components/figma-navigation.mjs';
 import {categoryItems} from '../design-system/pages/home/category-assets.mjs';
 import {categoryArtwork,pinArtwork,categoryName} from './category-artwork.mjs';
@@ -11,7 +12,7 @@ const functions={search:'검색.svg',target:'현위치.svg',quick:'바로적립1
 // Adapt only the v2 rendering boundary. Original screen renderers, supplied files
 // and historical v1/v2 MyLand frames stay unchanged.
 export function applyReceivedIcons(source){
- let html=source;
+ let html=applyFunctionIcons(source);
  html=html.replace(/<button\b[^>]*class="[^"]*\bhome-store-pin\b[^"]*"[^>]*>[\s\S]*?<\/button>/g,button=>{
   const name=button.match(/data-preview="([^"]+)"/)?.[1];
   const category=({'오시 망원본점':'일식','밀랍(MILLAB)':'카페/베이커리','육감만족':'한식'})[name];

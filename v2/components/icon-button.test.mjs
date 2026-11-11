@@ -11,12 +11,13 @@ test('icon buttons require a supported kind, face, state and accessible name',()
  assert.doesNotMatch(html,/material-icons|aria-pressed/);
  for(const props of [{kind:'invalid'},{face:'invalid'},{state:'invalid'},{label:' '}])assert.throws(()=>components.renderIconButton(props));
 });
-test('favorite retains the original heart and exposes selection separately from action state',()=>{
+test('favorite uses delivered ON/OFF hearts and exposes selection separately from action state',()=>{
  const html=components.renderIconButton({kind:'favorite',selected:true,state:'error'});
  assert.match(html,/og-button og-favorite v2-icon-button/);assert.match(html,/aria-pressed="true"/);
  assert.match(html,/data-state="error"/);assert.match(html,/aria-label="즐겨찾기"/);
- const original=favorite({selected:true});
- assert.equal(html.match(/<svg[\s\S]*?<\/svg>/)[0],original.match(/<svg[\s\S]*?<\/svg>/)[0]);
+ assert.match(html,/data-received-function="favorite-on"/);
+ assert.match(html,/data-received-function="favorite-off"/);
+ assert.doesNotMatch(html,/<svg/);
  assert.match(components.renderIconButton({kind:'favorite'}),/aria-pressed="false"/);
 });
 test('pending and disabled controls cannot be reenabled by caller attributes',()=>{

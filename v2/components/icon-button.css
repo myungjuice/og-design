@@ -33,3 +33,10 @@
 @keyframes v2-icon-pending{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.v2-icon-button[data-state="loading"]::after{animation:none}}
 @media(forced-colors:active){.v2-icon-button{color:ButtonText}.v2-icon-button:disabled{color:GrayText}.v2-icon-button[aria-pressed="true"]{color:Highlight;outline:2px solid Highlight}.v2-icon-button[data-face="raised"]::before{border:1px solid ButtonText;box-shadow:none}.v2-icon-button[data-face="raised"]:disabled::before{border-color:GrayText}}
+
+.received-favorite-art{position:relative;display:grid;place-items:center;width:20px;height:20px;pointer-events:none}
+.received-favorite-art img{grid-area:1 / 1;width:20px;height:20px;object-fit:contain}
+.og-favorite[aria-pressed="false"] [data-received-function="favorite-on"],.og-favorite[aria-pressed="true"] [data-received-function="favorite-off"]{display:none}
+.v2-icon-button[data-state="loading"] .received-favorite-art{visibility:hidden}
+
+.v2-icon-button>.received-function-icon{position:relative;display:block;width:20px;height:20px;object-fit:contain;pointer-events:none}

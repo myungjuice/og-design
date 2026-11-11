@@ -1,11 +1,11 @@
 import {renderLatestLandmarkMap} from './landmark-figma.mjs';
 import {figmaHomeStyles} from './figma-home.mjs';
-const assets='/assets/received-icons-20261022/pins/';
+import {pinArtworkURL} from '../category-artwork.mjs';
 
 export function renderFinalLandmarkPin(selected,{wrapped=false}={}){
  const scale=selected?1:1/1.4,size=60*scale;
  const crown=(layer)=>`<img class="landmark-final-crown landmark-crown-${layer}" src="/assets/review-20261030/neon-crown-gold-${layer}.svg" width="40" height="36" alt="">`;
- return `<span class="landmark-final-marker${wrapped?' landmark-wrapped':''}" data-landmark-state="${selected?'on':'off'}" role="img" aria-label="랜드마크 매장 · ${selected?'선택':'미선택'}" style="width:${size}px;height:${size}px"><span class="landmark-final-unit" style="transform:scale(${scale})">${wrapped?crown('back'):''}<img class="landmark-final-pin" src="${assets+(selected?'on':'off')}/${encodeURIComponent('반려동물-동물병원')}.png" width="60" height="60" alt="">${wrapped?crown('front'):'<img class="landmark-final-crown" src="/assets/review-20261029/neon-crown-gold.svg" width="40" height="36" alt="">'}</span></span>`;
+ return `<span class="landmark-final-marker${wrapped?' landmark-wrapped':''}" data-landmark-state="${selected?'on':'off'}" role="img" aria-label="랜드마크 매장 · ${selected?'선택':'미선택'}" style="width:${size}px;height:${size}px"><span class="landmark-final-unit" style="transform:scale(${scale})">${wrapped?crown('back'):''}<img class="landmark-final-pin" src="${pinArtworkURL('반려동물/동물병원',selected?'on':'off')}" width="60" height="60" alt="">${wrapped?crown('front'):'<img class="landmark-final-crown" src="/assets/review-20261029/neon-crown-gold.svg" width="40" height="36" alt="">'}</span></span>`;
 }
 
 export function renderFinalLandmarkMap({wrapped=false}={}){

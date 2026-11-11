@@ -1,3 +1,4 @@
+import {functionArtwork} from '../function-artwork.mjs';
 import {storeScreen,storeNavigation} from '../../design-system/pages/home/store.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
 import {iconButton} from '../../design-system/components/button/render.mjs';
@@ -6,7 +7,7 @@ import {renderIconButton} from '../components/icon-button.mjs';
 import {renderThumbnail,setupMedia} from '../components/media.mjs';
 
 const line=path=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
-const art={back:line('m14 5-7 7 7 7'),location:line('M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0ZM12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z'),share:line('M12 16V3m-4 4 4-4 4 4M7 11H4v10h16V11h-3'),star:line('m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z')};
+const art={back:line('m14 5-7 7 7 7'),location:functionArtwork('address',20),share:line('M12 16V3m-4 4 4-4 4 4M7 11H4v10h16V11h-3'),star:line('m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z')};
 const states=[
  ['basic','기본 첫 화면','오시 망원본점의 공개 로고·사진·소개를 사용합니다. 영업 상태와 제공 서비스는 배치용 예시이며 실시간 정보가 아닙니다.',{menu:true,reserve:true,wait:true,news:true,event:true}],
  ['limited','메뉴·예약·웨이팅·소식이 없는 매장','동일 매장을 사용해 제공 항목이 적은 상태를 비교합니다. 실제 제공 여부를 뜻하지 않습니다.',{menu:false,reserve:false,wait:false,news:false,event:false}],
@@ -31,7 +32,8 @@ const closedStatuses=new Set([...holidayStatuses,'close','notOpen','openPreparin
 function heroStatus(status){
  if(!status||status.isOpen!==false||!closedStatuses.has(status.runtimeStatus))return '';
  const holiday=holidayStatuses.has(status.runtimeStatus),label=status.label||'영업 종료';
- const glyph=holiday?line('M4 5h16v15H4ZM8 3v4m8-4v4M4 10h16m-6 3-4 4m0-4 4 4'):line('M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z');
+ const kind=({tempHoliday:'temporary-holiday',regularHoliday:'regular-holiday',holiday:'regular-holiday',close:'closed'})[status.runtimeStatus]||'hours';
+ const glyph=functionArtwork(kind,24);
  return `<div class="v2-store-hero-status" data-hero-status="${e(status.runtimeStatus)}">${glyph}<strong>${e(label)}</strong><span>${holiday?'오늘은 쉬어가요':'지금은 영업 시간이 아니에요'}</span></div>`;
 }
 export function renderHomeStoreScreen({state='basic'}={}){

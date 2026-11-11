@@ -49,3 +49,5 @@
 .v2-store-promotion-affordance{display:flex;align-items:center;justify-content:flex-end;gap:var(--v2-space-1);min-width:var(--v2-space-12);min-height:var(--v2-space-12);margin-left:auto;padding:0;border:0;background:transparent;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
 .v2-store-promotion-affordance svg{width:var(--v2-space-5);height:var(--v2-space-5);color:var(--v2-text-muted)}
 @media(forced-colors:active){.og-store-photo[data-store-hero-closed="true"] .v2-thumbnail{filter:none}.v2-store-hero-status{background:Canvas;color:CanvasText;border:1px solid CanvasText;backdrop-filter:none}.v2-store-hero-status svg{color:CanvasText}}
+
+.v2-store-hero-status>.received-function-icon{width:24px;height:24px;object-fit:contain;filter:brightness(0) invert(1)}

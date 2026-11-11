@@ -1,3 +1,4 @@
+import {favoriteArtwork} from '../function-artwork.mjs';
 import {iconButton,favorite} from '../../design-system/components/button/render.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
 import {stateComparison} from './catalog.mjs';
@@ -15,7 +16,7 @@ export function renderIconButton({kind='close',face=kind==='close'?'raised':'pla
  if(typeof label!=='string'||!label.trim())throw new TypeError('Icon button requires an accessible name');
  const cls='v2-icon-button'+(className?' '+className:'');
  const values={...attributes,'aria-label':label,'data-face':face,'data-state':state,disabled:['disabled','loading'].includes(state),'aria-busy':state==='loading'?'true':undefined};
- if(kind==='favorite')return favorite({label,selected,attributes:{...values,'aria-pressed':String(selected)}}).replace('class="og-button og-favorite"','class="og-button og-favorite '+e(cls)+'"');
+ if(kind==='favorite')return favorite({label,selected,attributes:{...values,'aria-pressed':String(selected)}}).replace('class="og-button og-favorite"','class="og-button og-favorite '+e(cls)+'"').replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/, favoriteArtwork());
  return iconButton({label,iconHTML:iconButtonArt(kind),className:cls,attributes:values});
 }
 const sample=(title,note,props)=>'<figure class="v2-component-sample"><figcaption><strong>'+e(title)+'</strong><span>'+e(note)+'</span></figcaption><div class="v2-icon-stage" inert>'+renderIconButton(props)+'</div></figure>';
@@ -24,8 +25,8 @@ export function renderIconButtonSamples(){
  sample('독립형 아이콘 버튼','흰 40px 평면에 연한 경계선을 적용합니다.',{kind:'close'})+
  sample('내용 옆 정보 버튼','제목·금액 옆에서는 배경 없이 표현합니다.',{kind:'info'})+
  sample('내용 옆 닫기 버튼','도움말처럼 표면 위에서는 받침을 반복하지 않습니다.',{kind:'close',face:'plain'})+
- sample('즐겨찾기 · 선택 전','회색 윤곽선 하트입니다.',{kind:'favorite'})+
- sample('즐겨찾기 · 선택 후','보라색 채움과 선택 상태를 함께 제공합니다.',{kind:'favorite',selected:true})+'</div>'+
+ sample('즐겨찾기 · 선택 전','수령한 라인 하트입니다.',{kind:'favorite'})+
+ sample('즐겨찾기 · 선택 후','수령한 빨간색 하트와 선택 상태를 함께 제공합니다.',{kind:'favorite',selected:true})+'</div>'+
  stateComparison('<div class="v2-icon-grid">'+[
  ['active','누르는 중','선택 여부와 누르는 피드백은 구분합니다.'],
  ['disabled','비활성','변경할 수 없는 상태이며 선택 여부는 남깁니다.'],

@@ -19,7 +19,7 @@
 .og-store-contact-row>span{min-width:0;overflow-wrap:anywhere}
 .og-store-hours{display:grid;gap:var(--v2-space-3);margin-top:var(--v2-space-5)}
 .og-store-hours-row{display:grid;grid-template-columns:18px minmax(0,1fr);align-items:start;column-gap:var(--v2-space-3);row-gap:var(--v2-space-1)}
-.og-store-hours-row>svg,.og-store-hours-spacer{width:18px;height:18px;flex:none;margin-top:2px}
+.og-store-hours-row>svg,.og-store-hours-row>.received-function-icon,.og-store-hours-spacer{width:18px;height:18px;flex:none;margin-top:2px}
 .og-store-hours-row>strong{font-weight:700;grid-column:2}
 .og-store-hours-row>div{min-width:0;overflow-wrap:anywhere;grid-column:2}
 .og-store-hours-row p{margin:0}

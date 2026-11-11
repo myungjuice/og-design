@@ -47,11 +47,11 @@ test('all three comparisons preserve delivered 160px transparent PNGs without a 
    const art=pin.match(/<img class="received-pin-art"[^>]*src="([^"]+)"/);
    assert.ok(art,`${id} pin ${index} must use PNG artwork`);
    const file=art[1];
-   assert.match(file,/^\/assets\/received-icons-20261022\/pins\/(on|off)\/[^/]+\.png$/);
+   assert.match(file,/^\/assets\/received-icons-20261110\/pins\/(on|off)\/[^/]+\.png$/);
    const bytes=readFileSync(new URL('../..'+file,import.meta.url));
    assert.equal(bytes.subarray(1,4).toString(),'PNG');
    assert.equal(bytes.readUInt32BE(16),160);
-   assert.equal(bytes.readUInt32BE(20),160);
+   assert.equal(bytes.readUInt32BE(20),file.includes('/on/')?173:160);
    assert.equal(bytes[25],6,'RGBA PNG must preserve the transparent background');
    assert.doesNotMatch(pin,/figma-pin-mask|figma-pin-layer/,'avoid clipping an already vector-shaped pin a second time');
   }
@@ -65,9 +65,9 @@ test('all comparison themes share the delivered selected ON and circular OFF art
  for(const id of ['original','light-large','dark-large']){
   const files=[...specimens[id].matchAll(/class="received-pin-art"[^>]*src="([^"]+)"/g)].map(m=>decodeURIComponent(m[1]));
   assert.deepEqual(files,[
-   '/assets/received-icons-20261022/pins/on/한식.png',
-   '/assets/received-icons-20261022/pins/off/한식.png',
-   '/assets/received-icons-20261022/pins/off/한식.png'
+   '/assets/received-icons-20261110/pins/on/한식.png',
+   '/assets/received-icons-20261110/pins/off/한식.png',
+   '/assets/received-icons-20261110/pins/off/한식.png'
   ]);
  }
 });

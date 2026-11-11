@@ -1,10 +1,11 @@
+import {applyFunctionIcons,functionArtwork} from '../function-artwork.mjs';
 import {storeInfoSection,locationSheet} from '../../design-system/pages/home/store-info.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
 import {icon} from '../../design-system/components/core.mjs';
 import {renderHomeStoreContent} from './store.mjs';
 import {remainingGallery,setupRemainingGallery} from './remaining-gallery.mjs';
-const clock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>';
-const adapt=html=>html.replaceAll(icon('access_time'),()=>clock).replace(/<button\b(?![^>]*\binert\b)/g,'<button inert').replaceAll('<h3>','<h5>').replaceAll('</h3>','</h5>');
+const clock=functionArtwork('hours',18);
+const adapt=html=>applyFunctionIcons(html).replaceAll(icon('access_time'),()=>clock).replace(/<button\b(?![^>]*\binert\b)/g,'<button inert').replaceAll('<h3>','<h5>').replaceAll('</h3>','</h5>');
 const valid=(state,allowed)=>{if(!allowed.includes(state))throw new RangeError('Unsupported information state');};
 export function renderHomeStoreInfoScreen({state='registered',data=publicStoreData}={}){
  valid(state,['registered','minimal']);const source=data.info;

@@ -7,12 +7,6 @@
 .approved-store-canvas .home-map-pins .figma-map-pin-selected{left:220px;top:314px;width:40px;height:40px}
 .approved-store-canvas .home-map-pins .figma-map-pin-first{left:56px;top:314px;width:24px;height:24px}
 .approved-store-canvas .home-map-pins .figma-map-pin-second{left:80px;top:359px;width:24px;height:24px}
-.approved-pin-mask{position:absolute;display:block;mask-mode:alpha;mask-repeat:no-repeat;overflow:visible}
-.approved-pin-mask-off{inset:7.6% 7.4% 7.4% 7.6%;mask-image:url('/assets/figma-store-markers-20261026/b53b1.svg');mask-position:-1.825px -1.825px;mask-size:24px 24px}
-.approved-pin-mask-on{inset:.1% 7.4% .49% 7.6%;mask-image:url('/assets/figma-store-markers-20261026/149e5.svg');mask-position:-3.042px -.042px;mask-size:40px 40px}
-.approved-pin-art{position:absolute;display:block}
-.approved-pin-mask-off>.approved-pin-art{inset:-7.97% -7.72% -7.72% -7.97%}
-.approved-pin-mask-on>.approved-pin-art{inset:-.1% 0 0 -.12%}
 .approved-new-badge{position:absolute;right:0;top:0;display:flex;align-items:center;justify-content:center;width:10px;height:10px;padding-bottom:1px;border-radius:999px;background:#ff383c;color:#fff;font:800 7px/normal 'Noto Sans Display','Noto Sans',sans-serif;pointer-events:none}
 .figma-map-pin-selected>.approved-new-badge{width:12px;height:12px;font-size:8px}
 .approved-crown{position:absolute;display:block;pointer-events:none}

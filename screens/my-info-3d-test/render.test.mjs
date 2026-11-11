@@ -117,7 +117,7 @@ test('my-info renderer accepts route-safe assets and the shared v2 balance rende
  const html=renderMyInfoTest({available:0,total:2400,shared:0,sharedCount:0,assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderMileage});
  assert.match(html,/class="og-surface mileage-card v2-mileage"/);
  assert.match(html,/공유인 0/);assert.match(html,/2,400 M/);
- assert.ok([...html.matchAll(/src="([^"]+)"/g)].every(m=>m[1].startsWith('/screens/my-info-3d-test/media/figma/')));
+ assert.ok([...html.matchAll(/src="([^"]+)"/g)].every(m=>(m[1].startsWith('/screens/my-info-3d-test/media/figma/')||m[1].startsWith('/assets/received-icons-20261105/'))));
 });
 test('barcode renderer accepts shared balance rendering without changing legacy defaults',async()=>{
  const {renderBarcodeTest}=await import('./render.mjs');

@@ -15,7 +15,7 @@ test('shared card resolves original assets from a different route and escapes pa
  assert.match(html,/class="og-surface mileage-card v2-mileage"/);
  const paths=[...html.matchAll(/src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(paths.length>=5);
- assert.ok(paths.every(p=>p.startsWith('/screens/my-info-3d-test/media/figma/')));
+ assert.ok(paths.every(p=>p.startsWith('/screens/my-info-3d-test/media/figma/')||p.startsWith('/assets/received-icons-20261105/functions/')));
  assert.match(sharedCard({assetBase:'" onerror="bad/'}),/src="&quot; onerror=&quot;bad\/mileage-m.png"/);
 });
 test('gallery renders four independently labelled balance cases using resolved original assets',()=>{

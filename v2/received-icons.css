@@ -20,3 +20,7 @@
 .home-quick>.figma-quick-glyph,.quick>.figma-quick-glyph{display:block;position:static;width:auto;height:auto;max-width:none;filter:none}
 .home-quick>.figma-quick-gloss,.quick>.figma-quick-gloss{display:block;position:absolute;left:-2.19px;top:-2.23px;width:auto;height:auto;max-width:none;pointer-events:none}
 .home-locate>.figma-location-glyph,.gps>.figma-location-glyph{display:block;position:static;max-width:none}
+
+.received-function-icon{display:block;object-fit:contain;flex:none;pointer-events:none}
+.service-face>.received-function-icon{width:40px;height:40px}
+.v2-store-hero-status>.received-function-icon{width:24px;height:24px}

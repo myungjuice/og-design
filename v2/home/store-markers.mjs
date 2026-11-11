@@ -1,3 +1,4 @@
+import {pinArtwork as receivedPinArtwork} from '../category-artwork.mjs';
 import {renderFigmaHome,figmaHomeStyles} from './figma-home.mjs';
 
 // Approved designs: NEW 267:2353 / BEST 267:2494. Figma is read-only.
@@ -9,8 +10,9 @@ const categories={'한식':'2f4c8.svg','중식':'7ac3e.svg','일식':'af4e4.svg'
 const navigation={'2e976.svg':'0a150.svg','e283b.svg':'0a150.svg','6cd8b.svg':'07cea.svg','770e1.svg':'07cea.svg','66ab4.svg':'a066d.svg','558f2.svg':'a066d.svg'};
 
 function pinArtwork(selected){
- return `<span class="approved-pin-mask ${selected?'approved-pin-mask-on':'approved-pin-mask-off'}"><span class="approved-pin-art">${selected?image('55e99.svg','',34.0417,39.803):image('3679c.svg','',23.6)}</span></span>`;
+ return receivedPinArtwork('한식',selected?'on':'off',selected?33.6:24);
 }
+
 function pin(name,position,kind){
  const selected=position==='selected',isNew=kind==='new'&&position!=='first',isBest=kind==='best'&&position!=='second';
  const label=name+(isNew?' · 신규 회원점':isBest?' · 랜드마크 매장':'')+' 보기';

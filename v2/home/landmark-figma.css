@@ -23,3 +23,5 @@
 [data-landmark-comparison="gold-neon"] .landmark-figma-pin{z-index:2}
 [data-landmark-comparison="gold-neon"] .landmark-figma-tilted-crown{z-index:1}
 [data-landmark-comparison="gold-neon"] .landmark-gold-crown-first{left:132px;top:234px}
+
+.landmark-figma-pin>img{width:100%;height:100%;object-fit:contain}

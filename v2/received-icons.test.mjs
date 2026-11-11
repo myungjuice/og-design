@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync,readFileSync} from 'node:fs';
+import {existsSync,readFileSync,readdirSync} from 'node:fs';
 import {renderWorkspace} from './render.mjs';
 import {applyReceivedIcons} from './received-icons.mjs';
 
@@ -28,7 +28,7 @@ test('home uses received category, function and map-pin artwork in actual v2 scr
  const html=renderWorkspace({pageId:'home'});
  for(const kind of ['category','navigation'])assert.match(html,new RegExp('data-received-icon="'+kind+'"'));
  assert.ok(html.includes('/assets/figma-home-20261020/adbac.svg'));
- for(const state of ['on','off'])assert.ok(html.includes('/assets/received-icons-20261022/pins/'+state+'/'),state);
+ for(const state of ['on','off'])assert.ok(html.includes('/assets/received-icons-20261110/pins/'+state+'/'),state);
  for(const file of ['aa166.svg','ae1d9.svg','d146b.svg'])assert.ok(html.includes('/assets/figma-home-20261020/'+file),file);
  assert.match(html,/data-received-category="한식"/);
  assert.match(html,/data-received-category="카페\/베이커리"/);
@@ -63,7 +63,7 @@ test('recent visits use matching industry icons rather than one generic utensils
 
 test('received artwork references are local SVG files present in the site',()=>{
  const html=['home','my-info','barcode','my-land'].map(pageId=>renderWorkspace({pageId})).join('');
- const paths=[...new Set([...html.matchAll(/src="(\/assets\/(?:received-icons-20261017|received-icons-20261022|figma-home-20261020)\/[^\"]+\.svg)"/g)].map(m=>decodeURIComponent(m[1])))];
+ const paths=[...new Set([...html.matchAll(/src="(\/assets\/(?:received-icons-20261017|received-icons-20261022|received-icons-20261105|figma-home-20261020)\/[^\"]+\.svg)"/g)].map(m=>decodeURIComponent(m[1])))];
  assert.ok(paths.length>=35,'actual renders reference the delivered artwork set');
  for(const path of paths){
   const file=new URL('..'+path,import.meta.url);
@@ -89,4 +89,23 @@ test('composing received-icon adapters does not duplicate stylesheet links or ar
  const html=renderWorkspace({pageId:'home'});
  const once=applyReceivedIcons(html);
  assert.equal(applyReceivedIcons(once),once);
+});
+
+
+test('function icons replace profile artwork and verification states without construction guides',()=>{
+ const html=renderWorkspace({pageId:'my-info'});
+ for(const kind of ['notification','settings','edit','mileage','history','notices','membership','support','account','verified-on','verified-off']){
+  assert.ok(html.includes('data-received-function="'+kind+'"'),kind+' reaches the public review entry point');
+ }
+ assert.doesNotMatch(html,/menu-icons\.png|header-bell\.svg|header-settings\.svg|mileage-m\.png/);
+ const directory=new URL('../assets/received-icons-20261105/functions/',import.meta.url);
+ const files=readdirSync(directory);
+ assert.equal(files.length,23);
+ for(const file of files){
+  const svg=readFileSync(new URL(file,directory),'utf8');
+  assert.doesNotMatch(svg,/<path[^>]*opacity="0\.2"[^>]*fill="#FF0E0E"/,file+' omits the red construction grid');
+ }
+ const mileage=readFileSync(new URL('L31_마일리지.svg',directory),'utf8');
+ assert.match(mileage,/<filter\b/);
+ assert.match(mileage,/<linearGradient\b/);
 });

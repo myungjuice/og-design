@@ -26,7 +26,7 @@ test('gallery keeps shared profile/list artwork and real mileage markup rather t
  assert.match(html,/id="loading" aria-labelledby="loading-title" hidden/);
  assert.match(html,/data-loading-state/);assert.match(html,/data-loading-status[^>]*role="status"/);
  assert.match(html,/data-loading-example="profile"/);assert.match(html,/data-loading-example="list"/);assert.match(html,/data-loading-example="mileage"/);
- assert.match(html,/og-list-row v2-list-row/);assert.match(html,/menu-icons\.png/);assert.match(html,/mileage-card v2-mileage/);assert.match(html,/mileage-m\.png/);
+ assert.match(html,/og-list-row v2-list-row/);assert.match(html,/menu-icons\.png/);assert.match(html,/mileage-card v2-mileage/);assert.match(html,/data-received-function="mileage"/);
  assert.match(get('renderLoadingMileage')({busy:false}),/<button disabled type="button" class="mileage-info"/);
  const group=reviewGroups('components').find(g=>g.id==='loading');assert.deepEqual(group.items.map(i=>i.id),['loading']);
 });

@@ -9,6 +9,7 @@ import {categoryArtworkURL,pinArtworkURL} from './category-artwork.mjs';
 import {renderHomeCategoryScreen} from './home/category.mjs';
 
 const base='/assets/received-icons-20261022/';
+const pinBase='/assets/received-icons-20261110/pins/';
 const imageSources=html=>[...html.matchAll(/<img\b[^>]*>/g)].map(([tag])=>({tag,src:decodeURIComponent(tag.match(/src="([^"]+)"/)?.[1]||'')}));
 
 test('all three category selection specimens include the received accessories industry once',()=>{
@@ -38,8 +39,8 @@ test('shared home specimens retain the 1.4 ratio outside the final Figma review 
 test('legacy sports labels and the supplied ON filename typo resolve to one sports/leisure artwork',()=>{
  for(const label of ['운동/헬스','레저','운동-서비스-레저','운동-스포츠-레저']){
   assert.equal(decodeURIComponent(categoryArtworkURL(label)),base+'categories/운동-스포츠-레저.svg');
-  assert.equal(decodeURIComponent(pinArtworkURL(label,'on')),base+'pins/on/운동-스포츠-레저.png');
-  assert.equal(decodeURIComponent(pinArtworkURL(label,'off')),base+'pins/off/운동-스포츠-레저.png');
+  assert.equal(decodeURIComponent(pinArtworkURL(label,'on')),pinBase+'on/운동-스포츠-레저.png');
+  assert.equal(decodeURIComponent(pinArtworkURL(label,'off')),pinBase+'off/운동-스포츠-레저.png');
  }
  assert.throws(()=>pinArtworkURL('한식','unknown'),RangeError);
 });
@@ -49,20 +50,19 @@ test('shared home uses delivered outlined ON/OFF PNGs without clipping their tra
  const pins=[...html.matchAll(/<button\b[^>]*class="figma-map-pin[^\"]*"[^>]*>([\s\S]*?)<\/button>/g)].map(m=>m[1]);
  assert.equal(pins.length,3);
  assert.deepEqual(pins.map(pin=>imageSources(pin)[0]?.src),[
-  base+'pins/on/한식.png',base+'pins/off/한식.png',base+'pins/off/한식.png'
+  pinBase+'on/한식.png',pinBase+'off/한식.png',pinBase+'off/한식.png'
  ]);
  for(const pin of pins)assert.doesNotMatch(pin,/figma-pin-mask|figma-pin-layer/);
 });
 
-test('shared map backdrops use delivered PNGs; approved review pins use final Figma art',()=>{
+test('all shared and approved map backdrops use delivered final PNGs',()=>{
  for(const pageId of ['home','barcode']){
   const html=renderWorkspace({pageId});
   const mapButtons=[...html.matchAll(/<button\b[^>]*class="(?:figma-map-pin|home-store-pin)[^\"]*"[^>]*>([\s\S]*?)<\/button>/g)];
   assert.ok(mapButtons.length>=3,pageId+' has map samples');
   for(const [,pin] of mapButtons){
    const sources=imageSources(pin).filter(({src})=>src.endsWith('.png')||src.endsWith('.svg'));
-   if(sources.some(({src})=>src.startsWith('/assets/figma-store-markers-20261026/')))continue;
-   assert.ok(sources.some(({src})=>src.startsWith(base+'pins/')),pageId+' uses delivered PNGs');
+   assert.ok(sources.some(({src})=>src.startsWith(pinBase)),pageId+' uses delivered PNGs');
   }
  }
 });
@@ -87,11 +87,11 @@ test('every current category consumer resolves the new SVG set including runtime
 test('all 23 industries have intact 160px RGBA ON/OFF images using the same canonical filename',()=>{
  for(const name of categoryRows.flat()){
   for(const state of ['on','off']){
-   const path=base+'pins/'+state+'/'+name.replaceAll('/','-')+'.png';
+   const path=pinBase+state+'/'+name.replaceAll('/','-')+'.png';
    assert.ok(existsSync(new URL('..'+path,import.meta.url)),path+' exists');
    const bytes=readFileSync(new URL('..'+path,import.meta.url));
    assert.equal(bytes.subarray(1,4).toString(),'PNG');
-   assert.equal(bytes.readUInt32BE(16),160);assert.equal(bytes.readUInt32BE(20),160);
+   assert.equal(bytes.readUInt32BE(16),160);assert.equal(bytes.readUInt32BE(20),state==='on'?173:160);
    assert.equal(bytes[25],6,'transparent RGBA artwork is preserved');
   }
  }
