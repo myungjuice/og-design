@@ -4,9 +4,9 @@ import {setupMedia} from '../components/media.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
 
 const variants = [
-  {id: 'logo', title: 'A안 · 로고 배지형', copy: '로고 위 왕관과 아래 라벨을 하나로 묶었습니다.'},
-  {id: 'name', title: 'B안 · 매장명 옆 라벨형', copy: '매장명을 읽을 때 랜드마크 여부를 함께 확인합니다.'},
-  {id: 'above', title: 'C안 · 매장명 위 라벨형', copy: '매장명 위에 별도 줄을 두어 라벨을 강조합니다.'}
+  {id: 'logo', title: 'A안 · 로고 배지형', copy: '같은 로고 위치에 왕관을 얹었습니다.'},
+  {id: 'name', title: 'B안 · 매장명 옆 라벨형', copy: '매장명·업종·랜드마크 순서로 표시합니다.'},
+  {id: 'above', title: 'C안 · 영업 상태 옆 라벨형', copy: '영업 중 표시 오른쪽에 랜드마크 라벨을 배치했습니다.'}
 ];
 const styles = [
   '/v2/components/icon-button.css',
@@ -30,8 +30,10 @@ export function renderStoreLandmarkScreen({state = 'name'} = {}) {
       .replace('<div class="v2-store-logo">', '<div class="sl-logo-group">' + crown + '<div class="v2-store-logo">')
       .replace('</div><div class="og-store-identity-copy">', '</div>' + label({compact: true}) + '</div><div class="og-store-identity-copy">');
   }
-  if (state === 'name') return html.replace('</h4>', '</h4>' + label());
-  return html.replace('<div class="og-store-name">', label() + '<div class="og-store-name">');
+  if (state === 'name') {
+    return html.replace(/(<div class="og-store-name">[\s\S]*?)(<\/div>)/, (_, content, end) => content + label() + end);
+  }
+  return html.replace(/(<p class="og-store-status"><strong>[\s\S]*?<\/strong>)/, content => content + label());
 }
 
 export function renderStoreLandmarkReview() {

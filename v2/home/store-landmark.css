@@ -19,11 +19,11 @@
 .sl-label .v2-badge { gap: var(--v2-space-1); white-space: nowrap; }
 .sl-crown { display: block; flex: none; width: 24px; height: 22px; object-fit: contain; }
 .sl-label .sl-crown { width: 18px; height: 16px; }
-.sl-logo-group { display: flex; flex: none; flex-direction: column; align-items: center; width: 56px; gap: var(--v2-space-1); }
-.sl-logo-group>.sl-crown { width: 28px; height: 25px; }
+.sl-logo-group { position: relative; flex: none; width: 34px; height: 34px; margin-top: var(--v2-space-1); }
+.sl-logo-group>.sl-crown { position: absolute; top: calc(-1 * var(--v2-space-4)); left: 50%; transform: translateX(-50%); }
+.sl-logo-group>.sl-label { position: absolute; top: calc(100% + var(--v2-space-1)); left: 50%; width: max-content; transform: translateX(-50%); }
 .sl-logo-group .v2-store-logo { margin-top: 0; }
 .sl-store-screen[data-store-landmark="name"] .og-store-name { align-items: center; gap: var(--v2-space-1) var(--v2-space-2); }
-.sl-store-screen[data-store-landmark="above"] .og-store-identity-copy>.sl-label { margin-bottom: var(--v2-space-2); }
 @media (max-width: 767px) {
   .sl-comparison { grid-template-columns: minmax(0, 1fr); }
   .sl-example figcaption { min-height: 0; }
