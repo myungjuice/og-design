@@ -1,5 +1,5 @@
 /* Hallmark · component: informational landmark label · existing OG tokens
- * Pre-emit critique: P5 H4 E4 S5 R5 V4. Static comparison of three placements. */
+ * Pre-emit critique: P5 H4 E4 S5 R5 V4. Comparison of two label placements. */
 .sl-comparison {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -27,4 +27,70 @@
 @media (max-width: 767px) {
   .sl-comparison { grid-template-columns: minmax(0, 1fr); }
   .sl-example figcaption { min-height: 0; }
+}
+
+/* BEST label uses a sharp warm-white core with a gold halo on a navy capsule. */
+.sl-best-label {
+  --sl-best-face: #211b49;
+  --sl-best-shade: #15112f;
+  --sl-best-edge: #ffd347;
+  --sl-best-ink: #fff7d5;
+  --sl-best-glow: rgb(255 195 48 / 65%);
+  --sl-best-soft-glow: rgb(255 195 48 / 30%);
+}
+.sl-best-label .v2-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex: none;
+  gap: 5px;
+  min-width: 76px;
+  height: 26px;
+  min-height: 26px;
+  padding: 0 8px;
+  border: 1.5px solid var(--sl-best-edge);
+  border-radius: var(--v2-radius-chip);
+  background: linear-gradient(145deg, var(--sl-best-face), var(--sl-best-shade));
+  color: var(--sl-best-ink);
+  box-shadow: inset 0 0 3px var(--sl-best-soft-glow), 0 0 3px var(--sl-best-glow), 0 0 9px var(--sl-best-soft-glow);
+  font: 800 12px/1 var(--v2-font);
+  white-space: nowrap;
+}
+.sl-best-crown {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 0 2px var(--sl-best-glow));
+}
+.sl-best-word {
+  display: block;
+  color: var(--sl-best-ink);
+  letter-spacing: 1px;
+  text-shadow: 0 0 1px var(--sl-best-ink), 0 0 4px var(--sl-best-glow), 0 0 7px var(--sl-best-soft-glow);
+}
+.sl-label-inspection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: var(--v2-space-6);
+  margin-top: var(--v2-space-8);
+  max-width: 812px;
+}
+.sl-best-preview {
+  container-type: inline-size;
+  min-width: 0;
+  margin: 0;
+  padding: var(--v2-space-5);
+  border: 1px solid var(--v2-material-edge);
+  border-radius: var(--v2-radius-card);
+  background: var(--v2-surface);
+  color: var(--v2-text);
+}
+.sl-best-preview figcaption { font-size: var(--v2-type-secondary); font-weight: 700; }
+.sl-best-sample { display: flex; align-items: center; justify-content: center; min-height: 144px; }
+.sl-best-enlarged > .sl-best-label { transform: scale(4); transform-origin: center; }
+
+@container (max-width: 304px) {
+  .sl-best-enlarged > .sl-best-label { transform: scale(2.5); }
 }

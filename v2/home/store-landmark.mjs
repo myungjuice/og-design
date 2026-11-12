@@ -5,8 +5,7 @@ import {escapeHTML as e} from '../../design-system/components/core.mjs';
 
 const variants = [
   {id: 'logo', title: 'A안 · 로고 배지형', copy: '같은 로고 위치에 왕관을 얹었습니다.'},
-  {id: 'name', title: 'B안 · 매장명 옆 라벨형', copy: '매장명·업종·랜드마크 순서로 표시합니다.'},
-  {id: 'above', title: 'C안 · 영업 상태 옆 라벨형', copy: '영업 중 표시 오른쪽에 랜드마크 라벨을 배치했습니다.'}
+  {id: 'name', title: 'B안 · BEST 네온 라벨', copy: '매장명·업종 옆에 왕관과 BEST를 표시합니다.'}
 ];
 const styles = [
   '/v2/components/icon-button.css',
@@ -18,8 +17,12 @@ const styles = [
 const crown = '<img class="sl-crown" src="/assets/review-20261029/neon-crown-gold.svg" width="24" height="22" alt="" aria-hidden="true">';
 
 function label({compact = false} = {}) {
-  const badge = renderBadge({label: '랜드마크', tone: 'warning', size: compact ? 'compact' : 'small'});
-  return '<span class="sl-label">' + (compact ? badge : badge.replace('>랜드마크', '>' + crown + '랜드마크')) + '</span>';
+  if (compact) {
+    return '<span class="sl-label">' + renderBadge({label: '랜드마크', tone: 'warning', size: 'compact'}) + '</span>';
+  }
+  const bestCrown = '<svg class="sl-best-crown" viewBox="0 0 24 22" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 16-1-11 5.5 5L12 2l4.5 8L22 5l-1 11H3Z"/><path d="M3 20h18"/></svg>';
+  const badge = renderBadge({label: 'BEST', tone: 'warning', size: 'small'});
+  return '<span class="sl-label sl-best-label" data-store-best-label="neon">' + badge.replace('>BEST', '>' + bestCrown + '<span class="sl-best-word">BEST</span>') + '</span>';
 }
 
 export function renderStoreLandmarkScreen({state = 'name'} = {}) {
@@ -30,10 +33,7 @@ export function renderStoreLandmarkScreen({state = 'name'} = {}) {
       .replace('<div class="v2-store-logo">', '<div class="sl-logo-group">' + crown + '<div class="v2-store-logo">')
       .replace('</div><div class="og-store-identity-copy">', '</div>' + label({compact: true}) + '</div><div class="og-store-identity-copy">');
   }
-  if (state === 'name') {
-    return html.replace(/(<div class="og-store-name">[\s\S]*?)(<\/div>)/, (_, content, end) => content + label() + end);
-  }
-  return html.replace(/(<p class="og-store-status"><strong>[\s\S]*?<\/strong>)/, content => content + label());
+  return html.replace(/(<div class="og-store-name">[\s\S]*?)(<\/div>)/, (_, content, end) => content + label() + end);
 }
 
 export function renderStoreLandmarkReview() {
@@ -46,9 +46,13 @@ export function renderStoreLandmarkReview() {
     </figure>`).join('');
   return `<link rel="stylesheet" href="/v2/home/store-landmark.css">
     <section id="store-landmark" data-review-screen data-review-status="pending" hidden aria-labelledby="store-landmark-title">
-      <h2 id="store-landmark-title">매장 상세 · 랜드마크 라벨 비교</h2>
-      <p class="v2-intro">랜드마크 지정 매장의 표시 예시입니다. 같은 매장 정보로 세 가지 위치를 비교합니다. 라벨 문구와 배치는 검토용 제안입니다.</p>
+      <h2 id="store-landmark-title">매장 상세 · BEST 라벨</h2>
+      <p class="v2-intro">선택한 B안에 왕관과 BEST 네온 라벨을 적용했습니다. 작은 크기의 글자와 빛 번짐을 함께 확인합니다.</p>
       <div class="sl-comparison">${examples}</div>
+      <div class="sl-label-inspection">
+        <figure class="sl-best-preview"><figcaption>실제 표시 크기</figcaption><div class="sl-best-sample" data-best-label-preview="actual">${label()}</div></figure>
+        <figure class="sl-best-preview"><figcaption>라벨 확대</figcaption><div class="sl-best-sample sl-best-enlarged" data-best-label-preview="enlarged">${label()}</div></figure>
+      </div>
     </section>`;
 }
 

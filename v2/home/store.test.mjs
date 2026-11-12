@@ -115,3 +115,18 @@ test('store reading stays scrollable while all service shortcuts remain static',
   assert.doesNotMatch(screen,/bottom-navigation|home-map-ground/);
  }
 });
+
+
+test('store B variant renders the requested crown and BEST neon label with size previews',async()=>{
+ const {renderStoreLandmarkScreen,renderStoreLandmarkReview}=await import('./store-landmark.mjs');
+ const html=renderStoreLandmarkScreen({state:'name'});
+ assert.match(html,/data-store-best-label="neon"/);
+ assert.match(html,/class="sl-best-crown"/);
+ assert.match(html,/class="sl-best-word">BEST<\/span>/);
+ assert.doesNotMatch(html,/>랜드마크<\/span>/);
+ const review=renderStoreLandmarkReview();
+ assert.match(review,/data-best-label-preview="actual"/);
+ assert.match(review,/data-best-label-preview="enlarged"/);
+ assert.match(renderStoreLandmarkScreen({state:'logo'}),/sl-logo-group/);
+ assert.doesNotMatch(renderHomeStoreScreen(),/data-store-best-label/);
+});
