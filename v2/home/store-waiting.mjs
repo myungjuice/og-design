@@ -18,12 +18,12 @@ const states=[
 const art=path=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
 const people=art('<circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v3"/>');
 const refresh=art('<path d="M20 7V3m0 4h-4M4 17v4m0-4h4M20 7a9 9 0 0 0-15-2M4 17a9 9 0 0 0 15 2"/>');
-export function renderHomeStoreWaitingSection({open=true,current=false,info=true,estimate=20,status='',runtimeStatus=''}={}){
+export function renderHomeStoreWaitingSection({open=true,current=false,info=true,estimate=20,status='',runtimeStatus='',busy=false}={}){
  const headingProps={title:'웨이팅',action:'내역 보기'};
  // Legacy store_waiting_widget.dart:231–240 keeps current/missing data ahead
  // of closure and both preparing statuses, even when reception itself is open.
  const accepting=open&&!['breakPreparing','closePreparing'].includes(runtimeStatus);
- let html=waitingSection({open:accepting,current,info,estimate,status})
+ let html=waitingSection({open:accepting,current,info,estimate,status,busy})
   .replace('class="og-store-service"','class="og-store-service v2-store-waiting"')
   .replace(sectionHeading(headingProps),()=>renderSectionHeading(headingProps))
   .replace(/<h3>/g,'<h4>').replace(/<\/h3>/g,'</h4>')

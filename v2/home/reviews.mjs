@@ -1,3 +1,5 @@
+import {joybarIcon} from './joybar.mjs';
+import {renderFeedback} from '../components/feedback.mjs';
 import {praiseSection,reviewsSection} from '../../design-system/pages/home/store-reviews.mjs';
 import {reviewListScreen,reviewPhotoScreen} from '../../design-system/pages/home/review-pages.mjs';
 import {publicReviewsData} from '../../design-system/pages/home/public-reviews-data.mjs';
@@ -23,11 +25,11 @@ function adapt(html,items=[]){
   for(const src of item.images||[])html=html.replaceAll(thumbnail({src,alt:'리뷰 사진'}),()=>renderThumbnail({src,alt:'리뷰 사진'}));
  }
  for(const [name,svg] of Object.entries(art))html=html.replaceAll(icon(name),()=>svg);
- return html.replace(/<button\b(?![^>]*\binert\b)/g,'<button inert').replaceAll('<h3>','<h5>').replaceAll('</h3>','</h5>');
+ return html.replace(/<button\b(?![^>]*\binert\b)/g,'<button inert').replace(/<h3(?=[ >])/g,'<h5').replaceAll('</h3>','</h5>');
 }
 export function renderHomeStoreReviewsScreen({state='registered',data=publicReviewsData}={}){
  valid('store-reviews',state);const empty=state.startsWith('empty'),canReview=state!=='empty-ineligible';
- const content='<div class="og-store-reviews">'+praiseSection({items:empty?[]:data.praise,canReview,expanded:state==='expanded'})+reviewsSection({items:empty?[]:data.items,canReview})+'</div>';
+ const content='<div class="og-store-reviews">'+praiseSection({items:empty?[]:data.praise,canReview,expanded:state==='expanded',renderIcon:item=>joybarIcon(item,icon(item.icon||'thumb_up'))})+reviewsSection({items:empty?[]:data.items,canReview,emptyFeedbackHTML:empty?renderFeedback({kind:'review',body:canReview?undefined:'이 매장을 방문하고, 첫 번째 리뷰어가 되어 주세요'}):undefined})+'</div>';
  const body=adapt(content,data.items);
  return `<div class="v2-home-store-frame v2-home-store-reviews-frame" data-store-reviews-state="${state}">${renderHomeStoreContent({store:data.store,selectedSection:1,contentHTML:body,bodyLabel:'매장 칭찬과 리뷰'})}</div>`;
 }
@@ -53,7 +55,7 @@ export function renderHomeReviewPhotoScreen({state='registered',data=publicRevie
   .replace('class="og-review-photo-copy"','class="og-review-photo-copy" role="region" tabindex="0" aria-label="사진 작성자와 리뷰 본문"');
  return `<div class="v2-home-review-photo-frame" data-review-photo-state="${state}">${adapt(html,data.items)}</div>`;
 }
-const styles=['/v2/components/icon-button.css','/v2/components/media.css','/v2/home/store.css','/v2/home/reviews.css'];
+const styles=['/v2/components/feedback.css','/v2/components/icon-button.css','/v2/components/media.css','/v2/home/store.css','/v2/home/reviews.css'];
 export const renderHomeStoreReviewsReview=()=>remainingGallery({id:'store-reviews',title:'매장 리뷰',copy:'매장에서 받은 칭찬과 최근 리뷰를 확인하는 영역입니다. 오형제황제누룽지탕의 익명화된 공개 리뷰 스냅샷을 사용합니다. 아래 펼침·빈 리뷰는 배치 비교이며 실제 리뷰 상태가 아닙니다. 작성·더 보기·사진 이동은 실행하지 않습니다.',states:states['store-reviews'],screen:renderHomeStoreReviewsScreen,styles});
 export const renderHomeReviewListReview=()=>remainingGallery({id:'review-list',title:'포토 리뷰 전체 목록',copy:'매장에 등록된 포토 리뷰를 작성자·날짜·사진·본문 순서로 읽는 화면입니다. 익명화된 기존 리뷰를 사용하며 두 번째 리뷰의 펼친 배치도 비교합니다. 더보기·접기·사진 열기는 실행하지 않습니다.',states:states['review-list'],screen:renderHomeReviewListScreen,styles});
 export const renderHomeReviewPhotoReview=()=>remainingGallery({id:'review-photo',title:'리뷰 사진 상세',copy:'사진을 크게 보면서 작성자와 리뷰를 함께 읽는 화면입니다. 기존 리뷰 사진 3장 중 첫 사진·마지막 사진과 채워 보기·전체 보기·본문 펼침을 비교합니다. 사진 전환·핀치 확대·본문 펼침은 실행하지 않습니다.',states:states['review-photo'],screen:renderHomeReviewPhotoScreen,styles});

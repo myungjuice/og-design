@@ -4,20 +4,23 @@ import {button,iconButton} from '../../components/button/render.mjs';
 import {surface} from '../../components/surfaces/render.mjs';
 import {sectionHeading} from '../../components/section-heading/render.mjs';
 const card=(content,kind='calendar_month',refresh=false)=>surface({className:'og-store-service-card',contentHTML:'<span class="og-store-service-icon">'+icon(kind)+'</span><div class="og-store-service-copy">'+content+'</div>'+(refresh?iconButton({name:'refresh',label:'새로고침'}):'')});
-export function reservationSection({open=true,current=false,count=1,expired=false}={}){
+function receptionButton(label,busy){
+ return button({label:busy?'처리 중…':label,state:busy?'loading':undefined,busy,disabled:busy});
+}
+export function reservationSection({open=true,current=false,count=1,expired=false,busy=false}={}){
  const heading=sectionHeading({title:'예약',action:'내역 보기',description:current&&count>1?'이 매장에 예약이 '+count+'건 있습니다.':''});
  const notice=!open?card('<p>현재 예약 접수가 일시적으로 중지되었습니다. 자세한 사항은 매장에 문의하세요.</p>'):'';
  const currentCard=card((expired?'<p class="og-store-service-expired">예약 시간 경과</p>':'')+'<p><strong>예약일: 2026년 9월 '+(expired?'18일(금)':'22일(화)')+' 18:00</strong></p><p>성인: 2명, 어린이: 0명</p>','event_available');
  const dates='<div class="og-store-service-dates">'+['9/19(토)','9/20(일)','9/21(월)','9/22(화)','9/23(수)'].map((date,i)=>'<div class="og-store-service-date" data-available="'+(i!==2)+'"><strong>'+date+'</strong><span>'+(i===2?'예약불가':'예약가능')+'</span></div>').join('')+'</div>';
- const content=current?currentCard+'<div class="og-store-service-actions">'+button({label:'내 예약 보기',variant:'secondary'})+(open?iconButton({name:'add',label:'추가 예약',className:'og-store-service-add'}):'')+'</div>':open?dates+button({label:'다른 날짜 예약'}):'';
+ const content=current?currentCard+'<div class="og-store-service-actions">'+button({label:'내 예약 보기',variant:'secondary'})+(open?iconButton({name:'add',label:'추가 예약',className:'og-store-service-add'}):'')+'</div>':open?dates+receptionButton('다른 날짜 예약',busy):'';
  return '<section class="og-store-service" data-service="reservation">'+heading+notice+content+'</section>';
 }
-export function waitingSection({open=true,current=false,info=true,estimate=20,status=''}={}){
+export function waitingSection({open=true,current=false,info=true,estimate=20,status='',busy=false}={}){
  let content='';
  if(current)content=card('<div class="og-store-service-ticket"><strong>대기번호 <em>12</em>번</strong><strong>내 순서 <em>3</em>번째</strong></div><p>성인: 2명, 어린이: 0명</p>','people_alt',true)+button({label:'웨이팅 실시간 보기',variant:'secondary'});
  else if(!info)content=card('<p>매장의 웨이팅정보가 없습니다.</p>'+(status?'<p class="og-store-service-sub">입구에서 직원에게 문의해주세요.</p>':''),'people_alt',true);
  else if(!open)content=card('<p>현재 웨이팅 상태가 아닙니다.</p>'+(status?'<p class="og-store-service-sub">'+e(status)+'</p>':''),'people_alt',true);
- else content=card('<div class="og-store-service-total"><span>현재 웨이팅</span><strong>5 <small>팀</small></strong></div>'+(estimate!==null?'<p class="og-store-service-sub">예상 대기 시간: '+e(estimate)+'분</p>':''),'people_alt',true)+button({label:'웨이팅 등록'});
+ else content=card('<div class="og-store-service-total"><span>현재 웨이팅</span><strong>5 <small>팀</small></strong></div>'+(estimate!==null?'<p class="og-store-service-sub">예상 대기 시간: '+e(estimate)+'분</p>':''),'people_alt',true)+receptionButton('웨이팅 등록',busy);
  return '<section class="og-store-service" data-service="waiting">'+sectionHeading({title:'웨이팅',action:'내역 보기'})+content+'</section>';
 }
 export function serviceScreen(kind,props={},store={}){

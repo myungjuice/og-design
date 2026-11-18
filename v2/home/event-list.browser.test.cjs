@@ -45,7 +45,7 @@ test('event states fit eight widths with fixed brand, source periods, readable s
       heading:header.querySelector('h4').textContent,centered:Math.abs(title.x+title.width/2-box.x-box.width/2)<=1,
       targets:[...node.querySelectorAll('button')].map(size),brand:[brand.querySelector('strong').textContent,...size(brand.querySelector('.v2-thumbnail')),brand.querySelector('.v2-thumbnail').dataset.fit],
       images:[...body.querySelectorAll('.og-update-row>.v2-thumbnail')].map(photo=>[...size(photo),photo.dataset.fit,getComputedStyle(photo).boxShadow!=='none']),
-      empty:[...body.querySelectorAll('.og-news-empty')].map(empty=>{const photo=empty.querySelector('.v2-thumbnail');return[...size(photo),photo.dataset.fit,photo.getAttribute('aria-hidden'),getComputedStyle(photo).boxShadow,empty.querySelector('p').textContent];}),
+      empty:[...body.querySelectorAll('.v2-feedback')].map(empty=>[...size(empty.querySelector('.og-feedback-icon')),empty.querySelector('h3').textContent]),
       rows:[...body.querySelectorAll('.og-update-row')].map(row=>({status:row.dataset.status,date:row.querySelector('.og-update-date').textContent,remaining:row.querySelector('.og-update-status').textContent.trim(),star:row.querySelector('svg').dataset.eventStar,title:row.querySelector('h5').textContent,shadow:getComputedStyle(row).boxShadow})),
       nums:getComputedStyle(node.querySelector('.v2-event-list')).fontVariantNumeric,font:getComputedStyle(body).fontFamily,
       textContrast:Math.min(...[...node.querySelectorAll('h4,h5,p,strong')].map(element=>contrast(getComputedStyle(element).color,surface))),
@@ -54,7 +54,7 @@ test('event states fit eight widths with fixed brand, source periods, readable s
     assert.deepEqual(result.size,[Math.min(width,390),846]);assert.ok(result.fits&&result.static&&result.readable);assert.equal(result.heading,'우리 매장 이벤트');assert.ok(result.centered);
     assert.deepEqual(result.targets,[[48,48]]);assert.deepEqual(result.brand,['육감만족',30,30,'contain']);
     assert.deepEqual(result.images,index===2?[]:Array.from({length:index===0?1:2},()=>[80,80,'cover',true]));
-    assert.deepEqual(result.empty,index===2?[[150,150,'contain','true','none','등록된 이벤트가 없습니다.']]:[]);
+    assert.deepEqual(result.empty,index===2?[[56,56,'등록된 이벤트가 없습니다.']]:[]);
     assert.deepEqual(result.rows.map(row=>[row.status,row.date,row.remaining,row.star]),index===0?[['ended','2026.6.26 ~ 2026.8.31','종료된 이벤트','outline']]:index===1?[
      ['active','2026.9.1 ~ 2026.9.19','진행 중 오늘 종료','filled'],['active','2026.9.1 ~ 2026.9.21','진행 중 2일 남음','filled'],['upcoming','2026.9.22 ~ 2026.9.30','D-3','outline'],['ended','2026.9.1 ~ 2026.9.18','종료된 이벤트','outline']]:[]);
     for(const row of result.rows){assert.equal(row.title,'포장할인 5000원');assert.equal(row.shadow,'none');}
@@ -82,7 +82,7 @@ test('failed event images keep storefront brand, source periods and empty explan
    assert.deepEqual(await brand.locator('.v2-thumbnail').evaluate(node=>[node.getBoundingClientRect().width,node.getBoundingClientRect().height]),[30,30]);
    assert.equal(await frame.locator('.og-update-date').count(),index===0?1:index===1?4:0);
    for(const media of await frame.locator('[data-v2-media]').all()){assert.equal(await media.getAttribute('data-state'),'error');await media.locator('.og-media-fallback').waitFor({state:'visible'});}
-   if(index===2){assert.equal(await frame.locator('.og-news-empty p').textContent(),'등록된 이벤트가 없습니다.');assert.deepEqual(await frame.locator('.og-news-empty .v2-thumbnail').evaluate(node=>[node.clientWidth,node.clientHeight]),[150,150]);}
+   if(index===2){assert.equal(await frame.locator('.v2-feedback h3').textContent(),'등록된 이벤트가 없습니다.');assert.deepEqual(await frame.locator('.v2-feedback .og-feedback-icon').evaluate(node=>[node.clientWidth,node.clientHeight]),[56,56]);}
    else for(const title of await frame.locator('h5').all())assert.equal(await title.textContent(),'포장할인 5000원');
   }
  }finally{await browser.close();}

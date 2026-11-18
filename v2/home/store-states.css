@@ -1,0 +1,6 @@
+.v2-store-state-example{position:relative}
+.v2-store-receipt{position:absolute;bottom:var(--v2-space-4);inset-inline:var(--v2-space-4);display:flex;justify-content:center}
+.v2-store-loading{margin:var(--v2-space-4);aspect-ratio:1 / 1.1}
+.v2-store-loading [data-shape="photo"]{aspect-ratio:1.35;border-radius:var(--v2-radius-card)}
+.v2-store-loading [data-shape="title"]{width:62%;height:var(--v2-line-body);margin-top:var(--v2-space-5)}
+.v2-store-loading [data-shape="text"]{width:86%;height:var(--v2-line-secondary);margin-top:var(--v2-space-3)}

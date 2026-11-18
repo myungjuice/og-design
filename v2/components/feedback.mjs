@@ -2,6 +2,8 @@ import {feedback} from '../../design-system/components/feedback/render.mjs';
 import {button} from '../../design-system/components/button/render.mjs';
 import {icon,uid} from '../../design-system/components/core.mjs';
 const meanings={
+ event:{symbol:'event',title:'등록된 이벤트가 없습니다.',body:'매장에서 이벤트를 등록하면 여기에 표시됩니다.',shape:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18"/>'},
+ review:{symbol:'reviews',title:'아직 리뷰가 없어요.',body:'이 매장의 첫 번째 리뷰어가 되어 주세요',shape:'<path d="M4 4h16v13H9l-5 4V4Zm4 4h8m-8 4h6"/>'},
  history:{symbol:'storefront',title:'아직 방문 내역이 없어요',body:'방문한 매장이 생기면 여기에 표시됩니다.',shape:'<path d="M4 10v11h16V10M3 10l2-7h14l2 7M3 10q2 4 4.5 0 2.3 4 4.5 0 2.3 4 4.5 0 2.5 4 4.5 0M9 21v-7h6v7"/>'},
  search:{symbol:'search',title:'검색 결과가 없어요',body:'다른 매장명이나 업종으로 검색해 보세요.',shape:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>'},
  error:{symbol:'cloud_off',title:'불러오지 못했어요',body:'잠시 후 다시 시도해 주세요.',shape:'<path d="M7 18H6a4 4 0 0 1-1-7.9 7 7 0 0 1 13-1.5A5 5 0 0 1 18 18h-1M12 10v4M12 17v1"/>'}

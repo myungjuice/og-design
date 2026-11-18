@@ -22,9 +22,9 @@ test('registered event retains its original ended period while four comparison r
  assert.equal([...mix.matchAll(/data-event-star="filled"/g)].length,2);
  assert.equal([...mix.matchAll(/data-event-star="outline"/g)].length,2);
 });
-test('empty event list retains brand and source illustration and explanation without extra actions',()=>{
+test('empty event list retains brand and shared empty state and explanation without extra actions',()=>{
  const html=frame('empty');assert.match(html,/육감만족/);assert.match(html,/brand_logo\//);
- assert.match(html,/등록된 이벤트가 없습니다\./);assert.match(html,/ogapp\/empty_event\.png/);assert.match(html,/data-fit="contain"/);
+ assert.match(html,/등록된 이벤트가 없습니다\./);assert.match(html,/og-feedback-icon/);assert.match(html,/data-fit="contain"/);
  assert.doesNotMatch(html,/og-update-row|검색|정렬|참여하기|다시 시도/);assert.equal([...html.matchAll(/<button\b/g)].length,1);
 });
 test('event adapter preserves source date tie breakers, escaping, omitted photos and readable body',async()=>{

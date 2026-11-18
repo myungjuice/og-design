@@ -13,8 +13,8 @@ export function sortEvents(items,today='2026-09-19'){
   return cmp(b.end,a.end)||cmp(b.start,a.start)||cmp(b.registered,a.registered);
  });
 }
-export function eventListScreen({items=[],name='회원점명',logo='',today='2026-09-19'}={}){
- const contents=items.length?sortEvents(items,today).map(item=>updateItem('event',{...item,periodLabel:dotted(item.start)+' ~ '+dotted(item.end)},today)).join(''):'<div class="og-news-empty"><img src="https://og-familystore-image.s3.ap-northeast-2.amazonaws.com/ogapp/empty_event.png" alt="" width="150" height="150"><p>등록된 이벤트가 없습니다.</p></div>';
+export function eventListScreen({items=[],name='회원점명',logo='',today='2026-09-19',emptyFeedbackHTML}={}){
+ const contents=items.length?sortEvents(items,today).map(item=>updateItem('event',{...item,periodLabel:dotted(item.start)+' ~ '+dotted(item.end)},today)).join(''):emptyFeedbackHTML??'<div class="og-news-empty"><img src="https://og-familystore-image.s3.ap-northeast-2.amazonaws.com/ogapp/empty_event.png" alt="" width="150" height="150"><p>등록된 이벤트가 없습니다.</p></div>';
  return '<div class="og-news-page og-event-page" inert>'+appBar({title:'우리 매장 이벤트',back:true})+'<div class="og-event-brand">'+(logo?'<img src="'+e(logo)+'" width="30" height="30" alt="">':icon('storefront'))+'<strong>'+e(name)+'</strong></div><div class="og-news-page-body">'+surface({className:'og-news-list',contentHTML:contents})+'</div></div>';
 }
 export function eventDetailScreen({title='회원점 이벤트 제목',contents='회원점에서 진행하는 이벤트입니다.\n\n이벤트의 자세한 내용을 안내합니다.',registered='2026.9.19 10.30',start='2026-09-01',end='2026-09-30',imageSrc=''}={}){

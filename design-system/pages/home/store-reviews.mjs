@@ -4,16 +4,16 @@ import {textButton} from '../../components/button/render.mjs';
 import {avatar,thumbnail} from '../../components/avatar/render.mjs';
 import {surface} from '../../components/surfaces/render.mjs';
 import {storeScreen} from './store.mjs';
-export function praiseSection({items=[],canReview=true,expanded=false}={}){
+export function praiseSection({items=[],canReview=true,expanded=false,renderIcon=i=>icon(i.icon||'thumb_up')}={}){
  const max=Math.max(0,...items.map(i=>i.count));
- return '<section class="og-store-praise">'+sectionHeading({title:'칭찬해요',action:canReview?'리뷰 작성':''})+items.slice(0,expanded?7:5).map(i=>'<div class="og-praise-row"><span class="og-praise-fill" style="--praise-ratio:'+(max?i.count/max:0)+';--praise-opacity:'+(max?.05+i.count/max*.25:.05)+'"'+(!max?' hidden':'')+'></span>'+icon(i.icon||'thumb_up')+'<span class="og-praise-name">'+e(i.name)+'</span><strong>'+e(i.count)+'</strong></div>').join('')+(items.length>5?'<div class="og-store-review-more">'+textButton({label:expanded?'줄이기':'더 보기'})+icon(expanded?'expand_less':'expand_more')+'</div>':'')+'</section>';
+ return '<section class="og-store-praise">'+sectionHeading({title:'칭찬해요',action:canReview?'리뷰 작성':''})+items.slice(0,expanded?7:5).map(i=>'<div class="og-praise-row"><span class="og-praise-fill" style="--praise-ratio:'+(max?i.count/max:0)+';--praise-opacity:'+(max?.05+i.count/max*.25:.05)+'"'+(!max?' hidden':'')+'></span>'+renderIcon(i)+'<span class="og-praise-name">'+e(i.name)+'</span><strong>'+e(i.count)+'</strong></div>').join('')+(items.length>5?'<div class="og-store-review-more">'+textButton({label:expanded?'줄이기':'더 보기'})+icon(expanded?'expand_less':'expand_more')+'</div>':'')+'</section>';
 }
 export function reviewCard({name='회원 닉네임',date='2026. 9. 19',text='',images=[],avatarSrc='',expandable=false,expanded=false}={}){
  return surface({className:'og-store-review-card'+(expanded?' is-expanded':''),contentHTML:'<div class="og-store-review-author">'+(avatarSrc?'<img src="'+e(avatarSrc)+'" alt="프로필 사진" width="25" height="25">':avatar({size:'small'}))+'<strong>'+e(name)+'</strong><time>'+e(date)+'</time></div>'+(images.length?'<div class="og-store-review-images">'+images.map(src=>thumbnail({src,alt:'리뷰 사진'})).join('')+'</div>':'')+'<p class="og-store-review-text">'+e(expanded?text:text.replace(/\n\s*\n/g,'\n'))+'</p>'+(expandable?'<div class="og-review-expand">'+textButton({label:expanded?'접기':'더보기'})+'</div>':'')});
 }
-export function reviewsSection({items=[],canReview=true}={}){
+export function reviewsSection({items=[],canReview=true,emptyFeedbackHTML}={}){
  const filled=items.length>0;
- return '<section class="og-store-review-section">'+sectionHeading({title:'리뷰',action:filled?'리뷰 작성':''})+(filled?items.slice(0,2).map(reviewCard).join('')+'<div class="og-store-review-more">'+textButton({label:'더 보기'})+icon('chevron_right')+'</div>':'<div class="og-store-review-empty"><p>'+icon('reviews')+'<span>아직 리뷰가 없어요.</span></p><p>'+(canReview?'이 매장의 첫 번째 리뷰어가 되어 주세요':'이 매장을 방문하고,<br>첫 번째 리뷰어가 되어 주세요')+'</p>'+(canReview?textButton({label:'리뷰 작성'}):'')+'</div>')+'</section>';
+ return '<section class="og-store-review-section">'+sectionHeading({title:'리뷰',action:filled?'리뷰 작성':''})+(filled?items.slice(0,2).map(reviewCard).join('')+'<div class="og-store-review-more">'+textButton({label:'더 보기'})+icon('chevron_right')+'</div>':'<div class="og-store-review-empty">'+(emptyFeedbackHTML??'<p>'+icon('reviews')+'<span>아직 리뷰가 없어요.</span></p><p>'+(canReview?'이 매장의 첫 번째 리뷰어가 되어 주세요':'이 매장을 방문하고,<br>첫 번째 리뷰어가 되어 주세요')+'</p>')+(canReview?textButton({label:'리뷰 작성'}):'')+'</div>')+'</section>';
 }
 export function storeReviewsScreen({state='default',imageSrc='',publicData}={}){
  const empty=state.startsWith('empty'),canReview=state!=='empty-ineligible';

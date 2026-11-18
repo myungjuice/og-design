@@ -33,9 +33,10 @@
 .og-store-review-card.is-expanded .og-store-review-text{display:block;white-space:pre-wrap}
 .og-review-expand{display:flex;justify-content:flex-end;margin-top:var(--v2-space-2)}
 .og-store-review-empty{padding-block:var(--v2-space-6);text-align:center;color:var(--v2-text-muted)}
-.og-store-review-empty p{margin:0 0 var(--v2-space-5);overflow-wrap:anywhere}
-.og-store-review-empty p:first-child{display:flex;align-items:center;justify-content:center;gap:var(--v2-space-3)}
-.og-store-review-empty svg{width:var(--v2-space-6);height:var(--v2-space-6);flex:none}
+.og-store-review-empty .v2-feedback{min-height:0;padding:var(--v2-space-4)}
+.og-store-review-empty .og-feedback-icon{width:40px;height:40px}
+.og-store-review-empty h5{margin:0;font-size:var(--v2-type-body)}
+.og-praise-row>.v2-joybar-icon{position:relative;flex:none}
 .og-review-list-page,.og-review-photo-page{height:100%;display:flex;flex-direction:column;overflow:clip}
 .og-app-bar{display:grid;grid-template-columns:var(--v2-space-12) minmax(0,1fr) var(--v2-space-12);align-items:center;gap:var(--v2-space-2);flex:none;padding:var(--v2-space-2);border-bottom:1px solid var(--v2-edge)}
 .og-app-bar h4{margin:0;text-align:center;overflow-wrap:anywhere;min-width:0;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font);font-style:normal}

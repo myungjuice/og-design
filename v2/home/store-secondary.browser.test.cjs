@@ -47,13 +47,13 @@ test('share, photo and praise specimens fit five widths and retain passive legac
        share:kakao?{src:kakao.getAttribute('src'),loaded:kakao.complete&&kakao.naturalWidth===34&&kakao.naturalHeight===35,sms:sms?{size:[sms.clientWidth,sms.clientHeight],color:getComputedStyle(sms).color}:null}:null,
        selected:node.querySelectorAll('.v2-praise-options [aria-pressed="true"]').length,
        checks:[...node.querySelectorAll('.v2-praise-options [aria-pressed="true"] .v2-chip-check')].map(check=>getComputedStyle(check).visibility),
-       emptyIcon:node.querySelector('.v2-praise-empty>svg')?[node.querySelector('.v2-praise-empty>svg').clientWidth,node.querySelector('.v2-praise-empty>svg').clientHeight]:null,noFonts:!node.querySelector('.material-icons')};
+       emptyIcon:node.querySelector('.v2-praise-targets .og-feedback-icon')?[node.querySelector('.v2-praise-targets .og-feedback-icon').clientWidth,node.querySelector('.v2-praise-targets .og-feedback-icon').clientHeight]:null,noFonts:!node.querySelector('.material-icons')};
      });
      assert.deepEqual(result.size,[Math.min(width,390),846],id+' '+state+' '+width);assert.ok(result.fits&&result.static&&result.noFonts,JSON.stringify(result));
      assert.match(result.font,/OG V2 Pretendard/);assert.equal(result.nums,'tabular-nums');assert.ok(result.targets.every(([w,h])=>w>=48&&h>=48),id+' '+state+' '+JSON.stringify(result.targets));
      if(id==='store-share'){assert.equal(result.sheet.bottom,0);assert.notEqual(result.sheet.shadow,'none');assert.match(result.text,/카카오톡 공유/);assert.match(result.text,/링크 공유/);assert.deepEqual(result.share,{src:'/v2/home/media/kakao-share.png',loaded:true,sms:{size:[32,32],color:'rgb(76, 175, 80)'}});}
      if(id==='store-photo'){assert.deepEqual(result.photo,{fit:'contain',complete:true,backFace:'none'});assert.doesNotMatch(result.text,/리뷰|사진번호/);}
-     if(id==='praise-write'){assert.ok(result.checks.every(visibility=>visibility==='visible'));if(state==='empty')assert.deepEqual(result.emptyIcon,[32,32]);if(state==='selected')assert.match(result.text,/2개 등록하기/);if(state==='limit'){assert.equal(result.selected,5);assert.match(result.text,/최대 5개까지 선택이 가능합니다/);assert.match(await frame.ariaSnapshot(),/region "칭찬 선택 제한 안내"/);assert.match(await frame.ariaSnapshot(),/heading "알림"/);}}
+     if(id==='praise-write'){assert.ok(result.checks.every(visibility=>visibility==='visible'));if(state==='empty')assert.deepEqual(result.emptyIcon,[56,56]);if(state==='selected')assert.match(result.text,/2개 등록하기/);if(state==='limit'){assert.equal(result.selected,5);assert.match(result.text,/최대 5개까지 선택이 가능합니다/);assert.match(await frame.ariaSnapshot(),/region "칭찬 선택 제한 안내"/);assert.match(await frame.ariaSnapshot(),/heading "알림"/);}}
      await frame.screenshot({path:'/private/tmp/og-v2-'+id+'-'+state+'-'+width+'.png'});
     }
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),id+' document '+width);

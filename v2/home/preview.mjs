@@ -1,3 +1,4 @@
+import {setupRemainingGallery} from './remaining-gallery.mjs';
 import {setupStoreLandmarkReview} from './store-landmark.mjs';
 import {setupDirectUseReview} from './direct-use.mjs';
 import {setupScreenPreview} from '../components/screen-preview.mjs';
@@ -63,7 +64,7 @@ export function setupHomePreview(root){
  setupHomeEventDetailReview(root);
  setupHomeReviewsReview(root);
  setupHomeInformationReview(root);
- setupHomeStoreShareReview(root);
+ setupRemainingGallery(root,'store-states');setupHomeStoreShareReview(root);
  setupHomeStorePhotoReview(root);
  setupHomeStorePraiseReview(root);
 }

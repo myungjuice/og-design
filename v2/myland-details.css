@@ -77,3 +77,5 @@
  background:linear-gradient(var(--md-rim-light),var(--md-rim-deep));
  box-shadow:0 3px 0 var(--md-rim-deep);
 }
+
+.md-limit>.v2-button{display:block;width:100%;margin-top:12px}

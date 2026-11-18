@@ -16,9 +16,9 @@ const states=[
 ];
 const paths={calendar_month:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18M7 15h2m3 0h2m3 0h1M7 18h2m3 0h2"/>',event_available:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18m-11 5 2 2 4-4"/>',add:'<path d="M12 5v14M5 12h14"/>'};
 const art=name=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[name]+'</svg>';
-export function renderHomeStoreReservationSection({open=true,current=false,count=1,expired=false}={}){
+export function renderHomeStoreReservationSection({open=true,current=false,count=1,expired=false,busy=false}={}){
  const headingProps={title:'예약',action:'내역 보기',description:current&&count>1?'이 매장에 예약이 '+count+'건 있습니다.':''};
- let html=reservationSection({open,current,count,expired})
+ let html=reservationSection({open,current,count,expired,busy})
   .replace('class="og-store-service"','class="og-store-service v2-store-reservation"')
   .replace(sectionHeading(headingProps),()=>renderSectionHeading(headingProps))
   .replace(/<h3>/g,'<h4>').replace(/<\/h3>/g,'</h4>')

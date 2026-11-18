@@ -1,3 +1,5 @@
+import {joybarIcon} from './joybar.mjs';
+import {renderFeedback} from '../components/feedback.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
 import {publicReviewsData} from '../../design-system/pages/home/public-reviews-data.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
@@ -49,14 +51,14 @@ function praiseTargets(data,empty){
  const logo=renderThumbnail({src:data.store.logo||'',alt:data.store.name+' 로고',fit:'contain',decorative:true});
  const profile=`<section class="v2-praise-profile"><div>${logo}<h5>${e(data.store.name)}</h5></div><p><strong>내 리뷰: ${e(empty?0:data.reviewCount??0)}회</strong></p><p>${entries.length?e((data.visitCount??entries.length)+'번 방문. 마지막 방문 '+(data.lastVisit||'')):'방문 전'}</p></section>`;
  const rows=entries.map(entry=>`<article class="v2-praise-target"><div><strong>${e(entry.date)}</strong><p>${e(Number(entry.amount).toLocaleString('ko-KR'))}원 사용</p></div>${button({label:entry.hasReviewed?'수정':'리뷰 작성',variant:entry.hasReviewed?'secondary':'text',size:'compact',className:'v2-button',attributes:{inert:true}})}</article>`).join('');
- return `${header('리뷰')}${profile}<div class="v2-praise-targets" role="region" tabindex="0" aria-label="칭찬 작성 대상 내역">${entries.length?rows:`<div class="v2-praise-empty">${art.loyalty}<p>이 매장에 아직 적립 내역이 없습니다</p></div>`}</div>`;
+ return `${header('리뷰')}${profile}<div class="v2-praise-targets" role="region" tabindex="0" aria-label="칭찬 작성 대상 내역">${entries.length?rows:renderFeedback({kind:'history',body:'이 매장에 아직 적립 내역이 없습니다'})}</div>`;
 }
 function praiseSelection(data,selected,original){
  const groups=data.groups||praiseData.groups,available=new Set(groups.flatMap(group=>group.items.map(item=>item.id)));
  if(!Array.isArray(selected)||!Array.isArray(original)||selected.length>5||new Set(selected).size!==selected.length||selected.some(id=>!available.has(id))||original.some(id=>!available.has(id)))throw new RangeError('Invalid praise selection');
  const same=selected.length===original.length&&selected.every(id=>original.includes(id));
  const label=same?'':!original.length?selected.length+'개 등록하기':!selected.length?'리뷰 삭제하기':'리뷰 수정하기';
- const sections=groups.map(group=>`<section class="v2-praise-category">${group.name?'<h5>'+e(group.name)+'</h5>':''}<div class="v2-praise-options" role="group" aria-label="${e(group.name||'칭찬 항목')}">${group.items.map(item=>renderChip({label:item.name,selected:selected.includes(item.id),attributes:{inert:true}}).replace('<span class="v2-chip-label">',()=>`<span class="v2-praise-option-icon">${art[item.icon]||art.loyalty}</span><span class="v2-chip-label">`)).join('')}</div></section>`).join('');
+ const sections=groups.map(group=>`<section class="v2-praise-category">${group.name?'<h5>'+e(group.name)+'</h5>':''}<div class="v2-praise-options" role="group" aria-label="${e(group.name||'칭찬 항목')}">${group.items.map(item=>renderChip({label:item.name,selected:selected.includes(item.id),attributes:{inert:true}}).replace('<span class="v2-chip-label">',()=>`<span class="v2-praise-option-icon">${joybarIcon(item,art[item.icon]||art.loyalty)}</span><span class="v2-chip-label">`)).join('')}</div></section>`).join('');
  return `${header('리뷰 작성')}<p class="v2-praise-instruction">최대 5개까지 리뷰 항목을 골라주세요.</p><div class="v2-praise-selection" role="region" tabindex="0" aria-label="칭찬 선택 항목">${sections}</div>${label?'<footer class="v2-praise-save">'+button({label,className:'v2-button',attributes:{inert:true}})+'</footer>':''}`;
 }
 export function renderHomeStorePraiseScreen({state='targets',data=praiseData,selected,original}={}){
@@ -72,7 +74,7 @@ export function renderHomeStorePraiseScreen({state='targets',data=praiseData,sel
  return `<div class="v2-home-store-secondary-frame v2-home-store-praise-frame" data-praise-write-state="${state}">${limit?'<div class="v2-secondary-background" inert aria-hidden="true">'+page+'</div><div class="v2-secondary-overlay v2-secondary-dialog-overlay">'+limit+'</div>':page}</div>`;
 }
 
-const styles=['button','icon-button','media','sheet','dialog','chips'].map(name=>'/v2/components/'+name+'.css').concat('/v2/home/store.css','/v2/home/store-secondary.css');
+const styles=['feedback','button','icon-button','media','sheet','dialog','chips'].map(name=>'/v2/components/'+name+'.css').concat('/v2/home/store.css','/v2/home/store-secondary.css');
 export const renderHomeStoreShareReview=()=>remainingGallery({id:'store-share',title:'매장 공유',copy:'매장을 카카오톡이나 링크로 공유하는 화면입니다. 실제 공유는 실행하지 않습니다.',states:[['open','공유 방식 선택']],screen:renderHomeStoreShareScreen,styles});
 export const renderHomeStorePhotoReview=()=>remainingGallery({id:'store-photo',title:'매장 사진 상세',copy:'매장 사진을 원본 비율로 살펴보는 화면입니다. 사진 이동·확대는 실행하지 않습니다.',states:[['first','첫 번째 등록 사진'],['last','마지막 등록 사진']],screen:renderHomeStorePhotoScreen,styles});
 export const renderHomeStorePraiseReview=()=>remainingGallery({id:'praise-write',title:'칭찬 작성',copy:'이용 내역에서 칭찬할 방문을 고르고, 칭찬 항목을 선택하는 화면입니다. 방문 정보는 표시 예시이며 작성·저장은 실행하지 않습니다.',states:praiseStates,screen:renderHomeStorePraiseScreen,styles});

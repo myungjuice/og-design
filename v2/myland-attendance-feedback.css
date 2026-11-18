@@ -39,4 +39,4 @@
 .md-attendance-milestone .md-attendance-heading{gap:12px}
 .md-attendance-rays{position:absolute;inset:-60px;z-index:3;pointer-events:none;background:repeating-conic-gradient(from 7deg at 50% 47%,#ffe9a152 0deg 4deg,transparent 7deg 20deg);filter:blur(3px);mask-image:radial-gradient(ellipse at 50% 47%,#000 9%,#0009 40%,transparent 72%)}
 
-.md-ticket-pair{display:flex;align-items:center;justify-content:center;gap:10px;height:100%;padding:25px 10px}.md-ticket-pair>span{display:grid;justify-items:center;gap:8px;color:#755000;font-size:14px}.md-ticket-pair img{width:112px;height:100px;object-fit:contain;filter:drop-shadow(0 6px 8px #b77d2533)}.md-ticket-pair>strong{font-size:32px;color:#b37d13}.md-attendance-earned strong{white-space:nowrap}
+.md-ticket-bear{position:relative;display:block;width:100%;height:100%;object-fit:contain}.md-attendance-earned strong{white-space:nowrap}

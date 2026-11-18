@@ -15,7 +15,7 @@ test('최신 출석 시안의 곰과 보상 에셋을 표시하고 공통 버튼
  assert.equal(typeof details.renderMyLandAttendanceFeedbackScreen,'function');
  for(const [id,asset,amount,next] of [
   ['attendance-daily','bear-with-gift.png','1장','7일'],
-  ['attendance-milestone','ticket.png','1+1장','14일']
+  ['attendance-milestone','bear-with-two-tickets-v1.png','1+1장','14일']
  ]){
   const html=details.renderMyLandAttendanceFeedbackScreen(id);
   const popup=html.slice(html.indexOf('<section class="md-dialog'));
@@ -36,7 +36,7 @@ test('최신 출석 시안의 곰과 보상 에셋을 표시하고 공통 버튼
  assert.match(milestone,/7일 연속 달성!/);
  assert.match(milestone,/md-attendance-rays/);
  assert.match(milestone,/티켓 5장 \+ 100 M/);
- assert.equal((details.renderMyLandDetailsReview().match(/href="\/v2\/components\/button.css"/g)||[]).length,2);
+ assert.equal((details.renderMyLandDetailsReview().match(/href="\/v2\/components\/button.css"/g)||[]).length,3);
 });
 
 test('출석 외 상태에는 피드백 출석 화면을 생성하지 않는다',()=>{
