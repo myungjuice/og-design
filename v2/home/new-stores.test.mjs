@@ -32,12 +32,12 @@ test('normal maps and non-matching stores do not gain a NEW badge or change pin 
  assert.equal((marked.match(/class="home-new-badge"/g)||[]).length,1);
 });
 
-test('home overview and appearance remain unchanged while new-store review is light-only',()=>{
+test('published home screens exclude new-store badges and their review navigation',()=>{
  const html=renderWorkspace({pageId:'home'});
  const overview=html.match(/<section id="overview"[\s\S]*?<\/template>/)[0];
- assert.equal((overview.match(/class="home-new-badge"/g)||[]).length,2);
- assert.ok(reviewGroups('home').some(group=>group.items.some(item=>item.id==='home-new-stores'&&!item.pending)));
- assert.match(html,/<section id="home-new-stores"[^>]*data-review-screen hidden/);
+ assert.equal((overview.match(/class="home-new-badge"/g)||[]).length,0);
+ assert.ok(!reviewGroups('home').some(group=>group.items.some(item=>item.id==='home-new-stores')));
+ assert.doesNotMatch(html,/<section id="home-new-stores"/);
  for(const example of html.matchAll(/<template data-home-appearance="[^"]+">([\s\S]*?)<\/template>/g)){
   assert.doesNotMatch(example[1],/class="home-new-badge"/,'home appearance is unchanged');
  }
@@ -62,13 +62,8 @@ test('three visual treatments decorate only new stores and preserve original ON/
  assert.match(renderFigmaHome({newStores:['세븐일레븐'],newStoreStyle:'unknown'}),/class="home-new-badge"/,'unknown treatment safely falls back to existing badge');
 });
 
-test('new-store review shows only the final Figma N option',()=>{
+test('home workspace contains no new-store marker specimen or badge',()=>{
  const html=renderWorkspace({pageId:'home'});
- const examples=[...html.matchAll(/<template data-approved-store-map="new">([\s\S]*?)<\/template>/g)];
- assert.equal(examples.length,1);
- const markup=examples[0][1],markers=pins(markup);
- assert.equal(markers.length,3);
- assert.equal((markup.match(/class="approved-new-badge"/g)||[]).length,2);
- assert.match(markup,/267:2353/);
- assert.doesNotMatch(markup,/data-home-theme="dark"|home-store-label|new-sprout/);
+ assert.doesNotMatch(html,/data-approved-store-map="new"|class="approved-new-badge"|class="home-new-badge"|data-home-new-mark=/);
+ assert.match(html,/id="home-landmarks"/);
 });

@@ -1,3 +1,4 @@
+import {renderReviewPatterns} from './review-patterns.mjs';
 import {button} from '../../design-system/components/button/render.mjs';
 import {surface,menuTile} from '../../design-system/components/surfaces/render.mjs';
 import {escapeHTML as e} from '../../design-system/components/core.mjs';
@@ -102,6 +103,7 @@ export function renderComponents(){
  ${renderSnackbarSamples()}
  ${renderHelpSamples()}
  ${renderLoadingSamples()}
+ ${renderReviewPatterns()}
  <section class="v2-component-section" id="try" aria-labelledby="try-title" hidden><h2 id="try-title">직접 눌러보기</h2><p>터치해서 눌림과 선택 상태를 확인합니다. 실제 마일리지를 사용하지 않습니다.</p><div class="v2-try-row">${renderButton({attributes:{'data-preview-action':'button'}})}${tileStage({attributes:{'data-preview-action':'tile'}})}</div><p class="v2-preview-status" role="status" aria-live="polite">메뉴 타일을 누르면 선택 여부가 바뀝니다.</p>
  <details class="v2-accessibility-check"><summary>접근성 점검</summary><p>웹 검토 페이지에서는 Tab으로 버튼에 이동하고 Enter·Space로 누를 수 있습니다. 실제 포커스 표시와 키보드 조작은 유지하며, 앱 기본 시안의 상태 비교에서는 제외했습니다.</p></details></section>`;
 }

@@ -32,21 +32,17 @@ test('new membership and landmark decorations coexist without losing their acces
  assert.doesNotMatch(renderFigmaHome({landmarkStores:['없는 매장']}),/data-home-landmark/);
 });
 
-test('landmark review keeps the final Figma crown alongside the requested neon comparison',()=>{
+test('landmark review contains only the confirmed wrapped neon crown',()=>{
  const html=renderWorkspace({pageId:'home'});
  assert.ok(reviewGroups('home').some(g=>g.items.some(i=>i.id==='home-landmarks')));
  assert.match(html,/<section id="home-landmarks"[^>]*data-review-screen hidden/);
- const examples=[...html.matchAll(/<template data-approved-store-map="best">([\s\S]*?)<\/template>/g)];
- assert.equal(examples.length,1);
- for(const [,markup] of examples){
-  assert.match(markup,/267:2494/);
-  assert.doesNotMatch(markup,/data-home-theme="dark"|best-gold|data-home-landmark="(?:medal|laurel|castle)"/);
-  const markers=pins(markup);
-  assert.match(markers[0],/랜드마크 매장/);assert.match(markers[2],/랜드마크 매장/);
-  assert.doesNotMatch(markers[1],/랜드마크 매장|data-feedback-gold/);
- }
- assert.doesNotMatch(html,/data-home-landmark-combined="true"/);
- assert.match(html,/id="home-new-stores"/);
+ const section=html.split('<section id="home-landmarks"')[1].split('</section>')[0];
+ assert.equal((section.match(/<template/g)||[]).length,1);
+ assert.match(section,/data-approved-store-map="best-fourth"/);
+ assert.match(section,/landmark-crown-back/);
+ assert.match(section,/landmark-crown-front/);
+ assert.doesNotMatch(section,/이전 시안|이전 왕관|data-approved-store-map="best"|best-final|best-figma/);
+ assert.doesNotMatch(html,/id="home-new-stores"/);
  assert.match(html,/id="home-appearance"/);
  for(const pageId of ['my-land','my-info','og-park','barcode'])assert.doesNotMatch(renderWorkspace({pageId}),/id="home-landmarks"|data-home-landmark=/);
 });

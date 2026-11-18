@@ -4,9 +4,9 @@ import * as details from './myland-details.mjs';
 
 test('두 출석 화면에만 원본 옆 피드백 비교본을 추가한다',()=>{
  const html=details.renderMyLandDetailsReview();
- assert.equal((html.match(/data-myland-detail=/g)||[]).length,12);
+ assert.equal((html.match(/data-myland-detail=/g)||[]).length,11);
  assert.deepEqual([...html.matchAll(/data-myland-attendance-feedback="([^"]+)"/g)].map(match=>match[1]),['attendance-daily','attendance-milestone']);
- assert.equal((html.match(/가송님 피드백 반영본 · 10\/26/g)||[]).length,2);
+ assert.equal((html.match(/<figcaption>피드백 반영본/g)||[]).length,2);
  assert.equal((html.match(/href="\/v2\/myland-attendance-feedback.css"/g)||[]).length,2);
  for(const id of ['attendance-daily','attendance-milestone'])assert.match(details.renderMyLandDetailScreen(id),/class="md-bear"/);
 });
@@ -15,7 +15,7 @@ test('최신 출석 시안의 곰과 보상 에셋을 표시하고 공통 버튼
  assert.equal(typeof details.renderMyLandAttendanceFeedbackScreen,'function');
  for(const [id,asset,amount,next] of [
   ['attendance-daily','bear-with-gift.png','1장','7일'],
-  ['attendance-milestone','milestone-reward.png','3장','14일']
+  ['attendance-milestone','ticket.png','1+1장','14일']
  ]){
   const html=details.renderMyLandAttendanceFeedbackScreen(id);
   const popup=html.slice(html.indexOf('<section class="md-dialog'));
@@ -31,7 +31,7 @@ test('최신 출석 시안의 곰과 보상 에셋을 표시하고 공통 버튼
  }
  const daily=details.renderMyLandAttendanceFeedbackScreen('attendance-daily');
  const milestone=details.renderMyLandAttendanceFeedbackScreen('attendance-milestone');
- assert.match(daily,/티켓 3장 \+ 50 M/);
+ assert.match(daily,/티켓 1\+1장/);
  assert.match(daily,/ticket\.png/);
  assert.match(milestone,/7일 연속 달성!/);
  assert.match(milestone,/md-attendance-rays/);

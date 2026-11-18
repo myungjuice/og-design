@@ -104,3 +104,5 @@ h1,p{margin:0}
 .nav-item.active::after{content:'';width:40px;height:2px;background:var(--violet)}
 .nav-item.barcode{position:relative;top:-32px}
 .nav-item.barcode>span{width:64px;height:64px;border-radius:50%;border:4px solid var(--paper);background:var(--barcode-fill)}
+
+.lucky-title{font-size:18px;line-height:24px;margin:14px 20px 8px;font-weight:700}

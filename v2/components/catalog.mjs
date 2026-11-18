@@ -1,4 +1,9 @@
 export const componentItems=[
+ {id:'map-markers',label:'지도 핀·랜드마크',group:'지도 탐색'},
+ {id:'best-label',label:'BEST 네온 라벨',group:'배지·알림 표시'},
+ {id:'content-patterns',label:'참여 단계·접힘 안내',group:'안내·확인'},
+ {id:'community-row',label:'커뮤니티 목록 행',group:'목록'},
+ {id:'mascot-rules',label:'마스코트 사용 규칙',group:'프로필·이미지'},
  {id:'primary',label:'주요 버튼',group:'버튼'},
  {id:'secondary',label:'보조 버튼',group:'버튼'},
  {id:'review',label:'후기 버튼',group:'버튼'},

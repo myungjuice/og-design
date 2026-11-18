@@ -45,6 +45,7 @@ export function applyReceivedIcons(source){
   return categoryPicture(file.replace(/\.svg$/,'').replaceAll('-','/'));
  });
  html=html.replace(/<li><span class="visit-symbol">[\s\S]*?<\/span><div class="visit-copy"><strong>([^<]+)<\/strong>/g,(row,name)=>{
+  if(row.includes('data-visit-photo'))return row;
   const category=({'스시산원 반주헌':'일식','준오헤어 용산아이파크몰':'헤어/뷰티','석암생소금구이 종로익선점':'한식'})[name];
   return category?row.replace(/<span class="visit-symbol">[\s\S]*?<\/span>/,`<span class="visit-symbol">${categoryPicture(category,32)}</span>`):row;
  });

@@ -1,7 +1,7 @@
 import {reviewSection} from './details-shared.mjs';
 import {renderOfficialEventList,renderOfficialEventDetail} from './events.mjs';
 import {renderContestScreen} from './contests.mjs';
-import {renderInterestSelection,renderCommunityFeed} from './community.mjs';
+import {renderInterestSelection,renderCommunityFeed,setupCommunityFeed} from './community.mjs';
 export const parkDetailGroups=[
  {id:'park-events-group',label:'본사 이벤트 · 검토 대기',items:[{id:'park-events',label:'공식 이벤트 목록'},{id:'park-event-detail',label:'참여 방식·종료'}]},
  {id:'park-contests-group',label:'공모전 · 검토 대기',items:[{id:'park-contests',label:'공모전 목록'},{id:'park-contest-detail',label:'상세·참여 안내'},{id:'park-contest-judging',label:'심사 중·내 출품작'},{id:'park-contest-result',label:'수상 결과'}]},
@@ -23,6 +23,7 @@ export function setupParkDetails(root){
  for(const host of root.querySelectorAll('[data-park-detail-screen]')){
   if(host.shadowRoot)continue;
   const template=host.querySelector('template'),shadow=host.attachShadow({mode:'open'});shadow.append(template.content.cloneNode(true));template.remove();
+  setupCommunityFeed(shadow);
   const screen=shadow.querySelector('.pd-screen');
   const resize=()=>{const scale=Math.min(1,host.clientWidth/390);screen.style.zoom=scale;host.style.height=Math.ceil(screen.offsetHeight*scale)+'px';};
   new ResizeObserver(resize).observe(host);new ResizeObserver(resize).observe(screen);

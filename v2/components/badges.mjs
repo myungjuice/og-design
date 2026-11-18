@@ -26,7 +26,6 @@ const mark=(label,tone='neutral',size='small')=>renderBadge({label,tone,size});
 export function renderBadgeSamples(){
  return `<section class="v2-component-section" id="badges" aria-labelledby="badges-title" hidden><h2 id="badges-title">배지·상태 라벨</h2><p>상태와 구분을 짧게 알려줍니다. 가장자리에만 얕은 입체감을 주고, 선택하는 칩과 달리 눌림·선택 효과는 넣지 않습니다.</p>
  <div class="v2-badge-grid">
- ${sample('신규',row(renderBadge({label:'신규',tone:'brand',size:'compact',variant:'solid'})+'<span class="v2-badge-context-name">오시 망원본점</span>'),'10px · 굵기 400. 실제 화면의 표시 위치는 별도 검토합니다.')}
  ${sample('진행·처리 상태',row(mark('진행 중','info')+mark('완료','success')+mark('확인 필요','warning')+mark('종료')+mark('실패','error')),'색뿐 아니라 문구로도 의미를 전달합니다.')}
  ${sample('공모전 진행 상태',row(mark('진행 중','info')+mark('심사 중','warning')+mark('종료')))}
  ${sample('매장 구분',row(mark('회원점','brand')+mark('일반 매장')))}

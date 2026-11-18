@@ -16,7 +16,7 @@ const styles = [
 ];
 const crown = '<img class="sl-crown" src="/assets/review-20261029/neon-crown-gold.svg" width="24" height="22" alt="" aria-hidden="true">';
 
-function label({compact = false} = {}) {
+export function renderStoreBestLabel({compact = false} = {}) {
   if (compact) {
     return '<span class="sl-label">' + renderBadge({label: '랜드마크', tone: 'warning', size: 'compact'}) + '</span>';
   }
@@ -31,9 +31,9 @@ export function renderStoreLandmarkScreen({state = 'name'} = {}) {
   if (state === 'logo') {
     return html
       .replace('<div class="v2-store-logo">', '<div class="sl-logo-group">' + crown + '<div class="v2-store-logo">')
-      .replace('</div><div class="og-store-identity-copy">', '</div>' + label({compact: true}) + '</div><div class="og-store-identity-copy">');
+      .replace('</div><div class="og-store-identity-copy">', '</div>' + renderStoreBestLabel({compact: true}) + '</div><div class="og-store-identity-copy">');
   }
-  return html.replace(/(<div class="og-store-name">[\s\S]*?)(<\/div>)/, (_, content, end) => content + label() + end);
+  return html.replace(/(<div class="og-store-name">[\s\S]*?)(<\/div>)/, (_, content, end) => content + renderStoreBestLabel() + end);
 }
 
 export function renderStoreLandmarkReview() {
@@ -50,8 +50,8 @@ export function renderStoreLandmarkReview() {
       <p class="v2-intro">선택한 B안에 왕관과 BEST 네온 라벨을 적용했습니다. 작은 크기의 글자와 빛 번짐을 함께 확인합니다.</p>
       <div class="sl-comparison">${examples}</div>
       <div class="sl-label-inspection">
-        <figure class="sl-best-preview"><figcaption>실제 표시 크기</figcaption><div class="sl-best-sample" data-best-label-preview="actual">${label()}</div></figure>
-        <figure class="sl-best-preview"><figcaption>라벨 확대</figcaption><div class="sl-best-sample sl-best-enlarged" data-best-label-preview="enlarged">${label()}</div></figure>
+        <figure class="sl-best-preview"><figcaption>실제 표시 크기</figcaption><div class="sl-best-sample" data-best-label-preview="actual">${renderStoreBestLabel()}</div></figure>
+        <figure class="sl-best-preview"><figcaption>라벨 확대</figcaption><div class="sl-best-sample sl-best-enlarged" data-best-label-preview="enlarged">${renderStoreBestLabel()}</div></figure>
       </div>
     </section>`;
 }

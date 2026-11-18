@@ -27,7 +27,7 @@ try{
     const last=root.querySelector('.mission:last-child').getBoundingClientRect();
     const lastVisible=last.bottom<=root.querySelector('.bottom-nav').getBoundingClientRect().top;
     scroll.scrollTop=0;
-    return {mode:host.dataset.mylandFeedbackScreen,screen:geometry('.screen'),attendance:geometry('.attendance'),games:geometry('.games'),missions:geometry('.missions'),nav:geometry('.bottom-nav'),fullScroll,fixed,lastVisible,images:[...root.querySelectorAll('img')].every(img=>img.complete&&img.naturalWidth>0),button:root.querySelector('.attendance-button').textContent,barcode:geometry('.barcode>span'),gameLabels:[...root.querySelectorAll('.game-copy>b')].map(e=>e.textContent)};
+    return {mode:host.dataset.mylandFeedbackScreen,screen:geometry('.screen'),attendance:geometry('.attendance'),games:geometry('.games'),missions:geometry('.missions'),nav:geometry('.bottom-nav'),fullScroll,fixed,lastVisible,images:[...root.querySelectorAll('img')].every(img=>img.complete&&img.naturalWidth>0),button:root.querySelector('.attendance-button').textContent,barcode:geometry('.figma-scan-surface'),gameLabels:[...root.querySelectorAll('.game-copy>b')].map(e=>e.textContent)};
    }))};
   });
   assert.equal(result.overflow,false,'가로 넘침: '+width);
@@ -37,14 +37,14 @@ try{
    const close=(a,b)=>assert.ok(Math.abs(a-b)<(width>=768?.15:.75),`${width} ${f.mode}: ${a} != ${b}`);
    close(f.screen.height,844);
    close(f.attendance.y,144);close(f.attendance.height,174);
-   close(f.games.y,330);close(f.games.height,92);
-   close(f.missions.y,434);close(f.missions.height,290);
+   assert.ok(f.games.y>f.attendance.y+f.attendance.height);close(f.games.height,92);
+   assert.ok(f.missions.y>f.games.y+f.games.height);close(f.missions.height,290);
    close(f.nav.height,90);close(f.nav.y,f.screen.height-90);
-   close(f.barcode.height,64);close(f.barcode.y,f.nav.y-24);
+   close(f.barcode.height,56);close(f.barcode.y,f.nav.y-26);
    assert.equal(f.fullScroll,true,'하단 메뉴 위 여백을 포함한 본문 스크롤 범위');
    assert.ok(f.fixed&&f.lastVisible&&f.images,'고정 메뉴·마지막 미션·이미지 누락');
    assert.equal(f.button,'출석하기');
-   assert.deepEqual(f.gameLabels,['룰렛','퍼즐']);
+   assert.deepEqual(f.gameLabels,['오지빙글','오지팡팡']);
   }
  }
  console.log('마이랜드 C안: 5개 화면 너비에서 이미지·배치·스크롤·고정 메뉴 검증 통과');

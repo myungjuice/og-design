@@ -27,5 +27,5 @@ test('마이랜드는 폐기한 두 배경 비교안 대신 확정안과 세부�
  const html=renderWorkspace({pageId:'my-land'});
  assert.doesNotMatch(html,/data-designer-screen="myland-v[12]"|id="myland-design"|미션마다 아이콘 필요/);
  assert.equal((html.match(/data-myland-feedback-screen=/g)||[]).length,1);
- assert.equal((html.match(/data-myland-detail=/g)||[]).length,12);
+ assert.equal((html.match(/data-myland-detail=/g)||[]).length,11);
 });

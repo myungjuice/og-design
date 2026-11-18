@@ -31,13 +31,13 @@ function attendance(){
 }
 
 function games(){
- return '<div class="games">'+[['룰렛','c-roulette.png','roulette'],['퍼즐','c-puzzle.png','puzzle']].map(item=>
+ return '<h2 class="lucky-title">오지럭키</h2><div class="games">'+[['오지빙글','c-roulette.png','roulette'],['오지팡팡','c-puzzle.png','puzzle']].map(item=>
   '<section class="game '+item[2]+'"><div class="game-copy"><b>'+item[0]+'</b><span class="ticket-count">'+picture('70418.svg')+'<strong>57</strong></span></div>'+picture(item[1],'game-art',item[0])+'</section>'
  ).join('')+'</div>';
 }
 
 function missions(){
- const rows=[['마이랜드 방문하기','','+10M'],['룰렛 2회 돌리기','1/2','방문하기'],['회원점 1곳에서 적립하기','3티켓','방문하기'],['공유인 1명 초대하기','','공유하기']];
+ const rows=[['마이랜드 방문하기','','+10M'],['오지빙글 2회 돌리기','1/2','방문하기'],['회원점 1곳에서 적립하기','3티켓','방문하기'],['공유인 1명 초대하기','','공유하기']];
  return '<section class="missions card"><header><b>이번주 미션</b><strong>1<span>/4</span></strong></header><div class="progress" aria-label="미션 4개 중 1개 완료"><span></span></div><div class="mission-list">'+rows.map((row,index)=>
   '<div class="mission'+(index===0?' complete':'')+'"><span class="mission-icon">'+picture('28c82.svg')+'<span class="mission-status" aria-label="'+(index===0?'완료':'진행 중')+'">'+picture('b2e4e.svg')+'</span></span><span class="mission-label"><span>'+row[0]+'</span>'+(index===0?'<em class="complete-label">완료</em>':row[1]?'<em>'+row[1]+'</em>':'')+'</span><span class="mission-action'+(index===0?' mileage':'')+'">'+row[2]+'</span></div>'
  ).join('')+'</div></section>';
@@ -59,7 +59,7 @@ export function renderMyLandFeedbackReview(){
   '<h3>반영 사항</h3><ul>'+
   '<li><b>배경</b> — 밝은 하늘·들판·주택과 캐릭터로 생동감 있는 3D 분위기를 구성했습니다.</li>'+
   '<li><b>주간 출석</b> — 주간형으로 확정하고, 오늘은 숫자 없는 빈 원으로 표시했습니다.</li>'+
-  '<li><b>게임 카드</b> — 기존 입체 형태의 룰렛·퍼즐에 색상을 적용하고, 게임별 티켓 수량을 유지했습니다.</li>'+
+  '<li><b>게임 카드</b> — 기존 입체 형태의 오지빙글·오지팡팡에 색상을 적용하고, 게임별 티켓 수량을 유지했습니다.</li>'+
   '<li><b>미션 색상</b> — 미션 바는 옐로·오렌지 그라데이션, 방문하기는 연한 옐로로 적용했습니다.</li>'+
   '</ul></section></section>';
 }

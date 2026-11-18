@@ -24,3 +24,18 @@
 .received-function-icon{display:block;object-fit:contain;flex:none;pointer-events:none}
 .service-face>.received-function-icon{width:40px;height:40px}
 .v2-store-hero-status>.received-function-icon{width:24px;height:24px}
+
+.received-function-mask{display:block;flex:none;background:currentColor;mask:var(--received-menu-icon) center/contain no-repeat;pointer-events:none}
+.service-face>.received-function-mask{color:var(--v2-action,#5251e3)}
+.review-write>.received-function-mask{color:var(--v2-on-action,#fff)}
+
+/* Center the visible artwork within its 40px menu slot. The supplied SVGs
+ * have unequal internal padding, so centering their canvases alone is uneven. */
+.service-face>[data-received-function]{transform:translate(var(--received-menu-x,0px),var(--received-menu-y,0px))}
+.service-face>[data-received-function="history"]{--received-menu-x:-1.75px;--received-menu-y:-.5px}
+.service-face>[data-received-function="notices"]{--received-menu-x:-1.33px;--received-menu-y:-.46px}
+.service-face>[data-received-function="membership"]{--received-menu-y:1.125px}
+.service-face>[data-received-function="support"]{--received-menu-x:-.54px;--received-menu-y:-.33px}
+.service-face>[data-received-function="account"]{--received-menu-x:-.96px;--received-menu-y:-.71px}
+
+[data-received-function="favorite-on"].received-function-mask{color:#FB4501}

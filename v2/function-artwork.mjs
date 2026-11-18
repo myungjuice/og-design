@@ -20,9 +20,12 @@ export function functionArtworkURL(kind) {
 export function functionArtwork(kind, size = 20, className = 'received-icon') {
   return `<img class="${e(className)} received-function-icon" data-received-function="${e(kind)}" src="${functionArtworkURL(kind)}" width="${size}" height="${size}" alt="" aria-hidden="true" decoding="async">`;
 }
+function maskedFunctionArtwork(kind, size) {
+  return `<span class="received-function-mask" data-received-function="${e(kind)}" style="--received-menu-icon:url('${functionArtworkURL(kind)}');width:${size}px;height:${size}px" aria-hidden="true"></span>`;
+}
 export function favoriteArtwork() {
   return '<span class="received-favorite-art" aria-hidden="true">' +
-    functionArtwork('favorite-off', 20) + functionArtwork('favorite-on', 20) + '</span>';
+    functionArtwork('favorite-off', 20) + maskedFunctionArtwork('favorite-on', 20) + '</span>';
 }
 
 const imageKinds = {
@@ -45,12 +48,14 @@ export function applyFunctionIcons(source) {
     return kind ? tag.replace(src, functionArtworkURL(kind)).replace('<img ', `<img data-received-function="${kind}" `) : tag;
   });
   html = html.replace(/<span class="service-face"><span class="service-art" data-art="([^"]+)"[^>]*>[\s\S]*?<\/span><\/span>/g,
-    (original, name) => menuKinds[name] ? '<span class="service-face">' + functionArtwork(menuKinds[name], 40) + '</span>' : original);
+    (original, name) => menuKinds[name] ? '<span class="service-face">' + (name === 'settings' ? maskedFunctionArtwork('settings', 40) : functionArtwork(menuKinds[name], 40)) + '</span>' : original);
   html = html.replace(/<svg\b[^>]*data-source-icon="([^"]+)"[^>]*>[\s\S]*?<\/svg>|<span class="material-icons"[^>]*>([^<]+)<\/span>/g,
     (original, svgName, materialName) => sourceKinds[svgName || materialName] ? functionArtwork(sourceKinds[svgName || materialName]) : original);
   html = html.replace(/(<span class="og-account-status([^\"]*)">)(?:<svg\b[^>]*>[\s\S]*?<\/svg>|<span class="material-icons"[^>]*>[^<]*<\/span>)/g,
     (_, opening, classes) => opening + functionArtwork(classes.includes('is-checked') ? 'verified-on' : 'verified-off'));
   html = html.replace(/<button\b[^>]*class="[^"]*\bog-favorite\b[^"]*"[^>]*>[\s\S]*?<\/button>/g,
     button => button.includes('received-favorite-art') ? button : button.replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/, favoriteArtwork()));
+  html = html.replace(/<button\b[^>]*class="[^"]*\breview-write\b[^"]*"[^>]*>[\s\S]*?<\/button>/g,
+    button => button.replace(/<img\b[^>]*data-received-function="edit"[^>]*>/, maskedFunctionArtwork('edit', 16)));
   return html;
 }

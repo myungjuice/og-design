@@ -41,7 +41,7 @@ export function renderFoundations(){
  <div><dt>메뉴 아이콘과 이름 사이</dt><dd>6px · 시안 기준 예외</dd></div>
  <div><dt>하단 메뉴와 화면 끝</dt><dd>20px · 떠 있는 바텀 메뉴</dd></div></dl>`)}
  ${section('radius','카드와 버튼, 시트를 구분합니다. 바코드 시트는 위쪽만 32px, 떠 있는 하단 메뉴는 네 모서리 모두 32px입니다.',`<div class="v2-radius-list">${[['card','카드 · 20px'],['tile','메뉴 타일 · 16px'],['button','버튼 · 12px'],['chip','검색·칩 · pill'],['sheet','바코드 시트 · 위 32px'],['navigation','하단 메뉴 · 32px']].map(([id,label])=>`<figure data-sample><div class="v2-radius-shape v2-radius-${id}" aria-hidden="true"></div><figcaption>${label}</figcaption></figure>`).join('')}</div>`)}
- ${section('materials','좌상단 빛과 하단 두께, 접촉 그림자로 깊이를 만듭니다. 본문과 바코드 막대에는 장식 그림자를 적용하지 않습니다.',`<p class="v2-specimen-note">시각 규칙 검토용 · 동작과 상태를 갖춘 완성 컴포넌트가 아닙니다.</p><div class="v2-material-list">
+ ${section('materials','카드와 검색창은 같은 3D 재질을 사용합니다. 좌상단 빛과 하단 두께, 접촉 그림자로 깊이를 만듭니다. 본문과 바코드 막대에는 장식 그림자를 적용하지 않습니다.',`<p class="v2-specimen-note">시각 규칙 검토용 · 동작과 상태를 갖춘 완성 컴포넌트가 아닙니다.</p><div class="v2-material-list">
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-flat" data-contrast="flat"><strong>마일리지 적립 안내</strong><span>글자와 바코드 막대는 평면으로 선명하게</span></div></div><figcaption>평면 <span>본문 · 안내 · 바코드 막대</span></figcaption></figure>
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-input" data-contrast="input">매장명으로 검색해 주세요.</div></div><figcaption>밝은 입력 표면 <span>홈 검색창 · 공통 입력 · 좌상단 빛과 얕은 접촉 그림자</span></figcaption></figure>
  <figure data-sample><div class="v2-material-stage"><div class="v2-material v2-material-panel" data-contrast="panel"><strong>최근 방문</strong><span>아래쪽 마감과 부드러운 접촉 그림자</span></div></div><figcaption>흰 정보 카드 <span>최근 방문 · 바코드 카드 · 기본 내부 여백 20px</span></figcaption></figure>

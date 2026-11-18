@@ -17,5 +17,5 @@ export function renderFinalLandmarkMap({wrapped=false}={}){
 
 export function renderFinalLandmarkReview({wrapped=false}={}){
  const styles=[...figmaHomeStyles.filter(href=>!['/v2/home/new-stores.css','/v2/home/landmarks.css'].includes(href)),'/v2/home/store-markers.css','/v2/home/landmark-figma.css','/v2/home/landmark-final.css'];
- return `<figure class="approved-store-figure"><figcaption>${wrapped?'4차 피드백 반영안 · 링 앞뒤 분리':'이전 시안 · 왕관 전체 앞 레이어'}</figcaption><div class="approved-store-host"><template data-approved-store-map="${wrapped?'best-fourth':'best-final'}">${styles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}<div class="approved-store-canvas" inert>${renderFinalLandmarkMap({wrapped})}</div></template></div></figure>`;
+ return `<figure class="approved-store-figure"><figcaption>${wrapped?'최종 시안 · 미선택 / 선택':'이전 시안 · 왕관 전체 앞 레이어'}</figcaption><div class="approved-store-host"><template data-approved-store-map="${wrapped?'best-fourth':'best-final'}">${styles.map(href=>`<link rel="stylesheet" href="${href}">`).join('')}<div class="approved-store-canvas" inert>${renderFinalLandmarkMap({wrapped})}</div></template></div></figure>`;
 }

@@ -41,8 +41,8 @@ test('review composition preserves placeholders and shows save only for source c
  const html=render();
  for(const key of ['empty','unchanged','help'])assert.doesNotMatch(stateHTML(html,'review-write',key),/og-write-footer/);
  for(const key of ['composed','expanded','selected','source'])assert.match(stateHTML(html,'review-write',key),/og-write-footer/);
- assert.match(stateHTML(html,'review-write','empty'),/placeholder="리뷰 내용을 입력해주세요\."/);
- assert.match(stateHTML(html,'review-write','expanded'),/다음에도 방문하고 싶어요/);
+ assert.match(stateHTML(html,'review-write','empty'),/placeholder="사진과 함께 남길 내용을 50자 이내로 적어주세요\."/);
+ assert.match(stateHTML(html,'review-write','expanded'),/또 방문하고 싶어요/);
  assert.match(stateHTML(html,'review-write','selected'),/리뷰 사진 삭제/);
  assert.doesNotMatch(stateHTML(html,'review-write','composed'),/리뷰 사진 삭제/);
  assert.match(stateHTML(html,'review-write','source'),/>갤러리</);

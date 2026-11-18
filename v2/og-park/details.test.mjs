@@ -61,3 +61,25 @@ test('my contest entry keeps the same photo and like count in judging, results a
  assert.equal(awardPhoto,ownPhoto);
  for(const html of [judging,result])assert.match(html,/<strong>정성 가득한 한 상<\/strong><span>♡ 47<\/span>/);
 });
+
+
+test('contest specimens distribute all ten supplied photos across distinct entry lists',async()=>{
+ const {renderContestScreen}=await import('./contests.mjs');
+ const screens=['detail','judging','result'].map(state=>renderContestScreen(state));
+ const suppliedPhotos=new Set(screens.flatMap(html=>[...html.matchAll(/src="(\/assets\/gasong-contest-20261112\/[^"]+)"/g)].map(match=>match[1])));
+ assert.equal(suppliedPhotos.size,10);
+ const grids=screens.map(html=>html.match(/<div class="pd-entry-grid">([\s\S]*?)<\/div>/)[1]);
+ assert.equal(new Set(grids).size,3);
+ for(const grid of grids){
+  const photos=[...grid.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match=>match[1]);
+  assert.equal(new Set(photos).size,3);
+ }
+});
+
+
+test('contest status specimens use three distinct prominent cover photos',async()=>{
+ const {renderContestScreen}=await import('./contests.mjs');
+ const covers=['detail','judging','result'].map(state=>
+  renderContestScreen(state).match(/class="pd-contest-photo" src="([^"]+)"/)[1]);
+ assert.equal(new Set(covers).size,3);
+});

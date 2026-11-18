@@ -13,14 +13,14 @@ test('current navigation keeps the Figma barcode caption and gloss across render
  }
 });
 
-test('home keeps the supplied map and three received PNG pins with opt-in NEW labels and no extra marker',()=>{
+test('home keeps the supplied map and three received PNG pins without new-store labels',()=>{
  const html=renderWorkspace({pageId:'home'}).split('<section id="overview"')[1].split('</template>')[0];
  assert.match(html,/figma-home-20261020\/f196c\.png/);
  assert.equal((html.match(/data-received-icon="pin-on"/g)||[]).length,1);
  assert.equal((html.match(/data-received-icon="pin-off"/g)||[]).length,2);
  assert.match(html,/30e02\.svg/);
  assert.equal((html.match(/class="home-store-label"/g)||[]).length,3);
- assert.equal((html.match(/class="home-new-badge"/g)||[]).length,2);
+ assert.equal((html.match(/class="home-new-badge"/g)||[]).length,0);
  assert.doesNotMatch(html,/home-current-pin|data-category="전체"/);
 });
 
@@ -55,9 +55,10 @@ test('received bottom navigation reaches all approved current main screens witho
  assert.doesNotMatch(barcode.match(/<section class="barcode-sheet"[\s\S]*/)?.[0]||'',/data-figma-navigation/);
 });
 
-test('recent visits use matching industry icons rather than one generic utensils image',()=>{
+test('recent visits keep two store photos without replacing them with industry icons',()=>{
  const html=renderWorkspace({pageId:'my-info'}).split('<section id="overview"')[1].split('</template>')[0];
- for(const name of ['일식','헤어/뷰티','한식'])assert.match(html,new RegExp('data-received-category="'+name+'"'));
+ assert.equal((html.match(/data-visit-photo/g)||[]).length,2);
+ assert.match(html,/02-sushi\.jpg/);assert.match(html,/03-steak\.jpg/);
  assert.doesNotMatch(html,/recent-utensils\.svg/);
 });
 

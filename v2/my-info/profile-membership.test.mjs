@@ -15,7 +15,7 @@ test('character preview distinguishes no selection from each valid selection',()
   assert.match(html,new RegExp('data-character-value="'+key+'"'));
   assert.match(html,new RegExp('data-character-art="'+key+'"'));
   assert.match(html,/캐릭터 변경하기/);
-  assert.equal((html.match(/class="visit-symbol"/g)||[]).length,3);
+  assert.equal((html.match(/class="visit-symbol"/g)||[]).length,2);
   const selected=renderCharacterSelection({selected:key});
   assert.equal((selected.match(/aria-checked="true"/g)||[]).length,1);
   assert.match(selected,new RegExp(({bear:'곰을',penguin:'펭귄을',raccoon:'너구리를'})[key]+' 선택했어요'));
@@ -35,12 +35,12 @@ test('character selection is reachable without removing the existing main or ena
  assert.equal((html.match(/data-character-choice=/g)||[]).length,3);
  assert.equal((html.match(/class="my-info-test"/g)||[]).length,1);
  const main=html.split('<section id="overview"')[1].split('</template>')[0];
- assert.equal((main.match(/class="visit-symbol"/g)||[]).length,3);
+ assert.equal((main.match(/class="visit-symbol"/g)||[]).length,2);
  assert.ok(!html.includes('펭귄으로 시작하기'));
  assert.ok(reviewGroups('my-info').flatMap(g=>g.items).some(i=>i.pending&&i.label==='캐릭터 파츠 꾸미기'));
 });
 
-test('character main keeps received navigation and industry icons before and after selection',()=>{
+test('character main keeps received navigation and store photos before and after selection',()=>{
  for(const selected of [null,'bear','penguin','raccoon']){
   const html=renderCharacterMain({selected});
   assert.match(html,/data-preview="내 정보" aria-current="page"/,String(selected)+' keeps My Info selected');
@@ -48,9 +48,7 @@ test('character main keeps received navigation and industry icons before and aft
   for(const name of ['홈','마이랜드','바코드','오지파크','내 정보']){
    assert.ok(html.includes('data-received-nav="'+name+'"'),String(selected)+' · '+name);
   }
-  for(const name of ['일식','헤어/뷰티','한식']){
-   assert.ok(html.includes('data-received-category="'+name+'"'),String(selected)+' · '+name);
-  }
+  assert.equal((html.match(/data-visit-photo/g)||[]).length,2);
   assert.doesNotMatch(html,/recent-utensils\.svg|bottom-navigation-source\.png/);
  }
 });
@@ -58,7 +56,7 @@ test('character main keeps received navigation and industry icons before and aft
 test('notifications cover earnings, attendance, roulette and notices without inventing settings',()=>{
  const html=renderNotices({selected:1});
  assert.equal((html.match(/class="og-notification-row"/g)||[]).length,4);
- for(const text of ['적립 완료','출석 7일','룰렛 당첨','더블 적립'])assert.ok(html.includes(text),text);
+ for(const text of ['적립 완료','출석 7일','오지빙글 당첨','더블 적립'])assert.ok(html.includes(text),text);
  assert.equal((html.match(/data-read="false"/g)||[]).length,2);
  assert.equal((html.match(/data-read="true"/g)||[]).length,2);
  assert.ok(!renderWorkspace({pageId:'my-info'}).includes('게임 알림'));

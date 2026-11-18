@@ -1,3 +1,4 @@
+@import url('./scenery.css');
 /* Hallmark · component: character choice · pre-emit critique: P5 H4 E5 S5 R5 V4
  * genre: playful · theme: existing OG 3D · app character selection
  * Hallmark · macrostructure: app-choice-list · three one-tap radios
@@ -5,7 +6,7 @@
  * No fake OS chrome, parts UI, or decorative motion. */
 .v2-character-screen,.v2-character-screen *{box-sizing:border-box}
 .v2-character-main .profile-edit{gap:var(--v2-space-2)}
-.v2-character-screen{width:100%;max-width:390px;height:846px;background:linear-gradient(to bottom,var(--v2-screen-top),var(--v2-screen-bottom));color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);display:flex;flex-direction:column;overflow:clip}
+.v2-character-screen{width:100%;max-width:390px;height:846px;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);display:flex;flex-direction:column;overflow:clip}
 .v2-character-screen svg,.v2-character-avatar svg{display:block;width:24px;height:24px;flex:none}
 .v2-character-header{display:flex;align-items:center;height:64px;flex:none;padding:var(--v2-space-2);gap:var(--v2-space-2)}
 .v2-character-header h2{flex:1;min-width:0;margin:0;text-align:center;font:700 var(--v2-type-card)/var(--v2-line-card) var(--v2-font)}

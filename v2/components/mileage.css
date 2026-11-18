@@ -7,7 +7,15 @@
 .v2-mileage-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--v2-space-8)}
 .v2-mileage.og-surface{width:350px;max-width:100%;min-width:0;padding:var(--v2-space-5);border:0;border-radius:var(--v2-radius-card);background:var(--v2-action);color:var(--v2-on-action);box-shadow:var(--v2-depth-primary);container-type:inline-size}
 .v2-mileage .mileage-top{display:flex;gap:var(--v2-space-2);align-items:center;position:relative}
-.v2-mileage .m-coin{display:block;width:48px;height:48px;flex:none;border-radius:50%}
+/* Offset by half the caption line so the coin centers on the amount row. */
+.v2-mileage .m-coin{
+ display:block;
+ width:48px;
+ height:48px;
+ flex:none;
+ border-radius:50%;
+ transform:translateY(calc(var(--v2-line-compact) / 2));
+}
 .v2-mileage .mileage-title{min-width:0;flex:1}
 .v2-mileage .mileage-title>div{display:flex;align-items:center;gap:2px;font-size:var(--v2-type-caption);line-height:var(--v2-line-compact);white-space:nowrap}
 .v2-mileage .mileage-title strong{display:block;font-size:var(--v2-type-amount);line-height:var(--v2-line-amount);margin:0;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}

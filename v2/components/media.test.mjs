@@ -62,7 +62,7 @@ test('media wrappers reject unsupported states geometry ambiguous profile source
 });
 test('media gallery groups profile and thumbnail examples with local assets and state previews',()=>{
  const html=components.renderComponents();
- assert.deepEqual(reviewGroups('components').find(g=>g.id==='media')?.items.map(x=>x.id),['avatar','thumbnail']);
+ assert.deepEqual(reviewGroups('components').find(g=>g.id==='media')?.items.map(x=>x.id),['mascot-rules','avatar','thumbnail']);
  assert.match(html,/id="avatar"/);assert.match(html,/id="thumbnail"/);assert.match(html,/data-media-preview="avatar"/);assert.match(html,/data-media-preview="thumbnail"/);
  assert.match(html,/profile-overlay.png/);assert.match(html,/멤버십 에셋/);assert.match(html,/aria-live="polite"/);
  assert.doesNotMatch(html,/<img[^>]+src="https?:/);

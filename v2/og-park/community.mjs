@@ -15,9 +15,31 @@ const posts=[
  {character:'penguin',name:'동네탐험가',time:'6시간 전',store:'미사 손칼국수',member:false,text:'여기 아직 회원점은 아닌데 진짜 맛있어요.\n동네 분들께도 소개하고 싶어요.',photo:null,likes:17,comments:12},
  {character:'raccoon',name:'오늘의 한 끼',time:'8시간 전',store:'오정해장국·두정점',member:true,text:'점심 한 끼 든든하게 먹고 왔어요!',photo:'a7e68.png',likes:38,comments:6}
 ];
-function postCard(post){return `<article class="pd-post"><header><span class="pd-post-avatar"><img src="/v2/my-info/media/${post.character}-cutout-v2.png" alt=""></span><div><strong>${post.name}</strong><span>${post.time}</span></div><button type="button" inert aria-label="게시글 메뉴">···</button></header><div class="pd-store-tag"><span class="pd-location-dot">⌖</span><strong>${post.store}</strong>${badge(post.member?'회원점':'일반 매장',post.member?'brand':'neutral')}</div><p>${post.text.replaceAll('\n','<br>')}</p>${post.photo?image(parkArt+post.photo,'게시글에 첨부한 음식 사진 예시','pd-post-photo'):''}<div class="pd-post-stats"><span>♡ ${post.likes}</span><span>댓글 ${post.comments}</span></div></article>`;}
+export function postCard(post){
+ return `<article class="pd-post" tabindex="0" aria-label="${post.name} 게시글 · 길게 누르거나 메뉴 키로 메뉴 열기"><header><span class="pd-post-avatar"><img src="/v2/my-info/media/${post.character}-cutout-v2.png" alt=""></span><div><strong>${post.name}</strong><span>${post.time}</span></div></header><div class="pd-store-tag"><span class="pd-location-dot">⌖</span><strong>${post.store}</strong>${badge(post.member?'회원점':'일반 매장',post.member?'brand':'neutral')}</div><div class="pd-post-content"><p>${post.text.replaceAll('\n','<br>')}</p>${post.photo?image(parkArt+post.photo,'게시글에 첨부한 음식 사진 예시','pd-post-photo'):''}</div><div class="pd-post-stats"><button type="button" class="pd-like" aria-label="좋아요" aria-pressed="false" data-likes="${post.likes}"><span aria-hidden="true">♡</span> <b>${post.likes}</b></button><span class="pd-comments">댓글 ${post.comments}</span></div><div class="pd-post-menu" hidden><span>게시글 메뉴</span><button type="button" data-post-menu-close>닫기</button><p>신고·차단 기능은 앱에서 이용할 수 있어요.</p></div></article>`;
+}
+posts.push({character:'penguin',name:'골목 산책',time:'어제',store:'동네 카페',member:false,text:'산책하다 발견한 조용한 카페예요. 창가 자리가 참 좋네요.',photo:null,likes:12,comments:3},{character:'bear',name:'마음 한 스푼',time:'어제',store:'오정해장국·두정점',member:true,text:'따뜻한 점심 먹고 기분 좋게 하루를 시작했어요.',photo:null,likes:9,comments:2});
+const writeIcon='<svg class="pd-write-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 5 5M4 15 16 3a2 2 0 0 1 3 0l2 2a2 2 0 0 1 0 3L9 20l-6 1 1-6Z"/></svg>';
+
 export function renderCommunityFeed(state='latest'){
  if(!['latest','popular','empty'].includes(state))throw new RangeError('Unsupported community state');
  const items=state==='popular'?[...posts].sort((a,b)=>b.likes-a.likes):posts;
- return scene({title:'커뮤니티',navigation:true,className:'pd-community-screen',body:`<div class="pd-community-heading"><span class="pd-kicker">함께 나누는 동네 이야기</span><h1>오늘, 우리 동네는?</h1><p>관심 업종의 새로운 이야기를 만나보세요.</p></div>${tabs(selectedCategories,'한식')}<div class="pd-feed-filter"><span>우리 동네 5km</span><span>${state==='popular'?'인기순':'최신순'}⌄</span></div>${state==='empty'?empty('아직 이야기가 없어요','이 업종의 첫 번째 이야기를 들려주세요.'):`<div class="pd-post-list">${items.map(postCard).join('')}</div>`}<div class="pd-write-seat">${action('글쓰기')}</div>`});
+ return scene({title:'커뮤니티',navigation:true,className:'pd-community-screen',body:`<div class="pd-community-heading"><span class="pd-kicker">함께 나누는 동네 이야기</span><h1>오늘, 우리 동네는?</h1><p>관심 업종의 새로운 이야기를 만나보세요.</p></div>${tabs(selectedCategories,'한식')}<div class="pd-feed-filter"><span>우리 동네 5km</span><span>${state==='popular'?'인기순':'최신순'}⌄</span></div>${state==='empty'?empty('아직 이야기가 없어요','이 업종의 첫 번째 이야기를 들려주세요.'):`<div class="pd-post-list">${items.map(postCard).join('')}</div>`}<div class="pd-write-seat">${action('글쓰기',{iconHTML:writeIcon+'<span>글쓰기</span>'})}</div>`});
+}
+
+
+export function setupCommunityFeed(root){
+ for(const post of root.querySelectorAll('.pd-post')){
+  let timer,origin;
+  const menu=post.querySelector('.pd-post-menu');
+  const cancel=()=>clearTimeout(timer);
+  const open=()=>{cancel();menu.hidden=false;menu.querySelector('button').focus();};
+  post.addEventListener('pointerdown',event=>{if(event.target.closest('button'))return;origin=[event.clientX,event.clientY];timer=setTimeout(open,550);});
+  post.addEventListener('pointermove',event=>{if(origin&&Math.hypot(event.clientX-origin[0],event.clientY-origin[1])>8)cancel();});
+  for(const type of ['pointerup','pointercancel','pointerleave'])post.addEventListener(type,cancel);
+  post.addEventListener('contextmenu',event=>{event.preventDefault();open();});
+  post.addEventListener('keydown',event=>{if(event.key==='ContextMenu'||event.key==='F10'&&event.shiftKey){event.preventDefault();open();}if(event.key==='Escape'){menu.hidden=true;post.focus();}});
+  post.querySelector('[data-post-menu-close]').addEventListener('click',()=>{menu.hidden=true;post.focus();});
+  post.querySelector('.pd-like').addEventListener('click',event=>{const button=event.currentTarget,on=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(on));button.querySelector('b').textContent=Number(button.dataset.likes)+(on?1:0);button.querySelector('span').textContent=on?'♥':'♡';});
+ }
 }

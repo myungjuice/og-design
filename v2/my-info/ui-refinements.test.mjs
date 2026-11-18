@@ -34,9 +34,10 @@ test('draft photo removal uses a close icon and preserves its accessible removal
  assert.doesNotMatch(selected,/data-source-icon="delete"/);
  assert.match(reviewWrite({photos:[{src:''}],selected:0}),/>delete<\/span>/);
 });
-test('notification editing ends with a visible Done label, not a crossed pencil',()=>{
+test('notification editing omits Done while retaining settings and delete actions',()=>{
  const editing=renderNotices({selected:1,editing:true});
- assert.match(editing,/aria-label="알림 관리 끝내기"[^>]*>완료<\/button>/);
+ assert.doesNotMatch(editing,/알림 관리 끝내기|>완료<\/button>/);
+ assert.match(editing,/선택 삭제/);
  assert.doesNotMatch(editing,/m3 3 18 18M5 14/);
  assert.match(renderNotices({selected:1}),/aria-label="알림 관리"/);
 });

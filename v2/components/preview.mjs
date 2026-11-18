@@ -1,3 +1,4 @@
+import {setupReviewPatterns} from './review-patterns.mjs';
 import {setupHomeControlSamples} from './home-controls.mjs';
 import {setupComponentExplorer} from './explorer.mjs';
 import {setupSectionHeadingSamples} from './section-heading.mjs';
@@ -19,6 +20,7 @@ import {setupSheetSamples} from './sheet.mjs';
 import {setupDateTimeSamples} from './date-time.mjs';
 import {setupAttachmentSamples} from './attachments.mjs';
 export function setupComponentPreview(root){
+ setupReviewPatterns(root);
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
  setupSectionHeadingSamples(root);

@@ -44,8 +44,8 @@ test('missing or unknown notification counts are not treated as zero',()=>{
 });
 test('badge gallery groups purpose and notification examples with a native local count preview',()=>{
  const html=components.renderComponents();
- assert.deepEqual(reviewGroups('components').find(g=>g.id==='badges')?.items.map(x=>x.id),['badges','notification-badges']);
- for(const label of ['신규','심사 중','회원점','일반 매장','사진','영상','그림'])assert.ok(html.includes(label));
+ assert.deepEqual(reviewGroups('components').find(g=>g.id==='badges')?.items.map(x=>x.id),['best-label','badges','notification-badges']);
+ for(const label of ['심사 중','회원점','일반 매장','사진','영상','그림'])assert.ok(html.includes(label));
  assert.match(html,/id="notification-badges"/);assert.match(html,/data-badge-preview/);assert.match(html,/<select[^>]+data-badge-count/);
  assert.match(html,/value="128"/);assert.match(html,/aria-live="polite"/);
 });

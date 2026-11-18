@@ -24,8 +24,8 @@ const art=name=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 // Planning p17 examples, not new notification preferences or reward policies.
 const planningNotifications=[
  {type:'적립',title:'오형제황제누룽지탕 적립 완료',body:'960 M가 적립되었어요.',date:'2026-09-18 10:00',read:false},
- {type:'이벤트',title:'출석 7일 달성 보상',body:'티켓 3장과 50 M를 받았어요.',date:'2026-09-17 09:00',read:false},
- {type:'게임',title:'룰렛 당첨 · 50 M',body:'당첨 마일리지가 적립되었어요.',date:'2026-09-12 12:00',read:true},
+ {type:'이벤트',title:'출석 7일 달성 보상',body:'기본 티켓 1장과 보너스 티켓 1장을 받았어요.',date:'2026-09-17 09:00',read:false},
+ {type:'게임',title:'오지빙글 당첨 · 50 M',body:'당첨 마일리지가 적립되었어요.',date:'2026-09-12 12:00',read:true},
  {type:'공지',title:'9월 더블 적립 이벤트 안내',body:'이벤트 내용을 확인해 주세요.',date:'2026-09-01 09:00',read:true}
 ];
 const emptyFeedback=(id,selected)=>renderFeedback({id,kind:'history',title:selected?'수신된 푸시 알림이 없습니다.':'공지 내역이 없습니다.',body:''}).replace(/<svg[\s\S]*?<\/svg>/,()=>art(selected?'notifications_off':'campaign'));
@@ -35,7 +35,7 @@ export function renderNotices({id=uid('v2-notices'),selected=0,overlay='',...opt
  const source=notices({selected,overlay,notifications:planningNotifications,...options});
  let body=source.match(/<div class="og-sheet-body">([\s\S]*?)<\/div><div class="og-sheet-footer">/)?.[1];
  if(body===undefined)throw new Error('Notice source body is missing');
- body=body.replace(/<button\b[^>]*aria-label="알림 관리 끝내기"[^>]*>[\s\S]*?<\/button>/,'<button type="button" class="og-text-button" aria-label="알림 관리 끝내기">완료</button>');
+ body=body.replace(/<button\b[^>]*aria-label="알림 관리 끝내기"[^>]*>[\s\S]*?<\/button>/,'');
  body=body.replace('og-tabs og-notice-tabs','og-tabs og-notice-tabs v2-tabs')
   .replaceAll('class="og-tab-panel"','class="og-tab-panel v2-tabs-panel"')
   .replaceAll('class="og-badge"','class="og-badge v2-badge" data-variant="soft"')

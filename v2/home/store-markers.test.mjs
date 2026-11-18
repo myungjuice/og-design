@@ -21,36 +21,21 @@ test('NEW route contains only the approved Figma screen and marks Samho plus the
  assert.doesNotMatch(html,/gasong-map|새싹|new-sprout|data-home-theme="dark"|home-store-label|gasong-map-legend/);
 });
 
-test('BEST route compares the previous states with the final placement while preserving supplied crown history',()=>{
+test('BEST route keeps only the confirmed crown with both selection states',()=>{
  const html=renderHomeLandmarkReview();
- assert.equal((html.match(/<template/g)||[]).length,4);
- assert.match(html,/data-approved-store-map="best-figma-20261028"/);
- assert.match(html,/data-figma-node="306:3424"/);
+ assert.equal((html.match(/<template/g)||[]).length,1);
  assert.match(html,/data-approved-store-map="best-fourth"/);
- assert.match(html,/data-approved-store-map="best-final"/);
- assert.equal((html.match(/data-neon-crown=/g)||[]).length,0);
- const examples=[...html.matchAll(/<template[^>]*>([\s\S]*?)<\/template>/g)].map(m=>m[1]);
- const [previous,current]=examples;
- for(const example of [previous,current]){
-  for(const state of ['off','on'])assert.match(example,new RegExp(`data-landmark-state="${state}"`));
-  for(const state of ['off','on'])assert.match(example,new RegExp(`pins/${state}/`));
+ assert.doesNotMatch(html,/best-figma|best-final|data-approved-store-map="best"|이전 왕관/);
+ for(const state of ['off','on']){
+  assert.match(html,new RegExp(`data-landmark-state="${state}"`));
+  assert.match(html,new RegExp(`pins/${state}/`));
  }
- assert.doesNotMatch(previous,/landmark-crown-back|landmark-crown-front/,'previous approved composition stays intact');
  for(const layer of ['back','front']){
-  assert.match(current,new RegExp(`landmark-crown-${layer}`));
-  assert.match(current,new RegExp(`neon-crown-gold-${layer}\\.svg`));
+  assert.match(html,new RegExp(`landmark-crown-${layer}`));
+  assert.ok(html.includes(`neon-crown-gold-${layer}.svg`));
  }
- assert.equal(pins(current).length,0,'comparison must use the dedicated final pin composition');
- assert.match(html,/data-approved-store-map="best"/);
- assert.match(html,/data-figma-node="267:2494"/);
- assert.equal((html.match(/data-approved-crown=/g)||[]).length,2);
- const markers=pins(html);
- assert.match(markers.find(m=>m.includes('data-preview="파샤도 망원"')),/랜드마크 매장/);
- assert.match(markers.find(m=>m.includes('data-preview="세븐일레븐"')),/랜드마크 매장/);
- assert.doesNotMatch(markers.find(m=>m.includes('data-preview="삼호가든"')),/랜드마크 매장/);
- for(const file of ['3c62c.svg','66a13.svg','9d749.svg','7a667.svg','7ac27.svg','a0421.svg','757f5.svg','83de9.svg','15e42.svg'])assert.ok(html.includes(file),file);
- assert.doesNotMatch(html,/황금색 핀|best-gold|gasong-map|data-home-theme="dark"|home-store-label/);
- assert.doesNotMatch(html.match(/<div class="home-map-pins">([\s\S]*?)<\/div><div class="home-map-actions">/)[1],/<svg/,'pin and crown artwork uses supplied files');
+ assert.equal(pins(html).length,0);
+ assert.doesNotMatch(html,/data-home-theme="dark"|home-store-label/);
 });
 
 test('approved screens reference nonempty local assets, shared navigation and correct review routes',()=>{
@@ -64,7 +49,7 @@ test('approved screens reference nonempty local assets, shared navigation and co
   }
  }
  const workspace=renderWorkspace({pageId:'home'});
- assert.match(workspace,/id="home-new-stores"/);assert.match(workspace,/id="home-landmarks"/);
- assert.match(workspace,/NEW · 확정 시안/);assert.match(workspace,/피그마 왕관 시안 · 10\/28/);
+ assert.doesNotMatch(workspace,/id="home-new-stores"/);assert.match(workspace,/id="home-landmarks"/);
+ assert.doesNotMatch(workspace,/NEW · 확정 시안/);assert.match(workspace,/랜드마크 매장 · 최종 시안/);
  assert.match(workspace,/data-home-appearance="dark-large"/,'existing home light/dark review remains');
 });

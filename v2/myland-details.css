@@ -17,7 +17,7 @@
 .md-puzzle-art{position:relative;width:148px;height:148px;margin:-10px auto 2px;object-fit:contain}.md-instructions{position:relative;margin:0 24px;background:var(--paper);border-radius:24px;padding:22px;text-align:center;box-shadow:var(--md-shadow)}.md-fruit-demo{display:flex;justify-content:center;align-items:center;gap:4px;margin-bottom:10px}.md-fruit-demo .md-fruit{width:45px;height:45px}.md-fruit-demo>b{margin-left:8px;font-size:16px;color:var(--violet)}.md-instructions>p{font-size:14px;line-height:1.8;color:var(--muted)}.md-instructions>p b{color:var(--ink)}.md-puzzle-stats{display:flex;border-top:1px solid var(--md-line);padding-top:16px;margin-top:16px}.md-puzzle-stats>span{flex:1;color:var(--muted);font-size:12px}.md-puzzle-stats>span+span{border-left:1px solid var(--md-line)}.md-puzzle-stats b{display:block;color:var(--ink);font-size:19px;margin-top:4px}
 .md-scoreboard{position:relative;margin:16px 24px 12px;display:flex;justify-content:space-between}.md-scoreboard>div>span{display:block;font-size:12px;color:var(--muted)}.md-scoreboard strong{font-size:32px;line-height:1.3}.md-timer{text-align:right}.md-timer strong{color:var(--violet)}.md-time-track{position:relative;height:9px;margin:0 24px;border-radius:99px;background:var(--paper);overflow:clip}.md-time-track>span{display:block;width:70%;height:100%;border-radius:99px;background:var(--progress-fill)}.md-combo{position:relative;text-align:center;font-weight:700;font-size:18px;color:var(--violet);margin:30px 0 16px}.md-combo b{color:var(--md-brown);margin-left:8px}.md-board{position:relative;margin:0 18px;padding:10px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;border:1px solid var(--paper);border-radius:24px;background:var(--md-spot);box-shadow:var(--md-shadow)}.md-cell{height:48px;display:grid;place-items:center;border-radius:12px;background:var(--paper)}.md-cell.matched{background:var(--md-gold);outline:2px solid var(--md-orange);outline-offset:-2px}.md-fruit{width:44px;height:44px;filter:drop-shadow(0 2px 0 var(--md-line))}.md-fruit{--fruit-light:var(--md-red-light);--fruit-mid:var(--md-fruit-red);--fruit-dark:var(--md-red-deep)}.orange{--fruit-light:var(--md-orange-light);--fruit-mid:var(--md-fruit-orange);--fruit-dark:var(--md-orange-deep)}.grape{--fruit-light:var(--md-purple-light);--fruit-mid:var(--md-fruit-purple);--fruit-dark:var(--md-purple-deep)}.pear{--fruit-light:var(--md-pear-light);--fruit-mid:var(--md-fruit-pear);--fruit-dark:var(--md-pear-deep)}.fruit-light{stop-color:var(--fruit-light)}.fruit-mid{stop-color:var(--fruit-mid)}.fruit-dark{stop-color:var(--fruit-dark)}.leaf-light{stop-color:var(--md-leaf-light)}.leaf-dark{stop-color:var(--md-leaf-deep)}.fruit-shine{fill:none;stroke:var(--md-shine);stroke-width:3;stroke-linecap:round}.md-play-caption{position:relative;text-align:center;margin-top:30px}.md-play-caption>b{font-size:16px}.md-play-caption p{font-size:12px;color:var(--muted);margin-top:6px}
 .md-result{position:relative;text-align:center;margin:32px 24px 0}.md-result h1{margin:14px 0 0;font-size:24px}.md-result-art{position:relative;height:205px;margin:20px auto 0;width:230px}.md-result-art>.md-bear{width:190px;height:205px;margin:auto}.md-result-art>.md-coin{position:absolute;bottom:8px;right:10px;width:66px;height:66px;font-size:40px;border-width:5px;transform:rotate(-12deg);box-shadow:var(--md-shadow)}.md-final-score{padding:16px 0 12px}.md-final-score span{display:block;color:var(--muted);font-size:12px}.md-final-score strong{font-size:28px}.md-prize{padding:20px 24px;background:var(--paper);border-radius:20px;box-shadow:var(--md-shadow)}.md-prize>span{display:block;font-size:12px;color:var(--muted)}.md-prize strong{display:block;font-size:40px;color:var(--violet);line-height:1.35;letter-spacing:-1px}.md-result-summary{display:flex;justify-content:center;gap:20px;margin:24px 0;color:var(--muted);font-size:12px}.md-result-summary b{color:var(--ink);margin-left:5px}
-.md-limit-background .md-wheel-stage{margin-top:135px}.md-limit h2{font-size:21px;word-break:keep-all;max-width:270px;margin:0 auto 12px}.md-limit-icon{width:88px;height:88px;background:var(--md-warm);border-radius:50%;display:grid;place-items:center;margin:0 auto 22px}.md-limit-icon>.md-ticket{width:44px;height:36px}.md-limit-icon>.md-coin{width:53px;height:53px;font-size:32px}.md-sun{font-size:52px;color:var(--md-orange);line-height:1}.md-limit-meter{display:flex;justify-content:space-between;gap:8px;padding:15px;background:var(--md-warm);border-radius:12px;margin:24px 0;font-size:12px;color:var(--muted)}.md-limit-meter b{color:var(--md-brown)}.md-limit>.md-wallet{background:var(--md-warm);border-radius:12px;padding:15px;margin:24px 0}
+.md-limit-background .md-wheel-stage{margin-top:135px}.md-limit h2{font-size:21px;word-break:keep-all;max-width:270px;margin:0 auto 12px}.md-limit-icon{width:88px;height:88px;background:var(--md-warm);border-radius:50%;display:grid;place-items:center;margin:0 auto 22px}.md-limit-icon>.md-ticket{width:44px;height:36px}.md-limit-icon>.md-coin{width:53px;height:53px;font-size:32px}.md-limit-meter{display:flex;justify-content:space-between;gap:8px;padding:15px;background:var(--md-warm);border-radius:12px;margin:24px 0;font-size:12px;color:var(--muted)}.md-limit-meter b{color:var(--md-brown)}.md-limit>.md-wallet{background:var(--md-warm);border-radius:12px;padding:15px;margin:24px 0}
 @media(prefers-reduced-motion:reduce){.md-primary:active{transform:none}}
 .md-game-footer>p{display:inline-block;padding:5px 10px;border-radius:99px;background:var(--md-warm);margin-top:12px}.md-play-caption{display:table;padding:10px 16px;border-radius:18px;background:var(--md-warm);margin:20px auto 0}
 
@@ -35,3 +35,45 @@
 .md-result{margin-top:50px}.md-result h1{margin-top:0}
 .md-result-screen{background:radial-gradient(ellipse at 50% 30%,var(--paper),var(--md-warm) 65%)}
 .md-result-screen .md-scenery-wash{display:none}
+
+/* The roulette uses the existing palette with a lit rim and embossed details. */
+.md-wheel {
+ box-shadow:inset 2px 3px 3px var(--md-shine),inset -2px -3px 3px var(--md-rim-deep),0 8px 0 var(--md-rim-deep),0 16px 24px var(--md-rim-shadow);
+}
+.md-wheel::before {
+ inset:19px;
+ border:3px solid var(--md-cream);
+ box-shadow:inset 0 0 0 2px var(--md-rim-light),inset 0 4px 12px var(--md-rim-shadow);
+}
+.md-wheel-lights,.md-wheel-dividers { position:absolute;inset:0;pointer-events:none; }
+.md-wheel-lights i {
+ position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;
+ background:radial-gradient(circle at 35% 25%,var(--paper),var(--md-gold-light) 45%,var(--md-gold-deep));
+ box-shadow:0 0 4px var(--md-gold-light),inset 0 -1px 1px var(--md-gold-deep);
+ transform:translate(-50%,-50%) rotate(var(--light-angle)) translateY(-147px);
+}
+.md-wheel-dividers i {
+ position:absolute;top:22px;left:calc(50% - 1px);width:2px;height:134px;
+ transform-origin:50% 100%;transform:rotate(var(--divider-angle));
+ background:linear-gradient(var(--md-cream),var(--md-shine));
+ box-shadow:1px 0 1px var(--md-rim-shadow);
+}
+.md-wedge { top:33px;height:123px;padding-top:6px; }
+.md-wedge b { text-shadow:0 1px 0 var(--paper),0 2px 2px var(--md-rim-shadow); }
+.md-wedge small { font-weight:700; }
+.md-wedge-medallion {
+ display:grid;place-items:center;width:22px;height:22px;margin:9px auto 0;
+ border:1px solid var(--md-gold-deep);border-radius:50%;
+ background:radial-gradient(circle at 30% 20%,var(--md-gold-light),var(--md-gold) 60%,var(--md-orange));
+ color:var(--md-brown);font-size:12px;font-weight:700;
+ box-shadow:inset 0 0 0 2px var(--md-gold-light),0 2px 0 var(--md-gold-deep);
+}
+.md-wheel-hub {
+ width:72px;height:72px;font-size:28px;
+ box-shadow:inset 0 0 0 2px var(--md-rim-light),inset 2px 3px 5px var(--md-shine),0 5px 0 var(--md-rim-deep),0 8px 12px var(--md-rim-shadow);
+}
+.md-wheel-stand::after {
+ content:"";position:absolute;bottom:3px;left:-12px;right:-12px;height:11px;border-radius:8px;
+ background:linear-gradient(var(--md-rim-light),var(--md-rim-deep));
+ box-shadow:0 3px 0 var(--md-rim-deep);
+}

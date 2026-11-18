@@ -31,24 +31,24 @@ test('퍼즐 매치 예시의 강조 칸은 같은 과일 세 개를 보여준�
  assert.equal(new Set(matched).size,1);
 });
 
-test('마이랜드 확정안과 세부 상태 12개를 탐색할 수 있다',()=>{
+test('마이랜드 확정안과 세부 상태 11개를 탐색할 수 있다',()=>{
  const groups=reviewGroups('my-land');
  assert.equal(groups[0].id,'myland-feedback');
  const details=groups.slice(1).flatMap(g=>g.items);
- assert.equal(details.length,12);
+ assert.equal(details.length,11);
  const html=renderWorkspace({pageId:'my-land'});
  for(const {id} of details)assert.ok(html.includes(`id="${id}" data-review-screen`),id);
- assert.equal((html.match(/data-myland-detail=/g)||[]).length,12);
+ assert.equal((html.match(/data-myland-detail=/g)||[]).length,11);
 });
 
 test('보상 수치의 기획 초안 경계와 보상 종류를 표시한다',()=>{
  const html=renderWorkspace({pageId:'my-land'});
  assert.match(html,/기획서 초안의 예시값/);
  assert.match(html,/7일 연속 출석/);
- assert.match(html,/3장/);
+ assert.match(html,/1\+1장/);
  assert.match(html,/50 M/);
- assert.match(html,/확률 안내/);
- assert.match(html,/50\.6%/);
+ assert.doesNotMatch(html,/확률 안내/);
+ assert.doesNotMatch(html,/50\.6%/);
  assert.match(html,/2,860/);
  assert.match(html,/35 M/);
  for(const label of ['티켓이 부족해요','오늘의 게임을 모두 즐겼어요','이번 달 마일리지를 모두 받았어요'])assert.ok(html.includes(label),label);
