@@ -1,3 +1,4 @@
+import {mountStoreNoticeComparison} from './store-notice-comparison.mjs';
 import {setupReviewPatterns} from './review-patterns.mjs';
 import {setupHomeControlSamples} from './home-controls.mjs';
 import {setupComponentExplorer} from './explorer.mjs';
@@ -23,6 +24,7 @@ export function setupComponentPreview(root){
  setupReviewPatterns(root);
  setupHomeControlSamples(root);
  setupComponentExplorer(root);
+ mountStoreNoticeComparison(root);
  setupSectionHeadingSamples(root);
  setupSelectionSamples(root);
  setupInputSamples(root);

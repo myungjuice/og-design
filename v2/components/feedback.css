@@ -27,3 +27,7 @@
 .v2-feedback-rules li+li{margin-top:var(--v2-space-2)}
 @media(min-width:900px){.v2-feedback-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(forced-colors:active){.v2-feedback,.v2-feedback-content{border:1px solid CanvasText}.v2-feedback .og-feedback-icon{box-shadow:none;border:1px solid CanvasText}.v2-feedback-result h3:focus-visible,.v2-feedback-tools select:focus-visible{outline-color:Highlight}}
+.og-feedback.v2-feedback[data-state="review"]{min-height:0;padding:var(--v2-space-4)}
+.v2-feedback[data-state="review"] .og-feedback-icon{width:40px;height:40px}
+.v2-feedback-guide-section{width:100%;max-width:390px;padding:var(--v2-space-4);box-sizing:border-box;background:var(--v2-surface);color:var(--v2-text);text-align:center;border-radius:var(--v2-radius-card)}
+.v2-feedback-guide-section>button{background:none;border:0;color:var(--v2-focus);font:700 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}

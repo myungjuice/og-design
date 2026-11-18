@@ -1,3 +1,4 @@
+import {heroStatus} from '../components/store-photo-status.mjs';
 import {functionArtwork} from '../function-artwork.mjs';
 import {storeScreen,storeNavigation} from '../../design-system/pages/home/store.mjs';
 import {publicStoreData} from '../../design-system/pages/home/public-store-data.mjs';
@@ -25,17 +26,6 @@ const states=[
  ].map(([id,title,runtimeStatus,label,sublabel])=>[id,title+' · 사진 상태','원본 RuntimeValidater의 label/sublabel과 사진 위 안내를 비교하는 정적 예시입니다. 이 매장의 실제 현재 상태·휴무·브레이크 시간을 뜻하지 않습니다.',{menu:true},{runtimeStatus:{runtimeStatus,label,sublabel,isOpen:false}}])
 ];
 const control=(label,kind)=>iconButton({label,iconHTML:art[kind],className:'v2-icon-button',attributes:{'data-face':'raised',inert:true}});
-const holidayStatuses=new Set(['tempHoliday','regularHoliday','holiday']);
-const closedStatuses=new Set([...holidayStatuses,'close','notOpen','openPreparing','breakTime']);
-// Source: shop_contents.dart _closedInfo/buildShopImages. These are supplied
-// RuntimeValidater specimens, never a fresh calculation of current shop hours.
-function heroStatus(status){
- if(!status||status.isOpen!==false||!closedStatuses.has(status.runtimeStatus))return '';
- const holiday=holidayStatuses.has(status.runtimeStatus),label=status.label||'영업 종료';
- const kind=({tempHoliday:'temporary-holiday',regularHoliday:'regular-holiday',holiday:'regular-holiday',close:'closed'})[status.runtimeStatus]||'hours';
- const glyph=functionArtwork(kind,24);
- return `<div class="v2-store-hero-status" data-hero-status="${e(status.runtimeStatus)}">${glyph}<strong>${e(label)}</strong><span>${holiday?'오늘은 쉬어가요':'지금은 영업 시간이 아니에요'}</span></div>`;
-}
 export function renderHomeStoreScreen({state='basic'}={}){
  const config=states.find(([id])=>id===state);if(!config)throw new RangeError('Unsupported store state');
  const store=publicStoreData.store,images=state==='no-photo'?[]:state==='limited'?store.images.slice(0,1):store.images;

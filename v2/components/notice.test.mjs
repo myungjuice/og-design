@@ -28,7 +28,7 @@ test('only opt-in dynamic updates receive live-region semantics',()=>{
 test('notice gallery is reachable with confirmation dialogs in the related feedback group',()=>{
  const html=components.renderComponents();
  assert.match(html,/id="notices" aria-labelledby="notices-title" hidden/);
- assert.equal((html.match(/class="og-notice v2-notice"/g)||[]).length,4);
+ assert.equal((html.match(/class="og-notice v2-notice"/g)||[]).length,6);
  const feedback=reviewGroups('components').find(g=>g.id==='feedback');
  assert.deepEqual(feedback.items.map(item=>item.id),['content-patterns','dialogs','notices','empty-feedback','snackbar','help']);
 });

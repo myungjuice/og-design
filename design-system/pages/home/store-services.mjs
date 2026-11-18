@@ -7,9 +7,10 @@ const card=(content,kind='calendar_month',refresh=false)=>surface({className:'og
 function receptionButton(label,busy){
  return button({label:busy?'처리 중…':label,state:busy?'loading':undefined,busy,disabled:busy});
 }
-export function reservationSection({open=true,current=false,count=1,expired=false,busy=false}={}){
+export const reservationPauseText='현재 예약 접수가 일시적으로 중지되었습니다. 자세한 사항은 매장에 문의하세요.';
+export function reservationSection({open=true,current=false,count=1,expired=false,busy=false,closedNoticeHTML}={}){
  const heading=sectionHeading({title:'예약',action:'내역 보기',description:current&&count>1?'이 매장에 예약이 '+count+'건 있습니다.':''});
- const notice=!open?card('<p>현재 예약 접수가 일시적으로 중지되었습니다. 자세한 사항은 매장에 문의하세요.</p>'):'';
+ const notice=!open?(closedNoticeHTML??card('<p>'+reservationPauseText+'</p>')):'';
  const currentCard=card((expired?'<p class="og-store-service-expired">예약 시간 경과</p>':'')+'<p><strong>예약일: 2026년 9월 '+(expired?'18일(금)':'22일(화)')+' 18:00</strong></p><p>성인: 2명, 어린이: 0명</p>','event_available');
  const dates='<div class="og-store-service-dates">'+['9/19(토)','9/20(일)','9/21(월)','9/22(화)','9/23(수)'].map((date,i)=>'<div class="og-store-service-date" data-available="'+(i!==2)+'"><strong>'+date+'</strong><span>'+(i===2?'예약불가':'예약가능')+'</span></div>').join('')+'</div>';
  const content=current?currentCard+'<div class="og-store-service-actions">'+button({label:'내 예약 보기',variant:'secondary'})+(open?iconButton({name:'add',label:'추가 예약',className:'og-store-service-add'}):'')+'</div>':open?dates+receptionButton('다른 날짜 예약',busy):'';

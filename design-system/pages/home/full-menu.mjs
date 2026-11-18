@@ -11,7 +11,11 @@ export function menuItem(item,{featured=false}={}){
  const copy='<div class="og-full-menu-copy"><h4>'+e(item.name)+'</h4><p class="og-full-menu-description">'+e(item.description||'')+'</p><p class="og-full-menu-price">'+e(price)+'</p></div>';
  return '<article class="og-full-menu-item'+(featured?' is-featured':'')+(item.soldOut?' is-sold-out':'')+'"><div class="og-full-menu-item-content">'+(featured?media+copy:copy+media)+'</div>'+(item.soldOut?'<strong class="og-full-menu-sold-out">SOLD OUT</strong>':'')+'</article>';
 }
-const caution='<section class="og-full-menu-caution"><h3>유의사항</h3><ul><li>메뉴 사진은 연출된 이미지로 실제 조리된 음식과 다를 수 있습니다.</li><li>상단 메뉴 및 가격은 업소에서 제공한 정보를 기준으로 작성되었으며, 변동될 수 있습니다.</li></ul></section>';
+export const menuCautionLines=[
+ '메뉴 사진은 연출된 이미지로 실제 조리된 음식과 다를 수 있습니다.',
+ '상단 메뉴 및 가격은 업소에서 제공한 정보를 기준으로 작성되었으며, 변동될 수 있습니다.'
+];
+export const menuCaution='<section class="og-full-menu-caution"><h3>유의사항</h3><ul>'+menuCautionLines.map(line=>'<li>'+e(line)+'</li>').join('')+'</ul></section>';
 export function fullMenuScreen({state='default',imageSrc='',store={},items:registeredItems}={}){
  const scrolled=state==='scrolled',search=state==='search';
  const items=registeredItems??[{name:'메뉴명',description:'메뉴에 대한 설명',price:12000,image:imageSrc},{name:'품절 메뉴',description:'메뉴에 대한 설명',price:8000,image:imageSrc,soldOut:true},{name:'사진이 없는 메뉴',description:'메뉴에 대한 설명',price:6500},{name:'가격 문구가 있는 메뉴',description:'',price:0,priceText:'시가'}];
@@ -24,7 +28,7 @@ export function fullMenuScreen({state='default',imageSrc='',store={},items:regis
  const list=categories.map(category=>'<section class="og-full-menu-list"><h3>'+e(category)+'</h3>'+items.filter(item=>(item.category||'카테고리명')===category).map(item=>menuItem(item)).join('')+'</section>').join('');
  const hero='<div class="og-full-menu-hero">'+thumbnail({src:imageSrc,alt:(store.name||'회원점')+' 대표 이미지'})+iconButton({name:'arrow_back_ios',label:'뒤로'})+'</div>';
  const overlay=search?'<div class="og-full-menu-search-scrim"><section class="og-full-menu-search-panel">'+iconButton({name:'arrow_back_ios',label:'검색 닫기'})+searchField({label:'메뉴 검색',value:searchTerm,placeholder:'메뉴 이름으로 검색해보세요.'})+'<div class="og-full-menu-results">'+(registeredItems?items.filter(item=>item.name.includes(searchTerm)):items.slice(0,2)).map(item=>menuItem(item)).join('')+'</div></section></div>':'';
- return '<div class="og-full-menu" data-state="'+e(state)+'" inert>'+(!scrolled?hero:'')+header+navigation+'<div class="og-full-menu-body">'+(!scrolled?featured:'')+list+caution+'</div>'+overlay+'</div>';
+ return '<div class="og-full-menu" data-state="'+e(state)+'" inert>'+(!scrolled?hero:'')+header+navigation+'<div class="og-full-menu-body">'+(!scrolled?featured:'')+list+menuCaution+'</div>'+overlay+'</div>';
 }
 export function fullMenuBoard({imageSrc='',store={},items}={}){
  return '<div class="screen-page-content"><div>'+[['default','처음 열었을 때'],['scrolled','아래로 스크롤했을 때'],['search','메뉴 검색 결과']].map(([state,label])=>'<section class="screen-state-example"><h3>'+label+'</h3><div class="screen-artboard">'+fullMenuScreen({state,imageSrc,store,items})+'</div></section>').join('')+'</div><div class="screen-design-notes"><h3>대표메뉴와 목록</h3><p>대표메뉴는 가로 카드로, 전체 메뉴는 카테고리별 목록으로 보여줍니다.</p><h3>스크롤 후</h3><p>매장 사진과 소개가 접히고, 매장명과 카테고리를 상단에 남깁니다.</p><h3>품절 표시</h3><p>메뉴 사진과 글을 흐리게 처리하고 SOLD OUT 문구를 겹쳐 보여줍니다.</p></div></div>';

@@ -1,3 +1,4 @@
+@import url('../components/store-photo-status.css');
 /* Hallmark · macrostructure: store identity → section rail → photo/introduction
  * genre: playful · theme: existing OG/Figma 3D · designed-as-app
  * audience: OG design review · use: read store identity and available sections
@@ -34,20 +35,9 @@
 .og-store-body:focus-visible{outline:3px solid var(--v2-focus);outline-offset:-3px}
 .og-store-photo{position:relative;margin-inline:var(--v2-space-4);aspect-ratio:1}
 .og-store-photo .v2-thumbnail{height:100%;width:100%;aspect-ratio:auto}
-.og-store-photo[data-store-hero-closed="true"] .v2-thumbnail{filter:grayscale(1) brightness(.55)}
-.v2-store-hero-status{box-sizing:border-box;position:absolute;inset-inline:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--v2-space-2);padding:var(--v2-space-4) var(--v2-space-5);background:color-mix(in oklab,var(--v2-text) 60%,transparent);backdrop-filter:blur(12px);color:var(--v2-on-action);text-align:center;pointer-events:none}
-.v2-store-hero-status svg{width:var(--v2-space-6);height:var(--v2-space-6);color:color-mix(in oklab,var(--v2-warning) 35%,var(--v2-on-action))}
-.v2-store-hero-status[data-hero-status="tempHoliday"] svg{color:color-mix(in oklab,var(--v2-action) 35%,var(--v2-on-action))}
-.v2-store-hero-status:is([data-hero-status="regularHoliday"],[data-hero-status="holiday"]) svg{color:color-mix(in oklab,var(--v2-success) 35%,var(--v2-on-action))}
-.v2-store-hero-status strong{font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);overflow-wrap:anywhere}
-.v2-store-hero-status span{font:400 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font)}
-.og-store-count{position:absolute;right:var(--v2-space-4);bottom:var(--v2-space-4);background:var(--v2-text);color:var(--v2-on-action);padding:var(--v2-space-1) var(--v2-space-2);border-radius:var(--v2-radius-chip);font:700 var(--v2-type-caption)/var(--v2-line-caption) var(--v2-font);font-variant-numeric:tabular-nums}
 .og-store-promotion{padding:var(--v2-space-8) var(--v2-space-4)}
 .og-store-promotion h4{margin:0 0 var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font);min-width:0;overflow-wrap:anywhere;white-space:pre-line}
 .og-store-promotion p{margin:0;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .og-store-promotion[data-promotion-expanded="true"] p{display:block;-webkit-line-clamp:unset;overflow:visible;white-space:pre-line}
 .v2-store-promotion-affordance{display:flex;align-items:center;justify-content:flex-end;gap:var(--v2-space-1);min-width:var(--v2-space-12);min-height:var(--v2-space-12);margin-left:auto;padding:0;border:0;background:transparent;color:var(--v2-text);font:400 var(--v2-type-secondary)/var(--v2-line-secondary) var(--v2-font)}
 .v2-store-promotion-affordance svg{width:var(--v2-space-5);height:var(--v2-space-5);color:var(--v2-text-muted)}
-@media(forced-colors:active){.og-store-photo[data-store-hero-closed="true"] .v2-thumbnail{filter:none}.v2-store-hero-status{background:Canvas;color:CanvasText;border:1px solid CanvasText;backdrop-filter:none}.v2-store-hero-status svg{color:CanvasText}}
-
-.v2-store-hero-status>.received-function-icon{width:24px;height:24px;object-fit:contain;filter:brightness(0) invert(1)}

@@ -1,3 +1,4 @@
+import {storeNoticeComparison} from './store-notice-comparison.mjs';
 import {notice} from '../../design-system/components/feedback/render.mjs';
 import {escapeHTML as e,attributes as attrs,icon} from '../../design-system/components/core.mjs';
 const tones={
@@ -24,5 +25,5 @@ const samples=[
 export function renderNoticeSamples(){
  return '<section class="v2-component-section" id="notices" aria-labelledby="notices-title" hidden><h2 id="notices-title">영역 안 안내</h2><p>관련 내용 가까이에서 상태와 다음 행동을 알려줍니다. 옅은 상태색 표면과 작은 아이콘 받침으로 구분하고, 문구는 선명하게 유지합니다.</p><div class="v2-notice-grid">'+samples.map(([tone,title,body])=>
   '<figure class="v2-component-sample"><figcaption><strong>'+e(tones[tone].label)+'</strong></figcaption>'+renderNotice({tone,title,body})+'</figure>').join('')+
- '</div><ul class="v2-notice-rules"><li>아이콘과 문구로도 상태를 구분합니다. 안내 전체는 버튼이 아닙니다.</li><li>중요한 오류는 해결할 때까지 관련 영역에 유지합니다. 자동으로 사라지거나 화면을 가리지 않습니다.</li><li>완료가 화면에서 충분히 드러나면 완료 안내를 반복하지 않습니다.</li></ul></section>';
+ '</div>'+storeNoticeComparison(renderNotice)+'<ul class="v2-notice-rules"><li>아이콘과 문구로도 상태를 구분합니다. 안내 전체는 버튼이 아닙니다.</li><li>중요한 오류는 해결할 때까지 관련 영역에 유지합니다. 자동으로 사라지거나 화면을 가리지 않습니다.</li><li>완료가 화면에서 충분히 드러나면 완료 안내를 반복하지 않습니다.</li></ul></section>';
 }
