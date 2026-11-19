@@ -1,3 +1,4 @@
+import {specimenMatrix} from './specimen-board.mjs';
 import {textField,passwordField,textarea} from '../../design-system/components/input/render.mjs';
 import {surface} from '../../design-system/components/surfaces/render.mjs';
 import {escapeHTML as e,attributes as attrs,uid} from '../../design-system/components/core.mjs';
@@ -54,9 +55,9 @@ export function renderMultiline({id=uid('v2-multiline'),appearance='raised',labe
 }
 const stage=body=>surface({className:'v2-input-stage',contentHTML:body});
 function comparisons(type,id){
- const label=type==='password'?'비밀번호':'닉네임';
- const cases=[['default','기본',{}],['filled','입력 완료',{value:type==='password'?'test-only':'맑은 땅콩'}],['active','입력 중',{state:'active',value:type==='password'?'test':'맑은'}],['disabled','비활성',{state:'disabled',value:'검토용 값'}],['readonly','읽기 전용',{state:'readonly',value:'검토용 값'}],['loading','확인 중',{state:'loading',value:'검토용 값'}],['error','오류',{state:'error',hint:'입력값이 비어 있습니다. 검토용 값을 입력해 주세요.'}],['success','확인 완료',{state:'success',value:'검토용 값'}]];
- return stateComparison(`<p class="v2-input-note">확인 중·오류·완료는 상태 예시입니다. 실제 계정 조회나 저장은 하지 않습니다.</p><div class="v2-input-grid">${cases.map(([key,title,props])=>`<figure class="v2-component-sample" id="${id}-state-${key}"><figcaption><strong>${title}</strong></figcaption>${stage(renderInput({type,label,...props}))}</figure>`).join('')}</div>`);
+ const label=type==='password'?'비밀번호':'항목명';
+ const cases=[['default','기본',{}],['filled','입력 완료',{value:type==='password'?'test-only':'입력값'}],['active','입력 중',{state:'active',value:type==='password'?'test':'입력'}],['disabled','비활성',{state:'disabled',value:'입력값'}],['readonly','읽기 전용',{state:'readonly',value:'입력값'}],['loading','확인 중',{state:'loading',value:'입력값'}],['error','오류',{state:'error',hint:'필수 항목을 입력해 주세요.'}],['success','확인 완료',{state:'success',value:'입력값'}]];
+ return stateComparison(`<p class="v2-input-note">확인 중·오류·완료는 상태 예시입니다. 실제 계정 조회나 저장은 하지 않습니다.</p><div class="v2-input-grid">${cases.map(([key,title,props])=>`<figure class="v2-component-sample" id="${id}-state-${key}"><figcaption><strong>${title}</strong></figcaption>${stage(renderInput({type,label,hint:hints[props.state]??'입력 안내',...props}))}</figure>`).join('')}</div>`);
 }
 function typedSamples(){
  return Object.entries(typedKinds).map(([kind,config])=>{
@@ -65,14 +66,24 @@ function typedSamples(){
  }).join('');
 }
 export function renderInputSamples(){
- return `<section class="v2-component-section" id="text-input" aria-labelledby="text-input-title" hidden><h2 id="text-input-title">텍스트 입력</h2><p>홈 검색바와 같은 연한 하늘색·둥근 표면·부드러운 입체 마감을 사용합니다. 항목명과 안내 문구는 입력창 밖에 표시합니다. 확인창 안에서는 흰 배경과 연한 경계선의 Line 입력을 사용합니다.</p><div id="text-input-live" data-input-live>${stage(renderInput({label:'닉네임',placeholder:'예: 맑은 땅콩',required:true,attributes:{autocomplete:'off'}}))}</div><p class="v2-input-note">입력창을 벗어난 뒤 빈 값만 안내하는 검토용 예시입니다. 실제 닉네임 규칙을 정하지 않습니다.</p><figure class="v2-component-sample"><figcaption><strong>Line · 확인창 입력</strong></figcaption>${stage(renderInput({label:'닉네임',appearance:'line',placeholder:'예: 맑은 땅콩'}))}</figure>${comparisons('text','text-input')}</section>
- <section class="v2-component-section" id="password-input" aria-labelledby="password-input-title" hidden><h2 id="password-input-title">비밀번호 입력</h2><p>오른쪽 표시·숨기기로 내용을 확인합니다. 입력값과 버튼 위치는 그대로 유지합니다.</p><div id="password-input-live" data-input-live>${stage(renderInput({type:'password',label:'비밀번호',placeholder:'test-only',hint:'실제 비밀번호를 입력하지 마세요. 검토용 문자열만 사용합니다.',required:true,attributes:{autocomplete:'off',spellcheck:'false'}}))}</div>${comparisons('password','password-input')}</section>
+ const board = specimenMatrix({
+  id:'fields',title:'입력 표면·상태 비교',
+  columns:[{group:'텍스트 입력',forms:[['입체 표면','raised'],['라인 표면','line']]}],
+  rows:[['default','기본'],['filled','입력됨'],['hover','호버'],['focus','포커스'],['disabled','비활성'],['success','성공'],['error','오류']],
+  render(appearance,view){
+   const state=['hover','focus'].includes(view)?'default':view;
+   const value=['filled','focus','success','error'].includes(view)?'입력값':'';
+   return renderInput({appearance,state,label:'레이블',placeholder:'입력',value,hint:{error:'오류 안내',success:'확인 완료'}[view]||''});
+  }
+ });
+ return `<section class="v2-component-section" id="text-input" aria-labelledby="text-input-title" hidden><h2 id="text-input-title">텍스트 입력</h2><p>홈 검색바와 같은 연한 하늘색·둥근 표면·부드러운 입체 마감을 사용합니다. 항목명과 안내 문구는 입력창 밖에 표시합니다. 확인창 안에서는 흰 배경과 연한 경계선의 Line 입력을 사용합니다.</p>${board}<div id="text-input-live" data-input-live>${stage(renderInput({label:'항목명',placeholder:'입력 안내',required:true,hint:'입력 안내',attributes:{autocomplete:'off'}}))}</div><p class="v2-input-note">필수 항목은 입력창을 벗어날 때 빈 값을 안내합니다.</p><figure class="v2-component-sample"><figcaption><strong>Line · 확인창 입력</strong></figcaption>${stage(renderInput({label:'항목명',appearance:'line',placeholder:'입력 안내',hint:'입력 안내'}))}</figure>${comparisons('text','text-input')}</section>
+ <section class="v2-component-section" id="password-input" aria-labelledby="password-input-title" hidden><h2 id="password-input-title">비밀번호 입력</h2><p>오른쪽 표시·숨기기로 내용을 확인합니다. 입력값과 버튼 위치는 그대로 유지합니다.</p><div id="password-input-live" data-input-live>${stage(renderInput({type:'password',label:'비밀번호',placeholder:'비밀번호 입력',hint:'비밀번호 입력 안내',required:true,attributes:{autocomplete:'off',spellcheck:'false'}}))}</div><p class="v2-input-note">실제 비밀번호를 입력하지 마세요.</p>${comparisons('password','password-input')}</section>
  ${typedSamples()}
  <section class="v2-component-section" id="multiline-input" aria-labelledby="multiline-input-title" hidden><h2 id="multiline-input-title">여러 줄 입력</h2><p>기존 입력의 밝은 표면과 얕은 입체감을 유지합니다. 긴 내용은 둥근 사각형 안에, 안내와 글자 수는 입력창 아래에 표시합니다.</p>
- <div class="v2-input-grid"><figure class="v2-component-sample"><figcaption><strong>기본 · 제한 없음</strong></figcaption><div id="multiline-input-live" data-multiline-live>${stage(renderMultiline({label:'내용',placeholder:'예: 적립 내역이 보이지 않아요.',required:true,hint:'실제 개인정보 없이 검토용 내용을 입력해 주세요.'}))}</div></figure>
- <figure class="v2-component-sample"><figcaption><strong>글자 수 안내 · 선택형</strong></figcaption><div id="multiline-limit-live" data-multiline-live>${stage(renderMultiline({label:'내용',maxLength:200,placeholder:'예: 적립 내역이 보이지 않아요.'}))}</div></figure></div>
+ <div class="v2-input-grid"><figure class="v2-component-sample"><figcaption><strong>기본 · 제한 없음</strong></figcaption><div id="multiline-input-live" data-multiline-live>${stage(renderMultiline({label:'내용',placeholder:'내용을 입력하세요.',required:true,hint:'입력 안내'}))}</div></figure>
+ <figure class="v2-component-sample"><figcaption><strong>글자 수 안내 · 선택형</strong></figcaption><div id="multiline-limit-live" data-multiline-live>${stage(renderMultiline({label:'내용',maxLength:200,placeholder:'내용을 입력하세요.',hint:'최대 200자'}))}</div></figure></div>
  <p class="v2-input-note">200자는 공통 컴포넌트의 제한형 예시일 뿐, 문의 화면의 정책이 아닙니다. 현재 문의 화면은 제한·카운터 없이 유지합니다. 제한형은 브라우저 maxlength 기준으로 세며 이모지 등은 2자 이상으로 계산될 수 있습니다.</p>
- ${stateComparison(`<div class="v2-input-grid">${[['filled','입력 완료'],['active','누르는 중'],['disabled','비활성'],['readonly','읽기 전용'],['loading','확인 중'],['error','오류'],['success','확인 완료']].map(([state,title])=>`<figure class="v2-component-sample" id="multiline-state-${state}"><figcaption><strong>${title}</strong></figcaption>${stage(renderMultiline({label:'내용',state,value:state==='error'?'':'검토용 내용입니다.\n두 번째 줄도 이어서 작성합니다.',hint:state==='error'?'내용이 비어 있습니다. 검토용 내용을 입력해 주세요.':undefined}))}</figure>`).join('')}</div>`)}
+ ${stateComparison(`<div class="v2-input-grid">${[['filled','입력 완료'],['active','누르는 중'],['disabled','비활성'],['readonly','읽기 전용'],['loading','확인 중'],['error','오류'],['success','확인 완료']].map(([state,title])=>`<figure class="v2-component-sample" id="multiline-state-${state}"><figcaption><strong>${title}</strong></figcaption>${stage(renderMultiline({label:'내용',state,value:state==='error'?'':'입력한 내용\n두 번째 줄',hint:state==='error'?'내용이 비어 있습니다. 검토용 내용을 입력해 주세요.':undefined}))}</figure>`).join('')}</div>`)}
  </section>`;
 }
 export function setupInputSamples(root){

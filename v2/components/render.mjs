@@ -1,3 +1,4 @@
+import {specimenMatrix} from './specimen-board.mjs';
 import {renderReviewPatterns} from './review-patterns.mjs';
 import {button} from '../../design-system/components/button/render.mjs';
 import {surface,menuTile} from '../../design-system/components/surfaces/render.mjs';
@@ -14,7 +15,7 @@ import {renderFeedbackSamples} from './feedback.mjs';
 import {renderLoadingSamples} from './loading.mjs';
 import {renderSnackbarSamples} from './snackbar.mjs';
 import {renderHelpSamples} from './help.mjs';
-import {renderIconButtonSamples} from './icon-button.mjs';
+import {renderIconButton,renderIconButtonSamples} from './icon-button.mjs';
 import {renderTabsSamples} from './tabs.mjs';
 import {renderChipSamples} from './chips.mjs';
 import {renderBadgeSamples} from './badges.mjs';
@@ -70,11 +71,25 @@ export function renderMenuTile({label='이용내역',state='default',selected=fa
 const tileStage=options=>`<div class="v2-menu-tile-stage">${renderMenuTile(options)}</div>`;
 const figure=(name,description,control)=>`<figure class="v2-component-sample"><figcaption><strong>${name}</strong><span>${description}</span></figcaption>${control}</figure>`;
 export function renderComponents(){
- const variants=[['primary','주요 버튼','마일리지 사용','보라색 표면 · 가장 중요한 동작'],['secondary','보조 버튼','영수증 적립','흰 표면 · 주요 버튼 옆의 보조 동작'],['review','작은 후기 버튼','후기 작성','작은 시각 크기 · 터치 영역은 44px 이상']];
- return `<p class="v2-intro">그룹별로 컴포넌트의 기본 형태와 동작 상태를 확인합니다.</p>
+ const variants=[['primary','주요 버튼','버튼명','보라색 표면 · 가장 중요한 동작'],['secondary','보조 버튼','버튼명','흰 표면 · 주요 버튼 옆의 보조 동작'],['review','작은 후기 버튼','버튼명','작은 시각 크기 · 터치 영역은 44px 이상']];
+ const buttonBoard = specimenMatrix({
+  id:'buttons',title:'버튼 크기·상태 비교',
+  columns:[
+   {group:'52 px', forms:[['채움','primary'],['라인','secondary']]},
+   {group:'48 px', forms:[['텍스트','text'],['아이콘 · 닫기','icon']]},
+   {group:'44 px', forms:[['소형','review']]}
+  ],
+  rows:[['default','기본'],['hover','호버'],['focus','포커스'],['active','누름'],['disabled','비활성']],
+  render(form,view){
+   const state=['disabled','active'].includes(view)?view:'default';
+   return form==='icon'?renderIconButton({kind:'close',state}):renderButton({variant:form,label:'버튼',state});
+  }
+ });
+ return `
  ${variants.map(([id,title,label,description])=>{
   const sample=([state,name,desc])=>figure(name,state==='disabled'&&id!=='primary'?(id==='review'?'후기 작성을 진행할 수 없는 상태':'적립을 진행할 수 없는 상태'):desc,renderButton({variant:id,label,state,attributes:{'data-component':'button','aria-label':`${stateLabel(label,state)} · ${title} · ${name}`}}));
-  return `<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title"${id!=='primary'?' hidden':''}><h2 id="${id}-title">${title}</h2><p>${description}</p>
+  return `<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title"${id!=='primary'?' hidden':''}><h2 id="${id}-title">${id==='primary'?'버튼 · 크기와 상태':title}</h2>
+  ${id==='primary'?buttonBoard:`<p>${description}</p>`}
   <div class="v2-component-grid">${sample(componentStates[0])}</div>${stateComparison(`<div class="v2-component-grid">${componentStates.slice(1).map(sample).join('')}</div>`)}</section>`;
  }).join('')}
  ${renderIconButtonSamples()}
@@ -88,9 +103,9 @@ export function renderComponents(){
  ${renderDateTimeSamples()}
  ${renderAttachmentSamples()}
  <section class="v2-component-section" id="cards" aria-labelledby="cards-title" hidden><h2 id="cards-title">카드·메뉴 타일</h2><p>정보 카드에는 눌림 상태를 적용하지 않습니다. 동작이 있는 메뉴 타일만 상태를 갖습니다.</p>
- <div class="v2-info-card-sample">${renderCard({title:'최근 방문',description:'정보를 담는 흰 카드입니다. 클릭 대상이 아닙니다.'})}</div>
- <div class="v2-component-grid">${figure('아이콘형 · 기본','내정보와 같은 3D 아이콘 판 아래에 이름을 표시합니다.',tileStage({attributes:{'aria-label':'이용내역 · 메뉴 타일 · 기본'}}))}${figure('텍스트형','아이콘 없이 짧은 메뉴명을 판 안에 표시하는 별도 형태입니다.',tileStage({layout:'text',attributes:{'aria-label':'이용내역 · 텍스트형 메뉴 타일'}}))}</div>
- ${stateComparison(`<div class="v2-component-grid">${componentStates.slice(1).map(([state,name,desc])=>figure(name,state==='disabled'?'이용내역을 열 수 없는 상태':desc,tileStage({state,attributes:{'aria-label':`${stateLabel('이용내역',state)} · 메뉴 타일 · ${name}`}}))).join('')}${figure('선택됨','선택 여부는 눌림 상태와 구분',tileStage({selected:true,attributes:{'aria-label':'이용내역 · 메뉴 타일 · 선택됨'}}))}</div>`)}</section>
+ <div class="v2-info-card-sample">${renderCard({title:'카드 제목',description:'본문'})}</div>
+ <div class="v2-component-grid">${figure('아이콘형 · 기본','내정보와 같은 3D 아이콘 판 아래에 이름을 표시합니다.',tileStage({label:'메뉴명',attributes:{'aria-label':'메뉴명 · 메뉴 타일 · 기본'}}))}${figure('텍스트형','아이콘 없이 짧은 메뉴명을 판 안에 표시하는 별도 형태입니다.',tileStage({label:'메뉴명',layout:'text',attributes:{'aria-label':'메뉴명 · 텍스트형 메뉴 타일'}}))}</div>
+ ${stateComparison(`<div class="v2-component-grid">${componentStates.slice(1).map(([state,name,desc])=>figure(name,state==='disabled'?'이용내역을 열 수 없는 상태':desc,tileStage({label:'메뉴명',state,attributes:{'aria-label':`${stateLabel('메뉴명',state)} · 메뉴 타일 · ${name}`}}))).join('')}${figure('선택됨','선택 여부는 눌림 상태와 구분',tileStage({label:'메뉴명',selected:true,attributes:{'aria-label':'메뉴명 · 메뉴 타일 · 선택됨'}}))}</div>`)}</section>
  ${renderMileageSamples()}
  ${renderListRowSamples()}
  ${renderSectionHeadingSamples()}
@@ -104,6 +119,6 @@ export function renderComponents(){
  ${renderHelpSamples()}
  ${renderLoadingSamples()}
  ${renderReviewPatterns()}
- <section class="v2-component-section" id="try" aria-labelledby="try-title" hidden><h2 id="try-title">직접 눌러보기</h2><p>터치해서 눌림과 선택 상태를 확인합니다. 실제 마일리지를 사용하지 않습니다.</p><div class="v2-try-row">${renderButton({attributes:{'data-preview-action':'button'}})}${tileStage({attributes:{'data-preview-action':'tile'}})}</div><p class="v2-preview-status" role="status" aria-live="polite">메뉴 타일을 누르면 선택 여부가 바뀝니다.</p>
+ <section class="v2-component-section" id="try" aria-labelledby="try-title" hidden><h2 id="try-title">직접 눌러보기</h2><p>터치해서 눌림과 선택 상태를 확인합니다. 실제 마일리지를 사용하지 않습니다.</p><div class="v2-try-row">${renderButton({label:'버튼명',attributes:{'data-preview-action':'button'}})}${tileStage({label:'메뉴명',attributes:{'data-preview-action':'tile'}})}</div><p class="v2-preview-status" role="status" aria-live="polite">메뉴 타일을 누르면 선택 여부가 바뀝니다.</p>
  <details class="v2-accessibility-check"><summary>접근성 점검</summary><p>웹 검토 페이지에서는 Tab으로 버튼에 이동하고 Enter·Space로 누를 수 있습니다. 실제 포커스 표시와 키보드 조작은 유지하며, 앱 기본 시안의 상태 비교에서는 제외했습니다.</p></details></section>`;
 }

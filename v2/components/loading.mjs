@@ -2,7 +2,7 @@ import {loading,skeletonRow} from '../../design-system/components/loading/render
 import {surface} from '../../design-system/components/surfaces/render.mjs';
 import {escapeHTML as e,attributes as attrs,uid} from '../../design-system/components/core.mjs';
 import {renderListRow} from './list-row.mjs';
-import {renderMileage} from './mileage.mjs';
+import {renderMileage,mileageSampleLabels} from './mileage.mjs';
 
 export function renderLoading({label='불러오는 중',size='regular',live=false}={}){
  if(!label.trim())throw new TypeError('Loading requires a visible label');
@@ -32,7 +32,7 @@ export function renderLoadingMileage({busy=true,balance={}}={}){
  return card.slice(0,boundary+1)+renderLoadingFrame({label:'OG 마일리지',contentHTML:contentHTML.replace(/<button /g,'<button disabled '),skeletonHTML,busy,className:'v2-loading-mileage'})+'</div>';
 }
 export function renderLoadingSamples(){
- const samples=[['profile','프로필 요약',renderLoadingRow({kind:'profile'})],['list','방문 내역',renderLoadingRow()],['mileage','마일리지 카드',renderLoadingMileage()]];
+ const samples=[['profile','프로필 요약',renderLoadingRow({kind:'profile',title:'사용자명',subtitle:'보조 설명'})],['list','방문 내역',renderLoadingRow({title:'항목 제목',subtitle:'보조 설명'})],['mileage','마일리지 카드',renderLoadingMileage({balance:{labels:mileageSampleLabels}})]];
  return '<section class="v2-component-section" id="loading" aria-labelledby="loading-title" hidden><h2 id="loading-title">로딩·스켈레톤</h2><p>내용을 불러오는 동안에도 들어올 자리를 유지합니다. 바깥 카드의 3D 재질은 그대로 두고, 임시 면은 평면으로 표현합니다.</p>'+
  '<div class="v2-loading-indicators"><figure class="v2-component-sample"><figcaption><strong>기본 · 24px</strong></figcaption>'+renderLoading()+'</figure><figure class="v2-component-sample"><figcaption><strong>작은 표시 · 16px</strong></figcaption>'+renderLoading({label:'처리 중',size:'small'})+'</figure></div>'+
  '<label class="v2-loading-tools">표시 상태<select data-loading-state><option value="loading">불러오는 중</option><option value="ready">내용 표시</option></select></label><p class="v2-loading-status" data-loading-status role="status" aria-live="polite" aria-atomic="true"></p>'+

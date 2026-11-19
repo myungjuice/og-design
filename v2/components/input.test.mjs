@@ -46,7 +46,7 @@ test('Line input is opt-in and rejects unknown appearances without changing the 
  assert.throws(()=>render({label:'닉네임',appearance:'unknown'}),RangeError);
 });
 test('home search, text and password belong to one input group with live previews',()=>{
- assert.deepEqual(reviewGroups('components').find(g=>g.id==='inputs')?.items.map(i=>i.id),['search','text-input','password-input','phone-input','numeric-input','multiline-input']);
+ assert.deepEqual(reviewGroups('components').find(g=>g.id==='inputs')?.items.map(i=>i.id),['text-input','search','password-input','phone-input','numeric-input','multiline-input']);
  const html=components.renderComponents();assert.match(html,/id="text-input-live"/);assert.match(html,/id="password-input-live"/);
  assert.match(html,/실제 비밀번호/);
 });

@@ -72,13 +72,13 @@ const previewImage=(kind,state)=>kind==='avatar'?renderAvatar({character:true,si
 const preview=kind=>stage('<div data-media-preview="'+kind+'"><label class="v2-media-controls" for="v2-'+kind+'-state">'+(kind==='avatar'?'프로필':'썸네일')+' 표시 상태<select id="v2-'+kind+'-state" data-media-state>'+states.map(state=>'<option value="'+state+'">'+({ready:'이미지 표시',loading:'불러오는 중',empty:'이미지 없음',error:'불러오기 실패'})[state]+'</option>').join('')+'</select></label><div class="v2-media-preview-slot" data-media-slot>'+previewImage(kind,'ready')+'</div><p class="v2-media-message" data-media-message role="status" aria-live="polite" aria-atomic="true"></p></div>');
 export function renderMediaSamples(){
  return `<section class="v2-component-section" id="avatar" aria-labelledby="avatar-title" hidden><h2 id="avatar-title">프로필 이미지</h2><p>원형 프레임으로 사람을 구분합니다. 기존 디자이너 캐릭터의 두 이미지 레이어와 비율을 유지하고 테두리에만 얕은 입체감을 줍니다.</p>
- ${sample('목록·프로필 크기', '<div class="v2-avatar-sizes">'+[['small','32px · 작은 목록'],['medium','48px · 기본 목록'],['large','64px · 프로필']].map(([size,copy])=>'<div>'+renderAvatar({size,character:true,label:'프로필 캐릭터'})+'<span>'+copy+'</span></div>').join('')+'</div><div class="v2-media-context">'+renderAvatar({size:'large',character:true,decorative:true})+'<div><strong>맑은 땅콩 님</strong><p>이름과 이미지 사이 16px</p></div></div>')}
+ ${sample('목록·프로필 크기', '<div class="v2-avatar-sizes">'+[['small','32px · 작은 목록'],['medium','48px · 기본 목록'],['large','64px · 프로필']].map(([size,copy])=>'<div>'+renderAvatar({size,character:true,label:'프로필 캐릭터'})+'<span>'+copy+'</span></div>').join('')+'</div><div class="v2-media-context">'+renderAvatar({size:'large',character:true,decorative:true})+'<div><strong>사용자명</strong><p>보조 설명</p></div></div>')}
  ${stateComparison('<div class="v2-media-grid">'+states.slice(1).map(state=>sample(({loading:'불러오는 중',empty:'이미지 없음 · 기본 프로필',error:'불러오기 실패 · 기본 프로필'})[state],renderAvatar({state,size:'large',character:true,label:'프로필 캐릭터'}))).join('')+'</div>','이미지 상태 비교')}
  <h3 class="v2-media-preview-title">표시 바꿔보기</h3>${preview('avatar')}
  <p>프로필 자체는 버튼이 아닙니다. 이름 옆 중복 이미지는 장식으로 제외하고, 누르는 프로필은 별도 버튼 안에 넣어 48px 이상의 터치 영역을 확보합니다. 캐릭터 선택·수정·저장은 연결하지 않습니다.</p></section>
  <section class="v2-component-section" id="thumbnail" aria-labelledby="thumbnail-title" hidden><h2 id="thumbnail-title">썸네일</h2><p>매장·콘텐츠는 둥근 사각형으로 구분합니다. 사진은 평면으로 두고 프레임 가장자리에만 얕은 재질을 적용합니다.</p>
  <div class="v2-media-grid">
- ${sample('정사각형 · 64 × 64', '<div class="v2-media-context">'+renderThumbnail({src:thumbSource,alt:'멤버십 에셋',fit:'contain',decorative:true})+'<div><strong>멤버십 에셋</strong><p>크기·비율 비교용이며 매장 사진이 아닙니다.</p></div></div>')}
+ ${sample('정사각형 · 64 × 64', '<div class="v2-media-context">'+renderThumbnail({src:thumbSource,alt:'멤버십 에셋',fit:'contain',decorative:true})+'<div><strong>이미지 제목</strong><p>보조 설명</p></div></div>')}
  ${sample('영역 채우기 · 16:9',renderThumbnail({src:thumbSource,alt:'멤버십 에셋 · 영역 채우기',ratio:'wide'}),'가운데를 기준으로 가장자리를 잘라 맞춥니다.')}
  ${sample('전체 보이기 · 16:9',renderThumbnail({src:thumbSource,alt:'멤버십 에셋 · 전체 보이기',ratio:'wide',fit:'contain'}),'로고·에셋이 잘리면 안 되는 경우 사용합니다.')}
  </div>

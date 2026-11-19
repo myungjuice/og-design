@@ -19,7 +19,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    await select.selectOption('undo');await show.click();
    const toast=host.locator('.v2-snackbar'),id=await toast.getAttribute('id');
    assert.equal(await show.evaluate(n=>document.activeElement===n),true,'opening does not steal focus');
-   assert.match(await section.locator('[data-snackbar-announcement]').textContent(),/즐겨찾기/);
+   assert.match(await section.locator('[data-snackbar-announcement]').textContent(),/결과 메시지/);
    await show.click();assert.equal(await toast.getAttribute('id'),id,'same message is not recreated or queued');assert.equal(await host.locator('.v2-snackbar').count(),1);
    assert.deepEqual(await geometry(),before,'toast does not move content '+width);
    await toast.evaluate(n=>n.getAnimations().forEach(a=>a.finish()));

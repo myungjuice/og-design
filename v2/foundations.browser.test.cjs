@@ -31,8 +31,10 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
      return {name:n.dataset.contrast,ratio:Math.min(...(stops||[s.backgroundColor]).map(bg=>ratio(s.color,bg))),min:n.dataset.large==='true'?3:4.5};
     });
     const workspace=getComputedStyle(document.documentElement).backgroundColor;
-    for(const selector of ['main h1','.v2-section-copy','.v2-color-row dd','.v2-color-value','.v2-back']){
-     contrasts.push({name:selector,ratio:ratio(getComputedStyle(document.querySelector(selector)).color,workspace),min:4.5});
+    for(const selector of ['main h1','.v2-section-copy','.v2-color-row dd','[data-color-token]','.v2-back']){
+     const node=document.querySelector(selector);
+     const background=node.closest('.v2-foundation') ? tokens.getPropertyValue('--v2-surface') : workspace;
+     contrasts.push({name:selector,ratio:ratio(getComputedStyle(node).color,background),min:4.5});
     }
     contrasts.push({name:'workspace focus',ratio:ratio(tokens.getPropertyValue('--v2-workspace-focus'),workspace),min:3});
     const faces=[...document.styleSheets].flatMap(sheet=>[...sheet.cssRules]).filter(r=>r.type===CSSRule.FONT_FACE_RULE).map(r=>r.style.getPropertyValue('font-weight')).sort();
@@ -68,7 +70,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
   const fallbackErrors=[];fallback.on('pageerror',e=>fallbackErrors.push(e.message));
   await fallback.route('**/*.woff2',route=>route.abort('failed'));
   await fallback.goto(`${base}/v2/design-system/#typography`);await fallback.locator('[data-type="amount"]').waitFor();await fallback.evaluate(()=>document.fonts.ready);
-  assert.equal(await fallback.locator('[data-type="amount"]').innerText(),'15,000 M');
+  assert.equal(await fallback.locator('[data-type="amount"]').innerText(),'012,345');
   assert.ok(await fallback.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'fallback stays readable');
   assert.ok(await fallback.locator('[data-sample]:visible').evaluateAll(nodes=>nodes.every(n=>n.scrollWidth<=n.clientWidth+1)),'fallback sample text fits');
   assert.deepEqual(fallbackErrors,[]);assert.deepEqual(errors,[]);

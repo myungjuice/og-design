@@ -7,12 +7,12 @@ const assets='/assets/figma-home-20261020/';
 const image=(file,cls='',width,height=width,extra='')=>`<img class="${cls}" src="${assets+file}"${width?` width="${width}" height="${height}"`:''} alt="" aria-hidden="true" ${extra}>`;
 const categories=['한식','중식','일식','양식','카페/베이커리'];
 
-export function renderFigmaHomeSearch({id='home-store-search'}={}){
- const field=searchField({id,label:'매장 검색',placeholder:'매장명으로 검색해 주세요.',className:'home-search',attributes:{'aria-label':'매장 검색'}});
+export function renderFigmaHomeSearch({id='home-store-search',placeholder='매장명으로 검색해 주세요.'}={}){
+ const field=searchField({id,label:'매장 검색',placeholder,className:'home-search',attributes:{'aria-label':'매장 검색'}});
  return `<form class="home-search-form" role="search">${image('adbac.svg','figma-search-icon',20)}${field}<button type="button" class="home-search-submit" data-preview="현 위치" aria-label="현 위치">${image('30e02.svg','figma-search-location',24)}</button></form>`;
 }
-export function renderFigmaHomeCategories(){
- return `<div class="v2-home-category-row"><div class="home-categories" aria-label="매장 업종">${categories.map(name=>`<button type="button" class="home-category" data-category="${name}" aria-pressed="false"><span class="figma-category-art">${categoryArtwork(name,20)}</span><span>${name}</span></button>`).join('')}</div><button type="button" class="home-category home-category-more" data-preview="업종 더 보기">+ 더보기</button></div>`;
+export function renderFigmaHomeCategories({labelFor=name=>name}={}){
+ return `<div class="v2-home-category-row"><div class="home-categories" aria-label="매장 업종">${categories.map((name,index)=>`<button type="button" class="home-category" data-category="${name}" aria-pressed="false"><span class="figma-category-art">${categoryArtwork(name,20)}</span><span>${e(labelFor(name,index))}</span></button>`).join('')}</div><button type="button" class="home-category home-category-more" data-preview="업종 더 보기">+ 더보기</button></div>`;
 }
 export const figmaHomeStyles=['/screens/my-info-3d-test/styles.css','/screens/my-info-3d-test/home.css','/v2/home/screen.css','/v2/components/bottom-navigation.css','/v2/home/figma-home.css','/v2/home/new-stores.css','/v2/home/landmarks.css'];
 export function renderHomeNewStoreMark(style){

@@ -2,9 +2,9 @@ import {renderFigmaHomeSearch,renderFigmaHomeCategories} from '../home/figma-hom
 import {renderFigmaNavigation} from './figma-navigation.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
 const samples=[
- ['search','매장 검색바','홈과 동일한 검색바입니다. 검색 아이콘 20px, 우측 현 위치 아이콘 24px, 높이 48px을 공통 기준으로 사용합니다.',()=>renderFigmaHomeSearch({id:'component-store-search'})],
- ['categories','업종 카테고리','홈과 동일한 30px 칩과 고정 더보기 버튼입니다. 미선택 상태가 전체보기이며 별도 전체 칩은 사용하지 않습니다.',()=>renderFigmaHomeCategories()],
- ['navigation','하단 메뉴','모든 현재 시안에서 같은 90px 메뉴를 사용합니다. 현재 메뉴는 아이콘 색상과 밑줄로 구분합니다.',()=>renderFigmaNavigation({active:'홈'})]
+ ['search','매장 검색바','홈과 동일한 검색바입니다. 검색 아이콘 20px, 우측 현 위치 아이콘 24px, 높이 48px을 공통 기준으로 사용합니다.',()=>renderFigmaHomeSearch({id:'component-store-search',placeholder:'검색어 입력'})],
+ ['categories','업종 카테고리','홈과 동일한 30px 칩과 고정 더보기 버튼입니다. 미선택 상태가 전체보기이며 별도 전체 칩은 사용하지 않습니다.',()=>renderFigmaHomeCategories({labelFor:(_,index)=>'항목 '+(index+1)})],
+ ['navigation','하단 메뉴','모든 현재 시안에서 같은 90px 메뉴를 사용합니다. 현재 메뉴는 아이콘 색상과 밑줄로 구분합니다.',()=>renderFigmaNavigation({active:'홈',labelFor:(_,index)=>'메뉴 '+(index+1)})]
 ];
 export function renderHomeControlSamples(){
  return applyReceivedIcons(samples.map(([id,title,description,render])=>`<section class="v2-component-section" id="${id}" aria-labelledby="${id}-title" hidden><h2 id="${id}-title">${title}</h2><p>${description}</p><div class="v2-home-component" data-home-component="${id}"><template>

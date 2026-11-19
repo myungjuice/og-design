@@ -45,10 +45,12 @@
 .v2-praise-category+.v2-praise-category{margin-top:var(--v2-space-5)}
 .v2-praise-category h5{margin:0 0 var(--v2-space-3);font:700 var(--v2-type-body)/var(--v2-line-body) var(--v2-font)}
 .v2-praise-options{display:flex;flex-wrap:wrap;gap:var(--v2-space-2);align-items:flex-start}
-.v2-praise-options>.v2-chip{max-width:100%;height:auto;min-height:48px;font-weight:400}
+.v2-praise-options>.v2-chip{max-width:100%;height:auto;min-height:44px;padding:var(--v2-space-1) var(--v2-space-3);font-weight:400}
+.v2-praise-options>.v2-chip[aria-pressed="true"]{padding-inline-start:var(--v2-space-6)}
 .v2-praise-options .v2-chip-label{white-space:normal;overflow-wrap:anywhere;text-align:start}
 .v2-praise-option-icon{display:inline-flex;flex:none}
-.v2-praise-option-icon svg{width:18px;height:18px;flex:none}
+.v2-praise-option-icon>img,.v2-praise-option-icon>svg{width:24px;height:24px;flex:none}
+.v2-praise-options .v2-chip[aria-pressed="true"] .v2-joybar-icon{filter:brightness(0) invert(1)}
 .v2-praise-save{flex:none;padding:var(--v2-space-4);border-top:1px solid var(--v2-edge)}
 .v2-praise-save>.v2-button{width:100%}
 .v2-secondary-dialog-overlay{align-items:center;justify-content:center}

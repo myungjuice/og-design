@@ -15,6 +15,6 @@ test('sheet gallery separates applied sort from pending choice and has four hist
  assert.equal(typeof module.renderSheetSamples,'function');
  const html=module.renderSheetSamples();
  assert.match(html,/data-sheet-open="v2-sheet-sort"/);assert.match(html,/data-sheet-sort-result/);
- for(const label of ['예약','웨이팅','Q오더','리뷰'])assert.ok(html.includes(label));
+ for(const label of ['탭 1','탭 2','탭 3','탭 4'])assert.ok(html.includes(label));
  assert.match(html,/선택 적용/);assert.match(html,/실제/);
 });

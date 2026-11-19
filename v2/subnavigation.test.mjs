@@ -7,13 +7,13 @@ import {renderWorkspace} from './render.mjs';
 test('all component entries belong to one related preview group',()=>{
  const groups=reviewGroups('components');
  assert.deepEqual(groups.map(g=>g.items.map(item=>item.id)),[
-  ['primary','secondary','review','icon-buttons'],['cards','mileage','section-heading'],['surfaces','dividers'],['mascot-rules','avatar','thumbnail'],['attachment-picker','image-viewer'],['community-row','list-row'],['quantity'],['checkbox','radio','switch'],['chip-single','chip-multiple','chip-filters'],['best-label','badges','notification-badges'],['tabs','segmented'],['search','text-input','password-input','phone-input','numeric-input','multiline-input'],['date-picker','range-picker','time-picker'],['content-patterns','dialogs','notices','empty-feedback','snackbar','help'],['bottom-sheet'],['loading'],['map-markers','categories'],['navigation'],['try']
+  ['primary','secondary','review','icon-buttons'],['text-input','search','password-input','phone-input','numeric-input','multiline-input'],['cards','mileage','section-heading'],['surfaces','dividers'],['mascot-rules','avatar','thumbnail'],['attachment-picker','image-viewer'],['community-row','list-row'],['quantity'],['checkbox','radio','switch'],['chip-single','chip-multiple','chip-filters'],['best-label','badges','notification-badges'],['tabs','segmented'],['date-picker','range-picker','time-picker'],['content-patterns','dialogs','notices','empty-feedback','snackbar','help'],['bottom-sheet'],['loading'],['map-markers','categories'],['navigation'],['try']
  ]);
  assert.deepEqual(groups.flatMap(g=>g.items.map(item=>item.id)).sort(),componentItems.map(item=>item.id).sort());
 });
 test('foundations group related visual rules without dropping sections',()=>{
  assert.deepEqual(reviewGroups('design-system').map(g=>g.items.map(item=>item.id)),[
-  ['colors'],['typography','spacing'],['radius','materials']
+  ['colors'],['typography','spacing'],['radius'],['materials']
  ]);
 });
 test('every destination separates primary destinations from secondary items',()=>{

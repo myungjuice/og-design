@@ -18,9 +18,9 @@ export function renderDialog({id=uid('v2-dialog'),title='',body='',actions=[{lab
   :'<div class="v2-dialog-static"'+attrs({id,inert:true})+'>'+panel+'</div>';
 }
 const cases=[
- {key:'notice',name:'안내',title:'알림을 켜 주세요',body:'새 소식을 받으려면 기기 설정에서 알림을 허용해 주세요.',actions:[{label:'확인'}]},
- {key:'confirm',name:'일반 확인',title:'작성을 그만두시겠어요?',body:'작성 중인 내용은 저장되지 않습니다.',actions:[{label:'계속 작성',variant:'secondary'},{label:'나가기'}]},
- {key:'delete',name:'삭제 확인',title:'리뷰를 삭제하시겠어요?',body:'삭제한 리뷰는 다시 복구할 수 없습니다.',actions:[{label:'취소',variant:'secondary'},{label:'삭제',variant:'danger'}]}
+ {key:'notice',name:'안내',title:'안내 제목',body:'안내 본문',actions:[{label:'확인'}]},
+ {key:'confirm',name:'일반 확인',title:'확인 제목',body:'확인 본문',actions:[{label:'취소',variant:'secondary'},{label:'확인'}]},
+ {key:'delete',name:'삭제 확인',title:'삭제 확인 제목',body:'삭제 안내 본문',actions:[{label:'취소',variant:'secondary'},{label:'삭제',variant:'danger'}]}
 ];
 export function renderDialogSamples(){
  return '<section class="v2-component-section" id="dialogs" aria-labelledby="dialogs-title" hidden><h2 id="dialogs-title">확인창</h2><p>짧은 안내나 중요한 선택을 화면 중앙에서 보여줍니다. 흰 표면에 얕은 입체감을 주고, 제목과 본문은 담백하게 유지합니다.</p><div class="v2-dialog-grid">'+cases.map(item=>

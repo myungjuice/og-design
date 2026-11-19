@@ -12,9 +12,9 @@ export function renderSnackbar({message='',action='',state='default',live=false,
   .replace('class="og-snackbar-action"','class="og-snackbar-action"'+attrs({disabled,'aria-busy':state==='loading'?'true':undefined,'aria-describedby':messageId}));
 }
 const examples={
- saved:{label:'완료 안내',message:'저장했어요.',state:'success',note:'결과가 화면에 바로 드러나지 않을 때 짧게 안내합니다.'},
- undo:{label:'실행 취소',message:'즐겨찾기에서 뺐어요.',action:'실행 취소',note:'되돌릴 수 있는 동작에는 실행 취소를 함께 제공합니다.'},
- retry:{label:'재시도 안내',message:'저장하지 못했어요.',action:'다시 시도',state:'error',note:'중요한 오류는 관련 본문에도 유지합니다. 입력 오류는 해당 입력란 아래에 표시합니다.'}
+ saved:{label:'완료 안내',message:'완료 메시지',state:'success',note:'결과가 화면에 바로 드러나지 않을 때 짧게 안내합니다.'},
+ undo:{label:'실행 취소',message:'결과 메시지',action:'실행 취소',note:'되돌릴 수 있는 동작에는 실행 취소를 함께 제공합니다.'},
+ retry:{label:'재시도 안내',message:'오류 메시지',action:'다시 시도',state:'error',note:'중요한 오류는 관련 본문에도 유지합니다. 입력 오류는 해당 입력란 아래에 표시합니다.'}
 };
 const sample=(kind,props)=>'<figure class="v2-component-sample" data-snackbar-example="'+kind+'"><figcaption><strong>'+e(props.label)+'</strong><span>'+e(props.note)+'</span></figcaption><div class="v2-snackbar-stage" inert>'+renderSnackbar(props)+'</div></figure>';
 export function renderSnackbarSamples(){

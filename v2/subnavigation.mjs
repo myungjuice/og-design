@@ -20,7 +20,8 @@ export function reviewGroups(pageId){
  if(pageId==='design-system')return [
   {id:'colors',label:'컬러',items:foundationGroups.filter(item=>item.id==='colors').map(({id,title})=>({id,label:title}))},
   {id:'type-space',label:'타이포·여백',items:foundationGroups.filter(item=>['typography','spacing'].includes(item.id)).map(({id,title})=>({id,label:title}))},
-  {id:'shape-material',label:'곡률·3D 재질',items:foundationGroups.filter(item=>['radius','materials'].includes(item.id)).map(({id,title})=>({id,label:title}))}
+  {id:'shape-material',label:'곡률',items:[{id:'radius',label:'곡률'}]},
+  {id:'material-guide',label:'3D 재질',items:[{id:'materials',label:'표면별 재질'}]}
  ];
  if(['home','barcode','my-info'].includes(pageId)){
   const labels={home:'홈',barcode:'바코드','my-info':'내정보 메인'};

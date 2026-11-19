@@ -17,10 +17,10 @@ export function renderNotice({tone='info',title='',body='',id,live=false}={}){
   .replace(icon(symbol),visual);
 }
 const samples=[
- ['info','사진을 확인해 주세요','글자가 선명하게 보이는 사진을 선택해 주세요.'],
- ['warning','변경 내용이 저장되지 않았어요','화면을 나가기 전에 저장해 주세요.'],
- ['error','저장하지 못했어요','입력한 내용은 그대로 남아 있어요. 다시 저장해 주세요.'],
- ['success','저장했어요','변경한 내용을 확인해 주세요.']
+ ['info','정보 제목','정보 본문'],
+ ['warning','주의 제목','주의 본문'],
+ ['error','오류 제목','오류 본문'],
+ ['success','완료 제목','완료 본문']
 ];
 export function renderNoticeSamples(){
  return '<section class="v2-component-section" id="notices" aria-labelledby="notices-title" hidden><h2 id="notices-title">영역 안 안내</h2><p>관련 내용 가까이에서 상태와 다음 행동을 알려줍니다. 옅은 상태색 표면과 작은 아이콘 받침으로 구분하고, 문구는 선명하게 유지합니다.</p><div class="v2-notice-grid">'+samples.map(([tone,title,body])=>

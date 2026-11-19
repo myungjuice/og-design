@@ -22,13 +22,13 @@ const sample=(id,label,description,options)=>`<figure class="v2-component-sample
 export function renderSectionHeadingSamples(){
  return `<section class="v2-component-section" id="section-heading" aria-labelledby="section-heading-title" hidden><h2 id="section-heading-title">섹션 제목·우측 액션</h2><p>제목과 설명은 평면으로, 전체보기는 텍스트와 화살표로 가볍게 표시합니다. 정보 버튼과 우측 동작은 별도의 터치 영역입니다.</p>
  <div class="v2-heading-grid">
- ${sample('heading-basic','기본형','제목만 있는 정보 묶음',{title:'최근 방문'})}
- ${sample('heading-description','설명형','제목 아래에 간단한 안내를 표시합니다.',{title:'마일리지 내역',description:'적립하고 사용한 마일리지를 확인하세요.'})}
- ${sample('heading-action','우측 액션형','전체보기는 후기를 작성하는 주요 동작보다 낮은 위계입니다.',{title:'최근 방문',action:'전체보기'})}
- ${sample('heading-information','정보 안내형','제목 옆 아이콘을 누르면 안내를 펼칩니다.',{title:'OG 마일리지',action:'내역보기',infoButton:true,helpText:'사용 가능한 마일리지는 총 보유 마일리지에 포함됩니다.'})}
- ${sample('heading-long','긴 제목','제목은 생략하지 않고 줄바꿈합니다. 폭이 부족하면 우측 버튼을 다음 줄로 배치합니다.',{title:'최근 방문한 회원점과 이용 내역',description:'매장별 방문 내역을 확인하세요.',action:'전체보기'})}
+ ${sample('heading-basic','기본형','제목만 있는 정보 묶음',{title:'섹션 제목'})}
+ ${sample('heading-description','설명형','제목 아래에 간단한 안내를 표시합니다.',{title:'섹션 제목',description:'보조 설명'})}
+ ${sample('heading-action','우측 액션형','전체보기는 후기를 작성하는 주요 동작보다 낮은 위계입니다.',{title:'섹션 제목',action:'전체보기'})}
+ ${sample('heading-information','정보 안내형','제목 옆 아이콘을 누르면 안내를 펼칩니다.',{title:'섹션 제목',action:'내역보기',infoButton:true,helpText:'도움말 본문'})}
+ ${sample('heading-long','긴 제목','제목은 생략하지 않고 줄바꿈합니다. 폭이 부족하면 우측 버튼을 다음 줄로 배치합니다.',{title:'두 줄에 걸쳐 표시하는 긴 섹션 제목',description:'보조 설명',action:'전체보기'})}
  </div>
- ${stateComparison(`<p class="v2-heading-note">우측 내역 확인 버튼의 상태 예시입니다. 섹션 제목은 유지하고 상태는 동작과 안내에서 구분합니다.</p><div class="v2-heading-grid">${states.map((state,index)=>sample('heading-state-'+state,['기본','누르는 중','비활성','처리 중','오류','성공'][index],'',{title:'이용내역',action:'전체보기',state})).join('')}</div>`)}
+ ${stateComparison(`<p class="v2-heading-note">우측 내역 확인 버튼의 상태 예시입니다. 섹션 제목은 유지하고 상태는 동작과 안내에서 구분합니다.</p><div class="v2-heading-grid">${states.map((state,index)=>sample('heading-state-'+state,['기본','누르는 중','비활성','처리 중','오류','성공'][index],'',{title:'섹션 제목',action:'전체보기',state})).join('')}</div>`)}
  <p class="v2-heading-feedback" role="status" aria-live="polite">버튼과 안내의 동작을 확인할 수 있습니다. 실제 내역은 열지 않습니다.</p></section>`;
 }
 export function setupSectionHeadingSamples(root){

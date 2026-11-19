@@ -42,7 +42,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
     assert.equal(await retry.isEnabled(),true);assert.equal(await retry.textContent(),'다시 시도');assert.equal(await retry.evaluate(n=>document.activeElement===n),true,'error keeps retry focus');
    }else{
     assert.equal(await retry.count(),0);assert.equal(await demo.locator('[data-feedback-area] h3').evaluate(n=>document.activeElement===n),true,'removed retry hands focus to the result heading');
-    assert.match(await demo.locator('[data-feedback-area]').innerText(),outcome==='empty'?/아직 방문 내역이 없어요/:/스시샤워 반주헌/);
+    assert.match(await demo.locator('[data-feedback-area]').innerText(),outcome==='empty'?/빈 상태 제목/:/항목 1/);
    }
    assert.equal(await demo.locator('[data-feedback-area]').evaluate(n=>n.getBoundingClientRect().height),height,'same result region retains height');
    assert.ok((await status.textContent()).length>0);

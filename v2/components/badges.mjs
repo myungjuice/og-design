@@ -32,17 +32,17 @@ export function renderBadgeSamples(){
  return `<section class="v2-component-section" id="badges" aria-labelledby="badges-title" hidden><h2 id="badges-title">배지·상태 라벨</h2><p>상태와 구분을 짧게 알려줍니다. 가장자리에만 얕은 입체감을 주고, 선택하는 칩과 달리 눌림·선택 효과는 넣지 않습니다.</p>
  <div class="v2-badge-grid">
  ${sample('진행·처리 상태',row(mark('진행 중','info')+mark('완료','success')+mark('확인 필요','warning')+mark('종료')+mark('실패','error')),'색뿐 아니라 문구로도 의미를 전달합니다.')}
- ${sample('공모전 진행 상태',row(mark('진행 중','info')+mark('심사 중','warning')+mark('종료')))}
- ${sample('매장 구분',row(mark('회원점','brand')+mark('일반 매장')))}
- ${sample('출품 형식',row(['사진','영상','그림'].map(label=>mark(label)).join('')),'형식은 같은 중립색으로 표시합니다.')}
+ ${sample('공모전 진행 상태',row(mark('진행 중','info')+mark('대기','warning')+mark('종료')))}
+ ${sample('매장 구분',row(mark('강조','brand')+mark('기본')))}
+ ${sample('출품 형식',row(['유형 1','유형 2','유형 3'].map(label=>mark(label)).join('')),'형식은 같은 중립색으로 표시합니다.')}
  </div>
  <h3>매장 상세의 상태 표시</h3>
  <div class="v2-badge-grid" data-store-badge-guide>
- ${sample('사진 위 영업 상태',photoSample(heroStatus({isOpen:false,runtimeStatus:'notOpen',label:'영업 전'}),true),'영업 전·영업 종료·브레이크 타임·휴무는 사진 중앙에 아이콘과 상태명을 표시합니다.')}
+ ${sample('사진 위 영업 상태',photoSample(heroStatus({isOpen:false,runtimeStatus:'notOpen',label:'상태명'},'상태 설명'),true),'영업 전·영업 종료·브레이크 타임·휴무는 사진 중앙에 아이콘과 상태명을 표시합니다.')}
  ${sample('사진 장수',photoSample(photoCount(10)),'사진 오른쪽 아래에 현재 순서와 전체 장수를 표시합니다. 사진이 없으면 생략합니다.')}
  ${sample('메뉴 옵션',row(mark('필수','info')+mark('선택')),'가격처럼 반드시 골라야 하는 항목에는 필수, 추가할 수 있는 항목에는 선택을 붙입니다.')}
  </div>
- ${stateComparison('<div class="v2-badge-grid">'+sample('기본 · 24px / 큰 크기 · 28px',row(mark('심사 중','warning')+mark('심사 중','warning','medium')))+sample('긴 제목과 함께',row('<span class="v2-badge-context-name">긴 이름의 공모전 출품작을 함께 표시하는 배치 예시</span>'+mark('심사 중','warning')+mark('사진')))+sample('긴 상태 문구',row(mark('추가 정보를 확인한 뒤 다시 신청해 주세요','warning')),'긴 설명은 본문을 권장하며, 예상보다 긴 라벨도 잘라 숨기지 않습니다.')+'</div>','크기·긴 내용 비교')}
+ ${stateComparison('<div class="v2-badge-grid">'+sample('기본 · 24px / 큰 크기 · 28px',row(mark('대기','warning')+mark('대기','warning','medium')))+sample('긴 제목과 함께',row('<span class="v2-badge-context-name">두 줄에 걸쳐 표시하는 긴 제목</span>'+mark('대기','warning')+mark('사진')))+sample('긴 상태 문구',row(mark('두 줄에 걸쳐 표시하는 긴 상태명','warning')),'긴 설명은 본문을 권장하며, 예상보다 긴 라벨도 잘라 숨기지 않습니다.')+'</div>','크기·긴 내용 비교')}
  <p>라벨 자체는 버튼이 아닙니다. 원인·다음 행동은 관련 본문에서 안내하며 기존 화면의 배지 위치와 색상은 변경하지 않습니다.</p></section>
  <section class="v2-component-section" id="notification-badges" aria-labelledby="notification-badges-title" hidden><h2 id="notification-badges-title">숫자 알림·읽지 않음</h2><p>알림 개수 또는 읽지 않음 여부를 표시합니다. 아래 조작은 예시 표시만 바꾸며 실제 알림은 조회하지 않습니다.</p>
  ${stage(`<div data-badge-preview><label class="v2-badge-preview-controls" for="v2-badge-count-select">예시 알림 개수<select id="v2-badge-count-select" data-badge-count>${counts.map(count=>'<option value="'+count+'"'+(count===9?' selected':'')+'>'+count+'개</option>').join('')}</select></label>

@@ -4,10 +4,10 @@ export const componentItems=[
  {id:'content-patterns',label:'참여 단계·접힘 안내',group:'안내·확인'},
  {id:'community-row',label:'커뮤니티 목록 행',group:'목록'},
  {id:'mascot-rules',label:'마스코트 사용 규칙',group:'프로필·이미지'},
- {id:'primary',label:'주요 버튼',group:'버튼'},
- {id:'secondary',label:'보조 버튼',group:'버튼'},
- {id:'review',label:'후기 버튼',group:'버튼'},
- {id:'icon-buttons',label:'아이콘 버튼·즐겨찾기',group:'버튼'},
+ {id:'primary',label:'크기·상태 비교',group:'버튼'},
+ {id:'secondary',label:'52px · 라인 동작',group:'버튼'},
+ {id:'review',label:'44px · 소형 동작',group:'버튼'},
+ {id:'icon-buttons',label:'48px · 아이콘 동작',group:'버튼'},
  {id:'cards',label:'카드·메뉴 타일',group:'카드·정보'},
  {id:'mileage',label:'마일리지 카드·진행바',group:'카드·정보'},
  {id:'section-heading',label:'섹션 제목·우측 액션',group:'카드·정보'},
@@ -29,8 +29,8 @@ export const componentItems=[
  {id:'notification-badges',label:'숫자 알림·읽지 않음',group:'배지·알림 표시'},
  {id:'tabs',label:'탭',group:'내용·보기 전환'},
  {id:'segmented',label:'분할 선택',group:'내용·보기 전환'},
+ {id:'text-input',label:'입력 상태 비교',group:'입력'},
  {id:'search',label:'매장 검색바',group:'입력'},
- {id:'text-input',label:'텍스트 입력',group:'입력'},
  {id:'password-input',label:'비밀번호 입력',group:'입력'},
  {id:'phone-input',label:'전화번호 입력',group:'입력'},
  {id:'numeric-input',label:'숫자 입력',group:'입력'},
@@ -49,5 +49,5 @@ export const componentItems=[
  {id:'navigation',label:'하단 메뉴',group:'내비게이션'},
  {id:'try',label:'직접 눌러보기',group:'동작 확인'}
 ];
-export const componentGroups=[['buttons','버튼'],['cards-information','카드·정보'],['surfaces','표면·구분선'],['media','프로필·이미지'],['attachments','이미지 보기·첨부'],['lists','목록'],['quantity','수량 조절'],['selection','선택 요소'],['chips','칩·필터'],['badges','배지·알림 표시'],['content-switching','내용·보기 전환'],['inputs','입력'],['date-time','날짜·시간'],['feedback','안내·확인'],['sheets','바텀시트'],['loading','로딩'],['map-exploration','지도 탐색'],['navigation','내비게이션'],['preview','동작 확인']].map(([id,label])=>({id,label,items:componentItems.filter(item=>item.group===label)}));
+export const componentGroups=[['buttons','버튼'],['inputs','입력'],['cards-information','카드·정보'],['surfaces','표면·구분선'],['media','프로필·이미지'],['attachments','이미지 보기·첨부'],['lists','목록'],['quantity','수량 조절'],['selection','선택 요소'],['chips','칩·필터'],['badges','배지·알림 표시'],['content-switching','내용·보기 전환'],['date-time','날짜·시간'],['feedback','안내·확인'],['sheets','바텀시트'],['loading','로딩'],['map-exploration','지도 탐색'],['navigation','내비게이션'],['preview','동작 확인']].map(([id,label])=>({id,label,items:componentItems.filter(item=>item.group===label)}));
 export const stateComparison=(content,label='상태 비교')=>`<details class="v2-state-comparison"><summary>${label}</summary>${content}</details>`;

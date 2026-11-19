@@ -1,0 +1,83 @@
+/* Reference sheets use the app's light canvas inside the review navigation. */
+.v2-foundation, .v2-component-section {
+ --v2-workspace-text:var(--v2-text);
+ --v2-workspace-muted:var(--v2-text-muted);
+ --v2-workspace-edge:var(--v2-edge);
+ --v2-workspace-accent:var(--v2-action);
+ --v2-workspace-focus:var(--v2-focus);
+ --v2-workspace-hover:var(--v2-muted-surface);
+ --v2-workspace-selected:var(--v2-selected-surface);
+ color:var(--v2-text);
+ background:var(--v2-surface);
+ border:0;
+ border-radius:16px;
+ padding:clamp(16px,3vw,40px);
+ margin-block:16px 28px;
+}
+.v2-foundation > h2, .v2-component-section > h2 {
+ font-size:clamp(22px,2.5vw,32px);
+ line-height:1.25;
+ margin:0 0 12px;
+}
+.guide-family { margin:0; padding:20px 0; border-top:1px solid var(--v2-edge); }
+.guide-family h3 { margin:0 0 14px; font-size:16px; line-height:1.4; }
+.guide-palette,.guide-scale,.guide-variants {
+ display:grid; gap:16px;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,125px),1fr)); margin:0;
+}
+.guide-palette {grid-template-columns:repeat(auto-fit,minmax(min(100%,90px),1fr));gap:8px}
+.guide-palette dt {display:block;font-size:13px}
+.guide-palette .v2-swatch {width:100%;height:44px;border-radius:4px;margin-bottom:8px}
+.guide-palette dd {margin:2px 0 0;color:var(--v2-text-muted);font-size:11px;font-variant-numeric:tabular-nums}
+.guide-scale {grid-template-columns:repeat(4,minmax(0,1fr))}
+.guide-scale figure,.guide-variants figure {margin:0;min-width:0}
+.guide-type [data-type] {display:flex;align-items:baseline;min-height:36px}
+.guide-type figcaption,.guide-variants figcaption {
+ color:var(--v2-text-muted);margin:8px 0 0;font-size:12px;line-height:18px;
+}
+.guide-board {margin:24px 0 32px}
+.guide-variants {grid-template-columns:repeat(4,minmax(0,1fr))}
+.guide-control {min-height:55px;display:grid;align-items:center;justify-items:start}
+.guide-control .v2-button,.guide-control .v2-input {width:100%;max-width:100%}
+.guide-control .v2-button[data-variant="review"] {width:min(100%,100px)}
+.guide-control .v2-chip {max-width:100%}
+.guide-control .v2-input input {padding-inline:12px}
+@media (max-width:760px) {
+ .guide-scale,.guide-variants {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+.guide-body-scale {grid-template-columns:repeat(3,minmax(0,1fr))}
+.guide-type > div {min-height:36px;display:flex;align-items:baseline}
+.guide-type strong {font-weight:700}
+@media(max-width:550px) {
+ .guide-body-scale {gap:14px 6px}
+ .guide-body-scale figcaption {font-size:10px;line-height:15px}
+}
+
+.guide-shortcuts {display:flex;gap:16px}
+.guide-shortcuts a {display:inline-flex;align-items:center;min-height:44px;color:var(--v2-workspace-accent);text-underline-offset:4px}
+.guide-matrix {overflow-x:auto;margin:20px 0 32px;color:var(--v2-text)}
+.guide-matrix table {width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font:400 14px/1.4 var(--v2-font)}
+.guide-matrix[data-board="buttons"] table {min-width:620px}
+.guide-matrix th,.guide-matrix td {padding:8px;text-align:center;border-bottom:1px solid var(--v2-edge)}
+.guide-matrix thead th {background:var(--v2-selected-surface);font-weight:700}
+.guide-matrix thead tr:nth-child(2) th {font-size:12px;background:var(--v2-page)}
+.guide-matrix th[scope="row"],.guide-matrix th[rowspan] {width:76px;position:sticky;left:0;text-align:left;background:var(--v2-surface);z-index:1}
+.guide-matrix td > div {display:flex;align-items:center;justify-content:center;min-height:46px}
+.guide-matrix .v2-button {max-width:112px;width:100%}
+.guide-matrix .v2-button[data-variant="review"] {max-width:92px}
+.guide-matrix .v2-input {width:100%;max-width:360px;text-align:left}
+.guide-matrix .v2-input .og-field-help:empty {display:none}
+.guide-matrix [data-guide-state="hover"] .v2-button {background:var(--v2-selected-surface);border-color:var(--v2-focus)}
+.guide-matrix [data-guide-state="active"] .v2-button {background:var(--v2-nav-selected-surface);border-color:var(--v2-focus)}
+.guide-matrix [data-guide-state="hover"] .v2-button[data-variant="primary"] {background:var(--v2-focus)}
+.guide-matrix [data-guide-state="active"] .v2-button[data-variant="primary"] {background:color-mix(in srgb,var(--v2-focus) 82%,var(--v2-text))}
+.guide-matrix [data-guide-state="hover"] .v2-icon-button::before {background:var(--v2-selected-surface);border-color:var(--v2-focus)}
+.guide-matrix [data-guide-state="active"] .v2-icon-button::before {background:var(--v2-nav-selected-surface);border-color:var(--v2-focus)}
+.guide-matrix [data-guide-state="focus"] :is(button,input) {outline:2px solid var(--v2-focus);outline-offset:2px}
+.guide-matrix [data-guide-state="hover"] input {border-color:var(--v2-input-muted)}
+@media(max-width:700px){
+ .guide-matrix[data-board="fields"] th,.guide-matrix[data-board="fields"] td {padding:5px}
+ .guide-matrix th[scope="row"],.guide-matrix th[rowspan] {width:64px}
+ .guide-matrix .v2-input input {padding-inline:8px}
+}

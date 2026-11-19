@@ -17,7 +17,7 @@ test('restored store subviews are grouped ready routes with lazy templates',()=>
 
 test('menu anchors preserve screen destinations and append the icon review',()=>{
  assert.deepEqual(navigationItems.map(({id,label,href})=>[id,label,href]),[
-  ['design-system','디자인 시스템','/v2/design-system/'],['components','공통 컴포넌트','/v2/components/'],['home','홈화면','/v2/home/'],
+  ['components','공통 컴포넌트','/v2/components/'],['design-system','디자인 시스템','/v2/design-system/'],['home','홈화면','/v2/home/'],
   ['my-land','마이랜드','/v2/my-land/'],['barcode','바코드','/v2/barcode/'],
   ['og-park','오지파크','/v2/og-park/'],['my-info','내정보','/v2/my-info/'],['icon-review','아이콘 제작 검토','/v2/icon-review/']
  ]);
@@ -82,7 +82,7 @@ test('unknown IDs give a safe return route without echoing markup',()=>{
 test('design system presents five foundation groups as visual specimens',()=>{
  const html=renderWorkspace({pageId:'design-system'});
  assert.deepEqual([...html.matchAll(/data-foundation="([^"]+)"/g)].map(x=>x[1]),['colors','typography','spacing','radius','materials']);
- assert.match(html,/시각 규칙 검토용/);
+ for(const view of ['primary','text-input'])assert.ok(html.includes('href="/v2/components/#'+view+'"'));
  assert.doesNotMatch(renderFoundations(),/<button|<input/);
  for(const role of ['screen-top','screen-bottom','button-light','button-face','input-ink','input-muted'])assert.match(html,new RegExp(`data-color-token="--v2-${role}"`));
  for(const id of ['components','home','my-land','barcode','og-park','my-info'])assert.doesNotMatch(renderWorkspace({pageId:id}),/data-foundation=/);

@@ -11,6 +11,7 @@ export function renderMileage({available=15000,total=16000,shared=1250,sharedCou
  return renderMileageCard({...range,available,total,shared,sharedCount,
   assetBase:'/screens/my-info-3d-test/media/figma/',className:'v2-mileage'}).replace(/<img class="m-coin"[^>]*>/,functionArtwork('mileage',48,'m-coin'));
 }
+export const mileageSampleLabels={title:'제목',action:'텍스트 버튼',total:'항목 1',shared:'항목 2',people:'인원'};
 export function renderMileageSamples(){
  const cases=[
   ['기본 잔액','사용 가능 15,000 M · 총 보유 16,000 M',{available:15000,total:16000,shared:1250,sharedCount:3}],
@@ -18,7 +19,7 @@ export function renderMileageSamples(){
   ['잔액 0','두 진행 구간과 원형 표시점을 숨김',{available:0,total:0,shared:0,sharedCount:0}],
   ['진행바 상한','끝점에서도 원형 표시점이 바 안에 머무름',{available:20000,total:20000,shared:0,sharedCount:0}]
  ];
- const sample=([title,description,props])=>`<figure class="v2-component-sample"><figcaption><strong>${title}</strong><span>${description}</span></figcaption>${renderMileage(props)}</figure>`;
+ const sample=([title,description,props])=>`<figure class="v2-component-sample"><figcaption><strong>${title}</strong><span>${description}</span></figcaption>${renderMileage({...props,labels:mileageSampleLabels})}</figure>`;
  return `<section class="v2-component-section" id="mileage" aria-labelledby="mileage-title" hidden><h2 id="mileage-title">마일리지 카드·진행바</h2>
  <p>내정보·바코드와 같은 렌더러와 수령한 M 아이콘을 사용합니다. 아래 금액은 검토용 예시입니다. 진행바는 드래그하지 않는 표시용입니다.</p>
  <div class="v2-mileage-grid">${sample(cases[0])}</div>
