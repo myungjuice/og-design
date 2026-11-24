@@ -106,3 +106,7 @@ h1,p{margin:0}
 .nav-item.barcode>span{width:64px;height:64px;border-radius:50%;border:4px solid var(--paper);background:var(--barcode-fill)}
 
 .lucky-title{font-size:18px;line-height:24px;margin:14px 20px 8px;font-weight:700}
+.myland-winter{--screen:#edf0fb}
+.myland-winter .park-scene{object-position:center 77%;mask-image:linear-gradient(#000 80%,transparent)}
+.myland-winter .hero-mascot{position:absolute;top:7px;right:32px;width:132px;height:139px;object-fit:contain}
+.myland-winter .hero-copy h1{color:var(--ink);text-shadow:0 1px 4px #fffd}

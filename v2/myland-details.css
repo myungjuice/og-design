@@ -80,6 +80,10 @@
 
 .md-limit>.v2-button{display:block;width:100%;margin-top:12px}
 
-/* Review assets retain their JPEGs. The white backdrop blends into the light surface. */
-.md-december-mascot{display:block;object-fit:contain;mix-blend-mode:multiply}
+.md-december-mascot{display:block;object-fit:contain}
 .md-result-art>.md-december-mascot{width:100%;height:100%}
+
+.md-winter-screen{--md-winter-surface:#edf0fb;background:var(--md-winter-surface)}
+.md-winter-screen>.md-landscape{height:310px;object-position:center 80%;opacity:1}
+.md-winter-screen>.md-scenery-wash{background:linear-gradient(var(--md-winter-surface) 62%,transparent)}
+.md-roulette.md-winter-screen>.md-landscape,.md-puzzle.md-winter-screen>.md-landscape{filter:blur(2px)}

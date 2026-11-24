@@ -1,6 +1,6 @@
 import {renderMyLandFeedbackScreen} from './myland-feedback.mjs';
 import {renderButton} from './components/render.mjs';
-import {decemberMascotSrc, mascotNames} from './mascot-preview.mjs';
+import {decemberMascotSrc, mascotNames, renderDecemberPicker, setupDecemberPicker, winterBackgroundSrc} from './mascot-preview.mjs';
 
 const decemberPoses={
  'attendance-daily':'attendance-complete',
@@ -30,11 +30,16 @@ const wallet=(count=3)=>`<div class="md-wallet">${ticket()}<span>내 티켓 <b>$
 function header(name,count=3){
  return `<header class="md-header">${close()}<b>${name}</b>${wallet(count)}</header>`;
 }
-function scene(content,cls=''){
- return `<div class="md-screen ${cls}">${cls==='md-result-screen'?'':img('c-background.png','md-landscape')}<div class="md-scenery-wash"></div>${content}</div>`;
+function winterLandscape(){
+ return `<img class="md-landscape" src="${winterBackgroundSrc}" alt="">`;
+}
+function scene(content,cls){
+ const landscape=cls==='md-result-screen'?'':cls==='md-limit-screen'?img('c-background.png','md-landscape'):winterLandscape();
+ const winter=cls==='md-limit-screen'?'':' md-winter-screen';
+ return `<div class="md-screen ${cls}${winter}">${landscape}<div class="md-scenery-wash"></div>${content}</div>`;
 }
 function mainBackdrop(days){
- return '<div class="md-main-backdrop" inert aria-hidden="true">'+renderMyLandFeedbackScreen().replace('10일차',days+'일차').replace('출석 전','출석 완료').replace(/(data-today[^>]*>)/,'$1'+img('9f802.svg')).replace('day-mark today','day-mark done').replace('>출석하기<','>출석 완료<')+'</div>';
+ return '<div class="md-main-backdrop" inert aria-hidden="true">'+renderMyLandFeedbackScreen({winter:false}).replace('10일차',days+'일차').replace('출석 전','출석 완료').replace(/(data-today[^>]*>)/,'$1'+img('9f802.svg')).replace('day-mark today','day-mark done').replace('>출석하기<','>출석 완료<')+'</div>';
 }
 function attendance(milestone){
  return `<div class="md-screen">${mainBackdrop(milestone?7:6)}<div class="md-shade"></div><section class="md-dialog md-celebration" aria-label="출석 완료">${close()}${bear()}${milestone?'<span class="md-pill">7일 연속 출석</span>':''}<h2>${milestone?'꾸준함에 보상을 더해요':'출석 완료!'}</h2><p>${milestone?'일주일 동안 모은 출석, 선물이 도착했어요.':'6일 연속 출석했어요.'}</p><div class="md-rewards">${reward('ticket',milestone?'1+1장':'1장')}</div><div class="md-next"><span>다음 출석 보상</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div>${link('바로 오지빙글 돌리기','roulette-ready')}${link('마이랜드로','myland-feedback','md-text-link')}</section></div>`;
@@ -90,15 +95,10 @@ export function renderMyLandAttendanceFeedbackScreen(id,{character}={}){
  const art=character
   ? `<div class="md-attendance-art md-december-attendance">${decemberArt(character,decemberPoses[id])}</div>`
   : previousArt;
- return `<div class="md-screen md-attendance-feedback${milestone?' md-attendance-milestone':''}" data-figma-node="${milestone?'280:2935':'268:2638'}">${mainBackdrop(milestone?7:6)}<div class="md-shade"></div>${milestone?'<div class="md-attendance-rays" aria-hidden="true"></div>':''}<div class="md-attendance-confetti" aria-hidden="true">${decorative('confetti.png')}${decorative('confetti.png')}</div><section class="md-dialog md-attendance-dialog" aria-label="${milestone?'7일 연속 달성':'출석 완료'} · 피드백 반영본"><header class="md-attendance-heading">${milestone?'':'<span class="md-attendance-pill">6일 연속</span>'}<h2 class="${milestone?'md-attendance-ribbon':'md-attendance-title'}">${milestone?'<span>7일 연속 달성!</span>':'출석 완료!'}</h2><p class="md-attendance-earned">${decorative('ticket-icon.svg')}<strong>${milestone?'OG티켓 1+1장 획득!':'OG티켓 1장 획득!'}</strong></p></header>${art}<div class="md-next md-attendance-next"><span>${milestone?'다음 목표':'다음 출석보상'}</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div><div class="md-attendance-actions">${attendanceAction('닫기','myland-feedback','secondary')}${attendanceAction('오지빙글 돌리기','roulette-ready','primary')}</div></section></div>`;
+ return `<div class="md-screen md-attendance-feedback${milestone?' md-attendance-milestone':''}${character?' md-winter-screen':''}" data-figma-node="${milestone?'280:2935':'268:2638'}">${character?winterLandscape():mainBackdrop(milestone?7:6)}<div class="md-shade"></div>${milestone?'<div class="md-attendance-rays" aria-hidden="true"></div>':''}<div class="md-attendance-confetti" aria-hidden="true">${decorative('confetti.png')}${decorative('confetti.png')}</div><section class="md-dialog md-attendance-dialog" aria-label="${milestone?'7일 연속 달성':'출석 완료'} · 피드백 반영본"><header class="md-attendance-heading">${milestone?'':'<span class="md-attendance-pill">6일 연속</span>'}<h2 class="${milestone?'md-attendance-ribbon':'md-attendance-title'}">${milestone?'<span>7일 연속 달성!</span>':'출석 완료!'}</h2><p class="md-attendance-earned">${decorative('ticket-icon.svg')}<strong>${milestone?'OG티켓 1+1장 획득!':'OG티켓 1장 획득!'}</strong></p></header>${art}<div class="md-next md-attendance-next"><span>${milestone?'다음 목표':'다음 출석보상'}</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div><div class="md-attendance-actions">${attendanceAction('닫기','myland-feedback','secondary')}${attendanceAction('오지빙글 돌리기','roulette-ready','primary')}</div></section></div>`;
 }
 function attendanceFeedbackFigure(id){
  return `<figure class="md-review-figure"><figcaption>피드백 반영본 · 12월</figcaption><div class="md-review-host" data-myland-attendance-feedback="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css"><link rel="stylesheet" href="/v2/components/button.css"><link rel="stylesheet" href="/v2/myland-attendance-feedback.css">${renderMyLandAttendanceFeedbackScreen(id,{character:'bear'})}</template></div></figure>`;
-}
-function decemberPicker(id){
- const options=Object.entries(mascotNames).map(([key,label])=>`<option value="${key}">${label}</option>`).join('');
- return `<label class="md-mascot-control">12월 캐릭터 <select data-mascot-preview="${id}">${options}</select></label>`+
-  (id==='roulette-result'?'<p class="md-mascot-fallback" data-mascot-fallback hidden>너구리 룰렛 결과는 기본 인사로 임시 표시합니다.</p>':'');
 }
 const notes={
  'attendance-daily':'일반 출석: 티켓 1장. 6일 연속 출석한 경우를 예시로 구성했습니다.',
@@ -114,7 +114,7 @@ const notes={
  'limit-monthly':'월간 마일리지 한도 1,500 M 예시. 초과 후 티켓·배지 전환의 상세 지급 방식은 추가 확정이 필요합니다.'
 };
 export function renderMyLandDetailsReview(){
- return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}.md-mascot-control{display:inline-flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:700}.md-mascot-control select{font:inherit;min-height:36px;padding:3px 12px;border:1px solid var(--v2-workspace-edge);border-radius:8px}.md-mascot-fallback{margin:0 0 12px;color:var(--v2-workspace-muted)}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p>${decemberPoses[id]?decemberPicker(id):''}<div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${id==='limit-ticket'?'<link rel="stylesheet" href="/v2/components/button.css">':''}${renderMyLandDetailScreen(id,{character:id.endsWith('-result')?'bear':undefined})}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure>${id.startsWith('attendance-')?attendanceFeedbackFigure(id):''}</div></section>`)).join('');
+ return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}.md-mascot-control{display:inline-flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:700}.md-mascot-control select{font:inherit;min-height:36px;padding:3px 12px;border:1px solid var(--v2-workspace-edge);border-radius:8px}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p>${decemberPoses[id]?renderDecemberPicker(id):''}<div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${id==='limit-ticket'?'<link rel="stylesheet" href="/v2/components/button.css">':''}${renderMyLandDetailScreen(id,{character:id.endsWith('-result')?'bear':undefined})}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure>${id.startsWith('attendance-')?attendanceFeedbackFigure(id):''}</div></section>`)).join('');
 }
 export function setupMyLandDetails(root){
  for(const host of root.querySelectorAll('[data-myland-detail], [data-myland-attendance-feedback]')){
@@ -127,18 +127,7 @@ export function setupMyLandDetails(root){
    const action=event.target.closest('[data-myland-destination]');
    if(action)window.location.hash=action.dataset.mylandDestination;
   });
-  const mascot=shadow.querySelector('[data-december-pose]');
-  if(mascot){
-   const section=host.closest('section');
-   const select=section.querySelector('[data-mascot-preview]');
-   const fallback=section.querySelector('[data-mascot-fallback]');
-   select.addEventListener('change',()=>{
-    const character=select.value;
-    mascot.src=decemberMascotSrc(character,mascot.dataset.decemberPose);
-    mascot.alt='12월 '+mascotNames[character]+' 캐릭터';
-    if(fallback)fallback.hidden=character!=='raccoon';
-   });
-  }
+  setupDecemberPicker(host);
   const screen=shadow.querySelector('.md-screen');
   const resize=()=>{const scale=Math.min(1,host.clientWidth/390);screen.style.zoom=scale;host.style.height=844*scale+'px';};
   new ResizeObserver(resize).observe(host);resize();

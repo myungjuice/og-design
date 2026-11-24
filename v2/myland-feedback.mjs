@@ -1,4 +1,6 @@
 // 피그마 확정안: 주간 출석 C · 옐로·오렌지 231:2573. 원본 v1·v2와 분리한다.
+import {decemberMascotSrc, renderDecemberPicker, setupDecemberPicker, winterBackgroundSrc} from './mascot-preview.mjs';
+
 const asset='/assets/myland-final-20261015/';
 const picture=(file,cls='',alt='')=>'<img class="'+cls+'" src="'+asset+file+'" alt="'+alt+'">';
 const screenHeights={weekly:844};
@@ -10,8 +12,11 @@ function navigation(){
  ).join('')+'</nav>';
 }
 
-function hero(){
- return '<header class="hero">'+picture('c-background.png','park-scene','밝은 들판과 주택 앞에서 인사하는 곰 캐릭터')+'<div class="hero-copy"><h1>마이랜드</h1></div></header>';
+function hero(winter){
+ const scenery=winter
+  ? `<img class="park-scene" src="${winterBackgroundSrc}" alt=""><img class="hero-mascot" data-december-pose="greeting" src="${decemberMascotSrc('bear','greeting')}" alt="12월 곰 캐릭터">`
+  : picture('c-background.png','park-scene','밝은 들판과 주택 앞에서 인사하는 곰 캐릭터');
+ return '<header class="hero">'+scenery+'<div class="hero-copy"><h1>마이랜드</h1></div></header>';
 }
 
 const weekNames=['일','월','화','수','목','금','토'];
@@ -43,21 +48,21 @@ function missions(){
  ).join('')+'</div></section>';
 }
 
-export function renderMyLandFeedbackScreen(){
- return '<div class="screen weekly"><div class="screen-scroll" tabindex="0" aria-label="마이랜드 본문">'+hero()+'<div class="content">'+attendance()+games()+missions()+'</div></div>'+navigation()+'</div>';
+export function renderMyLandFeedbackScreen({winter=true}={}){
+ return '<div class="screen weekly'+(winter?' myland-winter':'')+'"><div class="screen-scroll" tabindex="0" aria-label="마이랜드 본문">'+hero(winter)+'<div class="content">'+attendance()+games()+missions()+'</div></div>'+navigation()+'</div>';
 }
 
 function frame(mode,label){
- return '<figure class="feedback-figure"><figcaption>'+label+'</figcaption><div class="feedback-host" data-myland-feedback-screen="'+mode+'"><template><link rel="stylesheet" href="/v2/myland-feedback.css">'+renderMyLandFeedbackScreen(mode)+'</template></div></figure>';
+ return '<figure class="feedback-figure"><figcaption>'+label+'</figcaption><div class="feedback-host" data-myland-feedback-screen="'+mode+'"><template><link rel="stylesheet" href="/v2/myland-feedback.css">'+renderMyLandFeedbackScreen()+'</template></div></figure>';
 }
 
 export function renderMyLandFeedbackReview(){
  return '<section id="myland-feedback" data-review-screen><style>.feedback-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr));gap:32px;align-items:start}.feedback-figure{margin:0;max-width:390px;min-width:0}.feedback-figure figcaption{font-weight:700;margin:0 0 16px}.feedback-host{width:100%;overflow:clip}.feedback-note{max-width:840px;line-height:1.65;color:var(--v2-workspace-muted)}</style>'+
   '<h2>마이랜드 확정안</h2><p class="feedback-note">주간 출석과 옐로·오렌지 미션 색상을 적용한 시안입니다.</p>'+
-  '<div class="feedback-grid">'+frame('weekly','주간 출석 · C안 옐로·오렌지')+'</div>'+
+  renderDecemberPicker('greeting')+'<div class="feedback-grid">'+frame('weekly','주간 출석 · C안 옐로·오렌지')+'</div>'+
   '<section class="feedback-summary" aria-label="수정 내용 요약"><style>.feedback-summary{max-width:840px;margin-top:36px;padding-top:24px;border-top:1px solid var(--v2-workspace-edge)}.feedback-summary h3{margin:0 0 12px;font-size:18px}.feedback-summary h3:not(:first-child){margin-top:24px}.feedback-summary ul{margin:0;padding-left:20px;line-height:1.65}.feedback-summary li+li{margin-top:8px}</style>'+
   '<h3>반영 사항</h3><ul>'+
-  '<li><b>배경</b> — 밝은 하늘·들판·주택과 캐릭터로 생동감 있는 3D 분위기를 구성했습니다.</li>'+
+  '<li><b>배경</b> — 상단에 겨울 풍경과 12월 캐릭터의 기본 인사를 배치했습니다.</li>'+
   '<li><b>주간 출석</b> — 주간형으로 확정하고, 오늘은 숫자 없는 빈 원으로 표시했습니다.</li>'+
   '<li><b>게임 카드</b> — 기존 입체 형태의 오지빙글·오지팡팡에 색상을 적용하고, 게임별 티켓 수량을 유지했습니다.</li>'+
   '<li><b>미션 색상</b> — 미션 바는 옐로·오렌지 그라데이션, 방문하기는 연한 옐로로 적용했습니다.</li>'+
@@ -71,6 +76,7 @@ export function setupMyLandFeedback(root){
   const shadow=host.attachShadow({mode:'open'});
   shadow.append(template.content.cloneNode(true));
   template.remove();
+  setupDecemberPicker(host);
   const screen=shadow.querySelector('.screen');
   const resize=()=>{
    const scale=Math.min(1,host.clientWidth/390);

@@ -49,3 +49,6 @@
 .park-fourth .gasong-interests{padding-top:14px;padding-bottom:12px;gap:10px}
 .park-fourth .gasong-category-row{height:auto}
 .park-fourth .gasong-category{gap:6px}
+
+.park-screen.park-fourth{background:#edf0fb url('/assets/mascot-20261124/backgrounds/winter.jpg') center top/cover no-repeat}
+.park-fourth .park-clouds,.park-fourth .park-forest{display:none}

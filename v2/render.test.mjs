@@ -64,8 +64,8 @@ test('my-info exposes one approved representative screen without pulling home or
  assert.doesNotMatch(html,/대표 화면 연결 예정|class="home-test"|class="barcode-test"/);
  const images=[...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(images.length>10);
- for(const key of ['bear','penguin','raccoon'])assert.ok(images.includes('/assets/mascot-20261123/base/'+key+'.jpg'));
- assert.ok(images.every(src=>src.startsWith('/assets/mascot-20261123/base/')||src.startsWith('/assets/gasong-contest-20261112/')||src.startsWith('/assets/figma-attendance-20261026/')||src.startsWith('/assets/figma-recent-visit-20261118/')||src.startsWith('/screens/my-info-3d-test/media/figma/')||src.startsWith('/assets/received-icons-20261017/')||src.startsWith('/assets/received-icons-20261022/')||src.startsWith('/assets/received-icons-20261105/')||src.startsWith('/assets/received-icons-20261110/')||src.startsWith('/assets/figma-home-20261020/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared and received assets resolve from the v2 route');
+ for(const key of ['bear','penguin','raccoon'])assert.ok(images.includes('/assets/mascot-20261124/base/'+key+'.png'));
+ assert.ok(images.every(src=>src.startsWith('/assets/mascot-20261124/base/')||src.startsWith('/assets/gasong-contest-20261112/')||src.startsWith('/assets/figma-attendance-20261026/')||src.startsWith('/assets/figma-recent-visit-20261118/')||src.startsWith('/screens/my-info-3d-test/media/figma/')||src.startsWith('/assets/received-icons-20261017/')||src.startsWith('/assets/received-icons-20261022/')||src.startsWith('/assets/received-icons-20261105/')||src.startsWith('/assets/received-icons-20261110/')||src.startsWith('/assets/figma-home-20261020/')||['/v2/my-info/assets/password-backspace.svg','/v2/my-info/assets/password-chevron.svg'].includes(src)),'shared and received assets resolve from the v2 route');
 });
 test('my-info presents only the approved representative screen with shared navigation styling',()=>{
  const html=renderWorkspace({pageId:'my-info'});
