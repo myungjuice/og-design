@@ -43,3 +43,8 @@
 @media(prefers-reduced-motion:reduce){.v2-character-choice:active{transform:none}}
 @media(max-width:350px){.v2-character-choice{gap:var(--v2-space-2);padding:var(--v2-space-3) calc(var(--v2-space-3) + 2px)}.v2-character-display{width:96px}.v2-character-copy>span{font-size:11px}}
 @media(forced-colors:active){.v2-character-choice{outline:1px solid ButtonText;box-shadow:none}.v2-character-choice[aria-checked="true"]{outline-color:Highlight}.v2-character-choice[aria-checked="true"] .v2-character-check{background:Highlight;color:HighlightText}.v2-character-choice .v2-character-art::before,.v2-character-display::before{display:none}}
+
+/* The supplied review JPGs have a white backdrop. Blend it into the card surface. */
+.v2-character-display:has([data-basic-skin]){mix-blend-mode:multiply}
+.v2-character-choice [data-basic-skin]{background-image:none}
+.v2-character-choice [data-basic-skin] img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}

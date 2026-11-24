@@ -1,5 +1,14 @@
 import {renderMyLandFeedbackScreen} from './myland-feedback.mjs';
 import {renderButton} from './components/render.mjs';
+import {decemberMascotSrc, mascotNames} from './mascot-preview.mjs';
+
+const decemberPoses={
+ 'attendance-daily':'attendance-complete',
+ 'attendance-milestone':'attendance-streak-7',
+ 'roulette-result':'roulette-result',
+ 'puzzle-result':'puzzle-result',
+};
+const decemberArt=(character,pose,cls='')=>`<img class="md-december-mascot ${cls}" data-december-pose="${pose}" src="${decemberMascotSrc(character,pose)}" alt="12월 ${mascotNames[character]} 캐릭터">`;
 
 // 화면 검토용 상태. 7일 보상은 11/13 피드백의 기본1+보너스1, 나머지 한도는 기획서 초안이며 실제 지급 로직과 무관하다.
 export const myLandDetailGroups=[
@@ -56,8 +65,10 @@ function puzzle(playing=false){
  if(playing)return scene(`${header('오지팡팡',2)}<div class="md-scoreboard"><div><span>현재 점수</span><strong>1,240</strong></div><div class="md-timer"><span>남은 시간</span><strong>0:42</strong></div></div><div class="md-time-track"><span></span></div><div class="md-combo">콤보 ×2 <b>+30</b></div><div class="md-board" aria-label="오지팡팡 플레이 화면 예시">${board.map((type,i)=>`<span class="md-cell ${[14,20,26].includes(i)?'matched':''}">${fruit(types[type],i)}</span>`).join('')}</div><div class="md-play-caption"><b>같은 과일을 3개 이상!</b><p>이웃한 과일을 바꾸어 맞춰보세요.</p></div>`,'md-puzzle md-playing');
  return scene(`${header('오지팡팡')}<div class="md-game-heading"><h1>맞출수록 쌓이는 즐거움</h1><p>과일을 맞추고 마일리지를 받아요.</p></div>${img('c-puzzle.png','md-puzzle-art','입체 오지팡팡 조각')}<section class="md-instructions"><div class="md-fruit-demo">${fruit('apple',0)}${fruit('apple',1)}${fruit('apple',2)}<b>+점수</b></div><p>이웃한 과일을 바꿔<br><b>같은 과일을 3개 이상</b> 연결하세요.</p><div class="md-puzzle-stats"><span>제한 시간<b>60초</b></span><span>최대 보상<b>50 M</b></span></div></section><div class="md-game-footer">${link(`${ticket()} 1장으로 오지팡팡 시작`,'puzzle-playing')}<p>내 티켓 <b>3장</b><i>·</i>오늘 남은 게임 <b>6회</b></p></div>`,'md-puzzle');
 }
-function result(puzzleResult=false){
- return scene(`${header(puzzleResult?'오지팡팡 결과':'오지빙글 결과',2)}<section class="md-result"><h1>${puzzleResult?'달콤한 보상을 받았어요':'마일리지를 받았어요'}</h1><div class="md-result-art">${bear()}${coin()}</div>${puzzleResult?'<div class="md-final-score"><span>최종 점수</span><strong>2,860</strong></div>':''}<div class="md-prize"><span>획득 마일리지</span><strong>+${puzzleResult?'35':'20'} M</strong></div><div class="md-result-summary"><span>남은 티켓 <b>2장</b></span><span>오늘 남은 게임 <b>5회</b></span></div>${link(`${ticket()} 1장으로 한 번 더`,puzzleResult?'puzzle-playing':'roulette-spinning')}${link('마이랜드로','myland-feedback','md-text-link')}</section>`,'md-result-screen');
+function result(puzzleResult=false,character){
+ const pose=puzzleResult?'puzzle-result':'roulette-result';
+ const art=character?decemberArt(character,pose,'md-bear'):bear()+coin();
+ return scene(`${header(puzzleResult?'오지팡팡 결과':'오지빙글 결과',2)}<section class="md-result"><h1>${puzzleResult?'달콤한 보상을 받았어요':'마일리지를 받았어요'}</h1><div class="md-result-art">${art}</div>${puzzleResult?'<div class="md-final-score"><span>최종 점수</span><strong>2,860</strong></div>':''}<div class="md-prize"><span>획득 마일리지</span><strong>+${puzzleResult?'35':'20'} M</strong></div><div class="md-result-summary"><span>남은 티켓 <b>2장</b></span><span>오늘 남은 게임 <b>5회</b></span></div>${link(`${ticket()} 1장으로 한 번 더`,puzzleResult?'puzzle-playing':'roulette-spinning')}${link('마이랜드로','myland-feedback','md-text-link')}</section>`,'md-result-screen');
 }
 function limit(kind){
  const data={ticket:['티켓이 부족해요','회원점에서 마일리지를 적립하거나 리뷰를 남기면 티켓을 드려요.','','가까운 회원점 찾기','/v2/home/'],daily:['오늘의 게임을 모두 즐겼어요','오늘도 함께해 주셔서 고마워요.','내일 다시 새로운 행운에 도전해요.','마이랜드로','myland-feedback'],monthly:['이번 달 마일리지를 모두 받았어요','이번 달 보상 1,500 M 달성!','이후에는 티켓·배지 보상으로 참여해요.','확인','myland-feedback']}[kind];
@@ -65,21 +76,29 @@ function limit(kind){
  const illustrationHTML=kind==='daily'?'':`<div class="md-limit-icon">${illustration}</div>`;
  return scene(`<div class="md-limit-background" inert aria-hidden="true">${header('오지빙글',kind==='ticket'?0:2)}${wheel()}</div><div class="md-shade"></div><section class="md-dialog md-limit" aria-label="${data[0]}">${close()}${illustrationHTML}<h2>${data[0]}</h2><p>${data[1]}<br>${data[2]}</p>${kind==='daily'?'<div class="md-limit-meter"><span>오늘 참여</span><b>6 / 6회</b></div>':kind==='monthly'?'<div class="md-limit-meter"><span>이번 달 획득</span><b>1,500 / 1,500 M</b></div>':wallet(0)}${link(data[3],data[4])}${kind==='ticket'?attendanceAction('닫기','roulette-ready','secondary'):''}</section>`,'md-limit-screen');
 }
-export function renderMyLandDetailScreen(id){
- const renders={'attendance-daily':()=>attendance(false),'attendance-milestone':()=>attendance(true),'roulette-ready':()=>roulette(false),'roulette-spinning':()=>roulette(true),'roulette-result':()=>result(false),'puzzle-ready':()=>puzzle(false),'puzzle-playing':()=>puzzle(true),'puzzle-result':()=>result(true),'limit-ticket':()=>limit('ticket'),'limit-daily':()=>limit('daily'),'limit-monthly':()=>limit('monthly')};
+export function renderMyLandDetailScreen(id,{character}={}){
+ const renders={'attendance-daily':()=>attendance(false),'attendance-milestone':()=>attendance(true),'roulette-ready':()=>roulette(false),'roulette-spinning':()=>roulette(true),'roulette-result':()=>result(false,character),'puzzle-ready':()=>puzzle(false),'puzzle-playing':()=>puzzle(true),'puzzle-result':()=>result(true,character),'limit-ticket':()=>limit('ticket'),'limit-daily':()=>limit('daily'),'limit-monthly':()=>limit('monthly')};
  if(!renders[id])throw new RangeError('Unknown MyLand detail: '+id);
  return renders[id]();
 }
-export function renderMyLandAttendanceFeedbackScreen(id){
+export function renderMyLandAttendanceFeedbackScreen(id,{character}={}){
  if(!['attendance-daily','attendance-milestone'].includes(id))throw new RangeError('Unknown attendance feedback: '+id);
  const milestone=id==='attendance-milestone';
  const assets='/assets/figma-attendance-20261026/';
  const decorative=file=>`<img src="${assets+file}" alt="" aria-hidden="true">`;
- const art=milestone?`<div class="md-attendance-art md-milestone-art"><div class="md-reward-confetti">${decorative('reward-confetti.svg')}${decorative('reward-confetti-small.svg')}${decorative('reward-confetti-tall.svg')}</div><img class="md-ticket-bear" src="${assets}bear-with-two-tickets-v1.png" alt="양손에 OG 티켓을 한 장씩 든 곰 캐릭터"></div>`:`<div class="md-attendance-art md-bear-gift"><img class="md-gift-bear" src="${assets}bear-with-gift.png" alt="선물 상자를 든 곰 캐릭터"><span class="md-gift-ticket-glow">${decorative('ticket-glow.svg')}</span><img class="md-gift-ticket" src="${assets}ticket.png" alt="선물 상자 위 OG 티켓"></div>`;
+ const previousArt=milestone?`<div class="md-attendance-art md-milestone-art"><div class="md-reward-confetti">${decorative('reward-confetti.svg')}${decorative('reward-confetti-small.svg')}${decorative('reward-confetti-tall.svg')}</div><img class="md-ticket-bear" src="${assets}bear-with-two-tickets-v1.png" alt="양손에 OG 티켓을 한 장씩 든 곰 캐릭터"></div>`:`<div class="md-attendance-art md-bear-gift"><img class="md-gift-bear" src="${assets}bear-with-gift.png" alt="선물 상자를 든 곰 캐릭터"><span class="md-gift-ticket-glow">${decorative('ticket-glow.svg')}</span><img class="md-gift-ticket" src="${assets}ticket.png" alt="선물 상자 위 OG 티켓"></div>`;
+ const art=character
+  ? `<div class="md-attendance-art md-december-attendance">${decemberArt(character,decemberPoses[id])}</div>`
+  : previousArt;
  return `<div class="md-screen md-attendance-feedback${milestone?' md-attendance-milestone':''}" data-figma-node="${milestone?'280:2935':'268:2638'}">${mainBackdrop(milestone?7:6)}<div class="md-shade"></div>${milestone?'<div class="md-attendance-rays" aria-hidden="true"></div>':''}<div class="md-attendance-confetti" aria-hidden="true">${decorative('confetti.png')}${decorative('confetti.png')}</div><section class="md-dialog md-attendance-dialog" aria-label="${milestone?'7일 연속 달성':'출석 완료'} · 피드백 반영본"><header class="md-attendance-heading">${milestone?'':'<span class="md-attendance-pill">6일 연속</span>'}<h2 class="${milestone?'md-attendance-ribbon':'md-attendance-title'}">${milestone?'<span>7일 연속 달성!</span>':'출석 완료!'}</h2><p class="md-attendance-earned">${decorative('ticket-icon.svg')}<strong>${milestone?'OG티켓 1+1장 획득!':'OG티켓 1장 획득!'}</strong></p></header>${art}<div class="md-next md-attendance-next"><span>${milestone?'다음 목표':'다음 출석보상'}</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div><div class="md-attendance-actions">${attendanceAction('닫기','myland-feedback','secondary')}${attendanceAction('오지빙글 돌리기','roulette-ready','primary')}</div></section></div>`;
 }
 function attendanceFeedbackFigure(id){
- return `<figure class="md-review-figure"><figcaption>피드백 반영본</figcaption><div class="md-review-host" data-myland-attendance-feedback="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css"><link rel="stylesheet" href="/v2/components/button.css"><link rel="stylesheet" href="/v2/myland-attendance-feedback.css">${renderMyLandAttendanceFeedbackScreen(id)}</template></div><p>${id==='attendance-milestone'?'7일 출석 보상 1+1장에 맞춰 양손에 티켓을 한 장씩 든 곰 이미지를 적용했습니다. 시안 공유용 1종입니다.':'피그마 수정안의 보라색 제목·선물 상자를 든 곰과 티켓·모달 바깥 폭죽을 반영했습니다.'}</p></figure>`;
+ return `<figure class="md-review-figure"><figcaption>피드백 반영본 · 12월</figcaption><div class="md-review-host" data-myland-attendance-feedback="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css"><link rel="stylesheet" href="/v2/components/button.css"><link rel="stylesheet" href="/v2/myland-attendance-feedback.css">${renderMyLandAttendanceFeedbackScreen(id,{character:'bear'})}</template></div></figure>`;
+}
+function decemberPicker(id){
+ const options=Object.entries(mascotNames).map(([key,label])=>`<option value="${key}">${label}</option>`).join('');
+ return `<label class="md-mascot-control">12월 캐릭터 <select data-mascot-preview="${id}">${options}</select></label>`+
+  (id==='roulette-result'?'<p class="md-mascot-fallback" data-mascot-fallback hidden>너구리 룰렛 결과는 기본 인사로 임시 표시합니다.</p>':'');
 }
 const notes={
  'attendance-daily':'일반 출석: 티켓 1장. 6일 연속 출석한 경우를 예시로 구성했습니다.',
@@ -95,7 +114,7 @@ const notes={
  'limit-monthly':'월간 마일리지 한도 1,500 M 예시. 초과 후 티켓·배지 전환의 상세 지급 방식은 추가 확정이 필요합니다.'
 };
 export function renderMyLandDetailsReview(){
- return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p><div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${id==='limit-ticket'?'<link rel="stylesheet" href="/v2/components/button.css">':''}${renderMyLandDetailScreen(id)}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure>${id.startsWith('attendance-')?attendanceFeedbackFigure(id):''}</div></section>`)).join('');
+ return '<style>.md-review-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.md-review-figure{margin:0;width:390px;max-width:100%;min-width:0}.md-review-figure figcaption{margin:0 0 12px;font-weight:700}.md-review-host{width:100%;overflow:clip}.md-review-note{max-width:780px;line-height:1.7;color:var(--v2-workspace-muted)}.md-review-figure>p{line-height:1.6;font-size:14px;color:var(--v2-workspace-muted)}.md-review-section{margin-bottom:40px}.md-mascot-control{display:inline-flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:700}.md-mascot-control select{font:inherit;min-height:36px;padding:3px 12px;border:1px solid var(--v2-workspace-edge);border-radius:8px}.md-mascot-fallback{margin:0 0 12px;color:var(--v2-workspace-muted)}</style>'+myLandDetailGroups.flatMap(group=>group.items.map(({id,label})=>`<section id="${id}" data-review-screen class="md-review-section"><h2>${group.label} · ${label}</h2><p class="md-review-note">C안 확장 · 화면 검토용 시안입니다. 보상·확률·한도는 기획서 초안의 예시값이며 정책 확정 후 조정합니다.</p>${decemberPoses[id]?decemberPicker(id):''}<div class="md-review-grid"><figure class="md-review-figure"><figcaption>${label} · 390 × 844</figcaption><div class="md-review-host" data-myland-detail="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css">${id==='limit-ticket'?'<link rel="stylesheet" href="/v2/components/button.css">':''}${renderMyLandDetailScreen(id,{character:id.endsWith('-result')?'bear':undefined})}</template></div><p>${notes[id]}</p>${id==='roulette-spinning'?link('결과 시안 보기 →','roulette-result','md-review-next'):id==='puzzle-playing'?link('결과 시안 보기 →','puzzle-result','md-review-next'):''}</figure>${id.startsWith('attendance-')?attendanceFeedbackFigure(id):''}</div></section>`)).join('');
 }
 export function setupMyLandDetails(root){
  for(const host of root.querySelectorAll('[data-myland-detail], [data-myland-attendance-feedback]')){
@@ -108,6 +127,18 @@ export function setupMyLandDetails(root){
    const action=event.target.closest('[data-myland-destination]');
    if(action)window.location.hash=action.dataset.mylandDestination;
   });
+  const mascot=shadow.querySelector('[data-december-pose]');
+  if(mascot){
+   const section=host.closest('section');
+   const select=section.querySelector('[data-mascot-preview]');
+   const fallback=section.querySelector('[data-mascot-fallback]');
+   select.addEventListener('change',()=>{
+    const character=select.value;
+    mascot.src=decemberMascotSrc(character,mascot.dataset.decemberPose);
+    mascot.alt='12월 '+mascotNames[character]+' 캐릭터';
+    if(fallback)fallback.hidden=character!=='raccoon';
+   });
+  }
   const screen=shadow.querySelector('.md-screen');
   const resize=()=>{const scale=Math.min(1,host.clientWidth/390);screen.style.zoom=scale;host.style.height=844*scale+'px';};
   new ResizeObserver(resize).observe(host);resize();

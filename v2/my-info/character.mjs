@@ -1,6 +1,7 @@
 import {renderMyInfoTest} from '../../screens/my-info-3d-test/render.mjs';
 import {renderMileage} from '../components/mileage.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
+import {mascotBaseSrc} from '../mascot-preview.mjs';
 
 export const characterOptions=Object.freeze([
  {key:'bear',label:'곰',description:'느긋하고 든든한 친구'},
@@ -34,7 +35,7 @@ export function renderCharacterMain({selected=null}={}){
 }
 export function renderCharacterSelection({selected=null}={}){
  if(selected!==null)option(selected);
- const cards=characterOptions.map((value,i)=>'<button type="button" class="v2-character-choice" role="radio" aria-checked="'+(selected===value.key)+'" tabindex="'+(selected?selected===value.key?0:-1:i===0?0:-1)+'" data-character-choice="'+value.key+'"><span class="v2-character-display" aria-hidden="true">'+renderCharacterArt(value.key,{decorative:true})+'</span><span class="v2-character-copy"><strong>'+value.label+'</strong><span>'+value.description+'</span></span><span class="v2-character-check" aria-hidden="true">'+check+'</span></button>').join('');
+ const cards=characterOptions.map((value,i)=>'<button type="button" class="v2-character-choice" role="radio" aria-checked="'+(selected===value.key)+'" tabindex="'+(selected?selected===value.key?0:-1:i===0?0:-1)+'" data-character-choice="'+value.key+'"><span class="v2-character-display" aria-hidden="true">'+'<span class="v2-character-art" data-basic-skin><img src="'+mascotBaseSrc(value.key)+'" alt=""></span>'+'</span><span class="v2-character-copy"><strong>'+value.label+'</strong><span>'+value.description+'</span></span><span class="v2-character-check" aria-hidden="true">'+check+'</span></button>').join('');
  return '<section class="v2-character-screen" aria-label="프로필 캐릭터 선택"><header class="v2-character-header"><button type="button" class="v2-character-back" data-character-return aria-label="내정보 미리보기로 돌아가기">'+svg('<path d="m15 18-6-6 6-6"/>')+'</button><h2>프로필 캐릭터</h2><span aria-hidden="true"></span></header><div class="v2-character-body"><h3>함께할 친구를 골라주세요</h3><p>언제든지 바꿀 수 있어요</p><div class="v2-character-options" role="radiogroup" aria-label="프로필 캐릭터">'+cards+'</div><p class="v2-character-status" role="status" aria-live="polite">'+(selected?selectionMessage(selected):'캐릭터를 누르면 바로 선택돼요.')+'</p></div></section>';
 }
 const mainCSS=['/screens/my-info-3d-test/styles.css','/v2/components/mileage.css','/v2/my-info/screen.css','/v2/components/bottom-navigation.css','/v2/my-info/character.css','/v2/received-icons.css'];

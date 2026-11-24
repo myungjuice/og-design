@@ -79,3 +79,7 @@
 }
 
 .md-limit>.v2-button{display:block;width:100%;margin-top:12px}
+
+/* Review assets retain their JPEGs. The white backdrop blends into the light surface. */
+.md-december-mascot{display:block;object-fit:contain;mix-blend-mode:multiply}
+.md-result-art>.md-december-mascot{width:100%;height:100%}
