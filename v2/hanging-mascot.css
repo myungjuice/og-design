@@ -1,0 +1,23 @@
+/* December profile art is cropped just below the paws, so they overlap the edge. */
+.profile-balance{position:relative}
+.my-info-test:not([data-character-value=""]) .profile-avatar{display:none}
+.my-info-test:not([data-character-value=""]) .profile-balance::before,
+[data-hanging-home] [data-figma-navigation]::before{
+ content:"";
+ position:absolute;
+ top:0;
+ z-index:2;
+ aspect-ratio:306/260;
+ background:var(--hanging-mascot) center/contain no-repeat;
+ pointer-events:none;
+}
+.my-info-test:not([data-character-value=""]) .profile-balance::before{
+ width:102px;
+ left:73%;
+ transform:translate(-50%,-91.5%);
+}
+[data-hanging-home] [data-figma-navigation]::before{
+ width:53px;
+ left:10px;
+ transform:translateY(-91.5%);
+}

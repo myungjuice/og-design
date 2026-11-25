@@ -41,6 +41,12 @@ export function setupResponsiveMenu(root) {
   }
  });
 }
+import {previewCharacter,showHangingCharacter} from './mascot-preview.mjs';
+if(['my-info','home'].includes(document.body.dataset.page)){
+ const restore=()=>showHangingCharacter(previewCharacter()||'bear');
+ restore();
+ window.addEventListener('pageshow',restore);
+}
 const root=document.querySelector('#v2-root');
 root.innerHTML=renderWorkspace({pageId:document.body.dataset.page});
 setupResponsiveMenu(root);

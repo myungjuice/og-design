@@ -1,7 +1,7 @@
 import {renderMyInfoTest} from '../../screens/my-info-3d-test/render.mjs';
-import {renderMileage} from '../components/mileage.mjs';
+import {renderProfileBalance} from './profile-balance.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
-import {mascotBaseSrc} from '../mascot-preview.mjs';
+import {mascotBaseSrc,previewCharacter,selectPreviewCharacter} from '../mascot-preview.mjs';
 
 export const characterOptions=Object.freeze([
  {key:'bear',label:'곰',description:'느긋하고 든든한 친구'},
@@ -24,7 +24,7 @@ function avatar(key){
 }
 export function renderCharacterMain({selected=null}={}){
  if(selected!==null)option(selected);
- let html=renderMyInfoTest({assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderMileage});
+ let html=renderMyInfoTest({assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderProfileBalance});
  const start=html.indexOf('<span class="profile-avatar"'),end=html.indexOf('<div><h1>',start);
  if(start<0||end<0)throw new Error('Profile avatar boundary changed');
  html=html.slice(0,start)+avatar(selected)+html.slice(end);
@@ -41,7 +41,7 @@ export function renderCharacterSelection({selected=null}={}){
 const mainCSS=['/screens/my-info-3d-test/styles.css','/v2/components/mileage.css','/v2/my-info/screen.css','/v2/components/bottom-navigation.css','/v2/my-info/character.css','/v2/received-icons.css'];
 const links=paths=>paths.map(path=>'<link rel="stylesheet" href="'+path+'">').join('');
 export function renderCharacterReview(){
- return '<section id="profile-character" data-review-screen aria-labelledby="profile-character-title" hidden><h2 id="profile-character-title">프로필 캐릭터</h2><p class="v2-intro">캐릭터를 선택하지 않은 내정보와 곰·펭귄·너구리 선택 화면입니다. 가입 시 선택을 강제하지 않고 내정보에서 선택하거나 변경합니다.</p><div class="v2-reservation-review-grid v2-character-review-grid"><figure class="v2-reservation-review-sample"><figcaption>캐릭터 미선택 · 내정보</figcaption><div class="v2-character-main-host"></div></figure><figure class="v2-reservation-review-sample"><figcaption>캐릭터 선택 · 한 번 탭으로 적용</figcaption><div class="v2-character-selection-host"><template data-character-template>'+links(['/v2/my-info/character.css'])+renderCharacterSelection()+'</template></div></figure></div><p class="v2-intro">선택한 캐릭터는 이 화면의 아바타와 멤버십 회원증에 반영됩니다. 실제 회원정보는 저장하지 않으며 파츠 꾸미기는 포함하지 않습니다.</p></section>';
+ return '<section id="profile-character" data-review-screen aria-labelledby="profile-character-title" hidden><h2 id="profile-character-title">프로필 캐릭터</h2><p class="v2-intro">캐릭터를 선택하지 않은 내정보와 곰·펭귄·너구리 선택 화면입니다. 가입 시 선택을 강제하지 않고 내정보에서 선택하거나 변경합니다.</p><div class="v2-reservation-review-grid v2-character-review-grid"><figure class="v2-reservation-review-sample"><figcaption>캐릭터 미선택 · 내정보</figcaption><div class="v2-character-main-host"></div></figure><figure class="v2-reservation-review-sample"><figcaption>캐릭터 선택 · 한 번 탭으로 적용</figcaption><div class="v2-character-selection-host"><template data-character-template>'+links(['/v2/my-info/character.css'])+renderCharacterSelection()+'</template></div></figure></div><p class="v2-intro">선택한 캐릭터는 내정보 마일리지 카드와 홈 하단 메뉴에 매달리고 멤버십 회원증에도 표시됩니다. 실제 회원정보는 저장하지 않으며 파츠 꾸미기는 포함하지 않습니다.</p></section>';
 }
 export function setupCharacterReview(root){
  const section=root.querySelector('#profile-character');if(!section||section.dataset.characterReady)return;
@@ -53,6 +53,8 @@ export function setupCharacterReview(root){
  choice.append(choiceHost.querySelector('template').content.cloneNode(true));choiceHost.querySelector('template').remove();
  const choose=key=>{
   const value=option(key);selected=key;
+  selectPreviewCharacter(key);
+  section.querySelector('figcaption').textContent=value.label+' 선택 · 내정보';
   for(const card of choice.querySelectorAll('[data-character-choice]')){const current=card.dataset.characterChoice===key;card.setAttribute('aria-checked',String(current));card.tabIndex=current?0:-1;}
   choice.querySelector('.v2-character-status').textContent=selectionMessage(value.key);
   const frame=main.querySelector('.v2-character-main');frame.dataset.characterValue=key;
@@ -60,7 +62,8 @@ export function setupCharacterReview(root){
   frame.querySelector('.profile-edit').innerHTML='캐릭터 변경하기 <span aria-hidden="true">›</span>';
   root.dispatchEvent(new CustomEvent('v2-character-preview-change',{detail:{selected:key}}));
  };
- choice.addEventListener('click',event=>{const card=event.target.closest('[data-character-choice]');if(card)choose(card.dataset.characterChoice);if(event.target.closest('[data-character-return]'))main.querySelector('.v2-character-avatar').focus();});
+ const saved=previewCharacter();if(saved)choose(saved);
+ choice.addEventListener('click',event=>{const card=event.target.closest('[data-character-choice]');if(card)choose(card.dataset.characterChoice);if(event.target.closest('[data-character-return]'))main.querySelector(selected?'.profile-edit':'.v2-character-avatar').focus();});
  choice.addEventListener('keydown',event=>{
   const card=event.target.closest('[data-character-choice]');if(!card||!['ArrowDown','ArrowRight','ArrowUp','ArrowLeft','Home','End'].includes(event.key))return;
   event.preventDefault();const i=characterOptions.findIndex(c=>c.key===card.dataset.characterChoice);

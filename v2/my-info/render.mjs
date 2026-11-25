@@ -1,5 +1,5 @@
 import {renderMyInfoTest} from '../../screens/my-info-3d-test/render.mjs';
-import {renderMileage} from '../components/mileage.mjs';
+import {renderProfileBalance} from './profile-balance.mjs';
 import {previewDialog} from '../components/screen-preview.mjs';
 export {renderMileageHistoryReview} from './mileage.mjs';
 export {renderUseHistoryReview} from './use-history.mjs';
@@ -18,7 +18,7 @@ export {renderReviewWritingReview} from './review-writing.mjs';
 export {renderCharacterReview} from './character.mjs';
 
 export function renderMyInfoPreview(){
- const screen=renderMyInfoTest({assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderMileage});
+ const screen=renderMyInfoTest({assetBase:'/screens/my-info-3d-test/media/figma/',renderBalance:renderProfileBalance});
  return `<p class="v2-intro">마일리지와 최근 방문 내역, 주요 메뉴를 한눈에 확인하는 화면입니다.</p>
  <div class="v2-screen-stage"><div class="v2-screen-host"><template data-screen-template>
  <link rel="stylesheet" href="/screens/my-info-3d-test/styles.css">

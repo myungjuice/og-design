@@ -11,6 +11,21 @@ export function decemberMascotSrc(character,pose){
  return root+'months/12/'+character+'/'+pose+'.png';
 }
 
+const selectionKey='og-design:december-character';
+export function previewCharacter(){
+ try{
+  const key=sessionStorage.getItem(selectionKey);
+  return Object.hasOwn(mascotNames,key)?key:null;
+ }catch{return null;}
+}
+export function showHangingCharacter(key){
+ document.documentElement.style.setProperty('--hanging-mascot','url("'+decemberMascotSrc(key,'profile-hanging')+'")');
+}
+export function selectPreviewCharacter(key){
+ showHangingCharacter(key);
+ try{sessionStorage.setItem(selectionKey,key);}catch{/* The current page still previews the selection. */}
+}
+
 export function renderDecemberPicker(id){
  const options=Object.entries(mascotNames).map(([key,label])=>`<option value="${key}">${label}</option>`).join('');
  return `<label class="md-mascot-control">12월 캐릭터 <select data-mascot-preview="${id}">${options}</select></label>`;

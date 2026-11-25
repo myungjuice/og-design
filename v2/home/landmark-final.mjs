@@ -11,6 +11,7 @@ export function renderFinalLandmarkPin(selected,{wrapped=false}={}){
 export function renderFinalLandmarkMap({wrapped=false}={}){
  const markers=`<div class="home-map-pins"><div class="landmark-final-first">${renderFinalLandmarkPin(false,{wrapped})}</div><div class="landmark-final-second">${renderFinalLandmarkPin(true,{wrapped})}</div></div><div class="home-map-actions">`;
  return renderLatestLandmarkMap({crownStyle:'gold-neon'})
+  .replace('data-figma-home',wrapped?'data-figma-home data-hanging-home':'data-figma-home')
   .replace('data-landmark-comparison="gold-neon"',`data-landmark-comparison="${wrapped?'fourth':'final'}"`)
   .replace(/<div class="home-map-pins">[\s\S]*?<\/div><div class="home-map-actions">/,markers);
 }

@@ -1,3 +1,4 @@
+@import url('/v2/hanging-mascot.css');
 /* Hallmark · supplied Figma 144:1491 · map explorer, exact asset layers and geometry
  * pre-emit critique: P5 H5 E5 S5 R5 V4 */
 :host{--figma-home-surface:#fff;--figma-home-ink:#344468;--figma-home-muted:#526386;--figma-home-action:#5251e3;--figma-home-edge:#dbdbdb;--figma-home-search-bottom:#dee9f9;--figma-home-search-shade:#a9c2ec;--figma-home-search-contact:#54638338;--figma-home-clear:transparent;--figma-home-sky:#d9eafc;--figma-home-contact:#00000040;--figma-home-quick-light:#9aa8ffcc;--figma-home-quick-shade:#403fb0;--figma-home-font:'OG V2 Pretendard',sans-serif;--figma-home-search-font:'Noto Sans KR','OG V2 Pretendard',sans-serif}
