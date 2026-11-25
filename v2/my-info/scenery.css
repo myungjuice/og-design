@@ -7,3 +7,17 @@
 
 /* Figma 360:3974: label 14px, ticket 14px, group gaps 4px / 2px. */
 .my-info-test .review-write{gap:4px;padding:8px;border-radius:8px;background:#f2edff;color:var(--v2-action,#5251e3);font-size:14px;font-weight:400;line-height:17px}.my-info-test .review-write .review-reward{display:inline-flex;align-items:center;gap:2px;max-width:none}.my-info-test .review-write img{width:14px;height:14px;flex:none}.my-info-test .review-write b{font-weight:400}
+
+.my-info-test .profile-balance { position: relative; }
+.my-info-test .profile-balance::after {
+ content: "";
+ position: absolute;
+ z-index: 1;
+ top: -8px;
+ left: 4px;
+ right: 4px;
+ height: 19px;
+ background: url('/assets/mascot-20261124/backgrounds/card-snow.png') center / 100% 100% no-repeat;
+ filter: drop-shadow(0 2px 1.5px rgb(82 91 152 / 21%));
+ pointer-events: none;
+}

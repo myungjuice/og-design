@@ -16,7 +16,10 @@ function hero(winter){
  const scenery=winter
   ? `<img class="park-scene" src="${winterBackgroundSrc}" alt=""><img class="hero-mascot" data-december-pose="greeting" src="${decemberMascotSrc('bear','greeting')}" alt="12월 곰 캐릭터">`
   : picture('c-background.png','park-scene','밝은 들판과 주택 앞에서 인사하는 곰 캐릭터');
- return '<header class="hero">'+scenery+'<div class="hero-copy"><h1>마이랜드</h1></div></header>';
+ const heading=winter
+  ? '<span class="hero-label">오지고랜드</span><h1>맑은 땅콩 님,<br>오늘도 출석해 볼까요?</h1>'
+  : '<h1>마이랜드</h1>';
+ return '<header class="hero">'+scenery+'<div class="hero-copy">'+heading+'</div></header>';
 }
 
 const weekNames=['일','월','화','수','목','금','토'];
@@ -36,7 +39,7 @@ function attendance(){
 }
 
 function games(){
- return '<h2 class="lucky-title">오지럭키</h2><div class="games">'+[['오지빙글','c-roulette.png','roulette'],['오지팡팡','c-puzzle.png','puzzle']].map(item=>
+ return '<div class="games" role="group" aria-label="마이랜드 게임">'+[['오지빙글','c-roulette.png','roulette'],['오지팡팡','c-puzzle.png','puzzle']].map(item=>
   '<section class="game '+item[2]+'"><div class="game-copy"><b>'+item[0]+'</b><span class="ticket-count">'+picture('70418.svg')+'<strong>57</strong></span></div>'+picture(item[1],'game-art',item[0])+'</section>'
  ).join('')+'</div>';
 }
@@ -44,7 +47,7 @@ function games(){
 function missions(){
  const rows=[['마이랜드 방문하기','','+10M'],['오지빙글 2회 돌리기','1/2','방문하기'],['회원점 1곳에서 적립하기','3티켓','방문하기'],['공유인 1명 초대하기','','공유하기']];
  return '<section class="missions card"><header><b>이번주 미션</b><strong>1<span>/4</span></strong></header><div class="progress" aria-label="미션 4개 중 1개 완료"><span></span></div><div class="mission-list">'+rows.map((row,index)=>
-  '<div class="mission'+(index===0?' complete':'')+'"><span class="mission-icon">'+picture('28c82.svg')+'<span class="mission-status" aria-label="'+(index===0?'완료':'진행 중')+'">'+picture('b2e4e.svg')+'</span></span><span class="mission-label"><span>'+row[0]+'</span>'+(index===0?'<em class="complete-label">완료</em>':row[1]?'<em>'+row[1]+'</em>':'')+'</span><span class="mission-action'+(index===0?' mileage':'')+'">'+row[2]+'</span></div>'
+  '<div class="mission'+(index===0?' complete':'')+'"><span class="mission-check" role="img" aria-label="'+(index===0?'완료':'미완료')+'"></span><span class="mission-label"><span>'+row[0]+'</span>'+(index===0?'<em class="complete-label">완료</em>':row[1]?'<em>'+row[1]+'</em>':'')+'</span><span class="mission-action'+(index===0?' mileage':'')+'">'+row[2]+'</span></div>'
  ).join('')+'</div></section>';
 }
 

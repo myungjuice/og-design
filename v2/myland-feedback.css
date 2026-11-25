@@ -11,7 +11,7 @@
  --barcode-fill:linear-gradient(126.87deg,#a4a0ff 0%,#4941cb 71.429%);
  --progress-fill:linear-gradient(90deg,#ffe18a,#ffb56f);
  --ticket-label:#87234f;--badge-fill:#ffffffb3;--progress-track:#ebebeb;
- --mission-icon:#e4eaff;--mission-status:#a1a9ba;--mission-complete:#5251e3;
+ --mission-complete:#5251e3;
  --mission-tag:#edeeff;--complete-tag:#fff7db;--complete-ink:#76541b;--visit:#ffe5a2;--visit-ink:#72501b;
  --font-screen:'OG V2 Pretendard','Noto Sans KR',sans-serif;
  color:var(--ink);
@@ -86,9 +86,32 @@ h1,p{margin:0}
 .progress span{display:block;width:25%;height:100%;border-radius:99px;background:var(--progress-fill)}
 .mission-list{display:flex;flex-direction:column;gap:6px}
 .mission{display:flex;align-items:center;height:46px;gap:7px}
-.mission-icon{position:relative;display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:8px;background:var(--mission-icon)}
-.mission-status{position:absolute;right:-1.8px;bottom:-1.8px;display:grid;place-items:center;width:9.6px;height:9.6px;border:1px solid var(--paper);border-radius:50%;background:var(--mission-status)}
-.complete .mission-status{background:var(--mission-complete)}
+.mission-check {
+ display: grid;
+ place-items: center;
+ flex: none;
+ width: 18px;
+ height: 18px;
+ border: 1.5px solid #969cab;
+ border-radius: 5px;
+ background: white;
+}
+.mission.complete .mission-check {
+ background: var(--v2-action, var(--violet));
+ border-color: var(--v2-action, var(--violet));
+}
+.mission.complete .mission-check::after {
+ content: "";
+ width: 7px;
+ height: 4px;
+ border: solid white;
+ border-width: 0 0 2px 2px;
+ transform: translateY(-1px) rotate(-45deg);
+}
+.mission.complete .mission-label > span {
+ color: var(--muted);
+ text-decoration: line-through;
+}
 .mission-label{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;font-size:14px;line-height:20px}
 .mission-label>span{white-space:nowrap}
 .mission-label em{font-size:10px;line-height:14px;font-style:normal;color:var(--violet);background:var(--mission-tag);border-radius:4px;padding:1px 3px}
@@ -105,8 +128,30 @@ h1,p{margin:0}
 .nav-item.barcode{position:relative;top:-32px}
 .nav-item.barcode>span{width:64px;height:64px;border-radius:50%;border:4px solid var(--paper);background:var(--barcode-fill)}
 
-.lucky-title{font-size:18px;line-height:24px;margin:14px 20px 8px;font-weight:700}
 .myland-winter{--screen:#edf0fb}
-.myland-winter .park-scene{object-position:center 77%;mask-image:linear-gradient(#000 80%,transparent)}
-.myland-winter .hero-mascot{position:absolute;top:7px;right:32px;width:132px;height:139px;object-fit:contain}
-.myland-winter .hero-copy h1{color:var(--ink);text-shadow:0 1px 4px #fffd}
+.myland-winter .hero{height:230px}
+.myland-winter .park-scene{height:100%;object-position:center 77%;mask-image:linear-gradient(#000 80%,transparent)}
+.myland-winter .hero-mascot{position:absolute;bottom:12px;right:19px;width:150px;height:174px;object-fit:contain}
+.myland-winter .hero-copy{top:48px;left:20px}
+.myland-winter .hero-label{
+ display:inline-block;padding:3px 10px;border-radius:14px;
+ background:#fffffff0;color:var(--violet);font-size:13px;font-weight:700;
+}
+.myland-winter .hero-copy h1{
+ margin-top:9px;color:var(--ink);font-size:21px;line-height:1.35;
+ letter-spacing:-.65px;text-shadow:0 1px 4px #fffd;
+}
+
+.myland-winter .attendance { position: relative; }
+.myland-winter .attendance::after {
+ content: "";
+ position: absolute;
+ z-index: 1;
+ top: -8px;
+ left: 4px;
+ right: 4px;
+ height: 19px;
+ background: url('/assets/mascot-20261124/backgrounds/card-snow.png') center / 100% 100% no-repeat;
+ filter: drop-shadow(0 2px 1.5px rgb(82 91 152 / 21%));
+ pointer-events: none;
+}

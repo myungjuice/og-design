@@ -12,12 +12,12 @@
  pointer-events:none;
 }
 .my-info-test:not([data-character-value=""]) .profile-balance::before{
- width:102px;
- left:73%;
+ width:146px;
+ left:63%;
  transform:translate(-50%,-91.5%);
 }
 [data-hanging-home] [data-figma-navigation]::before{
- width:53px;
- left:10px;
+ width:78px;
+ left:4px;
  transform:translateY(-91.5%);
 }
