@@ -23,7 +23,7 @@ const base=process.env.V2_BASE_URL||'http://127.0.0.1:4173';
    for(const key of ['bear','penguin','raccoon']){
     await selection.locator('[data-character-choice="'+key+'"]').click();
     assert.equal(await selection.locator('[aria-checked="true"]').getAttribute('data-character-choice'),key);
-    assert.equal(await selection.locator('.v2-character-status').innerText(),({bear:'곰을',penguin:'펭귄을',raccoon:'너구리를'})[key]+' 선택했어요.');
+    assert.equal(await selection.locator('.v2-character-status').innerText(),({bear:'베리를',penguin:'피노를',raccoon:'너그를'})[key]+' 선택했어요.');
     const material=await selection.locator('[aria-checked="true"]').evaluate(card=>{const style=getComputedStyle(card),frame=card.getBoundingClientRect(),art=card.querySelector('.v2-character-art').getBoundingClientRect(),check=card.querySelector('.v2-character-check').getBoundingClientRect();return {fill:style.backgroundImage,shadow:style.boxShadow,left:art.left-frame.left,right:frame.right-check.right,artFill:getComputedStyle(card.querySelector('.v2-character-art')).backgroundImage};});
     assert.match(material.fill,/linear-gradient/,'selected card keeps a modeled face rather than only a flat outline');
     assert.notEqual(material.shadow,'none');assert.ok(Math.abs(material.left-material.right)<=1,'balanced art/check insets');

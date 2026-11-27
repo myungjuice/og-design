@@ -130,8 +130,8 @@ h1,p{margin:0}
 
 .myland-winter{--screen:#edf0fb}
 .myland-winter .hero{height:230px}
-.myland-winter .park-scene{height:100%;object-position:center 77%;mask-image:linear-gradient(#000 80%,transparent)}
-.myland-winter .hero-mascot{position:absolute;bottom:12px;right:19px;width:150px;height:174px;object-fit:contain}
+.myland-winter .park-scene{height:100%;object-position:center 67%;mask-image:linear-gradient(#000 80%,transparent)}
+.myland-winter .hero-mascot{position:absolute;bottom:-7px;left:64%;transform:translateX(-50%);width:auto;height:198px;object-fit:contain}
 .myland-winter .hero-copy{top:48px;left:20px}
 .myland-winter .hero-label{
  display:inline-block;padding:3px 10px;border-radius:14px;
@@ -155,3 +155,23 @@ h1,p{margin:0}
  filter: drop-shadow(0 2px 1.5px rgb(82 91 152 / 21%));
  pointer-events: none;
 }
+
+.md-fruit{--fruit-light:#ffbdad;--fruit-mid:#f37782;--fruit-dark:#c94765}
+.md-fruit.orange{--fruit-light:#ffe6a6;--fruit-mid:#ffbd60;--fruit-dark:#df8538}
+.md-fruit.grape{--fruit-light:#e4ceff;--fruit-mid:#a28aeb;--fruit-dark:#7250b4}
+.md-fruit.pear{--fruit-light:#eef9b6;--fruit-mid:#bdd77a;--fruit-dark:#839d43}
+.fruit-light{stop-color:var(--fruit-light)}
+.fruit-mid{stop-color:var(--fruit-mid)}
+.fruit-dark{stop-color:var(--fruit-dark)}
+.leaf-light{stop-color:#bbd889}
+.leaf-dark{stop-color:#4c7d4d}
+.fruit-shine{fill:none;stroke:#ffffff9c;stroke-width:3;stroke-linecap:round}
+.game-fruits { pointer-events:none; }
+.game-fruits .md-fruit {
+ position:absolute; width:48px; height:48px;
+ filter:drop-shadow(0 3px 2px #42347740);
+}
+.game-fruits .pear { top:12px; left:0; transform:rotate(-15deg); }
+.game-fruits .orange { top:0; right:1px; transform:rotate(9deg); }
+.game-fruits .apple { bottom:0; left:10px; transform:rotate(-8deg); }
+.game-fruits .grape { right:0; bottom:6px; transform:rotate(12deg); }

@@ -1,3 +1,4 @@
+import {fruit} from './components/puzzle-fruit.mjs';
 // 피그마 확정안: 주간 출석 C · 옐로·오렌지 231:2573. 원본 v1·v2와 분리한다.
 import {decemberMascotSrc, renderDecemberPicker, setupDecemberPicker, winterBackgroundSrc} from './mascot-preview.mjs';
 
@@ -14,10 +15,10 @@ function navigation(){
 
 function hero(winter){
  const scenery=winter
-  ? `<img class="park-scene" src="${winterBackgroundSrc}" alt=""><img class="hero-mascot" data-december-pose="greeting" src="${decemberMascotSrc('bear','greeting')}" alt="12월 곰 캐릭터">`
+  ? `<img class="park-scene" src="${winterBackgroundSrc}" alt=""><img class="hero-mascot" data-december-pose="greeting" src="${decemberMascotSrc('bear','greeting')}" alt="12월 베리 캐릭터">`
   : picture('c-background.png','park-scene','밝은 들판과 주택 앞에서 인사하는 곰 캐릭터');
  const heading=winter
-  ? '<span class="hero-label">오지고랜드</span><h1>맑은 땅콩 님,<br>오늘도 출석해 볼까요?</h1>'
+  ? '<span class="hero-label">마이랜드</span><h1>맑은 땅콩 님,<br>오늘도 출석해 볼까요?</h1>'
   : '<h1>마이랜드</h1>';
  return '<header class="hero">'+scenery+'<div class="hero-copy">'+heading+'</div></header>';
 }
@@ -39,8 +40,13 @@ function attendance(){
 }
 
 function games(){
- return '<div class="games" role="group" aria-label="마이랜드 게임">'+[['오지빙글','c-roulette.png','roulette'],['오지팡팡','c-puzzle.png','puzzle']].map(item=>
-  '<section class="game '+item[2]+'"><div class="game-copy"><b>'+item[0]+'</b><span class="ticket-count">'+picture('70418.svg')+'<strong>57</strong></span></div>'+picture(item[1],'game-art',item[0])+'</section>'
+ const fruits=['pear','orange','apple','grape'].map(type=>fruit(type,'card')).join('');
+ const cards=[
+  ['오지빙글','roulette',picture('c-roulette.png','game-art','오지빙글')],
+  ['오지팡팡','puzzle','<div class="game-art game-fruits" aria-hidden="true">'+fruits+'</div>'],
+ ];
+ return '<div class="games" role="group" aria-label="마이랜드 게임">'+cards.map(([label,type,art])=>
+  '<section class="game '+type+'"><div class="game-copy"><b>'+label+'</b><span class="ticket-count">'+picture('70418.svg')+'<strong>57</strong></span></div>'+art+'</section>'
  ).join('')+'</div>';
 }
 

@@ -25,7 +25,8 @@ test('최신 출석 시안의 곰과 보상 에셋을 표시하고 공통 버튼
   assert.match(html,/md-attendance-confetti/);
   assert.ok(popup.includes(amount));
   assert.ok(popup.includes(next+' 연속'));
-  assert.match(popup,/<button[^>]*class="og-button v2-button"[^>]*data-variant="primary"[^>]*data-myland-destination="roulette-ready"/);
+  assert.doesNotMatch(popup,/roulette-ready|오지빙글 돌리기/);
+  assert.equal((popup.match(/<button\b/g)||[]).length,1);
   assert.match(popup,/<button[^>]*class="og-button v2-button"[^>]*data-variant="secondary"[^>]*data-myland-destination="myland-feedback"/);
   assert.match(popup,/class="md-attendance-actions"/);
  }

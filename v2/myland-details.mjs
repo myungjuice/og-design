@@ -1,3 +1,4 @@
+import {fruit} from './components/puzzle-fruit.mjs';
 import {renderMyLandFeedbackScreen} from './myland-feedback.mjs';
 import {renderButton} from './components/render.mjs';
 import {decemberMascotSrc, mascotNames, renderDecemberPicker, setupDecemberPicker, winterBackgroundSrc} from './mascot-preview.mjs';
@@ -53,17 +54,6 @@ function wheel(spinning=false){
 function roulette(spinning=false){
  return scene(`${header('오지빙글',spinning?2:3)}<div class="md-game-heading"><span class="md-pill">꽝 없이 매번 받는 마일리지</span><h1>행운을 돌려봐요!</h1><p>티켓 한 장으로, 최대 500 M</p></div>${wallet(spinning?2:3)}${wheel(spinning)}<div class="md-game-footer">${spinning?'<button class="md-primary" disabled>행운이 돌아가는 중…</button>':link(`${ticket()} 1장으로 오지빙글 돌리기`,'roulette-spinning')}<p>오늘 남은 게임 <b>${spinning?'5':'6'}회</b></p></div>`,'md-roulette');
 }
-// 작은 게임 말은 SVG 벡터로 그린 목업용 과일 심볼이다. 최종 게임 에셋은 별도 검토한다.
-function fruit(type,index=0){
- const gradient=`fruit-${type}-${index}`;
- const shapes={
-  apple:'<path class="fruit-body" d="M26 22C7 11 6 35 16 46c5 6 9 1 12 1s7 5 12-1c10-12 9-35-10-24Z"/><path class="fruit-leaf" d="M28 21q-1-13 12-12-1 11-12 12Z"/>',
-  orange:'<circle class="fruit-body" cx="28" cy="33" r="18"/><path class="fruit-leaf" d="M28 15q3-13 16-7-4 10-16 7Z"/>',
-  grape:'<g class="fruit-body"><circle cx="20" cy="23" r="9"/><circle cx="36" cy="23" r="9"/><circle cx="28" cy="35" r="9"/><circle cx="28" cy="46" r="7"/></g><path class="fruit-leaf" d="M28 15q2-12 14-9-2 9-14 9Z"/>',
-  pear:'<path class="fruit-body" d="M21 17c0-10 14-10 14 0s14 16 11 26S12 55 10 43 21 27 21 17Z"/><path class="fruit-leaf" d="M28 11q3-9 13-6-4 9-13 6Z"/>'
- };
- return `<svg class="md-fruit ${type}" viewBox="0 0 56 56" role="img" aria-label="${{apple:'사과',orange:'오렌지',grape:'포도',pear:'배'}[type]}"><defs><radialGradient id="${gradient}" cx="30%" cy="23%" r="80%"><stop class="fruit-light" offset="0"/><stop class="fruit-mid" offset=".45"/><stop class="fruit-dark" offset="1"/></radialGradient><linearGradient id="${gradient}-leaf" x2=".8" y2="1"><stop class="leaf-light"/><stop class="leaf-dark" offset="1"/></linearGradient></defs><g fill="url(#${gradient})">${shapes[type].replace('class="fruit-leaf"',`class="fruit-leaf" fill="url(#${gradient}-leaf)"`)}</g><path class="fruit-shine" d="M17 29q-3 4-1 8"/></svg>`;
-}
 function puzzle(playing=false){
  const types=['apple','orange','grape','pear'];
  const board=[0,1,2,0,3,1,2,0,3,1,2,0,1,2,0,3,1,3,3,0,0,2,0,1,0,2,0,1,2,0,1,3,1,2,3,2,2,1,3,0,1,0];
@@ -95,7 +85,7 @@ export function renderMyLandAttendanceFeedbackScreen(id,{character}={}){
  const art=character
   ? `<div class="md-attendance-art md-december-attendance">${decemberArt(character,decemberPoses[id])}</div>`
   : previousArt;
- return `<div class="md-screen md-attendance-feedback${milestone?' md-attendance-milestone':''}${character?' md-winter-screen':''}" data-figma-node="${milestone?'280:2935':'268:2638'}">${character?winterLandscape():mainBackdrop(milestone?7:6)}<div class="md-shade"></div>${milestone?'<div class="md-attendance-rays" aria-hidden="true"></div>':''}<div class="md-attendance-confetti" aria-hidden="true">${decorative('confetti.png')}${decorative('confetti.png')}</div><section class="md-dialog md-attendance-dialog" aria-label="${milestone?'7일 연속 달성':'출석 완료'} · 피드백 반영본"><header class="md-attendance-heading">${milestone?'':'<span class="md-attendance-pill">6일 연속</span>'}<h2 class="${milestone?'md-attendance-ribbon':'md-attendance-title'}">${milestone?'<span>7일 연속 달성!</span>':'출석 완료!'}</h2><p class="md-attendance-earned">${decorative('ticket-icon.svg')}<strong>${milestone?'OG티켓 1+1장 획득!':'OG티켓 1장 획득!'}</strong></p></header>${art}<div class="md-next md-attendance-next"><span>${milestone?'다음 목표':'다음 출석보상'}</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div><div class="md-attendance-actions">${attendanceAction('닫기','myland-feedback','secondary')}${attendanceAction('오지빙글 돌리기','roulette-ready','primary')}</div></section></div>`;
+ return `<div class="md-screen md-attendance-feedback${milestone?' md-attendance-milestone':''}${character?' md-winter-screen':''}" data-figma-node="${milestone?'280:2935':'268:2638'}">${character?winterLandscape():mainBackdrop(milestone?7:6)}<div class="md-shade"></div>${milestone?'<div class="md-attendance-rays" aria-hidden="true"></div>':''}<div class="md-attendance-confetti" aria-hidden="true">${decorative('confetti.png')}${decorative('confetti.png')}</div><section class="md-dialog md-attendance-dialog" aria-label="${milestone?'7일 연속 달성':'출석 완료'} · 피드백 반영본"><header class="md-attendance-heading">${milestone?'':'<span class="md-attendance-pill">6일 연속</span>'}<h2 class="${milestone?'md-attendance-ribbon':'md-attendance-title'}">${milestone?'<span>7일 연속 달성!</span>':'출석 완료!'}</h2><p class="md-attendance-earned">${decorative('ticket-icon.svg')}<strong>${milestone?'OG티켓 1+1장 획득!':'OG티켓 1장 획득!'}</strong></p></header>${art}<div class="md-next md-attendance-next"><span>${milestone?'다음 목표':'다음 출석보상'}</span><b>${milestone?'14일':'7일'} 연속 <span>${milestone?'티켓 5장 + 100 M':'티켓 1+1장'}</span></b></div><div class="md-attendance-actions">${attendanceAction('닫기','myland-feedback','secondary')}</div></section></div>`;
 }
 function attendanceFeedbackFigure(id){
  return `<figure class="md-review-figure"><figcaption>피드백 반영본 · 12월</figcaption><div class="md-review-host" data-myland-attendance-feedback="${id}"><template><link rel="stylesheet" href="/v2/myland-feedback.css"><link rel="stylesheet" href="/v2/myland-details.css"><link rel="stylesheet" href="/v2/components/button.css"><link rel="stylesheet" href="/v2/myland-attendance-feedback.css">${renderMyLandAttendanceFeedbackScreen(id,{character:'bear'})}</template></div></figure>`;

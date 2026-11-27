@@ -18,7 +18,7 @@ test('character preview distinguishes no selection from each valid selection',()
   assert.equal((html.match(/class="visit-symbol"/g)||[]).length,2);
   const selected=renderCharacterSelection({selected:key});
   assert.equal((selected.match(/aria-checked="true"/g)||[]).length,1);
-  assert.match(selected,new RegExp(({bear:'곰을',penguin:'펭귄을',raccoon:'너구리를'})[key]+' 선택했어요'));
+  assert.match(selected,new RegExp(({bear:'베리를',penguin:'피노를',raccoon:'너그를'})[key]+' 선택했어요'));
  }
  assert.throws(()=>renderCharacterMain({selected:'unknown'}),RangeError);
  assert.throws(()=>renderCharacterSelection({selected:'unknown'}),RangeError);

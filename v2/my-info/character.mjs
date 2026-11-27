@@ -1,18 +1,18 @@
 import {renderMyInfoTest} from '../../screens/my-info-3d-test/render.mjs';
 import {renderProfileBalance} from './profile-balance.mjs';
 import {applyReceivedIcons} from '../received-icons.mjs';
-import {mascotBaseSrc,previewCharacter,selectPreviewCharacter} from '../mascot-preview.mjs';
+import {mascotNames,mascotBaseSrc,previewCharacter,selectPreviewCharacter} from '../mascot-preview.mjs';
 
 export const characterOptions=Object.freeze([
- {key:'bear',label:'곰',description:'느긋하고 든든한 친구'},
- {key:'penguin',label:'펭귄',description:'부지런하고 야무진 친구'},
- {key:'raccoon',label:'너구리',description:'호기심 많고 재빠른 친구'}
+ {key:'bear',label:mascotNames.bear,description:'느긋하고 든든한 친구'},
+ {key:'penguin',label:mascotNames.penguin,description:'부지런하고 야무진 친구'},
+ {key:'raccoon',label:mascotNames.raccoon,description:'호기심 많고 재빠른 친구'}
 ]);
 const svg=path=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+path+'</svg>';
 const plus=svg('<path d="M12 5v14M5 12h14"/>');
 const check=svg('<path d="m5 12 4 4L19 6"/>');
 function option(key){const value=characterOptions.find(c=>c.key===key);if(!value)throw new RangeError('Unknown character');return value;}
-const selectionMessage=key=>option(key).label+(key==='raccoon'?'를':'을')+' 선택했어요.';
+const selectionMessage=key=>option(key).label+'를 선택했어요.';
 // Background-extracted reference mascots share a transparent, full-body art seat.
 export function renderCharacterArt(key,{decorative=false}={}){
  const value=option(key);

@@ -1,7 +1,7 @@
 // Review assets from the November 24 design delivery.
 const root='/assets/mascot-20261124/';
 export const winterBackgroundSrc=root+'backgrounds/winter.jpg';
-export const mascotNames=Object.freeze({bear:'곰',penguin:'펭귄',raccoon:'너구리'});
+export const mascotNames=Object.freeze({bear:'베리',penguin:'피노',raccoon:'너그'});
 
 export function mascotBaseSrc(character){
  return root+'base/'+character+'.png';

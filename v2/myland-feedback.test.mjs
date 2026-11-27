@@ -23,8 +23,11 @@ test('확정 화면은 새 배경·컬러 게임 아이콘과 게임별 티켓�
   assert.match(html,/오지팡팡/);
   assert.match(html,/<strong>57<\/strong>/);
   assert.equal((html.match(/<strong>57<\/strong>/g)||[]).length,2);
-  for(const file of ['backgrounds/winter.jpg','bear/greeting.png','c-roulette.png','c-puzzle.png'])assert.ok(html.includes(file),file);
+  for(const file of ['backgrounds/winter.jpg','bear/greeting.png','c-roulette.png'])assert.ok(html.includes(file),file);
  }
+ assert.doesNotMatch(weekly,/c-puzzle\.png/);
+ for(const fruit of ['사과','오렌지','포도','배'])assert.ok(weekly.includes('aria-label="'+fruit+'"'));
+ assert.match(weekly,/class="hero-label">마이랜드</);
  assert.match(weekly,/class="week-grid"/);
  for(const label of ['마이랜드','오지빙글','오지팡팡','이번주 미션','출석하기','방문하기','공유하기','내 바코드'])assert.ok(weekly.includes(label),label);
 });

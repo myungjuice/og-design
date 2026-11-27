@@ -30,7 +30,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
     }
    }
    await host.locator('[data-character-choice="bear"]').click();
-   assert.equal(await host.locator('[aria-checked="true"]').count(),1);assert.match(await host.locator('.v2-character-status').innerText(),/곰을 선택/);
+   assert.equal(await host.locator('[aria-checked="true"]').count(),1);assert.match(await host.locator('.v2-character-status').innerText(),/베리를 선택/);
    await page.keyboard.press('End');assert.equal(await host.locator('[aria-checked="true"]').getAttribute('data-character-choice'),'raccoon');
    if([320,390].includes(width)){
     await page.reload();await host.locator('[role="radiogroup"]').waitFor();
